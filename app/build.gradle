@@ -1,0 +1,120 @@
+apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "app.intelehealth.covid"
+        minSdkVersion 19
+        targetSdkVersion 28
+        versionCode 1
+        buildToolsVersion('28.0.3')
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        //Change this to true to enable multidex support for Kitkat
+        multiDexEnabled true
+        //vectorDrawables.useSupportLibrary = true
+
+    }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+    buildTypes {
+
+        debug{
+            buildConfigField "String", "BASE_URL", "\"http://13.232.32.249:8080/\""
+            buildConfigField "String", "CLEAN_URL", "\"13.232.32.249:8080\""
+        }
+
+
+        release {
+            lintOptions {
+                disable 'MissingTranslation'
+            }
+            minifyEnabled true
+            buildConfigField "String", "BASE_URL", "\"http://13.232.32.249:8080/\""
+            buildConfigField "String", "CLEAN_URL", "\"13.232.32.249:8080\""
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:2.0.0-beta2'
+    implementation 'com.android.support:design:28.0.0'
+    implementation 'com.android.support:support-v4:28.0.0'
+    testImplementation 'junit:junit:4.13-beta-2'
+    implementation "com.android.support:support-v4:28.0.0"
+    implementation "com.android.support:support-media-compat:28.0.0"
+    implementation "com.android.support:animated-vector-drawable:28.0.0"
+
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    //mvvm
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
+    implementation "android.arch.lifecycle:viewmodel:1.1.1"
+    // JSON Converter
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    // RxJava
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.2'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+    // RxAndroid
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    //RxBindings
+    implementation 'com.jakewharton.rxbinding2:rxbinding:2.2.0'
+    //Retrofit
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    //Permission libraby
+    implementation 'gun0912.ted:tedpermission:2.2.2'
+    //logging and interceptor
+//  implementation "com.squareup.okhttp3:logging-interceptor:3.14.1"
+
+    implementation "com.squareup.okhttp3:logging-interceptor:3.8.0"
+
+    //debug bridge
+//    debugImplementation 'com.amitshekhar.android:debug-db:1.0.4'
+    //image loaders
+//    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.github.bumptech.glide:glide:3.8.0'
+    //Uncomment below line to enable multidex support for Kitkat
+    implementation 'com.android.support:multidex:1.0.3'
+    //camera view
+    implementation 'com.github.google:cameraview:9bbe07ba44'
+    //Google Guava
+    implementation 'com.google.guava:guava:27.1-jre'
+    //Storage librabry
+    //    implementation 'com.snatik:storage:2.1.0'
+    //    dexter permission
+    //Parse SDK
+    implementation 'com.parse:parse-android:1.15.7'
+    //date and time
+    implementation 'joda-time:joda-time:2.9.3'
+
+    implementation 'org.apache.commons:commons-lang3:3.6'
+
+    // (Java only)
+    implementation 'android.arch.work:work-runtime:1.0.1'
+    // optional - RxJava2 support
+    implementation 'android.arch.work:work-rxjava2:1.0.1'
+    // optional - Test helpers
+    androidTestImplementation 'android.arch.work:work-testing:1.0.1'
+
+    implementation 'com.github.hotchemi:permissionsdispatcher:2.3.2'
+    annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:2.3.2'
+
+    implementation "com.crashlytics.sdk.android:crashlytics:2.9.9"
+    implementation "com.google.firebase:firebase-core:16.0.7"
+    implementation "com.google.firebase:firebase-messaging:17.3.4"
+    implementation 'com.google.firebase:firebase-crash:16.2.1'
+
+//    implementation('com.github.SandroMachado:restaurant:0.2.0@aar') {
+//        transitive = true
+//    }
+}
+apply plugin: 'com.google.gms.google-services'  // Google Play services Gradle plugin
+

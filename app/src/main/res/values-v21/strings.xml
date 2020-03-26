@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="skip">skip</string>
+    <string name="start">Start</string>
+    <string name="do_i_have_covid_19">Do I have Covid-19?</string>
+    <string name="the_novel_coronavirus_disease_or_covid_19_is_an_infectious_disease_that_is_spreading_globally_you_may_have_the_disease_if_you_have_recently_traveled_abroad_or_came_in_contact_with_someone_who_is_known_to_be_infected_with_the_disease_in_such_cases_it_is_recommended_that_you_get_tested_and_also_self_quarantine_for_14_days">The novel Coronavirus disease or CoVid-19 is an infectious disease that is spreading globally. You may have the disease if you have recently traveled abroad, or came in contact with someone who is known to be infected with the disease. In such cases it is recommended that you get tested and also self-quarantine for 14 days.</string>
+    <string name="_14_day_quarantine_and_care">14-day quarantine and care</string>
+    <string name="home_quarantine_for_14_days_is_implemented_to_monitor_your_health_for_any_symptoms_and_to_prevent_from_spreading_the_infection_to_others_in_your_vicinity">Home-quarantine for 14 days is implemented to monitor your health for any symptoms and to prevent from spreading the infection to others in your vicinity.</string>
+    <string name="who_is_this_app_for">Who is this app for?</string>
+    <string name="this_app_is_to_help_you_through_your_14_day_quarantine_as_you_record_your_health_condition_daily_on_this_app_you_can_monitor_your_symptoms_and_understand_when_where_and_how_to_seek_medical_attention_if_they_get_worse">This app is to help you through your 14-day quarantine. As you record your health condition daily on this App, you can monitor your symptoms and understand when, where and how to seek medical attention if they get worse.</string>
+    <string name="district_municipal_corporations">District/Municipal Corporations *</string>
+    <string name="location">Location *</string>
+    <string name="prajwal_waingankar">Prajwal Waingankar</string>
+    <string name="recyclerview_home_date">01 January 2020, 12:00 AM</string>
+</resources>
