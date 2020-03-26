@@ -3,7 +3,7 @@ apply plugin: 'io.fabric'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "app.intelehealth.covid"
+        applicationId "org.intelehealth.intelesafe"
         minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
