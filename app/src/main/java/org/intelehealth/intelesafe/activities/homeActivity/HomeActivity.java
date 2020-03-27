@@ -108,6 +108,7 @@ public class HomeActivity extends AppCompatActivity {
     CountDownTimer CDT;
     int i = 5;
     Calendar calendar;
+    HashSet<Day_Date> hashSet;
     Recycler_Home_Adapter recycler_home_adapter;
     ArrayList<Day_Date> recycler_arraylist;
 //    Set<Day_Date> set;
@@ -266,7 +267,7 @@ public class HomeActivity extends AppCompatActivity {
 
         final Cursor cursor = db.rawQuery(query, data);
         int a = 1;
-        HashSet<Day_Date> hashSet = new HashSet<>();
+        hashSet = new HashSet<>();
 
         if (cursor != null) {
             if (cursor.moveToFirst()) {
