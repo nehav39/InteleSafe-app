@@ -9,26 +9,32 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.intelehealth.intelesafe.R;
 import org.intelehealth.intelesafe.app.AppConstants;
 import org.intelehealth.intelesafe.utilities.SessionManager;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Locale;
 
 public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Adapter.MyViewHolder> {
 
-    ArrayList<Day_Date> arrayList;
+    HashSet<Day_Date> arrayList;
     private Context mcontext;
     SessionManager sessionManager;
 
-    public Recycler_Home_Adapter(ArrayList<Day_Date> recycler_arraylist) {
+    public Recycler_Home_Adapter(HashSet<Day_Date> recycler_arraylist) {
         this.arrayList = recycler_arraylist;
     }
 
@@ -41,18 +47,51 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int position) {
+        //SimpleDateFormat currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
 
-        myViewHolder.day_text.setText(arrayList.get(position).getDay());
+    /*    try {
+            Date first_visit = currentDate.parse(arrayList.get(position).getDate());
+            Date array_visit = currentDate.parse(arrayList.get(position+1).getDate());
 
-       StringBuilder stringBuilder = new StringBuilder(arrayList.get(position).getDate());
-                       int a1 = stringBuilder.indexOf("T");
+            if((array_visit.getTime() > first_visit.getTime() || arrayList.size() > 0) &&
+            array_visit.getTime() != first_visit.getTime())
+            //25 after 26 -> true. --- 26 before 25 -> true.
+            {
+                myViewHolder.day_text.setText(arrayList.get(position).getDay());
+                StringBuilder stringBuilder = new StringBuilder(arrayList.get(position).getDate());
+                int a1 = stringBuilder.indexOf("T");
+                myViewHolder.date_text.setText(stringBuilder.substring(0, a1));
+                Log.d("GG","GG: "+stringBuilder.substring(0, a1));
+                Log.d("GG","GG_1: "+myViewHolder.date_text.getText().toString());
+            }
+            else
+            {
+                Toast.makeText(mcontext, "Hello", Toast.LENGTH_SHORT).show();
+                myViewHolder.cardView.setVisibility(View.GONE);
+            }
+
+        }
+        catch (Exception e)
+        {
+
+        }*/
+
+
+        myViewHolder.day_text.setText(arrayList.iterator().next().getDay());
+        StringBuilder stringBuilder = new StringBuilder(arrayList.iterator().next().getDate());
+        int a1 = stringBuilder.indexOf("T");
         myViewHolder.date_text.setText(stringBuilder.substring(0, a1));
+        Log.d("GG","GG: "+stringBuilder.substring(0, a1));
+        Log.d("GG","GG_1: "+myViewHolder.date_text.getText().toString());
+
+
+
 
         SQLiteDatabase db = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
         String query = "SELECT v.startdate FROM tbl_visit v, tbl_patient p WHERE " +
                 "p.uuid = v.patientuuid AND v.startdate IS NOT NULL AND " +
                 "v.patientuuid = ? AND v.startdate=?";
-        String[] data = {sessionManager.getPersionUUID(), arrayList.get(position).getDate()};
+        String[] data = {sessionManager.getPersionUUID(), arrayList.iterator().next().getDate()};
 
 
 

@@ -266,6 +266,7 @@ public class HomeActivity extends AppCompatActivity {
 
         final Cursor cursor = db.rawQuery(query, data);
         int a = 1;
+        HashSet<Day_Date> hashSet = new HashSet<>();
 
         if (cursor != null) {
             if (cursor.moveToFirst()) {
@@ -273,12 +274,18 @@ public class HomeActivity extends AppCompatActivity {
                     try {
 
                         endDate = cursor.getString(cursor.getColumnIndexOrThrow("startdate"));
-//                        stringBuilder = new StringBuilder(endDate);
-//                        int a1 = stringBuilder.indexOf("T");
-                        recycler_arraylist.add(new Day_Date
-                                ("Day " + a, endDate));
+                        StringBuilder stringBuilder = new StringBuilder(endDate);
+                        int a1 = stringBuilder.indexOf("T");
+                        String dd = stringBuilder.substring(0, a1);
 
+
+                        hashSet.add(new Day_Date("Day "+a, dd));
                         a++;
+
+                               /* recycler_arraylist.add(new Day_Date
+                                        ("Day " + a, dd));
+                                a++;*/
+
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -291,7 +298,7 @@ public class HomeActivity extends AppCompatActivity {
             cursor.close();
         }
 
-        recycler_home_adapter = new Recycler_Home_Adapter(recycler_arraylist);
+        recycler_home_adapter = new Recycler_Home_Adapter(hashSet);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(HomeActivity.this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(recycler_home_adapter);
