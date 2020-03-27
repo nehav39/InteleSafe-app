@@ -34,8 +34,9 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
     private Context mcontext;
     SessionManager sessionManager;
 
-    public Recycler_Home_Adapter(HashSet<Day_Date> recycler_arraylist) {
+    public Recycler_Home_Adapter(Context context, HashSet<Day_Date> recycler_arraylist) {
         this.arrayList = recycler_arraylist;
+        this.mcontext = context;
     }
 
     @NonNull

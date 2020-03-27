@@ -299,7 +299,7 @@ public class HomeActivity extends AppCompatActivity {
             cursor.close();
         }
 
-        recycler_home_adapter = new Recycler_Home_Adapter(hashSet);
+        recycler_home_adapter = new Recycler_Home_Adapter(context, hashSet);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(HomeActivity.this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(recycler_home_adapter);
