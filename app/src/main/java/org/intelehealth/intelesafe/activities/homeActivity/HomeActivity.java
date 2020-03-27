@@ -53,6 +53,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -105,6 +106,10 @@ public class HomeActivity extends AppCompatActivity {
     CountDownTimer CDT;
     int i = 5;
     Calendar calendar;
+    Recycler_Home_Adapter recycler_home_adapter;
+    ArrayList<Day_Date> recycler_arraylist;
+
+    SQLiteDatabase db;
     CustomProgressDialog customProgressDialog;
 
     TextView lastSyncTextView;
@@ -242,8 +247,49 @@ public class HomeActivity extends AppCompatActivity {
 
         //endregion
 
+        db = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
+
         recyclerView = findViewById(R.id.recyclerview_data);
-        Recycler_Home_Adapter recycler_home_adapter = new Recycler_Home_Adapter();
+
+        recycler_arraylist = new ArrayList<Day_Date>();
+
+        // ArrayList<String> endDate = new ArrayList<>();
+        String endDate = "";
+        String query = "SELECT v.startdate FROM tbl_visit v, tbl_patient p WHERE " +
+                "p.uuid = v.patientuuid AND v.startdate IS NOT NULL AND " +
+                "v.patientuuid = ?";
+        String[] data = {sessionManager.getPersionUUID()};
+
+        final Cursor cursor = db.rawQuery(query, data);
+        int a = 1;
+        StringBuilder stringBuilder;
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+                    try {
+
+                        endDate = cursor.getString(cursor.getColumnIndexOrThrow("startdate"));
+                        stringBuilder = new StringBuilder(endDate);
+                        int a1 = stringBuilder.indexOf("T");
+                        //endDate.add(i, cursor.getString(cursor.getColumnIndexOrThrow("enddate")));
+                        recycler_arraylist.add(new Day_Date
+                                ("Day " + a, stringBuilder.substring(0, a1).toString()));
+                        a++;
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }while (cursor.moveToNext());
+            }
+        }
+        if (cursor != null) {
+            cursor.close();
+        }
+
+
+        recycler_home_adapter = new Recycler_Home_Adapter(recycler_arraylist);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(HomeActivity.this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(recycler_home_adapter);
 

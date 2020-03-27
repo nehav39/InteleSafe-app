@@ -12,9 +12,15 @@ import android.widget.TextView;
 
 import org.intelehealth.intelesafe.R;
 
+import java.util.ArrayList;
+
 public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Adapter.MyViewHolder> {
 
-    final String[] day_item = {"Day 1"};
+    ArrayList<Day_Date> arrayList;
+
+    public Recycler_Home_Adapter(ArrayList<Day_Date> recycler_arraylist) {
+        this.arrayList = recycler_arraylist;
+    }
 
     @NonNull
     @Override
@@ -24,15 +30,15 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
+    public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int position) {
 
-        myViewHolder.day_text.setText(day_item[i]);
-        myViewHolder.date_text.setText("25 March 2020, 10:00 AM");
+        myViewHolder.day_text.setText(arrayList.get(position).getDay());
+        myViewHolder.date_text.setText(arrayList.get(position).getDate());
     }
 
     @Override
     public int getItemCount() {
-        return this.day_item.length;
+        return  arrayList.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
