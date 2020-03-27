@@ -56,7 +56,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Set;
 import java.util.UUID;
 
 import org.intelehealth.intelesafe.BuildConfig;
@@ -108,6 +110,7 @@ public class HomeActivity extends AppCompatActivity {
     Calendar calendar;
     Recycler_Home_Adapter recycler_home_adapter;
     ArrayList<Day_Date> recycler_arraylist;
+//    Set<Day_Date> set;
 
     SQLiteDatabase db;
     CustomProgressDialog customProgressDialog;
@@ -252,6 +255,7 @@ public class HomeActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerview_data);
 
         recycler_arraylist = new ArrayList<Day_Date>();
+//        set = new HashSet<Day_Date>();
 
         // ArrayList<String> endDate = new ArrayList<>();
         String endDate = "";
@@ -262,18 +266,18 @@ public class HomeActivity extends AppCompatActivity {
 
         final Cursor cursor = db.rawQuery(query, data);
         int a = 1;
-        StringBuilder stringBuilder;
+
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 do {
                     try {
 
                         endDate = cursor.getString(cursor.getColumnIndexOrThrow("startdate"));
-                        stringBuilder = new StringBuilder(endDate);
-                        int a1 = stringBuilder.indexOf("T");
-                        //endDate.add(i, cursor.getString(cursor.getColumnIndexOrThrow("enddate")));
+//                        stringBuilder = new StringBuilder(endDate);
+//                        int a1 = stringBuilder.indexOf("T");
                         recycler_arraylist.add(new Day_Date
-                                ("Day " + a, stringBuilder.substring(0, a1).toString()));
+                                ("Day " + a, endDate));
+
                         a++;
 
                     } catch (Exception e) {
@@ -286,7 +290,6 @@ public class HomeActivity extends AppCompatActivity {
         if (cursor != null) {
             cursor.close();
         }
-
 
         recycler_home_adapter = new Recycler_Home_Adapter(recycler_arraylist);
 

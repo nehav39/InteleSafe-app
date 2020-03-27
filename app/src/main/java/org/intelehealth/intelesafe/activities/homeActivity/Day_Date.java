@@ -4,6 +4,7 @@ public class Day_Date {
 
     private String Day, Date;
 
+
     public Day_Date(String day, String date) {
         Day = day;
         Date = date;
@@ -24,4 +25,6 @@ public class Day_Date {
     public void setDate(String date) {
         Date = date;
     }
+
+
 }
