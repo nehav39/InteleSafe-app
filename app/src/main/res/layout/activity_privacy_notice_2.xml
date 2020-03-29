@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activities.privacyNoticeActivity.PrivacyNotice_Activity">
 
@@ -17,34 +18,36 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
             app:title="@string/privacy_notice_title"
+            app:titleTextColor="@color/font_black_0"
+            android:background="@color/white"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
 
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="1"
         android:layout_alignParentBottom="true">
 
         <RadioGroup
             android:id="@+id/radio_privacy_grp"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="0.7"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginHorizontal="50dp"
-            android:layout_centerHorizontal="true">
+            android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/radio_accept"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
+                android:fontFamily="@fonts/Lato_Regular"
                 android:text="@string/accept" />
 
             <RadioButton
@@ -52,7 +55,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:layout_marginLeft="35dp"
+                android:fontFamily="@fonts/Lato_Regular"
+                android:layout_marginStart="35dp"
                 android:text="@string/reject"/>
 
 
@@ -60,21 +64,20 @@
 
         <TextView
             android:id="@+id/txt_privacy"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="0.2"
             android:layout_height="wrap_content"
             android:text="@string/next"
-            android:textColor="@color/white"
-            android:background="@color/colorPrimary"
-            android:textStyle="bold"
-            android:layout_below="@+id/radio_privacy_grp"
-            android:layout_alignParentRight="true"
+            android:gravity="end"
+            android:drawableEnd="@drawable/ic_keyboard_arrow_right"
+            android:textColor="@color/colorPrimaryDark"
             android:layout_marginVertical="15dp"
             android:textAlignment="center"
-            style="@style/SelectableItemBackground"
+            android:fontFamily="@fonts/Lato_Regular"
+            android:textSize="16sp"
             android:foreground="?android:attr/selectableItemBackground"
-            android:layout_marginHorizontal="10dp"
-            android:padding="15dp"/>
-    </RelativeLayout>
+            android:padding="10dp"/>
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -93,7 +96,7 @@
                 android:layout_weight="1"
                 android:textFontWeight="1"
                 android:padding="10dp"
-                android:fontFamily="sans-serif-light"
+                android:fontFamily="@fonts/Lato_Regular"
                 android:layout_width="wrap_content"
                 android:layout_marginHorizontal="5dp"
                 android:textAlignment="gravity"/>

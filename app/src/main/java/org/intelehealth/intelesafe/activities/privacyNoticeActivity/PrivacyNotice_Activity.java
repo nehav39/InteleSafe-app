@@ -1,6 +1,8 @@
 package org.intelehealth.intelesafe.activities.privacyNoticeActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -52,7 +54,6 @@ public class PrivacyNotice_Activity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
 
         sessionManager = new SessionManager(this);
         privacy_textview = findViewById(R.id.privacy_text);

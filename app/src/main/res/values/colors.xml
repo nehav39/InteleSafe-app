@@ -2,9 +2,12 @@
 
 <resources>
     <color name="colorPrimary">#385399</color>
-    <color name="colorPrimaryDark">#23408e</color>
+    <color name="colorPrimaryDark">#2014EB</color>
     <color name="colorPrimaryLight">#D1C4E9</color>
     <color name="colorAccent">#448AFF</color>
+
+    <color name="act_background">#E5E5E5</color>
+
     <color name="blue_transparent">#792E1E91</color>
     <color name="primary_text">#212121</color>
     <color name="icons">#FFFFFF</color>

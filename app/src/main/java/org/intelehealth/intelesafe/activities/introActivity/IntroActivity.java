@@ -2,6 +2,7 @@ package org.intelehealth.intelesafe.activities.introActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -31,6 +32,8 @@ public class IntroActivity extends AppCompatActivity {
     private int[] layouts;
     private Button btnSkip, btnNext;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,22 +41,30 @@ public class IntroActivity extends AppCompatActivity {
 
         context = IntroActivity.this;
 
-        // Making notification bar transparent
-        if (Build.VERSION.SDK_INT >= 21) {
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        }
+//        // Making notification bar transparent
+//        if (Build.VERSION.SDK_INT >= 21) {
+//            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+//        }
+
 
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
         btnSkip = (Button) findViewById(R.id.btn_skip);
         btnNext = (Button) findViewById(R.id.btn_next);
 
+
+
+
         // layouts of all welcome sliders
         // add few more layouts if you want
+//        layouts = new int[]{
+//                R.layout.welcome_slide1,
+//                R.layout.welcome_slide2,
+//                R.layout.welcome_slide3,
+//        };
+
         layouts = new int[]{
                 R.layout.welcome_slide1,
-                R.layout.welcome_slide2,
-                R.layout.welcome_slide3,
         };
 
         // adding bottom dots
@@ -70,7 +81,7 @@ public class IntroActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                    launchHomeScreen();
+                launchHomeScreen();
             }
         });
 
@@ -107,8 +118,9 @@ public class IntroActivity extends AppCompatActivity {
             dotsLayout.addView(dots[i]);
         }
 
+        //Changed color of Dot
         if (dots.length > 0)
-            dots[currentPage].setTextColor(getResources().getColor(R.color.black));
+            dots[currentPage].setTextColor(getResources().getColor(R.color.white));
     }
 
     private int getItem(int i) {
@@ -166,6 +178,8 @@ public class IntroActivity extends AppCompatActivity {
 
     public class MyViewPagerAdapter extends PagerAdapter {
         private LayoutInflater layoutInflater;
+        private TextView tvIntroOne;
+        private TextView tvIntroTwo;
 
         public MyViewPagerAdapter() {
         }
@@ -176,6 +190,20 @@ public class IntroActivity extends AppCompatActivity {
 
             View view = layoutInflater.inflate(layouts[position], container, false);
             container.addView(view);
+
+            tvIntroOne = view.findViewById(R.id.tv_intro_one);
+            tvIntroTwo = view.findViewById(R.id.tv_intro_two);
+
+            //Highlighting Text
+            String introOne = "This app is for all types of health workers at the frontlines of care to learn about personal protection measures and PPE use.";
+            String textToHighlightOne = "learn about personal protection measures and PPE use.";
+            String newString = introOne.replaceAll(textToHighlightOne, "<font color='blue'>" + textToHighlightOne + "</font>");
+            tvIntroOne.setText(Html.fromHtml(newString));
+
+            String introTwo = "You can monitor your own health daily and reach out for help if you think you may have had unsafe exposure and may be infected.";
+            String textToHighlightTwo = "monitor your own health daily";
+            String newStringTwo = introTwo.replaceAll(textToHighlightTwo, "<font color='blue'>" + textToHighlightTwo + "</font>");
+            tvIntroTwo.setText(Html.fromHtml(newStringTwo));
 
             return view;
         }
