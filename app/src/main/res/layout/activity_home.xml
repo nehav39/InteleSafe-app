@@ -153,7 +153,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/Help_Text"
-                            android:hint="Click here to send a Watsapp message"
+                            android:hint="Click here to send a WhatsApp message"
                             android:paddingStart="20sp"
                             android:layout_marginBottom="15sp"
                             android:textStyle="bold"
