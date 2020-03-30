@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.database.Cursor;
@@ -118,6 +119,7 @@ public class HomeActivity extends AppCompatActivity {
     private String key = null;
     private String licenseUrl = null;
     RecyclerView recyclerView;
+    TextView help_watsapp;
 
     Context context;
     private String mindmapURL = "";
@@ -176,6 +178,21 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         sessionManager.setCurrentLang(getResources().getConfiguration().locale.toString());
+
+        //Help section of watsapp...
+        help_watsapp = findViewById(R.id.Help_Watsapp);
+        help_watsapp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String phoneNumberWithCountryCode = "+917304154312";
+                String message = "Hello, I need assistance with the Corona virus infection!";
+
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse(
+                                String.format("https://api.whatsapp.com/send?phone=%s&text=%s",
+                                        phoneNumberWithCountryCode, message))));
+            }
+        });
 
         //Notification check
        // SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
