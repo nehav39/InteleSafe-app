@@ -128,7 +128,7 @@ public class HomeActivity extends AppCompatActivity {
     private String key = null;
     private String licenseUrl = null;
     RecyclerView recyclerView;
-    TextView help_watsapp;
+    Button help_watsapp;
 
     Context context;
     private String mindmapURL = "";
