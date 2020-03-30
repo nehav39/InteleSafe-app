@@ -530,6 +530,7 @@
                     android:id="@+id/visit_help_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textStyle="bold"
                     android:text="@string/if_you_get_much_sicker_please_call_your_nearest_doctor_020_26127394"
                     android:paddingTop="@dimen/padding_card"
                     android:layout_below="@id/help_title"
