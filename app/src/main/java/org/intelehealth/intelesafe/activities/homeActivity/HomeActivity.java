@@ -275,12 +275,12 @@ public class HomeActivity extends AppCompatActivity {
                     try {
 
                         endDate = cursor.getString(cursor.getColumnIndexOrThrow("startdate"));
-                        StringBuilder stringBuilder = new StringBuilder(endDate);
+                       /* StringBuilder stringBuilder = new StringBuilder(endDate);
                         int a1 = stringBuilder.indexOf("T");
-                        String dd = stringBuilder.substring(0, a1);
+                        String dd = stringBuilder.substring(0, a1);*/
 
 
-                        hashSet.add(new Day_Date("Day "+a, dd));
+                        hashSet.add(new Day_Date("Day "+a, endDate));
                         a++;
 
                                /* recycler_arraylist.add(new Day_Date
