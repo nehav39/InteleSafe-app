@@ -287,7 +287,7 @@ public class SignupActivity extends AppCompatActivity {
         mCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i != 0) {
+//                if (i != 0) {
                     country = adapterView.getItemAtPosition(i).toString();
 
                     if (country.matches("India")) {
@@ -304,12 +304,12 @@ public class SignupActivity extends AppCompatActivity {
                         }
 
                     }
-                } else {
-                    ArrayAdapter<CharSequence> stateAdapter = ArrayAdapter.createFromResource(SignupActivity.this,
-                            R.array.state_error, android.R.layout.simple_spinner_item);
-                    stateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    mState.setAdapter(stateAdapter);
-                }
+//                } else {
+//                    ArrayAdapter<CharSequence> stateAdapter = ArrayAdapter.createFromResource(SignupActivity.this,
+//                            R.array.state_error, android.R.layout.simple_spinner_item);
+//                    stateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                    mState.setAdapter(stateAdapter);
+//                }
 
             }
 
