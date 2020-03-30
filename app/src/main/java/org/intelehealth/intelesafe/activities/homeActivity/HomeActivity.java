@@ -109,7 +109,7 @@ public class HomeActivity extends AppCompatActivity {
     CountDownTimer CDT;
     int i = 5;
     Calendar calendar;
-    HashSet<Day_Date> hashSet;
+    HashSet<String> hashSet;
     Recycler_Home_Adapter recycler_home_adapter;
     ArrayList<Day_Date> recycler_arraylist;
 //    Set<Day_Date> set;
@@ -284,7 +284,9 @@ public class HomeActivity extends AppCompatActivity {
 
         final Cursor cursor = db.rawQuery(query, data);
         int a = 1;
+        int b = 0;
         hashSet = new HashSet<>();
+        ArrayList<String> array_original_date = new ArrayList<>();
 
         if (cursor != null) {
             if (cursor.moveToFirst()) {
@@ -292,13 +294,19 @@ public class HomeActivity extends AppCompatActivity {
                     try {
 
                         endDate = cursor.getString(cursor.getColumnIndexOrThrow("startdate"));
-                       /* StringBuilder stringBuilder = new StringBuilder(endDate);
+                        StringBuilder stringBuilder = new StringBuilder(endDate);
                         int a1 = stringBuilder.indexOf("T");
-                        String dd = stringBuilder.substring(0, a1);*/
+                        String dd = stringBuilder.substring(0, a1);
 
+                        array_original_date.add(b,endDate);
+                        b++;
+//                        hashSet.add(new Day_Date("Day "+a, endDate));
+                        if(hashSet.add(dd))
+                        {
+                            recycler_arraylist.add(new Day_Date("Day "+a, hashSet.iterator().next()));
+                            a++;
+                        }
 
-                        hashSet.add(new Day_Date("Day "+a, endDate));
-                        a++;
 
                                /* recycler_arraylist.add(new Day_Date
                                         ("Day " + a, dd));
@@ -316,7 +324,7 @@ public class HomeActivity extends AppCompatActivity {
             cursor.close();
         }
 
-        recycler_home_adapter = new Recycler_Home_Adapter(context, hashSet);
+        recycler_home_adapter = new Recycler_Home_Adapter(context, recycler_arraylist, array_original_date);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(HomeActivity.this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(recycler_home_adapter);

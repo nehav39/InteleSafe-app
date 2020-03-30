@@ -30,13 +30,15 @@ import java.util.Locale;
 
 public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Adapter.MyViewHolder> {
 
-    HashSet<Day_Date> arrayList;
+    ArrayList<Day_Date> arrayList;
+    ArrayList<String> stringArrayList_date;
     private Context mcontext;
     SessionManager sessionManager;
 
-    public Recycler_Home_Adapter(Context context, HashSet<Day_Date> recycler_arraylist) {
+    public Recycler_Home_Adapter(Context context, ArrayList<Day_Date> recycler_arraylist, ArrayList<String> array_og_date) {
         this.arrayList = recycler_arraylist;
         this.mcontext = context;
+        this.stringArrayList_date = array_og_date;
     }
 
     @NonNull
@@ -78,11 +80,11 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
         }*/
 
 
-        myViewHolder.day_text.setText(arrayList.iterator().next().getDay());
-        StringBuilder stringBuilder = new StringBuilder(arrayList.iterator().next().getDate());
-        int a1 = stringBuilder.indexOf("T");
-        myViewHolder.date_text.setText(stringBuilder.substring(0, a1));
-        Log.d("GG","GG: "+stringBuilder.substring(0, a1));
+        myViewHolder.day_text.setText(arrayList.get(position).getDay());
+//        StringBuilder stringBuilder = new StringBuilder(arrayList.get(position).getDate());
+//        int a1 = stringBuilder.indexOf("T");
+        myViewHolder.date_text.setText(arrayList.get(position).getDate());
+        Log.d("GG","GG: "+arrayList.get(position).getDate());
         Log.d("GG","GG_1: "+myViewHolder.date_text.getText().toString());
 
 
@@ -91,8 +93,8 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
         SQLiteDatabase db = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
         String query = "SELECT v.startdate FROM tbl_visit v, tbl_patient p WHERE " +
                 "p.uuid = v.patientuuid AND v.startdate IS NOT NULL AND " +
-                "v.patientuuid = ? AND v.startdate=?";
-        String[] data = {sessionManager.getPersionUUID(), arrayList.iterator().next().getDate()};
+                "v.patientuuid = ? AND v.startdate LIKE ? ";
+        String[] data = {sessionManager.getPersionUUID(), arrayList.get(position).getDate()+"%"};
 
 
 
