@@ -43,7 +43,7 @@
     <string name="logout_dialog">Are you sure you want to Logout?</string>
     <string name="day_1">Day 1</string>
     <string name="enter_check_in">Enter Check-in</string>
-    <string name="home_quarantine_guidelines">Home quarantine guidelines</string>
+    <string name="home_quarantine_guidelines">Guidelines for use of PPE</string>
     <string name="education_videos">Education videos</string>
     <string name="help">Help</string>
     <string name="your_check_in_overview">Your check in overview :</string>

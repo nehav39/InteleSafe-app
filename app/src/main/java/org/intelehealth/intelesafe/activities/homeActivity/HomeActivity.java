@@ -268,6 +268,16 @@ public class HomeActivity extends AppCompatActivity {
         home_quarantine_guidelines.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent home_quarantine = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("https://www.intelehealth.org/ppe-guidelines"));
+                startActivity(home_quarantine);
+            }
+        });
+
+/*
+        home_quarantine_guidelines.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
                 File pdfFile_downloaded = new File(Environment.getExternalStorageDirectory() + "/Intelehealth_COVID_PDF/" + "quarantine.pdf");
 
@@ -296,6 +306,7 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
+*/
 
 
         educational_videos.setOnClickListener(new View.OnClickListener() {

@@ -84,6 +84,7 @@
                     android:paddingHorizontal="15sp"
                     android:background="@drawable/button_bg_rounded_blue"
                     android:foreground="?android:attr/selectableItemBackground"
+
                     android:text="@string/home_quarantine_guidelines"
                     android:textAlignment="center"
                     android:textColor="@android:color/white"
