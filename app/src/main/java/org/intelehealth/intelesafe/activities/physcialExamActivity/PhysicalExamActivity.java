@@ -98,7 +98,7 @@ public class PhysicalExamActivity extends AppCompatActivity {
 
         localdb = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
         sessionManager = new SessionManager(this);
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+       /* AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle(R.string.wash_hands);
         LayoutInflater factory = LayoutInflater.from(this);
         final View view = factory.inflate(R.layout.hand_wash, null);
@@ -114,7 +114,7 @@ public class PhysicalExamActivity extends AppCompatActivity {
 
         Button pb = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
         pb.setTextColor(getResources().getColor((R.color.colorPrimary)));
-        pb.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+        pb.setTypeface(Typeface.DEFAULT, Typeface.BOLD);*/
 
         selectedExamsList = new ArrayList<>();
         Intent intent = this.getIntent(); // The intent was passed to the activity
