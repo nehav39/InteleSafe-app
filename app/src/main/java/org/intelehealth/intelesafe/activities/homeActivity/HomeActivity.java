@@ -315,7 +315,7 @@ public class HomeActivity extends AppCompatActivity {
                 //open youtube page.
                 startActivity
                         (new Intent(Intent.ACTION_VIEW,
-                                Uri.parse("https://www.youtube.com/playlist?list=PLY7f0i-HnvJ01aYOLRyZGGK3CVOKlz9hs")));
+                                Uri.parse("https://www.intelehealth.org/ppe-faqs")));
             }
         });
         Logger.logD(TAG, "onCreate: " + getFilesDir().toString());
