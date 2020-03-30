@@ -416,6 +416,7 @@ public class HomeActivity extends AppCompatActivity {
         });
 */
         WorkManager.getInstance().enqueueUniquePeriodicWork(AppConstants.UNIQUE_WORK_NAME, ExistingPeriodicWorkPolicy.KEEP, AppConstants.PERIODIC_WORK_REQUEST);
+/*
         if (sessionManager.isFirstTimeLaunched()) {
             TempDialog = new ProgressDialog(HomeActivity.this, R.style.AlertDialogStyle); //thats how to add a style!
             TempDialog.setTitle(R.string.syncInProgress);
@@ -440,6 +441,7 @@ public class HomeActivity extends AppCompatActivity {
             }.start();
 
         }
+*/
         sessionManager.setMigration(true);
 
         if (sessionManager.isReturningUser()) {
