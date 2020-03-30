@@ -54,9 +54,12 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Set;
 import java.util.UUID;
 
 import org.intelehealth.intelesafe.BuildConfig;
@@ -106,6 +109,12 @@ public class HomeActivity extends AppCompatActivity {
     CountDownTimer CDT;
     int i = 5;
     Calendar calendar;
+    HashSet<Day_Date> hashSet;
+    Recycler_Home_Adapter recycler_home_adapter;
+    ArrayList<Day_Date> recycler_arraylist;
+//    Set<Day_Date> set;
+
+    SQLiteDatabase db;
     CustomProgressDialog customProgressDialog;
 
     TextView lastSyncTextView;
@@ -259,8 +268,56 @@ public class HomeActivity extends AppCompatActivity {
 
         //endregion
 
+        db = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
+
         recyclerView = findViewById(R.id.recyclerview_data);
-        Recycler_Home_Adapter recycler_home_adapter = new Recycler_Home_Adapter();
+
+        recycler_arraylist = new ArrayList<Day_Date>();
+//        set = new HashSet<Day_Date>();
+
+        // ArrayList<String> endDate = new ArrayList<>();
+        String endDate = "";
+        String query = "SELECT v.startdate FROM tbl_visit v, tbl_patient p WHERE " +
+                "p.uuid = v.patientuuid AND v.startdate IS NOT NULL AND " +
+                "v.patientuuid = ?";
+        String[] data = {sessionManager.getPersionUUID()};
+
+        final Cursor cursor = db.rawQuery(query, data);
+        int a = 1;
+        hashSet = new HashSet<>();
+
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+                    try {
+
+                        endDate = cursor.getString(cursor.getColumnIndexOrThrow("startdate"));
+                       /* StringBuilder stringBuilder = new StringBuilder(endDate);
+                        int a1 = stringBuilder.indexOf("T");
+                        String dd = stringBuilder.substring(0, a1);*/
+
+
+                        hashSet.add(new Day_Date("Day "+a, endDate));
+                        a++;
+
+                               /* recycler_arraylist.add(new Day_Date
+                                        ("Day " + a, dd));
+                                a++;*/
+
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }while (cursor.moveToNext());
+            }
+        }
+        if (cursor != null) {
+            cursor.close();
+        }
+
+        recycler_home_adapter = new Recycler_Home_Adapter(context, hashSet);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(HomeActivity.this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(recycler_home_adapter);
 
