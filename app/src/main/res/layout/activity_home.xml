@@ -164,6 +164,8 @@
                             android:drawablePadding="10sp"
                             android:textSize="20sp"/>
 
+                        <!-- Icon Credits:- <a target="_blank" href="https://icons8.com/icons/set/whatsapp">WhatsApp icon</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>-->
+
                     </RelativeLayout>
                 </android.support.v7.widget.CardView>
 
