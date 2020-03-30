@@ -605,5 +605,6 @@
     <string name="recyclerview_home_date">01 January 2020, 12:00 AM</string>
     <string name="intelesafe">InteleSafe</string>
     <string name="who_is_this_napplication_for">Who is this \napplication for?</string>
+    <string name="submit_visitSummary_Button">Submit</string>
 
 </resources>

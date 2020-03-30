@@ -527,6 +527,7 @@
 
 
                 <TextView
+                    android:id="@+id/visit_help_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/if_you_get_much_sicker_please_call_your_nearest_doctor_020_26127394"
@@ -535,6 +536,17 @@
                     android:textSize="@dimen/card_content_text_size"
                     android:padding="@dimen/padding_card"
                     />
+
+                <TextView
+                    android:id="@+id/Help_Watsapp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/visit_help_text"
+                    android:hint="Click here to send a WhatsApp message"
+                    android:paddingStart="20sp"
+                    android:layout_marginBottom="15sp"
+                    android:textStyle="bold"
+                    android:textSize="20sp"/>
 
             </RelativeLayout>
         </android.support.v7.widget.CardView>
@@ -1233,7 +1245,7 @@
         android:layout_marginBottom="7dp"
         android:background="@color/colorPrimary"
         android:drawableLeft="@drawable/ic_cloud_upload"
-        android:text="Finish Check-in"
+        android:text="@string/submit_visitSummary_Button"
         android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textSize="24dp"
