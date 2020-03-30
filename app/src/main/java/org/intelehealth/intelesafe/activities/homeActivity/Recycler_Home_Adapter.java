@@ -95,39 +95,58 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
                 "p.uuid = v.patientuuid AND v.startdate IS NOT NULL AND " +
                 "v.patientuuid = ? AND v.startdate LIKE ? ";
         String[] data = {sessionManager.getPersionUUID(), arrayList.get(position).getDate()+"%"};
+String dd = sessionManager.getPersionUUID();
+        Log.d("JJJ","JJ: "+dd);
 
+        String message = "skdjs";
+        ArrayList<String> array_message = new ArrayList<>();
+        int counter = 0;
 
+        final Cursor cursor = db.rawQuery(query, data);
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+                    try {
+
+                        message = cursor.getString(cursor.getColumnIndexOrThrow("startdate"));
+                        StringBuilder stringBuilder = new StringBuilder(message);
+                        int a1 = stringBuilder.indexOf("T");
+                        String de = stringBuilder.substring(0, a1);
+
+                        array_message.add(counter, de);
+
+                        counter++;
+                        // alertdialogBuilder.setMessage(message);
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }while (cursor.moveToNext());
+            }
+        }
+        if (cursor != null) {
+            cursor.close();
+        }
 
         myViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
-            String message = "skdjs";
+
             @Override
             public void onClick(View view) {
 
                 AlertDialog.Builder alertdialogBuilder = new AlertDialog.Builder(mcontext);
                 alertdialogBuilder.setTitle("Today's Check-in");
 
-                final Cursor cursor = db.rawQuery(query, data);
-                if (cursor != null) {
-                    if (cursor.moveToFirst()) {
-                        do {
-                            try {
 
-                                message = cursor.getString(cursor.getColumnIndexOrThrow("startdate"));
-                                alertdialogBuilder.setMessage(message);
 
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
+              StringBuilder stringBuilder_2 = new StringBuilder();
+                for(int i=0; i<array_message.size(); i++)
+                {
+                   stringBuilder_2.append("Visit no." + (i+1) + "-\t\t"+ array_message.get(i));
+                   stringBuilder_2.append("\n");
 
-                        }while (cursor.moveToNext());
-                    }
                 }
-                if (cursor != null) {
-                    cursor.close();
-                }
-
-               // alertdialogBuilder.setMessage("");
-
+                alertdialogBuilder.setMessage(stringBuilder_2.toString());
                 alertdialogBuilder.setPositiveButton(R.string.generic_yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
