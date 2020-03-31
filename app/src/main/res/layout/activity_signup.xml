@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/white"
+
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
@@ -57,7 +58,7 @@
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="200dp"
+                        android:layout_height="300dp"
                         android:layout_marginRight="10dp"
                         android:layout_weight="1"
                         android:orientation="vertical">
@@ -132,6 +133,53 @@
 
                         </android.support.design.widget.TextInputLayout>
 
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/identification_registration_no"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:autofillHints="@string/action_settings"
+                                android:drawableStart="@drawable/person_icon"
+                                android:drawableLeft="@drawable/person_icon"
+                                android:drawablePadding="10dp"
+                                android:ems="10"
+                                android:freezesText="true"
+                                android:hint="@string/medical_registration_number_license_id"
+                                android:imeOptions="actionUnspecified"
+                                android:inputType="textCapWords"
+                                android:maxLength="25"
+                                android:maxLines="1"
+                                android:singleLine="true" />
+
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/identification_hospital_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:autofillHints="@string/action_settings"
+                                android:drawableStart="@drawable/person_icon"
+                                android:drawableLeft="@drawable/person_icon"
+                                android:drawablePadding="10dp"
+                                android:ems="10"
+                                android:freezesText="true"
+                                android:hint="@string/name_of_health_organization_hospital_where_you_primarily_work"
+                                android:imeOptions="actionUnspecified"
+                                android:inputType="textCapWords"
+                                android:maxLength="25"
+                                android:maxLines="1"
+                                android:singleLine="true" />
+
+                        </android.support.design.widget.TextInputLayout>
+
+
                     </LinearLayout>
 
                     <ImageView
@@ -161,7 +209,7 @@
                         android:id="@+id/email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/prompt_email"
+                        android:hint="User"
                         android:imeOptions="actionNext"
                         android:inputType="textEmailAddress"
                         android:maxLines="1"

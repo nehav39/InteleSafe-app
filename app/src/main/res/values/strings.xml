@@ -606,5 +606,7 @@
     <string name="intelesafe">InteleSafe</string>
     <string name="who_is_this_napplication_for">Who is this \napplication for?</string>
     <string name="submit_visitSummary_Button">Submit</string>
+    <string name="medical_registration_number_license_id">*Medical registration number/license ID</string>
+    <string name="name_of_health_organization_hospital_where_you_primarily_work">*Name of health organization/hospital where you primarily work</string>
 
 </resources>

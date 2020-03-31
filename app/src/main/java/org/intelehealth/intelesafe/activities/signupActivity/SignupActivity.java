@@ -134,6 +134,8 @@ public class SignupActivity extends AppCompatActivity {
     RadioButton mGenderF;
     EditText countryText;
     EditText stateText;
+    EditText licenseID;
+    EditText hospital_name;
 
     Spinner mCountry;
     Spinner mState;
@@ -218,6 +220,9 @@ public class SignupActivity extends AppCompatActivity {
 
         mPasswordView = findViewById(R.id.password);
         mCPassword = findViewById(R.id.cpassword);
+
+        licenseID = findViewById(R.id.identification_registration_no);
+        hospital_name = findViewById(R.id.identification_hospital_name);
 
         mDOB = findViewById(R.id.identification_birth_date_text_view);
         mPhoneNum = findViewById(R.id.identification_phone_number);
@@ -574,6 +579,18 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }
 
+                if (licenseID.getText().toString().equals("")) {
+                    licenseID.setError(getString(R.string.error_field_required));
+                    licenseID.requestFocus();
+                    return;
+                }
+
+                if (hospital_name.getText().toString().equals("")) {
+                    hospital_name.setError(getString(R.string.error_field_required));
+                    hospital_name.requestFocus();
+                    return;
+                }
+
                 // Check for a valid email address.
                 if (TextUtils.isEmpty(userName)) {
                     mEmailView.setError(getString(R.string.error_field_required));
@@ -783,6 +800,13 @@ public class SignupActivity extends AppCompatActivity {
                 UserBirthAttribute userBirthAttribute = new UserBirthAttribute();
                 userBirthAttribute.setAttributeType("14d4f066-15f5-102d-96e4-000c29c2a5d7");
                 userBirthAttribute.setValue("" + mPhoneNum.getText().toString());
+
+                userBirthAttribute.setAttributeType("ecdaadb6-14a0-4ed9-b5b7-cfed87b44b87"); // openmrsuuid occupation
+                userBirthAttribute.setValue("" + licenseID.getText().toString()); //license text
+
+                userBirthAttribute.setAttributeType("1c718819-345c-4368-aad6-d69b4c267db7"); //openmrsuuid education
+                userBirthAttribute.setValue("" + hospital_name.getText().toString()); //hospital name text
+
 
                 List<UserBirthAttribute> userAttributeList = new ArrayList<>();
                 userAttributeList.add(userBirthAttribute);
@@ -1121,12 +1145,12 @@ public class SignupActivity extends AppCompatActivity {
 //            patientAttributesDTO.setValue(StringUtils.getValue(mRelationship.getText().toString()));
 //            patientAttributesDTOList.add(patientAttributesDTO);
 
-//            patientAttributesDTO = new PatientAttributesDTO();
-//            patientAttributesDTO.setUuid(UUID.randomUUID().toString());
-//            patientAttributesDTO.setPatientuuid(uuid);
-//            patientAttributesDTO.setPersonAttributeTypeUuid(patientsDAO.getUuidForAttribute("occupation"));
-//            patientAttributesDTO.setValue(StringUtils.getValue(mOccupation.getText().toString()));
-//            patientAttributesDTOList.add(patientAttributesDTO);
+            patientAttributesDTO = new PatientAttributesDTO();
+            patientAttributesDTO.setUuid(UUID.randomUUID().toString());
+            patientAttributesDTO.setPatientuuid(uuid);
+            patientAttributesDTO.setPersonAttributeTypeUuid(patientsDAO.getUuidForAttribute("occupation"));
+            patientAttributesDTO.setValue(StringUtils.getValue(licenseID.getText().toString()));
+            patientAttributesDTOList.add(patientAttributesDTO);
 
 //            patientAttributesDTO = new PatientAttributesDTO();
 //            patientAttributesDTO.setUuid(UUID.randomUUID().toString());
@@ -1135,12 +1159,12 @@ public class SignupActivity extends AppCompatActivity {
 //            patientAttributesDTO.setValue(StringUtils.getProvided(mEconomicStatus));
 //            patientAttributesDTOList.add(patientAttributesDTO);
 
-//            patientAttributesDTO = new PatientAttributesDTO();
-//            patientAttributesDTO.setUuid(UUID.randomUUID().toString());
-//            patientAttributesDTO.setPatientuuid(uuid);
-//            patientAttributesDTO.setPersonAttributeTypeUuid(patientsDAO.getUuidForAttribute("Education Level"));
-//            patientAttributesDTO.setValue(StringUtils.getProvided(mEducation));
-//            patientAttributesDTOList.add(patientAttributesDTO);
+            patientAttributesDTO = new PatientAttributesDTO();
+            patientAttributesDTO.setUuid(UUID.randomUUID().toString());
+            patientAttributesDTO.setPatientuuid(uuid);
+            patientAttributesDTO.setPersonAttributeTypeUuid(patientsDAO.getUuidForAttribute("Education Level"));
+            patientAttributesDTO.setValue(StringUtils.getValue(hospital_name.getText().toString()));
+            patientAttributesDTOList.add(patientAttributesDTO);
 
         patientAttributesDTO = new PatientAttributesDTO();
         patientAttributesDTO.setUuid(UUID.randomUUID().toString());
