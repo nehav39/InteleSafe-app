@@ -13,12 +13,15 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -166,7 +169,7 @@ public class SignupActivity extends AppCompatActivity {
 
     int age = 0;
 
-    private AutoCompleteTextView mEmailView;
+    private TextInputEditText mEmailView;
     private EditText mPasswordView;
     private EditText mCPassword;
 
@@ -217,6 +220,23 @@ public class SignupActivity extends AppCompatActivity {
         mLastName.setFilters(new InputFilter[]{new InputFilter.LengthFilter(25), inputFilter_Name}); //maxlength 25
 
         mEmailView = findViewById(R.id.email);
+        mEmailView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                mPhoneNum.setText(mEmailView.getText().toString());
+            }
+        });
+
 
         mPasswordView = findViewById(R.id.password);
         mCPassword = findViewById(R.id.cpassword);
@@ -598,8 +618,8 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (userName.length() < 6) {
-                    mEmailView.setError(getString(R.string.username_should_be_6_digits));
+                if (userName.length() < 10) {
+                    mEmailView.setError(getString(R.string.username_10digits));
                     mEmailView.requestFocus();
                     return;
                 }

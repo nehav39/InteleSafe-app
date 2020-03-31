@@ -619,6 +619,7 @@
     <string name="submit_visitSummary_Button">Submit</string>
     <string name="medical_registration_number_license_id">*Medical registration number/license ID</string>
     <string name="name_of_health_organization_hospital_where_you_primarily_work">*Name of health organization/hospital where you primarily work</string>
+    <string name="username_10digits">Username should be 10 digits</string>
     <!-- <string name="select_language">Select Language</string>
      <string name="address_of_isolation_line_2">Address of isolation, Line 2</string>
      <string name="HomeScreen_Header_Title">Welcome</string>
