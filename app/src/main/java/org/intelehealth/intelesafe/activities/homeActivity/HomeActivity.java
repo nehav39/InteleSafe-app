@@ -298,6 +298,7 @@ public class HomeActivity extends AppCompatActivity {
                         int a1 = stringBuilder.indexOf("T");
                         String dd = stringBuilder.substring(0, a1);
 
+                        //comment...
                         array_original_date.add(b,endDate);
                         b++;
 //                        hashSet.add(new Day_Date("Day "+a, endDate));
