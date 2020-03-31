@@ -292,6 +292,8 @@ public class SignupActivity extends AppCompatActivity {
         mState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position != 0)
+                {
                 state = parent.getItemAtPosition(position).toString();
                 if (state.matches("Odisha")) {
                     //Creating the instance of ArrayAdapter containing list of fruit names
@@ -301,6 +303,11 @@ public class SignupActivity extends AppCompatActivity {
                     mCity.setAdapter(adapter);//setting the adapter data into the AutoCompleteTextView
                 } else {
                     mCity.setAdapter(null);
+                }
+                }
+                else
+                    {
+
                 }
             }
 
