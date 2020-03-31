@@ -162,6 +162,7 @@ public class SignupActivity extends AppCompatActivity {
     String password = "";
     String cPassword = "";
     String country = "";
+    String state = "";
     String district = "";
     private String personUUID = "";
     private String patientOpenMRSID = "";
@@ -291,7 +292,7 @@ public class SignupActivity extends AppCompatActivity {
         mState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String state = parent.getItemAtPosition(position).toString();
+                state = parent.getItemAtPosition(position).toString();
                 if (state.matches("Odisha")) {
                     //Creating the instance of ArrayAdapter containing list of fruit names
                     ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(SignupActivity.this,
@@ -325,7 +326,7 @@ public class SignupActivity extends AppCompatActivity {
                         if (patientID_edit != null) {
                             mState.setSelection(stateAdapter.getPosition(String.valueOf(patient1.getState_province())));
                         } else {
-                            mState.setSelection(stateAdapter.getPosition("Maharashtra"));
+                          //  mState.setSelection(stateAdapter.getPosition("Maharashtra"));
                         }
 
                     }
@@ -753,6 +754,11 @@ public class SignupActivity extends AppCompatActivity {
 
                 if (country.equalsIgnoreCase("")) {
                     Toast.makeText(context, getString(R.string.please_select_country), Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                if (state.equalsIgnoreCase("")) {
+                    Toast.makeText(context, getString(R.string.please_select_state), Toast.LENGTH_LONG).show();
                     return;
                 }
 

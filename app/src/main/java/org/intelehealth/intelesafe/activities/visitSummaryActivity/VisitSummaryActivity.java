@@ -105,6 +105,10 @@ import org.intelehealth.intelesafe.activities.vitalActivity.VitalsActivity;
 import org.intelehealth.intelesafe.utilities.NetworkConnection;
 import org.intelehealth.intelesafe.utilities.exception.DAOException;
 
+/**
+ * Created By: Prajwal Waingankar
+ * Github: prajwalmw
+ */
 public class VisitSummaryActivity extends AppCompatActivity {
 
     private static final String TAG = VisitSummaryActivity.class.getSimpleName();

@@ -28,6 +28,11 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Locale;
 
+/**
+ * Created By: Prajwal Waingankar
+ * Github: prajwalmw
+ */
+
 public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Adapter.MyViewHolder> {
 
     ArrayList<Day_Date> arrayList;
