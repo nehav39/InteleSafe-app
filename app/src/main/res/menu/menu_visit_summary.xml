@@ -8,8 +8,17 @@
         android:id="@+id/summary_print"
         android:orderInCategory="200"
         android:title="@string/action_print"
-        app:showAsAction="never"
-        android:visible="false">
+        app:showAsAction="always"
+        android:icon="@drawable/ic_print_black_24dp">
+
+    </item>
+
+    <item
+        android:id="@+id/summary_home"
+        android:orderInCategory="500"
+        android:title="Home"
+        android:icon="@drawable/ic_home_white_48px"
+        app:showAsAction="always">
 
     </item>
 
@@ -30,14 +39,7 @@
 
     </item>
 
-    <item
-        android:id="@+id/summary_home"
-        android:orderInCategory="500"
-        android:title="Home"
-        android:icon="@drawable/ic_home_white_48px"
-        app:showAsAction="always">
 
-    </item>
 
     <item
         android:id="@+id/internet_icon"
