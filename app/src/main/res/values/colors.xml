@@ -67,4 +67,8 @@
         <item>@color/dot_dark_screen4</item>
     </array>
 
+
+    <!--Home Screen Changes-->
+    <color name="txt_sub_header_color">#333333</color>
+
 </resources>
