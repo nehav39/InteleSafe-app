@@ -84,6 +84,7 @@
                     android:paddingHorizontal="15sp"
                     android:background="@drawable/button_bg_rounded_blue"
                     android:foreground="?android:attr/selectableItemBackground"
+
                     android:text="@string/home_quarantine_guidelines"
                     android:textAlignment="center"
                     android:textColor="@android:color/white"
@@ -136,6 +137,7 @@
 
 
                         <TextView
+                            android:id="@+id/Help_Text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/if_you_get_much_sicker_please_call_your_nearest_doctor_020_26127394"
@@ -145,6 +147,24 @@
                             android:textStyle="bold"
                             android:padding="@dimen/padding_card"
                             />
+
+                        <Button
+                            android:id="@+id/Help_Watsapp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/Help_Text"
+                            android:hint="Click here to send a WhatsApp message"
+                            android:paddingHorizontal="20sp"
+                            android:layout_marginBottom="15sp"
+                            android:textStyle="bold"
+                            android:background="@android:color/transparent"
+                            android:drawableStart="@drawable/ic_icons8_whatsapp"
+                            android:gravity="start|center"
+                            android:layout_marginStart="10sp"
+                            android:drawablePadding="10sp"
+                            android:textSize="20sp"/>
+
+                        <!-- Icon Credits:- <a target="_blank" href="https://icons8.com/icons/set/whatsapp">WhatsApp icon</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>-->
 
                     </RelativeLayout>
                 </android.support.v7.widget.CardView>

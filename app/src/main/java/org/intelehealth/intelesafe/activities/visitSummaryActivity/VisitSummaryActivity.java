@@ -16,6 +16,7 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -104,11 +105,16 @@ import org.intelehealth.intelesafe.activities.vitalActivity.VitalsActivity;
 import org.intelehealth.intelesafe.utilities.NetworkConnection;
 import org.intelehealth.intelesafe.utilities.exception.DAOException;
 
+/**
+ * Created By: Prajwal Waingankar
+ * Github: prajwalmw
+ */
 public class VisitSummaryActivity extends AppCompatActivity {
 
     private static final String TAG = VisitSummaryActivity.class.getSimpleName();
     private WebView mWebView;
     private LinearLayout mLayout;
+    TextView Help_Link_Whatsapp;
 
     String mHeight, mWeight, mBMI, mBP, mPulse, mTemp, mSPO2, mresp;
 
@@ -400,6 +406,7 @@ public class VisitSummaryActivity extends AppCompatActivity {
             isPastVisit = intent.getBooleanExtra("pastVisit", false);
             hasPrescription = intent.getStringExtra("hasPrescription");
 
+
             Set<String> selectedExams = sessionManager.getVisitSummary(patientUuid);
             if (physicalExams == null) physicalExams = new ArrayList<>();
             physicalExams.clear();
@@ -471,6 +478,19 @@ public class VisitSummaryActivity extends AppCompatActivity {
         additionalCommentsTextView = findViewById(R.id.textView_content_additional_comments);
         followUpDateTextView = findViewById(R.id.textView_content_follow_up_date);
 
+        Help_Link_Whatsapp = findViewById(R.id.Help_Watsapp);
+        Help_Link_Whatsapp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String phoneNumberWithCountryCode = "+917304154312";
+                String message = "Hello, I need assistance with the Corona virus infection!";
+
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse(
+                                String.format("https://api.whatsapp.com/send?phone=%s&text=%s",
+                                        phoneNumberWithCountryCode, message))));
+            }
+        });
         ivPrescription = findViewById(R.id.iv_prescription);
 
         if (hasPrescription.equalsIgnoreCase("true")) {

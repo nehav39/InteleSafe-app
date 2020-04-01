@@ -555,7 +555,7 @@
     <string name="select_language">Select Language</string>
     <string name="address_of_isolation_line_2">Address of isolation, Line 2</string>
     <string name="HomeScreen_Header_Title">Welcome</string>
-    <string name="if_you_get_much_sicker_please_call_your_nearest_doctor_020_26127394">If you get much sicker please call your nearest doctor: 020-26127394</string>
+    <string name="if_you_get_much_sicker_please_call_your_nearest_doctor_020_26127394">You can message us with your PPE related queries on our WhatsApp Helpline below.</string>
     <string name="visit_Summary_cardview">Summary</string>
     <string name="address_of_isolation_line_1">Address of isolation, Line 1*</string>
     <string name="skip">skip</string>
@@ -589,8 +589,8 @@
     <string name="logout_dialog">Are you sure you want to Logout?</string>
     <string name="day_1">Day 1</string>
     <string name="enter_check_in">Enter Check-in</string>
-    <string name="home_quarantine_guidelines">Home quarantine guidelines</string>
-    <string name="education_videos">Education videos</string>
+    <string name="home_quarantine_guidelines">Guidelines for use of PPE</string>
+    <string name="education_videos">FAQs</string>
     <string name="help">Help</string>
     <string name="your_check_in_overview">Your check in overview :</string>
     <string name="do_i_have_covid_19">Do I have Covid-19?</string>
@@ -605,5 +605,10 @@
     <string name="recyclerview_home_date">01 January 2020, 12:00 AM</string>
     <string name="intelesafe">InteleSafe</string>
     <string name="who_is_this_napplication_for">Who is this \napplication for?</string>
+    <string name="submit_visitSummary_Button">Submit</string>
+    <string name="medical_registration_number_license_id">*Medical registration number/license ID</string>
+    <string name="name_of_health_organization_hospital_where_you_primarily_work">*Name of health organization/hospital where you primarily work</string>
+    <string name="username_10digits">Username should be 10 digits</string>
+    <string name="please_select_state">Please select state</string>
 
 </resources>

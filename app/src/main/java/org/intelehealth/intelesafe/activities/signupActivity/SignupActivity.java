@@ -13,12 +13,15 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -134,6 +137,8 @@ public class SignupActivity extends AppCompatActivity {
     RadioButton mGenderF;
     EditText countryText;
     EditText stateText;
+    EditText licenseID;
+    EditText hospital_name;
 
     Spinner mCountry;
     Spinner mState;
@@ -157,6 +162,7 @@ public class SignupActivity extends AppCompatActivity {
     String password = "";
     String cPassword = "";
     String country = "";
+    String state = "";
     String district = "";
     private String personUUID = "";
     private String patientOpenMRSID = "";
@@ -164,7 +170,7 @@ public class SignupActivity extends AppCompatActivity {
 
     int age = 0;
 
-    private AutoCompleteTextView mEmailView;
+    private TextInputEditText mEmailView;
     private EditText mPasswordView;
     private EditText mCPassword;
 
@@ -215,9 +221,29 @@ public class SignupActivity extends AppCompatActivity {
         mLastName.setFilters(new InputFilter[]{new InputFilter.LengthFilter(25), inputFilter_Name}); //maxlength 25
 
         mEmailView = findViewById(R.id.email);
+        mEmailView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                mPhoneNum.setText(mEmailView.getText().toString());
+            }
+        });
+
 
         mPasswordView = findViewById(R.id.password);
         mCPassword = findViewById(R.id.cpassword);
+
+        licenseID = findViewById(R.id.identification_registration_no);
+        hospital_name = findViewById(R.id.identification_hospital_name);
 
         mDOB = findViewById(R.id.identification_birth_date_text_view);
         mPhoneNum = findViewById(R.id.identification_phone_number);
@@ -266,7 +292,9 @@ public class SignupActivity extends AppCompatActivity {
         mState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String state = parent.getItemAtPosition(position).toString();
+                if(position != 0)
+                {
+                state = parent.getItemAtPosition(position).toString();
                 if (state.matches("Odisha")) {
                     //Creating the instance of ArrayAdapter containing list of fruit names
                     ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(SignupActivity.this,
@@ -275,6 +303,11 @@ public class SignupActivity extends AppCompatActivity {
                     mCity.setAdapter(adapter);//setting the adapter data into the AutoCompleteTextView
                 } else {
                     mCity.setAdapter(null);
+                }
+                }
+                else
+                    {
+
                 }
             }
 
@@ -287,7 +320,7 @@ public class SignupActivity extends AppCompatActivity {
         mCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i != 0) {
+//                if (i != 0) {
                     country = adapterView.getItemAtPosition(i).toString();
 
                     if (country.matches("India")) {
@@ -300,16 +333,16 @@ public class SignupActivity extends AppCompatActivity {
                         if (patientID_edit != null) {
                             mState.setSelection(stateAdapter.getPosition(String.valueOf(patient1.getState_province())));
                         } else {
-                            mState.setSelection(stateAdapter.getPosition("Maharashtra"));
+                          //  mState.setSelection(stateAdapter.getPosition("Maharashtra"));
                         }
 
                     }
-                } else {
-                    ArrayAdapter<CharSequence> stateAdapter = ArrayAdapter.createFromResource(SignupActivity.this,
-                            R.array.state_error, android.R.layout.simple_spinner_item);
-                    stateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    mState.setAdapter(stateAdapter);
-                }
+//                } else {
+//                    ArrayAdapter<CharSequence> stateAdapter = ArrayAdapter.createFromResource(SignupActivity.this,
+//                            R.array.state_error, android.R.layout.simple_spinner_item);
+//                    stateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                    mState.setAdapter(stateAdapter);
+//                }
 
             }
 
@@ -574,6 +607,18 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }
 
+                if (licenseID.getText().toString().equals("")) {
+                    licenseID.setError(getString(R.string.error_field_required));
+                    licenseID.requestFocus();
+                    return;
+                }
+
+                if (hospital_name.getText().toString().equals("")) {
+                    hospital_name.setError(getString(R.string.error_field_required));
+                    hospital_name.requestFocus();
+                    return;
+                }
+
                 // Check for a valid email address.
                 if (TextUtils.isEmpty(userName)) {
                     mEmailView.setError(getString(R.string.error_field_required));
@@ -581,8 +626,8 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (userName.length() < 6) {
-                    mEmailView.setError(getString(R.string.username_should_be_6_digits));
+                if (userName.length() < 10) {
+                    mEmailView.setError(getString(R.string.username_10digits));
                     mEmailView.requestFocus();
                     return;
                 }
@@ -719,6 +764,11 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }
 
+                if (state.equalsIgnoreCase("")) {
+                    Toast.makeText(context, getString(R.string.please_select_state), Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 if (district.equalsIgnoreCase("")) {
                     Toast.makeText(context, getString(R.string.please_select_districts), Toast.LENGTH_LONG).show();
                     return;
@@ -783,6 +833,13 @@ public class SignupActivity extends AppCompatActivity {
                 UserBirthAttribute userBirthAttribute = new UserBirthAttribute();
                 userBirthAttribute.setAttributeType("14d4f066-15f5-102d-96e4-000c29c2a5d7");
                 userBirthAttribute.setValue("" + mPhoneNum.getText().toString());
+
+                userBirthAttribute.setAttributeType("ecdaadb6-14a0-4ed9-b5b7-cfed87b44b87"); // openmrsuuid occupation
+                userBirthAttribute.setValue("" + licenseID.getText().toString()); //license text
+
+                userBirthAttribute.setAttributeType("1c718819-345c-4368-aad6-d69b4c267db7"); //openmrsuuid education
+                userBirthAttribute.setValue("" + hospital_name.getText().toString()); //hospital name text
+
 
                 List<UserBirthAttribute> userAttributeList = new ArrayList<>();
                 userAttributeList.add(userBirthAttribute);
@@ -1121,12 +1178,12 @@ public class SignupActivity extends AppCompatActivity {
 //            patientAttributesDTO.setValue(StringUtils.getValue(mRelationship.getText().toString()));
 //            patientAttributesDTOList.add(patientAttributesDTO);
 
-//            patientAttributesDTO = new PatientAttributesDTO();
-//            patientAttributesDTO.setUuid(UUID.randomUUID().toString());
-//            patientAttributesDTO.setPatientuuid(uuid);
-//            patientAttributesDTO.setPersonAttributeTypeUuid(patientsDAO.getUuidForAttribute("occupation"));
-//            patientAttributesDTO.setValue(StringUtils.getValue(mOccupation.getText().toString()));
-//            patientAttributesDTOList.add(patientAttributesDTO);
+            patientAttributesDTO = new PatientAttributesDTO();
+            patientAttributesDTO.setUuid(UUID.randomUUID().toString());
+            patientAttributesDTO.setPatientuuid(uuid);
+            patientAttributesDTO.setPersonAttributeTypeUuid(patientsDAO.getUuidForAttribute("occupation"));
+            patientAttributesDTO.setValue(StringUtils.getValue(licenseID.getText().toString()));
+            patientAttributesDTOList.add(patientAttributesDTO);
 
 //            patientAttributesDTO = new PatientAttributesDTO();
 //            patientAttributesDTO.setUuid(UUID.randomUUID().toString());
@@ -1135,12 +1192,12 @@ public class SignupActivity extends AppCompatActivity {
 //            patientAttributesDTO.setValue(StringUtils.getProvided(mEconomicStatus));
 //            patientAttributesDTOList.add(patientAttributesDTO);
 
-//            patientAttributesDTO = new PatientAttributesDTO();
-//            patientAttributesDTO.setUuid(UUID.randomUUID().toString());
-//            patientAttributesDTO.setPatientuuid(uuid);
-//            patientAttributesDTO.setPersonAttributeTypeUuid(patientsDAO.getUuidForAttribute("Education Level"));
-//            patientAttributesDTO.setValue(StringUtils.getProvided(mEducation));
-//            patientAttributesDTOList.add(patientAttributesDTO);
+            patientAttributesDTO = new PatientAttributesDTO();
+            patientAttributesDTO.setUuid(UUID.randomUUID().toString());
+            patientAttributesDTO.setPatientuuid(uuid);
+            patientAttributesDTO.setPersonAttributeTypeUuid(patientsDAO.getUuidForAttribute("Education Level"));
+            patientAttributesDTO.setValue(StringUtils.getValue(hospital_name.getText().toString()));
+            patientAttributesDTOList.add(patientAttributesDTO);
 
         patientAttributesDTO = new PatientAttributesDTO();
         patientAttributesDTO.setUuid(UUID.randomUUID().toString());

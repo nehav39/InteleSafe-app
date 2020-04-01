@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.database.Cursor;
@@ -53,9 +54,12 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Set;
 import java.util.UUID;
 
 import org.intelehealth.intelesafe.BuildConfig;
@@ -94,6 +98,8 @@ import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
 /**
+ * Created By: Prajwal Waingankar
+ * Github: prajwalmw
  * Home Screen
  */
 
@@ -105,6 +111,12 @@ public class HomeActivity extends AppCompatActivity {
     CountDownTimer CDT;
     int i = 5;
     Calendar calendar;
+    HashSet<String> hashSet;
+    Recycler_Home_Adapter recycler_home_adapter;
+    ArrayList<Day_Date> recycler_arraylist;
+//    Set<Day_Date> set;
+
+    SQLiteDatabase db;
     CustomProgressDialog customProgressDialog;
 
     TextView lastSyncTextView;
@@ -118,6 +130,7 @@ public class HomeActivity extends AppCompatActivity {
     private String key = null;
     private String licenseUrl = null;
     RecyclerView recyclerView;
+    Button help_watsapp;
 
     Context context;
     private String mindmapURL = "";
@@ -176,6 +189,21 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         sessionManager.setCurrentLang(getResources().getConfiguration().locale.toString());
+
+        //Help section of watsapp...
+        help_watsapp = findViewById(R.id.Help_Watsapp);
+        help_watsapp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String phoneNumberWithCountryCode = "+917304154312";
+                String message = "Hello, I need assistance with the Corona virus infection!";
+
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse(
+                                String.format("https://api.whatsapp.com/send?phone=%s&text=%s",
+                                        phoneNumberWithCountryCode, message))));
+            }
+        });
 
         //Notification check
        // SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
@@ -242,8 +270,65 @@ public class HomeActivity extends AppCompatActivity {
 
         //endregion
 
+        db = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
+
         recyclerView = findViewById(R.id.recyclerview_data);
-        Recycler_Home_Adapter recycler_home_adapter = new Recycler_Home_Adapter();
+
+        recycler_arraylist = new ArrayList<Day_Date>();
+//        set = new HashSet<Day_Date>();
+
+        // ArrayList<String> endDate = new ArrayList<>();
+        String endDate = "";
+        String query = "SELECT v.startdate FROM tbl_visit v, tbl_patient p WHERE " +
+                "p.uuid = v.patientuuid AND v.startdate IS NOT NULL AND " +
+                "v.patientuuid = ?";
+        String[] data = {sessionManager.getPersionUUID()};
+
+        final Cursor cursor = db.rawQuery(query, data);
+        int a = 1;
+        int b = 0;
+        hashSet = new HashSet<>();
+        ArrayList<String> array_original_date = new ArrayList<>();
+
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+                    try {
+
+                        endDate = cursor.getString(cursor.getColumnIndexOrThrow("startdate"));
+                        StringBuilder stringBuilder = new StringBuilder(endDate);
+                        int a1 = stringBuilder.indexOf("T");
+                        String dd = stringBuilder.substring(0, a1);
+
+                        //comment...
+                        array_original_date.add(b,endDate);
+                        b++;
+//                        hashSet.add(new Day_Date("Day "+a, endDate));
+                        if(hashSet.add(dd))
+                        {
+                            recycler_arraylist.add(new Day_Date("Day "+a, hashSet.iterator().next()));
+                            a++;
+                        }
+
+
+                               /* recycler_arraylist.add(new Day_Date
+                                        ("Day " + a, dd));
+                                a++;*/
+
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }while (cursor.moveToNext());
+            }
+        }
+        if (cursor != null) {
+            cursor.close();
+        }
+
+        recycler_home_adapter = new Recycler_Home_Adapter(context, recycler_arraylist, array_original_date);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(HomeActivity.this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(recycler_home_adapter);
 
@@ -265,6 +350,16 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        home_quarantine_guidelines.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent home_quarantine = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("https://www.intelehealth.org/ppe-guidelines"));
+                startActivity(home_quarantine);
+            }
+        });
+
+/*
         home_quarantine_guidelines.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -296,6 +391,7 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
+*/
 
 
         educational_videos.setOnClickListener(new View.OnClickListener() {
@@ -304,7 +400,7 @@ public class HomeActivity extends AppCompatActivity {
                 //open youtube page.
                 startActivity
                         (new Intent(Intent.ACTION_VIEW,
-                                Uri.parse("https://www.youtube.com/playlist?list=PLY7f0i-HnvJ01aYOLRyZGGK3CVOKlz9hs")));
+                                Uri.parse("https://www.intelehealth.org/ppe-faqs")));
             }
         });
         Logger.logD(TAG, "onCreate: " + getFilesDir().toString());
@@ -388,6 +484,7 @@ public class HomeActivity extends AppCompatActivity {
         });
 */
         WorkManager.getInstance().enqueueUniquePeriodicWork(AppConstants.UNIQUE_WORK_NAME, ExistingPeriodicWorkPolicy.KEEP, AppConstants.PERIODIC_WORK_REQUEST);
+/*
         if (sessionManager.isFirstTimeLaunched()) {
             TempDialog = new ProgressDialog(HomeActivity.this, R.style.AlertDialogStyle); //thats how to add a style!
             TempDialog.setTitle(R.string.syncInProgress);
@@ -412,6 +509,7 @@ public class HomeActivity extends AppCompatActivity {
             }.start();
 
         }
+*/
         sessionManager.setMigration(true);
 
         if (sessionManager.isReturningUser()) {
