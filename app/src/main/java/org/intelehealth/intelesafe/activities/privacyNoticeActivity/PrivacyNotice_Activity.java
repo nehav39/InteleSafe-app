@@ -72,7 +72,6 @@ public class PrivacyNotice_Activity extends AppCompatActivity {
 
         txt_next = findViewById(R.id.txt_privacy);
 
-
         if (!sessionManager.getLicenseKey().isEmpty())
             hasLicense = true;
 

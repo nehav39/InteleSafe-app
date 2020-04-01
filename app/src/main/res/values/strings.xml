@@ -615,5 +615,10 @@
     <string name="username_10digits">Username should be 10 digits</string>
     <string name="please_select_state">Please select state</string>
     <string name="save">Save</string>
+    <string name="personal_information">Personal Information</string>
+    <string name="login_details">Login Details</string>
+    <string name="username">Username</string>
+    <string name="password_length">Your mobile number is set as your username and cannot be changed.</string>
+    <string name="address_details">Address Details</string>
 
 </resources>

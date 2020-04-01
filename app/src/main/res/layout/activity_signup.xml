@@ -67,7 +67,7 @@
                     android:drawableStart="@drawable/assignment"
                     android:drawableLeft="@drawable/assignment"
                     android:drawablePadding="10dp"
-                    android:text="Personal Information"
+                    android:text="@string/personal_information"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
 
@@ -336,7 +336,7 @@
                     android:drawableStart="@drawable/icon_account_details"
                     android:drawableLeft="@drawable/icon_account_details"
                     android:drawablePadding="10dp"
-                    android:text="Login Details"
+                    android:text="@string/login_details"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title" />
                 <Space
                     android:layout_width="20dp"
@@ -350,7 +350,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:digits="0123456789+"
-                        android:hint="Username"
+                        android:hint="@string/username"
                         android:imeOptions="actionNext"
                         android:inputType="phone"
                         android:maxLines="1"
@@ -363,7 +363,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="Your mobile number is set as your username and cannot be changed."
+                    android:text="@string/password_length"
                     android:textSize="10sp"
                     android:textColor="#828282"/>
 
@@ -421,7 +421,7 @@
                     android:drawableStart="@drawable/icon_address"
                     android:drawableLeft="@drawable/icon_address"
                     android:drawablePadding="10dp"
-                    android:text="Address Details"
+                    android:text="@string/address_details"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title" />
                 <Space
                     android:layout_width="20dp"
@@ -846,12 +846,8 @@
 
 
 <!--                </android.support.design.widget.TextInputLayout>-->
-
-
             </LinearLayout>
         </ScrollView>
-
-
     </RelativeLayout>
 
 <!--    <android.support.design.widget.FloatingActionButton
