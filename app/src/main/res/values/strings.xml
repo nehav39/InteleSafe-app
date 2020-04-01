@@ -618,7 +618,7 @@
     <string name="personal_information">Personal Information</string>
     <string name="login_details">Login Details</string>
     <string name="username">Username</string>
-    <string name="password_length">Your mobile number is set as your username and cannot be changed.</string>
+    <string name="username_condition">Your mobile number is set as your username and cannot be changed.</string>
     <string name="address_details">Address Details</string>
 
 </resources>
