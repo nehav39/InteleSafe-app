@@ -287,6 +287,9 @@ public class HomeActivity extends AppCompatActivity {
         final Cursor cursor = db.rawQuery(query, data);
         int a = 1;
         int b = 0;
+        String dd="";
+        int a1;
+        StringBuilder stringBuilder;
         hashSet = new HashSet<>();
         ArrayList<String> array_original_date = new ArrayList<>();
 
@@ -296,20 +299,26 @@ public class HomeActivity extends AppCompatActivity {
                     try {
 
                         endDate = cursor.getString(cursor.getColumnIndexOrThrow("startdate"));
-                        StringBuilder stringBuilder = new StringBuilder(endDate);
-                        int a1 = stringBuilder.indexOf("T");
-                        String dd = stringBuilder.substring(0, a1);
+                         stringBuilder = new StringBuilder(endDate);
+                         a1 = stringBuilder.indexOf("T");
+                         dd = stringBuilder.substring(0, a1);
 
                         //comment...
                         array_original_date.add(b,endDate);
                         b++;
 //                        hashSet.add(new Day_Date("Day "+a, endDate));
-                        if(hashSet.add(dd))
-                        {
-                            recycler_arraylist.add(new Day_Date("Day "+a, hashSet.iterator().next()));
-                            a++;
-                        }
+                     //   boolean t = ;
+                        hashSet.add(dd);
 
+
+
+//                        for(int i=0; i<recycler_arraylist.size(); i++)
+//                        {
+//                            recycler_arraylist.get(i);
+//                            String v = recycler_arraylist.get(i).getDate().toString();
+//                            Log.d("MM","MM: "+v);
+//
+//                        }
 
                                /* recycler_arraylist.add(new Day_Date
                                         ("Day " + a, dd));
@@ -327,10 +336,20 @@ public class HomeActivity extends AppCompatActivity {
             cursor.close();
         }
 
+        ArrayList<String> new_arraylist = new ArrayList<>();
+        new_arraylist.addAll(hashSet);
+
+        for (int j = 0; j < new_arraylist.size(); j++) {
+            recycler_arraylist.add(new Day_Date("Day "+a, new_arraylist.get(j)));
+            a++;
+        }
+
         recycler_home_adapter = new Recycler_Home_Adapter(context, recycler_arraylist, array_original_date);
+        recycler_home_adapter.notifyDataSetChanged();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(HomeActivity.this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(recycler_home_adapter);
+
 
         enter_check_in = findViewById(R.id.button_enter_checkin);
         home_quarantine_guidelines = findViewById(R.id.button_home_quarantine);
