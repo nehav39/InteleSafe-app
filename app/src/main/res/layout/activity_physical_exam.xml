@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="#fcfcff"
     tools:context="io.intelehealth.client.activities.physical_exam_activity.PhysicalExamActivity">
 
     <LinearLayout
@@ -21,17 +22,74 @@
             android:background="@color/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:visibility="gone"
+            >
 
         </android.support.v7.widget.Toolbar>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:orientation="horizontal">
+
+
+            <RelativeLayout
+                android:id="@+id/btn_back"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/svg_header_left_arrow"
+                    android:layout_centerInParent="true"/>
+
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/txt_sub_header_color"
+                android:textSize="30sp"
+                android:fontFamily="@font/lato_bold"
+                android:layout_gravity="center_vertical"
+                android:includeFontPadding="false"
+                android:text="@string/txt_self_assessment"
+                />
+
+        </LinearLayout>
+
+
+     <!--   <android.support.design.widget.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            app:tabTextColor="@android:color/white"
+            android:layout_margin="10dp"
+            app:tabSelectedTextColor="@android:color/white"
+            android:background="@color/colorPrimary"/>-->
+
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabTextColor="@android:color/white"
-            app:tabSelectedTextColor="@android:color/white"
-            android:background="@color/colorPrimary"/>
+            android:layout_height="25dp"
+            android:background="@drawable/tab_layout_background"
+            android:layout_margin="15dp"
+            app:tabMode="scrollable"
+            app:tabBackground="@drawable/tab_selector"
+            app:tabSelectedTextColor="#2418eb"
+            app:tabPaddingStart="16dp"
+            app:tabPaddingEnd="16dp"
+            app:tabIndicator="@null"
+            app:tabIndicatorColor="@android:color/transparent"
+            app:tabIndicatorHeight="0dp"
+            app:tabRippleColor="@null"
+            />
 
         <android.support.v4.view.ViewPager
             android:id="@+id/container"
@@ -48,7 +106,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/ic_done_24dp"
-        />
+        android:backgroundTint="@color/colorPrimaryDark"
+        app:srcCompat="@drawable/svg_right_arrow"
+        tools:ignore="VectorDrawableCompat" />
 
 </android.support.design.widget.CoordinatorLayout>

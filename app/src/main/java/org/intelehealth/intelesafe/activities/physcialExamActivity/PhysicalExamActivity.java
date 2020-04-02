@@ -10,10 +10,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
+
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +27,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.crashlytics.android.Crashlytics;
@@ -57,6 +60,8 @@ import org.intelehealth.intelesafe.utilities.UuidDictionary;
 
 import org.intelehealth.intelesafe.utilities.StringUtils;
 import org.intelehealth.intelesafe.utilities.exception.DAOException;
+
+import static java.security.AccessController.getContext;
 
 public class PhysicalExamActivity extends AppCompatActivity {
     final static String TAG = PhysicalExamActivity.class.getSimpleName();
@@ -219,12 +224,13 @@ public class PhysicalExamActivity extends AppCompatActivity {
         TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setSelectedTabIndicatorHeight(15);
 
+        // Modified by venu N on 02/04/2020.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            tabLayout.setSelectedTabIndicatorColor(getColor(R.color.amber));
-            tabLayout.setTabTextColors(getColor(R.color.white), getColor(R.color.amber));
+           // tabLayout.setSelectedTabIndicatorColor(getColor(R.color.amber));
+            tabLayout.setTabTextColors(getColor(R.color.txt_sub_header_color), getColor(R.color.white));
         } else {
-            tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.amber));
-            tabLayout.setTabTextColors(getResources().getColor(R.color.white), getResources().getColor(R.color.amber));
+           // tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.amber));
+            tabLayout.setTabTextColors(getResources().getColor(R.color.txt_sub_header_color), getResources().getColor(R.color.white));
         }
         if (tabLayout != null) {
             tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
@@ -232,7 +238,14 @@ public class PhysicalExamActivity extends AppCompatActivity {
         }
 
         FloatingActionButton fab = findViewById(R.id.fab);
+        // added by Venu N on 02/04/2020.
+        if(mViewPager.getCurrentItem() == mViewPager.getAdapter().getCount()-1){
+            fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_done_24dp));
+        }else{
+            fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.svg_right_arrow));
+        }
         assert fab != null;
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -284,11 +297,29 @@ public class PhysicalExamActivity extends AppCompatActivity {
                     }
 
                 } else {
-                    questionsMissing();
+                    // added by venu N 0n 02/04/2020.
+                    if(mViewPager.getCurrentItem() == mViewPager.getAdapter().getCount()-1){
+                        questionsMissing();
+                    }else if(mViewPager.getCurrentItem() < mViewPager.getAdapter().getCount()-1){
+                        fab.setImageDrawable(ContextCompat.getDrawable(PhysicalExamActivity.this, R.drawable.svg_right_arrow));
+                    }
+                    else{
+                        fab.setImageDrawable(ContextCompat.getDrawable(PhysicalExamActivity.this, R.drawable.ic_done_24dp));
+                    }
+
                 }
             }
         });
 
+
+        // Added by venu N as per the figma file on 02/04/2020.
+        RelativeLayout btn_back = findViewById(R.id.btn_back);
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private boolean insertDb(String value) {
@@ -488,6 +519,12 @@ public class PhysicalExamActivity extends AppCompatActivity {
 
             adapter = new CustomExpandableListAdapter(getContext(), viewNode, this.getClass().getSimpleName());
             expandableListView.setAdapter(adapter);
+
+            expandableListView.setGroupIndicator(null);
+            expandableListView.setChildIndicator(null);
+            expandableListView.setChildDivider(getResources().getDrawable(R.color.white));
+            expandableListView.setDivider(getResources().getDrawable(R.color.white));
+            expandableListView.setDividerHeight(0);
             expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
                 @Override
                 public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
