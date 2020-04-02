@@ -74,6 +74,11 @@
         <item name="colorControlHighlight">#FFFFFF</item>
     </style>
 
+    <style name="submit">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
 
     <!--Style changes related to the New Figma by venu N-->
 

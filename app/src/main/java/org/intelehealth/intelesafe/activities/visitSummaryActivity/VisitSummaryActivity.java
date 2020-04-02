@@ -474,7 +474,7 @@ public class VisitSummaryActivity extends AppCompatActivity {
         }
 
         setTitle(getString(R.string.title_activity_patient_summary));
-        setTitle(patientName + ": " + getString(R.string.check_in));
+        setTitle(patientName + ": " + getString(R.string.assessment_visit_title));
 
         db = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
 

@@ -559,7 +559,7 @@
     <string name="select_language">Select Language</string>
     <string name="address_of_isolation_line_2">Address of isolation Line 2</string>
     <string name="HomeScreen_Header_Title">Welcome</string>
-    <string name="if_you_get_much_sicker_please_call_your_nearest_doctor_020_26127394">You can message us with your PPE related queries on our WhatsApp Helpline below.</string>
+    <string name="if_you_get_much_sicker_please_call_your_nearest_doctor_020_26127394">You can message us with your PPE related queries on our WhatsApp Helpline below by clicking on it.</string>
     <string name="visit_Summary_cardview">Summary</string>
     <string name="address_of_isolation_line_1">Address of isolation Line 1</string>
     <string name="skip">skip</string>
@@ -628,5 +628,6 @@
     <string name="personal_pr">Personal protection guidelines</string>
     <string name="if_you_star">If you start showing symptoms of Covid-19 please reach out to your supervisor/doctor. You can also send us a WhatsApp message at the number below for any concerns.</string>
     <string name="some_id">020-26127394</string>
+    <string name="assessment_visit_title">Assessment</string>
 
 </resources>

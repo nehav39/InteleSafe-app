@@ -8,7 +8,7 @@
     <string name="privacy_reject_toast">आपण संमतीशिवाय रुग्णाची नोंदणी करू शकत नाही</string>
     <string name="address_of_isolation_line_2">Address of isolation Line 2</string>
     <string name="HomeScreen_Header_Title">Welcome</string>
-    <string name="if_you_get_much_sicker_please_call_your_nearest_doctor_020_26127394">You can message us with your PPE related queries on our WhatsApp Helpline below.</string>
+    <string name="if_you_get_much_sicker_please_call_your_nearest_doctor_020_26127394">You can message us with your PPE related queries on our WhatsApp Helpline below by clicking on it.</string>
     <string name="visit_Summary_cardview">Summary</string>
     <string name="address_of_isolation_line_1">Address of isolation Line 1</string>
     <string name="skip">skip</string>
@@ -622,6 +622,7 @@
     <string name="username_10digits">Username should be 10 digits</string>
     <string name="please_select_state">Please select state</string>
     <string name="stay_aware_stay_safe">Stay Aware | Stay Safe</string>
+    <string name="assessment_visit_title">Assessment</string>
     <!-- <string name="select_language">Select Language</string>
      <string name="address_of_isolation_line_2">Address of isolation, Line 2</string>
      <string name="HomeScreen_Header_Title">Welcome</string>
