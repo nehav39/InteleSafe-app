@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Intelehealth</string>
+    <string name="app_name" translatable="false">InteleSafe</string>
 
     //Generic
     <string name="generic_the_flipping_word_next" translatable="false">Next</string>
@@ -133,7 +133,7 @@
     <string name="title_activity_question_node" translatable="false">QuestionNodeActivity</string>
     <string name="complaint_change_selected" translatable="false">Modify</string>
     <string name="question_answer_all" translatable="false">Are you sure you have answered all questions.</string>
-    <string name="question_answer_all_phy_exam" translatable="false">Please answer all general exam questions.</string>
+    <string name="question_answer_all_phy_exam" translatable="false">Please answer all Self Assessment questions.</string> <!--modified by venu N on 02/04/2020.-->
     <string name="question_duration_picker" translatable="false">Please enter duration</string>
     <string name="question_text_input" translatable="false">Please enter text</string>
     <string name="question_date_picker" translatable="false">Please select date</string>
@@ -620,5 +620,13 @@
     <string name="username">Username</string>
     <string name="username_condition">Your mobile number is set as your username and cannot be changed.</string>
     <string name="address_details">Address Details</string>
+    <string name="stay_aware_stay_safe">Stay Aware | Stay Safe</string>
+
+    //HomeScreen (New Changes)
+    <string name="txt_self_assessment">Self Assessment</string>
+    <string name="txt_start_now">Start Now</string>
+    <string name="personal_pr">Personal protection guidelines</string>
+    <string name="if_you_star">If you start showing symptoms of Covid-19 please reach out to your supervisor/doctor. You can also send us a WhatsApp message at the number below for any concerns.</string>
+    <string name="some_id">020-26127394</string>
 
 </resources>

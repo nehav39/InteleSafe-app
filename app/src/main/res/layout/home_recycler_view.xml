@@ -26,7 +26,7 @@
                 android:layout_weight="2"
                 android:layout_height="wrap_content"
                 android:text="@string/day_1"
-                android:textStyle="bold"
+                android:fontFamily="@font/lato_bold"
                 android:textSize="18sp"
                 android:gravity="center_vertical"
                 android:paddingVertical="15sp"
@@ -38,6 +38,7 @@
                 android:layout_weight="7"
                 android:layout_height="wrap_content"
                 tools:text="@string/recyclerview_home_date"
+                android:fontFamily="@font/lato_regular"
                 android:textSize="16sp"
                 android:gravity="center"
                 android:layout_gravity="center"/>

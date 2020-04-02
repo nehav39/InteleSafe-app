@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Intelehealth</string>
+    <string name="app_name">InteleSafe</string>
     <string name="select_language">Select Language</string>
     <string name="accept">स्वीकार</string>
     <string name="reject">अस्वीकार</string>
@@ -193,7 +193,7 @@
     <string name="title_activity_question_node" translatable="false">QuestionNodeActivity</string>
     <string name="complaint_change_selected" translatable="false">Modify</string>
     <string name="question_answer_all" translatable="false">Are you sure you have answered all questions.</string>
-    <string name="question_answer_all_phy_exam" translatable="false">Please answer all general exam questions.</string>
+    <string name="question_answer_all_phy_exam" translatable="false">Please answer all Self Assessment questions.</string> <!--Modified by venu N on 02/04/2020.-->
     <string name="question_duration_picker" translatable="false">Please enter duration</string>
     <string name="question_text_input" translatable="false">Please enter text</string>
     <string name="question_date_picker" translatable="false">Please select date</string>
@@ -622,6 +622,7 @@
     <string name="name_of_health_organization_hospital_where_you_primarily_work">*Name of health organization/hospital where you primarily work</string>
     <string name="username_10digits">Username should be 10 digits</string>
     <string name="please_select_state">Please select state</string>
+    <string name="stay_aware_stay_safe">Stay Aware | Stay Safe</string>
     <!-- <string name="select_language">Select Language</string>
      <string name="address_of_isolation_line_2">Address of isolation, Line 2</string>
      <string name="HomeScreen_Header_Title">Welcome</string>

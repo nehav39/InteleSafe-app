@@ -31,12 +31,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/generic_yes"
+            android:fontFamily="@font/lato_regular"
             android:textSize="18sp" />
 
         <RadioButton android:id="@+id/radio_no"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/generic_no"
+            android:fontFamily="@font/lato_regular"
             android:textSize="18sp" />
 
     </RadioGroup>
