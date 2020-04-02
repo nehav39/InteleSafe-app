@@ -66,7 +66,7 @@ public class AppConstants {
     public static int IMAGE_JPG_QUALITY = 70;
 
 
-    public static int REPEAT_INTERVAL = 15;
+    public static int REPEAT_INTERVAL = 12;
     public static Constraints MY_CONSTRAINTS = new Constraints.Builder()
             .setRequiresCharging(false)
             .setRequiredNetworkType(NetworkType.CONNECTED)
@@ -75,7 +75,7 @@ public class AppConstants {
             .build();
 
     public static PeriodicWorkRequest PERIODIC_WORK_REQUEST =
-            new PeriodicWorkRequest.Builder(SyncWorkManager.class, REPEAT_INTERVAL, TimeUnit.MINUTES)
+            new PeriodicWorkRequest.Builder(SyncWorkManager.class, REPEAT_INTERVAL, TimeUnit.HOURS)
                     .setConstraints(MY_CONSTRAINTS)
                     .build();
 }
