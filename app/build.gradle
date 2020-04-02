@@ -22,8 +22,12 @@ android {
     buildTypes {
 
         debug{
-            buildConfigField "String", "BASE_URL", "\"http://13.232.32.249:8080/\""
-            buildConfigField "String", "CLEAN_URL", "\"13.232.32.249:8080\""
+           /* buildConfigField "String", "BASE_URL", "\"http://13.232.32.249:8080/\""
+            buildConfigField "String", "CLEAN_URL", "\"13.232.32.249:8080\""*/
+
+            buildConfigField "String", "BASE_URL", "\"https://intelesafe.covidhelp.in/\""
+            buildConfigField "String", "CLEAN_URL", "\"intelesafe.covidhelp.in\""
+
         }
 
 
@@ -32,8 +36,8 @@ android {
                 disable 'MissingTranslation'
             }
             minifyEnabled true
-            buildConfigField "String", "BASE_URL", "\"http://13.232.32.249:8080/\""
-            buildConfigField "String", "CLEAN_URL", "\"13.232.32.249:8080\""
+            buildConfigField "String", "BASE_URL", "\"https://intelesafe.covidhelp.in/\""
+            buildConfigField "String", "CLEAN_URL", "\"intelesafe.covidhelp.in\""
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
