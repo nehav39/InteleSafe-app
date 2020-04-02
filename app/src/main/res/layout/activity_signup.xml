@@ -17,8 +17,9 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/white"
-
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="@string/title_sign_up"
+            app:titleTextColor="@color/font_black_0"/>
 
     </android.support.design.widget.AppBarLayout>
 
@@ -50,6 +51,26 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:textColor="#828282"
+                    android:text="Please fill your details" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:layout_marginTop="10dp"
+                    android:textStyle="bold"
+                    android:drawableStart="@drawable/assignment"
+                    android:drawableLeft="@drawable/assignment"
+                    android:drawablePadding="10dp"
+                    android:text="@string/personal_information"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -58,8 +79,9 @@
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="300dp"
+                        android:layout_height="match_parent"
                         android:layout_marginRight="10dp"
+                        android:layout_marginTop="15dp"
                         android:layout_weight="1"
                         android:orientation="vertical">
 
@@ -73,9 +95,6 @@
                                 android:id="@+id/identification_first_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:drawableStart="@drawable/person_icon"
-                                android:drawableLeft="@drawable/person_icon"
-                                android:drawablePadding="10dp"
                                 android:ems="10"
                                 android:freezesText="true"
                                 android:hint="@string/identification_screen_prompt_first_name"
@@ -95,9 +114,6 @@
                                 android:id="@+id/identification_middle_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:drawableStart="@drawable/person_icon"
-                                android:drawableLeft="@drawable/person_icon"
-                                android:drawablePadding="10dp"
                                 android:ems="10"
                                 android:freezesText="true"
                                 android:hint="@string/identification_screen_prompt_middle_name"
@@ -119,9 +135,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:autofillHints="@string/action_settings"
-                                android:drawableStart="@drawable/person_icon"
-                                android:drawableLeft="@drawable/person_icon"
-                                android:drawablePadding="10dp"
                                 android:ems="10"
                                 android:freezesText="true"
                                 android:hint="@string/identification_screen_prompt_last_name"
@@ -133,7 +146,7 @@
 
                         </android.support.design.widget.TextInputLayout>
 
-                        <android.support.design.widget.TextInputLayout
+                      <!--  <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
@@ -177,9 +190,127 @@
                                 android:maxLines="1"
                                 android:singleLine="true" />
 
+                        </android.support.design.widget.TextInputLayout>-->
+
+                        <Space
+                            android:layout_width="15dp"
+                            android:layout_height="20dp" />
+
+                        <RadioGroup
+                            android:id="@+id/radioGrp"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingLeft="8dp"
+                            android:paddingRight="8dp">
+
+                            <RadioButton
+                                android:id="@+id/identification_gender_male"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:drawableStart="@drawable/icon_male"
+                                android:drawableLeft="@drawable/icon_male"
+                                android:drawablePadding="10dp"
+                                android:text="@string/identification_screen_checkbox_male"
+                                android:textSize="@dimen/id_screen_text_size" />
+
+                            <RadioButton
+                                android:id="@+id/identification_gender_female"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:drawableStart="@drawable/icon_female"
+                                android:drawableLeft="@drawable/icon_female"
+                                android:drawablePadding="10dp"
+                                android:text="@string/identification_screen_checkbox_female"
+                                android:textSize="@dimen/id_screen_text_size" />
+
+                        </RadioGroup>
+
+                        <Space
+                            android:layout_width="20dp"
+                            android:layout_height="20dp" />
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/identification_birth_date_text_view"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:focusable="false"
+                                android:freezesText="true"
+                                android:hint="@string/identification_screen_prompt_birthday"
+                                android:imeOptions="actionUnspecified"
+                                android:inputType=""
+                                android:maxLines="1"
+                                android:singleLine="true" />
                         </android.support.design.widget.TextInputLayout>
 
+                    <!--    <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
+                            <EditText
+                                android:id="@+id/identification_age"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:drawableStart="@drawable/event_icon"
+                                android:drawableLeft="@drawable/event_icon"
+                                android:drawablePadding="10dp"
+                                android:ems="10"
+                                android:focusable="false"
+                                android:freezesText="true"
+                                android:hint="@string/identification_screen_prompt_age"
+                                android:imeOptions="actionUnspecified"
+                                android:inputType=""
+                                android:maxLines="1"
+                                android:singleLine="true" />
+
+                        </android.support.design.widget.TextInputLayout>-->
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="0.2"
+                                android:layout_height="match_parent"
+                                android:text="+91"
+                                android:textSize="16sp"
+                                android:layout_marginTop="5dp"
+                                android:layout_gravity="center"
+                                android:gravity="center" />
+
+                            <android.support.design.widget.TextInputLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="1.8"
+                                android:layout_height="match_parent">
+
+                                <EditText
+                                    android:id="@+id/identification_phone_number"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:digits="0123456789+"
+                                    android:ems="10"
+                                    android:freezesText="true"
+                                    android:hint="@string/identification_screen_prompt_phone_number"
+                                    android:imeOptions="actionUnspecified"
+                                    android:inputType="phone"
+                                    android:maxLength="10"
+                                    android:maxLines="1"
+                                    android:singleLine="true"
+                                    android:tag="@string/tag_optional" />
+
+                            </android.support.design.widget.TextInputLayout>
+                        </LinearLayout>
                     </LinearLayout>
 
                     <ImageView
@@ -192,15 +323,24 @@
                         android:scaleType="centerCrop"
                         app:srcCompat="@drawable/ic_person_camera_intele" />
                 </LinearLayout>
-
+                <Space
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" />
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:text="@string/please_enter_your_username_and_password"
+                    android:layout_marginTop="10dp"
+                    android:textStyle="bold"
+                    android:drawableStart="@drawable/icon_account_details"
+                    android:drawableLeft="@drawable/icon_account_details"
+                    android:drawablePadding="10dp"
+                    android:text="@string/login_details"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title" />
-
+                <Space
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" />
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -210,7 +350,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:digits="0123456789+"
-                        android:hint="Username (Mobile Number)*"
+                        android:hint="@string/username"
                         android:imeOptions="actionNext"
                         android:inputType="phone"
                         android:maxLines="1"
@@ -218,6 +358,14 @@
                         android:nextFocusForward="@id/password" />
 
                 </android.support.design.widget.TextInputLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/username_condition"
+                    android:textSize="10sp"
+                    android:textColor="#828282"/>
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -258,138 +406,27 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:text="@string/password_should_be_8_characters_long_and_should_have_both_upper_and_lower_case_characters_at_least_one_digit"
-                    android:textSize="16sp"
-                    android:textColor="@color/font_black_0"/>
-
-                <Space
-                    android:layout_width="15dp"
-                    android:layout_height="20dp" />
-
-                <RadioGroup
-                    android:id="@+id/radioGrp"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp">
-
-                    <RadioButton
-                        android:id="@+id/identification_gender_male"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:drawableStart="@drawable/male_icon"
-                        android:drawableLeft="@drawable/male_icon"
-                        android:drawablePadding="10dp"
-                        android:text="@string/identification_screen_checkbox_male"
-                        android:textSize="@dimen/id_screen_text_size" />
-
-                    <RadioButton
-                        android:id="@+id/identification_gender_female"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:drawableStart="@drawable/female_icon"
-                        android:drawableLeft="@drawable/female_icon"
-                        android:drawablePadding="10dp"
-                        android:text="@string/identification_screen_checkbox_female"
-                        android:textSize="@dimen/id_screen_text_size" />
-
-                </RadioGroup>
+                    android:textSize="10sp"
+                    android:textColor="#828282"/>
 
                 <Space
                     android:layout_width="20dp"
                     android:layout_height="20dp" />
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <EditText
-                        android:id="@+id/identification_birth_date_text_view"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/event_icon"
-                        android:drawableLeft="@drawable/event_icon"
-                        android:drawablePadding="10dp"
-                        android:ems="10"
-                        android:focusable="false"
-                        android:freezesText="true"
-                        android:hint="@string/identification_screen_prompt_birthday"
-                        android:imeOptions="actionUnspecified"
-                        android:inputType=""
-                        android:maxLines="1"
-                        android:singleLine="true" />
-
-
-                </android.support.design.widget.TextInputLayout>
-
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <EditText
-                        android:id="@+id/identification_age"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:drawableStart="@drawable/event_icon"
-                        android:drawableLeft="@drawable/event_icon"
-                        android:drawablePadding="10dp"
-                        android:ems="10"
-                        android:focusable="false"
-                        android:freezesText="true"
-                        android:hint="@string/identification_screen_prompt_age"
-                        android:imeOptions="actionUnspecified"
-                        android:inputType=""
-                        android:maxLines="1"
-                        android:singleLine="true" />
-
-                </android.support.design.widget.TextInputLayout>
-
-
-                <LinearLayout
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
+                    android:ems="10"
+                    android:layout_marginTop="10dp"
+                    android:textStyle="bold"
+                    android:drawableStart="@drawable/icon_address"
+                    android:drawableLeft="@drawable/icon_address"
+                    android:drawablePadding="10dp"
+                    android:text="@string/address_details"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                <Space
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" />
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="0.2"
-                        android:layout_height="match_parent"
-                        android:text="+91"
-                        android:textSize="16sp"
-                        android:layout_marginTop="5dp"
-                        android:layout_gravity="center"
-                        android:gravity="center" />
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1.8"
-                    android:layout_height="match_parent">
-
-                    <EditText
-                        android:id="@+id/identification_phone_number"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:digits="0123456789+"
-                        android:drawableStart="@drawable/phone_icon"
-                        android:drawableLeft="@drawable/phone_icon"
-                        android:drawablePadding="10dp"
-                        android:ems="10"
-                        android:freezesText="true"
-                        android:hint="@string/identification_screen_prompt_phone_number"
-                        android:imeOptions="actionUnspecified"
-                        android:inputType="phone"
-                        android:maxLength="10"
-                        android:maxLines="1"
-                        android:singleLine="true"
-                        android:tag="@string/tag_optional" />
-
-                </android.support.design.widget.TextInputLayout>
-                </LinearLayout>
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -403,9 +440,6 @@
                         android:freezesText="true"
                         android:hint="@string/address_of_isolation_line_1"
                         android:imeOptions="actionUnspecified"
-                        android:drawableStart="@drawable/home_icon"
-                        android:drawableLeft="@drawable/home_icon"
-                        android:drawablePadding="10dp"
                         android:inputType="textCapWords"
                         android:maxLength="50"
                         android:maxLines="2"
@@ -429,9 +463,6 @@
                         android:inputType="textCapWords"
                         android:maxLength="50"
                         android:maxLines="2"
-                        android:drawableStart="@drawable/home_icon"
-                        android:drawableLeft="@drawable/home_icon"
-                        android:drawablePadding="10dp"
                         android:tag="@string/tag_optional" />
 
                 </android.support.design.widget.TextInputLayout>
@@ -444,9 +475,6 @@
                         android:id="@+id/identification_city"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/home_icon"
-                        android:drawableLeft="@drawable/home_icon"
-                        android:drawablePadding="10dp"
                         android:freezesText="true"
                         android:hint="@string/identification_screen_prompt_city"
                         android:imeOptions="actionUnspecified"
@@ -488,9 +516,6 @@
                                     android:layout_weight="3"
                                     android:clickable="false"
                                     android:cursorVisible="false"
-                                    android:drawableStart="@drawable/country_flag_icon"
-                                    android:drawableLeft="@drawable/country_flag_icon"
-                                    android:drawablePadding="10dp"
                                     android:focusable="false"
                                     android:focusableInTouchMode="false"
                                     android:freezesText="true"
@@ -537,9 +562,6 @@
                                     android:layout_weight="3"
                                     android:clickable="false"
                                     android:cursorVisible="false"
-                                    android:drawableStart="@drawable/state_list_icon"
-                                    android:drawableLeft="@drawable/state_list_icon"
-                                    android:drawablePadding="10dp"
                                     android:focusable="false"
                                     android:focusableInTouchMode="false"
                                     android:freezesText="true"
@@ -580,9 +602,6 @@
                             android:layout_weight="3"
                             android:clickable="false"
                             android:cursorVisible="false"
-                            android:drawableStart="@drawable/state_list_icon"
-                            android:drawableLeft="@drawable/state_list_icon"
-                            android:drawablePadding="10dp"
                             android:focusable="false"
                             android:focusableInTouchMode="false"
                             android:freezesText="true"
@@ -618,9 +637,6 @@
                             android:layout_weight="3"
                             android:clickable="false"
                             android:cursorVisible="false"
-                            android:drawableStart="@drawable/state_list_icon"
-                            android:drawableLeft="@drawable/state_list_icon"
-                            android:drawablePadding="10dp"
                             android:focusable="false"
                             android:focusableInTouchMode="false"
                             android:freezesText="true"
@@ -653,9 +669,6 @@
                         android:hint="@string/identification_screen_prompt_postal_code"
                         android:imeOptions="actionUnspecified"
                         android:inputType="number"
-                        android:drawableStart="@drawable/home_icon"
-                        android:drawableLeft="@drawable/home_icon"
-                        android:drawablePadding="10dp"
                         android:maxLength="6"
                         android:maxLines="1"
                         android:tag="@string/tag_optional" />
@@ -664,6 +677,17 @@
                 </android.support.design.widget.TextInputLayout>
 
 
+                <Button
+                    android:id="@+id/btnSave"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_bg_rounded_blue"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginStart="15dp"
+                    android:textStyle="bold"
+                    android:text="@string/save"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
 
 <!--                <android.support.design.widget.TextInputLayout-->
 <!--                    android:layout_width="match_parent"-->
@@ -826,19 +850,15 @@
 
 
 <!--                </android.support.design.widget.TextInputLayout>-->
-
-
             </LinearLayout>
         </ScrollView>
-
-
     </RelativeLayout>
 
-    <android.support.design.widget.FloatingActionButton
+<!--    <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/ic_done_24dp" />
+        app:srcCompat="@drawable/ic_done_24dp" />-->
 </android.support.design.widget.CoordinatorLayout>

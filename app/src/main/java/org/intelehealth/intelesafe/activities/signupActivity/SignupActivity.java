@@ -127,7 +127,7 @@ public class SignupActivity extends AppCompatActivity {
     EditText mLastName;
     EditText mDOB;
     EditText mPhoneNum;
-    EditText mAge;
+//    EditText mAge;
     AlertDialog.Builder mAgePicker;
     EditText mAddress1;
     EditText mAddress2;
@@ -137,8 +137,8 @@ public class SignupActivity extends AppCompatActivity {
     RadioButton mGenderF;
     EditText countryText;
     EditText stateText;
-    EditText licenseID;
-    EditText hospital_name;
+//    EditText licenseID;
+//    EditText hospital_name;
 
     Spinner mCountry;
     Spinner mState;
@@ -203,6 +203,14 @@ public class SignupActivity extends AppCompatActivity {
         context = SignupActivity.this;
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         progress = new ProgressDialog(SignupActivity.this);
 
@@ -242,12 +250,12 @@ public class SignupActivity extends AppCompatActivity {
         mPasswordView = findViewById(R.id.password);
         mCPassword = findViewById(R.id.cpassword);
 
-        licenseID = findViewById(R.id.identification_registration_no);
-        hospital_name = findViewById(R.id.identification_hospital_name);
+//        licenseID = findViewById(R.id.identification_registration_no);
+//        hospital_name = findViewById(R.id.identification_hospital_name);
 
         mDOB = findViewById(R.id.identification_birth_date_text_view);
         mPhoneNum = findViewById(R.id.identification_phone_number);
-        mAge = findViewById(R.id.identification_age);
+//        mAge = findViewById(R.id.identification_age);
         mAddress1 = findViewById(R.id.identification_address1);
         mAddress1.setFilters(new InputFilter[]{new InputFilter.LengthFilter(50), inputFilter_Name}); //maxlength 50
 
@@ -449,7 +457,7 @@ public class SignupActivity extends AppCompatActivity {
                 //Set the DOB calendar to the date selected by the user
                 dob.set(year, monthOfYear, dayOfMonth);
                 mDOB.setError(null);
-                mAge.setError(null);
+//                mAge.setError(null);
                 //Set Maximum date to current date because even after bday is less than current date it goes to check date is set after today
                 mDOBPicker.getDatePicker().setMaxDate(System.currentTimeMillis() - 1000);
                 Locale.setDefault(Locale.ENGLISH);
@@ -470,7 +478,7 @@ public class SignupActivity extends AppCompatActivity {
 
                 if (mAgeMonths < 0 || mAgeYears < 0 || dob.after(today)) {
                     mDOB.setError(getString(R.string.identification_screen_error_dob));
-                    mAge.setError(getString(R.string.identification_screen_error_age));
+//                    mAge.setError(getString(R.string.identification_screen_error_age));
                     return;
                 }
 
@@ -478,9 +486,9 @@ public class SignupActivity extends AppCompatActivity {
                 mDOBMonth = monthOfYear;
                 mDOBDay = dayOfMonth;
 
-                String ageString = mAgeYears + getString(R.string.identification_screen_text_years)
-                        + " - " + mAgeMonths + getString(R.string.identification_screen_text_months);
-                mAge.setText(ageString);
+//                String ageString = mAgeYears + getString(R.string.identification_screen_text_years)
+//                        + " - " + mAgeMonths + getString(R.string.identification_screen_text_months);
+//                mAge.setText(ageString);
             }
         }, mDOBYear, mDOBMonth, mDOBDay);
 
@@ -498,74 +506,76 @@ public class SignupActivity extends AppCompatActivity {
         if (patientID_edit != null) {
             age = DateAndTimeUtils.getAge(patient1.getDate_of_birth(), context);
             mDOB.setText(DateAndTimeUtils.getFormatedDateOfBirthAsView(patient1.getDate_of_birth()));
-            int month = DateAndTimeUtils.getMonth(patient1.getDate_of_birth());
-            mAge.setText(age + getString(R.string.identification_screen_text_years) + month + getString(R.string.identification_screen_text_months));
+//            int month = DateAndTimeUtils.getMonth(patient1.getDate_of_birth());
+//            mAge.setText(age + getString(R.string.identification_screen_text_years) + month + getString(R.string.identification_screen_text_months));
         }
-        mAge.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mAgePicker = new AlertDialog.Builder(SignupActivity.this, R.style.AlertDialogStyle);
-                mAgePicker.setTitle(R.string.identification_screen_prompt_age);
-                final LayoutInflater inflater = getLayoutInflater();
-                View convertView = inflater.inflate(R.layout.dialog_2_numbers_picker, null);
-                mAgePicker.setView(convertView);
-                final NumberPicker yearPicker = convertView.findViewById(R.id.dialog_2_numbers_quantity);
-                final NumberPicker monthPicker = convertView.findViewById(R.id.dialog_2_numbers_unit);
-                final TextView middleText = convertView.findViewById(R.id.dialog_2_numbers_text);
-                final TextView endText = convertView.findViewById(R.id.dialog_2_numbers_text_2);
-                middleText.setText(getString(R.string.identification_screen_picker_years));
-                endText.setText(getString(R.string.identification_screen_picker_months));
-                yearPicker.setMinValue(0);
-                yearPicker.setMaxValue(100);
-                monthPicker.setMinValue(0);
-                monthPicker.setMaxValue(12);
-                if (mAgeYears > 0) {
-                    yearPicker.setValue(mAgeYears);
-                }
-                if (mAgeMonths > 0) {
-                    monthPicker.setValue(mAgeMonths);
-                }
+//        mAge.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mAgePicker = new AlertDialog.Builder(SignupActivity.this, R.style.AlertDialogStyle);
+//                mAgePicker.setTitle(R.string.identification_screen_prompt_age);
+//                final LayoutInflater inflater = getLayoutInflater();
+//                View convertView = inflater.inflate(R.layout.dialog_2_numbers_picker, null);
+//                mAgePicker.setView(convertView);
+//                final NumberPicker yearPicker = convertView.findViewById(R.id.dialog_2_numbers_quantity);
+//                final NumberPicker monthPicker = convertView.findViewById(R.id.dialog_2_numbers_unit);
+//                final TextView middleText = convertView.findViewById(R.id.dialog_2_numbers_text);
+//                final TextView endText = convertView.findViewById(R.id.dialog_2_numbers_text_2);
+//                middleText.setText(getString(R.string.identification_screen_picker_years));
+//                endText.setText(getString(R.string.identification_screen_picker_months));
+//                yearPicker.setMinValue(0);
+//                yearPicker.setMaxValue(100);
+//                monthPicker.setMinValue(0);
+//                monthPicker.setMaxValue(12);
+//                if (mAgeYears > 0) {
+//                    yearPicker.setValue(mAgeYears);
+//                }
+//                if (mAgeMonths > 0) {
+//                    monthPicker.setValue(mAgeMonths);
+//                }
+//
+//                mAgePicker.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        yearPicker.setValue(yearPicker.getValue());
+//                        monthPicker.setValue(monthPicker.getValue());
+//                        String ageString = yearPicker.getValue() + getString(R.string.identification_screen_text_years) + " - " + monthPicker.getValue() + getString(R.string.identification_screen_text_months);
+//                        mAge.setText(ageString);
+//
+//
+//                        Calendar calendar = Calendar.getInstance();
+//                        int curYear = calendar.get(Calendar.YEAR);
+//                        int birthYear = curYear - yearPicker.getValue();
+//                        int curMonth = calendar.get(Calendar.MONTH);
+//                        int birthMonth = curMonth - monthPicker.getValue();
+//                        mDOBYear = birthYear;
+//                        mDOBMonth = birthMonth;
+//                        mDOBDay = 1;
+//
+//                        Locale.setDefault(Locale.ENGLISH);
+//                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault());
+//                        dob.set(mDOBYear, mDOBMonth, mDOBDay);
+//                        String dobString = simpleDateFormat.format(dob.getTime());
+//                        mDOB.setText(dobString);
+//                        mDOBPicker.updateDate(mDOBYear, mDOBMonth, mDOBDay);
+//                        dialog.dismiss();
+//                    }
+//                });
+//                mAgePicker.setNegativeButton(R.string.generic_cancel, new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        dialog.dismiss();
+//                    }
+//                });
+//
+//                mAgePicker.show();
+//            }
+//        });
 
-                mAgePicker.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        yearPicker.setValue(yearPicker.getValue());
-                        monthPicker.setValue(monthPicker.getValue());
-                        String ageString = yearPicker.getValue() + getString(R.string.identification_screen_text_years) + " - " + monthPicker.getValue() + getString(R.string.identification_screen_text_months);
-                        mAge.setText(ageString);
+        Button btnSave = findViewById(R.id.btnSave);
 
-
-                        Calendar calendar = Calendar.getInstance();
-                        int curYear = calendar.get(Calendar.YEAR);
-                        int birthYear = curYear - yearPicker.getValue();
-                        int curMonth = calendar.get(Calendar.MONTH);
-                        int birthMonth = curMonth - monthPicker.getValue();
-                        mDOBYear = birthYear;
-                        mDOBMonth = birthMonth;
-                        mDOBDay = 1;
-
-                        Locale.setDefault(Locale.ENGLISH);
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault());
-                        dob.set(mDOBYear, mDOBMonth, mDOBDay);
-                        String dobString = simpleDateFormat.format(dob.getTime());
-                        mDOB.setText(dobString);
-                        mDOBPicker.updateDate(mDOBYear, mDOBMonth, mDOBDay);
-                        dialog.dismiss();
-                    }
-                });
-                mAgePicker.setNegativeButton(R.string.generic_cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-                mAgePicker.show();
-            }
-        });
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+//        FloatingActionButton fab = findViewById(R.id.fab);
+        btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -607,17 +617,17 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (licenseID.getText().toString().equals("")) {
-                    licenseID.setError(getString(R.string.error_field_required));
-                    licenseID.requestFocus();
-                    return;
-                }
-
-                if (hospital_name.getText().toString().equals("")) {
-                    hospital_name.setError(getString(R.string.error_field_required));
-                    hospital_name.requestFocus();
-                    return;
-                }
+//                if (licenseID.getText().toString().equals("")) {
+//                    licenseID.setError(getString(R.string.error_field_required));
+//                    licenseID.requestFocus();
+//                    return;
+//                }
+//
+//                if (hospital_name.getText().toString().equals("")) {
+//                    hospital_name.setError(getString(R.string.error_field_required));
+//                    hospital_name.requestFocus();
+//                    return;
+//                }
 
                 // Check for a valid email address.
                 if (TextUtils.isEmpty(userName)) {
@@ -729,11 +739,11 @@ public class SignupActivity extends AppCompatActivity {
                     }
                 }
 
-                if (mAge.getText().toString().equals("")) {
-                    mAge.setError(getString(R.string.error_field_required));
-                    mAge.requestFocus();
-                    return;
-                }
+//                if (mAge.getText().toString().equals("")) {
+//                    mAge.setError(getString(R.string.error_field_required));
+//                    mAge.requestFocus();
+//                    return;
+//                }
 
                 if (mPhoneNum.getText().toString().equals("")) {
                     mPhoneNum.setError(getString(R.string.error_field_required));
@@ -834,11 +844,11 @@ public class SignupActivity extends AppCompatActivity {
                 userBirthAttribute.setAttributeType("14d4f066-15f5-102d-96e4-000c29c2a5d7");
                 userBirthAttribute.setValue("" + mPhoneNum.getText().toString());
 
-                userBirthAttribute.setAttributeType("ecdaadb6-14a0-4ed9-b5b7-cfed87b44b87"); // openmrsuuid occupation
-                userBirthAttribute.setValue("" + licenseID.getText().toString()); //license text
-
-                userBirthAttribute.setAttributeType("1c718819-345c-4368-aad6-d69b4c267db7"); //openmrsuuid education
-                userBirthAttribute.setValue("" + hospital_name.getText().toString()); //hospital name text
+//                userBirthAttribute.setAttributeType("ecdaadb6-14a0-4ed9-b5b7-cfed87b44b87"); // openmrsuuid occupation
+//                userBirthAttribute.setValue("" + licenseID.getText().toString()); //license text
+//
+//                userBirthAttribute.setAttributeType("1c718819-345c-4368-aad6-d69b4c267db7"); //openmrsuuid education
+//                userBirthAttribute.setValue("" + hospital_name.getText().toString()); //hospital name text
 
 
                 List<UserBirthAttribute> userAttributeList = new ArrayList<>();
@@ -1182,7 +1192,7 @@ public class SignupActivity extends AppCompatActivity {
             patientAttributesDTO.setUuid(UUID.randomUUID().toString());
             patientAttributesDTO.setPatientuuid(uuid);
             patientAttributesDTO.setPersonAttributeTypeUuid(patientsDAO.getUuidForAttribute("occupation"));
-            patientAttributesDTO.setValue(StringUtils.getValue(licenseID.getText().toString()));
+//            patientAttributesDTO.setValue(StringUtils.getValue(licenseID.getText().toString()));
             patientAttributesDTOList.add(patientAttributesDTO);
 
 //            patientAttributesDTO = new PatientAttributesDTO();
@@ -1196,7 +1206,7 @@ public class SignupActivity extends AppCompatActivity {
             patientAttributesDTO.setUuid(UUID.randomUUID().toString());
             patientAttributesDTO.setPatientuuid(uuid);
             patientAttributesDTO.setPersonAttributeTypeUuid(patientsDAO.getUuidForAttribute("Education Level"));
-            patientAttributesDTO.setValue(StringUtils.getValue(hospital_name.getText().toString()));
+//            patientAttributesDTO.setValue(StringUtils.getValue(hospital_name.getText().toString()));
             patientAttributesDTOList.add(patientAttributesDTO);
 
         patientAttributesDTO = new PatientAttributesDTO();
