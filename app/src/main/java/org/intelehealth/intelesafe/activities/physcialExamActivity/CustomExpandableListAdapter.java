@@ -86,7 +86,7 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
         ImageView imageView = convertView.findViewById(R.id.expandable_list_group_image);
 
         textView.setText(node.findDisplay());
-        textView.setTypeface(Typeface.DEFAULT_BOLD);
+       // textView.setTypeface(Typeface.DEFAULT_BOLD);
 
         switch (callingClass) {
             case "ComplaintNodeActivity":

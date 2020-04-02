@@ -192,7 +192,7 @@
     <string name="title_activity_question_node" translatable="false">QuestionNodeActivity</string>
     <string name="complaint_change_selected" translatable="false">Modify</string>
     <string name="question_answer_all" translatable="false">Are you sure you have answered all questions.</string>
-    <string name="question_answer_all_phy_exam" translatable="false">Please answer all general exam questions.</string>
+    <string name="question_answer_all_phy_exam" translatable="false">Please answer all Self Assessment questions.</string><!--Modified by Venu N on 02/04/2020.-->
     <string name="question_duration_picker" translatable="false">Please enter duration</string>
     <string name="question_text_input" translatable="false">Please enter text</string>
     <string name="question_date_picker" translatable="false">Please select date</string>
