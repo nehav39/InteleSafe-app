@@ -14,8 +14,14 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:titleTextColor="@color/txt_sub_header_color"
+            android:textSize="30sp"
+            android:fontFamily="@font/lato_bold"
+            android:layout_gravity="center_vertical"
+            android:includeFontPadding="false"
+            android:paddingVertical="2dp"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>

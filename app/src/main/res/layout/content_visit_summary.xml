@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".activities.visitSummaryActivity.VisitSummaryActivity"
     tools:showIn="@layout/activity_visit_summary"
@@ -38,9 +39,10 @@
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/padding_card"
             android:layout_marginBottom="@dimen/padding_card"
-            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardCornerRadius="12dp"
             app:cardElevation="2dp"
-            app:cardUseCompatPadding="true">
+            app:cardUseCompatPadding="true"
+            app:cardPreventCornerOverlap="false">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -435,9 +437,10 @@
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/padding_card"
             android:layout_marginBottom="@dimen/padding_card"
-            app:cardCornerRadius="@dimen/card_corner_radius"
-            app:cardElevation="2dp"
-            app:cardUseCompatPadding="true">
+            app:cardCornerRadius="10sp"
+            android:elevation="40dp"
+            app:cardUseCompatPadding="true"
+            app:cardPreventCornerOverlap="false">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -450,9 +453,10 @@
                     android:paddingVertical="12dp"
                     android:paddingStart="20dp"
                     android:text="@string/visit_Summary_cardview"
-                    android:background="@color/titleBar_cardview"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/card_content_text_size" />
+                    android:background="@color/white"
+                    android:textColor="@color/txt_sub_header_color"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/lato_bold"/>
 
                 <ImageButton
                     android:id="@+id/imagebutton_edit_physexam"
@@ -507,7 +511,12 @@
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardElevation="2dp"
+            app:cardUseCompatPadding="true"
+            app:cardPreventCornerOverlap="false"
+            android:layout_gravity="center">
 
             <RelativeLayout
                 android:id="@+id/help_relative"
