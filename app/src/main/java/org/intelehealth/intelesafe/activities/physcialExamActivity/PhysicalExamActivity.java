@@ -237,6 +237,8 @@ public class PhysicalExamActivity extends AppCompatActivity {
             tabLayout.setupWithViewPager(mViewPager);
         }
 
+
+
         FloatingActionButton fab = findViewById(R.id.fab);
         // added by Venu N on 02/04/2020.
         if(mViewPager.getCurrentItem() == mViewPager.getAdapter().getCount()-1){
@@ -302,6 +304,7 @@ public class PhysicalExamActivity extends AppCompatActivity {
                         questionsMissing();
                     }else if(mViewPager.getCurrentItem() < mViewPager.getAdapter().getCount()-1){
                         fab.setImageDrawable(ContextCompat.getDrawable(PhysicalExamActivity.this, R.drawable.svg_right_arrow));
+                        mViewPager.setCurrentItem(mViewPager.getCurrentItem()+1);
                     }
                     else{
                         fab.setImageDrawable(ContextCompat.getDrawable(PhysicalExamActivity.this, R.drawable.ic_done_24dp));
@@ -318,6 +321,27 @@ public class PhysicalExamActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                if(i == mViewPager.getAdapter().getCount()-1){
+                    fab.setImageDrawable(ContextCompat.getDrawable(PhysicalExamActivity.this, R.drawable.ic_done_24dp));
+                }else{
+                    fab.setImageDrawable(ContextCompat.getDrawable(PhysicalExamActivity.this, R.drawable.svg_right_arrow));
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
             }
         });
     }
