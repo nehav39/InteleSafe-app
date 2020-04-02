@@ -681,9 +681,13 @@
                     android:id="@+id/btnSave"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
+                    android:background="@drawable/button_bg_rounded_blue"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginStart="15dp"
                     android:textStyle="bold"
-                    android:text="@string/save"/>
+                    android:text="@string/save"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
 
 <!--                <android.support.design.widget.TextInputLayout-->
 <!--                    android:layout_width="match_parent"-->
