@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Intelehealth</string>
+    <string name="app_name" translatable="false">InteleSafe</string>
 
     //Generic
     <string name="generic_the_flipping_word_next" translatable="false">Next</string>
@@ -610,6 +610,7 @@
     <string name="name_of_health_organization_hospital_where_you_primarily_work">*Name of health organization/hospital where you primarily work</string>
     <string name="username_10digits">Username should be 10 digits</string>
     <string name="please_select_state">Please select state</string>
+    <string name="stay_aware_stay_safe">Stay Aware | Stay Safe</string>
 
     //HomeScreen (New Changes)
     <string name="txt_self_assessment">Self Assessment</string>

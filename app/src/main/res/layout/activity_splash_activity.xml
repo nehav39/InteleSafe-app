@@ -31,8 +31,19 @@
             android:text="@string/intelesafe"
             android:textColor="@color/white"
             android:textStyle="bold"
+            android:layout_gravity="center"
             app:fontFamily="@fonts/Lato-Regular"
-            android:textSize="28sp" />
+            android:textSize="36sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/stay_aware_stay_safe"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:fontFamily="@fonts/Lato-Regular"
+            android:textSize="24sp" />
 
     </LinearLayout>
 

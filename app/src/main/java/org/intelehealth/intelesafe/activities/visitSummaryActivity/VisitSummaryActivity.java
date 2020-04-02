@@ -226,6 +226,8 @@ public class VisitSummaryActivity extends AppCompatActivity {
     MenuItem internetCheck = null;
     MenuItem endVisit_click = null;
 
+    private static boolean flag_upload = false;
+
     private RecyclerView mAdditionalDocsRecyclerView;
     private RecyclerView.LayoutManager mAdditionalDocsLayoutManager;
 
@@ -327,13 +329,36 @@ public class VisitSummaryActivity extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.summary_home: {
+                if(flag_upload == true)
+                {
+                    Intent i = new Intent(this, HomeActivity.class);
+                    i.putExtra("from", "visit");
+                    i.putExtra("username", "");
+                    i.putExtra("password", "");
+                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(i);
+                }
+                else
+                {
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                    alertDialogBuilder.setTitle("Click on Submit button");
+                    alertDialogBuilder.setMessage("Please upload your visit before going to Home screen by clicking on the Submit button.");
+
+                    alertDialogBuilder.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();
+                    Button positiveButton = alertDialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE);
+                    positiveButton.setTextColor(getResources().getColor(R.color.colorPrimary));
+                    positiveButton.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+
+                }
 //                NavUtils.navigateUpFromSameTask(this);
-                Intent i = new Intent(this, HomeActivity.class);
-                i.putExtra("from", "visit");
-                i.putExtra("username", "");
-                i.putExtra("password", "");
-                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(i);
+
                 return true;
             }
             case R.id.summary_print: {
@@ -381,6 +406,11 @@ public class VisitSummaryActivity extends AppCompatActivity {
                     });
                     AlertDialog alertDialog = alertDialogBuilder.create();
                     alertDialog.show();
+
+                    Button positiveButton = alertDialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE);
+                    positiveButton.setTextColor(getResources().getColor(R.color.colorPrimary));
+                    positiveButton.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+
                 }
                 return true;
             }
@@ -595,6 +625,7 @@ public class VisitSummaryActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                flag_upload = true;
 
                 if (flag.isChecked()) {
                     try {
