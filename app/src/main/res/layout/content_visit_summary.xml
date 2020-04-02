@@ -22,8 +22,9 @@ Github: prajwalmw
     <!--Split the screen into two columns of cards-->
 
     <ScrollView
+        android:id="@+id/scroll_new"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:fillViewport="true">
 
     <LinearLayout
@@ -315,7 +316,8 @@ Github: prajwalmw
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1">
+                            android:layout_weight="1"
+                            android:orientation="vertical">
 
                             <TextView
                                 android:id="@+id/textView_temp"
@@ -487,12 +489,14 @@ Github: prajwalmw
                     style="@style/SelectableItemBackground"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:padding="10dp"
+                    android:visibility="gone"
                     app:srcCompat="@drawable/download" />
 
                 <TextView
                     android:id="@+id/textView_content_physexam"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:lineSpacingExtra="1sp"
                     android:layout_below="@+id/textView_heading_physexam"
                     android:textSize="14sp"
                     android:padding="@dimen/padding_card"
@@ -520,6 +524,7 @@ Github: prajwalmw
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
+            android:id="@+id/help_cardview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:elevation="40dp"
@@ -527,8 +532,9 @@ Github: prajwalmw
             app:cardPreventCornerOverlap="false"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/padding_card"
-            android:layout_marginBottom="@dimen/padding_card"
-            app:cardCornerRadius="10sp">
+            android:layout_marginBottom="26dp"
+            app:cardCornerRadius="10sp"
+            >
 
             <RelativeLayout
                 android:id="@+id/help_relative"
@@ -571,8 +577,7 @@ Github: prajwalmw
                     android:paddingStart="20sp"
                     android:textSize="@dimen/text_18sp"
                     android:layout_marginBottom="15sp"
-                    android:fontFamily="@font/lato_medium"
-                    android:textColor="@color/txt_sub_header_color"
+                    android:fontFamily="@font/lato_medium" android:textColor="@color/txt_sub_header_color"
                     android:textStyle="bold"
                     android:paddingHorizontal="20sp"
                     android:background="@android:color/transparent"
@@ -1266,12 +1271,12 @@ Github: prajwalmw
 
     </ScrollView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_alignParentBottom="true"
-        android:layout_marginHorizontal="5sp">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_alignParentBottom="true"
+    android:layout_marginBottom="50dp">
 
    <!-- <Button
         android:id="@+id/button_upload"
@@ -1292,16 +1297,21 @@ Github: prajwalmw
         android:textStyle="bold"
         />-->
 
-        <View
+        <Button
             android:id="@+id/button_upload"
-            android:layout_width="264.89dp"
-            android:layout_height="56.23dp"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="78dp"
-            android:layout_alignParentTop="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="447dp"
             android:background="@drawable/rectangle_7"
-            />
+            android:text="@string/submit_visitSummary_Button"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_18sp"
+            android:fontFamily="@font/lato_medium"
+            android:textAppearance="@style/submit"
+            android:gravity="center"
+            android:layout_gravity="center"/>
+
 
     <Button
         android:id="@+id/button_teleconsultation"
