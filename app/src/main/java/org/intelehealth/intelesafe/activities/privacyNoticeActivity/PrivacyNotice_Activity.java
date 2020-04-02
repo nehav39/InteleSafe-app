@@ -25,6 +25,10 @@ import org.intelehealth.intelesafe.app.AppConstants;
 import org.intelehealth.intelesafe.utilities.FileUtils;
 import org.intelehealth.intelesafe.utilities.SessionManager;
 
+/*
+* Created By: Prajwal Waingankar
+* 
+* */
 public class PrivacyNotice_Activity extends AppCompatActivity {
     TextView privacy_textview;
     SessionManager sessionManager = null;
