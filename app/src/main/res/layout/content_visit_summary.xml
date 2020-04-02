@@ -494,15 +494,19 @@ Github: prajwalmw
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/textView_heading_physexam"
-                    android:textSize="@dimen/card_content_text_size"
-                    android:padding="@dimen/padding_card"/>
+                    android:textSize="14sp"
+                    android:padding="@dimen/padding_card"
+                    android:fontFamily="@font/lato_regular"
+                    android:textColor="@color/txt_sub_header_color"
+                    />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recy_physexam"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/textView_content_physexam"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    />
 
                 <TextView
                     android:id="@+id/physcial_examination_download"
@@ -518,11 +522,13 @@ Github: prajwalmw
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="@dimen/card_corner_radius"
-            app:cardElevation="2dp"
+            android:elevation="40dp"
             app:cardUseCompatPadding="true"
             app:cardPreventCornerOverlap="false"
-            android:layout_gravity="center">
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/padding_card"
+            android:layout_marginBottom="@dimen/padding_card"
+            app:cardCornerRadius="10sp">
 
             <RelativeLayout
                 android:id="@+id/help_relative"
@@ -535,10 +541,11 @@ Github: prajwalmw
                     android:layout_height="wrap_content"
                     android:text="Help"
                     android:paddingVertical="12dp"
-                    android:background="@color/titleBar_cardview"
-                    android:textColor="@color/white"
+                    android:background="@color/white"
+                    android:textColor="@color/txt_sub_header_color"
                     android:paddingStart="20dp"
-                    android:textSize="@dimen/card_content_text_size"/>
+                    android:textSize="16sp"
+                    android:fontFamily="@font/lato_bold"/>
 
 
                 <TextView
@@ -546,10 +553,12 @@ Github: prajwalmw
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
+                    android:fontFamily="@font/lato_regular"
                     android:text="@string/if_you_get_much_sicker_please_call_your_nearest_doctor_020_26127394"
                     android:paddingTop="@dimen/padding_card"
                     android:layout_below="@id/help_title"
-                    android:textSize="@dimen/card_content_text_size"
+                    android:textSize="14sp"
+                    android:textColor="@color/txt_sub_header_color"
                     android:padding="@dimen/padding_card"
                     />
 
@@ -558,11 +567,13 @@ Github: prajwalmw
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/visit_help_text"
-                    android:hint="Click here to send a WhatsApp message"
+                   android:text="+91 7304154312"
                     android:paddingStart="20sp"
+                    android:textSize="@dimen/text_18sp"
                     android:layout_marginBottom="15sp"
+                    android:fontFamily="@font/lato_medium"
+                    android:textColor="@color/txt_sub_header_color"
                     android:textStyle="bold"
-                    android:textSize="20sp"
                     android:paddingHorizontal="20sp"
                     android:background="@android:color/transparent"
                     android:drawableStart="@drawable/ic_icons8_whatsapp"
@@ -1262,7 +1273,7 @@ Github: prajwalmw
         android:layout_alignParentBottom="true"
         android:layout_marginHorizontal="5sp">
 
-    <Button
+   <!-- <Button
         android:id="@+id/button_upload"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -1279,7 +1290,18 @@ Github: prajwalmw
         style="@style/SelectableItemBackground"
         android:foreground="?android:attr/selectableItemBackground"
         android:textStyle="bold"
-        />
+        />-->
+
+        <View
+            android:id="@+id/button_upload"
+            android:layout_width="264.89dp"
+            android:layout_height="56.23dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="78dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="447dp"
+            android:background="@drawable/rectangle_7"
+            />
 
     <Button
         android:id="@+id/button_teleconsultation"
