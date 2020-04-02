@@ -41,6 +41,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -122,7 +123,8 @@ public class HomeActivity extends AppCompatActivity {
     TextView lastSyncTextView;
     TextView lastSyncAgo;
     TextView welcomeUser;
-    Button manualSyncButton, enter_check_in, educational_videos, home_quarantine_guidelines;
+    Button manualSyncButton;
+    RelativeLayout enter_check_in,home_quarantine_guidelines,educational_videos,user_logout; // modified by Venu N on 01/04/2020
     IntentFilter filter;
     Myreceiver reMyreceive;
     SyncUtils syncUtils = new SyncUtils();
@@ -534,6 +536,31 @@ public class HomeActivity extends AppCompatActivity {
         if (sessionManager.isReturningUser()) {
             syncUtils.syncForeground("");
         }
+
+        // added by venu N on 01/04/2020 for new Change in Home Screen.
+        user_logout = findViewById(R.id.user_logout);
+        user_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(HomeActivity.this);
+                alertDialogBuilder.setMessage(getString(R.string.logout_dialog));
+                alertDialogBuilder.setNegativeButton(R.string.generic_no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                alertDialogBuilder.setPositiveButton(R.string.generic_yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        logout();
+                    }
+                });
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+            }
+        });
     }
 
     private void createNewVisit() {
