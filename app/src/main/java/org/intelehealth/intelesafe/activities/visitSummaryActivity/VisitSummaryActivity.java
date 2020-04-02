@@ -177,7 +177,7 @@ public class VisitSummaryActivity extends AppCompatActivity {
     TextView complaintView;
     TextView famHistView;
     TextView patHistView;
-//    TextView physFindingsView;
+    TextView physFindingsView;
     TextView mDoctorTitle;
     TextView mDoctorName;
     TextView mCHWname;
@@ -778,7 +778,7 @@ public class VisitSummaryActivity extends AppCompatActivity {
         complaintView = findViewById(R.id.textView_content_complaint);
         famHistView = findViewById(R.id.textView_content_famhist);
         patHistView = findViewById(R.id.textView_content_pathist);
-//        physFindingsView = findViewById(R.id.textView_content_physexam);
+        physFindingsView = findViewById(R.id.textView_content_physexam);
 
         if (isRespiratory) {
             respiratoryText.setVisibility(View.VISIBLE);
