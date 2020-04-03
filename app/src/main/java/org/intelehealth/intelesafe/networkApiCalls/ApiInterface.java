@@ -1,6 +1,7 @@
 package org.intelehealth.intelesafe.networkApiCalls;
 
 
+import org.intelehealth.intelesafe.models.CheckAppUpdateRes;
 import org.intelehealth.intelesafe.models.DownloadMindMapRes;
 import org.intelehealth.intelesafe.models.GetDistrictRes;
 import org.intelehealth.intelesafe.models.GetOpenMRS;
@@ -123,8 +124,8 @@ public interface ApiInterface {
                                          @Query("username") String userName,
                                          @Query("password") String password);
 
-//    @GET("/api/hfn_app_update.json")
-//    Single<CheckAppUpdateRes> checkAppUpdate();
+    @GET("/intelehealth/app_update.json")
+    Single<CheckAppUpdateRes> checkAppUpdate();
 
 
 }
