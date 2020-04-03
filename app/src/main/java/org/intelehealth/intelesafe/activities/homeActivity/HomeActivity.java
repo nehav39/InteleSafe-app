@@ -27,6 +27,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.StrictMode;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
@@ -48,6 +49,7 @@ import com.crashlytics.android.Crashlytics;
 import com.google.gson.Gson;
 
 import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
 
 import java.io.File;
@@ -503,7 +505,17 @@ public class HomeActivity extends AppCompatActivity {
         });
 */
         WorkManager.getInstance().enqueueUniquePeriodicWork(AppConstants.UNIQUE_WORK_NAME, ExistingPeriodicWorkPolicy.KEEP, AppConstants.PERIODIC_WORK_REQUEST);
-/*
+        /*WorkManager.getInstance().getWorkInfoByIdLiveData(AppConstants.PERIODIC_WORK_REQUEST.getId())
+                .observe(this, new android.arch.lifecycle.Observer<WorkInfo>() {
+                    @Override
+                    public void onChanged(@Nullable WorkInfo workInfo) {
+                        Log.d(TAG, "Worker Observser");
+                        Intent in = new Intent();
+                        in.setAction("downloadprescription");
+                        sendBroadcast(in);
+                    }
+                });*/
+        /*
         if (sessionManager.isFirstTimeLaunched()) {
             TempDialog = new ProgressDialog(HomeActivity.this, R.style.AlertDialogStyle); //thats how to add a style!
             TempDialog.setTitle(R.string.syncInProgress);

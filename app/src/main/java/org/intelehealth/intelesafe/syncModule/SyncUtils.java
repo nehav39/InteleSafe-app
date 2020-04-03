@@ -2,7 +2,15 @@ package org.intelehealth.intelesafe.syncModule;
 
 import android.content.Intent;
 import android.os.Handler;
+import android.support.annotation.Nullable;
+import android.util.Log;
 
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.ExistingWorkPolicy;
+import androidx.work.WorkInfo;
+import androidx.work.WorkManager;
+
+import org.intelehealth.intelesafe.app.AppConstants;
 import org.intelehealth.intelesafe.app.IntelehealthApplication;
 import org.intelehealth.intelesafe.database.dao.ImagesPushDAO;
 import org.intelehealth.intelesafe.database.dao.SyncDAO;
@@ -16,6 +24,7 @@ public class SyncUtils {
     private static final String TAG = SyncUtils.class.getSimpleName();
 
     public void syncBackground() {
+
         SyncDAO syncDAO = new SyncDAO();
         ImagesPushDAO imagesPushDAO = new ImagesPushDAO();
 
@@ -29,8 +38,14 @@ public class SyncUtils {
         NotificationUtils notificationUtils = new NotificationUtils();
         notificationUtils.clearAllNotifications(IntelehealthApplication.getAppContext());
 
-        Intent intent = new Intent(IntelehealthApplication.getAppContext(), UpdateDownloadPrescriptionService.class);
-        IntelehealthApplication.getAppContext().startService(intent);
+        //Background Sync Fixes : Chaining of request in place of running background service
+        WorkManager.getInstance()
+                .beginWith(AppConstants.VISIT_SUMMARY_WORK_REQUEST)
+                .then(AppConstants.LAST_SYNC_WORK_REQUEST)
+                .enqueue();
+
+        /*Intent intent = new Intent(IntelehealthApplication.getAppContext(), UpdateDownloadPrescriptionService.class);
+        IntelehealthApplication.getAppContext().startService(intent);*/
 
     }
 
@@ -60,8 +75,12 @@ public class SyncUtils {
 
         imagesPushDAO.deleteObsImage();
 
-        Intent intent = new Intent(IntelehealthApplication.getAppContext(), UpdateDownloadPrescriptionService.class);
-        IntelehealthApplication.getAppContext().startService(intent);
+        WorkManager.getInstance()
+                .beginWith(AppConstants.VISIT_SUMMARY_WORK_REQUEST)
+                .then(AppConstants.LAST_SYNC_WORK_REQUEST)
+                .enqueue();
+        /*Intent intent = new Intent(IntelehealthApplication.getAppContext(), UpdateDownloadPrescriptionService.class);
+        IntelehealthApplication.getAppContext().startService(intent);*/
 
         return isSynced;
     }
