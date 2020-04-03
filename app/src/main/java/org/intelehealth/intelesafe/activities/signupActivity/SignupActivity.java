@@ -229,6 +229,7 @@ public class SignupActivity extends AppCompatActivity {
         mLastName.setFilters(new InputFilter[]{new InputFilter.LengthFilter(25), inputFilter_Name}); //maxlength 25
 
         mEmailView = findViewById(R.id.email);
+/*
         mEmailView.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -245,6 +246,7 @@ public class SignupActivity extends AppCompatActivity {
                 mPhoneNum.setText(mEmailView.getText().toString());
             }
         });
+*/
 
 
         mPasswordView = findViewById(R.id.password);
@@ -275,6 +277,23 @@ public class SignupActivity extends AppCompatActivity {
         mGenderM = findViewById(R.id.identification_gender_male);
         mGenderF = findViewById(R.id.identification_gender_female);
         mImageView = findViewById(R.id.imageview_id_picture);
+
+        mPhoneNum.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                mEmailView.setText(mPhoneNum.getText().toString());
+            }
+        });
 
         ArrayAdapter<CharSequence> countryAdapter = ArrayAdapter.createFromResource(this,
                 R.array.countries, android.R.layout.simple_spinner_item);
@@ -936,7 +955,7 @@ public class SignupActivity extends AppCompatActivity {
 
 //                List<String> roles = new ArrayList<>();
 //                roles.add("8d94f280-c2cc-11de-8d13-0010c6dffd0f");
-//                data.setRoles(roles);
+//             email   data.setRoles(roles);
 
 
 //                //Add all into UserSignup
