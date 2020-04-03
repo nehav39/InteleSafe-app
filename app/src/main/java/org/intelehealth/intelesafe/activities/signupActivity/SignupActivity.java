@@ -894,20 +894,24 @@ public class SignupActivity extends AppCompatActivity {
                 userBirthAttribute.setAttributeType("14d4f066-15f5-102d-96e4-000c29c2a5d7");
                 userBirthAttribute.setValue("" + mPhoneNum.getText().toString());
 
-                userBirthAttribute.setAttributeType("ecdaadb6-14a0-4ed9-b5b7-cfed87b44b87"); // openmrsuuid occupation
-                userBirthAttribute.setValue("" + licenseID.getText().toString()); //license text
+                UserBirthAttribute userBirthOccupationAttribute = new UserBirthAttribute();
+                userBirthOccupationAttribute.setAttributeType("ecdaadb6-14a0-4ed9-b5b7-cfed87b44b87"); // openmrsuuid occupation
+                userBirthOccupationAttribute.setValue("" + licenseID.getText().toString()); //license text
 
-                userBirthAttribute.setAttributeType("1c718819-345c-4368-aad6-d69b4c267db7"); //openmrsuuid education
-                userBirthAttribute.setValue("" + hospital_name.getText().toString()); //hospital name text
+                UserBirthAttribute userBirthHosAttribute = new UserBirthAttribute();
+                userBirthHosAttribute.setAttributeType("1c718819-345c-4368-aad6-d69b4c267db7"); //openmrsuuid education
+                userBirthHosAttribute.setValue("" + hospital_name.getText().toString()); //hospital name text
 
-//                UserBirthAttribute userCasteAttribute = new UserBirthAttribute();
-                userBirthAttribute.setAttributeType("5a889d96-0c84-4a04-88dc-59a6e37db2d3"); // This is for Designation. openrms caste...
-                userBirthAttribute.setValue("" + selectedPersonalCaste);
+                UserBirthAttribute userCasteAttribute = new UserBirthAttribute();
+                userCasteAttribute.setAttributeType("5a889d96-0c84-4a04-88dc-59a6e37db2d3"); // This is for Designation. openrms caste...
+                userCasteAttribute.setValue("" + selectedPersonalCaste);
 
 
                 List<UserBirthAttribute> userAttributeList = new ArrayList<>();
                 userAttributeList.add(userBirthAttribute);
-//                userAttributeList.add(userCasteAttribute);
+                userAttributeList.add(userBirthOccupationAttribute);
+                userAttributeList.add(userBirthHosAttribute);
+                userAttributeList.add(userCasteAttribute);
 
                 userBirthData.setAttributes(userAttributeList);
 
