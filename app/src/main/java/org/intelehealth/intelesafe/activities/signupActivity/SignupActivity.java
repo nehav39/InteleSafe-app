@@ -1230,6 +1230,8 @@ public class SignupActivity extends AppCompatActivity {
         patientdto.setOpenmrsId("" + OpenMRSID);
         patientdto.setStateprovince(StringUtils.getValue(mState.getSelectedItem().toString()));
 
+
+        // Uncommented by venu N on 03/04/2020.
             patientAttributesDTO = new PatientAttributesDTO();
             patientAttributesDTO.setUuid(UUID.randomUUID().toString());
             patientAttributesDTO.setPatientuuid(uuid);
