@@ -72,6 +72,7 @@ import org.intelehealth.intelesafe.app.AppConstants;
 import org.intelehealth.intelesafe.database.InteleHealthDatabaseHelper;
 import org.intelehealth.intelesafe.database.dao.EncounterDAO;
 import org.intelehealth.intelesafe.database.dao.VisitsDAO;
+import org.intelehealth.intelesafe.models.CheckAppUpdateRes;
 import org.intelehealth.intelesafe.models.DownloadMindMapRes;
 import org.intelehealth.intelesafe.models.dto.EncounterDTO;
 import org.intelehealth.intelesafe.models.dto.VisitDTO;
@@ -96,6 +97,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
+import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -179,6 +181,8 @@ public class HomeActivity extends AppCompatActivity {
         filter = new IntentFilter("lasysync");
         manager = AccountManager.get(HomeActivity.this);
 
+        checkAppVer();  //auto-update feature.
+
         Intent intent = this.getIntent(); // The intent was passed to the activity
         if (intent != null) {
             fromActivity = intent.getStringExtra("from");
@@ -189,6 +193,7 @@ public class HomeActivity extends AppCompatActivity {
         if (fromActivity.equals("setup")) {
             UserLoginTask(username, password);
         }
+
 
         sessionManager.setCurrentLang(getResources().getConfiguration().locale.toString());
 
@@ -942,6 +947,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         registerReceiver(reMyreceive, filter);
+        checkAppVer();  //auto-update feature.
 //        lastSyncTextView.setText(getString(R.string.last_synced) + " \n" + sessionManager.getLastSyncDateTime());
         if (!sessionManager.getLastSyncDateTime().equalsIgnoreCase("- - - -")
                 && Locale.getDefault().toString().equals("en")) {
@@ -1160,63 +1166,63 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
-//    private void checkAppVer() {
-//
-//        try {
-//            PackageInfo pInfo = context.getPackageManager().getPackageInfo(getPackageName(), 0);
-//            String version = pInfo.versionName;
-//            versionCode = pInfo.versionCode;
-//        } catch (PackageManager.NameNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//
-//        disposable.add((Disposable) AppConstants.apiInterface.checkAppUpdate()
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribeWith(new DisposableSingleObserver<CheckAppUpdateRes>() {
-//                    @Override
-//                    public void onSuccess(CheckAppUpdateRes res) {
-//                        int latestVersionCode = 0;
-//                        if (!res.getLatestVersionCode().isEmpty()) {
-//                            latestVersionCode = Integer.parseInt(res.getLatestVersionCode());
-//                        }
-//
-//                        if (latestVersionCode > versionCode) {
-//                            android.app.AlertDialog.Builder builder;
-//                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//                                builder = new android.app.AlertDialog.Builder(HomeActivity.this, android.R.style.Theme_Material_Dialog_Alert);
-//                            } else {
-//                                builder = new android.app.AlertDialog.Builder(HomeActivity.this);
-//                            }
-//                            builder.setTitle(getResources().getString(R.string.new_update_available))
-//                                    .setCancelable(false)
-//                                    .setMessage(getResources().getString(R.string.update_app_note))
-//                                    .setPositiveButton(getResources().getString(R.string.update), new DialogInterface.OnClickListener() {
-//                                        public void onClick(DialogInterface dialog, int which) {
-//
-//                                            final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
-//                                            try {
-//                                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-//                                            } catch (ActivityNotFoundException anfe) {
-//                                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
-//                                            }
-//
-//                                        }
-//                                    })
-//
-//                                    .setIcon(android.R.drawable.ic_dialog_alert)
-//                                    .setCancelable(false)
-//                                    .show();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        Log.e("Error", "" + e);
-//                    }
-//                })
-//        );
-//
-//    }
+    private void checkAppVer() {
+
+        try {
+            PackageInfo pInfo = context.getPackageManager().getPackageInfo(getPackageName(), 0);
+            String version = pInfo.versionName;
+            versionCode = pInfo.versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        disposable.add((Disposable) AppConstants.apiInterface.checkAppUpdate()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<CheckAppUpdateRes>() {
+                    @Override
+                    public void onSuccess(CheckAppUpdateRes res) {
+                        int latestVersionCode = 0;
+                        if (!res.getLatestVersionCode().isEmpty()) {
+                            latestVersionCode = Integer.parseInt(res.getLatestVersionCode());
+                        }
+
+                        if (latestVersionCode > versionCode) {
+                            android.app.AlertDialog.Builder builder;
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                builder = new android.app.AlertDialog.Builder(HomeActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+                            } else {
+                                builder = new android.app.AlertDialog.Builder(HomeActivity.this);
+                            }
+                            builder.setTitle(getResources().getString(R.string.new_update_available))
+                                    .setCancelable(false)
+                                    .setMessage(getResources().getString(R.string.update_app_note))
+                                    .setPositiveButton(getResources().getString(R.string.update), new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+
+                                            final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
+                                            try {
+                                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                                            } catch (ActivityNotFoundException anfe) {
+                                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+                                            }
+
+                                        }
+                                    })
+
+                                    .setIcon(android.R.drawable.ic_dialog_alert)
+                                    .setCancelable(false)
+                                    .show();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e("Error", "" + e);
+                    }
+                })
+        );
+
+    }
 
 }

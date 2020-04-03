@@ -430,9 +430,11 @@
                         android:digits="0123456789+"
                         android:hint="@string/username"
                         android:imeOptions="actionNext"
-                        android:inputType="phone"
-                        android:maxLength="10"
+                        android:inputType="none"
                         android:maxLines="1"
+                        android:enabled="false"
+                        android:textColor="#50000000"
+                        android:maxLength="10"
                         android:nextFocusForward="@id/password" />
 
                 </android.support.design.widget.TextInputLayout>
