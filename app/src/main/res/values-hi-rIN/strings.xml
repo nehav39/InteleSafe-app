@@ -618,8 +618,8 @@
     <string name="intelesafe">InteleSafe</string>
     <string name="who_is_this_napplication_for">Who is this  application for?</string>
     <string name="submit_visitSummary_Button">Submit</string>
-    <string name="medical_registration_number_license_id">*Medical registration number/license ID</string>
-    <string name="name_of_health_organization_hospital_where_you_primarily_work">*Name of health organization/hospital where you primarily work</string>
+    <string name="medical_registration_number_license_id">Medical registration number/license ID</string>
+    <string name="name_of_health_organization_hospital_where_you_primarily_work">Name of health organization/hospital where you primarily work</string>
     <string name="username_10digits">Username should be 10 digits</string>
     <string name="please_select_state">Please select state</string>
     <string name="stay_aware_stay_safe">Stay Aware | Stay Safe</string>
@@ -675,5 +675,19 @@
      <string name="location">Location</string>
      <string name="prajwal_waingankar">Prajwal Waingankar</string>
      <string name="recyclerview_home_date">01 January 2020, 12:00 AM</string>-->
+
+    //HomeScreen (New Changes)
+    <string name="txt_self_assessment">Self Assessment</string>
+    <string name="txt_start_now">Start Now</string>
+    <string name="personal_pr">Personal protection guidelines</string>
+    <string name="if_you_star">If you start showing symptoms of Covid-19 please reach out to your supervisor/doctor. You can also send us a WhatsApp message at the number below for any concerns.</string>
+    <string name="some_id">020-26127394</string>
+
+    // SignUP Screen(New Changes)
+    <string name="txt_personal_caste_header">I am a...</string>
+    <string name="txt_prompt_caste">Select Caste</string>
+    <string name="txt_enter_caste">Designation</string>
+    <string name="toast_select_designation">Please select your designation.</string>
+    <string name="error_empty_designation">Enter your designation.</string>
 
 </resources>

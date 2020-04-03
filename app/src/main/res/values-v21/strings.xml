@@ -13,8 +13,8 @@
     <string name="prajwal_waingankar">Prajwal Waingankar</string>
     <string name="recyclerview_home_date">01 January 2020, 12:00 AM</string>
     <string name="submit_visitSummary_Button">Submit</string>
-    <string name="medical_registration_number_license_id">*Medical registration number/license ID</string>
-    <string name="name_of_health_organization_hospital_where_you_primarily_work">*Name of health organization/hospital where you primarily work</string>
+    <string name="medical_registration_number_license_id">Medical registration number/license ID</string>
+    <string name="name_of_health_organization_hospital_where_you_primarily_work">Name of health organization/hospital where you primarily work</string>
     <string name="username_10digits">Username should be 10 digits</string>
     <string name="please_select_state">Please select state</string>
     <string name="stay_aware_stay_safe">Stay Aware | Stay Safe</string>

@@ -610,8 +610,8 @@
     <string name="intelesafe">InteleSafe</string>
     <string name="who_is_this_napplication_for">Who is this \napplication for?</string>
     <string name="submit_visitSummary_Button">Submit</string>
-    <string name="medical_registration_number_license_id">*Medical registration number/license ID</string>
-    <string name="name_of_health_organization_hospital_where_you_primarily_work">*Name of health organization/hospital where you primarily work</string>
+    <string name="medical_registration_number_license_id">Medical registration number/license ID</string>
+    <string name="name_of_health_organization_hospital_where_you_primarily_work">Name of health organization/hospital where you primarily work</string>
     <string name="username_10digits">Username should be 10 digits</string>
     <string name="please_select_state">Please select state</string>
     <string name="save">Save</string>
@@ -630,5 +630,12 @@
     <string name="some_id">020-26127394</string>
     <string name="assessment_visit_title">Assessment</string>
     <string name="please_fill_your_details">Please fill your details</string>
+
+    // SignUP Screen(New Changes)
+    <string name="txt_personal_caste_header">I am a...</string>
+    <string name="txt_prompt_caste">Select Caste</string>
+    <string name="txt_enter_caste">Designation</string>
+    <string name="toast_select_designation">Please select your designation.</string>
+    <string name="error_empty_designation">Enter your designation.</string>
 
 </resources>
