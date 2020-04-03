@@ -228,8 +228,8 @@ public class HomeActivity extends AppCompatActivity {
             //region Enable Daily Notifications
             calendar = Calendar.getInstance();
             calendar.setTimeInMillis(System.currentTimeMillis());
-            calendar.set(Calendar.HOUR_OF_DAY, 21); //24 Hour Format - 8am alarm set.
-            calendar.set(Calendar.MINUTE, 03);
+            calendar.set(Calendar.HOUR_OF_DAY, 8); //24 Hour Format - 8am alarm set.
+            calendar.set(Calendar.MINUTE, 00);
             calendar.set(Calendar.SECOND, 0);
             // if notification time is before selected time, send notification the next day
             if (calendar.before(Calendar.getInstance())) {
@@ -256,7 +256,7 @@ public class HomeActivity extends AppCompatActivity {
         alarmIntent_2.setAction(AppConstants.ACTION_TWO);
         PendingIntent pendingIntent_2 = PendingIntent.getBroadcast(this, 1260, alarmIntent_2, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        if(dayCount < 3) {
+        if(dayCount < 42) {
             //region Enable Daily Notifications..
             calendar.setTimeInMillis(System.currentTimeMillis());
             calendar.set(Calendar.HOUR_OF_DAY, 19); //24 Hour Format - 7pm alarm
