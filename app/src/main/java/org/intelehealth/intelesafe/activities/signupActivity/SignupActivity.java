@@ -87,6 +87,7 @@ import org.intelehealth.intelesafe.utilities.NetworkConnection;
 import org.intelehealth.intelesafe.utilities.SessionManager;
 import org.intelehealth.intelesafe.utilities.StringUtils;
 import org.intelehealth.intelesafe.utilities.UrlModifiers;
+import org.intelehealth.intelesafe.utilities.UuidDictionary;
 import org.intelehealth.intelesafe.utilities.UuidGenerator;
 import org.intelehealth.intelesafe.utilities.exception.DAOException;
 import io.reactivex.Observable;
@@ -137,9 +138,11 @@ public class SignupActivity extends AppCompatActivity {
     RadioButton mGenderF;
     EditText countryText;
     EditText stateText;
-//    EditText licenseID;
-//    EditText hospital_name;
+    EditText licenseID;
+    EditText hospital_name;
 
+    EditText mEdtCaste; // Added by Venu N on 03/04/2020.
+    Spinner mCaste; // Added by venu N on 03/04/2020.
     Spinner mCountry;
     Spinner mState;
     Spinner selectDistrict;
@@ -181,6 +184,8 @@ public class SignupActivity extends AppCompatActivity {
 
     private String selectedLocationName = "";
     private String selectedLocationUUID = "";
+
+    private String selectedPersonalCaste = ""; // Added By venu N on 03/04/2020.
 
     Base64Utils base64Utils = new Base64Utils();
     String encoded = null;
@@ -250,8 +255,8 @@ public class SignupActivity extends AppCompatActivity {
         mPasswordView = findViewById(R.id.password);
         mCPassword = findViewById(R.id.cpassword);
 
-//        licenseID = findViewById(R.id.identification_registration_no);
-//        hospital_name = findViewById(R.id.identification_hospital_name);
+        licenseID = findViewById(R.id.identification_registration_no);
+        hospital_name = findViewById(R.id.identification_hospital_name);
 
         mDOB = findViewById(R.id.identification_birth_date_text_view);
         mPhoneNum = findViewById(R.id.identification_phone_number);
@@ -276,6 +281,11 @@ public class SignupActivity extends AppCompatActivity {
         mGenderF = findViewById(R.id.identification_gender_female);
         mImageView = findViewById(R.id.imageview_id_picture);
 
+        // Added by venu N on 03/04/2020.
+        mCaste = findViewById(R.id.spinner_Caste);
+        mEdtCaste = findViewById(R.id.identification_other_caste);
+        mEdtCaste.setVisibility(View.GONE);
+
         ArrayAdapter<CharSequence> countryAdapter = ArrayAdapter.createFromResource(this,
                 R.array.countries, android.R.layout.simple_spinner_item);
         countryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -290,6 +300,11 @@ public class SignupActivity extends AppCompatActivity {
                 R.array.selectLocation, android.R.layout.simple_spinner_item);
         locationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         selectLocation.setAdapter(locationAdapter);
+
+        ArrayAdapter<CharSequence> personalCasteAdapter = ArrayAdapter.createFromResource(SignupActivity.this,
+                R.array.personal_caste, R.layout.custom_spinner_item);
+       // personalCasteAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mCaste.setAdapter(personalCasteAdapter);
 
         generateUuid();
 
@@ -406,6 +421,25 @@ public class SignupActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+        mCaste.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String caste = parent.getSelectedItem().toString();
+                if(caste.equalsIgnoreCase("Other")){
+                    mEdtCaste.setVisibility(View.VISIBLE);
+                }else{
+                    mEdtCaste.setVisibility(View.GONE);
+                }
+                selectedPersonalCaste = caste;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
@@ -617,17 +651,17 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }
 
-//                if (licenseID.getText().toString().equals("")) {
-//                    licenseID.setError(getString(R.string.error_field_required));
-//                    licenseID.requestFocus();
-//                    return;
-//                }
-//
-//                if (hospital_name.getText().toString().equals("")) {
-//                    hospital_name.setError(getString(R.string.error_field_required));
-//                    hospital_name.requestFocus();
-//                    return;
-//                }
+                if (licenseID.getText().toString().equals("")) {
+                    licenseID.setError(getString(R.string.error_field_required));
+                    licenseID.requestFocus();
+                    return;
+                }
+
+                if (hospital_name.getText().toString().equals("")) {
+                    hospital_name.setError(getString(R.string.error_field_required));
+                    hospital_name.requestFocus();
+                    return;
+                }
 
                 // Check for a valid email address.
                 if (TextUtils.isEmpty(userName)) {
@@ -757,6 +791,22 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }
 
+                // Added by venu N on 03/04/202.
+                if((selectedPersonalCaste == null && selectedPersonalCaste.length() <= 0) || selectedPersonalCaste.equalsIgnoreCase("Select Designation")){
+                    Toast.makeText(context, getString(R.string.toast_select_designation), Toast.LENGTH_LONG).show();
+                    return;
+                }else if(selectedPersonalCaste.equalsIgnoreCase("Other")){
+                        selectedPersonalCaste = mEdtCaste.getText().toString();
+                    if(selectedPersonalCaste.equalsIgnoreCase("")){
+                        selectedPersonalCaste = "Other";
+                        mEdtCaste.setError(getString(R.string.error_empty_designation));
+                        mEdtCaste.requestFocus();
+                        return;
+                    }
+                }
+
+                System.out.println("DESIGATION: "+selectedPersonalCaste);
+
                 if (mAddress1.getText().toString().equals("")) {
                     mAddress1.setError(getString(R.string.error_field_required));
                     mAddress1.requestFocus();
@@ -844,15 +894,20 @@ public class SignupActivity extends AppCompatActivity {
                 userBirthAttribute.setAttributeType("14d4f066-15f5-102d-96e4-000c29c2a5d7");
                 userBirthAttribute.setValue("" + mPhoneNum.getText().toString());
 
-//                userBirthAttribute.setAttributeType("ecdaadb6-14a0-4ed9-b5b7-cfed87b44b87"); // openmrsuuid occupation
-//                userBirthAttribute.setValue("" + licenseID.getText().toString()); //license text
-//
-//                userBirthAttribute.setAttributeType("1c718819-345c-4368-aad6-d69b4c267db7"); //openmrsuuid education
-//                userBirthAttribute.setValue("" + hospital_name.getText().toString()); //hospital name text
+                userBirthAttribute.setAttributeType("ecdaadb6-14a0-4ed9-b5b7-cfed87b44b87"); // openmrsuuid occupation
+                userBirthAttribute.setValue("" + licenseID.getText().toString()); //license text
+
+                userBirthAttribute.setAttributeType("1c718819-345c-4368-aad6-d69b4c267db7"); //openmrsuuid education
+                userBirthAttribute.setValue("" + hospital_name.getText().toString()); //hospital name text
+
+//                UserBirthAttribute userCasteAttribute = new UserBirthAttribute();
+                userBirthAttribute.setAttributeType("5a889d96-0c84-4a04-88dc-59a6e37db2d3"); // This is for Designation. openrms caste...
+                userBirthAttribute.setValue("" + selectedPersonalCaste);
 
 
                 List<UserBirthAttribute> userAttributeList = new ArrayList<>();
                 userAttributeList.add(userBirthAttribute);
+//                userAttributeList.add(userCasteAttribute);
 
                 userBirthData.setAttributes(userAttributeList);
 
@@ -1167,12 +1222,12 @@ public class SignupActivity extends AppCompatActivity {
         patientdto.setOpenmrsId("" + OpenMRSID);
         patientdto.setStateprovince(StringUtils.getValue(mState.getSelectedItem().toString()));
 
-//            patientAttributesDTO = new PatientAttributesDTO();
-//            patientAttributesDTO.setUuid(UUID.randomUUID().toString());
-//            patientAttributesDTO.setPatientuuid(uuid);
-//            patientAttributesDTO.setPersonAttributeTypeUuid(patientsDAO.getUuidForAttribute("caste"));
-//            patientAttributesDTO.setValue(StringUtils.getProvided(mCaste));
-//            patientAttributesDTOList.add(patientAttributesDTO);
+            patientAttributesDTO = new PatientAttributesDTO();
+            patientAttributesDTO.setUuid(UUID.randomUUID().toString());
+            patientAttributesDTO.setPatientuuid(uuid);
+            patientAttributesDTO.setPersonAttributeTypeUuid(patientsDAO.getUuidForAttribute("caste"));
+            patientAttributesDTO.setValue(selectedPersonalCaste);  //get the spinner value and send it here.
+            patientAttributesDTOList.add(patientAttributesDTO);
 
         patientAttributesDTO = new PatientAttributesDTO();
         patientAttributesDTO.setUuid(UUID.randomUUID().toString());
@@ -1192,7 +1247,7 @@ public class SignupActivity extends AppCompatActivity {
             patientAttributesDTO.setUuid(UUID.randomUUID().toString());
             patientAttributesDTO.setPatientuuid(uuid);
             patientAttributesDTO.setPersonAttributeTypeUuid(patientsDAO.getUuidForAttribute("occupation"));
-//            patientAttributesDTO.setValue(StringUtils.getValue(licenseID.getText().toString()));
+            patientAttributesDTO.setValue(StringUtils.getValue(licenseID.getText().toString()));
             patientAttributesDTOList.add(patientAttributesDTO);
 
 //            patientAttributesDTO = new PatientAttributesDTO();
@@ -1206,7 +1261,7 @@ public class SignupActivity extends AppCompatActivity {
             patientAttributesDTO.setUuid(UUID.randomUUID().toString());
             patientAttributesDTO.setPatientuuid(uuid);
             patientAttributesDTO.setPersonAttributeTypeUuid(patientsDAO.getUuidForAttribute("Education Level"));
-//            patientAttributesDTO.setValue(StringUtils.getValue(hospital_name.getText().toString()));
+            patientAttributesDTO.setValue(StringUtils.getValue(hospital_name.getText().toString()));
             patientAttributesDTOList.add(patientAttributesDTO);
 
         patientAttributesDTO = new PatientAttributesDTO();

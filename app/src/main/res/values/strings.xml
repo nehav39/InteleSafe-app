@@ -630,4 +630,11 @@
     <string name="some_id">020-26127394</string>
     <string name="assessment_visit_title">Assessment</string>
 
+    // SignUP Screen(New Changes)
+    <string name="txt_personal_caste_header">I am a...</string>
+    <string name="txt_prompt_caste">Select Caste</string>
+    <string name="txt_enter_caste">Designation</string>
+    <string name="toast_select_designation">Please select your designation.</string>
+    <string name="error_empty_designation">Enter your designation.</string>
+
 </resources>

@@ -35,10 +35,10 @@
 
 
     <string-array name="countries">
-<!--        <item>Select Country</item>-->
+        <!--        <item>Select Country</item>-->
         <item>India</item>
-       <!-- <item>United States</item>
-        <item>Philippines</item>-->
+        <!-- <item>United States</item>
+         <item>Philippines</item>-->
     </string-array>
 
     <string-array name="selectDist">
@@ -304,6 +304,18 @@
         <item>Weeks</item>
         <item>Months</item>
         <item>Years</item>
+    </string-array>
+
+    <!--Added by venu N on 03/04/2020 to select the Caste-->
+    <string-array name="personal_caste">
+        <item>Select Designation</item>
+        <item>Doctor</item>
+        <item>Nurse</item>
+        <item>Midwife</item>
+        <item>Community Health Worker</item>
+        <item>Paramedic</item>
+        <item>Pharmacy worker</item>
+        <item>Other</item>
     </string-array>
 
 </resources>
