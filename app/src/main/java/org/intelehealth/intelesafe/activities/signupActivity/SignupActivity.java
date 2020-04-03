@@ -104,8 +104,10 @@ import okhttp3.ResponseBody;
 
 public class SignupActivity extends AppCompatActivity {
 
-    private static final String TAG = IdentificationActivity.class.getSimpleName();
+//    private static final String TAG = IdentificationActivity.class.getSimpleName();
     Context context;
+    private static final String TAG = SignupActivity.class.getSimpleName();
+
     SessionManager sessionManager = null;
     UuidGenerator uuidGenerator = new UuidGenerator();
     Calendar today = Calendar.getInstance();
@@ -145,8 +147,10 @@ public class SignupActivity extends AppCompatActivity {
     Spinner mCaste; // Added by venu N on 03/04/2020.
     Spinner mCountry;
     Spinner mState;
+/*
     Spinner selectDistrict;
     Spinner selectLocation;
+*/
 
     LinearLayout countryStateLayout;
 
@@ -166,7 +170,7 @@ public class SignupActivity extends AppCompatActivity {
     String cPassword = "";
     String country = "";
     String state = "";
-    String district = "";
+ //   String district = "";
     private String personUUID = "";
     private String patientOpenMRSID = "";
     private String OpenMRSID = "";
@@ -182,8 +186,8 @@ public class SignupActivity extends AppCompatActivity {
 
     private List<GetDistrictRes.Result> mLocations = new ArrayList<>();
 
-    private String selectedLocationName = "";
-    private String selectedLocationUUID = "";
+  /*  private String selectedLocationName = "";
+    private String selectedLocationUUID = "";*/
 
     private String selectedPersonalCaste = ""; // Added By venu N on 03/04/2020.
 
@@ -272,8 +276,8 @@ public class SignupActivity extends AppCompatActivity {
 
         stateText = findViewById(R.id.identification_state);
         mState = findViewById(R.id.spinner_state);
-        selectDistrict = findViewById(R.id.spinner_district);
-        selectLocation = findViewById(R.id.spinner_location);
+        /*selectDistrict = findViewById(R.id.spinner_district);
+        selectLocation = findViewById(R.id.spinner_location);*/
         mPostal = findViewById(R.id.identification_postal_code);
         countryText = findViewById(R.id.identification_country);
         mCountry = findViewById(R.id.spinner_country);
@@ -291,7 +295,7 @@ public class SignupActivity extends AppCompatActivity {
         countryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mCountry.setAdapter(countryAdapter);
 
-        ArrayAdapter<CharSequence> distAdapter = ArrayAdapter.createFromResource(SignupActivity.this,
+      /*  ArrayAdapter<CharSequence> distAdapter = ArrayAdapter.createFromResource(SignupActivity.this,
                 R.array.selectDist, android.R.layout.simple_spinner_item);
         distAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         selectDistrict.setAdapter(distAdapter);
@@ -299,7 +303,7 @@ public class SignupActivity extends AppCompatActivity {
         ArrayAdapter<CharSequence> locationAdapter = ArrayAdapter.createFromResource(SignupActivity.this,
                 R.array.selectLocation, android.R.layout.simple_spinner_item);
         locationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        selectLocation.setAdapter(locationAdapter);
+        selectLocation.setAdapter(locationAdapter);*/
 
         ArrayAdapter<CharSequence> personalCasteAdapter = ArrayAdapter.createFromResource(SignupActivity.this,
                 R.array.personal_caste, R.layout.custom_spinner_item);
@@ -375,7 +379,7 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
-        selectDistrict.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+      /*  selectDistrict.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i != 0) {
@@ -423,7 +427,7 @@ public class SignupActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
-        });
+        });*/
 
 
         mCaste.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -829,7 +833,7 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (district.equalsIgnoreCase("")) {
+              /*  if (district.equalsIgnoreCase("")) {
                     Toast.makeText(context, getString(R.string.please_select_districts), Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -842,7 +846,7 @@ public class SignupActivity extends AppCompatActivity {
                 if (selectedLocationName.equalsIgnoreCase("Select location")) {
                     Toast.makeText(context, getString(R.string.please_select_location), Toast.LENGTH_LONG).show();
                     return;
-                }
+                }*/
 
                 if (mPostal.getText().toString().equals("")) {
                     mPostal.setError(getString(R.string.error_field_required));
@@ -924,7 +928,7 @@ public class SignupActivity extends AppCompatActivity {
                 userAddressData.setCountry("" + country);
                 userAddressData.setStateProvince("" + mState.getSelectedItem().toString());
                 userAddressData.setPostalCode("" + mPostal.getText().toString());
-                userAddressData.setCountyDistrict("" + selectedLocationName);
+               // userAddressData.setCountyDistrict("" + selectedLocationName);
 
                 Log.e("JSON-STEP3- ", "" + gson.toJson(userAddressData));
 
@@ -1013,7 +1017,7 @@ public class SignupActivity extends AppCompatActivity {
 
     }
 
-    private void fetchDistrictData(String district) {
+   /* private void fetchDistrictData(String district) {
 
         String BASE_URL = BuildConfig.BASE_URL;
 
@@ -1058,7 +1062,7 @@ public class SignupActivity extends AppCompatActivity {
             Log.e(TAG, "changeApiBaseUrl: " + e.getMessage());
             Log.e(TAG, "changeApiBaseUrl: " + e.getStackTrace());
         }
-    }
+    }*/
 
     private List<String> getLocationStringList(List<GetDistrictRes.Result> locationList) {
         List<String> list = new ArrayList<String>();
@@ -1437,17 +1441,17 @@ public class SignupActivity extends AppCompatActivity {
                                         manager.addAccountExplicitly(account, password, null);
 
                                         sessionManager.setLocationName("" + userAddressData.getCountyDistrict());
-                                        sessionManager.setLocationUuid("" + selectedLocationUUID);
+                                        sessionManager.setLocationUuid("b56d5d16-bf89-4ac0-918d-e830fbfba290");
                                         sessionManager.setLocationDescription("In Maharashtra State");
                                         sessionManager.setServerUrl(BuildConfig.CLEAN_URL);
-                                        sessionManager.setServerUrlRest("http://" + BuildConfig.CLEAN_URL + "/openmrs/ws/rest/v1/");
-                                        sessionManager.setServerUrlBase("http://" + BuildConfig.CLEAN_URL + "/openmrs");
-                                        sessionManager.setBaseUrl("http://" + BuildConfig.CLEAN_URL + "/openmrs/ws/rest/v1/");
+                                        sessionManager.setServerUrlRest("https://" + BuildConfig.CLEAN_URL + "/openmrs/ws/rest/v1/");
+                                        sessionManager.setServerUrlBase("https://" + BuildConfig.CLEAN_URL + "/openmrs");
+                                        sessionManager.setBaseUrl("https://" + BuildConfig.CLEAN_URL + "/openmrs/ws/rest/v1/");
 //                                        sessionManager.setSetupComplete(true);
 
                                         Parse.initialize(new Parse.Configuration.Builder(getApplicationContext())
                                                 .applicationId(AppConstants.IMAGE_APP_ID)
-                                                .server("http://" + BuildConfig.CLEAN_URL + "/parse/")
+                                                .server("https://" + BuildConfig.CLEAN_URL + "/parse/")
                                                 .build()
                                         );
 
@@ -1618,7 +1622,7 @@ public class SignupActivity extends AppCompatActivity {
         IdentifierUUID identifierUUID = new IdentifierUUID();
         identifierUUID.setIdentifier(OpenMRSID);
         identifierUUID.setIdentifierType("05a29f94-c0ed-11e2-94be-8c13b969e334");
-        identifierUUID.setLocation("" + selectedLocationUUID);
+        identifierUUID.setLocation("b56d5d16-bf89-4ac0-918d-e830fbfba290");
         identifierUUID.setPreferred(true);
 
         List<IdentifierUUID> identifierUUIDList = new ArrayList<>();
