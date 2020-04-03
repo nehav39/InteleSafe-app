@@ -181,6 +181,8 @@ public class HomeActivity extends AppCompatActivity {
         filter = new IntentFilter("lasysync");
         manager = AccountManager.get(HomeActivity.this);
 
+        checkAppVer();  //auto-update feature.
+
         Intent intent = this.getIntent(); // The intent was passed to the activity
         if (intent != null) {
             fromActivity = intent.getStringExtra("from");
@@ -191,6 +193,7 @@ public class HomeActivity extends AppCompatActivity {
         if (fromActivity.equals("setup")) {
             UserLoginTask(username, password);
         }
+
 
         sessionManager.setCurrentLang(getResources().getConfiguration().locale.toString());
 
@@ -944,6 +947,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         registerReceiver(reMyreceive, filter);
+        checkAppVer();  //auto-update feature.
 //        lastSyncTextView.setText(getString(R.string.last_synced) + " \n" + sessionManager.getLastSyncDateTime());
         if (!sessionManager.getLastSyncDateTime().equalsIgnoreCase("- - - -")
                 && Locale.getDefault().toString().equals("en")) {
