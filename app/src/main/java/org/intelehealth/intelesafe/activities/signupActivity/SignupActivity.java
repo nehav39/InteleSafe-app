@@ -332,7 +332,7 @@ public class SignupActivity extends AppCompatActivity {
         generateUuid();
 
         ArrayAdapter<CharSequence> stateAdapter = ArrayAdapter.createFromResource(this, R.array.state_error, android.R.layout.simple_spinner_item);
-        stateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+       // stateAdapter.setDropDownViewResource(R.layout.custom_spinner_item);
         mState.setAdapter(stateAdapter);
 
         mState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -662,11 +662,13 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (mMiddleName.getText().toString().equals("")) {
+
+                // commented by venu N on 04/04/2020.
+               /* if (mMiddleName.getText().toString().equals("")) {
                     mMiddleName.setError(getString(R.string.error_field_required));
                     mMiddleName.requestFocus();
                     return;
-                }
+                }*/
 
                 if (mLastName.getText().toString().equals("")) {
                     mLastName.setError(getString(R.string.error_field_required));
@@ -674,7 +676,9 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (licenseID.getText().toString().equals("")) {
+
+                // commented by venu  N on 04/04/2020.
+               /* if (licenseID.getText().toString().equals("")) {
                     licenseID.setError(getString(R.string.error_field_required));
                     licenseID.requestFocus();
                     return;
@@ -684,7 +688,7 @@ public class SignupActivity extends AppCompatActivity {
                     hospital_name.setError(getString(R.string.error_field_required));
                     hospital_name.requestFocus();
                     return;
-                }
+                }*/
 
                 // Check for a valid email address.
                 if (TextUtils.isEmpty(userName)) {

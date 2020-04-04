@@ -81,7 +81,7 @@
                     android:layout_height="match_parent"
                     android:padding="10dp"
                     android:elevation="40dp"
-                    android:background="@drawable/rectangle_2">
+                    android:background="@drawable/white_rectangular_bg">
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -155,61 +155,18 @@
 
                         </android.support.design.widget.TextInputLayout>
 
-                          <android.support.design.widget.TextInputLayout
-                              android:layout_width="match_parent"
-                              android:layout_height="wrap_content">
 
-                              <EditText
-                                  android:id="@+id/identification_registration_no"
-                                  android:layout_width="match_parent"
-                                  android:layout_height="wrap_content"
-                                  android:autofillHints="@string/action_settings"
-                                  android:ems="10"
-                                  android:fontFamily="@font/lato_regular"
-                                  android:textSize="14sp"
-                                  android:freezesText="true"
-                                  android:hint="@string/medical_registration_number_license_id"
-                                  android:imeOptions="actionUnspecified"
-                                  android:inputType="textCapWords"
-                                  android:maxLength="25"
-                                  android:maxLines="1"
-                                  android:singleLine="true"
-                                  android:textAppearance="@style/sign_up_input"/>
 
-                          </android.support.design.widget.TextInputLayout>
-
-                          <android.support.design.widget.TextInputLayout
-                              android:layout_width="match_parent"
-                              android:layout_height="wrap_content">
-
-                              <EditText
-                                  android:id="@+id/identification_hospital_name"
-                                  android:layout_width="match_parent"
-                                  android:layout_height="wrap_content"
-                                  android:autofillHints="@string/action_settings"
-                                  android:ems="10"
-                                  android:freezesText="true"
-                                  android:hint="@string/name_of_health_organization_hospital_where_you_primarily_work"
-                                  android:imeOptions="actionUnspecified"
-                                  android:inputType="textCapWords"
-                                  android:maxLength="25"
-                                  android:maxLines="1"
-                                  android:fontFamily="@font/lato_regular"
-                                  android:textSize="14sp"
-                                  android:singleLine="true"
-                                  android:textAppearance="@style/sign_up_input"/>
-
-                          </android.support.design.widget.TextInputLayout>
-
-                        <Space
+                       <!-- <Space
                             android:layout_width="20dp"
-                            android:layout_height="20dp" />
+                            android:layout_height="20dp" />-->
 
                         <RadioGroup
                             android:id="@+id/radioGrp"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
+                            android:layout_marginTop="10dp"
                             android:paddingLeft="8dp"
                             android:paddingRight="8dp">
 
@@ -239,7 +196,7 @@
 
                         <Space
                             android:layout_width="20dp"
-                            android:layout_height="20dp" />
+                            android:layout_height="10dp" />
 
                         <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
@@ -325,19 +282,18 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="5dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginRight="5dp"
                             android:orientation="vertical">
 
                             <android.support.design.widget.TextInputLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1">
+                                android:layout_height="wrap_content"
+                                >
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
+                                    android:layout_height="wrap_content"
                                     android:orientation="vertical">
 
                                     <EditText
@@ -360,9 +316,6 @@
                                         android:id="@+id/spinner_Caste"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content" />
-
-
-
 
                                 </LinearLayout>
 
@@ -389,6 +342,54 @@
                                     android:textSize="14sp"
                                     android:fontFamily="@font/lato_regular"/>
                             </android.support.design.widget.TextInputLayout>
+
+                            <android.support.design.widget.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                >
+
+                                <EditText
+                                    android:id="@+id/identification_registration_no"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:autofillHints="@string/action_settings"
+                                    android:ems="10"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:textSize="14sp"
+                                    android:freezesText="true"
+                                    android:hint="@string/medical_registration_number_license_id"
+                                    android:imeOptions="actionUnspecified"
+                                    android:inputType="textCapWords"
+                                    android:maxLength="25"
+                                    android:maxLines="1"
+                                    android:singleLine="true"
+                                    android:textAppearance="@style/sign_up_input"/>
+
+                            </android.support.design.widget.TextInputLayout>
+
+                            <android.support.design.widget.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                               >
+
+                                <EditText
+                                    android:id="@+id/identification_hospital_name"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:autofillHints="@string/action_settings"
+                                    android:ems="10"
+                                    android:freezesText="true"
+                                    android:hint="@string/name_of_health_organization_hospital_where_you_primarily_work"
+                                    android:imeOptions="actionUnspecified"
+                                    android:inputType="textCapWords"
+                                    android:maxLength="25"
+                                    android:maxLines="1"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:textSize="14sp"
+                                    android:singleLine="true"
+                                    android:textAppearance="@style/sign_up_input"/>
+
+                            </android.support.design.widget.TextInputLayout>
                         </LinearLayout>
 
 
@@ -403,6 +404,7 @@
                         android:scaleType="centerCrop"
                         android:visibility="gone"
                         app:srcCompat="@drawable/ic_person_camera_intele" />
+
                 </LinearLayout>
 
                 <Space
@@ -428,7 +430,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:padding="10dp"
-                    android:background="@drawable/rectangle_2"
+                    android:background="@drawable/white_rectangular_bg"
                     android:elevation="40dp">
 
 
@@ -544,7 +546,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/rectangle_2"
+                    android:background="@drawable/white_rectangular_bg"
                     android:elevation="40dp"
                     android:padding="10dp">
 
