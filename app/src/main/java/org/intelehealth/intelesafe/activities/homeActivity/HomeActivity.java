@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -27,6 +28,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.StrictMode;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
@@ -60,6 +62,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -207,9 +210,12 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(context));
+        int dayCount = mSharedPreference.getInt("dayCount", 0);
+
         //Notification check
        // SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        //Intent for 10am alarm is set for everyday.
+        //Intent for 8am alarm is set for everyday.
         PackageManager pm = this.getPackageManager();
         ComponentName receiver = new ComponentName(this, DeviceBootReceiver.class);
         Intent alarmIntent_1 = new Intent(this, AlarmReceiver.class);
@@ -218,57 +224,64 @@ public class HomeActivity extends AppCompatActivity {
 
         AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
-        //region Enable Daily Notifications
-        calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 10); //24 Hour Format - 10am alarm set.
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        // if notification time is before selected time, send notification the next day
-        if (calendar.before(Calendar.getInstance())) {
-            calendar.add(Calendar.DATE, 1);
-        }
-        if (manager != null) {
-            manager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                    AlarmManager.INTERVAL_DAY, pendingIntent_1);
+        if(dayCount <= 42) {
+            //region Enable Daily Notifications
+            calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(System.currentTimeMillis());
+            calendar.set(Calendar.HOUR_OF_DAY, 8); //24 Hour Format - 8am alarm set.
+            calendar.set(Calendar.MINUTE, 00);
+            calendar.set(Calendar.SECOND, 0);
+            // if notification time is before selected time, send notification the next day
+            if (calendar.before(Calendar.getInstance())) {
+                calendar.add(Calendar.DATE, 1);
+            }
+            if (manager != null) {
+                manager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                        AlarmManager.INTERVAL_DAY, pendingIntent_1);
 //            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 //                manager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,
 //                        calendar.getTimeInMillis(), pendingIntent_1);
 //            }
+            }
+            //To enable Boot Receiver class
+            pm.setComponentEnabledSetting(receiver,
+                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                    PackageManager.DONT_KILL_APP);
+        }else{
+            manager.cancel(pendingIntent_1);
         }
-        //To enable Boot Receiver class
-        pm.setComponentEnabledSetting(receiver,
-                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-                PackageManager.DONT_KILL_APP);
 
-
-        //Intent for 5pm alarm is set for everyday.
+        //Intent for 7pm alarm is set for everyday.
         Intent alarmIntent_2 = new Intent(this, AlarmReceiver.class);
         alarmIntent_2.setAction(AppConstants.ACTION_TWO);
         PendingIntent pendingIntent_2 = PendingIntent.getBroadcast(this, 1260, alarmIntent_2, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        //region Enable Daily Notifications..
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 17); //24 Hour Format - 5pm alarm
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        // if notification time is before selected time, send notification the next day
-        if (calendar.before(Calendar.getInstance())) {
-            calendar.add(Calendar.DATE, 1);
-        }
-        if (manager != null) {
-            manager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                    AlarmManager.INTERVAL_DAY, pendingIntent_2);
+        if(dayCount < 42) {
+            //region Enable Daily Notifications..
+            calendar.setTimeInMillis(System.currentTimeMillis());
+            calendar.set(Calendar.HOUR_OF_DAY, 19); //24 Hour Format - 7pm alarm
+            calendar.set(Calendar.MINUTE, 0);
+            calendar.set(Calendar.SECOND, 0);
+            // if notification time is before selected time, send notification the next day
+            if (calendar.before(Calendar.getInstance())) {
+                calendar.add(Calendar.DATE, 1);
+            }
+            if (manager != null) {
+                manager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                        AlarmManager.INTERVAL_DAY, pendingIntent_2);
 //            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 //                manager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent_2);
 //            }
+            }
+            //comments
+
+            //To enable Boot Receiver class
+            pm.setComponentEnabledSetting(receiver,
+                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                    PackageManager.DONT_KILL_APP);
+        } else {
+            manager.cancel(pendingIntent_2);
         }
-        //comments
-        
-        //To enable Boot Receiver class
-        pm.setComponentEnabledSetting(receiver,
-                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-                PackageManager.DONT_KILL_APP);
 
         //endregion
 
