@@ -22,7 +22,7 @@ android {
     buildTypes {
 
         debug{
-            buildConfigField "String", "BASE_URL", "\"https://intelesafe.covidhelp.in/\"" // http://13.232.32.249:8080/
+            buildConfigField "String", "BASE_URL", "\"http://intelesafe.covidhelp.in/\"" // http://13.232.32.249:8080/
             buildConfigField "String", "CLEAN_URL", "\"intelesafe.covidhelp.in\"" // 13.232.32.249:8080
         }
 

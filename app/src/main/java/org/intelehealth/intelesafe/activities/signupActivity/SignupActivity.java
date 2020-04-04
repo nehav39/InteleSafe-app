@@ -1466,14 +1466,14 @@ public class SignupActivity extends AppCompatActivity {
                                         sessionManager.setLocationUuid("b56d5d16-bf89-4ac0-918d-e830fbfba290");
                                         sessionManager.setLocationDescription("In Maharashtra State");
                                         sessionManager.setServerUrl(BuildConfig.CLEAN_URL);
-                                        sessionManager.setServerUrlRest("https://" + BuildConfig.CLEAN_URL + "/openmrs/ws/rest/v1/");
-                                        sessionManager.setServerUrlBase("https://" + BuildConfig.CLEAN_URL + "/openmrs");
-                                        sessionManager.setBaseUrl("https://" + BuildConfig.CLEAN_URL + "/openmrs/ws/rest/v1/");
+                                        sessionManager.setServerUrlRest("http://" + BuildConfig.CLEAN_URL + "/openmrs/ws/rest/v1/");
+                                        sessionManager.setServerUrlBase("http://" + BuildConfig.CLEAN_URL + "/openmrs");
+                                        sessionManager.setBaseUrl("http://" + BuildConfig.CLEAN_URL + "/openmrs/ws/rest/v1/");
 //                                        sessionManager.setSetupComplete(true);
 
                                         Parse.initialize(new Parse.Configuration.Builder(getApplicationContext())
                                                 .applicationId(AppConstants.IMAGE_APP_ID)
-                                                .server("https://" + BuildConfig.CLEAN_URL + "/parse/")
+                                                .server("http://" + BuildConfig.CLEAN_URL + "/parse/")
                                                 .build()
                                         );
 

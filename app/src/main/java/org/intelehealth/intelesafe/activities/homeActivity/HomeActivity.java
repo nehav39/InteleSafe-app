@@ -213,7 +213,7 @@ public class HomeActivity extends AppCompatActivity {
 
                 startActivity(new Intent(Intent.ACTION_VIEW,
                         Uri.parse(
-                                String.format("https://api.whatsapp.com/send?phone=%s&text=%s",
+                                String.format("http://api.whatsapp.com/send?phone=%s&text=%s",
                                         phoneNumberWithCountryCode, message))));
             }
         });
@@ -402,7 +402,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent home_quarantine = new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("https://www.intelehealth.org/ppe-guidelines"));
+                        Uri.parse("http://www.intelehealth.org/ppe-guidelines"));
                 startActivity(home_quarantine);
             }
         });
@@ -433,7 +433,7 @@ public class HomeActivity extends AppCompatActivity {
                     }
                 } else {
                     customProgressDialog.show();
-                    new DownloadFile().execute("https://www.mohfw.gov.in/DraftGuidelinesforhomequarantine.pdf", "quarantine.pdf");
+                    new DownloadFile().execute("http://www.mohfw.gov.in/DraftGuidelinesforhomequarantine.pdf", "quarantine.pdf");
                 }
 
 
@@ -448,7 +448,7 @@ public class HomeActivity extends AppCompatActivity {
                 //open youtube page.
                 startActivity
                         (new Intent(Intent.ACTION_VIEW,
-                                Uri.parse("https://www.intelehealth.org/ppe-faqs")));
+                                Uri.parse("http://www.intelehealth.org/ppe-faqs")));
             }
         });
         Logger.logD(TAG, "onCreate: " + getFilesDir().toString());
@@ -1226,7 +1226,7 @@ public class HomeActivity extends AppCompatActivity {
                                             try {
                                                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
                                             } catch (ActivityNotFoundException anfe) {
-                                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+                                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + appPackageName)));
                                             }
 
                                         }
