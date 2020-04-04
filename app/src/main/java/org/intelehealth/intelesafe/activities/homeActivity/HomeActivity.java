@@ -135,6 +135,7 @@ public class HomeActivity extends AppCompatActivity {
     private String key = null;
     private String licenseUrl = null;
     RecyclerView recyclerView;
+    TextView tvNoVisit;
     Button help_watsapp;
 
     Context context;
@@ -200,7 +201,7 @@ public class HomeActivity extends AppCompatActivity {
         help_watsapp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String phoneNumberWithCountryCode = "+917304154312";
+                String phoneNumberWithCountryCode = "+919825989750";
                 String message = "Hello, I need assistance with the Corona virus infection!";
 
                 startActivity(new Intent(Intent.ACTION_VIEW,
@@ -288,6 +289,7 @@ public class HomeActivity extends AppCompatActivity {
         db = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
 
         recyclerView = findViewById(R.id.recyclerview_data);
+        tvNoVisit = findViewById(R.id.tv_no_visit);
 
         recycler_arraylist = new ArrayList<Day_Date>();
 //        set = new HashSet<Day_Date>();
@@ -359,11 +361,16 @@ public class HomeActivity extends AppCompatActivity {
             a++;
         }
 
-        recycler_home_adapter = new Recycler_Home_Adapter(context, recycler_arraylist, array_original_date);
-        recycler_home_adapter.notifyDataSetChanged();
+        if(!recycler_arraylist.isEmpty()) {
+            tvNoVisit.setVisibility(View.GONE);
+            recycler_home_adapter = new Recycler_Home_Adapter(context, recycler_arraylist, array_original_date);
+            recycler_home_adapter.notifyDataSetChanged();
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(HomeActivity.this, LinearLayoutManager.VERTICAL, false));
-        recyclerView.setAdapter(recycler_home_adapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(HomeActivity.this, LinearLayoutManager.VERTICAL, false));
+            recyclerView.setAdapter(recycler_home_adapter);
+        } else{
+            tvNoVisit.setVisibility(View.VISIBLE);
+        }
 
 
         enter_check_in = findViewById(R.id.button_enter_checkin);
