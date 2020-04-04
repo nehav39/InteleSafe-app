@@ -610,8 +610,8 @@
     <string name="intelesafe">InteleSafe</string>
     <string name="who_is_this_napplication_for">Who is this \napplication for?</string>
     <string name="submit_visitSummary_Button">Submit</string>
-    <string name="medical_registration_number_license_id">*Medical registration number/license ID</string>
-    <string name="name_of_health_organization_hospital_where_you_primarily_work">*Name of health organization/hospital where you primarily work</string>
+    <string name="medical_registration_number_license_id">Medical registration number/license ID</string>
+    <string name="name_of_health_organization_hospital_where_you_primarily_work">Name of health organization/hospital where you primarily work</string>
     <string name="username_10digits">Username should be 10 digits</string>
     <string name="please_select_state">Please select state</string>
     <string name="save">Save</string>
@@ -629,6 +629,7 @@
     <string name="if_you_star">If you start showing symptoms of Covid-19 please reach out to your supervisor/doctor. You can also send us a WhatsApp message at the number below for any concerns.</string>
     <string name="some_id">020-26127394</string>
     <string name="assessment_visit_title">Assessment</string>
+    <string name="please_fill_your_details">Please fill your details</string>
 
     // SignUP Screen(New Changes)
     <string name="txt_personal_caste_header">I am a...</string>

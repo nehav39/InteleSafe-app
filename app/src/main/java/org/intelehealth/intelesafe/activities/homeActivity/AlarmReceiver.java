@@ -52,7 +52,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                     .setWhen(System.currentTimeMillis())
                     .setSmallIcon(R.drawable.ic_cloud_upload)
 //                .setTicker("{Time to watch some cool stuff!}")
-                    .setContentTitle("Daily Check-in: 10am")
+                    .setContentTitle("Daily Check-in: 8am")
                     .setContentText("It's time for daily check-in")
                     .setContentInfo("INFO")
                     .setContentIntent(pendingI_10);
@@ -64,18 +64,20 @@ public class AlarmReceiver extends BroadcastReceiver {
                     .setWhen(System.currentTimeMillis())
                     .setSmallIcon(R.drawable.ic_cloud_upload)
 //                .setTicker("{Time to watch some cool stuff!}")
-                    .setContentTitle("Daily Check-in: 17pm")
+                    .setContentTitle("Daily Check-in: 19pm")
                     .setContentText("It's time for daily check-in")
                     .setContentInfo("INFO")
                     .setContentIntent(pendingI_17);
         }
 
-        if (nm != null) {
+        int dayCount = prefs.getInt("dayCount", 0);
+        if (nm != null && dayCount <= 42) {
            // int i = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
             nm.notify(1, b.build());
             Calendar nextNotifyTime = Calendar.getInstance();
             nextNotifyTime.add(Calendar.DATE, 1);
 
+            sharedPrefEditor.putInt("dayCount", dayCount + 1);
 
             sharedPrefEditor.putLong("nextNotifyTime", nextNotifyTime.getTimeInMillis());
             sharedPrefEditor.apply();
