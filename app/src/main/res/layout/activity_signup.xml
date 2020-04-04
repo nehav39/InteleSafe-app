@@ -468,11 +468,10 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
                     android:text="@string/username_condition"
+                    android:textColor="@null"
                     android:textAppearance="@style/login_details_conditions"
                     android:lineSpacingExtra="2sp"
                     android:translationY="-1sp"/>
-                    android:textColor="#828282"
-                    android:textSize="10sp" />
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -516,6 +515,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
+                    android:textColor="@null"
                     android:text="@string/password_should_be_8_characters_long_and_should_have_both_upper_and_lower_case_characters_at_least_one_digit"
                     android:textAppearance="@style/login_details_conditions"
                     android:lineSpacingExtra="2sp"

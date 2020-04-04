@@ -573,7 +573,7 @@ Github: prajwalmw
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/visit_help_text"
-                   android:text="+91 7304154312"
+                   android:text="+91 9825989750"
                     android:paddingStart="20sp"
                     android:textSize="@dimen/text_18sp"
                     android:layout_marginBottom="15sp"
