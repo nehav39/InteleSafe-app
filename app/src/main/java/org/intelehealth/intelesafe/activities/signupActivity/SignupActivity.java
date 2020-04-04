@@ -946,6 +946,7 @@ public class SignupActivity extends AppCompatActivity {
                 userAddressData.setCityVillage("" + mCity.getText().toString());
                 userAddressData.setCountry("" + country);
                 userAddressData.setStateProvince("" + mState.getSelectedItem().toString());
+                sessionManager.setState(mState.getSelectedItem().toString());
                 userAddressData.setPostalCode("" + mPostal.getText().toString());
                // userAddressData.setCountyDistrict("" + selectedLocationName);
 

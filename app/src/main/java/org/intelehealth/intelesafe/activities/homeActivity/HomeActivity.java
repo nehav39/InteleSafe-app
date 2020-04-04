@@ -207,7 +207,9 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String phoneNumberWithCountryCode = "+919825989750";
-                String message = "Hello, I need assistance with the Corona virus infection!";
+                String message =
+                        "Hello, my name is "+ sessionManager.getUserName()+
+                                " from " + sessionManager.getState() + " and I need some assistance.";
 
                 startActivity(new Intent(Intent.ACTION_VIEW,
                         Uri.parse(

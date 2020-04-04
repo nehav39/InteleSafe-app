@@ -286,6 +286,16 @@ public class SessionManager {
     }
 
 
+    public void setState(String state) {
+        editor.putString("STATE_DATA", state);
+        editor.commit();
+    }
+
+    public String getState() {
+        return pref.getString("STATE_DATA", "");
+    }
+
+
     public void deleteLicensekey() {
         editor.remove(LICENSE_KEY);
         editor.commit();
