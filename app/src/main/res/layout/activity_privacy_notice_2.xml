@@ -81,6 +81,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@fonts/Lato_Regular"
                 android:padding="10dp"
+                android:autoLink="all"
                 android:textAlignment="gravity"
                 android:textFontWeight="1" />
         </LinearLayout>

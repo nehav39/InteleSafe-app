@@ -6,11 +6,11 @@
     <string name="reject">नाकार</string>
     <string name="next">पुढे</string>
     <string name="privacy_reject_toast">आपण संमतीशिवाय रुग्णाची नोंदणी करू शकत नाही</string>
-    <string name="address_of_isolation_line_2">Address of isolation Line 2</string>
+    <string name="address_of_line_2">Address of Line 2*</string>
     <string name="HomeScreen_Header_Title">Welcome</string>
     <string name="if_you_get_much_sicker_please_call_your_nearest_doctor_020_26127394">You can message us with your PPE related queries on our WhatsApp Helpline below by clicking on it.</string>
     <string name="visit_Summary_cardview">Summary</string>
-    <string name="address_of_isolation_line_1">Address of isolation Line 1</string>
+    <string name="address_of_line_1">Address of Line 1*</string>
     <string name="skip">skip</string>
     <string name="start">Start</string>
     <string name="error_while_fetching_location">Error while fetching locations</string>
@@ -22,7 +22,7 @@
     <string name="please_select_districts">Please select District/Municipal Corporations</string>
     <string name="invalid_password">Invalid Password</string>
     <string name="username_should_be_6_digits">Username should be 6 digits</string>
-    <string name="confirm_password">Confirm Password</string>
+    <string name="confirm_password">Confirm Password*</string>
     <string name="confirm_password_is_mismatched">Confirm password is not matched with Password</string>
     <string name="invalid_phone_number">Invalid Phone Number</string>
     <string name="postal_code_validation">Enter valid Postal Code</string>
@@ -103,7 +103,7 @@
     //Login Screen
     <string name="title_activity_login" translatable="false">Intelehealth</string>
     <string name="prompt_email" translatable="false">Username</string>
-    <string name="prompt_password" translatable="false">Password</string>
+    <string name="prompt_password" translatable="false">Password*</string>
     <string name="prompt_admin_password" translatable="false">Admin Password</string>
     <string name="action_sign_in" translatable="false">Login</string>
     <string name="action_sign_in_short" translatable="false">Sign in</string>
@@ -138,25 +138,25 @@
 
     //Identification Screen
     <string name="title_activity_identification" translatable="false">Add New Patient</string>
-    <string name="identification_screen_prompt_first_name">First name</string>
+    <string name="identification_screen_prompt_first_name">First name*</string>
     <string name="identification_screen_prompt_middle_name">Middle name</string>
-    <string name="identification_screen_prompt_last_name">Last name</string>
+    <string name="identification_screen_prompt_last_name">Last name*</string>
     <string name="identification_screen_prompt_address">Address line 1</string>
     <string name="identification_screen_prompt_address2">Address line 2</string>
-    <string name="identification_screen_prompt_phone_number">Mobile Number</string>
+    <string name="identification_screen_prompt_phone_number">Mobile Number*</string>
     <string name="admin_password_dialog_heading" translatable="false">Enter Admin Password</string>
     <string name="identification_screen_prompt_gender" translatable="false">Gender</string>
     <string name="identification_screen_checkbox_male">Male</string>
     <string name="identification_screen_checkbox_female">Female</string>
-    <string name="identification_screen_prompt_birthday">Date of Birth</string>
+    <string name="identification_screen_prompt_birthday">Date of Birth*</string>
     <string name="identification_screen_prompt_age">Age:</string>
-    <string name="identification_screen_prompt_city">Village/Town/City</string>
-    <string name="identification_screen_prompt_state">State</string>
+    <string name="identification_screen_prompt_city">Village/Town/City*</string>
+    <string name="identification_screen_prompt_state">State*</string>
     <string name="identification_screen_prompt_caste" translatable="false">Caste</string>
     <string name="identification_screen_prompt_economic_status" translatable="false">Economic status</string>
     <string name="identification_screen_prompt_education" translatable="false">Education level</string>
-    <string name="identification_screen_prompt_country" translatable="false">Country</string>
-    <string name="identification_screen_prompt_postal_code" translatable="false">Postal code</string>
+    <string name="identification_screen_prompt_country" translatable="false">Country*</string>
+    <string name="identification_screen_prompt_postal_code" translatable="false">Postal code*</string>
     <string name="identification_screen_prompt_relationship" translatable="false">Son/Daughter/Wife of</string>
     <string name="identification_screen_prompt_occupation" translatable="false">Occupation</string>
     <string name="identification_screen_snack_patient_created" translatable="false">Patient created! Uploading to server.</string>
@@ -686,7 +686,7 @@
     <string name="some_id">+91 9825989750</string>
 
     // SignUP Screen(New Changes)
-    <string name="txt_personal_caste_header">I am a...</string>
+    <string name="txt_personal_caste_header">I am a...*</string>
     <string name="txt_prompt_caste">Select Caste</string>
     <string name="txt_enter_caste">Designation</string>
     <string name="toast_select_designation">Please select your designation.</string>
