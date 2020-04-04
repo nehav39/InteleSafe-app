@@ -60,22 +60,29 @@
             android:textSize="16sp" />
     </LinearLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/buttons"
         android:layout_below="@+id/actionbar"
-        android:orientation="vertical">
+        android:layout_marginBottom="15dp">
+        <!--Scrollable content here-->
 
-        <TextView
-            android:id="@+id/privacy_text"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginHorizontal="5dp"
-            android:layout_weight="1"
-            android:fontFamily="@fonts/Lato_Regular"
-            android:padding="10dp"
-            android:textAlignment="gravity"
-            android:textFontWeight="1" />
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/privacy_text"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_weight="1"
+                android:fontFamily="@fonts/Lato_Regular"
+                android:padding="10dp"
+                android:textAlignment="gravity"
+                android:textFontWeight="1" />
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>
