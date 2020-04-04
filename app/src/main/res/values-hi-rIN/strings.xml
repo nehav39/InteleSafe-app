@@ -123,7 +123,7 @@
 
 
     <string name="cant_login_user" translatable="false">Can\'t log in?</string>
-    <string name="email_link" translatable="false">Please contact your System Administrator to reset your password or send an email to support@intelehealth.io</string>
+    <string name="email_link" translatable="false"> To reset your password send an email to support@intelehealth.io</string>
 
     //Home Screen (after login)
     <string name="title_home_screen" translatable="false">Home</string>
