@@ -512,7 +512,7 @@ public class VisitSummaryActivity extends AppCompatActivity {
         Help_Link_Whatsapp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String phoneNumberWithCountryCode = "+917304154312";
+                String phoneNumberWithCountryCode = "+919825989750";
                 String message = "Hello, I need assistance with the Corona virus infection!";
 
                 startActivity(new Intent(Intent.ACTION_VIEW,
