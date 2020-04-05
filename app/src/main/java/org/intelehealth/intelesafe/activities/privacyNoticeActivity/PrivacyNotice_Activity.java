@@ -2,6 +2,7 @@ package org.intelehealth.intelesafe.activities.privacyNoticeActivity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,8 @@ import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
+import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
@@ -159,8 +162,13 @@ public class PrivacyNotice_Activity extends AppCompatActivity {
 
     private void changeColorOfText(String privacy_string) {
         //Highlighting Text
-        String second = "Your information is used for diagnosing and treating you.";
-        Spannable spannable = colorized(privacy_string, second, Color.BLUE);
+        String second = "Privacy notice and consent form for patients";
+        Spannable spannable = colorized(privacy_string, second, Color.RED);
+        spannable = textSize(spannable, privacy_string, "How we protect information");
+        spannable = boldSize(spannable, privacy_string, "How we protect information");
+
+        spannable = textSize(spannable, privacy_string, "Amendments");
+        spannable = boldSize(spannable, privacy_string, "Amendments");
         privacy_textview.setText(spannable, TextView.BufferType.SPANNABLE);
     }
 
@@ -173,6 +181,26 @@ public class PrivacyNotice_Activity extends AppCompatActivity {
                     new ForegroundColorSpan(argb), start, start + word.length(),
                     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
             );
+            substringStart = start + word.length();
+        }
+        return spannable;
+    }
+
+    private static Spannable textSize(Spannable spannable, String text, String word){
+        int substringStart = 0;
+        int start;
+        while ((start = text.indexOf(word, substringStart)) >= 0) {
+            spannable.setSpan(new RelativeSizeSpan(1.5f), start, start + word.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            substringStart = start + word.length();
+        }
+        return spannable;
+    }
+
+    private static Spannable boldSize(Spannable spannable, String text, String word){
+        int substringStart = 0;
+        int start;
+        while ((start = text.indexOf(word, substringStart)) >= 0) {
+            spannable.setSpan(new StyleSpan(Typeface.BOLD), start, start + word.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             substringStart = start + word.length();
         }
         return spannable;

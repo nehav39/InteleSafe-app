@@ -44,10 +44,21 @@
             android:fontFamily="@font/lato_bold"
             android:textSize="24sp" />-->
 
-        <ImageView
+<!--        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:src="@drawable/ic_stay_safe"/>-->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/lato_bold"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:textSize="24sp"
+            android:text="Stay Aware \u2022  Stay Safe"
             android:src="@drawable/ic_stay_safe"/>
 
     </LinearLayout>
