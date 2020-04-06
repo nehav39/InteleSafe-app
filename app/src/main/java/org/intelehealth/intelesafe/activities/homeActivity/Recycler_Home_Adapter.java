@@ -173,6 +173,8 @@ String dd = sessionManager.getPersionUUID();
                 negativeButton.setTextColor(mcontext.getResources().getColor(R.color.colorPrimary));
                 negativeButton.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
 
+
+
             }
         });
 

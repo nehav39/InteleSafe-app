@@ -55,12 +55,15 @@ import androidx.work.WorkManager;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
@@ -71,6 +74,7 @@ import org.intelehealth.intelesafe.R;
 import org.intelehealth.intelesafe.activities.loginActivity.LoginActivity;
 import org.intelehealth.intelesafe.activities.physcialExamActivity.PhysicalExamActivity;
 import org.intelehealth.intelesafe.activities.settingsActivity.SettingsActivity;
+import org.intelehealth.intelesafe.activities.visitSummaryActivity.VisitSummaryActivity;
 import org.intelehealth.intelesafe.app.AppConstants;
 import org.intelehealth.intelesafe.database.InteleHealthDatabaseHelper;
 import org.intelehealth.intelesafe.database.dao.EncounterDAO;
@@ -1245,6 +1249,97 @@ public class HomeActivity extends AppCompatActivity {
                 })
         );
 
+    }
+
+
+    public void pastVisits(int position) {
+
+        String patientuuid = sessionManager.getPersionUUID();
+        List<String> visitList = new ArrayList<>();
+        List<String> encounterVitalList = new ArrayList<>();
+        List<String> encounterAdultList = new ArrayList<>();
+
+        String end_date = "";
+        String date = "";
+        String encounterlocalAdultintial = "";
+        String encountervitalsLocal = null;
+        String encounterIDSelection = "visituuid = ?";
+
+        String visitSelection = "patientuuid = ?";
+        String[] visitArgs = {patientuuid};
+        String[] visitColumns = {"uuid, startdate", "enddate"};
+        String visitOrderBy = "startdate";
+        Cursor visitCursor = db.query("tbl_visit", visitColumns, visitSelection, visitArgs, null, null, visitOrderBy);
+
+        if (visitCursor.getCount() < 1) {
+//            neverSeen();
+        } else {
+
+            if (visitCursor.moveToLast() && visitCursor != null) {
+                do {
+                    EncounterDAO encounterDAO = new EncounterDAO();
+                    date = visitCursor.getString(visitCursor.getColumnIndexOrThrow("startdate"));
+                    end_date = visitCursor.getString(visitCursor.getColumnIndexOrThrow("enddate"));
+                    String visit_id = visitCursor.getString(visitCursor.getColumnIndexOrThrow("uuid"));
+
+                    visitList.add(visit_id);
+
+                    String[] encounterIDArgs = {visit_id};
+
+                    Cursor encounterCursor = db.query("tbl_encounter", null, encounterIDSelection, encounterIDArgs, null, null, null);
+                    if (encounterCursor != null && encounterCursor.moveToFirst()) {
+                        do {
+                            if (encounterDAO.getEncounterTypeUuid("ENCOUNTER_VITALS").equalsIgnoreCase(encounterCursor.getString(encounterCursor.getColumnIndexOrThrow("encounter_type_uuid")))) {
+                                encountervitalsLocal = encounterCursor.getString(encounterCursor.getColumnIndexOrThrow("uuid"));
+                                encounterVitalList.add(encountervitalsLocal);
+                            }
+                            if (encounterDAO.getEncounterTypeUuid("ENCOUNTER_ADULTINITIAL").equalsIgnoreCase(encounterCursor.getString(encounterCursor.getColumnIndexOrThrow("encounter_type_uuid")))) {
+                                encounterlocalAdultintial = encounterCursor.getString(encounterCursor.getColumnIndexOrThrow("uuid"));
+                                encounterAdultList.add(encounterlocalAdultintial);
+                            }
+
+                        } while (encounterCursor.moveToNext());
+                    }
+                    encounterCursor.close();
+
+                    // Called when we close app on vitals screen and Didn't select any complaints
+
+                } while (visitCursor.moveToPrevious());
+
+                SimpleDateFormat currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                try {
+                    Collections.reverse(visitList);
+                    Collections.reverse(encounterVitalList);
+                    Collections.reverse(encounterAdultList);
+
+                    Date formatted = currentDate.parse(date);
+                    String visitDate = currentDate.format(formatted);
+                    OldVisit(visitDate, visitList.get(position), end_date, "", encounterVitalList.get(position), encounterAdultList.get(position));
+                } catch (ParseException e) {
+                    Crashlytics.getInstance().core.logException(e);
+                }
+            }
+        }
+        visitCursor.close();
+    }
+
+    private void OldVisit(final String datetime, String visit_id, String end_datetime, String visitValue, String encounterVitalslocal, String encounterAdultIntialslocal) throws ParseException {
+
+        final Boolean past_visit;
+
+        past_visit = true;
+
+        Intent visitSummary = new Intent(HomeActivity.this, VisitSummaryActivity.class);
+
+        visitSummary.putExtra("visitUuid", visit_id);
+        visitSummary.putExtra("patientUuid", "" + sessionManager.getPersionUUID());
+        visitSummary.putExtra("encounterUuidVitals", encounterVitalslocal);
+        visitSummary.putExtra("encounterUuidAdultIntial", encounterAdultIntialslocal);
+        visitSummary.putExtra("name", "" + sessionManager.getUserName());
+        visitSummary.putExtra("tag", "prior");
+        visitSummary.putExtra("pastVisit", past_visit);
+        visitSummary.putExtra("hasPrescription", "false");
+        startActivity(visitSummary);
     }
 
 }
