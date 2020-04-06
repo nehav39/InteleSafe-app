@@ -9,12 +9,17 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextPaint;
+import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -143,16 +148,57 @@ String dd = sessionManager.getPersionUUID();
                 alertdialogBuilder.setTitle("Today's Check-in");
 
 
+                View customView =LayoutInflater.from(mcontext).inflate(R.layout.custom_dialog_layout,null);
+                alertdialogBuilder.setView(customView);
+
+                LinearLayout visit_list_view = customView.findViewById(R.id.visit_list_view);
+
 
               StringBuilder stringBuilder_2 = new StringBuilder();
                 for(int i=0; i<array_message.size(); i++)
                 {
                    stringBuilder_2.append("Visit no." + (i+1) + "-\t\t"+ array_message.get(i));
-                   stringBuilder_2.append("\n");
+                   //stringBuilder_2.append("\n");
+                    TextView visitText = new TextView(mcontext);
+                    visitText.setText("Visit no." + (i+1) + "-\t\t"+ array_message.get(i));
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT);
+                    params.setMargins(0,5,0,5);
+                    visitText.setLayoutParams(params);
+                    visitText.setPadding(5,10,5,10);
+                    visitText.setTextSize(14);
+                 /* Typeface typeface =  Typeface.createFromAsset
+                          (mcontext.getAssets(),"/fonts/Lato-Regular.ttf");
+                  visitText.setTypeface(typeface);*/
+                    visit_list_view.addView(visitText);
+                   visitText.setTag(i);
+                    visitText.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            int pos = (int)view.getTag();
+                            ((HomeActivity)mcontext).pastVisits(pos);
+                        }
+                    });
 
+//                    ((HomeActivity) context).pastVisits(position);
                 }
-                alertdialogBuilder.setMessage(stringBuilder_2.toString());
-                alertdialogBuilder.setPositiveButton(R.string.generic_yes, new DialogInterface.OnClickListener() {
+               // alertdialogBuilder.setMessage(stringBuilder_2.toString());
+              /*  SpannableString ss = new SpannableString(stringBuilder_2.toString());
+                ClickableSpan clickableSpan = new ClickableSpan() {
+                    @Override
+                    public void onClick(View textView) {
+
+                       // startActivity(new Intent(MyActivity.this, NextActivity.class));
+                    }
+                    @Override
+                    public void updateDrawState(TextPaint ds) {
+                        super.updateDrawState(ds);
+                        ds.setUnderlineText(false);
+                    }
+                };
+                ss.setSpan(clickableSpan, 22, 27, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);*/
+
+                alertdialogBuilder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         // moveTaskToBack(true);
@@ -177,6 +223,12 @@ String dd = sessionManager.getPersionUUID();
 
             }
         });
+
+    }
+
+
+    private void setAlertDialog(){
+        AlertDialog.Builder alertBuilder  = new AlertDialog.Builder(mcontext);
 
     }
 

@@ -1339,6 +1339,7 @@ public class HomeActivity extends AppCompatActivity {
         visitSummary.putExtra("tag", "prior");
         visitSummary.putExtra("pastVisit", past_visit);
         visitSummary.putExtra("hasPrescription", "false");
+        visitSummary.putExtra("fromOldVisit",true);
         startActivity(visitSummary);
     }
 
