@@ -162,13 +162,26 @@ public class PrivacyNotice_Activity extends AppCompatActivity {
 
     private void changeColorOfText(String privacy_string) {
         //Highlighting Text
-        String second = "Privacy notice and consent form for patients";
+        String second = "Privacy notice and consent form";
         Spannable spannable = colorized(privacy_string, second, Color.RED);
         spannable = textSize(spannable, privacy_string, "How we protect information");
         spannable = boldSize(spannable, privacy_string, "How we protect information");
 
         spannable = textSize(spannable, privacy_string, "Amendments");
         spannable = boldSize(spannable, privacy_string, "Amendments");
+
+        spannable = boldSize(spannable, privacy_string, "Telehealth Innovations Foundation Privacy Notice");
+        spannable = boldSize(spannable, privacy_string, "INFORMATION WE COLLECT");
+        spannable = boldSize(spannable, privacy_string, "Use");
+        spannable = boldSize(spannable, privacy_string, "Your contact information may be used to");
+        spannable = boldSize(spannable, privacy_string, "Intelehealth generally provides Personal Information to third parties where:");
+        spannable = boldSize(spannable, privacy_string, "We may also disclose your personal information:");
+        spannable = boldSize(spannable, privacy_string, "Protection Measures");
+        spannable = boldSize(spannable, privacy_string, "Access and Correction");
+        spannable = boldSize(spannable, privacy_string, "Privacy notice and consent form");
+
+
+
         privacy_textview.setText(spannable, TextView.BufferType.SPANNABLE);
     }
 

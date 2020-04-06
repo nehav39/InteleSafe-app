@@ -329,7 +329,7 @@ public class VisitSummaryActivity extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.summary_home: {
-                if(flag_upload == true)
+                if(flag_upload == true || isFromOldVisit)
                 {
                     Intent i = new Intent(this, HomeActivity.class);
                     i.putExtra("from", "visit");
@@ -420,6 +420,7 @@ public class VisitSummaryActivity extends AppCompatActivity {
     }
 
 
+     boolean isFromOldVisit = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         sessionManager = new SessionManager(getApplicationContext());
@@ -435,7 +436,7 @@ public class VisitSummaryActivity extends AppCompatActivity {
             intentTag = intent.getStringExtra("tag");
             isPastVisit = intent.getBooleanExtra("pastVisit", false);
             hasPrescription = intent.getStringExtra("hasPrescription");
-
+            isFromOldVisit = intent.getBooleanExtra("fromOldVisit",false);
 
             Set<String> selectedExams = sessionManager.getVisitSummary(patientUuid);
             if (physicalExams == null) physicalExams = new ArrayList<>();
@@ -556,6 +557,14 @@ public class VisitSummaryActivity extends AppCompatActivity {
         editMedHist = findViewById(R.id.imagebutton_edit_pathist);
         editAddDocs = findViewById(R.id.imagebutton_edit_additional_document);
         uploadButton = findViewById(R.id.button_upload);
+
+        //added by Prajwal for disabling the upload on old visit
+        if(isFromOldVisit){
+            uploadButton.setVisibility(View.GONE);
+        }else{
+            uploadButton.setVisibility(View.VISIBLE);
+        }
+
         //  downloadButton = findViewById(R.id.button_download);
         teleconsultationButton = findViewById(R.id.button_teleconsultation);
 
@@ -1342,6 +1351,7 @@ public class VisitSummaryActivity extends AppCompatActivity {
         });
 
         doQuery();
+
     }
 
     private void showPopup() {
