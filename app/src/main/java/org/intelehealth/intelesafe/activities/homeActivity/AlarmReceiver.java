@@ -64,7 +64,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                     .setWhen(System.currentTimeMillis())
                     .setSmallIcon(R.drawable.ic_cloud_upload)
 //                .setTicker("{Time to watch some cool stuff!}")
-                    .setContentTitle("Daily Check-in: 19pm")
+                    .setContentTitle("Daily Check-in: 7pm")
                     .setContentText("It's time for daily check-in")
                     .setContentInfo("INFO")
                     .setContentIntent(pendingI_17);
