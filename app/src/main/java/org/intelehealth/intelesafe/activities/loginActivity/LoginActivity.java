@@ -243,7 +243,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void cant_log() {
-        final SpannableString span_string = new SpannableString(getApplicationContext().getText(R.string.email_link));
+        final SpannableString span_string = new SpannableString(getApplicationContext().getText(R.string.email_link)); //message is changed...
         Linkify.addLinks(span_string, Linkify.EMAIL_ADDRESSES);
 
         new AlertDialog.Builder(this)
