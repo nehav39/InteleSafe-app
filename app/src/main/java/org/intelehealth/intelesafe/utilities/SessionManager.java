@@ -62,6 +62,8 @@ public class SessionManager {
     // Shared pref mode
     private int PRIVATE_MODE = 0;
 
+    private static final String personFirstName = "personFirstName"; // Added by venu N  to store user First Name on 07/04/2020.
+
     public SessionManager(Context context) {
         this._context = context;
         pref = _context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
@@ -484,6 +486,24 @@ public class SessionManager {
 
     public boolean isFirstTimeLaunch() {
         return pref.getBoolean(IS_FIRST_TIME_LAUNCH, true);
+    }
+
+
+    /**
+     * for getting User First Name only by Venu N
+     * @return
+     */
+    public String getUserFirstName() {
+        return pref.getString(personFirstName, "");
+    }
+
+    /**
+     * to set User First Name only by Venu N
+     * @param value
+     */
+    public void setUseFirstName(String value) {
+        editor.putString(personFirstName, value);
+        editor.commit();
     }
 
 

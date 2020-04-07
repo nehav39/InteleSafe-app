@@ -61,6 +61,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -366,6 +367,8 @@ public class HomeActivity extends AppCompatActivity {
 
         ArrayList<String> new_arraylist = new ArrayList<>();
         new_arraylist.addAll(hashSet);
+
+        Collections.sort(new_arraylist); // added by venu N to sort the
 
         for (int j = 0; j < new_arraylist.size(); j++) {
             recycler_arraylist.add(new Day_Date("Day "+a, new_arraylist.get(j)));
