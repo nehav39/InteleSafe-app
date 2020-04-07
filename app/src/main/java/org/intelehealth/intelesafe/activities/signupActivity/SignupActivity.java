@@ -160,7 +160,7 @@ public class SignupActivity extends AppCompatActivity {
     ImagesDAO imagesDAO = new ImagesDAO();
     private String mCurrentPhotoPath;
     private String BlockCharacterSet_Others = "0123456789\\@$!=><&^*+€¥£`~";
-    private String BlockCharacterSet_Name = "\\@$!=><&^*+\"\'€¥£`~";
+    private String BlockCharacterSet_Name = "\\@$!=><&^*+\"\'€¥£`~/";
 
     Intent i_privacy;
     String privacy_value;
@@ -262,6 +262,7 @@ public class SignupActivity extends AppCompatActivity {
         mCPassword = findViewById(R.id.cpassword);
 
         licenseID = findViewById(R.id.identification_registration_no);
+        licenseID.setFilters(new InputFilter[]{new InputFilter.LengthFilter(50), inputFilter_Name}); //maxlength 50
         hospital_name = findViewById(R.id.identification_hospital_name);
 
         mDOB = findViewById(R.id.identification_birth_date_text_view);

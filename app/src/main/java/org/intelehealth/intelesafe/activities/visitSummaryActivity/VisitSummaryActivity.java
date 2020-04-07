@@ -329,7 +329,7 @@ public class VisitSummaryActivity extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.summary_home: {
-                if(flag_upload == true)
+                if(flag_upload == true || isFromOldVisit)
                 {
                     Intent i = new Intent(this, HomeActivity.class);
                     i.putExtra("from", "visit");
@@ -420,6 +420,7 @@ public class VisitSummaryActivity extends AppCompatActivity {
     }
 
 
+     boolean isFromOldVisit = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         sessionManager = new SessionManager(getApplicationContext());
@@ -435,7 +436,7 @@ public class VisitSummaryActivity extends AppCompatActivity {
             intentTag = intent.getStringExtra("tag");
             isPastVisit = intent.getBooleanExtra("pastVisit", false);
             hasPrescription = intent.getStringExtra("hasPrescription");
-
+            isFromOldVisit = intent.getBooleanExtra("fromOldVisit",false);
 
             Set<String> selectedExams = sessionManager.getVisitSummary(patientUuid);
             if (physicalExams == null) physicalExams = new ArrayList<>();
@@ -556,6 +557,14 @@ public class VisitSummaryActivity extends AppCompatActivity {
         editMedHist = findViewById(R.id.imagebutton_edit_pathist);
         editAddDocs = findViewById(R.id.imagebutton_edit_additional_document);
         uploadButton = findViewById(R.id.button_upload);
+
+        //added by Prajwal for disabling the upload on old visit
+        if(isFromOldVisit){
+            uploadButton.setVisibility(View.GONE);
+        }else{
+            uploadButton.setVisibility(View.VISIBLE);
+        }
+
         //  downloadButton = findViewById(R.id.button_download);
         teleconsultationButton = findViewById(R.id.button_teleconsultation);
 
@@ -707,6 +716,8 @@ public class VisitSummaryActivity extends AppCompatActivity {
                                 showVisitID();
                                 endVisit();
                                 showPopup();
+                                uploadButton.setEnabled(false);
+                                uploadButton.setAlpha(0.5f);
 
                             } else {
                                 AppConstants.notificationUtils.DownloadDone(patientName + " " + getString(R.string.visit_data_failed), getString(R.string.visit_uploaded_failed), 3, VisitSummaryActivity.this);
@@ -719,6 +730,8 @@ public class VisitSummaryActivity extends AppCompatActivity {
                     }, 4000);
                 } else {
                     AppConstants.notificationUtils.DownloadDone(patientName + " " + getString(R.string.visit_data_failed), getString(R.string.visit_uploaded_failed), 3, VisitSummaryActivity.this);
+                    /*uploadButton.setEnabled(false);
+                    uploadButton.setAlpha(0.5f);*/
                 }
             }
 
@@ -1342,6 +1355,7 @@ public class VisitSummaryActivity extends AppCompatActivity {
         });
 
         doQuery();
+
     }
 
     private void showPopup() {
@@ -1362,12 +1376,13 @@ public class VisitSummaryActivity extends AppCompatActivity {
                 dialog.dismiss();
 
                 sessionManager.setFirstCheckin("true");
-                Intent i = new Intent(context, HomeActivity.class);
+                // Modified by Venu N on 06/04/2020.
+               /* Intent i = new Intent(context, HomeActivity.class);
                 i.putExtra("from", "visitSummary");
                 i.putExtra("username", "");
                 i.putExtra("password", "");
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(i);
+                startActivity(i);*/
             }
         });
         AlertDialog alertDialog = alertDialogBuilder.create();
@@ -1552,7 +1567,7 @@ public class VisitSummaryActivity extends AppCompatActivity {
             }
         });
 
-        String mPatientName = patient.getFirst_name() + " " + patient.getMiddle_name() + " " + patient.getLast_name();
+        String mPatientName = patient.getFirst_name() + " " + (patient.getMiddle_name()!= null ?patient.getMiddle_name():"") + " " + patient.getLast_name();
         String mPatientOpenMRSID = patient.getOpenmrs_id();
         String mPatientDob = patient.getDate_of_birth();
         String mAddress = (patient.getAddress1()!=null?patient.getAddress1():"")+(patient.getAddress2()!=null?"\n" +patient.getAddress2():""); // modified by the Venu N on 02/04/2020.
