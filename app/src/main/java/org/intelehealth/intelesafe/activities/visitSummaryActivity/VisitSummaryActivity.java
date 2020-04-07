@@ -716,6 +716,8 @@ public class VisitSummaryActivity extends AppCompatActivity {
                                 showVisitID();
                                 endVisit();
                                 showPopup();
+                                uploadButton.setEnabled(false);
+                                uploadButton.setAlpha(0.5f);
 
                             } else {
                                 AppConstants.notificationUtils.DownloadDone(patientName + " " + getString(R.string.visit_data_failed), getString(R.string.visit_uploaded_failed), 3, VisitSummaryActivity.this);
@@ -728,6 +730,8 @@ public class VisitSummaryActivity extends AppCompatActivity {
                     }, 4000);
                 } else {
                     AppConstants.notificationUtils.DownloadDone(patientName + " " + getString(R.string.visit_data_failed), getString(R.string.visit_uploaded_failed), 3, VisitSummaryActivity.this);
+                    /*uploadButton.setEnabled(false);
+                    uploadButton.setAlpha(0.5f);*/
                 }
             }
 
@@ -1372,12 +1376,13 @@ public class VisitSummaryActivity extends AppCompatActivity {
                 dialog.dismiss();
 
                 sessionManager.setFirstCheckin("true");
-                Intent i = new Intent(context, HomeActivity.class);
+                // Modified by Venu N on 06/04/2020.
+               /* Intent i = new Intent(context, HomeActivity.class);
                 i.putExtra("from", "visitSummary");
                 i.putExtra("username", "");
                 i.putExtra("password", "");
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(i);
+                startActivity(i);*/
             }
         });
         AlertDialog alertDialog = alertDialogBuilder.create();
@@ -1562,7 +1567,7 @@ public class VisitSummaryActivity extends AppCompatActivity {
             }
         });
 
-        String mPatientName = patient.getFirst_name() + " " + patient.getMiddle_name() + " " + patient.getLast_name();
+        String mPatientName = patient.getFirst_name() + " " + (patient.getMiddle_name()!= null ?patient.getMiddle_name():"") + " " + patient.getLast_name();
         String mPatientOpenMRSID = patient.getOpenmrs_id();
         String mPatientDob = patient.getDate_of_birth();
         String mAddress = (patient.getAddress1()!=null?patient.getAddress1():"")+(patient.getAddress2()!=null?"\n" +patient.getAddress2():""); // modified by the Venu N on 02/04/2020.
