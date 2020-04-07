@@ -4,8 +4,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -94,19 +96,17 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
 //        StringBuilder stringBuilder = new StringBuilder(arrayList.get(position).getDate());
 //        int a1 = stringBuilder.indexOf("T");
         myViewHolder.date_text.setText(arrayList.get(position).getDate());
-        Log.d("GG","GG: "+arrayList.get(position).getDate());
-        Log.d("GG","GG_1: "+myViewHolder.date_text.getText().toString());
-
-
+        Log.d("GG", "GG: " + arrayList.get(position).getDate());
+        Log.d("GG", "GG_1: " + myViewHolder.date_text.getText().toString());
 
 
         SQLiteDatabase db = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
         String query = "SELECT v.startdate FROM tbl_visit v, tbl_patient p WHERE " +
                 "p.uuid = v.patientuuid AND v.startdate IS NOT NULL AND " +
                 "v.patientuuid = ? AND v.startdate LIKE ? ";
-        String[] data = {sessionManager.getPersionUUID(), arrayList.get(position).getDate()+"%"};
-String dd = sessionManager.getPersionUUID();
-        Log.d("JJJ","JJ: "+dd);
+        String[] data = {sessionManager.getPersionUUID(), arrayList.get(position).getDate() + "%"};
+        String dd = sessionManager.getPersionUUID();
+        Log.d("JJJ", "JJ: " + dd);
 
         String message = "skdjs";
         ArrayList<String> array_message = new ArrayList<>();
@@ -132,7 +132,7 @@ String dd = sessionManager.getPersionUUID();
                         e.printStackTrace();
                     }
 
-                }while (cursor.moveToNext());
+                } while (cursor.moveToNext());
             }
         }
         if (cursor != null) {
@@ -148,41 +148,41 @@ String dd = sessionManager.getPersionUUID();
                 alertdialogBuilder.setTitle("Today's Check-in");
 
 
-                View customView =LayoutInflater.from(mcontext).inflate(R.layout.custom_dialog_layout,null);
+                View customView = LayoutInflater.from(mcontext).inflate(R.layout.custom_dialog_layout, null);
                 alertdialogBuilder.setView(customView);
 
                 LinearLayout visit_list_view = customView.findViewById(R.id.visit_list_view);
 
-
-              StringBuilder stringBuilder_2 = new StringBuilder();
-                for(int i=0; i<array_message.size(); i++)
-                {
-                   stringBuilder_2.append("Visit no." + (i+1) + "-\t\t"+ array_message.get(i));
-                   //stringBuilder_2.append("\n");
+                Log.e("VENU: ",array_message.toString());
+                StringBuilder stringBuilder_2 = new StringBuilder();
+                for (int i = 0; i < array_message.size(); i++) {
+                    stringBuilder_2.append("Visit no." + (i + 1) + "-\t\t" + array_message.get(i));
+                    //stringBuilder_2.append("\n");
                     TextView visitText = new TextView(mcontext);
-                    visitText.setText("Visit no." + (i+1) + "-\t\t"+ array_message.get(i));
+                    visitText.setText("Visit no." + (i + 1) + "-\t\t" + array_message.get(i));
                     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                             LinearLayout.LayoutParams.WRAP_CONTENT);
-                    params.setMargins(0,5,0,5);
+                    params.setMargins(0, 8, 0, 8);
                     visitText.setLayoutParams(params);
-                    visitText.setPadding(5,10,5,10);
+                    visitText.setPadding(5, 10, 5, 10);
                     visitText.setTextSize(14);
-                 /* Typeface typeface =  Typeface.createFromAsset
-                          (mcontext.getAssets(),"/fonts/Lato-Regular.ttf");
-                  visitText.setTypeface(typeface);*/
+                    visitText.setTextColor(mcontext.getResources().getColor(R.color.colorPrimary));
+                    Typeface typeface = ResourcesCompat.getFont(mcontext, R.font.lato_regular);
+                    visitText.setTypeface(typeface);
+                    visitText.setPaintFlags(visitText.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
                     visit_list_view.addView(visitText);
-                   visitText.setTag(i);
+                    visitText.setTag(i);
                     visitText.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            int pos = (int)view.getTag();
-                            ((HomeActivity)mcontext).pastVisits(pos);
+                            int pos = (int) view.getTag();
+                            ((HomeActivity) mcontext).pastVisits(pos);
                         }
                     });
 
 //                    ((HomeActivity) context).pastVisits(position);
                 }
-               // alertdialogBuilder.setMessage(stringBuilder_2.toString());
+                // alertdialogBuilder.setMessage(stringBuilder_2.toString());
               /*  SpannableString ss = new SpannableString(stringBuilder_2.toString());
                 ClickableSpan clickableSpan = new ClickableSpan() {
                     @Override
@@ -220,21 +220,20 @@ String dd = sessionManager.getPersionUUID();
                 negativeButton.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
 
 
-
             }
         });
 
     }
 
 
-    private void setAlertDialog(){
-        AlertDialog.Builder alertBuilder  = new AlertDialog.Builder(mcontext);
+    private void setAlertDialog() {
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(mcontext);
 
     }
 
     @Override
     public int getItemCount() {
-        return  arrayList.size();
+        return arrayList.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -243,7 +242,7 @@ String dd = sessionManager.getPersionUUID();
         TextView date_text;
         ImageView check_image;
 
-       // Context context;
+        // Context context;
 
 
         public MyViewHolder(@NonNull View itemView, Context context) {
@@ -255,7 +254,7 @@ String dd = sessionManager.getPersionUUID();
             mcontext = context;
             sessionManager = new SessionManager(mcontext);
 
-           // this.date_text.getText();
+            // this.date_text.getText();
 
         }
 

@@ -1683,6 +1683,7 @@ public class SignupActivity extends AppCompatActivity {
 
                             sessionManager.setPersionUUID(personUUID);
                             sessionManager.setUserName("" + mFirstName.getText().toString() + " " + mLastName.getText().toString());
+                            sessionManager.setUseFirstName("" + mFirstName.getText().toString()); // added by venu N on 07/04/2020.
                             sessionManager.setPrivacyValue(privacy_value);
                             sessionManager.setTriggerNoti("no");
                             startActivity(intent);

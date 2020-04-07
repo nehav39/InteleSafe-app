@@ -474,8 +474,8 @@ public class VisitSummaryActivity extends AppCompatActivity {
             Crashlytics.getInstance().core.logException(e);
         }
 
-        setTitle(getString(R.string.title_activity_patient_summary));
-        setTitle(patientName + ": " + getString(R.string.assessment_visit_title));
+        //setTitle(getString(R.string.title_activity_patient_summary));
+        setTitle(sessionManager.getUserFirstName() + ": " + getString(R.string.assessment_visit_title)); // only First Name of User will Show here.
 
         db = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
 
