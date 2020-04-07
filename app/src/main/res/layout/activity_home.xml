@@ -592,7 +592,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/mental_cardview_help"
-                    android:layout_marginTop="20sp"
+                    android:layout_marginTop="15sp"
                     android:fontFamily="@font/lato_bold"
                     android:padding="10sp"
                     android:paddingStart="15sp"

@@ -566,8 +566,10 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         //added by Prajwal for disabling the upload on old visit
         if(isFromOldVisit){
             uploadButton.setVisibility(View.GONE);
+            editPhysical.setVisibility(View.GONE);
         }else{
             uploadButton.setVisibility(View.VISIBLE);
+            editPhysical.setVisibility(View.VISIBLE);
         }
 
         //  downloadButton = findViewById(R.id.button_download);

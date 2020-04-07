@@ -445,8 +445,7 @@ Github: prajwalmw
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/padding_card"
-            android:layout_marginBottom="@dimen/padding_card"
+            android:layout_marginTop="15dp"
             app:cardCornerRadius="10sp"
             android:elevation="40dp"
             app:cardUseCompatPadding="true"
@@ -501,7 +500,8 @@ Github: prajwalmw
                     android:lineSpacingExtra="1sp"
                     android:layout_below="@+id/textView_heading_physexam"
                     android:textSize="14sp"
-                    android:padding="@dimen/padding_card"
+                    android:paddingLeft="@dimen/padding_card"
+                    android:paddingRight="@dimen/padding_card"
                     android:fontFamily="@font/lato_regular"
                     android:textColor="@color/txt_sub_header_color"
                     />
@@ -533,8 +533,7 @@ Github: prajwalmw
             app:cardUseCompatPadding="true"
             app:cardPreventCornerOverlap="false"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="15dp"
             app:cardCornerRadius="10sp"
             >
 
@@ -542,7 +541,7 @@ Github: prajwalmw
                 android:id="@+id/help_relative"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="20dp">
+                android:padding="10dp">
 
                 <TextView
                     android:id="@+id/help_title"
@@ -581,7 +580,7 @@ Github: prajwalmw
                     android:background="@android:color/transparent"
                     android:drawableStart="@drawable/ic_icons8_whatsapp"
                     android:gravity="start|center"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:drawablePadding="10sp" />
 
                 <!-- Icon Credits:- <a target="_blank" href="https://icons8.com/icons/set/whatsapp">WhatsApp icon</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>-->
@@ -599,8 +598,7 @@ Github: prajwalmw
             app:cardUseCompatPadding="true"
             app:cardPreventCornerOverlap="false"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="15dp"
             app:cardCornerRadius="10sp"
         >
 
@@ -608,7 +606,7 @@ Github: prajwalmw
             android:id="@+id/mental_help_relative"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="20dp">
+            android:padding="10dp">
 
             <TextView
                 android:id="@+id/mental_visit_help_text"
@@ -619,7 +617,6 @@ Github: prajwalmw
                 android:text="@string/feeling_stressed_or_anxious_request_for_a_free_confidential_mental_health_consultation_with_a_counsellor"
                 android:textSize="14sp"
                 android:textColor="@color/txt_sub_header_color"
-                android:layout_marginTop="10dp"
                 />
 
             <Button
@@ -628,7 +625,7 @@ Github: prajwalmw
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/mental_visit_help_text"
                 android:layout_marginStart="10sp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/lato_bold"
                 android:gravity="start|center"
@@ -1317,69 +1314,72 @@ Github: prajwalmw
         <!--</android.support.v7.widget.CardView>-->
 
 
+        <LinearLayout
+            android:id="@+id/lin_upload"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="15dp">
+
+            <!-- <Button
+                 android:id="@+id/button_upload"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginBottom="7dp"
+                 android:background="@color/colorPrimary"
+                 android:drawableLeft="@drawable/ic_cloud_upload"
+                 android:text="@string/submit_visitSummary_Button"
+                 android:textAlignment="center"
+                 android:textColor="@android:color/white"
+                 android:textSize="24dp"
+                 android:paddingRight="17sp"
+                 android:paddingEnd="17sp"
+                 android:gravity="center"
+                 style="@style/SelectableItemBackground"
+                 android:foreground="?android:attr/selectableItemBackground"
+                 android:textStyle="bold"
+                 />-->
+
+            <Button
+                android:id="@+id/button_upload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rectangle_7"
+                android:text="@string/submit_visitSummary_Button"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_18sp"
+                android:fontFamily="@font/lato_medium"
+                android:textAppearance="@style/submit"
+                android:gravity="center"
+                android:layout_gravity="center"/>
+
+
+            <Button
+                android:id="@+id/button_teleconsultation"
+                style="@style/SelectableItemBackground"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:background="@color/colorPrimary"
+                android:layout_below="@+id/button_upload"
+                android:drawableLeft="@drawable/ic_cloud_download"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:text="@string/teleconsultation_button_visitsummary"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="24dp"
+                android:visibility="gone"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+
     </LinearLayout>
 
     </ScrollView>
 
-<LinearLayout
-    android:id="@+id/lin_upload"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_alignParentBottom="true"
-    android:layout_margin="10dp">
-
-   <!-- <Button
-        android:id="@+id/button_upload"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="7dp"
-        android:background="@color/colorPrimary"
-        android:drawableLeft="@drawable/ic_cloud_upload"
-        android:text="@string/submit_visitSummary_Button"
-        android:textAlignment="center"
-        android:textColor="@android:color/white"
-        android:textSize="24dp"
-        android:paddingRight="17sp"
-        android:paddingEnd="17sp"
-        android:gravity="center"
-        style="@style/SelectableItemBackground"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:textStyle="bold"
-        />-->
-
-        <Button
-            android:id="@+id/button_upload"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rectangle_7"
-            android:text="@string/submit_visitSummary_Button"
-            android:textAlignment="center"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/text_18sp"
-            android:fontFamily="@font/lato_medium"
-            android:textAppearance="@style/submit"
-            android:gravity="center"
-            android:layout_gravity="center"/>
-
-
-    <Button
-        android:id="@+id/button_teleconsultation"
-        style="@style/SelectableItemBackground"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:gravity="center"
-        android:background="@color/colorPrimary"
-        android:layout_below="@+id/button_upload"
-        android:drawableLeft="@drawable/ic_cloud_download"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:text="@string/teleconsultation_button_visitsummary"
-        android:textAlignment="center"
-        android:textColor="@android:color/white"
-        android:textSize="24dp"
-        android:visibility="gone"
-        android:textStyle="bold" />
-
-    </LinearLayout>
 </RelativeLayout>
