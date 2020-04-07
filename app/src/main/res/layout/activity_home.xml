@@ -414,11 +414,25 @@
                      android:textSize="16sp"
                      android:textStyle="bold" />-->
 
+                <TextView
+                    android:id="@+id/help_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:includeFontPadding="false"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_below="@+id/cardview_two_action_View"
+                    android:text="@string/help"
+                    android:textColor="@color/txt_sub_header_color" />
+
+
                 <android.support.v7.widget.CardView
                     android:id="@+id/cardview_help"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/cardview_two_action_View"
+                    android:layout_below="@+id/help_title"
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginTop="15dp"
                     app:cardCornerRadius="10sp"
@@ -433,25 +447,17 @@
                             android:id="@+id/help_relative"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
                             android:layout_marginStart="5dp"
                             android:layout_marginEnd="40dp">
 
-                            <TextView
-                                android:id="@+id/help_title"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/lato_bold"
-                                android:includeFontPadding="false"
-                                android:text="@string/help"
-                                android:textColor="@color/txt_sub_header_color"
-                                android:textSize="12sp" />
+
 
 
                             <TextView
                                 android:id="@+id/Help_Text"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_below="@id/help_title"
                                 android:layout_marginTop="5dp"
                                 android:fontFamily="@font/lato_regular"
                                 android:includeFontPadding="false"
@@ -496,11 +502,96 @@
 
                 </android.support.v7.widget.CardView>
 
+
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/mental_cardview_help"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cardview_help"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="15dp"
+                    app:cardCornerRadius="10sp"
+                    app:cardElevation="5sp">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp">
+
+                        <RelativeLayout
+                            android:id="@+id/mental_help_relative"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="40dp">
+
+                         <!--   <TextView
+                                android:id="@+id/mental_help_title"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/lato_bold"
+                                android:includeFontPadding="false"
+                                android:text="@string/help"
+                                android:textColor="@color/txt_sub_header_color"
+                                android:textSize="12sp" />-->
+
+
+                            <TextView
+                                android:id="@+id/mental_Help_Text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:fontFamily="@font/lato_regular"
+                                android:includeFontPadding="false"
+                                android:text="@string/feeling_stressed_or_anxious_request_for_a_free_confidential_mental_health_consultation_with_a_counsellor"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/tv_mental_help_request"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/mental_Help_Text"
+                                android:layout_marginStart="10sp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:background="@android:color/transparent"
+                                android:fontFamily="@font/lato_bold"
+                                android:gravity="start|center"
+                                android:hint=""
+                                android:textSize="18sp"
+                                android:text="@string/teleconsult_request"
+                                android:textColor="@color/txt_sub_header_color" />
+
+                            <!-- Icon Credits:- <a target="_blank" href="https://icons8.com/icons/set/whatsapp">WhatsApp icon</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>-->
+
+
+                        </RelativeLayout>
+
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|right"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="8dp"
+                            android:src="@mipmap/ic_mental_health">
+
+                        </ImageView>
+
+                    </FrameLayout>
+
+
+                </android.support.v7.widget.CardView>
+
+
                 <TextView
                     android:id="@+id/your_data_overview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/cardview_help"
+                    android:layout_below="@id/mental_cardview_help"
                     android:layout_marginTop="20sp"
                     android:fontFamily="@font/lato_bold"
                     android:padding="10sp"

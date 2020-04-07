@@ -586,7 +586,7 @@
     <string name="password_validation">Password must have atleast one digit character</string>
     <string name="password_validation_two">Password must have atleast one lowercase character</string>
     <string name="thank_you">Thank you</string>
-    <string name="your_checkin_is_uploaded_successfully">Your check-in is uploaded successfully</string>
+    <string name="your_checkin_is_uploaded_successfully">Your check-in submitted successfully.</string>
     <string name="upper_case_validation">Password must have atleast one uppercase character</string>
     <string name="password_must_eight">Password must have 8 character</string>
     <string name="check_in">Check In</string>
@@ -637,5 +637,7 @@
     <string name="txt_enter_caste">Designation</string>
     <string name="toast_select_designation">Please select your designation.</string>
     <string name="error_empty_designation">Enter your designation.</string>
+    <string name="teleconsult_request">Teleconsult request</string>
+    <string name="feeling_stressed_or_anxious_request_for_a_free_confidential_mental_health_consultation_with_a_counsellor">Feeling stressed or anxious? Request for a free confidential mental health consultation with a counsellor.</string>
 
 </resources>

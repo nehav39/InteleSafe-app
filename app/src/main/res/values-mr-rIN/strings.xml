@@ -36,7 +36,7 @@
 
     <string name="password_validation">Password must have atleast one digit character</string>
     <string name="thank_you">Thank you</string>
-    <string name="your_checkin_is_uploaded_successfully">Your check-in is uploaded successfully</string>
+    <string name="your_checkin_is_uploaded_successfully">Your check-in submitted successfully.</string>
     <string name="upper_case_validation">Password must have atleast one uppercase character</string>
     <string name="password_must_eight">Password must have 8 character</string>
     <string name="check_in">Check In</string>

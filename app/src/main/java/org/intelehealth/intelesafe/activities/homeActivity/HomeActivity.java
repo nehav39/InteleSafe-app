@@ -114,7 +114,7 @@ import io.reactivex.schedulers.Schedulers;
  * Home Screen
  */
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = HomeActivity.class.getSimpleName();
     SessionManager sessionManager = null;
@@ -144,6 +144,7 @@ public class HomeActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     TextView tvNoVisit;
     Button help_watsapp;
+    TextView tvMentalHelpRequest;
 
     Context context;
     private String mindmapURL = "";
@@ -222,6 +223,9 @@ public class HomeActivity extends AppCompatActivity {
                                         phoneNumberWithCountryCode, message))));
             }
         });
+
+        tvMentalHelpRequest = findViewById(R.id.tv_mental_help_request);
+        tvMentalHelpRequest.setOnClickListener(this);
 
         SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(context));
         int dayCount = mSharedPreference.getInt("dayCount", 0);
@@ -702,6 +706,16 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent2);
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.tv_mental_help_request:
+                Uri uri = Uri.parse("https://www.intelehealth.org/mental-health-consult"); // missing 'http://' will cause crashed
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+        }
+    }
+
     private class DownloadFile extends AsyncTask<String, Void, Void> {
 
         @Override
@@ -956,9 +970,13 @@ public class HomeActivity extends AppCompatActivity {
         Account[] accountList = manager.getAccountsByType("io.intelehealth.openmrs");
         if (accountList.length > 0) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                manager.removeAccount(accountList[0], HomeActivity.this, null, null);
+                for(int i = 0; i < accountList.length; i++){
+                    manager.removeAccount(accountList[i], HomeActivity.this, null, null);
+                }
             } else {
-                manager.removeAccount(accountList[0], null, null); // Legacy implementation
+                for(int i = 0; i < accountList.length; i++) {
+                    manager.removeAccount(accountList[i], null, null); // Legacy implementation
+                }
             }
         }
 

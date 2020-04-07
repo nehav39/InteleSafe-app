@@ -109,13 +109,13 @@ import org.intelehealth.intelesafe.utilities.exception.DAOException;
  * Created By: Prajwal Waingankar
  * Github: prajwalmw
  */
-public class VisitSummaryActivity extends AppCompatActivity {
+public class VisitSummaryActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = VisitSummaryActivity.class.getSimpleName();
     private WebView mWebView;
     private LinearLayout mLayout;
     TextView Help_Link_Whatsapp;
-
+    TextView tvMentalHelpRequest;
     String mHeight, mWeight, mBMI, mBP, mPulse, mTemp, mSPO2, mresp;
 
     boolean uploaded = false;
@@ -523,6 +523,11 @@ public class VisitSummaryActivity extends AppCompatActivity {
                                         phoneNumberWithCountryCode, message))));
             }
         });
+
+
+
+        tvMentalHelpRequest = findViewById(R.id.tv_mental_help_request);
+        tvMentalHelpRequest.setOnClickListener(this);
         ivPrescription = findViewById(R.id.iv_prescription);
 
         if (hasPrescription.equalsIgnoreCase("true")) {
@@ -2328,6 +2333,16 @@ public class VisitSummaryActivity extends AppCompatActivity {
             downloadPrescriptionService = null;
         }
         isReceiverRegistered = false;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.tv_mental_help_request:
+                Uri uri = Uri.parse("https://www.intelehealth.org/mental-health-consult"); // missing 'http://' will cause crashed
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+        }
     }
 
 
