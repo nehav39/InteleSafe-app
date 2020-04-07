@@ -83,7 +83,7 @@
     <string name="identification_screen_prompt_middle_name">Middle name</string>
     <string name="identification_screen_prompt_last_name">Last name*</string>
     <string name="identification_screen_prompt_address">Address line 1*</string>
-    <string name="identification_screen_prompt_address2">Address line 2*</string>
+    <string name="identification_screen_prompt_address2">Address line 2</string>
     <string name="identification_screen_prompt_phone_number">Mobile Number*</string>
     <string name="admin_password_dialog_heading" translatable="false">Enter Admin Password</string>
     <string name="identification_screen_prompt_gender" translatable="false">Gender</string>
@@ -611,7 +611,7 @@
     <string name="who_is_this_napplication_for">Who is this \napplication for?</string>
     <string name="submit_visitSummary_Button">Submit</string>
     <string name="medical_registration_number_license_id">Medical registration number/license ID</string>
-    <string name="name_of_health_organization_hospital_where_you_primarily_work">Name of health organization/hospital where you primarily work</string>
+    <string name="name_of_health_organization_hospital_where_you_primarily_work">Health org./hospital where you work</string>
     <string name="username_10digits">Username should be 10 digits</string>
     <string name="please_select_state">Please select state</string>
     <string name="save">Save</string>

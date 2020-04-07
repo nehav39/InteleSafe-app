@@ -160,7 +160,7 @@ public class SignupActivity extends AppCompatActivity {
     ImagesDAO imagesDAO = new ImagesDAO();
     private String mCurrentPhotoPath;
     private String BlockCharacterSet_Others = "0123456789\\@$!=><&^*+€¥£`~";
-    private String BlockCharacterSet_Name = "\\@$!=><&^*+\"\'€¥£`~";
+    private String BlockCharacterSet_Name = "\\@$!=><&^*+\"\'€¥£`~/";
 
     Intent i_privacy;
     String privacy_value;
@@ -229,13 +229,13 @@ public class SignupActivity extends AppCompatActivity {
         manager = AccountManager.get(SignupActivity.this);
 
         mFirstName = findViewById(R.id.identification_first_name);
-        mFirstName.setFilters(new InputFilter[]{new InputFilter.LengthFilter(25), inputFilter_Name}); //maxlength 25
+        mFirstName.setFilters(new InputFilter[]{new InputFilter.LengthFilter(41), inputFilter_Name}); //maxlength 41
 
         mMiddleName = findViewById(R.id.identification_middle_name);
-        mMiddleName.setFilters(new InputFilter[]{new InputFilter.LengthFilter(25), inputFilter_Name}); //maxlength 25
+        mMiddleName.setFilters(new InputFilter[]{new InputFilter.LengthFilter(41), inputFilter_Name}); //maxlength 41
 
         mLastName = findViewById(R.id.identification_last_name);
-        mLastName.setFilters(new InputFilter[]{new InputFilter.LengthFilter(25), inputFilter_Name}); //maxlength 25
+        mLastName.setFilters(new InputFilter[]{new InputFilter.LengthFilter(41), inputFilter_Name}); //maxlength 41
 
         mEmailView = findViewById(R.id.email);
 /*
@@ -262,19 +262,22 @@ public class SignupActivity extends AppCompatActivity {
         mCPassword = findViewById(R.id.cpassword);
 
         licenseID = findViewById(R.id.identification_registration_no);
+        licenseID.setFilters(new InputFilter[]{new InputFilter.LengthFilter(50), inputFilter_Name}); //maxlength 50
         hospital_name = findViewById(R.id.identification_hospital_name);
+        hospital_name.setFilters(new InputFilter[]{new InputFilter.LengthFilter(26), inputFilter_Name}); //maxlength 26
+
 
         mDOB = findViewById(R.id.identification_birth_date_text_view);
         mPhoneNum = findViewById(R.id.identification_phone_number);
 //        mAge = findViewById(R.id.identification_age);
         mAddress1 = findViewById(R.id.identification_address1);
-        mAddress1.setFilters(new InputFilter[]{new InputFilter.LengthFilter(50), inputFilter_Name}); //maxlength 50
+        mAddress1.setFilters(new InputFilter[]{new InputFilter.LengthFilter(41), inputFilter_Name}); //maxlength 41
 
         mAddress2 = findViewById(R.id.identification_address2);
-        mAddress2.setFilters(new InputFilter[]{new InputFilter.LengthFilter(50), inputFilter_Name}); //maxlength 50
+        mAddress2.setFilters(new InputFilter[]{new InputFilter.LengthFilter(41), inputFilter_Name}); //maxlength 41
 
         mCity = findViewById(R.id.identification_city);
-        mCity.setFilters(new InputFilter[]{new InputFilter.LengthFilter(25), inputFilter_Others}); //maxlength 25
+        mCity.setFilters(new InputFilter[]{new InputFilter.LengthFilter(26), inputFilter_Others}); //maxlength 26
 
         stateText = findViewById(R.id.identification_state);
         mState = findViewById(R.id.spinner_state);
@@ -1682,6 +1685,7 @@ public class SignupActivity extends AppCompatActivity {
 
                             sessionManager.setPersionUUID(personUUID);
                             sessionManager.setUserName("" + mFirstName.getText().toString() + " " + mLastName.getText().toString());
+                            sessionManager.setUseFirstName("" + mFirstName.getText().toString()); // added by venu N on 07/04/2020.
                             sessionManager.setPrivacyValue(privacy_value);
                             sessionManager.setTriggerNoti("no");
                             startActivity(intent);
