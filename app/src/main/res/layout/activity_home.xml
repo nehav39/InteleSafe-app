@@ -496,11 +496,96 @@
 
                 </android.support.v7.widget.CardView>
 
+
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/mental_cardview_help"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cardview_help"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="15dp"
+                    app:cardCornerRadius="10sp"
+                    app:cardElevation="5sp">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp">
+
+                        <RelativeLayout
+                            android:id="@+id/mental_help_relative"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="40dp">
+
+                            <TextView
+                                android:id="@+id/mental_help_title"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/lato_bold"
+                                android:includeFontPadding="false"
+                                android:text="@string/help"
+                                android:textColor="@color/txt_sub_header_color"
+                                android:textSize="12sp" />
+
+
+                            <TextView
+                                android:id="@+id/mental_Help_Text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/mental_help_title"
+                                android:layout_marginTop="5dp"
+                                android:fontFamily="@font/lato_regular"
+                                android:includeFontPadding="false"
+                                android:text="@string/if_you_star"
+                                android:textSize="14sp" />
+
+                            <Button
+                                android:id="@+id/mental_Help_Watsapp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/mental_Help_Text"
+                                android:layout_marginStart="10sp"
+                                android:background="@android:color/transparent"
+                                android:drawableStart="@drawable/ic_icons8_whatsapp"
+                                android:drawableLeft="@drawable/ic_icons8_whatsapp"
+                                android:drawablePadding="10sp"
+                                android:fontFamily="@font/lato_medium"
+                                android:gravity="start|center"
+                                android:hint=""
+                                android:text="@string/some_id"
+                                android:textColor="@color/txt_sub_header_color"
+                                android:textSize="18sp" />
+
+                            <!-- Icon Credits:- <a target="_blank" href="https://icons8.com/icons/set/whatsapp">WhatsApp icon</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>-->
+
+
+                        </RelativeLayout>
+
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|right"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:src="@drawable/ic_heart">
+
+                        </ImageView>
+
+                    </FrameLayout>
+
+
+                </android.support.v7.widget.CardView>
+
+
                 <TextView
                     android:id="@+id/your_data_overview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/cardview_help"
+                    android:layout_below="@id/mental_cardview_help"
                     android:layout_marginTop="20sp"
                     android:fontFamily="@font/lato_bold"
                     android:padding="10sp"
