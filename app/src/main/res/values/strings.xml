@@ -591,7 +591,7 @@
     <string name="password_must_eight">Password must have 8 character</string>
     <string name="check_in">Check In</string>
     <string name="logout_dialog">Are you sure you want to Logout?</string>
-    <string name="day_1">Day 1</string>
+    <string name="day_1">Day 1 | Tue 9</string>
     <string name="enter_check_in">Enter Check-in</string>
     <string name="home_quarantine_guidelines">Guidelines for use of PPE</string>
     <string name="education_videos">FAQs</string>
@@ -639,5 +639,7 @@
     <string name="error_empty_designation">Enter your designation.</string>
     <string name="teleconsult_request">Teleconsult request</string>
     <string name="feeling_stressed_or_anxious_request_for_a_free_confidential_mental_health_consultation_with_a_counsellor">Feeling stressed or anxious? Request for a free confidential mental health consultation with a counsellor.</string>
+    <string name="dummy">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor..</string>
+    <string name="feedback">Feedback-</string>
 
 </resources>

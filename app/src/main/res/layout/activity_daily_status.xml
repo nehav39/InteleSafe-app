@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/act_background"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="@drawable/start_assessment"
+        android:text="Start Today's Assessment Day 4|Wed 10"
+        android:textAppearance="@style/start_Assessment" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/previous_as"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="10dp"
+        android:text="Previous Assessment"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_dates"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>
