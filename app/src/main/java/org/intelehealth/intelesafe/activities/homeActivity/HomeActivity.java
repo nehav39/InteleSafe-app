@@ -273,7 +273,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         alarmIntent_2.setAction(AppConstants.ACTION_TWO);
         PendingIntent pendingIntent_2 = PendingIntent.getBroadcast(this, 1260, alarmIntent_2, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        if(dayCount < 42) {
+        if(dayCount <= 42) {    //added by Prajwal the equal case to give notifi in the evening as well on the last day.
             //region Enable Daily Notifications..
             calendar.setTimeInMillis(System.currentTimeMillis());
             calendar.set(Calendar.HOUR_OF_DAY, 19); //24 Hour Format - 7pm alarm
