@@ -61,17 +61,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
-import java.util.Set;
 import java.util.UUID;
 
 import org.intelehealth.intelesafe.BuildConfig;
 import org.intelehealth.intelesafe.R;
+import org.intelehealth.intelesafe.activities.languageActivity.LanguageActivity;
 import org.intelehealth.intelesafe.activities.loginActivity.LoginActivity;
 import org.intelehealth.intelesafe.activities.physcialExamActivity.PhysicalExamActivity;
 import org.intelehealth.intelesafe.activities.settingsActivity.SettingsActivity;
@@ -134,7 +133,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     TextView lastSyncAgo;
     TextView welcomeUser;
     Button manualSyncButton;
-    RelativeLayout enter_check_in,home_quarantine_guidelines,educational_videos,user_logout; // modified by Venu N on 01/04/2020
+    RelativeLayout enter_check_in,home_quarantine_guidelines,educational_videos,user_logout, relUserLang; // modified by Venu N on 01/04/2020
     IntentFilter filter;
     Myreceiver reMyreceive;
     SyncUtils syncUtils = new SyncUtils();
@@ -395,6 +394,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         home_quarantine_guidelines = findViewById(R.id.button_home_quarantine);
         educational_videos = findViewById(R.id.button_educational_videos);
         welcomeUser = findViewById(R.id.welcomeUser);
+
+        relUserLang = findViewById(R.id.rel_user_lang);
+        relUserLang.setOnClickListener(this);
 
         welcomeUser.setText("" + sessionManager.getUserName());
 
@@ -713,6 +715,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 Uri uri = Uri.parse("https://www.intelehealth.org/mental-health-consult"); // missing 'http://' will cause crashed
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
+                break;
+            case R.id.rel_user_lang:
+                Intent intentLang = new Intent(HomeActivity.this, LanguageActivity.class);
+                intentLang.putExtra("previous_view", "home");
+                startActivity(intentLang);
+                break;
         }
     }
 

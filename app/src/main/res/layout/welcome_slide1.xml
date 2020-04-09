@@ -31,7 +31,7 @@
             android:id="@+id/tv_intro_one"
             app:fontFamily="@fonts/Lato-Regular"
             android:paddingEnd="20dp"
-            tools:text="This app is for all types of health workers at the frontlines of care to learn about personal protection measures and PPE use."
+            tools:text="@string/intro_desc1"
             android:textColor="@color/font_black_0"
             android:textSize="16sp" />
 
@@ -43,7 +43,7 @@
             android:id="@+id/tv_intro_two"
             app:fontFamily="@fonts/Lato-Regular"
             android:paddingEnd="20dp"
-            tools:text="You can monitor your own health daily and reach out for help if you think you may have had unsafe exposure and may be infected."
+            tools:text="@string/intro_desc2"
             android:textColor="@color/font_black_0"
             android:textSize="16sp" />
 
