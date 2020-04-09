@@ -556,7 +556,7 @@
     <string name="not_answered">Not answered</string>
     <string name="teleconsultation_button_visitsummary">Teleconsultation</string>
     <string name="help_cardview_visit">If you get much sicker please call your nearest doctor - 73054154312</string>
-    <string name="select_language">Select Language</string>
+    <string name="choose_your_language">Select Language</string>
     <string name="address_of_line_2">Address of Line 2</string>
     <string name="HomeScreen_Header_Title">Welcome</string>
     <string name="if_you_get_much_sicker_please_call_your_nearest_doctor_020_26127394">You can message us with your PPE related queries on our WhatsApp Helpline below by clicking on it.</string>
@@ -629,7 +629,8 @@
     <string name="if_you_star">If you start showing symptoms of Covid-19 please reach out to your supervisor/doctor. You can also send us a WhatsApp message at the number below for any concerns.</string>
     <string name="some_id">+91 9825989750</string>
     <string name="assessment_visit_title">Assessment</string>
-    <string name="please_fill_your_details">Please fill your details</string>
+    <string name="teleconsult_request">Teleconsult request</string>
+    <string name="feeling_stressed_or_anxious_request_for_a_free_confidential_mental_health_consultation_with_a_counsellor">Feeling stressed or anxious? Request for a free confidential mental health consultation with a counsellor.</string>
 
     // SignUP Screen(New Changes)
     <string name="txt_personal_caste_header">I am a...*</string>
@@ -637,7 +638,8 @@
     <string name="txt_enter_caste">Designation</string>
     <string name="toast_select_designation">Please select your designation.</string>
     <string name="error_empty_designation">Enter your designation.</string>
-    <string name="teleconsult_request">Teleconsult request</string>
-    <string name="feeling_stressed_or_anxious_request_for_a_free_confidential_mental_health_consultation_with_a_counsellor">Feeling stressed or anxious? Request for a free confidential mental health consultation with a counsellor.</string>
+    <string name="intro_desc1">This app is for all types of health workers at the frontlines of care to learn about personal protection measures and PPE use.</string>
+    <string name="intro_desc2">You can monitor your own health daily and reach out for help if you think you may have had unsafe exposure and may be infected.</string>
+    <string name="please_fill_your_details">Please fill your details</string>
 
 </resources>

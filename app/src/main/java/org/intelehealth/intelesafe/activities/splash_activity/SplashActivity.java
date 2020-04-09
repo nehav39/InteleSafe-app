@@ -20,6 +20,7 @@ import java.util.Locale;
 import org.intelehealth.intelesafe.R;
 import org.intelehealth.intelesafe.activities.homeActivity.HomeActivity;
 import org.intelehealth.intelesafe.activities.introActivity.IntroActivity;
+import org.intelehealth.intelesafe.activities.languageActivity.LanguageActivity;
 import org.intelehealth.intelesafe.dataMigration.SmoothUpgrade;
 import org.intelehealth.intelesafe.utilities.Logger;
 import org.intelehealth.intelesafe.utilities.SessionManager;
@@ -120,32 +121,26 @@ public class SplashActivity extends AppCompatActivity {
 
     private void nextActivity() {
         boolean setup = sessionManager.isSetupComplete();
-
         String LOG_TAG = "SplashActivity";
         Logger.logD(LOG_TAG, String.valueOf(setup));
         if (setup) {
-
             Logger.logD(LOG_TAG, "Starting login");
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
             finish();
-
         } else {
-
             if (sessionManager.isFirstTimeLaunch()) {
                 Logger.logD(LOG_TAG, "Starting setup");
-                Intent intent = new Intent(this, IntroActivity.class);
+                Intent intent = new Intent(this, LanguageActivity.class);
                 startActivity(intent);
                 finish();
             } else {
-
                 Intent intent = new Intent(this, HomeActivity.class);
                 intent.putExtra("from", "splash");
                 intent.putExtra("username", "");
                 intent.putExtra("password", "");
                 startActivity(intent);
                 finish();
-
             }
         }
     }
