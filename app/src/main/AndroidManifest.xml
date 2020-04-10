@@ -249,7 +249,6 @@
         <meta-data
             android:name="firebase_crashlytics_collection_enabled"
             android:value="false" />
-
         <provider
             android:name=".activities.searchPatientActivity.SearchSuggestionProvider"
             android:authorities="org.intelehealth.intelesafe.activities.searchPatientActivity.SearchSuggestionProvider"

@@ -82,46 +82,100 @@ public class DailyStatusActivity extends AppCompatActivity implements View.OnCli
 
     private void getDailyCheckInDataFromDB() {
         sqLiteDatabase = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
-        String endDate;
+
+        String endDate = "";
         String query = "SELECT v.startdate FROM tbl_visit v, tbl_patient p WHERE " +
                 "p.uuid = v.patientuuid AND v.startdate IS NOT NULL AND " +
                 "v.patientuuid = ?";
         String[] data = {sessionManager.getPersionUUID()};
 
         final Cursor cursor = sqLiteDatabase.rawQuery(query, data);
-        String dd;
+        int a = 1;
+        int b = 0;
+        String dd="";
         int a1;
         StringBuilder stringBuilder;
-        HashSet<String> hashSet = new HashSet<>();
+        HashSet hashSet = new HashSet<>();
+        ArrayList<String> array_original_date = new ArrayList<>();
 
-        if (cursor != null && cursor.moveToFirst()) {
-            do {
-                try {
-                    endDate = cursor.getString(cursor.getColumnIndexOrThrow("startdate"));
-                    stringBuilder = new StringBuilder(endDate);
-                    a1 = stringBuilder.indexOf("T");
-                    dd = stringBuilder.substring(0, a1);
-                    hashSet.add(dd);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            } while (cursor.moveToNext());
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+                    try {
+
+                        endDate = cursor.getString(cursor.getColumnIndexOrThrow("startdate"));
+                        stringBuilder = new StringBuilder(endDate);
+                        a1 = stringBuilder.indexOf("T");
+                        dd = stringBuilder.substring(0, a1);
+
+                        //comment...
+                        array_original_date.add(b,endDate);
+                        b++;
+//                        hashSet.add(new Day_Date("Day "+a, endDate));
+                        //   boolean t = ;
+                        hashSet.add(dd);
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }while (cursor.moveToNext());
+            }
         }
-
         if (cursor != null) {
             cursor.close();
         }
 
-        ArrayList<String> arrayList = new ArrayList<>(hashSet);
+        ArrayList<String> new_arraylist = new ArrayList<>();
+        new_arraylist.addAll(hashSet);
 
-        Collections.sort(arrayList); // added by venu N to sort the
+        Collections.sort(new_arraylist); // added by venu N to sort the
 
-        for (int i = 0; i < arrayList.size(); i++) {
-            recyclerDayDatelist.add(new Day_Date("Day " + i + 1, arrayList.get(i)));
+        for (int j = 0; j < new_arraylist.size(); j++) {
+            recyclerDayDatelist.add(new Day_Date("Day "+a, new_arraylist.get(j)));
+            a++;
         }
+//        String endDate;
+//        String query = "SELECT v.startdate FROM tbl_visit v, tbl_patient p WHERE " +
+//                "p.uuid = v.patientuuid AND v.startdate IS NOT NULL AND " +
+//                "v.patientuuid = ?";
+//        String[] data = {sessionManager.getPersionUUID()};
+//
+//        final Cursor cursor = sqLiteDatabase.rawQuery(query, data);
+//        String dd;
+//        int a1;
+//        StringBuilder stringBuilder;
+//        HashSet<String> hashSet = new HashSet<>();
+//
+//        if (cursor != null && cursor.moveToFirst()) {
+//            do {
+//                try {
+//                    endDate = cursor.getString(cursor.getColumnIndexOrThrow("startdate"));
+//                    stringBuilder = new StringBuilder(endDate);
+//                    a1 = stringBuilder.indexOf("T");
+//                    dd = stringBuilder.substring(0, a1);
+//                    hashSet.add(dd);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            } while (cursor.moveToNext());
+//        }
+//
+//        if (cursor != null) {
+//            cursor.close();
+//        }
+//
+//        ArrayList<String> arrayList = new ArrayList<>(hashSet);
+//
+//        Collections.sort(arrayList); // added by venu N to sort the
+//
+//        for (int i = 0; i < arrayList.size(); i++) {
+//            recyclerDayDatelist.add(new Day_Date("Day " + i + 1, arrayList.get(i)));
+//        }
 
         if (!recyclerDayDatelist.isEmpty()) {
             tvNoVisit.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
             DailyStatusAdapter recycler_home_adapter = new DailyStatusAdapter(
                     DailyStatusActivity.this, recyclerDayDatelist);
             recycler_home_adapter.notifyDataSetChanged();
@@ -131,6 +185,7 @@ public class DailyStatusActivity extends AppCompatActivity implements View.OnCli
             recyclerView.setAdapter(recycler_home_adapter);
         } else {
             tvNoVisit.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
         }
     }
 
