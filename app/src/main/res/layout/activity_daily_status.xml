@@ -2,16 +2,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/act_background"
     android:orientation="vertical">
 
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="Daily Summary"
+            app:titleTextColor="@color/font_black_0" />
+
+    </android.support.design.widget.AppBarLayout>
+
     <Button
-        android:id="@+id/btnSave"
+        android:id="@+id/btn_start_assessment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:background="@drawable/start_assessment"
-        android:text="Start Today's Assessment Day 4|Wed 10"
+        android:text="Start Today's Assessment Day 4 | Wed 10"
         android:textAppearance="@style/start_Assessment" />
 
     <TextView
@@ -29,4 +46,14 @@
         android:id="@+id/recycler_dates"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
+    <TextView
+        android:id="@+id/tv_no_visit"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:textColor="@null"
+        android:text="@string/you_don_t_have_any_visit"
+        android:textAppearance="@style/home_no_visit" />
 </LinearLayout>

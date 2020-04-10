@@ -641,5 +641,6 @@
     <string name="feeling_stressed_or_anxious_request_for_a_free_confidential_mental_health_consultation_with_a_counsellor">Feeling stressed or anxious? Request for a free confidential mental health consultation with a counsellor.</string>
     <string name="dummy">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor..</string>
     <string name="feedback">Feedback-</string>
+    <string name="you_don_t_have_any_visit">You don\'t have any visit.</string>
 
 </resources>

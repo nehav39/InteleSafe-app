@@ -30,7 +30,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/recycler_day_textview"
+                        android:id="@+id/tv_day_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/lato_bold"
@@ -38,7 +38,7 @@
                         android:textAppearance="@style/day_3_tue_9" />
 
                    <TextView
-                        android:id="@+id/recycler_date_textview"
+                        android:id="@+id/tv_feedback"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/lato_regular"

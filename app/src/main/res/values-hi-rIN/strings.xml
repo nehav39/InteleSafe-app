@@ -689,5 +689,6 @@
     <string name="txt_enter_caste">Designation</string>
     <string name="toast_select_designation">Please select your designation.</string>
     <string name="error_empty_designation">Enter your designation.</string>
+    <string name="you_don_t_have_any_visit">You don\'t have any visit.</string>
 
 </resources>
