@@ -72,6 +72,7 @@ import java.util.UUID;
 
 import org.intelehealth.intelesafe.BuildConfig;
 import org.intelehealth.intelesafe.R;
+import org.intelehealth.intelesafe.activities.dailystatus.DailyStatusActivity;
 import org.intelehealth.intelesafe.activities.loginActivity.LoginActivity;
 import org.intelehealth.intelesafe.activities.physcialExamActivity.PhysicalExamActivity;
 import org.intelehealth.intelesafe.activities.settingsActivity.SettingsActivity;
@@ -123,8 +124,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     int i = 5;
     Calendar calendar;
     HashSet<String> hashSet;
-    Recycler_Home_Adapter recycler_home_adapter;
-    ArrayList<Day_Date> recycler_arraylist;
+//    Recycler_Home_Adapter recycler_home_adapter;
+//    ArrayList<Day_Date> recycler_arraylist;
 //    Set<Day_Date> set;
 
     SQLiteDatabase db;
@@ -141,10 +142,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     CardView c1, c2, c3, c4, c5;
     private String key = null;
     private String licenseUrl = null;
-    RecyclerView recyclerView;
-    TextView tvNoVisit;
+//    RecyclerView recyclerView;
+//    TextView tvNoVisit;
     Button help_watsapp;
     TextView tvMentalHelpRequest;
+    TextView tvDailyStatus;
 
     Context context;
     private String mindmapURL = "";
@@ -227,6 +229,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         tvMentalHelpRequest = findViewById(R.id.tv_mental_help_request);
         tvMentalHelpRequest.setOnClickListener(this);
 
+        tvDailyStatus = findViewById(R.id.tv_daily_status);
+        tvDailyStatus.setOnClickListener(this);
+
         SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(context));
         int dayCount = mSharedPreference.getInt("dayCount", 0);
 
@@ -304,7 +309,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         db = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
 
-        recyclerView = findViewById(R.id.recyclerview_data);
+        /*recyclerView = findViewById(R.id.recyclerview_data);
         tvNoVisit = findViewById(R.id.tv_no_visit);
 
         recycler_arraylist = new ArrayList<Day_Date>();
@@ -353,9 +358,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 //
 //                        }
 
-                               /* recycler_arraylist.add(new Day_Date
+                               *//* recycler_arraylist.add(new Day_Date
                                         ("Day " + a, dd));
-                                a++;*/
+                                a++;*//*
 
 
                     } catch (Exception e) {
@@ -388,7 +393,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             recyclerView.setAdapter(recycler_home_adapter);
         } else{
             tvNoVisit.setVisibility(View.VISIBLE);
-        }
+        }*/
 
 
         enter_check_in = findViewById(R.id.button_enter_checkin);
@@ -713,6 +718,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 Uri uri = Uri.parse("https://www.intelehealth.org/mental-health-consult"); // missing 'http://' will cause crashed
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
+                break;
+            case R.id.tv_daily_status:
+                Intent intentDailyStatus = new Intent(HomeActivity.this, DailyStatusActivity.class);
+                startActivity(intentDailyStatus);
+                break;
         }
     }
 
@@ -1273,6 +1283,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+/*
     public void pastVisits(int position) {
 
         String patientuuid = sessionManager.getPersionUUID();
@@ -1343,8 +1354,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
         visitCursor.close();
     }
+*/
 
-    private void OldVisit(final String datetime, String visit_id, String end_datetime, String visitValue, String encounterVitalslocal, String encounterAdultIntialslocal) throws ParseException {
+   /* private void OldVisit(final String datetime, String visit_id, String end_datetime, String visitValue, String encounterVitalslocal, String encounterAdultIntialslocal) throws ParseException {
 
         final Boolean past_visit;
 
@@ -1362,6 +1374,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         visitSummary.putExtra("hasPrescription", "false");
         visitSummary.putExtra("fromOldVisit",true);
         startActivity(visitSummary);
-    }
+    }*/
 
 }

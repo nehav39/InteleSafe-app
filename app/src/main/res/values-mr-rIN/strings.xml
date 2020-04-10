@@ -41,7 +41,7 @@
     <string name="password_must_eight">Password must have 8 character</string>
     <string name="check_in">Check In</string>
     <string name="logout_dialog">Are you sure you want to Logout?</string>
-    <string name="day_1">Day 1</string>
+    <string name="day_1">Day 1 | Tue 9</string>
     <string name="enter_check_in">Enter Check-in</string>
     <string name="home_quarantine_guidelines">Guidelines for use of PPE</string>
     <string name="education_videos">FAQs</string>
@@ -691,4 +691,5 @@
     <string name="txt_enter_caste">Designation</string>
     <string name="toast_select_designation">Please select your designation.</string>
     <string name="error_empty_designation">Enter your designation.</string>
+    <string name="you_don_t_have_any_visit">You don\'t have any visit.</string>
 </resources>

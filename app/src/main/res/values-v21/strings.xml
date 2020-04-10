@@ -19,4 +19,5 @@
     <string name="please_select_state">Please select state</string>
     <string name="stay_aware_stay_safe">Stay Aware | Stay Safe</string>
     <string name="assessment_visit_title">Assessment</string>
+    <string name="you_don_t_have_any_visit">You don\'t have any visit.</string>
 </resources>

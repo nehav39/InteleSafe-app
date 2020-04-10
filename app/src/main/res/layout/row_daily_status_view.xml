@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:cardBackgroundColor="#F2994A"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_view_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            app:cardBackgroundColor="#FFF3E9"
+            android:layout_marginLeft="5dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_day_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato_bold"
+                        android:text="@string/day_1"
+                        android:textAppearance="@style/day_3_tue_9" />
+
+                   <TextView
+                        android:id="@+id/tv_feedback"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato_regular"
+                        android:lineSpacingExtra="4sp"
+                        android:layout_marginTop="20dp"
+                        android:background="@null"
+                        android:textAppearance="@style/feedback_"
+                        android:translationY="-2.2sp"
+                        android:text="@string/feedback" />
+
+                    <TextView
+                        android:id="@+id/recycler_tick_imageview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:lineSpacingExtra="1sp"
+                        android:translationY="-0.6sp"
+                        android:textAppearance="@style/lorem_ipsum"
+                        android:text="@string/dummy" />
+                </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

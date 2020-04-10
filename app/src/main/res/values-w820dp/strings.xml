@@ -2,4 +2,5 @@
 <resources>
     <string name="skip">skip</string>
     <string name="start">Start</string>
+    <string name="you_don_t_have_any_visit">You don\'t have any visit.</string>
 </resources>
