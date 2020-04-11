@@ -14,6 +14,7 @@ import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -90,6 +91,7 @@ import org.intelehealth.intelesafe.utilities.UrlModifiers;
 import org.intelehealth.intelesafe.utilities.UuidDictionary;
 import org.intelehealth.intelesafe.utilities.UuidGenerator;
 import org.intelehealth.intelesafe.utilities.exception.DAOException;
+
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -104,7 +106,7 @@ import okhttp3.ResponseBody;
 
 public class SignupActivity extends AppCompatActivity {
 
-//    private static final String TAG = IdentificationActivity.class.getSimpleName();
+    //    private static final String TAG = IdentificationActivity.class.getSimpleName();
     Context context;
     private static final String TAG = SignupActivity.class.getSimpleName();
 
@@ -130,7 +132,7 @@ public class SignupActivity extends AppCompatActivity {
     EditText mLastName;
     EditText mDOB;
     EditText mPhoneNum;
-//    EditText mAge;
+    //    EditText mAge;
     AlertDialog.Builder mAgePicker;
     EditText mAddress1;
     EditText mAddress2;
@@ -170,7 +172,7 @@ public class SignupActivity extends AppCompatActivity {
     String cPassword = "";
     String country = "";
     String state = "";
- //   String district = "";
+    //   String district = "";
     private String personUUID = "";
     private String patientOpenMRSID = "";
     private String OpenMRSID = "";
@@ -203,6 +205,9 @@ public class SignupActivity extends AppCompatActivity {
     Pattern digitCasePatten = Pattern.compile("[0-9 ]");
 
     protected AccountManager manager;
+
+    private TextInputLayout input_state_field, input_state_spinner; //  state a text box if country is not India so that user can enter their state
+    private EditText edt_state;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -290,6 +295,10 @@ public class SignupActivity extends AppCompatActivity {
         mGenderF = findViewById(R.id.identification_gender_female);
         mImageView = findViewById(R.id.imageview_id_picture);
 
+        input_state_field = findViewById(R.id.input_state_field);
+        input_state_spinner = findViewById(R.id.input_state_spinner);
+        edt_state = findViewById(R.id.edt_state);
+
         mPhoneNum.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -313,7 +322,7 @@ public class SignupActivity extends AppCompatActivity {
         mEdtCaste.setVisibility(View.GONE);
 
         ArrayAdapter<CharSequence> countryAdapter = ArrayAdapter.createFromResource(this,
-                R.array.countries, android.R.layout.simple_spinner_item);
+                R.array.countries_array, android.R.layout.simple_spinner_item);
         countryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mCountry.setAdapter(countryAdapter);
 
@@ -329,33 +338,31 @@ public class SignupActivity extends AppCompatActivity {
 
         ArrayAdapter<CharSequence> personalCasteAdapter = ArrayAdapter.createFromResource(SignupActivity.this,
                 R.array.personal_caste, R.layout.custom_spinner_item);
-       // personalCasteAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // personalCasteAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mCaste.setAdapter(personalCasteAdapter);
 
         generateUuid();
 
         ArrayAdapter<CharSequence> stateAdapter = ArrayAdapter.createFromResource(this, R.array.state_error, android.R.layout.simple_spinner_item);
-       // stateAdapter.setDropDownViewResource(R.layout.custom_spinner_item);
+        // stateAdapter.setDropDownViewResource(R.layout.custom_spinner_item);
         mState.setAdapter(stateAdapter);
 
         mState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position != 0)
-                {
-                state = parent.getItemAtPosition(position).toString();
-                if (state.matches("Odisha")) {
-                    //Creating the instance of ArrayAdapter containing list of fruit names
-                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(SignupActivity.this,
-                            R.array.odisha_villages, android.R.layout.simple_spinner_item);
-                    mCity.setThreshold(1);//will start working from first character
-                    mCity.setAdapter(adapter);//setting the adapter data into the AutoCompleteTextView
+                if (position != 0) {
+                    edt_state.setText("");
+                    state = parent.getItemAtPosition(position).toString();
+                    if (state.matches("Odisha")) {
+                        //Creating the instance of ArrayAdapter containing list of fruit names
+                        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(SignupActivity.this,
+                                R.array.odisha_villages, android.R.layout.simple_spinner_item);
+                        mCity.setThreshold(1);//will start working from first character
+                        mCity.setAdapter(adapter);//setting the adapter data into the AutoCompleteTextView
+                    } else {
+                        mCity.setAdapter(null);
+                    }
                 } else {
-                    mCity.setAdapter(null);
-                }
-                }
-                else
-                    {
 
                 }
             }
@@ -366,26 +373,48 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
+        edt_state.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                state = edt_state.getText().toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         mCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 //                if (i != 0) {
-                    country = adapterView.getItemAtPosition(i).toString();
+                country = adapterView.getItemAtPosition(i).toString();
 
-                    if (country.matches("India")) {
-                        ArrayAdapter<CharSequence> stateAdapter = ArrayAdapter.createFromResource(SignupActivity.this,
-                                R.array.states_india, android.R.layout.simple_spinner_item);
-                        stateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        mState.setAdapter(stateAdapter);
-                        // setting state according database when user clicks edit details
+                if (country.matches("India")) {
+                    input_state_spinner.setVisibility(View.VISIBLE);
+                    input_state_field.setVisibility(View.GONE);
+                    ArrayAdapter<CharSequence> stateAdapter = ArrayAdapter.createFromResource(SignupActivity.this,
+                            R.array.states_india, android.R.layout.simple_spinner_item);
+                    stateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    mState.setAdapter(stateAdapter);
+                    // setting state according database when user clicks edit details
 
-                        if (patientID_edit != null) {
-                            mState.setSelection(stateAdapter.getPosition(String.valueOf(patient1.getState_province())));
-                        } else {
-                          //  mState.setSelection(stateAdapter.getPosition("Maharashtra"));
-                        }
-
+                    if (patientID_edit != null) {
+                        mState.setSelection(stateAdapter.getPosition(String.valueOf(patient1.getState_province())));
+                    } else {
+                        //  mState.setSelection(stateAdapter.getPosition("Maharashtra"));
                     }
+
+                } else {
+                    input_state_spinner.setVisibility(View.GONE);
+                    input_state_field.setVisibility(View.VISIBLE);
+                }
 //                } else {
 //                    ArrayAdapter<CharSequence> stateAdapter = ArrayAdapter.createFromResource(SignupActivity.this,
 //                            R.array.state_error, android.R.layout.simple_spinner_item);
@@ -456,9 +485,9 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String caste = parent.getSelectedItem().toString();
-                if(caste.equalsIgnoreCase("Other")){
+                if (caste.equalsIgnoreCase("Other")) {
                     mEdtCaste.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     mEdtCaste.setVisibility(View.GONE);
                 }
                 selectedPersonalCaste = caste;
@@ -822,12 +851,12 @@ public class SignupActivity extends AppCompatActivity {
                 }
 
                 // Added by venu N on 03/04/202.
-                if((selectedPersonalCaste == null && selectedPersonalCaste.length() <= 0) || selectedPersonalCaste.equalsIgnoreCase("Select Designation")){
+                if ((selectedPersonalCaste == null && selectedPersonalCaste.length() <= 0) || selectedPersonalCaste.equalsIgnoreCase("Select Designation")) {
                     Toast.makeText(context, getString(R.string.toast_select_designation), Toast.LENGTH_LONG).show();
                     return;
-                }else if(selectedPersonalCaste.equalsIgnoreCase("Other")){
-                        selectedPersonalCaste = mEdtCaste.getText().toString();
-                    if(selectedPersonalCaste.equalsIgnoreCase("")){
+                } else if (selectedPersonalCaste.equalsIgnoreCase("Other")) {
+                    selectedPersonalCaste = mEdtCaste.getText().toString();
+                    if (selectedPersonalCaste.equalsIgnoreCase("")) {
                         selectedPersonalCaste = "Other";
                         mEdtCaste.setError(getString(R.string.error_empty_designation));
                         mEdtCaste.requestFocus();
@@ -835,7 +864,7 @@ public class SignupActivity extends AppCompatActivity {
                     }
                 }
 
-                System.out.println("DESIGATION: "+selectedPersonalCaste);
+                System.out.println("DESIGATION: " + selectedPersonalCaste);
 
                 if (mAddress1.getText().toString().equals("")) {
                     mAddress1.setError(getString(R.string.error_field_required));
@@ -849,13 +878,23 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (country.equalsIgnoreCase("")) {
+                boolean isNotIndia = true;
+                if (country.equalsIgnoreCase("") || country.equalsIgnoreCase("Select Country")) {
                     Toast.makeText(context, getString(R.string.please_select_country), Toast.LENGTH_LONG).show();
                     return;
+                }else{
+                    if(country.equalsIgnoreCase("India")){
+                        isNotIndia = false;
+                    }
                 }
 
                 if (state.equalsIgnoreCase("")) {
-                    Toast.makeText(context, getString(R.string.please_select_state), Toast.LENGTH_LONG).show();
+                    if(isNotIndia){
+                        edt_state.setError(getString(R.string.error_field_required));
+                        edt_state.requestFocus();
+                    }else{
+                        Toast.makeText(context, getString(R.string.please_select_state), Toast.LENGTH_LONG).show();
+                    }
                     return;
                 }
 
@@ -955,7 +994,7 @@ public class SignupActivity extends AppCompatActivity {
                 userAddressData.setStateProvince("" + mState.getSelectedItem().toString());
                 sessionManager.setState(mState.getSelectedItem().toString());
                 userAddressData.setPostalCode("" + mPostal.getText().toString());
-               // userAddressData.setCountyDistrict("" + selectedLocationName);
+                // userAddressData.setCountyDistrict("" + selectedLocationName);
 
                 Log.e("JSON-STEP3- ", "" + gson.toJson(userAddressData));
 
@@ -1259,12 +1298,12 @@ public class SignupActivity extends AppCompatActivity {
 
 
         // Uncommented by venu N on 03/04/2020.
-            patientAttributesDTO = new PatientAttributesDTO();
-            patientAttributesDTO.setUuid(UUID.randomUUID().toString());
-            patientAttributesDTO.setPatientuuid(uuid);
-            patientAttributesDTO.setPersonAttributeTypeUuid(patientsDAO.getUuidForAttribute("caste"));
-            patientAttributesDTO.setValue(selectedPersonalCaste);  //get the spinner value and send it here.
-            patientAttributesDTOList.add(patientAttributesDTO);
+        patientAttributesDTO = new PatientAttributesDTO();
+        patientAttributesDTO.setUuid(UUID.randomUUID().toString());
+        patientAttributesDTO.setPatientuuid(uuid);
+        patientAttributesDTO.setPersonAttributeTypeUuid(patientsDAO.getUuidForAttribute("caste"));
+        patientAttributesDTO.setValue(selectedPersonalCaste);  //get the spinner value and send it here.
+        patientAttributesDTOList.add(patientAttributesDTO);
 
         patientAttributesDTO = new PatientAttributesDTO();
         patientAttributesDTO.setUuid(UUID.randomUUID().toString());
@@ -1280,12 +1319,12 @@ public class SignupActivity extends AppCompatActivity {
 //            patientAttributesDTO.setValue(StringUtils.getValue(mRelationship.getText().toString()));
 //            patientAttributesDTOList.add(patientAttributesDTO);
 
-            patientAttributesDTO = new PatientAttributesDTO();
-            patientAttributesDTO.setUuid(UUID.randomUUID().toString());
-            patientAttributesDTO.setPatientuuid(uuid);
-            patientAttributesDTO.setPersonAttributeTypeUuid(patientsDAO.getUuidForAttribute("occupation"));
-            patientAttributesDTO.setValue(StringUtils.getValue(licenseID.getText().toString()));
-            patientAttributesDTOList.add(patientAttributesDTO);
+        patientAttributesDTO = new PatientAttributesDTO();
+        patientAttributesDTO.setUuid(UUID.randomUUID().toString());
+        patientAttributesDTO.setPatientuuid(uuid);
+        patientAttributesDTO.setPersonAttributeTypeUuid(patientsDAO.getUuidForAttribute("occupation"));
+        patientAttributesDTO.setValue(StringUtils.getValue(licenseID.getText().toString()));
+        patientAttributesDTOList.add(patientAttributesDTO);
 
 //            patientAttributesDTO = new PatientAttributesDTO();
 //            patientAttributesDTO.setUuid(UUID.randomUUID().toString());
@@ -1294,12 +1333,12 @@ public class SignupActivity extends AppCompatActivity {
 //            patientAttributesDTO.setValue(StringUtils.getProvided(mEconomicStatus));
 //            patientAttributesDTOList.add(patientAttributesDTO);
 
-            patientAttributesDTO = new PatientAttributesDTO();
-            patientAttributesDTO.setUuid(UUID.randomUUID().toString());
-            patientAttributesDTO.setPatientuuid(uuid);
-            patientAttributesDTO.setPersonAttributeTypeUuid(patientsDAO.getUuidForAttribute("Education Level"));
-            patientAttributesDTO.setValue(StringUtils.getValue(hospital_name.getText().toString()));
-            patientAttributesDTOList.add(patientAttributesDTO);
+        patientAttributesDTO = new PatientAttributesDTO();
+        patientAttributesDTO.setUuid(UUID.randomUUID().toString());
+        patientAttributesDTO.setPatientuuid(uuid);
+        patientAttributesDTO.setPersonAttributeTypeUuid(patientsDAO.getUuidForAttribute("Education Level"));
+        patientAttributesDTO.setValue(StringUtils.getValue(hospital_name.getText().toString()));
+        patientAttributesDTOList.add(patientAttributesDTO);
 
         patientAttributesDTO = new PatientAttributesDTO();
         patientAttributesDTO.setUuid(UUID.randomUUID().toString());
