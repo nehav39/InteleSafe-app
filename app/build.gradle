@@ -30,6 +30,7 @@ android {
         release {
             lintOptions {
                 disable 'MissingTranslation'
+                checkReleaseBuilds false
             }
             minifyEnabled true
             buildConfigField "String", "BASE_URL", "\"http://intelesafe.covidhelp.in/\"" // http://13.232.32.249:8080/
