@@ -121,7 +121,7 @@
     <string name="device_id" translatable="false">Device ID:</string>
 
 
-    <string name="cant_login_user" translatable="false">Can\'t log in?</string>
+    <string name="cant_login_user" translatable="false">Forgot password?</string>
     <string name="email_link" translatable="false"> To reset your password send an email to support@intelehealth.io</string>
 
     //Home Screen (after login)
@@ -691,4 +691,7 @@
     <string name="txt_enter_caste">Designation</string>
     <string name="toast_select_designation">Please select your designation.</string>
     <string name="error_empty_designation">Enter your designation.</string>
+
+    <!--Login Screen (New Changes)-->
+    <string name="txt_sign_up_option">Don\'t have an account?<b> Sign Up!</b></string>
 </resources>

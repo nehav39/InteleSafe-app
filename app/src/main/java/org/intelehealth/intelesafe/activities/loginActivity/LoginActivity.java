@@ -19,7 +19,11 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
+import android.text.method.PasswordTransformationMethod;
+import android.text.style.ClickableSpan;
 import android.text.util.Linkify;
 import android.util.Log;
 import android.view.View;
@@ -41,6 +45,7 @@ import java.security.NoSuchAlgorithmException;
 
 import org.intelehealth.intelesafe.BuildConfig;
 import org.intelehealth.intelesafe.R;
+import org.intelehealth.intelesafe.activities.signupActivity.SignupActivity;
 import org.intelehealth.intelesafe.app.AppConstants;
 import org.intelehealth.intelesafe.models.loginModel.LoginModel;
 import org.intelehealth.intelesafe.models.loginProviderModel.LoginProviderModel;
@@ -62,7 +67,7 @@ import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
 public class LoginActivity extends AppCompatActivity {
-    TextView txt_cant_login;
+    TextView txt_cant_login,txt_signup; // txt_signup added for signup navigation.
     /**
      * A dummy authentication store containing known user names and passwords.
      */
@@ -92,12 +97,15 @@ public class LoginActivity extends AppCompatActivity {
 
     private long createdRecordsCount = 0;
     String provider_url_uuid;
+    String privacy_value;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         sessionManager = new SessionManager(this);
+        privacy_value = getIntent().getStringExtra("privacy"); //privacy_accept value retrieved from previous act.
 
         context = LoginActivity.this;
         sessionManager = new SessionManager(context);
@@ -158,6 +166,7 @@ public class LoginActivity extends AppCompatActivity {
         mUsernameView = findViewById(R.id.et_email);
         // populateAutoComplete(); TODO: create our own autocomplete code
         mPasswordView = findViewById(R.id.et_password);
+        mPasswordView.setTransformationMethod(new PasswordTransformationMethod());
 //      mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 //            @Override
 //            public boolean onEditorAction(TextView v, int id, KeyEvent event) {
@@ -176,6 +185,33 @@ public class LoginActivity extends AppCompatActivity {
                 attemptLogin();
             }
         });
+
+        txt_signup = findViewById(R.id.txt_signup);
+        String signupStr = getString(R.string.txt_sign_up_option);
+        SpannableString spannableString = new SpannableString(signupStr);
+        int startIndex = signupStr.lastIndexOf("?");
+        Log.e("OnClick","startIndex" + startIndex);
+        int endIndex = signupStr.length();
+        Log.e("OnClick","endIndex" + endIndex);
+        ClickableSpan span1 = new ClickableSpan() {
+            @Override
+            public void onClick(View textView) {
+                // do some thing
+                Log.e("OnClick","txt_signup");
+                Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
+                intent.putExtra("privacy", privacy_value); //privacy value send to identificationActivity
+                intent//addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                       . addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        };
+        spannableString.setSpan(new android.text.style.StyleSpan(android.graphics.Typeface.BOLD), startIndex+1, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(span1, startIndex+1, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
+        txt_signup.setText(spannableString);
+        txt_signup.setMovementMethod(LinkMovementMethod.getInstance());
 
     }
 

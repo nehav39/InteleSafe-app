@@ -59,7 +59,7 @@
     <string name="device_id" translatable="false">Device ID:</string>
 
 
-    <string name="cant_login_user" translatable="false">Can\'t log in?</string>
+    <string name="cant_login_user" translatable="false">Forgot password?</string>
     <string name="email_link" translatable="false"> To reset your password send an email to support@intelehealth.io</string>
 
     // Sign up
@@ -639,5 +639,8 @@
     <string name="error_empty_designation">Enter your designation.</string>
     <string name="teleconsult_request">Teleconsult request</string>
     <string name="feeling_stressed_or_anxious_request_for_a_free_confidential_mental_health_consultation_with_a_counsellor">Feeling stressed or anxious? Request for a free confidential mental health consultation with a counsellor.</string>
+
+    <!--Login Screen (New Changes)-->
+    <string name="txt_sign_up_option">Don\'t have an account?<b> Sign Up!</b></string>
 
 </resources>
