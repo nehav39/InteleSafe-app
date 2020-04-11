@@ -991,8 +991,8 @@ public class SignupActivity extends AppCompatActivity {
                 userAddressData.setAddress1("" + mAddress1.getText().toString() + " " + mAddress2.getText().toString());
                 userAddressData.setCityVillage("" + mCity.getText().toString());
                 userAddressData.setCountry("" + country);
-                userAddressData.setStateProvince("" + mState.getSelectedItem().toString());
-                sessionManager.setState(mState.getSelectedItem().toString());
+                userAddressData.setStateProvince("" + state);
+                sessionManager.setState(state);
                 userAddressData.setPostalCode("" + mPostal.getText().toString());
                 // userAddressData.setCountyDistrict("" + selectedLocationName);
 
@@ -1294,7 +1294,7 @@ public class SignupActivity extends AppCompatActivity {
         patientdto.setPatientPhoto(mCurrentPhotoPath);
 //      patientdto.setEconomic(StringUtils.getValue(m));
         patientdto.setOpenmrsId("" + OpenMRSID);
-        patientdto.setStateprovince(StringUtils.getValue(mState.getSelectedItem().toString()));
+        patientdto.setStateprovince(StringUtils.getValue(state));
 
 
         // Uncommented by venu N on 03/04/2020.
