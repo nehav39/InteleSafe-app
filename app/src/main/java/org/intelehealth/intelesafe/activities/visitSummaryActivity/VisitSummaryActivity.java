@@ -1559,7 +1559,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
     private void doWebViewPrint() throws ParseException {
         // Create a WebView object specifically for printing
-        WebView webView = new WebView(this);
+        WebView webView = new WebView(VisitSummaryActivity.this);
         webView.setWebViewClient(new WebViewClient() {
 
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
