@@ -1817,7 +1817,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
         // Create a print job with name and adapter instance
         String jobName = getString(R.string.app_name) + " Visit Summary";
-        printManager.print(jobName, printAdapter,           //removed PrintJob instance by Prajwal as it was of no use.
+        printManager.print(jobName, printAdapter,           //removed PrintJob instance as it was of no use - Prajwal.
                 new PrintAttributes.Builder().build());
 
     }
