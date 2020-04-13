@@ -142,7 +142,7 @@ public class PrivacyNotice_Activity extends AppCompatActivity {
                 public void onClick(View view) {
                     if (chbAgreePrivacy.isChecked()) {
 //                            sessionManager.setOfllineOpenMRSID("");
-                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
                         intent.putExtra("privacy", "Accept"); //privacy value send to identificationActivity
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)

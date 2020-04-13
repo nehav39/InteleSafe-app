@@ -92,4 +92,16 @@ public class UrlModifiers {
         return BASE_URL + provider;
     }
 
+
+    /**
+     * for the patient DetailsGet
+     * @param patientUUID
+     * @return
+     */
+    public String getUrlForPersonDetails(String patientUUID){
+        String provider = "person" + "/" + patientUUID;
+        String BASE_URL = "http://"+ BuildConfig.CLEAN_URL+"/openmrs/ws/rest/v1/";
+        return BASE_URL + provider;
+    }
+
 }

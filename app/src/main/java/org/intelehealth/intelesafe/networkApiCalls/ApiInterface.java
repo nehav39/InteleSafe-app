@@ -18,6 +18,7 @@ import org.intelehealth.intelesafe.models.dto.ResponseDTO;
 import org.intelehealth.intelesafe.models.loginModel.LoginModel;
 import org.intelehealth.intelesafe.models.loginProviderModel.LoginProviderModel;
 import org.intelehealth.intelesafe.models.patientImageModelRequest.PatientProfile;
+import org.intelehealth.intelesafe.models.person.ClsPersonGetResponse;
 import org.intelehealth.intelesafe.models.pushRequestApiCall.PushRequestApiCall;
 import org.intelehealth.intelesafe.models.pushResponseApiCall.PushResponseApiCall;
 import io.reactivex.Observable;
@@ -126,6 +127,10 @@ public interface ApiInterface {
 
     @GET("/intelehealth/app_update.json")
     Single<CheckAppUpdateRes> checkAppUpdate();
+
+
+    @GET
+    Observable<ClsPersonGetResponse> getPersonDetails(@Url  String url, @Header("Authorization") String authHeader,@Query("v") String str);
 
 
 }

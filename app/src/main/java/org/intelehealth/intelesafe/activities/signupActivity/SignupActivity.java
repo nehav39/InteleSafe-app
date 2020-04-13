@@ -730,7 +730,7 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (userName.length() < 10) {
+                if (userName.length() < 8) {
                     mEmailView.setError(getString(R.string.username_10digits));
                     mEmailView.requestFocus();
                     return;
@@ -839,7 +839,7 @@ public class SignupActivity extends AppCompatActivity {
 //                    return;
 //                }
 
-                if (mPhoneNum.getText().toString().equals("")) {
+             /*   if (mPhoneNum.getText().toString().equals("")) {
                     mPhoneNum.setError(getString(R.string.error_field_required));
                     mPhoneNum.requestFocus();
                     return;
@@ -849,7 +849,7 @@ public class SignupActivity extends AppCompatActivity {
                     mPhoneNum.setError(getString(R.string.invalid_phone_number));
                     mPhoneNum.requestFocus();
                     return;
-                }
+                }*/
 
                 // Added by venu N on 03/04/202.
                 if ((selectedPersonalCaste == null && selectedPersonalCaste.length() <= 0) || selectedPersonalCaste.equalsIgnoreCase("Select Designation")) {
@@ -867,7 +867,7 @@ public class SignupActivity extends AppCompatActivity {
 
                 System.out.println("DESIGATION: " + selectedPersonalCaste);
 
-                if (mAddress1.getText().toString().equals("")) {
+               /* if (mAddress1.getText().toString().equals("")) {
                     mAddress1.setError(getString(R.string.error_field_required));
                     mAddress1.requestFocus();
                     return;
@@ -877,7 +877,7 @@ public class SignupActivity extends AppCompatActivity {
                     mCity.setError(getString(R.string.error_field_required));
                     mCity.requestFocus();
                     return;
-                }
+                }*/
 
                 boolean isNotIndia = true;
                 if (country.equalsIgnoreCase("") || country.equalsIgnoreCase("Select Country")) {
@@ -889,7 +889,7 @@ public class SignupActivity extends AppCompatActivity {
                     }
                 }
 
-                if (state.equalsIgnoreCase("")) {
+               /* if (state.equalsIgnoreCase("")) {
                     if(isNotIndia){
                         edt_state.setError(getString(R.string.error_field_required));
                         edt_state.requestFocus();
@@ -897,7 +897,7 @@ public class SignupActivity extends AppCompatActivity {
                         Toast.makeText(context, getString(R.string.please_select_state), Toast.LENGTH_LONG).show();
                     }
                     return;
-                }
+                }*/
 
               /*  if (district.equalsIgnoreCase("")) {
                     Toast.makeText(context, getString(R.string.please_select_districts), Toast.LENGTH_LONG).show();
@@ -914,7 +914,7 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }*/
 
-                if (mPostal.getText().toString().equals("")) {
+               /* if (mPostal.getText().toString().equals("")) {
                     mPostal.setError(getString(R.string.error_field_required));
                     mPostal.requestFocus();
                     return;
@@ -924,7 +924,7 @@ public class SignupActivity extends AppCompatActivity {
                     mPostal.setError(getString(R.string.postal_code_validation));
                     mPostal.requestFocus();
                     return;
-                }
+                }*/
 
 
                 ///////////Data Model for step 1
