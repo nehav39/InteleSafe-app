@@ -722,7 +722,9 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                                 //
                                 showVisitID();
                                 endVisit();
-                                showPopup();
+                                if (!isFinishing()) {
+                                    showPopup();
+                                }
                                 uploadButton.setEnabled(false);
                                 uploadButton.setAlpha(0.5f);
 
