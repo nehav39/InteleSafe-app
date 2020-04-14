@@ -397,6 +397,7 @@ public class SignupActivity extends AppCompatActivity {
                 country = adapterView.getItemAtPosition(i).toString();
 
                 if (country.matches("India")) {
+                    edt_state.setText("");
                     input_state_spinner.setVisibility(View.VISIBLE);
                     input_state_field.setVisibility(View.GONE);
                     ArrayAdapter<CharSequence> stateAdapter = ArrayAdapter.createFromResource(SignupActivity.this,
