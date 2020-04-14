@@ -21,6 +21,8 @@ import org.intelehealth.intelesafe.models.patientImageModelRequest.PatientProfil
 import org.intelehealth.intelesafe.models.person.ClsPersonGetResponse;
 import org.intelehealth.intelesafe.models.pushRequestApiCall.PushRequestApiCall;
 import org.intelehealth.intelesafe.models.pushResponseApiCall.PushResponseApiCall;
+import org.intelehealth.intelesafe.models.user.ClsUserGetResponse;
+
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import okhttp3.MultipartBody;
@@ -131,6 +133,9 @@ public interface ApiInterface {
 
     @GET
     Observable<ClsPersonGetResponse> getPersonDetails(@Url  String url, @Header("Authorization") String authHeader,@Query("v") String str);
+
+    @GET
+    Observable<ClsUserGetResponse> getUsersFromServer(@Url String url,@Header("Authorization") String authHeader);
 
 
 }

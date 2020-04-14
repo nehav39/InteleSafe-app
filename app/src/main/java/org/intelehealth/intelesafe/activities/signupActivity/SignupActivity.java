@@ -3,6 +3,7 @@ package org.intelehealth.intelesafe.activities.signupActivity;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -26,6 +27,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -79,6 +81,8 @@ import org.intelehealth.intelesafe.models.UserBirthData;
 import org.intelehealth.intelesafe.models.dto.PatientAttributesDTO;
 import org.intelehealth.intelesafe.models.dto.PatientDTO;
 import org.intelehealth.intelesafe.models.loginModel.LoginModel;
+import org.intelehealth.intelesafe.models.user.ClsUserGetResponse;
+import org.intelehealth.intelesafe.models.user.ResultsItem;
 import org.intelehealth.intelesafe.networkApiCalls.ApiClient;
 import org.intelehealth.intelesafe.networkApiCalls.ApiInterface;
 import org.intelehealth.intelesafe.utilities.Base64Utils;
@@ -94,6 +98,7 @@ import org.intelehealth.intelesafe.utilities.exception.DAOException;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
+import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
@@ -243,7 +248,8 @@ public class SignupActivity extends AppCompatActivity {
         mLastName.setFilters(new InputFilter[]{new InputFilter.LengthFilter(41), inputFilter_Name}); //maxlength 41
 
         mEmailView = findViewById(R.id.email);
-/*
+
+
         mEmailView.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -252,15 +258,18 @@ public class SignupActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+               // mEmailView.setError("");
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                mPhoneNum.setText(mEmailView.getText().toString());
+               if(editable.length() == 8){
+                   InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+                   imm.hideSoftInputFromWindow(mEmailView.getWindowToken(), 0);
+                   checkUserExistsOrNot(mEmailView.getText().toString());
+               }
             }
         });
-*/
 
 
         mPasswordView = findViewById(R.id.password);
@@ -1081,6 +1090,41 @@ public class SignupActivity extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    private void checkUserExistsOrNot(String enteredUserName) {
+        progress.show();
+        UrlModifiers urlModifiers = new UrlModifiers();
+        String urlString = urlModifiers.setRegistrationURL();
+        encoded = base64Utils.encoded("admin", "Admin123");
+        Observable<ClsUserGetResponse> userGetResponse = AppConstants.apiInterface.getUsersFromServer(urlString,"Basic " +encoded);
+        userGetResponse.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<ClsUserGetResponse>() {
+                    @Override
+                    public void onNext(ClsUserGetResponse clsUserGetResponse) {
+                        progress.dismiss();
+                        List<ResultsItem> resultList = clsUserGetResponse.getResults();
+                        ResultsItem objResultsItem  = new ResultsItem();
+                        objResultsItem.setDisplay(enteredUserName);
+                        if(resultList.contains(objResultsItem)){
+                            mEmailView.setError(getString(R.string.txt_user_exists));
+                            mEmailView.requestFocus();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        progress.dismiss();
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
 
     }
 

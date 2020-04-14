@@ -639,6 +639,7 @@
     <string name="error_empty_designation">Enter your designation.</string>
     <string name="teleconsult_request">Teleconsult request</string>
     <string name="feeling_stressed_or_anxious_request_for_a_free_confidential_mental_health_consultation_with_a_counsellor">Feeling stressed or anxious? Request for a free confidential mental health consultation with a counsellor.</string>
+    <string name="txt_user_exists">User name already exists.</string>
 
     <!--Login Screen (New Changes)-->
     <string name="txt_sign_up_option">Don\'t have an account?<b> Sign Up!</b></string>
