@@ -82,6 +82,7 @@
                     android:paddingHorizontal="10dp"
                     android:paddingBottom="10dp"
                     android:elevation="40dp"
+                    android:visibility="gone"
                     android:background="@drawable/white_rectangular_bg">
 
                     <LinearLayout
@@ -478,6 +479,7 @@
                     android:textColor="@null"
                     android:textAppearance="@style/login_details_conditions"
                     android:lineSpacingExtra="2sp"
+                    android:visibility="visible"
                     android:translationY="-1sp"/>
 
                 <android.support.design.widget.TextInputLayout

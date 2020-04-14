@@ -144,7 +144,7 @@ public class PrivacyNotice_Activity extends AppCompatActivity {
 //                            sessionManager.setOfllineOpenMRSID("");
                         Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
                         intent.putExtra("privacy", "Accept"); //privacy value send to identificationActivity
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        intent
                                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
