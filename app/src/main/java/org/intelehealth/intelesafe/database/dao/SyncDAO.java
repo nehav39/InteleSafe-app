@@ -261,6 +261,13 @@ public class SyncDAO {
                     }
                 }
 
+                if(fromActivity.equalsIgnoreCase("HOME_SCREEN")){
+                    Intent intent = new Intent();
+                    intent.setAction("org.intelehealth.intelesafe.refreshCheck-in");
+                    IntelehealthApplication.getAppContext().sendBroadcast(intent);
+
+                }
+
                 Logger.logD("End Pull request", "Ended");
                 sessionManager.setLastPulledDateTime(AppConstants.dateAndTimeUtils.currentDateTimeInHome());
 

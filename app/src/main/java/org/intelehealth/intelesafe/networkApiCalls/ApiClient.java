@@ -13,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiClient {
     //
     private static OkHttpClient.Builder client = new OkHttpClient.Builder();
-    private static String apiBaseUrl = "http://intelesafe.covidhelp.in/" ;//http://openmrs.intelehealth.io"; // replaced for app_update_version.
+    private static String apiBaseUrl = "http://testintelesafe.covidhelp.in/" ;//Live = http://intelesafe.covidhelp.in/  //http://openmrs.intelehealth.io"; // replaced for app_update_version.
     private static Retrofit retrofit;
     private static Retrofit.Builder builder =
             new Retrofit.Builder()
@@ -34,7 +34,7 @@ public class ApiClient {
     public static <S> S createService(Class<S> serviceClass) {
 
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.NONE);
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         client.addInterceptor(loggingInterceptor);
         client.connectTimeout(70, TimeUnit.SECONDS);
         client.readTimeout(70, TimeUnit.SECONDS);

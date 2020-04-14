@@ -59,8 +59,10 @@
                 android:hint="@string/prompt_email"
                 android:textColorHint="@color/font_black_5"
                 android:imeOptions="actionNext"
-                android:inputType="number"
-                android:maxLength="100"
+                android:digits="1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+                android:inputType="text"
+                android:maxLength="8"
+                android:fontFamily="@font/lato_regular"
                 android:theme="@style/MyEditTextTheme"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
@@ -102,9 +104,9 @@
                 android:hint="@string/prompt_password"
                 android:textColorHint="@color/font_black_5"
                 android:imeOptions="actionDone"
-                android:inputType="textPassword"
                 android:maxLength="50"
                 android:maxLines="1"
+                android:fontFamily="@font/lato_regular"
                 android:textColor="@color/white"
                 android:singleLine="true"
                 android:textSize="16sp" />
@@ -122,9 +124,10 @@
             android:layout_marginTop="16dp"
             android:background="@drawable/button_bg_rounded_corners"
             android:text="@string/action_sign_in"
+            android:fontFamily="@font/lato_bold"
             android:textColor="@color/button_text_color"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            />
 
         <TextView
             android:id="@+id/cant_login_id"
@@ -135,11 +138,32 @@
             android:paddingBottom="5dp"
             android:paddingEnd="10dp"
             android:paddingStart="10dp"
+            android:includeFontPadding="false"
             android:paddingTop="5dp"
+            android:fontFamily="@font/lato_bold"
             android:text="@string/cant_login_user"
             android:textColor="@color/white"
             android:textSize="16sp"
-            android:textStyle="bold" />
+             />
+
+
+        <TextView
+            android:id="@+id/txt_signup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="16dp"
+            android:gravity="center_horizontal"
+            android:text="@string/txt_sign_up_option"
+            android:textColor="@color/white"
+            android:fontFamily="@font/lato_regular"
+            android:textSize="16sp"
+            android:textColorLink="@color/white"
+             />
+
+
+
 
     </LinearLayout>
 </RelativeLayout>
