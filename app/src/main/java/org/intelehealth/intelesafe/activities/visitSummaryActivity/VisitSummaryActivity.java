@@ -226,7 +226,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
     MenuItem internetCheck = null;
     MenuItem endVisit_click = null;
 
-    private static boolean flag_upload = false;
+    private  boolean flag_upload = false;
 
     private RecyclerView mAdditionalDocsRecyclerView;
     private RecyclerView.LayoutManager mAdditionalDocsLayoutManager;

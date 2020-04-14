@@ -56,7 +56,7 @@ public class ResultsItem{
 		/*if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;*/
 		ResultsItem that = (ResultsItem) o;
-		return display.equals(that.display);
+		return display.equalsIgnoreCase(that.display);
 	}
 
 	@Override

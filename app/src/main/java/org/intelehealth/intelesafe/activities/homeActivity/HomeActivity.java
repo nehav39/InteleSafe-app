@@ -601,6 +601,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         if(!recycler_arraylist.isEmpty()) {
+            sessionManager.setFirstCheckin("true");
             tvNoVisit.setVisibility(View.GONE);
             recycler_home_adapter = new Recycler_Home_Adapter(context, recycler_arraylist, array_original_date);
             recycler_home_adapter.notifyDataSetChanged();
@@ -1356,7 +1357,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                     Date formatted = currentDate.parse(date);
                     String visitDate = currentDate.format(formatted);
-                    OldVisit(visitDate, visitList.get(position), end_date, "", encounterVitalList.get(position), encounterAdultList.get(position));
+                    OldVisit(visitDate, visitList.get(position), end_date, "", ""/*encounterVitalList.get(position)*/, encounterAdultList.get(position));
                 } catch (ParseException e) {
                     Crashlytics.getInstance().core.logException(e);
                 }
