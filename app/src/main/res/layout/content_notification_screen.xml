@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".activities.notification_screen.NotificationScreenActivity"
+    tools:showIn="@layout/activity_notification_screen">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/mark_as_rea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mark as read"
+        android:fontFamily="@font/lato_medium"
+        android:textAppearance="@style/mark_as_rea"
+        android:gravity="end"
+        android:textColor="#2014EB"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="24.4dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15.12dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/mark_as_rea"
+                >
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/assess_cardview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="40dp"
+        app:cardUseCompatPadding="true"
+        app:cardPreventCornerOverlap="false"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="25dp"
+        app:cardCornerRadius="10sp"
+        >
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/assesment_p"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Assesment Pending"
+                android:fontFamily="@font/lato_medium"
+                android:layout_marginStart="@dimen/text_18sp"
+                android:layout_marginTop="14.36dp"
+                android:textAppearance="@style/assesment_p"
+                android:gravity="bottom"
+                />
+
+            <TextView
+                android:id="@+id/day_5_wed_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Day 5 | Wed 10"
+                android:fontFamily="@font/lato_regular"
+                android:layout_marginTop="8.34dp"
+                android:layout_marginStart="@dimen/text_18sp"
+                android:layout_below="@+id/assesment_p"
+                android:textAppearance="@style/day_5_wed_1"
+                android:gravity="center_vertical"
+                android:alpha="0.8"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/day_5_wed_1"
+                android:orientation="horizontal"
+                android:layout_marginTop="11.83dp"
+                android:layout_marginBottom="14.47dp"
+                android:layout_marginStart="@dimen/text_18sp">
+
+                <TextView
+                    android:id="@+id/start_asses"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Start Assesment"
+                    android:fontFamily="@font/lato_medium"
+                    android:textSize="13sp"
+                    android:textColor="#2418EB"
+                    android:gravity="center"
+                    />
+
+                <ImageView
+                    android:id="@+id/keyboard_ba"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/svg_right_arrow"
+                    android:tint="#2418EB"
+                    android:layout_marginStart="10dp"
+                    />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="30.81dp"
+                android:layout_marginVertical="21.15dp"
+                android:gravity="center">
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_notification_drawable"
+                />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/feedback_cardview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="40dp"
+                app:cardUseCompatPadding="true"
+                app:cardPreventCornerOverlap="false"
+                android:layout_gravity="center"
+                android:layout_below="@+id/assess_cardview"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="10sp"
+                >
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/feedback_p"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Feedback"
+                        android:fontFamily="@font/lato_medium"
+                        android:layout_marginStart="@dimen/text_18sp"
+                        android:layout_marginTop="14.36dp"
+                        android:textAppearance="@style/assesment_p"
+                        android:gravity="bottom"
+                        />
+
+                    <TextView
+                        android:id="@+id/feedback_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Day 4 | Tue 19"
+                        android:fontFamily="@font/lato_regular"
+                        android:layout_marginStart="@dimen/text_18sp"
+                        android:layout_below="@+id/feedback_p"
+                        android:layout_marginTop="8.34dp"
+                        android:textAppearance="@style/day_5_wed_1"
+                        android:gravity="center_vertical"
+                        android:alpha="0.8"
+                        />
+
+                    <TextView
+                        android:id="@+id/lorem_ipsum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/feedback_date"
+                        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."
+                        android:textAppearance="@style/lorem_ipsum"
+                        android:lineSpacingExtra="1sp"
+                        android:fontFamily="@font/lato_regular"
+                        android:layout_marginStart="@dimen/text_18sp"
+                        android:translationY="-0.6sp"
+                        android:layout_marginEnd="14.32dp"
+                        android:layout_marginBottom="14dp"
+                        android:layout_marginTop="11.83dp"
+                        android:gravity="top"
+                        />
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+
+
+</RelativeLayout>
