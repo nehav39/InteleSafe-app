@@ -117,7 +117,8 @@
 
                         <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:visibility="gone">
 
                             <EditText
                                 android:id="@+id/identification_middle_name"
@@ -246,6 +247,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
+                            android:visibility="gone"
                             android:weightSum="2">
 
                             <TextView
@@ -348,6 +350,7 @@
                             <android.support.design.widget.TextInputLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:visibility="gone"
                                 >
 
                                 <EditText
@@ -372,6 +375,7 @@
                             <android.support.design.widget.TextInputLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:visibility="gone"
                                >
 
                                 <EditText
@@ -448,22 +452,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
+                    <!-- android:textColor="#50000000"-->
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:digits="0123456789+"
                         android:hint="@string/username"
                         android:imeOptions="actionNext"
-                        android:inputType="none"
+                        android:digits="1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+                        android:inputType="text"
                         android:maxLines="1"
-                        android:enabled="false"
-                        android:textColor="#50000000"
-                        android:maxLength="10"
+                        android:maxLength="8"
                         android:nextFocusForward="@id/password"
                         android:textAppearance="@style/sign_up_input"/>
-                        android:maxLines="1"
-                        android:nextFocusForward="@id/password" />
+                       <!-- android:maxLines="1"
+                        android:nextFocusForward="@id/password" />-->
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -475,6 +478,7 @@
                     android:textColor="@null"
                     android:textAppearance="@style/login_details_conditions"
                     android:lineSpacingExtra="2sp"
+                    android:visibility="visible"
                     android:translationY="-1sp"/>
 
                 <android.support.design.widget.TextInputLayout
@@ -566,7 +570,8 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
 
                     <EditText
                         android:id="@+id/identification_address1"
@@ -587,7 +592,8 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
 
                     <EditText
                         android:id="@+id/identification_address2"
@@ -607,7 +613,8 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
 
                     <AutoCompleteTextView
                         android:id="@+id/identification_city"
@@ -677,20 +684,24 @@
                     </LinearLayout>
 
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="5dp"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
                         <android.support.design.widget.TextInputLayout
+                            android:id="@+id/input_state_spinner"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:visibility="gone"
                             android:layout_weight="1"
                             android:weightSum="4">
 
                             <LinearLayout
+
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical">
@@ -720,7 +731,35 @@
 
 
                         </android.support.design.widget.TextInputLayout>
-                    </LinearLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/input_state_field"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+
+                            >
+                            <!--Can't access Vector drawables directly,that's why putted into another DrawableContainer-->
+                            <!--On the Left or Right of textview or Editext-->
+
+                            <EditText
+                                android:id="@+id/edt_state"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:freezesText="true"
+                                android:hint="@string/identification_screen_prompt_state"
+                                android:imeOptions="actionUnspecified"
+                                android:inputType="textCapWords"
+                                android:maxLength="25"
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                android:textAppearance="@style/sign_up_input"/>
+
+                        </android.support.design.widget.TextInputLayout>
+
+
+                    </RelativeLayout>
 
                 </LinearLayout>
 
@@ -801,7 +840,8 @@
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
 
                     <EditText
                         android:id="@+id/identification_postal_code"

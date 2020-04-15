@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.intelehealth.intelesafe.R;
+import org.intelehealth.intelesafe.activities.loginActivity.LoginActivity;
 import org.intelehealth.intelesafe.activities.privacyNoticeActivity.PrivacyNotice_Activity;
 
 public class IntroActivity extends AppCompatActivity {
@@ -129,7 +130,7 @@ public class IntroActivity extends AppCompatActivity {
 
     private void launchHomeScreen() {
 
-        Intent intent = new Intent(context, PrivacyNotice_Activity.class);
+        Intent intent = new Intent(context, LoginActivity.class);
         startActivity(intent);
         finish();
 

@@ -46,7 +46,8 @@ public class AlarmReceiver extends BroadcastReceiver {
         }
         NotificationCompat.Builder b = new NotificationCompat.Builder(context, "default");
 
-        if (intent.getAction().equalsIgnoreCase(AppConstants.ACTION_ONE)) {
+        if (intent != null && intent.getAction() != null
+                && intent.getAction().equalsIgnoreCase(AppConstants.ACTION_ONE)) {
             b.setAutoCancel(true)
                     .setDefaults(NotificationCompat.DEFAULT_ALL)
                     .setWhen(System.currentTimeMillis())

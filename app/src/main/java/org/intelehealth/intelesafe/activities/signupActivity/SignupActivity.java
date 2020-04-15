@@ -3,6 +3,7 @@ package org.intelehealth.intelesafe.activities.signupActivity;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -14,6 +15,7 @@ import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -25,6 +27,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -78,6 +81,8 @@ import org.intelehealth.intelesafe.models.UserBirthData;
 import org.intelehealth.intelesafe.models.dto.PatientAttributesDTO;
 import org.intelehealth.intelesafe.models.dto.PatientDTO;
 import org.intelehealth.intelesafe.models.loginModel.LoginModel;
+import org.intelehealth.intelesafe.models.user.ClsUserGetResponse;
+import org.intelehealth.intelesafe.models.user.ResultsItem;
 import org.intelehealth.intelesafe.networkApiCalls.ApiClient;
 import org.intelehealth.intelesafe.networkApiCalls.ApiInterface;
 import org.intelehealth.intelesafe.utilities.Base64Utils;
@@ -90,8 +95,10 @@ import org.intelehealth.intelesafe.utilities.UrlModifiers;
 import org.intelehealth.intelesafe.utilities.UuidDictionary;
 import org.intelehealth.intelesafe.utilities.UuidGenerator;
 import org.intelehealth.intelesafe.utilities.exception.DAOException;
+
 import io.reactivex.Observable;
 import io.reactivex.Observer;
+import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
@@ -104,7 +111,7 @@ import okhttp3.ResponseBody;
 
 public class SignupActivity extends AppCompatActivity {
 
-//    private static final String TAG = IdentificationActivity.class.getSimpleName();
+    //    private static final String TAG = IdentificationActivity.class.getSimpleName();
     Context context;
     private static final String TAG = SignupActivity.class.getSimpleName();
 
@@ -130,7 +137,7 @@ public class SignupActivity extends AppCompatActivity {
     EditText mLastName;
     EditText mDOB;
     EditText mPhoneNum;
-//    EditText mAge;
+    //    EditText mAge;
     AlertDialog.Builder mAgePicker;
     EditText mAddress1;
     EditText mAddress2;
@@ -170,7 +177,7 @@ public class SignupActivity extends AppCompatActivity {
     String cPassword = "";
     String country = "";
     String state = "";
- //   String district = "";
+    //   String district = "";
     private String personUUID = "";
     private String patientOpenMRSID = "";
     private String OpenMRSID = "";
@@ -203,6 +210,9 @@ public class SignupActivity extends AppCompatActivity {
     Pattern digitCasePatten = Pattern.compile("[0-9 ]");
 
     protected AccountManager manager;
+
+    private TextInputLayout input_state_field, input_state_spinner; //  state a text box if country is not India so that user can enter their state
+    private EditText edt_state;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -238,7 +248,8 @@ public class SignupActivity extends AppCompatActivity {
         mLastName.setFilters(new InputFilter[]{new InputFilter.LengthFilter(41), inputFilter_Name}); //maxlength 41
 
         mEmailView = findViewById(R.id.email);
-/*
+
+
         mEmailView.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -247,15 +258,18 @@ public class SignupActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+               // mEmailView.setError("");
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                mPhoneNum.setText(mEmailView.getText().toString());
+               if(editable.length() == 8){
+                   InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+                   imm.hideSoftInputFromWindow(mEmailView.getWindowToken(), 0);
+                   checkUserExistsOrNot(mEmailView.getText().toString());
+               }
             }
         });
-*/
 
 
         mPasswordView = findViewById(R.id.password);
@@ -290,6 +304,10 @@ public class SignupActivity extends AppCompatActivity {
         mGenderF = findViewById(R.id.identification_gender_female);
         mImageView = findViewById(R.id.imageview_id_picture);
 
+        input_state_field = findViewById(R.id.input_state_field);
+        input_state_spinner = findViewById(R.id.input_state_spinner);
+        edt_state = findViewById(R.id.edt_state);
+
         mPhoneNum.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -313,7 +331,7 @@ public class SignupActivity extends AppCompatActivity {
         mEdtCaste.setVisibility(View.GONE);
 
         ArrayAdapter<CharSequence> countryAdapter = ArrayAdapter.createFromResource(this,
-                R.array.countries, android.R.layout.simple_spinner_item);
+                R.array.countries_array, android.R.layout.simple_spinner_item);
         countryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mCountry.setAdapter(countryAdapter);
 
@@ -329,33 +347,31 @@ public class SignupActivity extends AppCompatActivity {
 
         ArrayAdapter<CharSequence> personalCasteAdapter = ArrayAdapter.createFromResource(SignupActivity.this,
                 R.array.personal_caste, R.layout.custom_spinner_item);
-       // personalCasteAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // personalCasteAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mCaste.setAdapter(personalCasteAdapter);
 
         generateUuid();
 
         ArrayAdapter<CharSequence> stateAdapter = ArrayAdapter.createFromResource(this, R.array.state_error, android.R.layout.simple_spinner_item);
-       // stateAdapter.setDropDownViewResource(R.layout.custom_spinner_item);
+        // stateAdapter.setDropDownViewResource(R.layout.custom_spinner_item);
         mState.setAdapter(stateAdapter);
 
         mState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position != 0)
-                {
-                state = parent.getItemAtPosition(position).toString();
-                if (state.matches("Odisha")) {
-                    //Creating the instance of ArrayAdapter containing list of fruit names
-                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(SignupActivity.this,
-                            R.array.odisha_villages, android.R.layout.simple_spinner_item);
-                    mCity.setThreshold(1);//will start working from first character
-                    mCity.setAdapter(adapter);//setting the adapter data into the AutoCompleteTextView
+                if (position != 0) {
+                    edt_state.setText("");
+                    state = parent.getItemAtPosition(position).toString();
+                    if (state.matches("Odisha")) {
+                        //Creating the instance of ArrayAdapter containing list of fruit names
+                        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(SignupActivity.this,
+                                R.array.odisha_villages, android.R.layout.simple_spinner_item);
+                        mCity.setThreshold(1);//will start working from first character
+                        mCity.setAdapter(adapter);//setting the adapter data into the AutoCompleteTextView
+                    } else {
+                        mCity.setAdapter(null);
+                    }
                 } else {
-                    mCity.setAdapter(null);
-                }
-                }
-                else
-                    {
 
                 }
             }
@@ -366,26 +382,49 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
+        edt_state.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                state = edt_state.getText().toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         mCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 //                if (i != 0) {
-                    country = adapterView.getItemAtPosition(i).toString();
+                country = adapterView.getItemAtPosition(i).toString();
 
-                    if (country.matches("India")) {
-                        ArrayAdapter<CharSequence> stateAdapter = ArrayAdapter.createFromResource(SignupActivity.this,
-                                R.array.states_india, android.R.layout.simple_spinner_item);
-                        stateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        mState.setAdapter(stateAdapter);
-                        // setting state according database when user clicks edit details
+                if (country.matches("India")) {
+                    edt_state.setText("");
+                    input_state_spinner.setVisibility(View.VISIBLE);
+                    input_state_field.setVisibility(View.GONE);
+                    ArrayAdapter<CharSequence> stateAdapter = ArrayAdapter.createFromResource(SignupActivity.this,
+                            R.array.states_india, android.R.layout.simple_spinner_item);
+                    stateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    mState.setAdapter(stateAdapter);
+                    // setting state according database when user clicks edit details
 
-                        if (patientID_edit != null) {
-                            mState.setSelection(stateAdapter.getPosition(String.valueOf(patient1.getState_province())));
-                        } else {
-                          //  mState.setSelection(stateAdapter.getPosition("Maharashtra"));
-                        }
-
+                    if (patientID_edit != null) {
+                        mState.setSelection(stateAdapter.getPosition(String.valueOf(patient1.getState_province())));
+                    } else {
+                        //  mState.setSelection(stateAdapter.getPosition("Maharashtra"));
                     }
+
+                } else {
+                    input_state_spinner.setVisibility(View.GONE);
+                    input_state_field.setVisibility(View.VISIBLE);
+                }
 //                } else {
 //                    ArrayAdapter<CharSequence> stateAdapter = ArrayAdapter.createFromResource(SignupActivity.this,
 //                            R.array.state_error, android.R.layout.simple_spinner_item);
@@ -456,9 +495,9 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String caste = parent.getSelectedItem().toString();
-                if(caste.equalsIgnoreCase("Other")){
+                if (caste.equalsIgnoreCase("Other")) {
                     mEdtCaste.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     mEdtCaste.setVisibility(View.GONE);
                 }
                 selectedPersonalCaste = caste;
@@ -700,7 +739,7 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (userName.length() < 10) {
+                if (userName.length() < 8) {
                     mEmailView.setError(getString(R.string.username_10digits));
                     mEmailView.requestFocus();
                     return;
@@ -809,7 +848,7 @@ public class SignupActivity extends AppCompatActivity {
 //                    return;
 //                }
 
-                if (mPhoneNum.getText().toString().equals("")) {
+             /*   if (mPhoneNum.getText().toString().equals("")) {
                     mPhoneNum.setError(getString(R.string.error_field_required));
                     mPhoneNum.requestFocus();
                     return;
@@ -819,15 +858,15 @@ public class SignupActivity extends AppCompatActivity {
                     mPhoneNum.setError(getString(R.string.invalid_phone_number));
                     mPhoneNum.requestFocus();
                     return;
-                }
+                }*/
 
                 // Added by venu N on 03/04/202.
-                if((selectedPersonalCaste == null && selectedPersonalCaste.length() <= 0) || selectedPersonalCaste.equalsIgnoreCase("Select Designation")){
+                if ((selectedPersonalCaste == null && selectedPersonalCaste.length() <= 0) || selectedPersonalCaste.equalsIgnoreCase("Select Designation")) {
                     Toast.makeText(context, getString(R.string.toast_select_designation), Toast.LENGTH_LONG).show();
                     return;
-                }else if(selectedPersonalCaste.equalsIgnoreCase("Other")){
-                        selectedPersonalCaste = mEdtCaste.getText().toString();
-                    if(selectedPersonalCaste.equalsIgnoreCase("")){
+                } else if (selectedPersonalCaste.equalsIgnoreCase("Other")) {
+                    selectedPersonalCaste = mEdtCaste.getText().toString();
+                    if (selectedPersonalCaste.equalsIgnoreCase("")) {
                         selectedPersonalCaste = "Other";
                         mEdtCaste.setError(getString(R.string.error_empty_designation));
                         mEdtCaste.requestFocus();
@@ -835,9 +874,9 @@ public class SignupActivity extends AppCompatActivity {
                     }
                 }
 
-                System.out.println("DESIGATION: "+selectedPersonalCaste);
+                System.out.println("DESIGATION: " + selectedPersonalCaste);
 
-                if (mAddress1.getText().toString().equals("")) {
+               /* if (mAddress1.getText().toString().equals("")) {
                     mAddress1.setError(getString(R.string.error_field_required));
                     mAddress1.requestFocus();
                     return;
@@ -847,17 +886,27 @@ public class SignupActivity extends AppCompatActivity {
                     mCity.setError(getString(R.string.error_field_required));
                     mCity.requestFocus();
                     return;
-                }
+                }*/
 
-                if (country.equalsIgnoreCase("")) {
+                boolean isNotIndia = true;
+                if (country.equalsIgnoreCase("") || country.equalsIgnoreCase("Select Country")) {
                     Toast.makeText(context, getString(R.string.please_select_country), Toast.LENGTH_LONG).show();
                     return;
+                }else{
+                    if(country.equalsIgnoreCase("India")){
+                        isNotIndia = false;
+                    }
                 }
 
-                if (state.equalsIgnoreCase("")) {
-                    Toast.makeText(context, getString(R.string.please_select_state), Toast.LENGTH_LONG).show();
+               /* if (state.equalsIgnoreCase("")) {
+                    if(isNotIndia){
+                        edt_state.setError(getString(R.string.error_field_required));
+                        edt_state.requestFocus();
+                    }else{
+                        Toast.makeText(context, getString(R.string.please_select_state), Toast.LENGTH_LONG).show();
+                    }
                     return;
-                }
+                }*/
 
               /*  if (district.equalsIgnoreCase("")) {
                     Toast.makeText(context, getString(R.string.please_select_districts), Toast.LENGTH_LONG).show();
@@ -874,7 +923,7 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }*/
 
-                if (mPostal.getText().toString().equals("")) {
+               /* if (mPostal.getText().toString().equals("")) {
                     mPostal.setError(getString(R.string.error_field_required));
                     mPostal.requestFocus();
                     return;
@@ -884,7 +933,7 @@ public class SignupActivity extends AppCompatActivity {
                     mPostal.setError(getString(R.string.postal_code_validation));
                     mPostal.requestFocus();
                     return;
-                }
+                }*/
 
 
                 ///////////Data Model for step 1
@@ -952,10 +1001,10 @@ public class SignupActivity extends AppCompatActivity {
                 userAddressData.setAddress1("" + mAddress1.getText().toString() + " " + mAddress2.getText().toString());
                 userAddressData.setCityVillage("" + mCity.getText().toString());
                 userAddressData.setCountry("" + country);
-                userAddressData.setStateProvince("" + mState.getSelectedItem().toString());
-                sessionManager.setState(mState.getSelectedItem().toString());
+                userAddressData.setStateProvince("" + state);
+                sessionManager.setState(state);
                 userAddressData.setPostalCode("" + mPostal.getText().toString());
-               // userAddressData.setCountyDistrict("" + selectedLocationName);
+                // userAddressData.setCountyDistrict("" + selectedLocationName);
 
                 Log.e("JSON-STEP3- ", "" + gson.toJson(userAddressData));
 
@@ -1041,6 +1090,41 @@ public class SignupActivity extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    private void checkUserExistsOrNot(String enteredUserName) {
+        progress.show();
+        UrlModifiers urlModifiers = new UrlModifiers();
+        String urlString = urlModifiers.setRegistrationURL();
+        encoded = base64Utils.encoded("admin", "Admin123");
+        Observable<ClsUserGetResponse> userGetResponse = AppConstants.apiInterface.getUsersFromServer(urlString,"Basic " +encoded);
+        userGetResponse.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<ClsUserGetResponse>() {
+                    @Override
+                    public void onNext(ClsUserGetResponse clsUserGetResponse) {
+                        progress.dismiss();
+                        List<ResultsItem> resultList = clsUserGetResponse.getResults();
+                        ResultsItem objResultsItem  = new ResultsItem();
+                        objResultsItem.setDisplay(enteredUserName);
+                        if(resultList.contains(objResultsItem)){
+                            mEmailView.setError(getString(R.string.txt_user_exists));
+                            mEmailView.requestFocus();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        progress.dismiss();
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
 
     }
 
@@ -1255,16 +1339,16 @@ public class SignupActivity extends AppCompatActivity {
         patientdto.setPatientPhoto(mCurrentPhotoPath);
 //      patientdto.setEconomic(StringUtils.getValue(m));
         patientdto.setOpenmrsId("" + OpenMRSID);
-        patientdto.setStateprovince(StringUtils.getValue(mState.getSelectedItem().toString()));
+        patientdto.setStateprovince(StringUtils.getValue(state));
 
 
         // Uncommented by venu N on 03/04/2020.
-            patientAttributesDTO = new PatientAttributesDTO();
-            patientAttributesDTO.setUuid(UUID.randomUUID().toString());
-            patientAttributesDTO.setPatientuuid(uuid);
-            patientAttributesDTO.setPersonAttributeTypeUuid(patientsDAO.getUuidForAttribute("caste"));
-            patientAttributesDTO.setValue(selectedPersonalCaste);  //get the spinner value and send it here.
-            patientAttributesDTOList.add(patientAttributesDTO);
+        patientAttributesDTO = new PatientAttributesDTO();
+        patientAttributesDTO.setUuid(UUID.randomUUID().toString());
+        patientAttributesDTO.setPatientuuid(uuid);
+        patientAttributesDTO.setPersonAttributeTypeUuid(patientsDAO.getUuidForAttribute("caste"));
+        patientAttributesDTO.setValue(selectedPersonalCaste);  //get the spinner value and send it here.
+        patientAttributesDTOList.add(patientAttributesDTO);
 
         patientAttributesDTO = new PatientAttributesDTO();
         patientAttributesDTO.setUuid(UUID.randomUUID().toString());
@@ -1280,12 +1364,12 @@ public class SignupActivity extends AppCompatActivity {
 //            patientAttributesDTO.setValue(StringUtils.getValue(mRelationship.getText().toString()));
 //            patientAttributesDTOList.add(patientAttributesDTO);
 
-            patientAttributesDTO = new PatientAttributesDTO();
-            patientAttributesDTO.setUuid(UUID.randomUUID().toString());
-            patientAttributesDTO.setPatientuuid(uuid);
-            patientAttributesDTO.setPersonAttributeTypeUuid(patientsDAO.getUuidForAttribute("occupation"));
-            patientAttributesDTO.setValue(StringUtils.getValue(licenseID.getText().toString()));
-            patientAttributesDTOList.add(patientAttributesDTO);
+        patientAttributesDTO = new PatientAttributesDTO();
+        patientAttributesDTO.setUuid(UUID.randomUUID().toString());
+        patientAttributesDTO.setPatientuuid(uuid);
+        patientAttributesDTO.setPersonAttributeTypeUuid(patientsDAO.getUuidForAttribute("occupation"));
+        patientAttributesDTO.setValue(StringUtils.getValue(licenseID.getText().toString()));
+        patientAttributesDTOList.add(patientAttributesDTO);
 
 //            patientAttributesDTO = new PatientAttributesDTO();
 //            patientAttributesDTO.setUuid(UUID.randomUUID().toString());
@@ -1294,12 +1378,12 @@ public class SignupActivity extends AppCompatActivity {
 //            patientAttributesDTO.setValue(StringUtils.getProvided(mEconomicStatus));
 //            patientAttributesDTOList.add(patientAttributesDTO);
 
-            patientAttributesDTO = new PatientAttributesDTO();
-            patientAttributesDTO.setUuid(UUID.randomUUID().toString());
-            patientAttributesDTO.setPatientuuid(uuid);
-            patientAttributesDTO.setPersonAttributeTypeUuid(patientsDAO.getUuidForAttribute("Education Level"));
-            patientAttributesDTO.setValue(StringUtils.getValue(hospital_name.getText().toString()));
-            patientAttributesDTOList.add(patientAttributesDTO);
+        patientAttributesDTO = new PatientAttributesDTO();
+        patientAttributesDTO.setUuid(UUID.randomUUID().toString());
+        patientAttributesDTO.setPatientuuid(uuid);
+        patientAttributesDTO.setPersonAttributeTypeUuid(patientsDAO.getUuidForAttribute("Education Level"));
+        patientAttributesDTO.setValue(StringUtils.getValue(hospital_name.getText().toString()));
+        patientAttributesDTOList.add(patientAttributesDTO);
 
         patientAttributesDTO = new PatientAttributesDTO();
         patientAttributesDTO.setUuid(UUID.randomUUID().toString());
@@ -1711,4 +1795,6 @@ public class SignupActivity extends AppCompatActivity {
                     }
                 });
     }
+
+
 }

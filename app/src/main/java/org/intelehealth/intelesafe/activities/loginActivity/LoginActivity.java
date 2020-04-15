@@ -19,7 +19,11 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
+import android.text.method.PasswordTransformationMethod;
+import android.text.style.ClickableSpan;
 import android.text.util.Linkify;
 import android.util.Log;
 import android.view.View;
@@ -41,9 +45,12 @@ import java.security.NoSuchAlgorithmException;
 
 import org.intelehealth.intelesafe.BuildConfig;
 import org.intelehealth.intelesafe.R;
+import org.intelehealth.intelesafe.activities.privacyNoticeActivity.PrivacyNotice_Activity;
+import org.intelehealth.intelesafe.activities.signupActivity.SignupActivity;
 import org.intelehealth.intelesafe.app.AppConstants;
 import org.intelehealth.intelesafe.models.loginModel.LoginModel;
 import org.intelehealth.intelesafe.models.loginProviderModel.LoginProviderModel;
+import org.intelehealth.intelesafe.models.person.ClsPersonGetResponse;
 import org.intelehealth.intelesafe.utilities.Base64Utils;
 import org.intelehealth.intelesafe.utilities.Logger;
 import org.intelehealth.intelesafe.utilities.OfflineLogin;
@@ -62,7 +69,7 @@ import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
 public class LoginActivity extends AppCompatActivity {
-    TextView txt_cant_login;
+    TextView txt_cant_login,txt_signup; // txt_signup added for signup navigation.
     /**
      * A dummy authentication store containing known user names and passwords.
      */
@@ -92,12 +99,15 @@ public class LoginActivity extends AppCompatActivity {
 
     private long createdRecordsCount = 0;
     String provider_url_uuid;
+    String privacy_value;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         sessionManager = new SessionManager(this);
+        privacy_value = getIntent().getStringExtra("privacy"); //privacy_accept value retrieved from previous act.
 
         context = LoginActivity.this;
         sessionManager = new SessionManager(context);
@@ -158,6 +168,7 @@ public class LoginActivity extends AppCompatActivity {
         mUsernameView = findViewById(R.id.et_email);
         // populateAutoComplete(); TODO: create our own autocomplete code
         mPasswordView = findViewById(R.id.et_password);
+        mPasswordView.setTransformationMethod(new PasswordTransformationMethod());
 //      mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 //            @Override
 //            public boolean onEditorAction(TextView v, int id, KeyEvent event) {
@@ -176,6 +187,33 @@ public class LoginActivity extends AppCompatActivity {
                 attemptLogin();
             }
         });
+
+        txt_signup = findViewById(R.id.txt_signup);
+        String signupStr = getString(R.string.txt_sign_up_option);
+        SpannableString spannableString = new SpannableString(signupStr);
+        int startIndex = signupStr.lastIndexOf("?");
+        Log.e("OnClick","startIndex" + startIndex);
+        int endIndex = signupStr.length();
+        Log.e("OnClick","endIndex" + endIndex);
+        ClickableSpan span1 = new ClickableSpan() {
+            @Override
+            public void onClick(View textView) {
+                // do some thing
+                Log.e("OnClick","txt_signup");
+                Intent intent = new Intent(LoginActivity.this, PrivacyNotice_Activity.class);
+                //intent.putExtra("privacy", privacy_value); //privacy value send to identificationActivity
+                intent//addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                       . addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        };
+        spannableString.setSpan(new android.text.style.StyleSpan(android.graphics.Typeface.BOLD), startIndex+1, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(span1, startIndex+1, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
+        txt_signup.setText(spannableString);
+        txt_signup.setMovementMethod(LinkMovementMethod.getInstance());
 
     }
 
@@ -331,62 +369,12 @@ public class LoginActivity extends AppCompatActivity {
 
                                         }
                                     }
-                                    SQLiteDatabase sqLiteDatabase = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
-                                    //SQLiteDatabase read_db = AppConstants.inteleHealthDatabaseHelper.getReadableDatabase();
+                                    String url = urlModifiers.getUrlForPersonDetails(loginModel.getUser().getPerson().getUuid());
+                                    getPersonDetails(url,mEmail,mPassword,loginModel.getUser().getUuid(),loginModel.getUser().getDisplay());
 
-                                    sqLiteDatabase.beginTransaction();
-                                    //read_db.beginTransaction();
-                                    ContentValues values = new ContentValues();
-
-                                    //StringEncryption stringEncryption = new StringEncryption();
-                                    String random_salt = getSalt_DATA();
-
-                                    //String random_salt = stringEncryption.getRandomSaltString();
-                                    Log.d("salt", "salt: " + random_salt);
-                                    //Salt_Getter_Setter salt_getter_setter = new Salt_Getter_Setter();
-                                    //salt_getter_setter.setSalt(random`_salt);
-
-
-                                    String hash_password = null;
-                                    try {
-                                        //hash_email = StringEncryption.convertToSHA256(random_salt + mEmail);
-                                        hash_password = StringEncryption.convertToSHA256(random_salt + mPassword);
-                                    } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
-                                        Crashlytics.getInstance().core.logException(e);
-                                    }
-
-                                    try {
-                                        values.put("username", mEmail);
-                                        values.put("password", hash_password);
-                                        values.put("creator_uuid_cred", loginModel.getUser().getUuid());
-                                        values.put("chwname", loginModel.getUser().getDisplay());
-                                        values.put("provider_uuid_cred", sessionManager.getProviderID());
-                                        createdRecordsCount = sqLiteDatabase.insertWithOnConflict("tbl_user_credentials", null, values, SQLiteDatabase.CONFLICT_REPLACE);
-                                        sqLiteDatabase.setTransactionSuccessful();
-
-                                        Logger.logD("values", "values" + values);
-                                        Logger.logD("created user credentials", "create user records" + createdRecordsCount);
-                                    } catch (SQLException e) {
-                                        Log.d("SQL", "SQL user credentials: " + e);
-                                    } finally {
-                                        sqLiteDatabase.endTransaction();
-                                    }
-
-
-                                    sessionManager.setSetupComplete(false);
-                                    // offlineLogin.setUpOfflineLogin(mEmail, mPassword);
-                                    cpd.dismiss();
-                                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                                    intent.putExtra("login", true);
-                                    intent.putExtra("from", "login");
-                                    intent.putExtra("username", "");
-                                    intent.putExtra("password", "");
-//                startJobDispatcherService(LoginActivity.this);
-                                    startActivity(intent);
-                                    finish();
                                     //  showProgress(false);
 
-                                    sessionManager.setReturningUser(true);
+                                    //sessionManager.setReturningUser(true);
                                 }
 
                                 @Override
@@ -414,6 +402,102 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete() {
                 Logger.logD(TAG, "completed");
+            }
+        });
+
+    }
+
+    private void getPersonDetails(String url, String mEmail,String mPassword,String userUUID,String chwname) {
+        Observable<ClsPersonGetResponse> personGetResponseObservable = AppConstants.apiInterface.getPersonDetails(url, "Basic " + encoded,"full");
+
+        personGetResponseObservable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(new DisposableObserver<ClsPersonGetResponse>() {
+            @Override
+            public void onNext(ClsPersonGetResponse clsPersonGetResponse) {
+                if(clsPersonGetResponse != null){
+                    Log.e("VENU PERSON Details: "," : "+clsPersonGetResponse);
+                    SQLiteDatabase sqLiteDatabase = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
+                    //SQLiteDatabase read_db = AppConstants.inteleHealthDatabaseHelper.getReadableDatabase();
+
+                    sqLiteDatabase.beginTransaction();
+                    //read_db.beginTransaction();
+                    ContentValues values = new ContentValues();
+
+                    //StringEncryption stringEncryption = new StringEncryption();
+                    String random_salt = getSalt_DATA();
+
+                    //String random_salt = stringEncryption.getRandomSaltString();
+                    Log.d("salt", "salt: " + random_salt);
+                    //Salt_Getter_Setter salt_getter_setter = new Salt_Getter_Setter();
+                    //salt_getter_setter.setSalt(random`_salt);
+
+
+                    String hash_password = null;
+                    try {
+                        //hash_email = StringEncryption.convertToSHA256(random_salt + mEmail);
+                        hash_password = StringEncryption.convertToSHA256(random_salt + mPassword);
+                    } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+                        Crashlytics.getInstance().core.logException(e);
+                    }
+
+                    try {
+                        values.put("username", mEmail);
+                        values.put("password", hash_password);
+                        values.put("creator_uuid_cred", userUUID);
+                        values.put("chwname", chwname);
+                        values.put("provider_uuid_cred", sessionManager.getProviderID());
+                        createdRecordsCount = sqLiteDatabase.insertWithOnConflict("tbl_user_credentials", null, values, SQLiteDatabase.CONFLICT_REPLACE);
+                        sqLiteDatabase.setTransactionSuccessful();
+
+                        Logger.logD("values", "values" + values);
+                        Logger.logD("created user credentials", "create user records" + createdRecordsCount);
+                    } catch (SQLException e) {
+                        Log.d("SQL", "SQL user credentials: " + e);
+                    } finally {
+                        sqLiteDatabase.endTransaction();
+                    }
+
+                   // sessionManager.setState(clsPersonGetResponse.getPreferredAddress().getStateProvince()!= null?clsPersonGetResponse.getPreferredAddress().getStateProvince():"");
+                    sessionManager.setPersionUUID(clsPersonGetResponse.getUuid());
+                    sessionManager.setUserName(clsPersonGetResponse.getPreferredName().getDisplay());
+                    sessionManager.setUseFirstName(clsPersonGetResponse.getPreferredName().getGivenName());
+                    sessionManager.setSetupComplete(false);
+                    sessionManager.setReturningUser(true);
+                    sessionManager.setLocationUuid("b56d5d16-bf89-4ac0-918d-e830fbfba290");
+                    sessionManager.setServerUrl(BuildConfig.CLEAN_URL);
+                    sessionManager.setServerUrlRest("http://" + BuildConfig.CLEAN_URL + "/openmrs/ws/rest/v1/");
+                    sessionManager.setServerUrlBase("http://" + BuildConfig.CLEAN_URL + "/openmrs");
+                    sessionManager.setBaseUrl("http://" + BuildConfig.CLEAN_URL + "/openmrs/ws/rest/v1/");
+                    sessionManager.setTriggerNoti("yes");
+                    sessionManager.setPrivacyValue("Accept");
+                    sessionManager.setFirstTimeLaunch(false);
+                    // offlineLogin.setUpOfflineLogin(mEmail, mPassword);
+                    cpd.dismiss();
+                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                    intent.putExtra("login", true);
+                    intent.putExtra("from", "login");
+                    intent.putExtra("username", "");
+                    intent.putExtra("password", "");
+//                startJobDispatcherService(LoginActivity.this);
+                    startActivity(intent);
+                    finish();
+                }else{
+                    cpd.dismiss();
+                    Toast.makeText(LoginActivity.this, getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                e.printStackTrace();
+                cpd.dismiss();
+                Toast.makeText(LoginActivity.this, getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onComplete() {
+
             }
         });
 

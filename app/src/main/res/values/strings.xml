@@ -59,7 +59,7 @@
     <string name="device_id" translatable="false">Device ID:</string>
 
 
-    <string name="cant_login_user" translatable="false">Can\'t log in?</string>
+    <string name="cant_login_user" translatable="false">Forgot password?</string>
     <string name="email_link" translatable="false"> To reset your password send an email to support@intelehealth.io</string>
 
     // Sign up
@@ -612,13 +612,13 @@
     <string name="submit_visitSummary_Button">Submit</string>
     <string name="medical_registration_number_license_id">Medical registration number/license ID</string>
     <string name="name_of_health_organization_hospital_where_you_primarily_work">Health org./hospital where you work</string>
-    <string name="username_10digits">Username should be 10 digits</string>
+    <string name="username_10digits">Username should be 8 characters</string>
     <string name="please_select_state">Please select state</string>
     <string name="save">Save</string>
     <string name="personal_information">Personal Information</string>
     <string name="login_details">Login Details</string>
     <string name="username">Username*</string>
-    <string name="username_condition">Your mobile number is set as your username and cannot be changed.</string>
+    <string name="username_condition">Username should be combination of Alphabets and Numbers and 8 characters long.</string>
     <string name="address_details">Address Details</string>
     <string name="stay_aware_stay_safe">Stay Aware | Stay Safe</string>
 
@@ -639,5 +639,9 @@
     <string name="error_empty_designation">Enter your designation.</string>
     <string name="teleconsult_request">Teleconsult request</string>
     <string name="feeling_stressed_or_anxious_request_for_a_free_confidential_mental_health_consultation_with_a_counsellor">Feeling stressed or anxious? Request for a free confidential mental health consultation with a counsellor.</string>
+    <string name="txt_user_exists">Username already exists.</string>
+
+    <!--Login Screen (New Changes)-->
+    <string name="txt_sign_up_option">Don\'t have an account?<b> Sign Up!</b></string>
 
 </resources>

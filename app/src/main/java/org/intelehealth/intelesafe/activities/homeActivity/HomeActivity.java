@@ -213,7 +213,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 String phoneNumberWithCountryCode = "+919825989750";
                 String message =
                         "Hello, my name is "+ sessionManager.getUserName()+
-                                " from " + sessionManager.getState() + " and I need some assistance.";
+                                /*" from " + sessionManager.getState() + */" and I need some assistance.";
 
                 startActivity(new Intent(Intent.ACTION_VIEW,
                         Uri.parse(
@@ -305,88 +305,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         recyclerView = findViewById(R.id.recyclerview_data);
         tvNoVisit = findViewById(R.id.tv_no_visit);
 
-        recycler_arraylist = new ArrayList<Day_Date>();
+
 //        set = new HashSet<Day_Date>();
 
         // ArrayList<String> endDate = new ArrayList<>();
-        String endDate = "";
-        String query = "SELECT v.startdate FROM tbl_visit v, tbl_patient p WHERE " +
-                "p.uuid = v.patientuuid AND v.startdate IS NOT NULL AND " +
-                "v.patientuuid = ?";
-        String[] data = {sessionManager.getPersionUUID()};
 
-        final Cursor cursor = db.rawQuery(query, data);
-        int a = 1;
-        int b = 0;
-        String dd="";
-        int a1;
-        StringBuilder stringBuilder;
-        hashSet = new HashSet<>();
-        ArrayList<String> array_original_date = new ArrayList<>();
-
-        if (cursor != null) {
-            if (cursor.moveToFirst()) {
-                do {
-                    try {
-
-                        endDate = cursor.getString(cursor.getColumnIndexOrThrow("startdate"));
-                         stringBuilder = new StringBuilder(endDate);
-                         a1 = stringBuilder.indexOf("T");
-                         dd = stringBuilder.substring(0, a1);
-
-                        //comment...
-                        array_original_date.add(b,endDate);
-                        b++;
-//                        hashSet.add(new Day_Date("Day "+a, endDate));
-                     //   boolean t = ;
-                        hashSet.add(dd);
-
-
-
-//                        for(int i=0; i<recycler_arraylist.size(); i++)
-//                        {
-//                            recycler_arraylist.get(i);
-//                            String v = recycler_arraylist.get(i).getDate().toString();
-//                            Log.d("MM","MM: "+v);
-//
-//                        }
-
-                               /* recycler_arraylist.add(new Day_Date
-                                        ("Day " + a, dd));
-                                a++;*/
-
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                }while (cursor.moveToNext());
-            }
-        }
-        if (cursor != null) {
-            cursor.close();
-        }
-
-        ArrayList<String> new_arraylist = new ArrayList<>();
-        new_arraylist.addAll(hashSet);
-
-        Collections.sort(new_arraylist); // added by venu N to sort the
-
-        for (int j = 0; j < new_arraylist.size(); j++) {
-            recycler_arraylist.add(new Day_Date("Day "+a, new_arraylist.get(j)));
-            a++;
-        }
-
-        if(!recycler_arraylist.isEmpty()) {
-            tvNoVisit.setVisibility(View.GONE);
-            recycler_home_adapter = new Recycler_Home_Adapter(context, recycler_arraylist, array_original_date);
-            recycler_home_adapter.notifyDataSetChanged();
-
-            recyclerView.setLayoutManager(new LinearLayoutManager(HomeActivity.this, LinearLayoutManager.VERTICAL, false));
-            recyclerView.setAdapter(recycler_home_adapter);
-        } else{
-            tvNoVisit.setVisibility(View.VISIBLE);
-        }
 
 
         enter_check_in = findViewById(R.id.button_enter_checkin);
@@ -547,7 +470,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 */
-        WorkManager.getInstance().enqueueUniquePeriodicWork(AppConstants.UNIQUE_WORK_NAME, ExistingPeriodicWorkPolicy.KEEP, AppConstants.PERIODIC_WORK_REQUEST);
+       // WorkManager.getInstance().enqueueUniquePeriodicWork(AppConstants.UNIQUE_WORK_NAME, ExistingPeriodicWorkPolicy.KEEP, AppConstants.PERIODIC_WORK_REQUEST);
 /*
         if (sessionManager.isFirstTimeLaunched()) {
             TempDialog = new ProgressDialog(HomeActivity.this, R.style.AlertDialogStyle); //thats how to add a style!
@@ -577,7 +500,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         sessionManager.setMigration(true);
 
         if (sessionManager.isReturningUser()) {
-            syncUtils.syncForeground("");
+            customProgressDialog.show();
+            syncUtils.syncForeground("HOME_SCREEN");
+        }else{
+            renderList();
         }
 
         // added by venu N on 01/04/2020 for new Change in Home Screen.
@@ -604,6 +530,92 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 alertDialog.show();
             }
         });
+
+        WorkManager.getInstance().enqueueUniquePeriodicWork(AppConstants.UNIQUE_WORK_NAME, ExistingPeriodicWorkPolicy.KEEP, AppConstants.PERIODIC_WORK_REQUEST);
+
+    }
+
+    private void renderList(){
+        recycler_arraylist = new ArrayList<Day_Date>();
+        String endDate = "";
+        String query = "SELECT v.startdate FROM tbl_visit v, tbl_patient p WHERE " +
+                "p.uuid = v.patientuuid AND v.startdate IS NOT NULL AND " +
+                "v.patientuuid = ?";
+        String[] data = {sessionManager.getPersionUUID()};
+
+        final Cursor cursor = db.rawQuery(query, data);
+        int a = 1;
+        int b = 0;
+        String dd="";
+        int a1;
+        StringBuilder stringBuilder;
+        hashSet = new HashSet<>();
+        ArrayList<String> array_original_date = new ArrayList<>();
+
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+                    try {
+
+                        endDate = cursor.getString(cursor.getColumnIndexOrThrow("startdate"));
+                        stringBuilder = new StringBuilder(endDate);
+                        a1 = stringBuilder.indexOf("T");
+                        dd = stringBuilder.substring(0, a1);
+
+                        //comment...
+                        array_original_date.add(b,endDate);
+                        b++;
+//                        hashSet.add(new Day_Date("Day "+a, endDate));
+                        //   boolean t = ;
+                        hashSet.add(dd);
+
+
+
+//                        for(int i=0; i<recycler_arraylist.size(); i++)
+//                        {
+//                            recycler_arraylist.get(i);
+//                            String v = recycler_arraylist.get(i).getDate().toString();
+//                            Log.d("MM","MM: "+v);
+//
+//                        }
+
+                               /* recycler_arraylist.add(new Day_Date
+                                        ("Day " + a, dd));
+                                a++;*/
+
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }while (cursor.moveToNext());
+            }
+        }
+        if (cursor != null) {
+            cursor.close();
+        }
+
+        ArrayList<String> new_arraylist = new ArrayList<>();
+        new_arraylist.addAll(hashSet);
+
+        Collections.sort(new_arraylist); // added by venu N to sort the
+
+        for (int j = 0; j < new_arraylist.size(); j++) {
+            recycler_arraylist.add(new Day_Date("Day "+a, new_arraylist.get(j)));
+            a++;
+        }
+
+        if(!recycler_arraylist.isEmpty()) {
+            sessionManager.setFirstCheckin("true");
+            tvNoVisit.setVisibility(View.GONE);
+            recycler_home_adapter = new Recycler_Home_Adapter(context, recycler_arraylist, array_original_date);
+            recycler_home_adapter.notifyDataSetChanged();
+
+            recyclerView.setLayoutManager(new LinearLayoutManager(HomeActivity.this, LinearLayoutManager.VERTICAL, false));
+            recyclerView.setAdapter(recycler_home_adapter);
+        } else{
+            tvNoVisit.setVisibility(View.VISIBLE);
+        }
     }
 
     private void createNewVisit() {
@@ -999,6 +1011,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         registerReceiver(reMyreceive, filter);
+        registerReceiver(reMyreceive, new IntentFilter("org.intelehealth.intelesafe.refreshCheck-in"));
         checkAppVer();  //auto-update feature.
 //        lastSyncTextView.setText(getString(R.string.last_synced) + " \n" + sessionManager.getLastSyncDateTime());
         if (!sessionManager.getLastSyncDateTime().equalsIgnoreCase("- - - -")
@@ -1052,6 +1065,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         public void onReceive(Context context, Intent intent) {
 //            lastSyncTextView.setText(getString(R.string.last_synced) + " \n" + sessionManager.getLastSyncDateTime());
 //          lastSyncAgo.setText(sessionManager.getLastTimeAgo());
+
+            if(intent != null){
+                String strAction = intent.getAction().toString();
+                if(strAction.equalsIgnoreCase("org.intelehealth.intelesafe.refreshCheck-in")){
+                    renderList();
+                    sessionManager.setReturningUser(false);
+                    customProgressDialog.dismiss();
+                }
+            }
         }
     }
 
@@ -1340,7 +1362,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                     Date formatted = currentDate.parse(date);
                     String visitDate = currentDate.format(formatted);
-                    OldVisit(visitDate, visitList.get(position), end_date, "", encounterVitalList.get(position), encounterAdultList.get(position));
+                    OldVisit(visitDate, visitList.get(position), end_date, "", ""/*encounterVitalList.get(position)*/, encounterAdultList.get(position));
                 } catch (ParseException e) {
                     Crashlytics.getInstance().core.logException(e);
                 }
@@ -1368,5 +1390,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         visitSummary.putExtra("fromOldVisit",true);
         startActivity(visitSummary);
     }
+
+
 
 }
