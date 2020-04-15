@@ -3,6 +3,7 @@ package org.intelehealth.intelesafe.activities.signupActivity;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -26,6 +27,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -79,6 +81,8 @@ import org.intelehealth.intelesafe.models.UserBirthData;
 import org.intelehealth.intelesafe.models.dto.PatientAttributesDTO;
 import org.intelehealth.intelesafe.models.dto.PatientDTO;
 import org.intelehealth.intelesafe.models.loginModel.LoginModel;
+import org.intelehealth.intelesafe.models.user.ClsUserGetResponse;
+import org.intelehealth.intelesafe.models.user.ResultsItem;
 import org.intelehealth.intelesafe.networkApiCalls.ApiClient;
 import org.intelehealth.intelesafe.networkApiCalls.ApiInterface;
 import org.intelehealth.intelesafe.utilities.Base64Utils;
@@ -94,6 +98,7 @@ import org.intelehealth.intelesafe.utilities.exception.DAOException;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
+import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
@@ -243,7 +248,8 @@ public class SignupActivity extends AppCompatActivity {
         mLastName.setFilters(new InputFilter[]{new InputFilter.LengthFilter(41), inputFilter_Name}); //maxlength 41
 
         mEmailView = findViewById(R.id.email);
-/*
+
+
         mEmailView.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -252,15 +258,18 @@ public class SignupActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+               // mEmailView.setError("");
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                mPhoneNum.setText(mEmailView.getText().toString());
+               if(editable.length() == 8){
+                   InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+                   imm.hideSoftInputFromWindow(mEmailView.getWindowToken(), 0);
+                   checkUserExistsOrNot(mEmailView.getText().toString());
+               }
             }
         });
-*/
 
 
         mPasswordView = findViewById(R.id.password);
@@ -730,7 +739,7 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (userName.length() < 10) {
+                if (userName.length() < 8) {
                     mEmailView.setError(getString(R.string.username_10digits));
                     mEmailView.requestFocus();
                     return;
@@ -839,7 +848,7 @@ public class SignupActivity extends AppCompatActivity {
 //                    return;
 //                }
 
-                if (mPhoneNum.getText().toString().equals("")) {
+             /*   if (mPhoneNum.getText().toString().equals("")) {
                     mPhoneNum.setError(getString(R.string.error_field_required));
                     mPhoneNum.requestFocus();
                     return;
@@ -849,7 +858,7 @@ public class SignupActivity extends AppCompatActivity {
                     mPhoneNum.setError(getString(R.string.invalid_phone_number));
                     mPhoneNum.requestFocus();
                     return;
-                }
+                }*/
 
                 // Added by venu N on 03/04/202.
                 if ((selectedPersonalCaste == null && selectedPersonalCaste.length() <= 0) || selectedPersonalCaste.equalsIgnoreCase("Select Designation")) {
@@ -867,7 +876,7 @@ public class SignupActivity extends AppCompatActivity {
 
                 System.out.println("DESIGATION: " + selectedPersonalCaste);
 
-                if (mAddress1.getText().toString().equals("")) {
+               /* if (mAddress1.getText().toString().equals("")) {
                     mAddress1.setError(getString(R.string.error_field_required));
                     mAddress1.requestFocus();
                     return;
@@ -877,7 +886,7 @@ public class SignupActivity extends AppCompatActivity {
                     mCity.setError(getString(R.string.error_field_required));
                     mCity.requestFocus();
                     return;
-                }
+                }*/
 
                 boolean isNotIndia = true;
                 if (country.equalsIgnoreCase("") || country.equalsIgnoreCase("Select Country")) {
@@ -889,7 +898,7 @@ public class SignupActivity extends AppCompatActivity {
                     }
                 }
 
-                if (state.equalsIgnoreCase("")) {
+               /* if (state.equalsIgnoreCase("")) {
                     if(isNotIndia){
                         edt_state.setError(getString(R.string.error_field_required));
                         edt_state.requestFocus();
@@ -897,7 +906,7 @@ public class SignupActivity extends AppCompatActivity {
                         Toast.makeText(context, getString(R.string.please_select_state), Toast.LENGTH_LONG).show();
                     }
                     return;
-                }
+                }*/
 
               /*  if (district.equalsIgnoreCase("")) {
                     Toast.makeText(context, getString(R.string.please_select_districts), Toast.LENGTH_LONG).show();
@@ -914,7 +923,7 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }*/
 
-                if (mPostal.getText().toString().equals("")) {
+               /* if (mPostal.getText().toString().equals("")) {
                     mPostal.setError(getString(R.string.error_field_required));
                     mPostal.requestFocus();
                     return;
@@ -924,7 +933,7 @@ public class SignupActivity extends AppCompatActivity {
                     mPostal.setError(getString(R.string.postal_code_validation));
                     mPostal.requestFocus();
                     return;
-                }
+                }*/
 
 
                 ///////////Data Model for step 1
@@ -1081,6 +1090,41 @@ public class SignupActivity extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    private void checkUserExistsOrNot(String enteredUserName) {
+        progress.show();
+        UrlModifiers urlModifiers = new UrlModifiers();
+        String urlString = urlModifiers.setRegistrationURL();
+        encoded = base64Utils.encoded("admin", "Admin123");
+        Observable<ClsUserGetResponse> userGetResponse = AppConstants.apiInterface.getUsersFromServer(urlString,"Basic " +encoded);
+        userGetResponse.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<ClsUserGetResponse>() {
+                    @Override
+                    public void onNext(ClsUserGetResponse clsUserGetResponse) {
+                        progress.dismiss();
+                        List<ResultsItem> resultList = clsUserGetResponse.getResults();
+                        ResultsItem objResultsItem  = new ResultsItem();
+                        objResultsItem.setDisplay(enteredUserName);
+                        if(resultList.contains(objResultsItem)){
+                            mEmailView.setError(getString(R.string.txt_user_exists));
+                            mEmailView.requestFocus();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        progress.dismiss();
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
 
     }
 
@@ -1751,4 +1795,6 @@ public class SignupActivity extends AppCompatActivity {
                     }
                 });
     }
+
+
 }

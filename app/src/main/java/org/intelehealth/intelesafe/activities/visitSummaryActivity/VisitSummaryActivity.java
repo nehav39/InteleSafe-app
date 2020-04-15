@@ -226,7 +226,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
     MenuItem internetCheck = null;
     MenuItem endVisit_click = null;
 
-    private static boolean flag_upload = false;
+    private  boolean flag_upload = false;
 
     private RecyclerView mAdditionalDocsRecyclerView;
     private RecyclerView.LayoutManager mAdditionalDocsLayoutManager;
@@ -515,7 +515,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
             public void onClick(View view) {
                 String phoneNumberWithCountryCode = "+919825989750";
                 String message = "Hello, my name is "+ sessionManager.getUserName()+
-                        " from "+ sessionManager.getState() + " and I need some assistance.";
+                        /*" from "+ sessionManager.getState() + */" and I need some assistance.";
 
                 startActivity(new Intent(Intent.ACTION_VIEW,
                         Uri.parse(
@@ -1733,7 +1733,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                                     "<hr style=\"font-size:12pt;\">" + "<br/>" +
                                     "<p id=\"patient_name\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">%s</p></b>" +
                                     "<p id=\"patient_details\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">Age: %s | Gender: %s  </p>" + // | Son/Daughter/Wife of: %s  Removed as per the Prajwal by Venu N on 02/04/2020.
-                                    "<p id=\"address_and_contact\" style=\"font-size:12pt; margin: 0px; padding: 0px;\"><b>Address and Contact:</b> %s</p>" +
+                                   /* "<p id=\"address_and_contact\" style=\"font-size:12pt; margin: 0px; padding: 0px;\"><b>Address and Contact:</b> %s</p>" +*/
                                     "<b><p id=\"visit_details\" style=\"font-size:12pt; margin-top:5px; margin-bottom:0px; padding: 0px;\">User ID: %s | Date of Assessment: %s </p></b><br><br>" +
                                     "<b><p id=\"Self Assessment\" style=\"font-size:12pt;margin-top:5px; margin-bottom:0px;; padding: 0px;\">Self Assessment</p></b>" + physicalExamStr
                                     /* +
@@ -1755,7 +1755,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                                     "%s" +
                                     "<b><p id=\"follow_up_heading\" style=\"font-size:12pt;margin-top:5px; margin-bottom:0px; padding: 0px;\">Follow Up Date</p></b>" +
                                     "%s"*/
-                            , heading, heading2, heading3, mPatientName, age, mGender/*, mSdw*/, address, mPatientOpenMRSID, (mDate!= null?mDate:""), mHeight, mWeight,
+                            , heading, heading2, heading3, mPatientName, age, mGender/*, mSdw, address*/, mPatientOpenMRSID, (mDate!= null?mDate:""), mHeight, mWeight,
                             mBMI, bp, mPulse, mTemp, mresp, mSPO2, pat_hist, fam_hist, mComplaint, diagnosis_web, rx_web, tests_web, advice_web, followUp_web, doctor_web);
             webView.loadDataWithBaseURL(null, htmlDocument, "text/HTML", "UTF-8", null);
         } else {
@@ -1766,7 +1766,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                                     "<hr style=\"font-size:12pt;\">" + "<br/>" +
                                     "<p id=\"patient_name\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">%s</p></b>" +
                                     "<p id=\"patient_details\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">Age: %s | Gender: %s </p>" +  //  | Son/Daughter/Wife of: %s  modified by venu as per Prejwal on 02/04/2020.
-                                    "<p id=\"address_and_contact\" style=\"font-size:12pt; margin: 0px; padding: 0px;\"><b>Address and Contact:</b> %s</p>" +
+                                   /* "<p id=\"address_and_contact\" style=\"font-size:12pt; margin: 0px; padding: 0px;\"><b>Address and Contact:</b> %s</p>" +*/
                                     "<b><p id=\"visit_details\" style=\"font-size:12pt; margin-top:5px; margin-bottom:0px; padding: 0px;\">User ID: %s | Date of Assessment: %s </p></b><br><br>" +
                                     "<b><p id=\"Self Assessment\" style=\"font-size:12pt;margin-top:5px; margin-bottom:0px;; padding: 0px;\">Self Assessment</p></b>" + physicalExamStr
                             /*"<b><p id=\"vitals_heading\" style=\"font-size:12pt;margin-top:5px; margin-bottom:0px;; padding: 0px;\">Vitals</p></b>" +
@@ -1787,7 +1787,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                                     "%s" +
                                     "<b><p id=\"follow_up_heading\" style=\"font-size:12pt;margin-top:5px; margin-bottom:0px; padding: 0px;\">Follow Up Date</p></b>" +
                                     "%s"*/
-                            , heading, heading2, heading3, mPatientName, age, mGender, /*mSdw,*/ address, mPatientOpenMRSID,  (mDate!= null?mDate:""), mHeight, mWeight,
+                            , heading, heading2, heading3, mPatientName, age, mGender/*, mSdw, address*/, mPatientOpenMRSID,  (mDate!= null?mDate:""), mHeight, mWeight,
                             mBMI, bp, mPulse, mTemp, mSPO2, pat_hist, fam_hist, mComplaint, diagnosis_web, rx_web, tests_web, advice_web, followUp_web, doctor_web);
             webView.loadDataWithBaseURL(null, htmlDocument, "text/HTML", "UTF-8", null);
         }

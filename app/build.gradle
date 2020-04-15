@@ -21,6 +21,12 @@ android {
     }
     buildTypes {
 
+        //Live BASE_URL = http://intelesafe.covidhelp.in/
+        //Live CLEAN_URL = intelesafe.covidhelp.in
+
+        //Test BASE_URL = http://testintelesafe.covidhelp.in/
+        //Test CLEAN_URL = testintelesafe.covidhelp.in
+
         debug{
             buildConfigField "String", "BASE_URL", "\"http://testintelesafe.covidhelp.in/\"" // http://13.232.32.249:8080/
             buildConfigField "String", "CLEAN_URL", "\"testintelesafe.covidhelp.in\"" // 13.232.32.249:8080

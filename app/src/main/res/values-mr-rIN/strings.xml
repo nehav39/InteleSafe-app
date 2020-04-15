@@ -121,7 +121,7 @@
     <string name="device_id" translatable="false">Device ID:</string>
 
 
-    <string name="cant_login_user" translatable="false">Can\'t log in?</string>
+    <string name="cant_login_user" translatable="false">Forgot password?</string>
     <string name="email_link" translatable="false"> To reset your password send an email to support@intelehealth.io</string>
 
     //Home Screen (after login)
@@ -619,7 +619,7 @@
     <string name="submit_visitSummary_Button">Submit</string>
     <string name="medical_registration_number_license_id">Medical registration number/license ID</string>
     <string name="name_of_health_organization_hospital_where_you_primarily_work">Health org./hospital where you work</string>
-    <string name="username_10digits">Username should be 10 digits</string>
+    <string name="username_10digits">Username should be 8 characters</string>
     <string name="please_select_state">Please select state</string>
     <string name="stay_aware_stay_safe">Stay Aware | Stay Safe</string>
     <string name="assessment_visit_title">Assessment</string>
@@ -691,4 +691,8 @@
     <string name="txt_enter_caste">Designation</string>
     <string name="toast_select_designation">Please select your designation.</string>
     <string name="error_empty_designation">Enter your designation.</string>
+    <string name="txt_user_exists">Username already exists.</string>
+
+    <!--Login Screen (New Changes)-->
+    <string name="txt_sign_up_option">Don\'t have an account?<b> Sign Up!</b></string>
 </resources>

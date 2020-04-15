@@ -537,55 +537,76 @@ Github: prajwalmw
             app:cardCornerRadius="10sp"
             >
 
-            <RelativeLayout
-                android:id="@+id/help_relative"
+
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp">
+                android:padding="5dp">
 
-                <TextView
-                    android:id="@+id/help_title"
+                <RelativeLayout
+                    android:id="@+id/help_relative"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Help"
-                    android:background="@color/white"
-                    android:textColor="@color/txt_sub_header_color"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/lato_bold"/>
+                    android:padding="10dp"
+                    android:layout_marginEnd="20dp">
+
+                    <TextView
+                        android:id="@+id/help_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Help"
+                        android:background="@color/white"
+                        android:textColor="@color/txt_sub_header_color"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/lato_bold"/>
 
 
-                <TextView
-                    android:id="@+id/visit_help_text"
-                    android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/visit_help_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/lato_regular"
+                        android:text="@string/if_you_get_much_sicker_please_call_your_nearest_doctor_020_26127394"
+                        android:layout_below="@id/help_title"
+                        android:textSize="14sp"
+                        android:textColor="@color/txt_sub_header_color"
+                        android:layout_marginTop="10dp"
+                        />
+
+                    <Button
+                        android:id="@+id/Help_Watsapp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/visit_help_text"
+                        android:text="+91 9825989750"
+                        android:textSize="@dimen/text_18sp"
+                        android:layout_marginStart="10sp"
+                        android:fontFamily="@font/lato_medium" android:textColor="@color/txt_sub_header_color"
+                        android:textStyle="bold"
+                        android:background="@android:color/transparent"
+                        android:drawableStart="@drawable/ic_icons8_whatsapp"
+                        android:gravity="start|center"
+                        android:layout_marginTop="5dp"
+                        android:drawablePadding="10sp" />
+
+                    <!-- Icon Credits:- <a target="_blank" href="https://icons8.com/icons/set/whatsapp">WhatsApp icon</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>-->
+
+                </RelativeLayout>
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/lato_regular"
-                    android:text="@string/if_you_get_much_sicker_please_call_your_nearest_doctor_020_26127394"
-                    android:layout_below="@id/help_title"
-                    android:textSize="14sp"
-                    android:textColor="@color/txt_sub_header_color"
-                    android:layout_marginTop="10dp"
-                    />
+                    android:layout_gravity="bottom|right"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:src="@drawable/ic_heart">
 
-                <Button
-                    android:id="@+id/Help_Watsapp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/visit_help_text"
-                    android:text="+91 9825989750"
-                    android:textSize="@dimen/text_18sp"
-                    android:layout_marginStart="10sp"
-                    android:fontFamily="@font/lato_medium" android:textColor="@color/txt_sub_header_color"
-                    android:textStyle="bold"
-                    android:background="@android:color/transparent"
-                    android:drawableStart="@drawable/ic_icons8_whatsapp"
-                    android:gravity="start|center"
-                    android:layout_marginTop="5dp"
-                    android:drawablePadding="10sp" />
+                </ImageView>
 
-                <!-- Icon Credits:- <a target="_blank" href="https://icons8.com/icons/set/whatsapp">WhatsApp icon</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>-->
+            </FrameLayout>
 
-            </RelativeLayout>
         </android.support.v7.widget.CardView>
 
 
@@ -602,40 +623,62 @@ Github: prajwalmw
             app:cardCornerRadius="10sp"
         >
 
-        <RelativeLayout
-            android:id="@+id/mental_help_relative"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp">
-
-            <TextView
-                android:id="@+id/mental_visit_help_text"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:fontFamily="@font/lato_regular"
-                android:text="@string/feeling_stressed_or_anxious_request_for_a_free_confidential_mental_health_consultation_with_a_counsellor"
-                android:textSize="14sp"
-                android:textColor="@color/txt_sub_header_color"
-                />
+                android:padding="5dp">
 
-            <Button
-                android:id="@+id/tv_mental_help_request"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/mental_visit_help_text"
-                android:layout_marginStart="10sp"
-                android:layout_marginTop="5dp"
-                android:background="@android:color/transparent"
-                android:fontFamily="@font/lato_bold"
-                android:gravity="start|center"
-                android:hint=""
-                android:text="@string/teleconsult_request"
-                android:textColor="@color/txt_sub_header_color" />
+                <RelativeLayout
+                    android:id="@+id/mental_help_relative"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:layout_marginEnd="20dp">
 
-            <!-- Icon Credits:- <a target="_blank" href="https://icons8.com/icons/set/whatsapp">WhatsApp icon</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>-->
+                    <TextView
+                        android:id="@+id/mental_visit_help_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/lato_regular"
+                        android:text="@string/feeling_stressed_or_anxious_request_for_a_free_confidential_mental_health_consultation_with_a_counsellor"
+                        android:textSize="14sp"
+                        android:textColor="@color/txt_sub_header_color"
+                        />
 
-        </RelativeLayout>
+                    <Button
+                        android:id="@+id/tv_mental_help_request"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/mental_visit_help_text"
+                        android:layout_marginStart="10sp"
+                        android:layout_marginTop="5dp"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/lato_bold"
+                        android:gravity="start|center"
+                        android:hint=""
+                        android:text="@string/teleconsult_request"
+                        android:textColor="@color/txt_sub_header_color" />
+
+                    <!-- Icon Credits:- <a target="_blank" href="https://icons8.com/icons/set/whatsapp">WhatsApp icon</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>-->
+
+                </RelativeLayout>
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|right"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="8dp"
+                    android:src="@mipmap/ic_mental_health">
+
+                </ImageView>
+
+            </FrameLayout>
+
+
     </android.support.v7.widget.CardView>
 
         <!--Patient History Card contains text-->
