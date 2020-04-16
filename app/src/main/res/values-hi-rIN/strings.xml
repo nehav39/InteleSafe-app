@@ -692,6 +692,6 @@
     <string name="txt_user_exists">Username already exists.</string>
 
     <!--Login Screen (New Changes)-->
-    <string name="txt_sign_up_option">Don\'t have an account?<b> Sign Up!</b></string>
+    <string name="txt_sign_up_option">Don\'t have an account?</string>
 
 </resources>
