@@ -609,6 +609,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             recyclerView.setLayoutManager(new LinearLayoutManager(HomeActivity.this, LinearLayoutManager.VERTICAL, false));
             recyclerView.setAdapter(recycler_home_adapter);
         } else{
+            sessionManager.setFirstCheckin("false");
             tvNoVisit.setVisibility(View.VISIBLE);
         }
     }
@@ -991,15 +992,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         }
-
+        sessionManager.setFirstCheckin("false");
+        sessionManager.setReturningUser(false);
         Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
 
 //        SyncUtils syncUtils = new SyncUtils();
 //        syncUtils.syncBackground();
-
-        sessionManager.setReturningUser(false);
     }
 
 
@@ -1295,7 +1295,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    public void pastVisits(int position) {
+    public void pastVisits(int position, String check_inDate) {
 
         String patientuuid = sessionManager.getPersionUUID();
         List<String> visitList = new ArrayList<>();
@@ -1324,27 +1324,31 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     date = visitCursor.getString(visitCursor.getColumnIndexOrThrow("startdate"));
                     end_date = visitCursor.getString(visitCursor.getColumnIndexOrThrow("enddate"));
                     String visit_id = visitCursor.getString(visitCursor.getColumnIndexOrThrow("uuid"));
+                    StringBuilder stringBuilder = new StringBuilder(date);
+                    int a1 = stringBuilder.indexOf("T");
+                    String dateFromDB = stringBuilder.substring(0, a1);
+                    //check for current check_in visits only.
+                    if(dateFromDB.equals(check_inDate)){
+                        visitList.add(visit_id);
 
-                    visitList.add(visit_id);
+                        String[] encounterIDArgs = {visit_id};
 
-                    String[] encounterIDArgs = {visit_id};
+                        Cursor encounterCursor = db.query("tbl_encounter", null, encounterIDSelection, encounterIDArgs, null, null, null);
+                        if (encounterCursor != null && encounterCursor.moveToFirst()) {
+                            do {
+                                if (encounterDAO.getEncounterTypeUuid("ENCOUNTER_VITALS").equalsIgnoreCase(encounterCursor.getString(encounterCursor.getColumnIndexOrThrow("encounter_type_uuid")))) {
+                                    encountervitalsLocal = encounterCursor.getString(encounterCursor.getColumnIndexOrThrow("uuid"));
+                                    encounterVitalList.add(encountervitalsLocal);
+                                }
+                                if (encounterDAO.getEncounterTypeUuid("ENCOUNTER_ADULTINITIAL").equalsIgnoreCase(encounterCursor.getString(encounterCursor.getColumnIndexOrThrow("encounter_type_uuid")))) {
+                                    encounterlocalAdultintial = encounterCursor.getString(encounterCursor.getColumnIndexOrThrow("uuid"));
+                                    encounterAdultList.add(encounterlocalAdultintial);
+                                }
 
-                    Cursor encounterCursor = db.query("tbl_encounter", null, encounterIDSelection, encounterIDArgs, null, null, null);
-                    if (encounterCursor != null && encounterCursor.moveToFirst()) {
-                        do {
-                            if (encounterDAO.getEncounterTypeUuid("ENCOUNTER_VITALS").equalsIgnoreCase(encounterCursor.getString(encounterCursor.getColumnIndexOrThrow("encounter_type_uuid")))) {
-                                encountervitalsLocal = encounterCursor.getString(encounterCursor.getColumnIndexOrThrow("uuid"));
-                                encounterVitalList.add(encountervitalsLocal);
-                            }
-                            if (encounterDAO.getEncounterTypeUuid("ENCOUNTER_ADULTINITIAL").equalsIgnoreCase(encounterCursor.getString(encounterCursor.getColumnIndexOrThrow("encounter_type_uuid")))) {
-                                encounterlocalAdultintial = encounterCursor.getString(encounterCursor.getColumnIndexOrThrow("uuid"));
-                                encounterAdultList.add(encounterlocalAdultintial);
-                            }
-
-                        } while (encounterCursor.moveToNext());
+                            } while (encounterCursor.moveToNext());
+                        }
+                        encounterCursor.close();
                     }
-                    encounterCursor.close();
-
                     // Called when we close app on vitals screen and Didn't select any complaints
 
                 } while (visitCursor.moveToPrevious());
