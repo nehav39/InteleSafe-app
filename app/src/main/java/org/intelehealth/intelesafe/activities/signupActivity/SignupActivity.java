@@ -745,6 +745,13 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }
 
+                if(isUSerExistsAlready){
+                    Toast.makeText(context, getString(R.string.txt_user_exists)+"Please try with another.", Toast.LENGTH_LONG).show();
+                    mEmailView.setError(getString(R.string.txt_user_exists));
+                    mEmailView.requestFocus();
+                    return;
+                }
+
                 // Check for a valid password, if the user entered one.
                 if (TextUtils.isEmpty(password)) {
                     mPasswordView.setError(getString(R.string.error_field_required));
@@ -1093,6 +1100,8 @@ public class SignupActivity extends AppCompatActivity {
 
     }
 
+    boolean isUSerExistsAlready = false;
+
     private void checkUserExistsOrNot(String enteredUserName) {
         progress.show();
         UrlModifiers urlModifiers = new UrlModifiers();
@@ -1109,8 +1118,11 @@ public class SignupActivity extends AppCompatActivity {
                         ResultsItem objResultsItem  = new ResultsItem();
                         objResultsItem.setDisplay(enteredUserName);
                         if(resultList.contains(objResultsItem)){
+                            isUSerExistsAlready = true;
                             mEmailView.setError(getString(R.string.txt_user_exists));
                             mEmailView.requestFocus();
+                        }else{
+                            isUSerExistsAlready = false;
                         }
                     }
 

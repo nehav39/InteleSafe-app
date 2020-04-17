@@ -188,9 +188,22 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        Button sign_up_button = findViewById(R.id.sign_up_button);
+        sign_up_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, PrivacyNotice_Activity.class);
+                //intent.putExtra("privacy", privacy_value); //privacy value send to identificationActivity
+                intent//addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        . addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+
         txt_signup = findViewById(R.id.txt_signup);
         String signupStr = getString(R.string.txt_sign_up_option);
-        SpannableString spannableString = new SpannableString(signupStr);
+       /* SpannableString spannableString = new SpannableString(signupStr);
         int startIndex = signupStr.lastIndexOf("?");
         Log.e("OnClick","startIndex" + startIndex);
         int endIndex = signupStr.length();
@@ -210,10 +223,8 @@ public class LoginActivity extends AppCompatActivity {
         };
         spannableString.setSpan(new android.text.style.StyleSpan(android.graphics.Typeface.BOLD), startIndex+1, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         spannableString.setSpan(span1, startIndex+1, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-
         txt_signup.setText(spannableString);
-        txt_signup.setMovementMethod(LinkMovementMethod.getInstance());
+        txt_signup.setMovementMethod(LinkMovementMethod.getInstance());*/
 
     }
 

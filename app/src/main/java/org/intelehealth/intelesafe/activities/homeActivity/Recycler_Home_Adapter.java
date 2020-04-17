@@ -176,7 +176,7 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
                         @Override
                         public void onClick(View view) {
                             int pos = (int) view.getTag();
-                            ((HomeActivity) mcontext).pastVisits(pos);
+                            ((HomeActivity) mcontext).pastVisits(pos,array_message.get(pos));
                         }
                     });
 
