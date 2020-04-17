@@ -62,6 +62,7 @@ import android.widget.Toast;
 import com.crashlytics.android.Crashlytics;
 
 import org.apache.commons.lang3.StringUtils;
+import org.intelehealth.intelesafe.activities.notification_screen.NotificationScreenActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -347,6 +348,8 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                     alertDialogBuilder.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                           /* Intent i = new Intent(VisitSummaryActivity.this, NotificationScreenActivity.class);
+                            startActivity(i);*/
 
                         }
                     });
