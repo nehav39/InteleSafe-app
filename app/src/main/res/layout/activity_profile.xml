@@ -61,7 +61,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
-                android:fontFamily="@font/lato_medium"
+                android:fontFamily="@font/lato_bold"
+                android:background="@null"
                 android:textAppearance="@style/profile_personal_in"
                 android:text="Personal Information" />
 
@@ -124,6 +125,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
+                android:background="@null"
                 android:fontFamily="@font/lato_bold"
                 android:textAppearance="@style/profile_personal_in"
                 android:text="Login Details" />
@@ -168,6 +170,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
+                android:background="@null"
                 android:fontFamily="@font/lato_bold"
                 android:textAppearance="@style/profile_personal_in"
                 android:text="Address Details" />
