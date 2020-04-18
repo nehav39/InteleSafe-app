@@ -63,6 +63,7 @@ public class SessionManager {
     private int PRIVATE_MODE = 0;
 
     private static final String personFirstName = "personFirstName"; // Added by venu N  to store user First Name on 07/04/2020.
+    private static final String personSelectedCountry = "personSelectedCountry";
 
     public SessionManager(Context context) {
         this._context = context;
@@ -505,6 +506,26 @@ public class SessionManager {
         editor.putString(personFirstName, value);
         editor.commit();
     }
+
+    /**
+     * for setting the patient Selected Country
+     * @param countryStr
+     */
+    public void setPatientCountry(String countryStr){
+        editor.putString(personSelectedCountry,countryStr);
+        editor.commit();
+    }
+
+
+    /**
+     * get patient Country.
+     * @return
+     */
+    public  String getPatientCountry(){
+        return pref.getString(personSelectedCountry,"");
+    }
+
+
 
 
 }
