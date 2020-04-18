@@ -146,7 +146,8 @@
                     android:layout_marginTop="15dp"
                     app:cardCornerRadius="10sp"
                     app:cardElevation="5sp"
-                    app:cardPreventCornerOverlap="false">
+                    app:cardPreventCornerOverlap="false"
+                    >
 
                     <RelativeLayout
                         android:id="@+id/button_enter_checkin"
@@ -259,7 +260,7 @@
                         android:fontFamily="@font/lato_bold"
                         android:gravity="center"
                         android:includeFontPadding="false"
-                        android:text="@string/education_videos"
+                        android:text="@string/ppe_faq"
                         android:textColor="@color/txt_sub_header_color"
                         android:textSize="13sp" />
 
@@ -436,7 +437,8 @@
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginTop="15dp"
                     app:cardCornerRadius="10sp"
-                    app:cardElevation="5sp">
+                    app:cardElevation="5sp"
+                    >
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -586,12 +588,104 @@
 
                 </android.support.v7.widget.CardView>
 
+                <android.support.v7.widget.CardView
+                    android:id="@+id/ppe_cardView_request"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/mental_cardview_help"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="15dp"
+                    app:cardCornerRadius="10sp"
+                    app:cardElevation="5sp">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp">
+
+                        <RelativeLayout
+                            android:id="@+id/ppe_help_relative"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="40dp">
+
+                            <!--   <TextView
+                                   android:id="@+id/mental_help_title"
+                                   android:layout_width="match_parent"
+                                   android:layout_height="wrap_content"
+                                   android:fontFamily="@font/lato_bold"
+                                   android:includeFontPadding="false"
+                                   android:text="@string/help"
+                                   android:textColor="@color/txt_sub_header_color"
+                                   android:textSize="12sp" />-->
+
+                            <TextView
+                                android:id="@+id/ppe_Help_Text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:fontFamily="@font/lato_medium"
+                                android:includeFontPadding="false"
+                                android:text="@string/ppe_req_header"
+                                android:textSize="14sp" />
+
+
+                            <TextView
+                                android:id="@+id/ppe_Help_Text1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_below="@+id/ppe_Help_Text"
+                                android:fontFamily="@font/lato_regular"
+                                android:includeFontPadding="false"
+                                android:text="@string/ppe_req_sub_header"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/tv_ppe_request"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/ppe_Help_Text1"
+                                android:layout_marginStart="10sp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:background="@android:color/transparent"
+                                android:fontFamily="@font/lato_bold"
+                                android:gravity="start|center"
+                                android:hint=""
+                                android:textSize="18sp"
+                                android:text="@string/ppe_req"
+                                android:textColor="@color/txt_sub_header_color" />
+
+                            <!-- Icon Credits:- <a target="_blank" href="https://icons8.com/icons/set/whatsapp">WhatsApp icon</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>-->
+
+
+                        </RelativeLayout>
+
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="bottom|right"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginTop="10dp"
+                            android:src="@drawable/svg_mask">
+
+                        </ImageView>
+
+                    </FrameLayout>
+
+
+                </android.support.v7.widget.CardView>
+
 
                 <TextView
                     android:id="@+id/your_data_overview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/mental_cardview_help"
+                    android:layout_below="@id/ppe_cardView_request"
                     android:layout_marginTop="15sp"
                     android:fontFamily="@font/lato_bold"
                     android:padding="10sp"
