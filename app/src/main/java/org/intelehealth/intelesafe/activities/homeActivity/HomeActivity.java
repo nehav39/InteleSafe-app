@@ -534,11 +534,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
         ppe_cardView_request = findViewById(R.id.ppe_cardView_request);
-        if(sessionManager.getPatientCountry().equals("India")){
+     /*   if(sessionManager.getPatientCountry().equals("India")){
             ppe_cardView_request.setVisibility(View.VISIBLE);
         }else{
             ppe_cardView_request.setVisibility(View.GONE);
-        }
+        }*/
+        ppe_cardView_request.setVisibility(View.GONE);
         tv_ppe_request = findViewById(R.id.tv_ppe_request);
         String mystring = getString(R.string.ppe_req);
         SpannableString content1 = new SpannableString(mystring);

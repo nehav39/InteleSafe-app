@@ -630,7 +630,7 @@
     <string name="some_id">+91 9825989750</string>
     <string name="assessment_visit_title">Assessment</string>
     <string name="please_fill_your_details">Please fill your details</string>
-    <string name="ppe_faq">What are the best ways to reuse PPE?</string>
+    <string name="ppe_faq">PPE reuse, alternatives and FAQs</string>
     <string name="ppe_req_header">Running low on PPE? Request for PPE Kits</string>
     <string name="ppe_req_sub_header">This service is currently available in Mumbai and Delhi only. We aim to serve as many as possible and hope to expand this service to other areas soon.</string>
     <string name="ppe_req">Order PPE kits</string>
