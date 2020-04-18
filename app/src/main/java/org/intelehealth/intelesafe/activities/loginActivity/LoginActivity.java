@@ -482,6 +482,7 @@ public class LoginActivity extends AppCompatActivity {
                     sessionManager.setTriggerNoti("yes");
                     sessionManager.setPrivacyValue("Accept");
                     sessionManager.setFirstTimeLaunch(false);
+                    sessionManager.setPatientCountry(clsPersonGetResponse.getPreferredAddress().getCountry());
                     // offlineLogin.setUpOfflineLogin(mEmail, mPassword);
                     cpd.dismiss();
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);

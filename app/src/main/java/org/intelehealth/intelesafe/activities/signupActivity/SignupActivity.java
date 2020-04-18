@@ -1010,6 +1010,7 @@ public class SignupActivity extends AppCompatActivity {
                 userAddressData.setCountry("" + country);
                 userAddressData.setStateProvince("" + state);
                 sessionManager.setState(state);
+                sessionManager.setPatientCountry(country);
                 userAddressData.setPostalCode("" + mPostal.getText().toString());
                 // userAddressData.setCountyDistrict("" + selectedLocationName);
 

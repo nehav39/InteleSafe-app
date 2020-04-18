@@ -143,7 +143,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     IntentFilter filter;
     Myreceiver reMyreceive;
     SyncUtils syncUtils = new SyncUtils();
-    CardView c1, c2, c3, c4, c5;
+    CardView c1, c2, c3, c4, c5,ppe_cardView_request;
     private String key = null;
     private String licenseUrl = null;
     RecyclerView recyclerView;
@@ -533,7 +533,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 alertDialog.show();
             }
         });
-
+        ppe_cardView_request = findViewById(R.id.ppe_cardView_request);
+        if(sessionManager.getPatientCountry().equals("India")){
+            ppe_cardView_request.setVisibility(View.VISIBLE);
+        }else{
+            ppe_cardView_request.setVisibility(View.GONE);
+        }
         tv_ppe_request = findViewById(R.id.tv_ppe_request);
         String mystring = getString(R.string.ppe_req);
         SpannableString content1 = new SpannableString(mystring);
@@ -800,7 +805,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 }
 
                 String finalAddressStr = addressStr1 + " "+(!TextUtils.isEmpty(addressStr2+ " ")?addressStr2:"")+ cityStr + " "+ pinCodeStr;
-                String phoneNumberWithCountryCode = "+918008220025";
+                String phoneNumberWithCountryCode = "+918108220025";
                 String messageStr = "Hi I would like to request for PPE kits."+"\n"+
                         "Name: "+ sessionManager.getUserName()+"\n"+
                         "Address: "+ finalAddressStr +"\n"+
