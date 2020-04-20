@@ -688,6 +688,10 @@
     <string name="ppe_req">Order PPE kits</string>
     <string name="ppe_req_hint">What PPE do you require with quantity*</string>
     <string name="txt_whatsapp_helpline">WhatsApp Helpline</string>
+    <string name="Mental_health_support_text">Feeling stressed or anxious? Here are some self-care and support resources for healthcare providers</string>
+    <string name="tele_consultant_text">Feeling stressed or anxious? Request for a free confidential mental health consultation with a counsellor.</string>
+    <string name="mental_health_support">Mental health support</string>
+    <string name="teleconsult_request">Teleconsult request</string>
 
     // SignUP Screen(New Changes)
     <string name="txt_personal_caste_header">I am a...*</string>

@@ -635,7 +635,11 @@
     <string name="ppe_req_sub_header">This service is currently available in Mumbai and Delhi only. We aim to serve as many as possible and hope to expand this service to other areas soon.</string>
     <string name="ppe_req">Order PPE kits</string>
     <string name="ppe_req_hint">What PPE do you require with quantity*</string>
+
     <string name="txt_whatsapp_helpline">WhatsApp Helpline</string>
+    <string name="Mental_health_support_text">Feeling stressed or anxious? Here are some self-care and support resources for healthcare providers</string>
+    <string name="mental_health_support">Mental health support</string>
+
 
 
     // SignUP Screen(New Changes)
@@ -645,7 +649,7 @@
     <string name="toast_select_designation">Please select your designation.</string>
     <string name="error_empty_designation">Enter your designation.</string>
     <string name="teleconsult_request">Teleconsult request</string>
-    <string name="feeling_stressed_or_anxious_request_for_a_free_confidential_mental_health_consultation_with_a_counsellor">Feeling stressed or anxious? Request for a free confidential mental health consultation with a counsellor.</string>
+    <string name="tele_consultant_text">Feeling stressed or anxious? Request for a free confidential mental health consultation with a counsellor.</string>
     <string name="txt_user_exists">Username already exists.</string>
 
     <!--Login Screen (New Changes)-->

@@ -417,7 +417,10 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
     }
 
 
-    boolean isFromOldVisit = false;
+
+     boolean isFromOldVisit = false;
+    TextView mental_visit_help_text;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -570,6 +573,16 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
             uploadButton.setVisibility(View.VISIBLE);
             editPhysical.setVisibility(View.VISIBLE);
         }
+
+        mental_visit_help_text = findViewById(R.id.mental_visit_help_text);
+        if(sessionManager.getPatientCountry().equals("India")){
+            mental_visit_help_text.setText(getString(R.string.tele_consultant_text));
+            tvMentalHelpRequest.setText(getString(R.string.teleconsult_request));
+        }else{
+            mental_visit_help_text.setText(getString(R.string.Mental_health_support_text));
+            tvMentalHelpRequest.setText(getString(R.string.mental_health_support));
+        }
+
 
         //  downloadButton = findViewById(R.id.button_download);
         teleconsultationButton = findViewById(R.id.button_teleconsultation);
