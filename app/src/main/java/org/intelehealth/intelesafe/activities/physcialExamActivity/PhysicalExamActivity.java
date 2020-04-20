@@ -32,6 +32,7 @@ import android.widget.TextView;
 
 import com.crashlytics.android.Crashlytics;
 
+import org.intelehealth.intelesafe.utilities.FontUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -424,8 +425,10 @@ public class PhysicalExamActivity extends AppCompatActivity {
 
     public void questionsMissing() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setMessage(R.string.question_answer_all_phy_exam);
-        alertDialogBuilder.setNeutralButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+        alertDialogBuilder.setMessage(FontUtils.typeface(PhysicalExamActivity.this, R.font.lato_medium,
+                getString(R.string.question_answer_all_phy_exam)));
+        alertDialogBuilder.setNeutralButton(FontUtils.typeface(PhysicalExamActivity.this,
+                R.font.lato_bold, getString(R.string.generic_ok)), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -486,6 +489,7 @@ public class PhysicalExamActivity extends AppCompatActivity {
         public static PlaceholderFragment newInstance(int sectionNumber, PhysicalExam exams, String patientUuid, String visitUuid) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
+//            FontUtils.typeface(this (PhysicalExamActivity.class), R.font.lato_regular, ""+sectionNumber);
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
             args.putString("patientUuid", patientUuid);
             args.putString("visitUuid", visitUuid);

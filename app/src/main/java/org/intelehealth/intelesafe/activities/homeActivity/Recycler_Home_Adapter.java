@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import org.intelehealth.intelesafe.R;
 import org.intelehealth.intelesafe.app.AppConstants;
+import org.intelehealth.intelesafe.utilities.FontUtils;
 import org.intelehealth.intelesafe.utilities.SessionManager;
 
 import java.text.SimpleDateFormat;
@@ -145,7 +146,7 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
             public void onClick(View view) {
 
                 AlertDialog.Builder alertdialogBuilder = new AlertDialog.Builder(mcontext);
-                alertdialogBuilder.setTitle("Today's Check-in");
+                alertdialogBuilder.setTitle(FontUtils.typeface(mcontext, R.font.lato_bold, "Today's Check-in"));
 
 
                 View customView = LayoutInflater.from(mcontext).inflate(R.layout.custom_dialog_layout, null);
@@ -198,7 +199,8 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
                 };
                 ss.setSpan(clickableSpan, 22, 27, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);*/
 
-                alertdialogBuilder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                alertdialogBuilder.setPositiveButton(FontUtils.typeface(mcontext, R.font.lato_bold,
+                        mcontext.getString(R.string.ok)), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         // moveTaskToBack(true);

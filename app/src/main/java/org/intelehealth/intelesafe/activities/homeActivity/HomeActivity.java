@@ -79,6 +79,7 @@ import org.intelehealth.intelesafe.BuildConfig;
 import org.intelehealth.intelesafe.R;
 import org.intelehealth.intelesafe.activities.loginActivity.LoginActivity;
 import org.intelehealth.intelesafe.activities.physcialExamActivity.PhysicalExamActivity;
+import org.intelehealth.intelesafe.activities.questionNodeActivity.QuestionNodeActivity;
 import org.intelehealth.intelesafe.activities.settingsActivity.SettingsActivity;
 import org.intelehealth.intelesafe.activities.visitSummaryActivity.VisitSummaryActivity;
 import org.intelehealth.intelesafe.app.AppConstants;
@@ -96,6 +97,7 @@ import org.intelehealth.intelesafe.networkApiCalls.ApiInterface;
 import org.intelehealth.intelesafe.syncModule.SyncUtils;
 import org.intelehealth.intelesafe.utilities.Base64Utils;
 import org.intelehealth.intelesafe.utilities.DownloadMindMaps;
+import org.intelehealth.intelesafe.utilities.FontUtils;
 import org.intelehealth.intelesafe.utilities.Logger;
 import org.intelehealth.intelesafe.utilities.OfflineLogin;
 import org.intelehealth.intelesafe.utilities.SessionManager;
@@ -515,14 +517,17 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(HomeActivity.this);
-                alertDialogBuilder.setMessage(getString(R.string.logout_dialog));
-                alertDialogBuilder.setNegativeButton(R.string.generic_no, new DialogInterface.OnClickListener() {
+                alertDialogBuilder.setMessage(FontUtils.typeface(HomeActivity.this, R.font.lato_medium,
+                        getString(R.string.logout_dialog)));
+                alertDialogBuilder.setNegativeButton(FontUtils.typeface(HomeActivity.this, R.font.lato_bold,
+                        getString(R.string.generic_no)), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
                     }
                 });
-                alertDialogBuilder.setPositiveButton(R.string.generic_yes, new DialogInterface.OnClickListener() {
+                alertDialogBuilder.setPositiveButton(FontUtils.typeface(HomeActivity.this, R.font.lato_bold,
+                        getString(R.string.generic_yes)), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -1033,7 +1038,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         dialogInterface.dismiss();
                     }
                 });
-                alertDialogBuilder.setPositiveButton(R.string.generic_yes, new DialogInterface.OnClickListener() {
+                alertDialogBuilder.setPositiveButton(FontUtils.typeface(HomeActivity.this, R.font.lato_bold, getString(R.string.generic_yes)), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -1135,15 +1140,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     public void onBackPressed() {
 
         AlertDialog.Builder alertdialogBuilder = new AlertDialog.Builder(this);
-        alertdialogBuilder.setMessage(R.string.sure_to_exit);
-        alertdialogBuilder.setPositiveButton(R.string.generic_yes, new DialogInterface.OnClickListener() {
+        alertdialogBuilder.setMessage(FontUtils.typeface(HomeActivity.this, R.font.lato_medium, getString(R.string.sure_to_exit)));
+        alertdialogBuilder.setPositiveButton(FontUtils.typeface(HomeActivity.this, R.font.lato_bold, getString(R.string.generic_yes)), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 moveTaskToBack(true);
                 // finish();
             }
         });
-        alertdialogBuilder.setNegativeButton(R.string.generic_no, null);
+        alertdialogBuilder.setNegativeButton(FontUtils.typeface(HomeActivity.this, R.font.lato_bold, getString(R.string.generic_no)), null);
 
         AlertDialog alertDialog = alertdialogBuilder.create();
         alertDialog.show();

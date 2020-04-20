@@ -15,6 +15,7 @@ import android.widget.ExpandableListView;
 
 import com.crashlytics.android.Crashlytics;
 
+import org.intelehealth.intelesafe.utilities.FontUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -201,8 +202,10 @@ public class QuestionNodeActivity extends AppCompatActivity {
             }
         } else if ((currentNode.getOption(groupPosition).getChoiceType().equals("single")) && currentNode.getOption(groupPosition).anySubSelected()) {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(QuestionNodeActivity.this);
-            alertDialogBuilder.setMessage(R.string.this_question_only_one_answer);
-            alertDialogBuilder.setNeutralButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+            alertDialogBuilder.setMessage(FontUtils.typeface(QuestionNodeActivity.this, R.font.lato_medium,
+                    getString(R.string.this_question_only_one_answer)));
+            alertDialogBuilder.setNeutralButton(FontUtils.typeface(QuestionNodeActivity.this, R.font.lato_medium,
+                    getString(R.string.generic_ok)), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
@@ -513,8 +516,10 @@ public class QuestionNodeActivity extends AppCompatActivity {
     //TODO: Add setting to allow for all questions unrequired..addAll(Arrays.asList(splitExams))
     public void questionsMissing() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setMessage(Html.fromHtml(currentNode.formQuestionAnswer(0)));
-        alertDialogBuilder.setPositiveButton(R.string.generic_yes, new DialogInterface.OnClickListener() {
+        alertDialogBuilder.setMessage(FontUtils.typeface(QuestionNodeActivity.this, R.font.lato_medium,
+                Html.fromHtml(currentNode.formQuestionAnswer(0))));
+        alertDialogBuilder.setPositiveButton(FontUtils.typeface(QuestionNodeActivity.this, R.font.lato_bold,
+                getString(R.string.generic_yes)), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 complaintConfirmed = true;
@@ -522,7 +527,8 @@ public class QuestionNodeActivity extends AppCompatActivity {
                 fabClick();
             }
         });
-        alertDialogBuilder.setNegativeButton(R.string.generic_back, new DialogInterface.OnClickListener() {
+        alertDialogBuilder.setNegativeButton(FontUtils.typeface(QuestionNodeActivity.this, R.font.lato_bold,
+                getString(R.string.generic_back)), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();

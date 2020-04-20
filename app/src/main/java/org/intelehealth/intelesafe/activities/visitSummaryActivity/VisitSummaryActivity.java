@@ -62,6 +62,7 @@ import android.widget.Toast;
 import com.crashlytics.android.Crashlytics;
 
 import org.apache.commons.lang3.StringUtils;
+import org.intelehealth.intelesafe.utilities.FontUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -341,10 +342,10 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                 else
                 {
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-                    alertDialogBuilder.setTitle("Click on Submit button");
-                    alertDialogBuilder.setMessage("Please upload your visit before going to Home screen by clicking on the Submit button.");
+                    alertDialogBuilder.setTitle(FontUtils.typeface(VisitSummaryActivity.this, R.font.lato_bold, "Click on Submit button"));
+                    alertDialogBuilder.setMessage(FontUtils.typeface(VisitSummaryActivity.this, R.font.lato_medium,"Please upload your visit before going to Home screen by clicking on the Submit button."));
 
-                    alertDialogBuilder.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+                    alertDialogBuilder.setPositiveButton(FontUtils.typeface(VisitSummaryActivity.this, R.font.lato_bold, getString(R.string.generic_ok)), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
@@ -378,14 +379,17 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                 if (downloaded) {
 
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-                    alertDialogBuilder.setMessage(R.string.end_visit_msg);
-                    alertDialogBuilder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    alertDialogBuilder.setMessage(FontUtils.typeface(VisitSummaryActivity.this, R.font.lato_medium,
+                            getString(R.string.end_visit_msg)));
+                    alertDialogBuilder.setNegativeButton(FontUtils.typeface(VisitSummaryActivity.this, R.font.lato_bold,
+                            getString(R.string.cancel)), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.dismiss();
                         }
                     });
-                    alertDialogBuilder.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+                    alertDialogBuilder.setPositiveButton(FontUtils.typeface(VisitSummaryActivity.this, R.font.lato_bold,
+                            getString(R.string.generic_ok)), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
@@ -397,8 +401,10 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
                 } else {
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-                    alertDialogBuilder.setMessage(R.string.error_no_data);
-                    alertDialogBuilder.setNeutralButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+                    alertDialogBuilder.setMessage(FontUtils.typeface(VisitSummaryActivity.this, R.font.lato_medium,
+                            getString(R.string.error_no_data)));
+                    alertDialogBuilder.setNeutralButton(FontUtils.typeface(VisitSummaryActivity.this, R.font.lato_regular,
+                            getString(R.string.generic_ok)), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
@@ -868,7 +874,8 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void onClick(View v) {
                 final AlertDialog.Builder famHistDialog = new AlertDialog.Builder(VisitSummaryActivity.this);
-                famHistDialog.setTitle(getString(R.string.visit_summary_family_history));
+                famHistDialog.setTitle(FontUtils.typeface(VisitSummaryActivity.this,
+                        R.font.lato_bold, getString(R.string.visit_summary_family_history)));
                 final LayoutInflater inflater = getLayoutInflater();
                 View convertView = inflater.inflate(R.layout.dialog_edit_entry, null);
                 famHistDialog.setView(convertView);
@@ -878,18 +885,21 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                     famHistText.setText(Html.fromHtml(famHistory.getValue()));
                 famHistText.setEnabled(false);
 
-                famHistDialog.setPositiveButton(getString(R.string.generic_manual_entry), new DialogInterface.OnClickListener() {
+                famHistDialog.setPositiveButton(FontUtils.typeface(VisitSummaryActivity.this,
+                        R.font.lato_bold, getString(R.string.generic_manual_entry)), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         final AlertDialog.Builder textInput = new AlertDialog.Builder(VisitSummaryActivity.this);
-                        textInput.setTitle(R.string.question_text_input);
+                        textInput.setTitle(FontUtils.typeface(VisitSummaryActivity.this,
+                                R.font.lato_bold, getString(R.string.question_text_input)));
                         final EditText dialogEditText = new EditText(VisitSummaryActivity.this);
                         if (famHistory.getValue() != null)
                             dialogEditText.setText(Html.fromHtml(famHistory.getValue()));
                         else
                             dialogEditText.setText("");
                         textInput.setView(dialogEditText);
-                        textInput.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+                        textInput.setPositiveButton(FontUtils.typeface(VisitSummaryActivity.this, R.font.lato_bold,
+                                getString(R.string.generic_ok)), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 //famHistory.setValue(dialogEditText.getText().toString());
@@ -903,7 +913,8 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                                 dialog.dismiss();
                             }
                         });
-                        textInput.setNegativeButton(R.string.generic_cancel, new DialogInterface.OnClickListener() {
+                        textInput.setNegativeButton(FontUtils.typeface(VisitSummaryActivity.this, R.font.lato_bold,
+                                getString(R.string.generic_cancel)), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
@@ -914,14 +925,15 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                     }
                 });
 
-                famHistDialog.setNeutralButton(getString(R.string.generic_cancel), new DialogInterface.OnClickListener() {
+                famHistDialog.setNeutralButton(FontUtils.typeface(VisitSummaryActivity.this, R.font.lato_bold, getString(R.string.generic_cancel)), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
                     }
                 });
 
-                famHistDialog.setNegativeButton(R.string.generic_erase_redo, new DialogInterface.OnClickListener() {
+                famHistDialog.setNegativeButton(FontUtils.typeface(VisitSummaryActivity.this, R.font.lato_bold,
+                        getString(R.string.generic_erase_redo)), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -958,7 +970,8 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void onClick(View v) {
                 final AlertDialog.Builder complaintDialog = new AlertDialog.Builder(VisitSummaryActivity.this);
-                complaintDialog.setTitle(getString(R.string.visit_summary_complaint));
+                complaintDialog.setTitle(FontUtils.typeface(VisitSummaryActivity.this,
+                        R.font.lato_bold, getString(R.string.visit_summary_complaint)));
                 final LayoutInflater inflater = getLayoutInflater();
                 View convertView = inflater.inflate(R.layout.dialog_edit_entry, null);
                 complaintDialog.setView(convertView);
@@ -969,11 +982,12 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                 }
                 complaintText.setEnabled(false);
 
-                complaintDialog.setPositiveButton(getString(R.string.generic_manual_entry), new DialogInterface.OnClickListener() {
+                complaintDialog.setPositiveButton(FontUtils.typeface(VisitSummaryActivity.this,
+                        R.font.lato_bold, getString(R.string.generic_manual_entry)), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         final AlertDialog.Builder textInput = new AlertDialog.Builder(VisitSummaryActivity.this);
-                        textInput.setTitle(R.string.question_text_input);
+                        textInput.setTitle(FontUtils.typeface(VisitSummaryActivity.this, R.font.lato_bold, getString(R.string.question_text_input)));
                         final EditText dialogEditText = new EditText(VisitSummaryActivity.this);
                         if (complaint.getValue() != null) {
                             dialogEditText.setText(Html.fromHtml(complaint.getValue()));
@@ -981,7 +995,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                             dialogEditText.setText("");
                         }
                         textInput.setView(dialogEditText);
-                        textInput.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+                        textInput.setPositiveButton(FontUtils.typeface(VisitSummaryActivity.this, R.font.lato_bold, getString(R.string.generic_ok)), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 complaint.setValue(dialogEditText.getText().toString().replace("\n", "<br>"));
@@ -993,7 +1007,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                                 dialog.dismiss();
                             }
                         });
-                        textInput.setNeutralButton(R.string.generic_cancel, new DialogInterface.OnClickListener() {
+                        textInput.setNeutralButton(FontUtils.typeface(VisitSummaryActivity.this, R.font.lato_bold, getString(R.string.generic_cancel)), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
@@ -1004,7 +1018,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                     }
                 });
 
-                complaintDialog.setNegativeButton(getString(R.string.generic_erase_redo), new DialogInterface.OnClickListener() {
+                complaintDialog.setNegativeButton(FontUtils.typeface(VisitSummaryActivity.this, R.font.lato_bold, getString(R.string.generic_erase_redo)), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         //Deleting the old image in physcial examination
@@ -1035,7 +1049,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                     }
                 });
 
-                complaintDialog.setNeutralButton(R.string.generic_cancel, new DialogInterface.OnClickListener() {
+                complaintDialog.setNeutralButton(FontUtils.typeface(VisitSummaryActivity.this, R.font.lato_bold, getString(R.string.generic_cancel)), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
@@ -1079,7 +1093,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         final AlertDialog.Builder textInput = new AlertDialog.Builder(VisitSummaryActivity.this);
-                        textInput.setTitle(R.string.question_text_input);
+                        textInput.setTitle(FontUtils.typeface(VisitSummaryActivity.this, R.font.lato_bold, getString(R.string.question_text_input)));
                         final EditText dialogEditText = new EditText(VisitSummaryActivity.this);
                         if (phyExam.getValue() != null) {
                             String physicalExamStr = phyExam.getValue().replaceAll("<b>General exams: </b>", "<b>Self Assessment: </b>");
@@ -1087,7 +1101,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                         }else
                             dialogEditText.setText("");
                         textInput.setView(dialogEditText);
-                        textInput.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+                        textInput.setPositiveButton(FontUtils.typeface(VisitSummaryActivity.this, R.font.lato_bold, getString(R.string.generic_ok)), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
@@ -1101,7 +1115,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                                 dialog.dismiss();
                             }
                         });
-                        textInput.setNegativeButton(R.string.generic_cancel, new DialogInterface.OnClickListener() {
+                        textInput.setNegativeButton(FontUtils.typeface(VisitSummaryActivity.this, R.font.lato_bold, getString(R.string.generic_cancel)), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
@@ -1112,7 +1126,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                     }
                 });
 
-                physicalDialog.setNegativeButton(getString(R.string.generic_erase_redo), new DialogInterface.OnClickListener() {
+                physicalDialog.setNegativeButton(FontUtils.typeface(VisitSummaryActivity.this, R.font.lato_bold, getString(R.string.generic_erase_redo)), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if (obsImgdir.exists()) {
@@ -1144,7 +1158,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                     }
                 });
 
-                physicalDialog.setNeutralButton(R.string.generic_cancel, new DialogInterface.OnClickListener() {
+                physicalDialog.setNeutralButton(FontUtils.typeface(VisitSummaryActivity.this, R.font.lato_bold,getString(R.string.generic_cancel)), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
@@ -1171,7 +1185,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void onClick(View v) {
                 final AlertDialog.Builder historyDialog = new AlertDialog.Builder(VisitSummaryActivity.this);
-                historyDialog.setTitle(getString(R.string.visit_summary_medical_history));
+                historyDialog.setTitle(FontUtils.typeface(VisitSummaryActivity.this, R.font.lato_bold, getString(R.string.visit_summary_medical_history)));
                 final LayoutInflater inflater = getLayoutInflater();
                 View convertView = inflater.inflate(R.layout.dialog_edit_entry, null);
                 historyDialog.setView(convertView);
@@ -1181,18 +1195,20 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                     historyText.setText(Html.fromHtml(patHistory.getValue()));
                 historyText.setEnabled(false);
 
-                historyDialog.setPositiveButton(getString(R.string.generic_manual_entry), new DialogInterface.OnClickListener() {
+                historyDialog.setPositiveButton(FontUtils.typeface(VisitSummaryActivity.this, R.font.lato_bold, getString(R.string.generic_manual_entry)), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         final AlertDialog.Builder textInput = new AlertDialog.Builder(VisitSummaryActivity.this);
-                        textInput.setTitle(R.string.question_text_input);
+                        textInput.setTitle(FontUtils.typeface(VisitSummaryActivity.this,
+                                R.font.lato_bold, getString(R.string.question_text_input)));
                         final EditText dialogEditText = new EditText(VisitSummaryActivity.this);
                         if (patHistory.getValue() != null)
                             dialogEditText.setText(Html.fromHtml(patHistory.getValue()));
                         else
                             dialogEditText.setText("");
                         textInput.setView(dialogEditText);
-                        textInput.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+                        textInput.setPositiveButton(FontUtils.typeface(VisitSummaryActivity.this,
+                                R.font.lato_bold, getString(R.string.generic_ok)), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 //patHistory.setValue(dialogEditText.getText().toString());
@@ -1206,7 +1222,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                                 dialog.dismiss();
                             }
                         });
-                        textInput.setNegativeButton(R.string.generic_cancel, new DialogInterface.OnClickListener() {
+                        textInput.setNegativeButton(FontUtils.typeface(VisitSummaryActivity.this, R.font.lato_bold, getString(R.string.generic_cancel)), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
@@ -1217,7 +1233,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                     }
                 });
 
-                historyDialog.setNegativeButton(getString(R.string.generic_erase_redo), new DialogInterface.OnClickListener() {
+                historyDialog.setNegativeButton(FontUtils.typeface(VisitSummaryActivity.this, R.font.lato_bold, getString(R.string.generic_erase_redo)), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Intent intent1 = new Intent(VisitSummaryActivity.this, PastMedicalHistoryActivity.class);
@@ -1232,7 +1248,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                     }
                 });
 
-                historyDialog.setNeutralButton(R.string.generic_cancel, new DialogInterface.OnClickListener() {
+                historyDialog.setNeutralButton(FontUtils.typeface(VisitSummaryActivity.this, R.font.lato_bold, getString(R.string.generic_cancel)), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
@@ -1303,7 +1319,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                         pb.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
                     }
                 });
-                textEditInput.setNegativeButton(R.string.generic_cancel, new DialogInterface.OnClickListener() {
+                textEditInput.setNegativeButton(FontUtils.typeface(VisitSummaryActivity.this, R.font.lato_bold, getString(R.string.generic_cancel)), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -1374,8 +1390,9 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
     private void showPopup() {
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle(getString(R.string.thank_you));
-        alertDialogBuilder.setMessage(getString(R.string.your_checkin_is_uploaded_successfully));
+        alertDialogBuilder.setTitle(FontUtils.typeface(VisitSummaryActivity.this, R.font.lato_bold, getString(R.string.thank_you)));
+        alertDialogBuilder.setMessage(FontUtils.typeface(VisitSummaryActivity.this, R.font.lato_medium,
+                getString(R.string.your_checkin_is_uploaded_successfully)));
 
 //        alertDialogBuilder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
 //            @Override
@@ -1383,7 +1400,8 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 //                dialogInterface.dismiss();
 //            }
 //        });
-        alertDialogBuilder.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+        alertDialogBuilder.setPositiveButton(FontUtils.typeface(VisitSummaryActivity.this, R.font.lato_bold,
+                getString(R.string.generic_ok)), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -2367,7 +2385,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
     public void sendSMS() {
         final AlertDialog.Builder textInput = new AlertDialog.Builder(this, R.style.AlertDialogStyle);
-        textInput.setTitle(R.string.identification_screen_prompt_phone_number);
+        textInput.setTitle(FontUtils.typeface(VisitSummaryActivity.this, R.font.lato_bold, getString(R.string.identification_screen_prompt_phone_number)));
         final EditText phoneNumberEditText = new EditText(context);
         phoneNumberEditText.setInputType(InputType.TYPE_CLASS_PHONE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -2378,7 +2396,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
         textInput.setView(phoneNumberEditText);
 
-        textInput.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+        textInput.setPositiveButton(FontUtils.typeface(VisitSummaryActivity.this, R.font.lato_bold, getString(R.string.generic_ok)), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -2459,7 +2477,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         });
 
 
-        textInput.setNegativeButton(getString(R.string.generic_cancel), new DialogInterface.OnClickListener() {
+        textInput.setNegativeButton(FontUtils.typeface(VisitSummaryActivity.this, R.font.lato_bold, getString(R.string.generic_cancel)), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();

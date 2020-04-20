@@ -24,6 +24,7 @@ import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -87,6 +88,7 @@ import org.intelehealth.intelesafe.networkApiCalls.ApiClient;
 import org.intelehealth.intelesafe.networkApiCalls.ApiInterface;
 import org.intelehealth.intelesafe.utilities.Base64Utils;
 import org.intelehealth.intelesafe.utilities.DateAndTimeUtils;
+import org.intelehealth.intelesafe.utilities.FontUtils;
 import org.intelehealth.intelesafe.utilities.Logger;
 import org.intelehealth.intelesafe.utilities.NetworkConnection;
 import org.intelehealth.intelesafe.utilities.SessionManager;
@@ -273,7 +275,10 @@ public class SignupActivity extends AppCompatActivity {
 
 
         mPasswordView = findViewById(R.id.password);
+        mPasswordView.setTransformationMethod(new PasswordTransformationMethod());
+
         mCPassword = findViewById(R.id.cpassword);
+        mCPassword.setTransformationMethod(new PasswordTransformationMethod());
 
         licenseID = findViewById(R.id.identification_registration_no);
         licenseID.setFilters(new InputFilter[]{new InputFilter.LengthFilter(50), inputFilter_Name}); //maxlength 50
@@ -331,8 +336,8 @@ public class SignupActivity extends AppCompatActivity {
         mEdtCaste.setVisibility(View.GONE);
 
         ArrayAdapter<CharSequence> countryAdapter = ArrayAdapter.createFromResource(this,
-                R.array.countries_array, android.R.layout.simple_spinner_item);
-        countryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.array.countries_array, R.layout.custom_spinner_item);
+//        countryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mCountry.setAdapter(countryAdapter);
 
       /*  ArrayAdapter<CharSequence> distAdapter = ArrayAdapter.createFromResource(SignupActivity.this,
@@ -801,9 +806,9 @@ public class SignupActivity extends AppCompatActivity {
 
                 if (!mGenderF.isChecked() && !mGenderM.isChecked()) {
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(SignupActivity.this);
-                    alertDialogBuilder.setTitle(R.string.error);
-                    alertDialogBuilder.setMessage(R.string.identification_screen_dialog_error_gender);
-                    alertDialogBuilder.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+                    alertDialogBuilder.setTitle(FontUtils.typeface(SignupActivity.this, R.font.lato_bold, getString(R.string.error)));
+                    alertDialogBuilder.setMessage(FontUtils.typeface(SignupActivity.this, R.font.lato_medium, getString(R.string.identification_screen_dialog_error_gender)));
+                    alertDialogBuilder.setPositiveButton(FontUtils.typeface(SignupActivity.this, R.font.lato_bold, getString(R.string.generic_ok)), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
@@ -827,10 +832,10 @@ public class SignupActivity extends AppCompatActivity {
                 if (dob.equals("") || dob.toString().equals("")) {
                     if (dob.after(today)) {
                         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(SignupActivity.this);
-                        alertDialogBuilder.setTitle(R.string.error);
-                        alertDialogBuilder.setMessage(R.string.identification_screen_dialog_error_dob);
+                        alertDialogBuilder.setTitle(FontUtils.typeface(SignupActivity.this, R.font.lato_bold, getString(R.string.error)));
+                        alertDialogBuilder.setMessage(FontUtils.typeface(SignupActivity.this, R.font.lato_medium, getString(R.string.identification_screen_dialog_error_dob)));
                         //alertDialogBuilder.setMessage(getString(R.string.identification_dialog_date_error));
-                        alertDialogBuilder.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+                        alertDialogBuilder.setPositiveButton(FontUtils.typeface(SignupActivity.this, R.font.lato_bold, getString(R.string.generic_ok)), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();

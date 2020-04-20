@@ -22,6 +22,7 @@ import android.widget.ListView;
 
 import com.crashlytics.android.Crashlytics;
 
+import org.intelehealth.intelesafe.utilities.FontUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -191,8 +192,8 @@ public class ComplaintNodeActivity extends AppCompatActivity {
 
             if (selection.isEmpty()) {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-                alertDialogBuilder.setTitle(getString(R.string.complaint_dialog_title));
-                alertDialogBuilder.setMessage(getString(R.string.complaint_required));
+                alertDialogBuilder.setTitle(FontUtils.typeface(ComplaintNodeActivity.this, R.font.lato_bold, getString(R.string.complaint_dialog_title)));
+                alertDialogBuilder.setMessage(FontUtils.typeface(ComplaintNodeActivity.this, R.font.lato_medium, getString(R.string.complaint_required)));
                 alertDialogBuilder.setNeutralButton(getString(R.string.generic_ok), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -206,7 +207,7 @@ public class ComplaintNodeActivity extends AppCompatActivity {
                 pb.setTypeface(Typeface.DEFAULT,Typeface.BOLD);
             } else {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-                alertDialogBuilder.setTitle(R.string.complaint_dialog_title);
+                alertDialogBuilder.setTitle(FontUtils.typeface(ComplaintNodeActivity.this, R.font.lato_bold, getString(R.string.complaint_dialog_title)));
                 final LayoutInflater inflater = getLayoutInflater();
                 View convertView = inflater.inflate(R.layout.list_dialog_complaint, null);
                 alertDialogBuilder.setView(convertView);
@@ -214,7 +215,7 @@ public class ComplaintNodeActivity extends AppCompatActivity {
                 listView.setDivider(null);
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, displaySelection);
                 listView.setAdapter(arrayAdapter);
-                alertDialogBuilder.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+                alertDialogBuilder.setPositiveButton(FontUtils.typeface(ComplaintNodeActivity.this, R.font.lato_bold, getString(R.string.generic_ok)), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -233,7 +234,7 @@ public class ComplaintNodeActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
-                alertDialogBuilder.setNegativeButton(getResources().getString(R.string.complaint_change_selected), new DialogInterface.OnClickListener() {
+                alertDialogBuilder.setNegativeButton((FontUtils.typeface(ComplaintNodeActivity.this, R.font.lato_bold, getResources().getString(R.string.complaint_change_selected))), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
