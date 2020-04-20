@@ -28,6 +28,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.crashlytics.android.Crashlytics;
 
+import org.intelehealth.intelesafe.utilities.FontUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -534,11 +535,13 @@ public class Node implements Serializable {
 
     public static void askText(final Node node, Activity context, final CustomExpandableListAdapter adapter) {
         final AlertDialog.Builder textInput = new AlertDialog.Builder(context);
-        textInput.setTitle(R.string.question_text_input);
+        textInput.setTitle(FontUtils.typeface(context,
+                R.font.lato_bold, context.getString(R.string.question_text_input)));
         final EditText dialogEditText = new EditText(context);
         dialogEditText.setInputType(InputType.TYPE_CLASS_TEXT);
         textInput.setView(dialogEditText);
-        textInput.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+        textInput.setPositiveButton(FontUtils.typeface(context,
+                R.font.lato_bold, context.getString(R.string.generic_ok)), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (node.getLanguage().contains("_")) {
@@ -552,7 +555,8 @@ public class Node implements Serializable {
                 dialog.dismiss();
             }
         });
-        textInput.setNegativeButton(R.string.generic_cancel, new DialogInterface.OnClickListener() {
+        textInput.setNegativeButton(FontUtils.typeface(context,
+                R.font.lato_bold, context.getString(R.string.generic_cancel)), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
@@ -719,7 +723,7 @@ public class Node implements Serializable {
 
         if (!finalMessage.isEmpty()) {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-            alertDialogBuilder.setMessage(finalMessage);
+            alertDialogBuilder.setMessage(FontUtils.typeface(context, R.font.lato_medium, finalMessage));
             alertDialogBuilder.setNeutralButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -1023,11 +1027,13 @@ public class Node implements Serializable {
 
     public static void subAskText(final Node node, Activity context, final CustomArrayAdapter adapter) {
         final AlertDialog.Builder textInput = new AlertDialog.Builder(context);
-        textInput.setTitle(R.string.question_text_input);
+        textInput.setTitle(FontUtils.typeface(context,
+                R.font.lato_bold, context.getString(R.string.question_text_input)));
         final EditText dialogEditText = new EditText(context);
         dialogEditText.setInputType(InputType.TYPE_CLASS_TEXT);
         textInput.setView(dialogEditText);
-        textInput.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+        textInput.setPositiveButton(FontUtils.typeface(context,
+                R.font.lato_bold, context.getString(R.string.generic_ok)), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (node.getLanguage().contains("_")) {
@@ -1041,7 +1047,8 @@ public class Node implements Serializable {
                 dialog.dismiss();
             }
         });
-        textInput.setNegativeButton(R.string.generic_cancel, new DialogInterface.OnClickListener() {
+        textInput.setNegativeButton(FontUtils.typeface(context,
+                R.font.lato_bold, context.getString(R.string.generic_cancel)), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();

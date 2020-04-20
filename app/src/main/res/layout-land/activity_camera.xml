@@ -26,6 +26,7 @@
         android:layout_height="?attr/actionBarSize"
         android:layout_alignEnd="@id/camera_surface_CameraView"
         android:layout_alignRight="@id/camera_surface_CameraView"
+        app:titleTextAppearance="@style/title"
         android:layout_alignParentTop="true" />
 
     <android.support.design.widget.FloatingActionButton

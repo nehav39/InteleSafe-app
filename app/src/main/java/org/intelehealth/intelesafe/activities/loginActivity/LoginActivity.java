@@ -52,6 +52,7 @@ import org.intelehealth.intelesafe.models.loginModel.LoginModel;
 import org.intelehealth.intelesafe.models.loginProviderModel.LoginProviderModel;
 import org.intelehealth.intelesafe.models.person.ClsPersonGetResponse;
 import org.intelehealth.intelesafe.utilities.Base64Utils;
+import org.intelehealth.intelesafe.utilities.FontUtils;
 import org.intelehealth.intelesafe.utilities.Logger;
 import org.intelehealth.intelesafe.utilities.OfflineLogin;
 import org.intelehealth.intelesafe.utilities.SessionManager;
@@ -296,8 +297,8 @@ public class LoginActivity extends AppCompatActivity {
         Linkify.addLinks(span_string, Linkify.EMAIL_ADDRESSES);
 
         new AlertDialog.Builder(this)
-                .setMessage(span_string)
-                .setNegativeButton("Send Email", new DialogInterface.OnClickListener() {
+                .setMessage(FontUtils.typeface(LoginActivity.this, R.font.lato_regular, span_string))
+                .setNegativeButton(FontUtils.typeface(LoginActivity.this, R.font.lato_regular,"Send Email"), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //finish();
@@ -313,7 +314,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
 
                 })
-                .setPositiveButton("Close", null)
+                .setPositiveButton(FontUtils.typeface(LoginActivity.this, R.font.lato_regular,"Close"), null)
                 .show();
 
         //prajwal_changes

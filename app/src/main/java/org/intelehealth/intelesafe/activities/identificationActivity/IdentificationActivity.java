@@ -39,6 +39,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.crashlytics.android.Crashlytics;
 import com.google.gson.Gson;
 
+import org.intelehealth.intelesafe.utilities.FontUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -819,8 +820,8 @@ public class IdentificationActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         AlertDialog.Builder alertdialogBuilder = new AlertDialog.Builder(this);
-                alertdialogBuilder.setMessage(R.string.are_you_want_go_back);
-                alertdialogBuilder.setPositiveButton(R.string.generic_yes, new DialogInterface.OnClickListener() {
+                alertdialogBuilder.setMessage(FontUtils.typeface(IdentificationActivity.this, R.font.lato_medium, getString(R.string.are_you_want_go_back)));
+                alertdialogBuilder.setPositiveButton(FontUtils.typeface(IdentificationActivity.this, R.font.lato_bold, getString(R.string.generic_yes)), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i)
 
@@ -829,7 +830,7 @@ public class IdentificationActivity extends AppCompatActivity {
                         startActivity(i_back);
                     }
                 });
-                alertdialogBuilder.setNegativeButton(R.string.generic_no, null);
+                alertdialogBuilder.setNegativeButton(FontUtils.typeface(IdentificationActivity.this, R.font.lato_bold, getString(R.string.generic_no)), null);
 
         AlertDialog alertDialog = alertdialogBuilder.create();
         alertDialog.show();
@@ -847,8 +848,8 @@ public class IdentificationActivity extends AppCompatActivity {
     public void showAlertDialogButtonClicked(String errorMessage) {
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Config Error");
-        alertDialogBuilder.setMessage(errorMessage);
+        alertDialogBuilder.setTitle(FontUtils.typeface(IdentificationActivity.this, R.font.lato_bold,"Config Error"));
+        alertDialogBuilder.setMessage(FontUtils.typeface(IdentificationActivity.this, R.font.lato_medium, errorMessage));
         alertDialogBuilder.setNeutralButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -898,10 +899,10 @@ public class IdentificationActivity extends AppCompatActivity {
         if(dob.equals("") || dob.toString().equals("")) {
             if (dob.after(today)) {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(IdentificationActivity.this);
-                alertDialogBuilder.setTitle(R.string.error);
-                alertDialogBuilder.setMessage(R.string.identification_screen_dialog_error_dob);
+                alertDialogBuilder.setTitle(FontUtils.typeface(IdentificationActivity.this, R.font.lato_bold, getString(R.string.error)));
+                alertDialogBuilder.setMessage(FontUtils.typeface(IdentificationActivity.this, R.font.lato_medium, getString(R.string.identification_screen_dialog_error_dob)));
                 //alertDialogBuilder.setMessage(getString(R.string.identification_dialog_date_error));
-                alertDialogBuilder.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+                alertDialogBuilder.setPositiveButton(FontUtils.typeface(IdentificationActivity.this, R.font.lato_bold, getString(R.string.generic_ok)), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -984,9 +985,9 @@ public class IdentificationActivity extends AppCompatActivity {
 
             if (!mGenderF.isChecked() && !mGenderM.isChecked()) {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(IdentificationActivity.this);
-                alertDialogBuilder.setTitle(R.string.error);
-                alertDialogBuilder.setMessage(R.string.identification_screen_dialog_error_gender);
-                alertDialogBuilder.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+                alertDialogBuilder.setTitle(FontUtils.typeface(IdentificationActivity.this, R.font.lato_bold, getString(R.string.error)));
+                alertDialogBuilder.setMessage(FontUtils.typeface(IdentificationActivity.this, R.font.lato_medium, getString(R.string.identification_screen_dialog_error_gender)));
+                alertDialogBuilder.setPositiveButton(FontUtils.typeface(IdentificationActivity.this, R.font.lato_bold, getString(R.string.generic_ok)), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();

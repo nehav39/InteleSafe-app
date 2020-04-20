@@ -14,7 +14,9 @@ import java.util.Calendar;
 import java.util.Objects;
 
 import org.intelehealth.intelesafe.R;
+import org.intelehealth.intelesafe.activities.visitSummaryActivity.VisitSummaryActivity;
 import org.intelehealth.intelesafe.app.AppConstants;
+import org.intelehealth.intelesafe.utilities.FontUtils;
 
 public class AlarmReceiver extends BroadcastReceiver {
     @Override
@@ -53,8 +55,9 @@ public class AlarmReceiver extends BroadcastReceiver {
                     .setWhen(System.currentTimeMillis())
                     .setSmallIcon(R.drawable.ic_cloud_upload)
 //                .setTicker("{Time to watch some cool stuff!}")
-                    .setContentTitle("Daily Check-in: 8am")
-                    .setContentText("It's time for daily check-in")
+                    .setContentTitle(FontUtils.typeface(context, R.font.lato_bold,
+                            "Daily Check-in: 8am"))
+                    .setContentText(FontUtils.typeface(context, R.font.lato_regular,"It's time for daily check-in"))
                     .setContentInfo("INFO")
                     .setContentIntent(pendingI_10);
         }
@@ -65,8 +68,8 @@ public class AlarmReceiver extends BroadcastReceiver {
                     .setWhen(System.currentTimeMillis())
                     .setSmallIcon(R.drawable.ic_cloud_upload)
 //                .setTicker("{Time to watch some cool stuff!}")
-                    .setContentTitle("Daily Check-in: 7pm")
-                    .setContentText("It's time for daily check-in")
+                    .setContentTitle(FontUtils.typeface(context, R.font.lato_bold,"Daily Check-in: 7pm"))
+                    .setContentText(FontUtils.typeface(context, R.font.lato_bold,"It's time for daily check-in"))
                     .setContentInfo("INFO")
                     .setContentIntent(pendingI_17);
         }

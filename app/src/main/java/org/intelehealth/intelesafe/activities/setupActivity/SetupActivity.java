@@ -61,6 +61,7 @@ import org.intelehealth.intelesafe.utilities.AdminPassword;
 import org.intelehealth.intelesafe.utilities.Base64Utils;
 import org.intelehealth.intelesafe.utilities.DialogUtils;
 import org.intelehealth.intelesafe.utilities.DownloadMindMaps;
+import org.intelehealth.intelesafe.utilities.FontUtils;
 import org.intelehealth.intelesafe.utilities.Logger;
 import org.intelehealth.intelesafe.utilities.SessionManager;
 import org.intelehealth.intelesafe.utilities.StringEncryption;
@@ -386,10 +387,10 @@ public class SetupActivity extends AppCompatActivity {
                     View promptsView = li.inflate(R.layout.dialog_mindmap_cred, null);
 
 
-                    dialog.setTitle(getString(R.string.enter_license_key))
+                    dialog.setTitle(FontUtils.typeface(SetupActivity.this, R.font.lato_bold, getString(R.string.enter_license_key)))
                             .setView(promptsView)
 
-                            .setPositiveButton(getString(R.string.button_ok), new DialogInterface.OnClickListener() {
+                            .setPositiveButton(FontUtils.typeface(SetupActivity.this, R.font.lato_bold, getString(R.string.button_ok)), new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     Dialog d = (Dialog) dialog;
@@ -447,7 +448,7 @@ public class SetupActivity extends AppCompatActivity {
                                 }
                             })
 
-                            .setNegativeButton(getString(R.string.button_cancel), new DialogInterface.OnClickListener() {
+                            .setNegativeButton(FontUtils.typeface(SetupActivity.this, R.font.lato_bold, getString(R.string.button_cancel)), new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.dismiss();

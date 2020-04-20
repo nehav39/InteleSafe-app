@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.60"
         android:focusable="false"
-        android:fontFamily="sans-serif"
+        android:fontFamily="@font/lato_regular"
         android:textStyle="normal"
         android:paddingStart="20dp"
         android:paddingEnd="0dp"

@@ -37,6 +37,7 @@ import org.intelehealth.intelesafe.database.dao.VisitsDAO;
 import org.intelehealth.intelesafe.models.TodayPatientModel;
 import org.intelehealth.intelesafe.models.dto.EncounterDTO;
 import org.intelehealth.intelesafe.models.dto.VisitDTO;
+import org.intelehealth.intelesafe.utilities.FontUtils;
 import org.intelehealth.intelesafe.utilities.Logger;
 import org.intelehealth.intelesafe.utilities.SessionManager;
 import org.intelehealth.intelesafe.activities.homeActivity.HomeActivity;
@@ -353,8 +354,8 @@ public class TodayPatientActivity extends AppCompatActivity {
             startActivity(intent);
         } else {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-            alertDialogBuilder.setMessage(getString(R.string.unable_to_end) + failedUploads +
-                    getString(R.string.upload_before_end_visit_active));
+            alertDialogBuilder.setMessage(FontUtils.typeface(TodayPatientActivity.this, R.font.lato_medium,getString(R.string.unable_to_end) + failedUploads +
+                    getString(R.string.upload_before_end_visit_active)));
             alertDialogBuilder.setNeutralButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {

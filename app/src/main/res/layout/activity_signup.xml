@@ -19,6 +19,7 @@
             android:background="@color/white"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:title="@string/title_sign_up"
+            app:titleTextAppearance="@style/title"
             app:titleTextColor="@color/font_black_0" />
 
     </android.support.design.widget.AppBarLayout>
@@ -487,18 +488,16 @@
                     app:passwordToggleEnabled="true"
                     >
 
-                    <EditText
+                    <android.support.design.widget.TextInputEditText
                         android:id="@+id/password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/prompt_password"
                         android:imeOptions="actionNext"
-                        android:inputType="textPassword"
                         android:maxLength="12"
+                        android:maxLines="1"
                         android:singleLine="true"
                         android:textAppearance="@style/sign_up_input"/>
-                        android:maxLines="1"
-                        android:singleLine="true" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -507,16 +506,14 @@
                     android:layout_height="wrap_content"
                     app:passwordToggleEnabled="true">
 
-                    <EditText
+                    <android.support.design.widget.TextInputEditText
                         android:id="@+id/cpassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/confirm_password"
                         android:imeOptions="actionNext"
-                        android:inputType="textPassword"
                         android:maxLength="12"
-                        android:singleLine="true"
-                        android:textAppearance="@style/sign_up_input"/>
+                        android:textAppearance="@style/sign_up_input"
                         android:maxLines="1"
                         android:singleLine="true" />
 

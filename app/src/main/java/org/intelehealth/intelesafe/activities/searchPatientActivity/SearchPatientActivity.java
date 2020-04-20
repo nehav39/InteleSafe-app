@@ -37,6 +37,7 @@ import org.intelehealth.intelesafe.R;
 import org.intelehealth.intelesafe.app.AppConstants;
 import org.intelehealth.intelesafe.database.dao.ProviderDAO;
 import org.intelehealth.intelesafe.models.dto.PatientDTO;
+import org.intelehealth.intelesafe.utilities.FontUtils;
 import org.intelehealth.intelesafe.utilities.Logger;
 import org.intelehealth.intelesafe.utilities.SessionManager;
 
@@ -262,8 +263,8 @@ public class SearchPatientActivity extends AppCompatActivity {
             startActivity(intent);
         } else {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-            alertDialogBuilder.setMessage("Unable to end " + failedUploads +
-                    " visits.Please upload visit before attempting to end the visit.");
+            alertDialogBuilder.setMessage(FontUtils.typeface(SearchPatientActivity.this, R.font.lato_medium,"Unable to end " + failedUploads +
+                    " visits.Please upload visit before attempting to end the visit."));
             alertDialogBuilder.setNeutralButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {

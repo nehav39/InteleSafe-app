@@ -37,7 +37,7 @@
         android:layout_marginEnd="20dp"
         android:text="@string/next"
         android:gravity="center"
-        android:fontFamily="@fonts/Lato_Regular"
+        android:fontFamily="@font/lato_regular"
         android:drawableEnd="@drawable/ic_keyboard_arrow_right"
         android:textColor="@color/colorPrimaryDark" />
 

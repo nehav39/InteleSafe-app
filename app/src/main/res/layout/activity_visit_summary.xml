@@ -22,6 +22,7 @@
             android:layout_gravity="center_vertical"
             android:includeFontPadding="false"
             android:paddingVertical="2dp"
+            app:titleTextAppearance="@style/title"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
