@@ -101,15 +101,20 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
 
 
         SQLiteDatabase db = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
-        String query = "SELECT v.startdate FROM tbl_visit v, tbl_patient p WHERE " +
+        String query =
+                "SELECT  DISTINCT tbl_visit.uuid, tbl_visit.startdate FROM tbl_visit JOIN tbl_encounter ON  tbl_encounter.visituuid == tbl_visit.uuid JOIN tbl_obs ON tbl_obs.encounteruuid== tbl_encounter.uuid" +
+                " WHERE  tbl_visit.startdate IS NOT NULL AND  " +
+                "tbl_visit.patientuuid = ? AND tbl_visit.startdate LIKE ? ";
+       /* String query = "SELECT  v.startdate FROM tbl_visit v, tbl_patient p WHERE " +
                 "p.uuid = v.patientuuid AND v.startdate IS NOT NULL AND v.issubmitted == 1 AND " +
-                "v.patientuuid = ? AND v.startdate LIKE ? ";
+                "v.patientuuid = ? AND v.startdate LIKE ? ";*/
         String[] data = {sessionManager.getPersionUUID(), arrayList.get(position).getDate() + "%"};
         String dd = sessionManager.getPersionUUID();
         Log.d("JJJ", "JJ: " + dd);
 
         String message = "skdjs";
         ArrayList<String> array_message = new ArrayList<>();
+        ArrayList<String> uuid_array = new ArrayList<>();
         int counter = 0;
 
         final Cursor cursor = db.rawQuery(query, data);
@@ -124,6 +129,8 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
                         String de = stringBuilder.substring(0, a1);
 
                         array_message.add(counter, de);
+
+                        uuid_array.add(counter,cursor.getString(cursor.getColumnIndexOrThrow("uuid")));
 
                         counter++;
                         // alertdialogBuilder.setMessage(message);
@@ -176,7 +183,7 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
                         @Override
                         public void onClick(View view) {
                             int pos = (int) view.getTag();
-                            ((HomeActivity) mcontext).pastVisits(pos,array_message.get(pos));
+                            ((HomeActivity) mcontext).pastVisits(pos,array_message.get(pos),uuid_array.get(pos));
                         }
                     });
 

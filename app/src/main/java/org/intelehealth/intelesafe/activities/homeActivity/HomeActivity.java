@@ -1412,7 +1412,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    public void pastVisits(int position, String check_inDate) {
+    public void pastVisits(int position, String check_inDate,String visit_compare_id) {
 
         String patientuuid = sessionManager.getPersionUUID();
         List<String> visitList = new ArrayList<>();
@@ -1445,7 +1445,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     int a1 = stringBuilder.indexOf("T");
                     String dateFromDB = stringBuilder.substring(0, a1);
                     //check for current check_in visits only.
-                    if (dateFromDB.equals(check_inDate)) {
+                    if (dateFromDB.equals(check_inDate) && visit_id.equals(visit_compare_id)) {
                         visitList.add(visit_id);
 
                         String[] encounterIDArgs = {visit_id};
@@ -1478,7 +1478,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                     Date formatted = currentDate.parse(date);
                     String visitDate = currentDate.format(formatted);
-                    OldVisit(visitDate, visitList.get(position), end_date, "", ""/*encounterVitalList.get(position)*/, encounterAdultList.get(position));
+                    OldVisit(visitDate, visitList.get(0), end_date, "", ""/*encounterVitalList.get(position)*/, encounterAdultList.get(0));
                 } catch (ParseException e) {
                     Crashlytics.getInstance().core.logException(e);
                 }
