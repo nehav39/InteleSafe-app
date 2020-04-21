@@ -1564,7 +1564,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
     private void doWebViewPrint() throws ParseException {
         // Create a WebView object specifically for printing
-        WebView webView = new WebView(this);
+        WebView webView = new WebView(VisitSummaryActivity.this); //Use VisitSummary.this instead of this - added by Prajwal.
         webView.setWebViewClient(new WebViewClient() {
 
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -1814,16 +1814,16 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
      * @param webView object of type WebView.
      */
     private void createWebPrintJob(WebView webView) {
-
         // Get a PrintManager instance
-        PrintManager printManager = (PrintManager) this.getSystemService(Context.PRINT_SERVICE);
+        PrintManager printManager = (PrintManager) VisitSummaryActivity.this.getSystemService(Context.PRINT_SERVICE);
+        //Used VisitSummary.this instead of this because everytime a new context is created for this activity, using this would led the OS to a confusion of which context instance to be used. Using VisitSummary.this points to the VisitSummary activity everytime - added by Prajwal.
 
         // Get a print adapter instance
         PrintDocumentAdapter printAdapter = webView.createPrintDocumentAdapter();
 
         // Create a print job with name and adapter instance
         String jobName = getString(R.string.app_name) + " Visit Summary";
-        PrintJob printJob = printManager.print(jobName, printAdapter,
+        printManager.print(jobName, printAdapter,           //removed PrintJob instance as it was of no use - Prajwal.
                 new PrintAttributes.Builder().build());
 
     }

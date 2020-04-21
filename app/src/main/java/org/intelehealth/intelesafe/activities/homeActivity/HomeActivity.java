@@ -204,9 +204,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             password = intent.getStringExtra("password");
         }
 
-        if (fromActivity.equals("setup")) {
-            UserLoginTask(username, password);
-        }
+
+            if (fromActivity != null && !fromActivity.isEmpty() && fromActivity.equals("setup"))
+            //To handle null pointer exception.
+            {
+                UserLoginTask(username, password);
+            }
+
+
 
 
         sessionManager.setCurrentLang(getResources().getConfiguration().locale.toString());
