@@ -721,7 +721,9 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                                 //
                                 showVisitID();
                                 endVisit();
-                                showPopup();
+                                if (!isFinishing()) {
+                                    showPopup();
+                                }
                                 uploadButton.setEnabled(false);
                                 uploadButton.setAlpha(0.5f);
 
@@ -1372,7 +1374,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
     private void showPopup() {
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(VisitSummaryActivity.this);
         alertDialogBuilder.setTitle(getString(R.string.thank_you));
         alertDialogBuilder.setMessage(getString(R.string.your_checkin_is_uploaded_successfully));
 
