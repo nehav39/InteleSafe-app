@@ -626,7 +626,7 @@
     <string name="txt_self_assessment">Self Assessment</string>
     <string name="txt_start_now">Start Now</string>
     <string name="personal_pr">Personal protection guidelines</string>
-    <string name="if_you_star">If you start showing symptoms of Covid-19 please reach out to your supervisor/doctor. You can also send us a WhatsApp message at the number below for any concerns.</string>
+    <string name="if_you_star">Got questions about PPE and infection control? Concerned you\'re showing symptoms of Covid-19? Send us a WhatsApp message at our helpline number below to talk with an expert about your concerns.</string>
     <string name="some_id">+91 9825989750</string>
     <string name="assessment_visit_title">Assessment</string>
     <string name="please_fill_your_details">Please fill your details</string>
@@ -635,6 +635,7 @@
     <string name="ppe_req_sub_header">This service is currently available in Mumbai and Delhi only. We aim to serve as many as possible and hope to expand this service to other areas soon.</string>
     <string name="ppe_req">Order PPE kits</string>
     <string name="ppe_req_hint">What PPE do you require with quantity*</string>
+    <string name="txt_whatsapp_helpline">WhatsApp Helpline</string>
 
 
     // SignUP Screen(New Changes)

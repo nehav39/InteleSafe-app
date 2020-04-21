@@ -19,6 +19,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.Uri;
@@ -214,6 +215,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         //Help section of watsapp...
         help_watsapp = findViewById(R.id.Help_Watsapp);
+        help_watsapp.setPaintFlags(help_watsapp.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         help_watsapp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
