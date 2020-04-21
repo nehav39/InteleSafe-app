@@ -508,6 +508,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         followUpDateTextView = findViewById(R.id.textView_content_follow_up_date);
 
         Help_Link_Whatsapp = findViewById(R.id.Help_Watsapp);
+        Help_Link_Whatsapp.setPaintFlags(Help_Link_Whatsapp.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         Help_Link_Whatsapp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -524,6 +525,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
 
         tvMentalHelpRequest = findViewById(R.id.tv_mental_help_request);
+        tvMentalHelpRequest.setPaintFlags(tvMentalHelpRequest.getPaintFlags()|Paint.UNDERLINE_TEXT_FLAG);
         tvMentalHelpRequest.setOnClickListener(this);
         ivPrescription = findViewById(R.id.iv_prescription);
 
@@ -720,7 +722,9 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                                 //
                                 showVisitID();
                                 endVisit();
-                                showPopup();
+                                if (!isFinishing()) {
+                                    showPopup();
+                                }
                                 uploadButton.setEnabled(false);
                                 uploadButton.setAlpha(0.5f);
 
@@ -1371,7 +1375,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
     private void showPopup() {
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(VisitSummaryActivity.this);
         alertDialogBuilder.setTitle(getString(R.string.thank_you));
         alertDialogBuilder.setMessage(getString(R.string.your_checkin_is_uploaded_successfully));
 
@@ -1563,7 +1567,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
     private void doWebViewPrint() throws ParseException {
         // Create a WebView object specifically for printing
-        WebView webView = new WebView(this);
+        WebView webView = new WebView(VisitSummaryActivity.this); //Use VisitSummary.this instead of this - added by Prajwal.
         webView.setWebViewClient(new WebViewClient() {
 
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -1813,16 +1817,16 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
      * @param webView object of type WebView.
      */
     private void createWebPrintJob(WebView webView) {
-
         // Get a PrintManager instance
-        PrintManager printManager = (PrintManager) this.getSystemService(Context.PRINT_SERVICE);
+        PrintManager printManager = (PrintManager) VisitSummaryActivity.this.getSystemService(Context.PRINT_SERVICE);
+        //Used VisitSummary.this instead of this because everytime a new context is created for this activity, using this would led the OS to a confusion of which context instance to be used. Using VisitSummary.this points to the VisitSummary activity everytime - added by Prajwal.
 
         // Get a print adapter instance
         PrintDocumentAdapter printAdapter = webView.createPrintDocumentAdapter();
 
         // Create a print job with name and adapter instance
         String jobName = getString(R.string.app_name) + " Visit Summary";
-        PrintJob printJob = printManager.print(jobName, printAdapter,
+        printManager.print(jobName, printAdapter,           //removed PrintJob instance as it was of no use - Prajwal.
                 new PrintAttributes.Builder().build());
 
     }

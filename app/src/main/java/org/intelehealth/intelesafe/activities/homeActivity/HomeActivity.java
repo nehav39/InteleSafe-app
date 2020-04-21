@@ -19,6 +19,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.Uri;
@@ -66,13 +67,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
-import java.util.Set;
 import java.util.UUID;
 
 import org.intelehealth.intelesafe.BuildConfig;
@@ -205,15 +204,21 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             password = intent.getStringExtra("password");
         }
 
-        if (fromActivity.equals("setup")) {
-            UserLoginTask(username, password);
-        }
+
+            if (fromActivity != null && !fromActivity.isEmpty() && fromActivity.equals("setup"))
+            //To handle null pointer exception.
+            {
+                UserLoginTask(username, password);
+            }
+
+
 
 
         sessionManager.setCurrentLang(getResources().getConfiguration().locale.toString());
 
         //Help section of watsapp...
         help_watsapp = findViewById(R.id.Help_Watsapp);
+        help_watsapp.setPaintFlags(help_watsapp.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         help_watsapp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -343,9 +348,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         home_quarantine_guidelines.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent home_quarantine = new Intent(Intent.ACTION_VIEW,
+                /*Intent home_quarantine = new Intent(Intent.ACTION_VIEW,
                         Uri.parse("http://www.intelehealth.org/ppe-guidelines"));
-                startActivity(home_quarantine);
+                startActivity(home_quarantine);*/
+
+                Intent ppe = new Intent(HomeActivity.this, Webview.class);
+                ppe.putExtra("PPE", 1);
+                startActivity(ppe);
             }
         });
 
@@ -388,9 +397,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View view) {
                 //open youtube page.
-                startActivity
+                /*startActivity
                         (new Intent(Intent.ACTION_VIEW,
-                                Uri.parse("http://www.intelehealth.org/ppe-faqs")));
+                                Uri.parse("http://www.intelehealth.org/ppe-faqs")));*/
+                Intent faq = new Intent(HomeActivity.this, Webview.class);
+                faq.putExtra("FAQ", 1);
+                startActivity(faq);
             }
         });
         Logger.logD(TAG, "onCreate: " + getFilesDir().toString());

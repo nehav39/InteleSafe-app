@@ -479,7 +479,8 @@
                                 android:fontFamily="@font/lato_medium"
                                 android:gravity="start|center"
                                 android:hint=""
-                                android:text="@string/some_id"
+                                android:textStyle="bold"
+                                android:text="@string/txt_whatsapp_helpline"
                                 android:textColor="@color/txt_sub_header_color"
                                 android:textSize="18sp" />
 
