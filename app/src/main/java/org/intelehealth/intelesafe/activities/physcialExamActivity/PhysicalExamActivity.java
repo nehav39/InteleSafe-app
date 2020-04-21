@@ -394,7 +394,7 @@ public class PhysicalExamActivity extends AppCompatActivity {
         @Override
         public CharSequence getPageTitle(int position) {
             //return exams.getTitle(position);
-            return String.valueOf(position + 1);
+            return FontUtils.typeface(PhysicalExamActivity.this, R.font.lato_regular, String.valueOf(position + 1));
         }
     }
 

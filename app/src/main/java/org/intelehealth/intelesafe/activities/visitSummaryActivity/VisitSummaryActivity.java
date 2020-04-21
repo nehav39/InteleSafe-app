@@ -28,6 +28,7 @@ import android.print.PrintJob;
 import android.print.PrintManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -893,6 +894,8 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                         textInput.setTitle(FontUtils.typeface(VisitSummaryActivity.this,
                                 R.font.lato_bold, getString(R.string.question_text_input)));
                         final EditText dialogEditText = new EditText(VisitSummaryActivity.this);
+                        Typeface typeface = ResourcesCompat.getFont(VisitSummaryActivity.this, R.font.lato_medium);
+                        dialogEditText.setTypeface(typeface);
                         if (famHistory.getValue() != null)
                             dialogEditText.setText(Html.fromHtml(famHistory.getValue()));
                         else
@@ -989,6 +992,8 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                         final AlertDialog.Builder textInput = new AlertDialog.Builder(VisitSummaryActivity.this);
                         textInput.setTitle(FontUtils.typeface(VisitSummaryActivity.this, R.font.lato_bold, getString(R.string.question_text_input)));
                         final EditText dialogEditText = new EditText(VisitSummaryActivity.this);
+                        Typeface typeface = ResourcesCompat.getFont(VisitSummaryActivity.this, R.font.lato_regular);
+                        dialogEditText.setTypeface(typeface);
                         if (complaint.getValue() != null) {
                             dialogEditText.setText(Html.fromHtml(complaint.getValue()));
                         } else {
@@ -1077,7 +1082,8 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void onClick(View v) {
                 final AlertDialog.Builder physicalDialog = new AlertDialog.Builder(VisitSummaryActivity.this);
-                physicalDialog.setTitle(getString(R.string.visit_summary_on_examination));
+                physicalDialog.setTitle(FontUtils.typeface(VisitSummaryActivity.this,
+                        R.font.lato_bold, getString(R.string.visit_summary_on_examination)));
                 final LayoutInflater inflater = getLayoutInflater();
                 View convertView = inflater.inflate(R.layout.dialog_edit_entry, null);
                 physicalDialog.setView(convertView);
@@ -1089,12 +1095,15 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                 }
                 physicalText.setEnabled(false);
 
-                physicalDialog.setPositiveButton(getString(R.string.generic_manual_entry), new DialogInterface.OnClickListener() {
+                physicalDialog.setPositiveButton(FontUtils.typeface(VisitSummaryActivity.this,
+                        R.font.lato_bold, getString(R.string.generic_manual_entry)), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         final AlertDialog.Builder textInput = new AlertDialog.Builder(VisitSummaryActivity.this);
                         textInput.setTitle(FontUtils.typeface(VisitSummaryActivity.this, R.font.lato_bold, getString(R.string.question_text_input)));
                         final EditText dialogEditText = new EditText(VisitSummaryActivity.this);
+                        Typeface typeface = ResourcesCompat.getFont(VisitSummaryActivity.this, R.font.lato_regular);
+                        dialogEditText.setTypeface(typeface);
                         if (phyExam.getValue() != null) {
                             String physicalExamStr = phyExam.getValue().replaceAll("<b>General exams: </b>", "<b>Self Assessment: </b>");
                             dialogEditText.setText(Html.fromHtml(physicalExamStr));
@@ -1195,13 +1204,16 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                     historyText.setText(Html.fromHtml(patHistory.getValue()));
                 historyText.setEnabled(false);
 
-                historyDialog.setPositiveButton(FontUtils.typeface(VisitSummaryActivity.this, R.font.lato_bold, getString(R.string.generic_manual_entry)), new DialogInterface.OnClickListener() {
+                historyDialog.setPositiveButton(FontUtils.typeface(VisitSummaryActivity.this,
+                        R.font.lato_bold, getString(R.string.generic_manual_entry)), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         final AlertDialog.Builder textInput = new AlertDialog.Builder(VisitSummaryActivity.this);
                         textInput.setTitle(FontUtils.typeface(VisitSummaryActivity.this,
                                 R.font.lato_bold, getString(R.string.question_text_input)));
                         final EditText dialogEditText = new EditText(VisitSummaryActivity.this);
+                        Typeface typeface = ResourcesCompat.getFont(VisitSummaryActivity.this, R.font.lato_regular);
+                        dialogEditText.setTypeface(typeface);
                         if (patHistory.getValue() != null)
                             dialogEditText.setText(Html.fromHtml(patHistory.getValue()));
                         else

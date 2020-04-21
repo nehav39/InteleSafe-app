@@ -12,6 +12,7 @@
         android:layout_marginLeft="28dp"
        android:paddingVertical="15dp"
        android:fillViewport="true"
+       android:fontFamily="@font/lato_medium"
        android:fadeScrollbars="false"
         android:layout_marginRight="28dp">
 

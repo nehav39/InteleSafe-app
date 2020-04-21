@@ -9,6 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="4"
+        android:theme="@style/number_picker"
         android:padding="@dimen/padding_card">
 
     </NumberPicker>
@@ -19,6 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="1"
+        android:fontFamily="@font/lato_medium"
         android:gravity="center"
         android:padding="@dimen/padding_card" />
 
@@ -27,6 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="4"
+        android:theme="@style/number_picker"
         android:padding="@dimen/padding_card">
 
     </NumberPicker>
@@ -37,6 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="1"
+        android:fontFamily="@font/lato_medium"
         android:gravity="center"
         android:padding="@dimen/padding_card" />
 

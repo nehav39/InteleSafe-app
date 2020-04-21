@@ -168,7 +168,7 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
                     visitText.setPadding(5, 10, 5, 10);
                     visitText.setTextSize(14);
                     visitText.setTextColor(mcontext.getResources().getColor(R.color.colorPrimary));
-                    Typeface typeface = ResourcesCompat.getFont(mcontext, R.font.lato_regular);
+                    Typeface typeface = ResourcesCompat.getFont(mcontext, R.font.lato_medium);
                     visitText.setTypeface(typeface);
                     visitText.setPaintFlags(visitText.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
                     visit_list_view.addView(visitText);

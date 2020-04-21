@@ -133,8 +133,12 @@
         <item name="android:fontFamily">@font/lato_bold</item>
     </style>
 
+    <style name="number_picker">
+        <item name="android:fontFamily">@font/lato_regular</item>
+    </style>
+
 
     <style name="AlertDialogCustom" parent="Theme.AppCompat.Dialog.Alert">
-        <item name="fontFamily">@font/lato_regular</item>
+        <item name="fontFamily">@font/lato_medium</item>
     </style>
 </resources>

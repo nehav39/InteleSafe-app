@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.InputType;
 import android.util.DisplayMetrics;
@@ -267,7 +269,7 @@ public class Node implements Serializable {
         }
 
 
-        subQuestion.setTitle(node.findDisplay());
+        subQuestion.setTitle(FontUtils.typeface(context, R.font.lato_bold, node.findDisplay()));
         ListView listView = convertView.findViewById(R.id.dialog_subquestion_list_view);
         listView.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
         listView.setClickable(true);
@@ -289,7 +291,7 @@ public class Node implements Serializable {
         });
 
         subQuestion.setView(listView);
-        subQuestion.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+        subQuestion.setPositiveButton(FontUtils.typeface(context, R.font.lato_bold, context.getString(R.string.generic_ok)), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -301,7 +303,7 @@ public class Node implements Serializable {
                 }
             }
         });
-        subQuestion.setNegativeButton(R.string.generic_cancel, new DialogInterface.OnClickListener() {
+        subQuestion.setNegativeButton(FontUtils.typeface(context, R.font.lato_bold, context.getString(R.string.generic_cancel)), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 node.toggleSelected();
@@ -697,7 +699,7 @@ public class Node implements Serializable {
                         //TODO:: Check if the language is actually what is intended to be displayed
                     }
                 }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-        datePickerDialog.setTitle(R.string.question_date_picker);
+        datePickerDialog.setTitle(FontUtils.typeface(context, R.font.lato_bold, context.getString(R.string.question_date_picker)));
         //Set Maximum date to current date because even after bday is less than current date it goes to check date is set after today
         //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis() - 1000);
         datePickerDialog.show();
@@ -724,7 +726,7 @@ public class Node implements Serializable {
         if (!finalMessage.isEmpty()) {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
             alertDialogBuilder.setMessage(FontUtils.typeface(context, R.font.lato_medium, finalMessage));
-            alertDialogBuilder.setNeutralButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+            alertDialogBuilder.setNeutralButton(FontUtils.typeface(context, R.font.lato_bold, context.getString(R.string.generic_ok)), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
@@ -786,14 +788,14 @@ public class Node implements Serializable {
     public static void askNumber(final Node node, Activity context, final CustomExpandableListAdapter adapter) {
 
         final AlertDialog.Builder numberDialog = new AlertDialog.Builder(context);
-        numberDialog.setTitle(R.string.question_number_picker);
+        numberDialog.setTitle(FontUtils.typeface(context, R.font.lato_bold, context.getString(R.string.question_number_picker)));
         final LayoutInflater inflater = context.getLayoutInflater();
         View convertView = inflater.inflate(R.layout.dialog_1_number_picker, null);
         numberDialog.setView(convertView);
         final NumberPicker numberPicker = convertView.findViewById(R.id.dialog_1_number_picker);
         numberPicker.setMinValue(0);
         numberPicker.setMaxValue(1000);
-        numberDialog.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+        numberDialog.setPositiveButton(FontUtils.typeface(context, R.font.lato_bold, context.getString(R.string.generic_ok)), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 numberPicker.setValue(numberPicker.getValue());
@@ -812,7 +814,7 @@ public class Node implements Serializable {
                 dialog.dismiss();
             }
         });
-        numberDialog.setNegativeButton(R.string.generic_cancel, new DialogInterface.OnClickListener() {
+        numberDialog.setNegativeButton(FontUtils.typeface(context, R.font.lato_bold, context.getString(R.string.generic_cancel)), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -826,7 +828,7 @@ public class Node implements Serializable {
     public static void askArea(final Node node, Activity context, final CustomExpandableListAdapter adapter) {
 
         final AlertDialog.Builder areaDialog = new AlertDialog.Builder(context);
-        areaDialog.setTitle(R.string.question_area_picker);
+        areaDialog.setTitle(FontUtils.typeface(context, R.font.lato_bold, context.getString(R.string.question_area_picker)));
         final LayoutInflater inflater = context.getLayoutInflater();
         View convertView = inflater.inflate(R.layout.dialog_2_numbers_picker, null);
         areaDialog.setView(convertView);
@@ -842,7 +844,7 @@ public class Node implements Serializable {
         lengthPicker.setMinValue(0);
         lengthPicker.setMaxValue(100);
 
-        areaDialog.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+        areaDialog.setPositiveButton(FontUtils.typeface(context, R.font.lato_bold, context.getString(R.string.generic_ok)), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 widthPicker.setValue(widthPicker.getValue());
@@ -863,7 +865,7 @@ public class Node implements Serializable {
                 dialog.dismiss();
             }
         });
-        areaDialog.setNegativeButton(R.string.generic_cancel, new DialogInterface.OnClickListener() {
+        areaDialog.setNegativeButton(FontUtils.typeface(context, R.font.lato_bold, context.getString(R.string.generic_cancel)), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -876,7 +878,7 @@ public class Node implements Serializable {
     public static void askRange(final Node node, Activity context, final CustomExpandableListAdapter adapter) {
 
         final AlertDialog.Builder rangeDialog = new AlertDialog.Builder(context);
-        rangeDialog.setTitle(R.string.question_range_picker);
+        rangeDialog.setTitle(FontUtils.typeface(context, R.font.lato_bold, context.getString(R.string.question_range_picker)));
         final LayoutInflater inflater = context.getLayoutInflater();
         View convertView = inflater.inflate(R.layout.dialog_2_numbers_picker, null);
         rangeDialog.setView(convertView);
@@ -891,7 +893,7 @@ public class Node implements Serializable {
         startPicker.setMaxValue(100);
         endPicker.setMinValue(0);
         endPicker.setMaxValue(100);
-        rangeDialog.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+        rangeDialog.setPositiveButton(FontUtils.typeface(context, R.font.lato_bold, context.getString(R.string.generic_ok)), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 startPicker.setValue(startPicker.getValue());
@@ -911,7 +913,7 @@ public class Node implements Serializable {
                 dialog.dismiss();
             }
         });
-        rangeDialog.setNegativeButton(R.string.generic_cancel, new DialogInterface.OnClickListener() {
+        rangeDialog.setNegativeButton(FontUtils.typeface(context, R.font.lato_bold, context.getString(R.string.generic_cancel)), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -923,7 +925,7 @@ public class Node implements Serializable {
     public static void askLocation(final Node node, Activity context, final CustomExpandableListAdapter adapter) {
 
         final AlertDialog.Builder locationDialog = new AlertDialog.Builder(context);
-        locationDialog.setTitle(R.string.question_location_picker);
+        locationDialog.setTitle(FontUtils.typeface(context, R.font.lato_bold, context.getString(R.string.question_location_picker)));
 
         //TODO: Issue #51 on GitHub
 
@@ -933,7 +935,7 @@ public class Node implements Serializable {
     public static void askFrequency(final Node node, Activity context, final CustomExpandableListAdapter adapter) {
 
         final AlertDialog.Builder frequencyDialog = new AlertDialog.Builder(context);
-        frequencyDialog.setTitle(R.string.question_frequency_picker);
+        frequencyDialog.setTitle(FontUtils.typeface(context, R.font.lato_bold, context.getString(R.string.question_frequency_picker)));
         final LayoutInflater inflater = context.getLayoutInflater();
         View convertView = inflater.inflate(R.layout.dialog_2_numbers_picker, null);
         frequencyDialog.setView(convertView);
@@ -950,7 +952,7 @@ public class Node implements Serializable {
         quantityPicker.setMaxValue(100);
         unitPicker.setMinValue(0);
         unitPicker.setMaxValue(4);
-        frequencyDialog.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+        frequencyDialog.setPositiveButton(FontUtils.typeface(context, R.font.lato_bold, context.getString(R.string.generic_ok)), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 quantityPicker.setValue(quantityPicker.getValue());
@@ -969,7 +971,7 @@ public class Node implements Serializable {
                 dialog.dismiss();
             }
         });
-        frequencyDialog.setNegativeButton(R.string.generic_cancel, new DialogInterface.OnClickListener() {
+        frequencyDialog.setNegativeButton(FontUtils.typeface(context, R.font.lato_bold, context.getString(R.string.generic_cancel)), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -981,7 +983,7 @@ public class Node implements Serializable {
 
     public static void askDuration(final Node node, Activity context, final CustomExpandableListAdapter adapter) {
         final AlertDialog.Builder durationDialog = new AlertDialog.Builder(context);
-        durationDialog.setTitle(R.string.question_duration_picker);
+        durationDialog.setTitle(FontUtils.typeface(context, R.font.lato_bold, context.getString(R.string.question_duration_picker)));
         final LayoutInflater inflater = context.getLayoutInflater();
         View convertView = inflater.inflate(R.layout.dialog_2_numbers_picker, null);
         durationDialog.setView(convertView);
@@ -997,7 +999,7 @@ public class Node implements Serializable {
         quantityPicker.setMaxValue(100);
         unitPicker.setMinValue(0);
         unitPicker.setMaxValue(4);
-        durationDialog.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+        durationDialog.setPositiveButton(FontUtils.typeface(context, R.font.lato_bold, context.getString(R.string.generic_ok)), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 quantityPicker.setValue(quantityPicker.getValue());
@@ -1016,7 +1018,7 @@ public class Node implements Serializable {
                 dialog.dismiss();
             }
         });
-        durationDialog.setNegativeButton(R.string.generic_cancel, new DialogInterface.OnClickListener() {
+        durationDialog.setNegativeButton(FontUtils.typeface(context, R.font.lato_bold, context.getString(R.string.generic_cancel)), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -1031,6 +1033,8 @@ public class Node implements Serializable {
                 R.font.lato_bold, context.getString(R.string.question_text_input)));
         final EditText dialogEditText = new EditText(context);
         dialogEditText.setInputType(InputType.TYPE_CLASS_TEXT);
+        Typeface typeface = ResourcesCompat.getFont(context, R.font.lato_medium);
+        dialogEditText.setTypeface(typeface);
         textInput.setView(dialogEditText);
         textInput.setPositiveButton(FontUtils.typeface(context,
                 R.font.lato_bold, context.getString(R.string.generic_ok)), new DialogInterface.OnClickListener() {
@@ -1082,7 +1086,7 @@ public class Node implements Serializable {
                         //TODO:: Check if the language is actually what is intended to be displayed
                     }
                 }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-        datePickerDialog.setTitle(R.string.question_date_picker);
+        datePickerDialog.setTitle(FontUtils.typeface(context, R.font.lato_bold, context.getString(R.string.question_date_picker)));
         //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis() - 1000);
         datePickerDialog.show();
     }
@@ -1090,14 +1094,14 @@ public class Node implements Serializable {
     public static void subAskNumber(final Node node, Activity context, final CustomArrayAdapter adapter) {
 
         final AlertDialog.Builder numberDialog = new AlertDialog.Builder(context);
-        numberDialog.setTitle(R.string.question_number_picker);
+        numberDialog.setTitle(FontUtils.typeface(context,R.font.lato_bold, context.getString(R.string.question_number_picker)));
         final LayoutInflater inflater = context.getLayoutInflater();
         View convertView = inflater.inflate(R.layout.dialog_1_number_picker, null);
         numberDialog.setView(convertView);
         final NumberPicker numberPicker = convertView.findViewById(R.id.dialog_1_number_picker);
         numberPicker.setMinValue(0);
         numberPicker.setMaxValue(1000);
-        numberDialog.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+        numberDialog.setPositiveButton(FontUtils.typeface(context,R.font.lato_bold, context.getString(R.string.generic_ok)), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 numberPicker.setValue(numberPicker.getValue());
@@ -1114,7 +1118,7 @@ public class Node implements Serializable {
                 dialog.dismiss();
             }
         });
-        numberDialog.setNegativeButton(R.string.generic_cancel, new DialogInterface.OnClickListener() {
+        numberDialog.setNegativeButton(FontUtils.typeface(context,R.font.lato_bold, context.getString(R.string.generic_cancel)), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -1163,7 +1167,7 @@ public class Node implements Serializable {
     public static void subAskArea(final Node node, Activity context, final CustomArrayAdapter adapter) {
 
         final AlertDialog.Builder areaDialog = new AlertDialog.Builder(context);
-        areaDialog.setTitle(R.string.question_area_picker);
+        areaDialog.setTitle(FontUtils.typeface(context, R.font.lato_bold, context.getString(R.string.question_area_picker)));
         final LayoutInflater inflater = context.getLayoutInflater();
         View convertView = inflater.inflate(R.layout.dialog_2_numbers_picker, null);
         areaDialog.setView(convertView);
@@ -1179,7 +1183,7 @@ public class Node implements Serializable {
         lengthPicker.setMinValue(0);
         lengthPicker.setMaxValue(100);
 
-        areaDialog.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+        areaDialog.setPositiveButton(FontUtils.typeface(context, R.font.lato_bold, context.getString(R.string.generic_ok)), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 widthPicker.setValue(widthPicker.getValue());
@@ -1198,7 +1202,7 @@ public class Node implements Serializable {
                 dialog.dismiss();
             }
         });
-        areaDialog.setNegativeButton(R.string.generic_cancel, new DialogInterface.OnClickListener() {
+        areaDialog.setNegativeButton(FontUtils.typeface(context, R.font.lato_bold, context.getString(R.string.generic_cancel)), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -1211,7 +1215,7 @@ public class Node implements Serializable {
     public static void subAskRange(final Node node, Activity context, final CustomArrayAdapter adapter) {
 
         final AlertDialog.Builder rangeDialog = new AlertDialog.Builder(context);
-        rangeDialog.setTitle(R.string.question_range_picker);
+        rangeDialog.setTitle(FontUtils.typeface(context, R.font.lato_bold, context.getString(R.string.question_range_picker)));
         final LayoutInflater inflater = context.getLayoutInflater();
         View convertView = inflater.inflate(R.layout.dialog_2_numbers_picker, null);
         rangeDialog.setView(convertView);
@@ -1226,7 +1230,7 @@ public class Node implements Serializable {
         startPicker.setMaxValue(100);
         endPicker.setMinValue(0);
         endPicker.setMaxValue(100);
-        rangeDialog.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+        rangeDialog.setPositiveButton(FontUtils.typeface(context, R.font.lato_bold, context.getString(R.string.generic_ok)), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 startPicker.setValue(startPicker.getValue());
@@ -1246,7 +1250,7 @@ public class Node implements Serializable {
                 dialog.dismiss();
             }
         });
-        rangeDialog.setNegativeButton(R.string.generic_cancel, new DialogInterface.OnClickListener() {
+        rangeDialog.setNegativeButton(FontUtils.typeface(context, R.font.lato_bold, context.getString(R.string.generic_cancel)), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -1258,7 +1262,7 @@ public class Node implements Serializable {
     public static void subAskLocation(final Node node, Activity context, final CustomArrayAdapter adapter) {
 
         final AlertDialog.Builder locationDialog = new AlertDialog.Builder(context);
-        locationDialog.setTitle(R.string.question_location_picker);
+        locationDialog.setTitle(FontUtils.typeface(context, R.font.lato_bold, context.getString(R.string.question_location_picker)));
 
         //TODO: Issue #51 on GitHub
     }
@@ -1266,7 +1270,7 @@ public class Node implements Serializable {
     public static void subAskFrequency(final Node node, Activity context, final CustomArrayAdapter adapter) {
 
         final AlertDialog.Builder frequencyDialog = new AlertDialog.Builder(context);
-        frequencyDialog.setTitle(R.string.question_frequency_picker);
+        frequencyDialog.setTitle(FontUtils.typeface(context, R.font.lato_bold, context.getString(R.string.question_frequency_picker)));
         final LayoutInflater inflater = context.getLayoutInflater();
         View convertView = inflater.inflate(R.layout.dialog_2_numbers_picker, null);
         frequencyDialog.setView(convertView);
@@ -1283,7 +1287,7 @@ public class Node implements Serializable {
         quantityPicker.setMaxValue(100);
         unitPicker.setMinValue(0);
         unitPicker.setMaxValue(4);
-        frequencyDialog.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+        frequencyDialog.setPositiveButton(FontUtils.typeface(context, R.font.lato_bold, context.getString(R.string.generic_ok)), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 quantityPicker.setValue(quantityPicker.getValue());
@@ -1302,7 +1306,7 @@ public class Node implements Serializable {
                 dialog.dismiss();
             }
         });
-        frequencyDialog.setNegativeButton(R.string.generic_cancel, new DialogInterface.OnClickListener() {
+        frequencyDialog.setNegativeButton(FontUtils.typeface(context, R.font.lato_bold, context.getString(R.string.generic_cancel)), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -1314,7 +1318,7 @@ public class Node implements Serializable {
 
     public static void subAskDuration(final Node node, Activity context, final CustomArrayAdapter adapter) {
         final AlertDialog.Builder durationDialog = new AlertDialog.Builder(context);
-        durationDialog.setTitle(R.string.question_duration_picker);
+        durationDialog.setTitle(FontUtils.typeface(context, R.font.lato_bold, context.getString(R.string.question_duration_picker)));
         final LayoutInflater inflater = context.getLayoutInflater();
         View convertView = inflater.inflate(R.layout.dialog_2_numbers_picker, null);
         durationDialog.setView(convertView);
@@ -1330,7 +1334,7 @@ public class Node implements Serializable {
         quantityPicker.setMaxValue(100);
         unitPicker.setMinValue(0);
         unitPicker.setMaxValue(4);
-        durationDialog.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+        durationDialog.setPositiveButton(FontUtils.typeface(context, R.font.lato_bold, context.getString(R.string.generic_ok)), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 quantityPicker.setValue(quantityPicker.getValue());
@@ -1349,7 +1353,7 @@ public class Node implements Serializable {
                 dialog.dismiss();
             }
         });
-        durationDialog.setNegativeButton(R.string.generic_cancel, new DialogInterface.OnClickListener() {
+        durationDialog.setNegativeButton(FontUtils.typeface(context, R.font.lato_bold, context.getString(R.string.generic_cancel)), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -1457,14 +1461,14 @@ public class Node implements Serializable {
 
     public AlertDialog displayImage(final Activity context, final String path, final String name) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setPositiveButton(R.string.button_save, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(FontUtils.typeface(context, R.font.lato_bold, context.getString(R.string.button_save)), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 addImageToList();
                 dialog.dismiss();
             }
         });
-        builder.setNegativeButton(R.string.button_delete, new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(FontUtils.typeface(context, R.font.lato_bold, context.getString(R.string.button_delete)), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 File temp = new File(imagePath);

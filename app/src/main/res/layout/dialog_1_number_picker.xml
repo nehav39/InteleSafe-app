@@ -9,6 +9,7 @@
         android:id="@+id/dialog_1_number_picker"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:theme="@style/number_picker"
         android:layout_weight="1">
 
     </NumberPicker>
