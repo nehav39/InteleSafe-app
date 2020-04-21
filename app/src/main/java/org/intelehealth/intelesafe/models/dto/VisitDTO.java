@@ -33,6 +33,8 @@ public class VisitDTO {
     @Expose
     private Boolean syncd;
 
+    private Integer isSubmitted;
+
     private List<VisitAttributeDTO> visitAttributeDTOS;
 
     public String getPatientuuid() {
@@ -105,5 +107,13 @@ public class VisitDTO {
 
     public void setVisitAttributeDTOS(List<VisitAttributeDTO> visitAttributeDTOS) {
         this.visitAttributeDTOS = visitAttributeDTOS;
+    }
+
+    public Integer getIsSubmitted() {
+        return isSubmitted;
+    }
+
+    public void setIsSubmitted(Integer isSubmitted) {
+        this.isSubmitted = isSubmitted;
     }
 }

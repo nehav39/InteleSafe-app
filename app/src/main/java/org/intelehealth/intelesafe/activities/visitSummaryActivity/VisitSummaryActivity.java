@@ -226,7 +226,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
     MenuItem internetCheck = null;
     MenuItem endVisit_click = null;
 
-    private  boolean flag_upload = false;
+    private boolean flag_upload = false;
 
     private RecyclerView mAdditionalDocsRecyclerView;
     private RecyclerView.LayoutManager mAdditionalDocsLayoutManager;
@@ -329,17 +329,14 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.summary_home: {
-                if(flag_upload == true || isFromOldVisit)
-                {
+                if (flag_upload == true || isFromOldVisit) {
                     Intent i = new Intent(this, HomeActivity.class);
                     i.putExtra("from", "visit");
                     i.putExtra("username", "");
                     i.putExtra("password", "");
                     i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(i);
-                }
-                else
-                {
+                } else {
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
                     alertDialogBuilder.setTitle("Click on Submit button");
                     alertDialogBuilder.setMessage("Please upload your visit before going to Home screen by clicking on the Submit button.");
@@ -420,7 +417,8 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
     }
 
 
-     boolean isFromOldVisit = false;
+    boolean isFromOldVisit = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         sessionManager = new SessionManager(getApplicationContext());
@@ -436,7 +434,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
             intentTag = intent.getStringExtra("tag");
             isPastVisit = intent.getBooleanExtra("pastVisit", false);
             hasPrescription = intent.getStringExtra("hasPrescription");
-            isFromOldVisit = intent.getBooleanExtra("fromOldVisit",false);
+            isFromOldVisit = intent.getBooleanExtra("fromOldVisit", false);
 
             Set<String> selectedExams = sessionManager.getVisitSummary(patientUuid);
             if (physicalExams == null) physicalExams = new ArrayList<>();
@@ -514,7 +512,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void onClick(View view) {
                 String phoneNumberWithCountryCode = "+919825989750";
-                String message = "Hello, my name is "+ sessionManager.getUserName()+
+                String message = "Hello, my name is " + sessionManager.getUserName() +
                         /*" from "+ sessionManager.getState() + */" and I need some assistance.";
 
                 startActivity(new Intent(Intent.ACTION_VIEW,
@@ -523,7 +521,6 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                                         phoneNumberWithCountryCode, message))));
             }
         });
-
 
 
         tvMentalHelpRequest = findViewById(R.id.tv_mental_help_request);
@@ -564,10 +561,10 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         uploadButton = findViewById(R.id.button_upload);
 
         //added by Prajwal for disabling the upload on old visit
-        if(isFromOldVisit){
+        if (isFromOldVisit) {
             uploadButton.setVisibility(View.GONE);
             editPhysical.setVisibility(View.GONE);
-        }else{
+        } else {
             uploadButton.setVisibility(View.VISIBLE);
             editPhysical.setVisibility(View.VISIBLE);
         }
@@ -698,7 +695,8 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 //                        .setBackgroundColor(Color.BLACK)
 //                        .setTextColor(Color.WHITE)
 //                        .show();
-
+                // to set the Visit submit successfully in local DB to Push.
+                updateVisitSubmit();
                 if (NetworkConnection.isOnline(getApplication())) {
                     Toast.makeText(context, getResources().getString(R.string.upload_started), Toast.LENGTH_LONG).show();
 
@@ -1084,7 +1082,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                         if (phyExam.getValue() != null) {
                             String physicalExamStr = phyExam.getValue().replaceAll("<b>General exams: </b>", "<b>Self Assessment: </b>");
                             dialogEditText.setText(Html.fromHtml(physicalExamStr));
-                        }else
+                        } else
                             dialogEditText.setText("");
                         textInput.setView(dialogEditText);
                         textInput.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
@@ -1580,10 +1578,10 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
             }
         });
 
-        String mPatientName = patient.getFirst_name() + " " + (patient.getMiddle_name()!= null ?patient.getMiddle_name():"") + " " + patient.getLast_name();
+        String mPatientName = patient.getFirst_name() + " " + (patient.getMiddle_name() != null ? patient.getMiddle_name() : "") + " " + patient.getLast_name();
         String mPatientOpenMRSID = patient.getOpenmrs_id();
         String mPatientDob = patient.getDate_of_birth();
-        String mAddress = (patient.getAddress1()!=null?patient.getAddress1():"")+(patient.getAddress2()!=null?"\n" +patient.getAddress2():""); // modified by the Venu N on 02/04/2020.
+        String mAddress = (patient.getAddress1() != null ? patient.getAddress1() : "") + (patient.getAddress2() != null ? "\n" + patient.getAddress2() : ""); // modified by the Venu N on 02/04/2020.
         String mCityState = patient.getCity_village();
         String mPhone = patient.getPhone_number();
         String mState = patient.getState_province();
@@ -1591,7 +1589,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
         String mSdw = patient.getSdw();
         String mOccupation = patient.getOccupation();
-        String mGender = patient.getGender()!= null ?patient.getGender():""; // Modified by venu N on 02/04/2020.
+        String mGender = patient.getGender() != null ? patient.getGender() : ""; // Modified by venu N on 02/04/2020.
 
         Calendar c = Calendar.getInstance();
         System.out.println("Current time => " + c.getTime());
@@ -1706,10 +1704,10 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         String bp = mBP;
         if (bp.equals("/")) bp = "";
 
-        String address = mAddress +  (mCityState!=null ?" " +mCityState:"") + (mPhone!=null? " " +mPhone:"");
-        System.out.println("ADDRESSS: "+mAddress);
-        System.out.println("CITY: "+mCityState);
-        System.out.println("PHONE: "+mPhone);
+        String address = mAddress + (mCityState != null ? " " + mCityState : "") + (mPhone != null ? " " + mPhone : "");
+        System.out.println("ADDRESSS: " + mAddress);
+        System.out.println("CITY: " + mCityState);
+        System.out.println("PHONE: " + mPhone);
 
         String fam_hist = mFamHist;
         String pat_hist = mPatHist;
@@ -1727,7 +1725,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
         // Modified by the Venu N on for print option as per the Prajwal note on 02/04/2020.
         String physicalExamStr = phyExam.getValue().replaceAll("<b>General exams: </b>", "");
-         physicalExamStr = physicalExamStr.replaceAll("Self Assessment:","");// Added by venu N on 02/04/2020.
+        physicalExamStr = physicalExamStr.replaceAll("Self Assessment:", "");// Added by venu N on 02/04/2020.
 
         // Generate an HTML document on the fly:
         if (isRespiratory) {
@@ -1738,7 +1736,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                                     "<hr style=\"font-size:12pt;\">" + "<br/>" +
                                     "<p id=\"patient_name\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">%s</p></b>" +
                                     "<p id=\"patient_details\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">Age: %s | Gender: %s  </p>" + // | Son/Daughter/Wife of: %s  Removed as per the Prajwal by Venu N on 02/04/2020.
-                                   /* "<p id=\"address_and_contact\" style=\"font-size:12pt; margin: 0px; padding: 0px;\"><b>Address and Contact:</b> %s</p>" +*/
+                                    /* "<p id=\"address_and_contact\" style=\"font-size:12pt; margin: 0px; padding: 0px;\"><b>Address and Contact:</b> %s</p>" +*/
                                     "<b><p id=\"visit_details\" style=\"font-size:12pt; margin-top:5px; margin-bottom:0px; padding: 0px;\">User ID: %s | Date of Assessment: %s </p></b><br><br>" +
                                     "<b><p id=\"Self Assessment\" style=\"font-size:12pt;margin-top:5px; margin-bottom:0px;; padding: 0px;\">Self Assessment:</p></b>" + physicalExamStr
                                     /* +
@@ -1760,7 +1758,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                                     "%s" +
                                     "<b><p id=\"follow_up_heading\" style=\"font-size:12pt;margin-top:5px; margin-bottom:0px; padding: 0px;\">Follow Up Date</p></b>" +
                                     "%s"*/
-                            , heading, heading2, heading3, mPatientName, age, mGender/*, mSdw, address*/, mPatientOpenMRSID, (mDate!= null?mDate:""), mHeight, mWeight,
+                            , heading, heading2, heading3, mPatientName, age, mGender/*, mSdw, address*/, mPatientOpenMRSID, (mDate != null ? mDate : ""), mHeight, mWeight,
                             mBMI, bp, mPulse, mTemp, mresp, mSPO2, pat_hist, fam_hist, mComplaint, diagnosis_web, rx_web, tests_web, advice_web, followUp_web, doctor_web);
             webView.loadDataWithBaseURL(null, htmlDocument, "text/HTML", "UTF-8", null);
         } else {
@@ -1771,7 +1769,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                                     "<hr style=\"font-size:12pt;\">" + "<br/>" +
                                     "<p id=\"patient_name\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">%s</p></b>" +
                                     "<p id=\"patient_details\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">Age: %s | Gender: %s </p>" +  //  | Son/Daughter/Wife of: %s  modified by venu as per Prejwal on 02/04/2020.
-                                   /* "<p id=\"address_and_contact\" style=\"font-size:12pt; margin: 0px; padding: 0px;\"><b>Address and Contact:</b> %s</p>" +*/
+                                    /* "<p id=\"address_and_contact\" style=\"font-size:12pt; margin: 0px; padding: 0px;\"><b>Address and Contact:</b> %s</p>" +*/
                                     "<b><p id=\"visit_details\" style=\"font-size:12pt; margin-top:5px; margin-bottom:0px; padding: 0px;\">User ID: %s | Date of Assessment: %s </p></b><br><br>" +
                                     "<b><p id=\"Self Assessment\" style=\"font-size:12pt;margin-top:5px; margin-bottom:0px;; padding: 0px;\">Self Assessment:</p></b>" + physicalExamStr
                             /*"<b><p id=\"vitals_heading\" style=\"font-size:12pt;margin-top:5px; margin-bottom:0px;; padding: 0px;\">Vitals</p></b>" +
@@ -1792,7 +1790,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                                     "%s" +
                                     "<b><p id=\"follow_up_heading\" style=\"font-size:12pt;margin-top:5px; margin-bottom:0px; padding: 0px;\">Follow Up Date</p></b>" +
                                     "%s"*/
-                            , heading, heading2, heading3, mPatientName, age, mGender/*, mSdw, address*/, mPatientOpenMRSID,  (mDate!= null?mDate:""), mHeight, mWeight,
+                            , heading, heading2, heading3, mPatientName, age, mGender/*, mSdw, address*/, mPatientOpenMRSID, (mDate != null ? mDate : ""), mHeight, mWeight,
                             mBMI, bp, mPulse, mTemp, mSPO2, pat_hist, fam_hist, mComplaint, diagnosis_web, rx_web, tests_web, advice_web, followUp_web, doctor_web);
             webView.loadDataWithBaseURL(null, htmlDocument, "text/HTML", "UTF-8", null);
         }
@@ -1902,6 +1900,33 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
             });
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
+
+        }
+    }
+
+    /**
+     * update the value of submit in table for particular visit
+     */
+    private void updateVisitSubmit() {
+        Log.d(TAG, "updateVisitSubmit: ");
+        if (visitUUID == null || visitUUID.isEmpty()) {
+            String visitIDSelection = "uuid = ?";
+            String[] visitIDArgs = {visitUuid};
+            final Cursor visitIDCursor = db.query("tbl_visit", null, visitIDSelection, visitIDArgs, null, null, null);
+            if (visitIDCursor != null && visitIDCursor.moveToFirst() && visitIDCursor.getCount() > 0) {
+                visitIDCursor.moveToFirst();
+                visitUUID = visitIDCursor.getString(visitIDCursor.getColumnIndexOrThrow("uuid"));
+            }
+            if (visitIDCursor != null) visitIDCursor.close();
+        }
+        if (visitUUID != null && !visitUUID.isEmpty()) {
+
+            VisitsDAO visitsDAO = new VisitsDAO();
+            try {
+                visitsDAO.updateVisitSubmit(visitUuid);
+            } catch (DAOException e) {
+                Crashlytics.getInstance().core.logException(e);
+            }
 
         }
     }
@@ -2346,7 +2371,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.tv_mental_help_request:
                 Uri uri = Uri.parse("http://www.intelehealth.org/mental-health-consult"); // missing 'http://' will cause crashed
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);

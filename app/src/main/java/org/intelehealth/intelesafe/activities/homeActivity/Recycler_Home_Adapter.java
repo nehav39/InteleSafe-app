@@ -102,7 +102,7 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
 
         SQLiteDatabase db = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
         String query = "SELECT v.startdate FROM tbl_visit v, tbl_patient p WHERE " +
-                "p.uuid = v.patientuuid AND v.startdate IS NOT NULL AND " +
+                "p.uuid = v.patientuuid AND v.startdate IS NOT NULL AND v.issubmitted == 1 AND " +
                 "v.patientuuid = ? AND v.startdate LIKE ? ";
         String[] data = {sessionManager.getPersionUUID(), arrayList.get(position).getDate() + "%"};
         String dd = sessionManager.getPersionUUID();

@@ -719,6 +719,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         visitDTO.setLocationuuid(sessionManager.getLocationUuid());
         visitDTO.setSyncd(false);
         visitDTO.setCreatoruuid(sessionManager.getCreatorID());//static
+        visitDTO.setIsSubmitted(0);// add to check is patient click on submitt in summary.
 
         VisitsDAO visitsDAO = new VisitsDAO();
 
