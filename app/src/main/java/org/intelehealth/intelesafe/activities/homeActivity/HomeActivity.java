@@ -67,13 +67,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
-import java.util.Set;
 import java.util.UUID;
 
 import org.intelehealth.intelesafe.BuildConfig;
@@ -345,9 +343,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         home_quarantine_guidelines.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent home_quarantine = new Intent(Intent.ACTION_VIEW,
+                /*Intent home_quarantine = new Intent(Intent.ACTION_VIEW,
                         Uri.parse("http://www.intelehealth.org/ppe-guidelines"));
-                startActivity(home_quarantine);
+                startActivity(home_quarantine);*/
+
+                Intent ppe = new Intent(HomeActivity.this, Webview.class);
+                ppe.putExtra("PPE", 1);
+                startActivity(ppe);
             }
         });
 
@@ -390,9 +392,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View view) {
                 //open youtube page.
-                startActivity
+                /*startActivity
                         (new Intent(Intent.ACTION_VIEW,
-                                Uri.parse("http://www.intelehealth.org/ppe-faqs")));
+                                Uri.parse("http://www.intelehealth.org/ppe-faqs")));*/
+                Intent faq = new Intent(HomeActivity.this, Webview.class);
+                faq.putExtra("FAQ", 1);
+                startActivity(faq);
             }
         });
         Logger.logD(TAG, "onCreate: " + getFilesDir().toString());
