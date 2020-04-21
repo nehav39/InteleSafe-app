@@ -37,12 +37,17 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.SpannableString;
+import android.text.TextUtils;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -134,17 +139,17 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     TextView lastSyncAgo;
     TextView welcomeUser;
     Button manualSyncButton;
-    RelativeLayout enter_check_in,home_quarantine_guidelines,educational_videos,user_logout; // modified by Venu N on 01/04/2020
+    RelativeLayout enter_check_in, home_quarantine_guidelines, educational_videos, user_logout; // modified by Venu N on 01/04/2020
     IntentFilter filter;
     Myreceiver reMyreceive;
     SyncUtils syncUtils = new SyncUtils();
-    CardView c1, c2, c3, c4, c5;
+    CardView c1, c2, c3, c4, c5,ppe_cardView_request;
     private String key = null;
     private String licenseUrl = null;
     RecyclerView recyclerView;
     TextView tvNoVisit;
     Button help_watsapp;
-    TextView tvMentalHelpRequest;
+    TextView tvMentalHelpRequest, tv_ppe_request;
 
     Context context;
     private String mindmapURL = "";
@@ -214,7 +219,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             public void onClick(View view) {
                 String phoneNumberWithCountryCode = "+919825989750";
                 String message =
-                        "Hello, my name is "+ sessionManager.getUserName()+
+                        "Hello, my name is " + sessionManager.getUserName() +
                                 /*" from " + sessionManager.getState() + */" and I need some assistance.";
 
                 startActivity(new Intent(Intent.ACTION_VIEW,
@@ -226,12 +231,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         tvMentalHelpRequest = findViewById(R.id.tv_mental_help_request);
         tvMentalHelpRequest.setOnClickListener(this);
+        String teleconsult_request = getString(R.string.teleconsult_request);
+        SpannableString content = new SpannableString(teleconsult_request);
+        content.setSpan(new UnderlineSpan(), 0, teleconsult_request.length(), 0);
+        tvMentalHelpRequest.setText(content);
 
         SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(context));
         int dayCount = mSharedPreference.getInt("dayCount", 0);
 
         //Notification check
-       // SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        // SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         //Intent for 8am alarm is set for everyday.
         PackageManager pm = this.getPackageManager();
         ComponentName receiver = new ComponentName(this, DeviceBootReceiver.class);
@@ -241,7 +250,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
-        if(dayCount <= 42) {
+        if (dayCount <= 42) {
             //region Enable Daily Notifications
             calendar = Calendar.getInstance();
             calendar.setTimeInMillis(System.currentTimeMillis());
@@ -264,7 +273,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             pm.setComponentEnabledSetting(receiver,
                     PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
                     PackageManager.DONT_KILL_APP);
-        }else{
+        } else {
             manager.cancel(pendingIntent_1);
         }
 
@@ -273,7 +282,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         alarmIntent_2.setAction(AppConstants.ACTION_TWO);
         PendingIntent pendingIntent_2 = PendingIntent.getBroadcast(this, 1260, alarmIntent_2, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        if(dayCount <= 42) {    //added by Prajwal the equal case to give notifi in the evening as well on the last day.
+        if (dayCount <= 42) {    //added by Prajwal the equal case to give notifi in the evening as well on the last day.
             //region Enable Daily Notifications..
             calendar.setTimeInMillis(System.currentTimeMillis());
             calendar.set(Calendar.HOUR_OF_DAY, 19); //24 Hour Format - 7pm alarm
@@ -311,7 +320,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 //        set = new HashSet<Day_Date>();
 
         // ArrayList<String> endDate = new ArrayList<>();
-
 
 
         enter_check_in = findViewById(R.id.button_enter_checkin);
@@ -465,7 +473,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 */
-       // WorkManager.getInstance().enqueueUniquePeriodicWork(AppConstants.UNIQUE_WORK_NAME, ExistingPeriodicWorkPolicy.KEEP, AppConstants.PERIODIC_WORK_REQUEST);
+        // WorkManager.getInstance().enqueueUniquePeriodicWork(AppConstants.UNIQUE_WORK_NAME, ExistingPeriodicWorkPolicy.KEEP, AppConstants.PERIODIC_WORK_REQUEST);
 /*
         if (sessionManager.isFirstTimeLaunched()) {
             TempDialog = new ProgressDialog(HomeActivity.this, R.style.AlertDialogStyle); //thats how to add a style!
@@ -497,7 +505,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         if (sessionManager.isReturningUser()) {
             customProgressDialog.show();
             syncUtils.syncForeground("HOME_SCREEN");
-        }else{
+        } else {
             renderList();
         }
 
@@ -525,12 +533,26 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 alertDialog.show();
             }
         });
+        ppe_cardView_request = findViewById(R.id.ppe_cardView_request);
+     /*   if(sessionManager.getPatientCountry().equals("India")){
+            ppe_cardView_request.setVisibility(View.VISIBLE);
+        }else{
+            ppe_cardView_request.setVisibility(View.GONE);
+        }*/
+        ppe_cardView_request.setVisibility(View.GONE);
+        tv_ppe_request = findViewById(R.id.tv_ppe_request);
+        String mystring = getString(R.string.ppe_req);
+        SpannableString content1 = new SpannableString(mystring);
+        content1.setSpan(new UnderlineSpan(), 0, mystring.length(), 0);
+        tv_ppe_request.setText(content1);
+        tv_ppe_request.setOnClickListener(this);
+        //tv_ppe_request.setText(getString(R.string.ppe_req));
 
         WorkManager.getInstance().enqueueUniquePeriodicWork(AppConstants.UNIQUE_WORK_NAME, ExistingPeriodicWorkPolicy.KEEP, AppConstants.PERIODIC_WORK_REQUEST);
 
     }
 
-    private void renderList(){
+    private void renderList() {
         recycler_arraylist = new ArrayList<Day_Date>();
         String endDate = "";
         String query = "SELECT v.startdate FROM tbl_visit v, tbl_patient p WHERE " +
@@ -541,7 +563,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         final Cursor cursor = db.rawQuery(query, data);
         int a = 1;
         int b = 0;
-        String dd="";
+        String dd = "";
         int a1;
         StringBuilder stringBuilder;
         hashSet = new HashSet<>();
@@ -558,12 +580,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         dd = stringBuilder.substring(0, a1);
 
                         //comment...
-                        array_original_date.add(b,endDate);
+                        array_original_date.add(b, endDate);
                         b++;
 //                        hashSet.add(new Day_Date("Day "+a, endDate));
                         //   boolean t = ;
                         hashSet.add(dd);
-
 
 
 //                        for(int i=0; i<recycler_arraylist.size(); i++)
@@ -583,7 +604,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         e.printStackTrace();
                     }
 
-                }while (cursor.moveToNext());
+                } while (cursor.moveToNext());
             }
         }
         if (cursor != null) {
@@ -596,11 +617,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         Collections.sort(new_arraylist); // added by venu N to sort the
 
         for (int j = 0; j < new_arraylist.size(); j++) {
-            recycler_arraylist.add(new Day_Date("Day "+a, new_arraylist.get(j)));
+            recycler_arraylist.add(new Day_Date("Day " + a, new_arraylist.get(j)));
             a++;
         }
 
-        if(!recycler_arraylist.isEmpty()) {
+        if (!recycler_arraylist.isEmpty()) {
             sessionManager.setFirstCheckin("true");
             tvNoVisit.setVisibility(View.GONE);
             recycler_home_adapter = new Recycler_Home_Adapter(context, recycler_arraylist, array_original_date);
@@ -608,7 +629,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
             recyclerView.setLayoutManager(new LinearLayoutManager(HomeActivity.this, LinearLayoutManager.VERTICAL, false));
             recyclerView.setAdapter(recycler_home_adapter);
-        } else{
+        } else {
+            sessionManager.setFirstCheckin("false");
             tvNoVisit.setVisibility(View.VISIBLE);
         }
     }
@@ -720,12 +742,95 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.tv_mental_help_request:
                 Uri uri = Uri.parse("https://www.intelehealth.org/mental-health-consult"); // missing 'http://' will cause crashed
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
+                break;
+            case R.id.tv_ppe_request:
+                showAlertToRequestPPE();
+                break;
         }
+    }
+
+    /**
+     * alert for request the PPE
+     */
+    private void showAlertToRequestPPE() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View customView = LayoutInflater.from(this).inflate(R.layout.ppe_request_alert, null);
+        builder.setView(customView);
+        Button btn_positive = customView.findViewById(R.id.btn_positive);
+        Button btn_negative = customView.findViewById(R.id.btn_negative);
+        EditText edt_city = customView.findViewById(R.id.edt_city_village);
+        EditText edt_address1 = customView.findViewById(R.id.edt_address1);
+        EditText edt_address2 = customView.findViewById(R.id.edt_address2);
+        EditText edt_pincode = customView.findViewById(R.id.edt_pincode);
+        EditText edt_ppe_qty = customView.findViewById(R.id.edt_ppe_qty);
+        AlertDialog alert = builder.create();
+        btn_positive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String cityStr = edt_city.getText().toString();
+                String addressStr1 = edt_address1.getText().toString();
+                String addressStr2 = edt_address2.getText().toString();
+                String pinCodeStr = edt_pincode.getText().toString();
+                String ppeQtyStr = edt_ppe_qty.getText().toString();
+                if(TextUtils.isEmpty(cityStr)){
+                    edt_city.setError(getString(R.string.error_field_required));
+                    edt_city.requestFocus();
+                    return;
+                }
+                if(TextUtils.isEmpty(addressStr1)){
+                    edt_address1.setError(getString(R.string.error_field_required));
+                    edt_address1.requestFocus();
+                    return;
+                }
+
+                if(TextUtils.isEmpty(pinCodeStr)){
+                    edt_pincode.setError(getString(R.string.error_field_required));
+                    edt_pincode.requestFocus();
+                    return;
+                }
+
+                if (pinCodeStr.length() < 6) {
+                    edt_pincode.setError(getString(R.string.postal_code_validation));
+                    edt_pincode.requestFocus();
+                    return;
+                }
+                if(TextUtils.isEmpty(ppeQtyStr)){
+                    edt_ppe_qty.setError(getString(R.string.error_field_required));
+                    edt_ppe_qty.requestFocus();
+                    return;
+                }
+
+                String finalAddressStr = addressStr1 + " "+(!TextUtils.isEmpty(addressStr2+ " ")?addressStr2:"")+ cityStr + " "+ pinCodeStr;
+                String phoneNumberWithCountryCode = "+918108220025";
+                String messageStr = "Hi I would like to request for PPE kits."+"\n"+
+                        "Name: "+ sessionManager.getUserName()+"\n"+
+                        "Address: "+ finalAddressStr +"\n"+
+                        "PPE required: "+ ppeQtyStr;
+
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse(
+                                String.format("http://api.whatsapp.com/send?phone=%s&text=%s",
+                                        phoneNumberWithCountryCode, messageStr))));
+
+                alert.dismiss();
+            }
+        });
+        btn_negative.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.dismiss();
+            }
+        });
+        alert.show();
+        alert.setCancelable(false);
+        alert.setCanceledOnTouchOutside(false);
+        alert.getButton(AlertDialog.BUTTON_POSITIVE).setVisibility(View.GONE);
+        alert.getButton(AlertDialog.BUTTON_NEGATIVE).setVisibility(View.GONE);
     }
 
     private class DownloadFile extends AsyncTask<String, Void, Void> {
@@ -982,24 +1087,23 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         Account[] accountList = manager.getAccountsByType("io.intelehealth.openmrs");
         if (accountList.length > 0) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                for(int i = 0; i < accountList.length; i++){
+                for (int i = 0; i < accountList.length; i++) {
                     manager.removeAccount(accountList[i], HomeActivity.this, null, null);
                 }
             } else {
-                for(int i = 0; i < accountList.length; i++) {
+                for (int i = 0; i < accountList.length; i++) {
                     manager.removeAccount(accountList[i], null, null); // Legacy implementation
                 }
             }
         }
-
+        sessionManager.setFirstCheckin("false");
+        sessionManager.setReturningUser(false);
         Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
 
 //        SyncUtils syncUtils = new SyncUtils();
 //        syncUtils.syncBackground();
-
-        sessionManager.setReturningUser(false);
     }
 
 
@@ -1061,9 +1165,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 //            lastSyncTextView.setText(getString(R.string.last_synced) + " \n" + sessionManager.getLastSyncDateTime());
 //          lastSyncAgo.setText(sessionManager.getLastTimeAgo());
 
-            if(intent != null){
+            if (intent != null) {
                 String strAction = intent.getAction().toString();
-                if(strAction.equalsIgnoreCase("org.intelehealth.intelesafe.refreshCheck-in")){
+                if (strAction.equalsIgnoreCase("org.intelehealth.intelesafe.refreshCheck-in")) {
                     renderList();
                     sessionManager.setReturningUser(false);
                     customProgressDialog.dismiss();
@@ -1295,7 +1399,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    public void pastVisits(int position) {
+    public void pastVisits(int position, String check_inDate) {
 
         String patientuuid = sessionManager.getPersionUUID();
         List<String> visitList = new ArrayList<>();
@@ -1324,27 +1428,31 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     date = visitCursor.getString(visitCursor.getColumnIndexOrThrow("startdate"));
                     end_date = visitCursor.getString(visitCursor.getColumnIndexOrThrow("enddate"));
                     String visit_id = visitCursor.getString(visitCursor.getColumnIndexOrThrow("uuid"));
+                    StringBuilder stringBuilder = new StringBuilder(date);
+                    int a1 = stringBuilder.indexOf("T");
+                    String dateFromDB = stringBuilder.substring(0, a1);
+                    //check for current check_in visits only.
+                    if (dateFromDB.equals(check_inDate)) {
+                        visitList.add(visit_id);
 
-                    visitList.add(visit_id);
+                        String[] encounterIDArgs = {visit_id};
 
-                    String[] encounterIDArgs = {visit_id};
+                        Cursor encounterCursor = db.query("tbl_encounter", null, encounterIDSelection, encounterIDArgs, null, null, null);
+                        if (encounterCursor != null && encounterCursor.moveToFirst()) {
+                            do {
+                                if (encounterDAO.getEncounterTypeUuid("ENCOUNTER_VITALS").equalsIgnoreCase(encounterCursor.getString(encounterCursor.getColumnIndexOrThrow("encounter_type_uuid")))) {
+                                    encountervitalsLocal = encounterCursor.getString(encounterCursor.getColumnIndexOrThrow("uuid"));
+                                    encounterVitalList.add(encountervitalsLocal);
+                                }
+                                if (encounterDAO.getEncounterTypeUuid("ENCOUNTER_ADULTINITIAL").equalsIgnoreCase(encounterCursor.getString(encounterCursor.getColumnIndexOrThrow("encounter_type_uuid")))) {
+                                    encounterlocalAdultintial = encounterCursor.getString(encounterCursor.getColumnIndexOrThrow("uuid"));
+                                    encounterAdultList.add(encounterlocalAdultintial);
+                                }
 
-                    Cursor encounterCursor = db.query("tbl_encounter", null, encounterIDSelection, encounterIDArgs, null, null, null);
-                    if (encounterCursor != null && encounterCursor.moveToFirst()) {
-                        do {
-                            if (encounterDAO.getEncounterTypeUuid("ENCOUNTER_VITALS").equalsIgnoreCase(encounterCursor.getString(encounterCursor.getColumnIndexOrThrow("encounter_type_uuid")))) {
-                                encountervitalsLocal = encounterCursor.getString(encounterCursor.getColumnIndexOrThrow("uuid"));
-                                encounterVitalList.add(encountervitalsLocal);
-                            }
-                            if (encounterDAO.getEncounterTypeUuid("ENCOUNTER_ADULTINITIAL").equalsIgnoreCase(encounterCursor.getString(encounterCursor.getColumnIndexOrThrow("encounter_type_uuid")))) {
-                                encounterlocalAdultintial = encounterCursor.getString(encounterCursor.getColumnIndexOrThrow("uuid"));
-                                encounterAdultList.add(encounterlocalAdultintial);
-                            }
-
-                        } while (encounterCursor.moveToNext());
+                            } while (encounterCursor.moveToNext());
+                        }
+                        encounterCursor.close();
                     }
-                    encounterCursor.close();
-
                     // Called when we close app on vitals screen and Didn't select any complaints
 
                 } while (visitCursor.moveToPrevious());
@@ -1382,10 +1490,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         visitSummary.putExtra("tag", "prior");
         visitSummary.putExtra("pastVisit", past_visit);
         visitSummary.putExtra("hasPrescription", "false");
-        visitSummary.putExtra("fromOldVisit",true);
+        visitSummary.putExtra("fromOldVisit", true);
         startActivity(visitSummary);
     }
-
 
 
 }

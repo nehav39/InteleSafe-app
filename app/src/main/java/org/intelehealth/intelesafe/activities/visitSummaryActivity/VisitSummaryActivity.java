@@ -846,8 +846,10 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
             famHistView.setText(Html.fromHtml(famHistory.getValue()));
         if (patHistory.getValue() != null)
             patHistView.setText(Html.fromHtml(patHistory.getValue()));
-        if (phyExam.getValue() != null)
-            physFindingsView.setText(Html.fromHtml(phyExam.getValue()));
+        if (phyExam.getValue() != null) {
+            String physicalExamStr = phyExam.getValue().replaceAll("<b>General exams: </b>", "<b>Self Assessment: </b>");
+            physFindingsView.setText(Html.fromHtml(physicalExamStr));
+        }
 
 
         editVitals.setOnClickListener(new View.OnClickListener() {
@@ -1069,8 +1071,10 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                 physicalDialog.setView(convertView);
 
                 final TextView physicalText = convertView.findViewById(R.id.textView_entry);
-                if (phyExam.getValue() != null)
-                    physicalText.setText(Html.fromHtml(phyExam.getValue()));
+                if (phyExam.getValue() != null) {
+                    String physicalExamStr = phyExam.getValue().replaceAll("<b>General exams: </b>", "<b>Self Assessment: </b>");
+                    physicalText.setText(Html.fromHtml(physicalExamStr));
+                }
                 physicalText.setEnabled(false);
 
                 physicalDialog.setPositiveButton(getString(R.string.generic_manual_entry), new DialogInterface.OnClickListener() {
@@ -1079,9 +1083,10 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                         final AlertDialog.Builder textInput = new AlertDialog.Builder(VisitSummaryActivity.this);
                         textInput.setTitle(R.string.question_text_input);
                         final EditText dialogEditText = new EditText(VisitSummaryActivity.this);
-                        if (phyExam.getValue() != null)
-                            dialogEditText.setText(Html.fromHtml(phyExam.getValue()));
-                        else
+                        if (phyExam.getValue() != null) {
+                            String physicalExamStr = phyExam.getValue().replaceAll("<b>General exams: </b>", "<b>Self Assessment: </b>");
+                            dialogEditText.setText(Html.fromHtml(physicalExamStr));
+                        }else
                             dialogEditText.setText("");
                         textInput.setView(dialogEditText);
                         textInput.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
@@ -1090,8 +1095,9 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
                                 phyExam.setValue(dialogEditText.getText().toString().replace("\n", "<br>"));
                                 if (phyExam.getValue() != null) {
-                                    physicalText.setText(Html.fromHtml(phyExam.getValue()));
-                                    physFindingsView.setText(Html.fromHtml(phyExam.getValue()));
+                                    String physicalExamStr = phyExam.getValue().replaceAll("<b>General exams: </b>", "<b>Self Assessment: </b>");
+                                    physicalText.setText(Html.fromHtml(physicalExamStr));
+                                    physFindingsView.setText(Html.fromHtml(physicalExamStr));
                                 }
                                 updateDatabase(phyExam.getValue(), UuidDictionary.PHYSICAL_EXAMINATION);
                                 dialog.dismiss();
@@ -1722,7 +1728,8 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
 
         // Modified by the Venu N on for print option as per the Prajwal note on 02/04/2020.
-        String physicalExamStr = phyExam.getValue().replaceAll("<b>General exams: </b>", "");// Added by venu N on 02/04/2020.
+        String physicalExamStr = phyExam.getValue().replaceAll("<b>General exams: </b>", "");
+         physicalExamStr = physicalExamStr.replaceAll("Self Assessment:","");// Added by venu N on 02/04/2020.
 
         // Generate an HTML document on the fly:
         if (isRespiratory) {
@@ -1735,7 +1742,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                                     "<p id=\"patient_details\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">Age: %s | Gender: %s  </p>" + // | Son/Daughter/Wife of: %s  Removed as per the Prajwal by Venu N on 02/04/2020.
                                    /* "<p id=\"address_and_contact\" style=\"font-size:12pt; margin: 0px; padding: 0px;\"><b>Address and Contact:</b> %s</p>" +*/
                                     "<b><p id=\"visit_details\" style=\"font-size:12pt; margin-top:5px; margin-bottom:0px; padding: 0px;\">User ID: %s | Date of Assessment: %s </p></b><br><br>" +
-                                    "<b><p id=\"Self Assessment\" style=\"font-size:12pt;margin-top:5px; margin-bottom:0px;; padding: 0px;\">Self Assessment</p></b>" + physicalExamStr
+                                    "<b><p id=\"Self Assessment\" style=\"font-size:12pt;margin-top:5px; margin-bottom:0px;; padding: 0px;\">Self Assessment:</p></b>" + physicalExamStr
                                     /* +
                                    "<b><p id=\"vitals_heading\" style=\"font-size:12pt;margin-top:5px; margin-bottom:0px;; padding: 0px;\">Vitals</p></b>" +
                                     "<p id=\"vitals\" style=\"font-size:12pt;margin:0px; padding: 0px;\">Height(cm): %s | Weight(kg): %s | BMI: %s | Blood Pressure: %s | Pulse(bpm): %s | %s | Respiratory Rate: %s |  %s </p>" +
@@ -1768,7 +1775,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                                     "<p id=\"patient_details\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">Age: %s | Gender: %s </p>" +  //  | Son/Daughter/Wife of: %s  modified by venu as per Prejwal on 02/04/2020.
                                    /* "<p id=\"address_and_contact\" style=\"font-size:12pt; margin: 0px; padding: 0px;\"><b>Address and Contact:</b> %s</p>" +*/
                                     "<b><p id=\"visit_details\" style=\"font-size:12pt; margin-top:5px; margin-bottom:0px; padding: 0px;\">User ID: %s | Date of Assessment: %s </p></b><br><br>" +
-                                    "<b><p id=\"Self Assessment\" style=\"font-size:12pt;margin-top:5px; margin-bottom:0px;; padding: 0px;\">Self Assessment</p></b>" + physicalExamStr
+                                    "<b><p id=\"Self Assessment\" style=\"font-size:12pt;margin-top:5px; margin-bottom:0px;; padding: 0px;\">Self Assessment:</p></b>" + physicalExamStr
                             /*"<b><p id=\"vitals_heading\" style=\"font-size:12pt;margin-top:5px; margin-bottom:0px;; padding: 0px;\">Vitals</p></b>" +
                             "<p id=\"vitals\" style=\"font-size:12pt;margin:0px; padding: 0px;\">Height(cm): %s | Weight(kg): %s | BMI: %s | Blood Pressure: %s | Pulse(bpm): %s | %s | %s </p>" +
                                     "<b><p id=\"patient_history_heading\" style=\"font-size:11pt;margin-top:5px; margin-bottom:0px; padding: 0px;\">Patient History</p></b>" +

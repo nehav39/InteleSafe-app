@@ -126,4 +126,9 @@
         <item name="android:textColor">@color/colorPrimaryDark</item>
         <item name="android:fontFamily">@font/lato_bold</item>
     </style>
+
+
+    <style name="AlertDialogCustom" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="fontFamily">@font/lato_regular</item>
+    </style>
 </resources>
