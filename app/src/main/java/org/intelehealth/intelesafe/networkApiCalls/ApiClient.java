@@ -38,6 +38,7 @@ public class ApiClient {
     }
 
     public static <S> S createService(Class<S> serviceClass) {
+
         retrofit = builder.client(getOkHttpClient()).build();
         return retrofit.create(serviceClass);
     }
