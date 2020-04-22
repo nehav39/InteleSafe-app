@@ -568,7 +568,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         recycler_arraylist = new ArrayList<Day_Date>();
         String endDate = "";
         String query = "SELECT v.startdate FROM tbl_visit v, tbl_patient p WHERE " +
-                "p.uuid = v.patientuuid AND v.startdate IS NOT NULL AND " +
+                "p.uuid = v.patientuuid AND v.startdate IS NOT NULL AND (v.issubmitted == 1 OR v.enddate IS NOT NULL) AND " +
                 "v.patientuuid = ?";
         String[] data = {sessionManager.getPersionUUID()};
 
@@ -1412,7 +1412,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    public void pastVisits(int position, String check_inDate,String visit_compare_id) {
+    public void pastVisits(int position, String check_inDate) {
 
         String patientuuid = sessionManager.getPersionUUID();
         List<String> visitList = new ArrayList<>();
@@ -1426,10 +1426,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         String encounterIDSelection = "visituuid = ?";
 
         String visitSelection = "patientuuid = ?";
-        String[] visitArgs = {patientuuid};
+
         String[] visitColumns = {"uuid, startdate", "enddate"};
         String visitOrderBy = "startdate";
-        Cursor visitCursor = db.query("tbl_visit", visitColumns, visitSelection, visitArgs, null, null, visitOrderBy);
+        String query = "SELECT DISTINCT v.uuid, v.startdate, v.enddate FROM tbl_visit v WHERE " +
+                "(v.issubmitted == 1 OR v.enddate IS NOT NULL) AND " +
+                "v.patientuuid = ? ORDER BY v.startdate";
+        String[] visitArgs = {patientuuid};
+
+        Cursor visitCursor = db.rawQuery(query,visitArgs);
+        //Cursor visitCursor = db.query("tbl_visit", visitColumns, visitSelection, visitArgs, null, null, visitOrderBy);
 
         if (visitCursor.getCount() < 1) {
 //            neverSeen();
@@ -1445,7 +1451,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     int a1 = stringBuilder.indexOf("T");
                     String dateFromDB = stringBuilder.substring(0, a1);
                     //check for current check_in visits only.
-                    if (dateFromDB.equals(check_inDate) && visit_id.equals(visit_compare_id)) {
+                    if (dateFromDB.equals(check_inDate)) {
                         visitList.add(visit_id);
 
                         String[] encounterIDArgs = {visit_id};
@@ -1478,7 +1484,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                     Date formatted = currentDate.parse(date);
                     String visitDate = currentDate.format(formatted);
-                    OldVisit(visitDate, visitList.get(0), end_date, "", ""/*encounterVitalList.get(position)*/, encounterAdultList.get(0));
+                    OldVisit(visitDate, visitList.get(position), end_date, "", ""/*encounterVitalList.get(position)*/, encounterAdultList.get(position));
                 } catch (ParseException e) {
                     Crashlytics.getInstance().core.logException(e);
                 }
