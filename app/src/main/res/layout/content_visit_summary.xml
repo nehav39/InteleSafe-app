@@ -40,7 +40,7 @@ Github: prajwalmw
         android:orientation="vertical">
 
 
-        <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+        <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/cardView_patient_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -162,12 +162,12 @@ Github: prajwalmw
 
                 </TableLayout>
             </RelativeLayout>
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
 
         <!-- Vitals Card contains a TableView-->
 
-        <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+        <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/cardView_vitals"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -383,10 +383,10 @@ Github: prajwalmw
 
                 </TableLayout>
             </RelativeLayout>
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
         <!--C/O Card contains text-->
-        <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+        <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/cardView_complaint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -434,13 +434,13 @@ Github: prajwalmw
                     android:textSize="@dimen/card_content_text_size"
                     android:padding="@dimen/padding_card"/>
             </RelativeLayout>
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
 
 
 
         <!--Physical Exam Card contains text-->
-        <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+        <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/cardView_physexam"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -506,7 +506,7 @@ Github: prajwalmw
                     android:textColor="@color/txt_sub_header_color"
                     />
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recy_physexam"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -523,9 +523,9 @@ Github: prajwalmw
                     android:text="@string/click_to_download_the_images"
                     android:visibility="gone" />
             </RelativeLayout>
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/help_cardview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -608,11 +608,11 @@ Github: prajwalmw
 
             </FrameLayout>
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
 
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/mental_help_cardview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -681,10 +681,10 @@ Github: prajwalmw
             </FrameLayout>
 
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
         <!--Patient History Card contains text-->
-        <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+        <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/cardView_pathist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -732,10 +732,10 @@ Github: prajwalmw
                     android:textSize="@dimen/card_content_text_size" />
             </RelativeLayout>
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
         <!--Family History Card contains text-->
-        <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+        <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/cardView_famhist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -783,9 +783,9 @@ Github: prajwalmw
                     android:padding="@dimen/padding_card"/>
 
             </RelativeLayout>
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-        <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+        <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/additional_document_images"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -824,14 +824,14 @@ Github: prajwalmw
                     android:padding="10dp"
                     app:srcCompat="@drawable/edit_icon" />
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recy_additional_documents"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/textView_additional_document_images"
                     android:padding="@dimen/padding_card">
 
-                </android.support.v7.widget.RecyclerView>
+                </androidx.recyclerview.widget.RecyclerView>
 
                 <TextView
                     android:id="@+id/additional_documents_download"
@@ -845,10 +845,10 @@ Github: prajwalmw
             </RelativeLayout>
 
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
         <!-- Diagnosis contains a TableView-->
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/cardView_diagnosis"
             android:layout_width="match_parent"
@@ -900,10 +900,10 @@ Github: prajwalmw
 
                 </TableLayout>
             </RelativeLayout>
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
         <!-- Prescription contains a TableView-->
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/cardView_rx"
             android:layout_width="match_parent"
@@ -955,10 +955,10 @@ Github: prajwalmw
 
                 </TableLayout>
             </RelativeLayout>
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
         <!-- Medical Advice contains a TableView-->
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/cardView_medical_advice"
             android:layout_width="match_parent"
@@ -1010,10 +1010,10 @@ Github: prajwalmw
 
                 </TableLayout>
             </RelativeLayout>
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
         <!-- Requested Tests contains a TableView-->
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/cardView_tests"
             android:layout_width="match_parent"
@@ -1066,10 +1066,10 @@ Github: prajwalmw
 
                 </TableLayout>
             </RelativeLayout>
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
         <!-- Additional Comments contains a TableView-->
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/cardView_additional_comments"
             android:layout_width="match_parent"
@@ -1121,9 +1121,9 @@ Github: prajwalmw
 
                 </TableLayout>
             </RelativeLayout>
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/cardView_follow_up_date"
             android:layout_width="match_parent"
@@ -1175,9 +1175,9 @@ Github: prajwalmw
 
                 </TableLayout>
             </RelativeLayout>
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-        <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+        <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/chw_and_doctor_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -1237,9 +1237,9 @@ Github: prajwalmw
 
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-        <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+        <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/flageddetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -1279,7 +1279,7 @@ Github: prajwalmw
 
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
         <!--Previous Reports Card contains a list of links to image files of the previous reports-->
         <!--<android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"-->

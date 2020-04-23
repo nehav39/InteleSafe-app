@@ -5,15 +5,13 @@ Created By: Prajwal Waingankar
 Github: prajwalmw
 */
 
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.TextView;
 
 import org.intelehealth.intelesafe.R;
 import org.intelehealth.intelesafe.widget.materialprogressbar.CustomProgressDialog;
