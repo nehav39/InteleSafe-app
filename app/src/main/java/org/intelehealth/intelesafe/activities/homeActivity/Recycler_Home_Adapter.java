@@ -101,8 +101,12 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
 
 
         SQLiteDatabase db = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
-        String query = "SELECT v.startdate FROM tbl_visit v, tbl_patient p WHERE " +
-                "p.uuid = v.patientuuid AND v.startdate IS NOT NULL AND " +
+       /* String query =
+                "SELECT  DISTINCT tbl_visit.uuid, tbl_visit.startdate FROM tbl_visit JOIN tbl_encounter ON  tbl_encounter.visituuid == tbl_visit.uuid JOIN tbl_obs ON tbl_obs.encounteruuid== tbl_encounter.uuid" +
+                " WHERE  tbl_visit.startdate IS NOT NULL AND  " +
+                "tbl_visit.patientuuid = ? AND tbl_visit.startdate LIKE ? ";*/
+        String query = "SELECT DISTINCT v.uuid, v.startdate FROM tbl_visit v, tbl_patient p WHERE " +
+                "p.uuid = v.patientuuid AND v.startdate IS NOT NULL AND (v.issubmitted == 1 OR v.enddate IS NOT NULL) AND " +
                 "v.patientuuid = ? AND v.startdate LIKE ? ";
         String[] data = {sessionManager.getPersionUUID(), arrayList.get(position).getDate() + "%"};
         String dd = sessionManager.getPersionUUID();
@@ -110,6 +114,7 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
 
         String message = "skdjs";
         ArrayList<String> array_message = new ArrayList<>();
+        ArrayList<String> uuid_array = new ArrayList<>();
         int counter = 0;
 
         final Cursor cursor = db.rawQuery(query, data);
@@ -124,6 +129,8 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
                         String de = stringBuilder.substring(0, a1);
 
                         array_message.add(counter, de);
+
+                        uuid_array.add(counter,cursor.getString(cursor.getColumnIndexOrThrow("uuid")));
 
                         counter++;
                         // alertdialogBuilder.setMessage(message);
@@ -146,6 +153,7 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
 
                 AlertDialog.Builder alertdialogBuilder = new AlertDialog.Builder(mcontext);
                 alertdialogBuilder.setTitle("Today's Check-in");
+
 
 
                 View customView = LayoutInflater.from(mcontext).inflate(R.layout.custom_dialog_layout, null);

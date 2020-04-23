@@ -697,7 +697,8 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 //                        .setBackgroundColor(Color.BLACK)
 //                        .setTextColor(Color.WHITE)
 //                        .show();
-
+                // to set the Visit submit successfully in local DB to Push.
+                updateVisitSubmit();
                 if (NetworkConnection.isOnline(getApplication())) {
                     Toast.makeText(context, getResources().getString(R.string.upload_started), Toast.LENGTH_LONG).show();
 
@@ -1903,6 +1904,33 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
             });
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
+
+        }
+    }
+
+    /**
+     * update the value of submit in table for particular visit
+     */
+    private void updateVisitSubmit() {
+        Log.d(TAG, "updateVisitSubmit: ");
+        if (visitUUID == null || visitUUID.isEmpty()) {
+            String visitIDSelection = "uuid = ?";
+            String[] visitIDArgs = {visitUuid};
+            final Cursor visitIDCursor = db.query("tbl_visit", null, visitIDSelection, visitIDArgs, null, null, null);
+            if (visitIDCursor != null && visitIDCursor.moveToFirst() && visitIDCursor.getCount() > 0) {
+                visitIDCursor.moveToFirst();
+                visitUUID = visitIDCursor.getString(visitIDCursor.getColumnIndexOrThrow("uuid"));
+            }
+            if (visitIDCursor != null) visitIDCursor.close();
+        }
+        if (visitUUID != null && !visitUUID.isEmpty()) {
+
+            VisitsDAO visitsDAO = new VisitsDAO();
+            try {
+                visitsDAO.updateVisitSubmit(visitUuid);
+            } catch (DAOException e) {
+                Crashlytics.getInstance().core.logException(e);
+            }
 
         }
     }

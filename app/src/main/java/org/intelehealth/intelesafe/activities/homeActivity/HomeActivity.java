@@ -568,7 +568,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         recycler_arraylist = new ArrayList<Day_Date>();
         String endDate = "";
         String query = "SELECT v.startdate FROM tbl_visit v, tbl_patient p WHERE " +
-                "p.uuid = v.patientuuid AND v.startdate IS NOT NULL AND " +
+                "p.uuid = v.patientuuid AND v.startdate IS NOT NULL AND (v.issubmitted == 1 OR v.enddate IS NOT NULL) AND " +
                 "v.patientuuid = ?";
         String[] data = {sessionManager.getPersionUUID()};
 
@@ -731,6 +731,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         visitDTO.setLocationuuid(sessionManager.getLocationUuid());
         visitDTO.setSyncd(false);
         visitDTO.setCreatoruuid(sessionManager.getCreatorID());//static
+        visitDTO.setIsSubmitted(0);// add to check is patient click on submitt in summary.
 
         VisitsDAO visitsDAO = new VisitsDAO();
 
@@ -1425,10 +1426,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         String encounterIDSelection = "visituuid = ?";
 
         String visitSelection = "patientuuid = ?";
-        String[] visitArgs = {patientuuid};
+
         String[] visitColumns = {"uuid, startdate", "enddate"};
         String visitOrderBy = "startdate";
-        Cursor visitCursor = db.query("tbl_visit", visitColumns, visitSelection, visitArgs, null, null, visitOrderBy);
+        String query = "SELECT DISTINCT v.uuid, v.startdate, v.enddate FROM tbl_visit v WHERE " +
+                "(v.issubmitted == 1 OR v.enddate IS NOT NULL) AND " +
+                "v.patientuuid = ? ORDER BY v.startdate";
+        String[] visitArgs = {patientuuid};
+
+        Cursor visitCursor = db.rawQuery(query,visitArgs);
+        //Cursor visitCursor = db.query("tbl_visit", visitColumns, visitSelection, visitArgs, null, null, visitOrderBy);
 
         if (visitCursor.getCount() < 1) {
 //            neverSeen();
