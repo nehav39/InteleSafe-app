@@ -548,7 +548,7 @@
                                 android:layout_marginTop="5dp"
                                 android:fontFamily="@font/lato_regular"
                                 android:includeFontPadding="false"
-                                android:text="@string/feeling_stressed_or_anxious_request_for_a_free_confidential_mental_health_consultation_with_a_counsellor"
+                                android:text="@string/tele_consultant_text"
                                 android:textSize="14sp" />
 
                             <TextView
