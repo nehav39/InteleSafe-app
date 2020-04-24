@@ -2776,4 +2776,6 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
+
+
 }
