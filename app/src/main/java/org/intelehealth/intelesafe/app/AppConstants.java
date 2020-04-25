@@ -5,6 +5,7 @@ import android.os.Environment;
 
 import androidx.work.Constraints;
 import androidx.work.NetworkType;
+import androidx.work.OneTimeWorkRequest;
 import androidx.work.PeriodicWorkRequest;
 
 
@@ -12,6 +13,8 @@ import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 import org.intelehealth.intelesafe.database.InteleHealthDatabaseHelper;
+import org.intelehealth.intelesafe.syncModule.LastSyncWork;
+import org.intelehealth.intelesafe.syncModule.VisitSummaryWork;
 import org.intelehealth.intelesafe.utilities.DateAndTimeUtils;
 import org.intelehealth.intelesafe.utilities.NotificationUtils;
 import org.intelehealth.intelesafe.utilities.UuidGenerator;
@@ -65,17 +68,27 @@ public class AppConstants {
     //  Image Conversion Ratio
     public static int IMAGE_JPG_QUALITY = 70;
 
+    public static int REPEAT_INTERVAL = 15;
 
-    public static int REPEAT_INTERVAL = 12;
     public static Constraints MY_CONSTRAINTS = new Constraints.Builder()
-            .setRequiresCharging(false)
+            .setRequiresCharging(true)
             .setRequiredNetworkType(NetworkType.CONNECTED)
             .setRequiresBatteryNotLow(true)
             .setRequiresStorageNotLow(true)
             .build();
 
     public static PeriodicWorkRequest PERIODIC_WORK_REQUEST =
-            new PeriodicWorkRequest.Builder(SyncWorkManager.class, REPEAT_INTERVAL, TimeUnit.HOURS)
+            new PeriodicWorkRequest.Builder(SyncWorkManager.class, REPEAT_INTERVAL, TimeUnit.MINUTES)
+                    .setConstraints(MY_CONSTRAINTS)
+                    .build();
+
+    public static OneTimeWorkRequest VISIT_SUMMARY_WORK_REQUEST =
+            new OneTimeWorkRequest.Builder(VisitSummaryWork.class)
+                    .setConstraints(MY_CONSTRAINTS)
+                    .build();
+
+    public static OneTimeWorkRequest LAST_SYNC_WORK_REQUEST =
+            new OneTimeWorkRequest.Builder(LastSyncWork.class)
                     .setConstraints(MY_CONSTRAINTS)
                     .build();
 }

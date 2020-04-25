@@ -1,22 +1,24 @@
 package org.intelehealth.intelesafe.syncModule;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
+import android.content.Intent;
+import android.support.annotation.NonNull;
 
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
 import com.crashlytics.android.Crashlytics;
 
+import org.intelehealth.intelesafe.app.IntelehealthApplication;
 import org.intelehealth.intelesafe.utilities.Logger;
 import org.intelehealth.intelesafe.utilities.SessionManager;
 
-public class SyncWorkManager extends Worker {
+public class VisitSummaryWork extends Worker {
 
     private SessionManager sessionManager = null;
-    private String TAG = SyncWorkManager.class.getSimpleName();
+    private String TAG = VisitSummaryWork.class.getSimpleName();
 
-    public SyncWorkManager(@NonNull Context context, @NonNull WorkerParameters workerParams) {
+    public VisitSummaryWork(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
         sessionManager = new SessionManager(context);
     }
@@ -33,10 +35,10 @@ public class SyncWorkManager extends Worker {
         }
         Logger.logD(TAG, "doWork");
 
-        SyncUtils syncUtils = new SyncUtils();
-        syncUtils.syncBackground();
+        Intent in = new Intent();
+        in.setAction("downloadprescription");
+        IntelehealthApplication.getAppContext().sendBroadcast(in);
 
         return Result.success();
     }
 }
-

@@ -1,22 +1,25 @@
 package org.intelehealth.intelesafe.syncModule;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
+import android.content.Intent;
+import android.support.annotation.NonNull;
 
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
 import com.crashlytics.android.Crashlytics;
 
+import org.intelehealth.intelesafe.app.IntelehealthApplication;
+import org.intelehealth.intelesafe.services.LastSyncIntentService;
 import org.intelehealth.intelesafe.utilities.Logger;
 import org.intelehealth.intelesafe.utilities.SessionManager;
 
-public class SyncWorkManager extends Worker {
+public class LastSyncWork extends Worker {
 
     private SessionManager sessionManager = null;
-    private String TAG = SyncWorkManager.class.getSimpleName();
+    private String TAG = VisitSummaryWork.class.getSimpleName();
 
-    public SyncWorkManager(@NonNull Context context, @NonNull WorkerParameters workerParams) {
+    public LastSyncWork(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
         sessionManager = new SessionManager(context);
     }
@@ -25,6 +28,7 @@ public class SyncWorkManager extends Worker {
     @NonNull
     @Override
     public Result doWork() {
+
         try {
             Thread.sleep(3000);
         } catch (Exception e) {
@@ -33,10 +37,10 @@ public class SyncWorkManager extends Worker {
         }
         Logger.logD(TAG, "doWork");
 
-        SyncUtils syncUtils = new SyncUtils();
-        syncUtils.syncBackground();
+        Intent in = new Intent();
+        in.setAction("lasysync");
+        IntelehealthApplication.getAppContext().sendBroadcast(in);
 
         return Result.success();
     }
 }
-
