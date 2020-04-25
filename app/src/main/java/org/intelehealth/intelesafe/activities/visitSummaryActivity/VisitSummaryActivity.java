@@ -740,10 +740,10 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                                 }
                                 uploadButton.setEnabled(false);
                                 uploadButton.setAlpha(0.5f);
+                                editPhysical.setVisibility(View.GONE);
 
                             } else {
                                 AppConstants.notificationUtils.DownloadDone(patientName + " " + getString(R.string.visit_data_failed), getString(R.string.visit_uploaded_failed), 3, VisitSummaryActivity.this);
-
                             }
                             uploaded = true;
 //                            pd.dismiss();
