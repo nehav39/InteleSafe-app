@@ -416,7 +416,10 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
     }
 
 
-    boolean isFromOldVisit = false;
+
+     boolean isFromOldVisit = false;
+    TextView mental_visit_help_text;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -570,6 +573,16 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
             editPhysical.setVisibility(View.VISIBLE);
         }
 
+        mental_visit_help_text = findViewById(R.id.mental_visit_help_text);
+        if(sessionManager.getPatientCountry().equals("India")){
+            mental_visit_help_text.setText(getString(R.string.tele_consultant_text));
+            tvMentalHelpRequest.setText(getString(R.string.teleconsult_request));
+        }else{
+            mental_visit_help_text.setText(getString(R.string.Mental_health_support_text));
+            tvMentalHelpRequest.setText(getString(R.string.mental_health_support));
+        }
+
+
         //  downloadButton = findViewById(R.id.button_download);
         teleconsultationButton = findViewById(R.id.button_teleconsultation);
 
@@ -696,7 +709,8 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 //                        .setBackgroundColor(Color.BLACK)
 //                        .setTextColor(Color.WHITE)
 //                        .show();
-
+                // to set the Visit submit successfully in local DB to Push.
+                updateVisitSubmit();
                 if (NetworkConnection.isOnline(getApplication())) {
                     Toast.makeText(context, getResources().getString(R.string.upload_started), Toast.LENGTH_LONG).show();
 
@@ -725,10 +739,10 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                                 }
                                 uploadButton.setEnabled(false);
                                 uploadButton.setAlpha(0.5f);
+                                editPhysical.setVisibility(View.GONE);
 
                             } else {
                                 AppConstants.notificationUtils.DownloadDone(patientName + " " + getString(R.string.visit_data_failed), getString(R.string.visit_uploaded_failed), 3, VisitSummaryActivity.this);
-
                             }
                             uploaded = true;
 //                            pd.dismiss();
@@ -1906,6 +1920,33 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
+    /**
+     * update the value of submit in table for particular visit
+     */
+    private void updateVisitSubmit() {
+        Log.d(TAG, "updateVisitSubmit: ");
+        if (visitUUID == null || visitUUID.isEmpty()) {
+            String visitIDSelection = "uuid = ?";
+            String[] visitIDArgs = {visitUuid};
+            final Cursor visitIDCursor = db.query("tbl_visit", null, visitIDSelection, visitIDArgs, null, null, null);
+            if (visitIDCursor != null && visitIDCursor.moveToFirst() && visitIDCursor.getCount() > 0) {
+                visitIDCursor.moveToFirst();
+                visitUUID = visitIDCursor.getString(visitIDCursor.getColumnIndexOrThrow("uuid"));
+            }
+            if (visitIDCursor != null) visitIDCursor.close();
+        }
+        if (visitUUID != null && !visitUUID.isEmpty()) {
+
+            VisitsDAO visitsDAO = new VisitsDAO();
+            try {
+                visitsDAO.updateVisitSubmit(visitUuid);
+            } catch (DAOException e) {
+                Crashlytics.getInstance().core.logException(e);
+            }
+
+        }
+    }
+
 
     /**
      * This methods retrieves patient data from database.
@@ -2733,5 +2774,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
             downloadPrescriptionDefault();
         }
     }
+
+
 
 }

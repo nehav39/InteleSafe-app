@@ -148,7 +148,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     RecyclerView recyclerView;
     TextView tvNoVisit;
     Button help_watsapp;
-    TextView tvMentalHelpRequest, tv_ppe_request;
+    TextView tvMentalHelpRequest, tv_ppe_request,mental_Help_Text;
 
     Context context;
     private String mindmapURL = "";
@@ -236,10 +236,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         tvMentalHelpRequest = findViewById(R.id.tv_mental_help_request);
         tvMentalHelpRequest.setOnClickListener(this);
-        String teleconsult_request = getString(R.string.teleconsult_request);
-        SpannableString content = new SpannableString(teleconsult_request);
-        content.setSpan(new UnderlineSpan(), 0, teleconsult_request.length(), 0);
-        tvMentalHelpRequest.setText(content);
 
         SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(context));
         int dayCount = mSharedPreference.getInt("dayCount", 0);
@@ -546,11 +542,23 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
         ppe_cardView_request = findViewById(R.id.ppe_cardView_request);
-     /*   if(sessionManager.getPatientCountry().equals("India")){
-            ppe_cardView_request.setVisibility(View.VISIBLE);
+        mental_Help_Text = findViewById(R.id.mental_Help_Text);
+        String teleconsult_request = "";
+        if(sessionManager.getPatientCountry().equals("India")){
+            mental_Help_Text.setText(getString(R.string.tele_consultant_text));
+            tvMentalHelpRequest.setText(getString(R.string.teleconsult_request));
+            teleconsult_request = getString(R.string.teleconsult_request);
+          //  ppe_cardView_request.setVisibility(View.VISIBLE);
         }else{
-            ppe_cardView_request.setVisibility(View.GONE);
-        }*/
+            mental_Help_Text.setText(getString(R.string.Mental_health_support_text));
+            tvMentalHelpRequest.setText(getString(R.string.mental_health_support));
+            teleconsult_request = getString(R.string.mental_health_support);
+           // ppe_cardView_request.setVisibility(View.GONE);
+        }
+
+        SpannableString content = new SpannableString(teleconsult_request);
+        content.setSpan(new UnderlineSpan(), 0, teleconsult_request.length(), 0);
+        tvMentalHelpRequest.setText(content);
         ppe_cardView_request.setVisibility(View.GONE);
         tv_ppe_request = findViewById(R.id.tv_ppe_request);
         String mystring = getString(R.string.ppe_req);
@@ -568,7 +576,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         recycler_arraylist = new ArrayList<Day_Date>();
         String endDate = "";
         String query = "SELECT v.startdate FROM tbl_visit v, tbl_patient p WHERE " +
-                "p.uuid = v.patientuuid AND v.startdate IS NOT NULL AND " +
+                "p.uuid = v.patientuuid AND v.startdate IS NOT NULL AND (v.issubmitted == 1 OR v.enddate IS NOT NULL) AND " +
                 "v.patientuuid = ?";
         String[] data = {sessionManager.getPersionUUID()};
 
@@ -731,6 +739,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         visitDTO.setLocationuuid(sessionManager.getLocationUuid());
         visitDTO.setSyncd(false);
         visitDTO.setCreatoruuid(sessionManager.getCreatorID());//static
+        visitDTO.setIsSubmitted(0);// add to check is patient click on submitt in summary.
 
         VisitsDAO visitsDAO = new VisitsDAO();
 
@@ -1425,10 +1434,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         String encounterIDSelection = "visituuid = ?";
 
         String visitSelection = "patientuuid = ?";
-        String[] visitArgs = {patientuuid};
+
         String[] visitColumns = {"uuid, startdate", "enddate"};
         String visitOrderBy = "startdate";
-        Cursor visitCursor = db.query("tbl_visit", visitColumns, visitSelection, visitArgs, null, null, visitOrderBy);
+        String query = "SELECT DISTINCT v.uuid, v.startdate, v.enddate FROM tbl_visit v WHERE " +
+                "(v.issubmitted == 1 OR v.enddate IS NOT NULL) AND " +
+                "v.patientuuid = ? ORDER BY v.startdate";
+        String[] visitArgs = {patientuuid};
+
+        Cursor visitCursor = db.rawQuery(query,visitArgs);
+        //Cursor visitCursor = db.query("tbl_visit", visitColumns, visitSelection, visitArgs, null, null, visitOrderBy);
 
         if (visitCursor.getCount() < 1) {
 //            neverSeen();

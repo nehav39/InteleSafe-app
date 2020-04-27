@@ -57,6 +57,7 @@ public class VisitsDAO {
             values.put("enddate", visit.getEnddate());
             values.put("modified_date", AppConstants.dateAndTimeUtils.currentDateTime());
             values.put("sync", visit.getSyncd());
+            values.put("issubmitted",1);
             createdRecordsCount = db.insertWithOnConflict("tbl_visit", null, values, SQLiteDatabase.CONFLICT_REPLACE);
         } catch (SQLException e) {
             isCreated = false;
@@ -84,6 +85,7 @@ public class VisitsDAO {
             values.put("enddate", visit.getEnddate());
             values.put("modified_date", AppConstants.dateAndTimeUtils.currentDateTime());
             values.put("sync", false);
+            values.put("issubmitted",visit.getIsSubmitted()); // added to set default value
 
             visitAttributeDTOS = visit.getVisitAttributeDTOS();
             if (visitAttributeDTOS != null) {
@@ -133,7 +135,7 @@ public class VisitsDAO {
         List<VisitDTO> visitDTOList = new ArrayList<>();
         SQLiteDatabase db = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
         db.beginTransaction();
-        Cursor idCursor = db.rawQuery("SELECT * FROM tbl_visit where (sync = ? OR sync=?) COLLATE NOCASE", new String[]{"0", "false"});
+        Cursor idCursor = db.rawQuery("SELECT * FROM tbl_visit where ((sync = ? OR sync=?) AND issubmitted = ?)  COLLATE NOCASE", new String[]{"0", "false","1"});
         VisitDTO visitDTO = new VisitDTO();
         if (idCursor.getCount() != 0) {
             while (idCursor.moveToNext()) {
@@ -300,6 +302,35 @@ public class VisitsDAO {
             db.endTransaction();
         }
         return isDownloaded;
+    }
+
+
+
+
+    public boolean updateVisitSubmit(String uuid) throws DAOException {
+        boolean isUpdated = true;
+        Logger.logD("visitdao", "updatesynv visit " + uuid );
+        SQLiteDatabase db = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
+        db.beginTransaction();
+        ContentValues values = new ContentValues();
+        String whereclause = "uuid=?";
+        String[] whereargs = {uuid};
+        try {
+            values.put("issubmitted", 1);
+           // values.put("sync", "0");
+            int i = db.update("tbl_visit", values, whereclause, whereargs);
+            Logger.logD("visit", "updated" + i);
+            db.setTransactionSuccessful();
+        } catch (SQLException sql) {
+            Logger.logD("visit", "updated" + sql.getMessage());
+            throw new DAOException(sql.getMessage());
+        } finally {
+            db.endTransaction();
+
+
+        }
+
+        return isUpdated;
     }
 
 }
