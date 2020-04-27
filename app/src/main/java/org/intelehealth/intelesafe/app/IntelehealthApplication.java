@@ -18,6 +18,7 @@ import com.parse.Parse;
 import org.intelehealth.intelesafe.BuildConfig;
 import org.intelehealth.intelesafe.database.InteleHealthDatabaseHelper;
 import org.intelehealth.intelesafe.utilities.SessionManager;
+
 import io.fabric.sdk.android.Fabric;
 
 import io.reactivex.plugins.RxJavaPlugins;
@@ -32,6 +33,7 @@ public class IntelehealthApplication extends MultiDexApplication implements Appl
     private static String androidId;
     private Activity currentActivity;
     SessionManager sessionManager;
+
     public static Context getAppContext() {
         return mContext;
     }
@@ -91,7 +93,7 @@ public class IntelehealthApplication extends MultiDexApplication implements Appl
 
     private void configureCrashReporting() {
         CrashlyticsCore crashlyticsCore = new CrashlyticsCore.Builder()
-                .disabled(BuildConfig.DEBUG)
+                //.disabled(BuildConfig.DEBUG)
                 .build();
         Fabric.with(this, new Crashlytics.Builder().core(crashlyticsCore).build());
     }
