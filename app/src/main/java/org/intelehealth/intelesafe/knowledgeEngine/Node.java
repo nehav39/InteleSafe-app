@@ -786,15 +786,17 @@ public class Node implements Serializable {
         final LayoutInflater inflater = context.getLayoutInflater();
         View convertView = inflater.inflate(R.layout.dialog_1_number_picker, null);
         numberDialog.setView(convertView);
-        final NumberPicker numberPicker = convertView.findViewById(R.id.dialog_1_number_picker);
-        numberPicker.setMinValue(0);
-        numberPicker.setMaxValue(1000);
+//        final NumberPicker numberPicker = convertView.findViewById(R.id.dialog_1_number_picker);
+//        numberPicker.setMinValue(0);
+//        numberPicker.setMaxValue(1000);
+        EditText etEnterValue = convertView.findViewById(R.id.et_enter_value);
+
         numberDialog.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                numberPicker.setValue(numberPicker.getValue());
-                String value = String.valueOf(numberPicker.getValue());
-
+//                numberPicker.setValue(numberPicker.getValue());
+//                String value = String.valueOf(numberPicker.getValue());
+                String value = etEnterValue.getText().toString();
                 if (node.getLanguage().contains("_")) {
                     node.setLanguage(node.getLanguage().replace("_", value));
                 } else {
@@ -1087,14 +1089,16 @@ public class Node implements Serializable {
         final LayoutInflater inflater = context.getLayoutInflater();
         View convertView = inflater.inflate(R.layout.dialog_1_number_picker, null);
         numberDialog.setView(convertView);
-        final NumberPicker numberPicker = convertView.findViewById(R.id.dialog_1_number_picker);
-        numberPicker.setMinValue(0);
-        numberPicker.setMaxValue(1000);
+        EditText etEnterValue = convertView.findViewById(R.id.et_enter_value);
+       // final NumberPicker numberPicker = convertView.findViewById(R.id.dialog_1_number_picker);
+//        numberPicker.setMinValue(0);
+//        numberPicker.setMaxValue(1000);
         numberDialog.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                numberPicker.setValue(numberPicker.getValue());
-                String value = String.valueOf(numberPicker.getValue());
+//                numberPicker.setValue(numberPicker.getValue());
+//                String value = String.valueOf(numberPicker.getValue());
+                String value = etEnterValue.getText().toString();
                 if (node.getLanguage().contains("_")) {
                     node.setLanguage(node.getLanguage().replace("_", value));
                 } else {
