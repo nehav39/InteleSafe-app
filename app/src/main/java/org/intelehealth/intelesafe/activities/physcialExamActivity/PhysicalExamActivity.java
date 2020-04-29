@@ -501,89 +501,94 @@ public class PhysicalExamActivity extends AppCompatActivity {
             TextView textView = rootView.findViewById(R.id.physical_exam_text_view);
             ExpandableListView expandableListView = rootView.findViewById(R.id.physical_exam_expandable_list_view);
 
-            int viewNumber = getArguments().getInt(ARG_SECTION_NUMBER);
-            final String patientUuid1 = getArguments().getString("patientUuid");
-            final String visitUuid1 = getArguments().getString("visitUuid");
-            final Node viewNode = exam_list.getExamNode(viewNumber - 1);
-            final String parent_name = exam_list.getExamParentNodeName(viewNumber - 1);
-            String nodeText = parent_name + " : " + viewNode.findDisplay();
+            try {
+                int viewNumber = getArguments().getInt(ARG_SECTION_NUMBER);
+                final String patientUuid1 = getArguments().getString("patientUuid");
+                final String visitUuid1 = getArguments().getString("visitUuid");
+                final Node viewNode = exam_list.getExamNode(viewNumber - 1);
+                final String parent_name = exam_list.getExamParentNodeName(viewNumber - 1);
+                String nodeText = parent_name + " : " + viewNode.findDisplay();
 
-            textView.setText(nodeText);
+                textView.setText(nodeText);
 
-            Node displayNode = viewNode.getOption(0);
+                Node displayNode = viewNode.getOption(0);
 
-            if (displayNode.isAidAvailable()) {
-                String type = displayNode.getJobAidType();
-                if (type.equals("video")) {
-                    imageView.setVisibility(View.GONE);
-                } else if (type.equals("image")) {
-                    String drawableName = "physicalExamAssets/" + displayNode.getJobAidFile() + ".jpg";
-                    try {
-                        // get input stream
-                        InputStream ims = getContext().getAssets().open(drawableName);
-                        // load image as Drawable
-                        Drawable d = Drawable.createFromStream(ims, null);
-                        // set image to ImageView
-                        imageView.setImageDrawable(d);
-                        imageView.setMinimumHeight(500);
-                        imageView.setMinimumWidth(500);
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
+                if (displayNode.isAidAvailable()) {
+                    String type = displayNode.getJobAidType();
+                    if (type.equals("video")) {
+                        imageView.setVisibility(View.GONE);
+                    } else if (type.equals("image")) {
+                        String drawableName = "physicalExamAssets/" + displayNode.getJobAidFile() + ".jpg";
+                        try {
+                            // get input stream
+                            InputStream ims = getContext().getAssets().open(drawableName);
+                            // load image as Drawable
+                            Drawable d = Drawable.createFromStream(ims, null);
+                            // set image to ImageView
+                            imageView.setImageDrawable(d);
+                            imageView.setMinimumHeight(500);
+                            imageView.setMinimumWidth(500);
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                            imageView.setVisibility(View.GONE);
+                        }
+                    } else {
                         imageView.setVisibility(View.GONE);
                     }
                 } else {
                     imageView.setVisibility(View.GONE);
                 }
-            } else {
-                imageView.setVisibility(View.GONE);
-            }
 
 
-            adapter = new CustomExpandableListAdapter(getContext(), viewNode, this.getClass().getSimpleName());
-            expandableListView.setAdapter(adapter);
+                adapter = new CustomExpandableListAdapter(getContext(), viewNode, this.getClass().getSimpleName());
+                expandableListView.setAdapter(adapter);
 
-            expandableListView.setGroupIndicator(null);
-            expandableListView.setChildIndicator(null);
-            expandableListView.setChildDivider(getResources().getDrawable(R.color.white));
-            expandableListView.setDivider(getResources().getDrawable(R.color.white));
-            expandableListView.setDividerHeight(0);
-            expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-                @Override
-                public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                    Node question = viewNode.getOption(groupPosition).getOption(childPosition);
-                    //Log.d("Clicked", question.language());
-                    question.toggleSelected();
-                    if (viewNode.getOption(groupPosition).anySubSelected()) {
-                        viewNode.getOption(groupPosition).setSelected();
-                    } else {
-                        viewNode.getOption(groupPosition).setUnselected();
-                    }
-                    adapter.notifyDataSetChanged();
-
-
-                    if (question.getInputType() != null && question.isSelected()) {
-
-                        if (question.getInputType().equals("camera")) {
-                            if (!filePath.exists()) {
-                                boolean res = filePath.mkdirs();
-                                Log.i("RES>", "" + filePath + " -> " + res);
-                            }
-                            imageName = UUID.randomUUID().toString();
-                            Node.handleQuestion(question, getActivity(), adapter, filePath.toString(), imageName);
+                expandableListView.setGroupIndicator(null);
+                expandableListView.setChildIndicator(null);
+                expandableListView.setChildDivider(getResources().getDrawable(R.color.white));
+                expandableListView.setDivider(getResources().getDrawable(R.color.white));
+                expandableListView.setDividerHeight(0);
+                expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+                    @Override
+                    public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                        Node question = viewNode.getOption(groupPosition).getOption(childPosition);
+                        //Log.d("Clicked", question.language());
+                        question.toggleSelected();
+                        if (viewNode.getOption(groupPosition).anySubSelected()) {
+                            viewNode.getOption(groupPosition).setSelected();
                         } else {
-                            Node.handleQuestion(question, (Activity) getContext(), adapter, null, null);
+                            viewNode.getOption(groupPosition).setUnselected();
+                        }
+                        adapter.notifyDataSetChanged();
+
+
+                        if (question.getInputType() != null && question.isSelected()) {
+
+                            if (question.getInputType().equals("camera")) {
+                                if (!filePath.exists()) {
+                                    boolean res = filePath.mkdirs();
+                                    Log.i("RES>", "" + filePath + " -> " + res);
+                                }
+                                imageName = UUID.randomUUID().toString();
+                                Node.handleQuestion(question, getActivity(), adapter, filePath.toString(), imageName);
+                            } else {
+                                Node.handleQuestion(question, (Activity) getContext(), adapter, null, null);
+                            }
+
+
                         }
 
+                        if (!question.isTerminal() && question.isSelected()) {
+                            Node.subLevelQuestion(question, (Activity) getContext(), adapter, filePath.toString(), imageName);
+                        }
 
+                        return false;
                     }
+                });
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
 
-                    if (!question.isTerminal() && question.isSelected()) {
-                        Node.subLevelQuestion(question, (Activity) getContext(), adapter, filePath.toString(), imageName);
-                    }
-
-                    return false;
-                }
-            });
 
             expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
                 @Override
