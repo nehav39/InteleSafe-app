@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.appcompat.app.AlertDialog;
@@ -22,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.intelehealth.intelesafe.R;
+import org.intelehealth.intelesafe.activities.visitSummaryActivity.MyViewHolder;
 import org.intelehealth.intelesafe.app.AppConstants;
 import org.intelehealth.intelesafe.utilities.SessionManager;
 
@@ -122,7 +124,7 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
 
                         array_message.add(counter, de);
 
-                        uuid_array.add(counter,cursor.getString(cursor.getColumnIndexOrThrow("uuid")));
+                        uuid_array.add(counter, cursor.getString(cursor.getColumnIndexOrThrow("uuid")));
 
                         counter++;
                         // alertdialogBuilder.setMessage(message);
@@ -142,10 +144,8 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
 
             @Override
             public void onClick(View view) {
-
                 AlertDialog.Builder alertdialogBuilder = new AlertDialog.Builder(mcontext);
                 alertdialogBuilder.setTitle("Today's Check-in");
-
 
 
                 View customView = LayoutInflater.from(mcontext).inflate(R.layout.custom_dialog_layout, null);
@@ -153,7 +153,7 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
 
                 LinearLayout visit_list_view = customView.findViewById(R.id.visit_list_view);
 
-                Log.e("VENU: ",array_message.toString());
+                Log.e("VENU: ", array_message.toString());
                 StringBuilder stringBuilder_2 = new StringBuilder();
                 for (int i = 0; i < array_message.size(); i++) {
                     stringBuilder_2.append("Visit no." + (i + 1) + "-\t\t" + array_message.get(i));
@@ -176,7 +176,7 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
                         @Override
                         public void onClick(View view) {
                             int pos = (int) view.getTag();
-                            ((HomeActivity) mcontext).pastVisits(pos,array_message.get(pos));
+                            ((HomeActivity) mcontext).pastVisits(pos, array_message.get(pos));
                         }
                     });
 
