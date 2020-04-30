@@ -15,10 +15,12 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
-import android.support.v4.app.NotificationCompat;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Patterns;
+
+import androidx.core.app.NotificationCompat;
+
 import org.intelehealth.intelesafe.R;
 import org.intelehealth.intelesafe.fcm.Config;
 import java.io.IOException;
