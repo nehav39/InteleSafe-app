@@ -21,6 +21,7 @@ import org.intelehealth.intelesafe.R;
 import org.intelehealth.intelesafe.activities.homeActivity.HomeActivity;
 import org.intelehealth.intelesafe.activities.introActivity.IntroActivity;
 import org.intelehealth.intelesafe.dataMigration.SmoothUpgrade;
+import org.intelehealth.intelesafe.fcm.util.FCMUtils;
 import org.intelehealth.intelesafe.utilities.Logger;
 import org.intelehealth.intelesafe.utilities.SessionManager;
 
@@ -31,6 +32,8 @@ public class SplashActivity extends AppCompatActivity {
     SessionManager sessionManager = null;
     ProgressDialog TempDialog;
     int i = 5;
+
+    FCMUtils fcmUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +51,8 @@ public class SplashActivity extends AppCompatActivity {
             config.locale = locale;
             getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
         }
-
+        fcmUtils = new FCMUtils(SplashActivity.this);
+        fcmUtils.fcm();
         checkPerm();
         Crashlytics.log(Log.DEBUG, "tag", "message");
     }
@@ -160,4 +164,10 @@ public class SplashActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
 }
