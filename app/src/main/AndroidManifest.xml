@@ -57,6 +57,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
+        //Facebook SDK...
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"/>
+
+       <!-- Prajwal: Disable automatically logged events: Like if any crash occurs in Facebook's SDK then
+        when the app is restarted, a report is generated and sent to Facebook to help them imporve their
+        SDK...-->
+        <meta-data
+            android:name="com.facebook.sdk.AutoLogAppEventsEnabled"
+            android:value="false"/>
+
+
         <activity android:name=".activities.homeActivity.Webview"></activity>
 
         <receiver

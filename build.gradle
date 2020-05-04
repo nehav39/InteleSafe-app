@@ -26,6 +26,8 @@ allprojects {
         maven { url 'http://maven.google.com' }
         maven { url 'http://maven.fabric.io/public' }
 
+        mavenCentral() //to download the facebook sdk from the maven central repo.
+
     }
 }
 
