@@ -66,9 +66,9 @@
        <!-- Prajwal: Disable automatically logged events: Like if any crash occurs in Facebook's SDK then
         when the app is restarted, a report is generated and sent to Facebook to help them imporve their
         SDK...-->
-        <meta-data
+        <!--<meta-data
             android:name="com.facebook.sdk.AutoLogAppEventsEnabled"
-            android:value="false"/>
+            android:value="false"/>-->
 
 
         <activity android:name=".activities.homeActivity.Webview"></activity>
