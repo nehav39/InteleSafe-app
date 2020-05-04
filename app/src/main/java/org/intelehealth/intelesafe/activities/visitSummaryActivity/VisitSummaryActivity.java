@@ -335,6 +335,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                     i.putExtra("password", "");
                     i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(i);
+                    finish();
                 } else {
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
                     alertDialogBuilder.setTitle("Click on Submit button");
@@ -2330,9 +2331,11 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
     public void callBroadcastReceiver() {
         if (!isReceiverRegistered) {
-            IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-            receiver = new NetworkChangeReceiver();
-            registerReceiver(receiver, filter);
+            if(receiver == null) {
+                IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+                receiver = new NetworkChangeReceiver();
+                registerReceiver(receiver, filter);
+            }
             isReceiverRegistered = true;
         }
     }
@@ -2375,7 +2378,8 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
     public void onPause() {
         super.onPause();
         if (receiver != null) {
-            LocalBroadcastManager.getInstance(context).unregisterReceiver(receiver);
+            //LocalBroadcastManager.getInstance(context).unregisterReceiver(receiver);
+            unregisterReceiver(receiver);
             receiver = null;
         }
         if (downloadPrescriptionService != null) {

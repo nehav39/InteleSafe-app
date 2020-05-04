@@ -1499,6 +1499,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
         visitCursor.close();
+        finish();
     }
 
     private void OldVisit(final String datetime, String visit_id, String end_datetime, String visitValue, String encounterVitalslocal, String encounterAdultIntialslocal) throws ParseException {
