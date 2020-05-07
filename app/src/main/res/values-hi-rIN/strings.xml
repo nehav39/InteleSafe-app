@@ -772,4 +772,6 @@
     <string name="Visit_Patient_ID_">\"Patient Id: \"</string>
     <string name="Visit_Patient_Name_">\"Patient Name: \"</string>
     <string name="Visit_Patient_DOB_">\"Patient DOB: \"</string>
+    <string name="FAQs_Title_">FAQ\'s</string>
+    <string name="PPE_Guidelines_Title_">PPE Guidelines</string>
 </resources>
