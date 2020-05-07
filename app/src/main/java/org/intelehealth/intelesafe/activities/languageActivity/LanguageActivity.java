@@ -110,7 +110,7 @@ public class LanguageActivity extends AppCompatActivity {
                     Intent intent = new Intent(context, IntroActivity.class);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(context, "Please select language", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, R.string.please_select_language_, Toast.LENGTH_LONG).show();
                 }
 
             }

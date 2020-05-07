@@ -733,5 +733,13 @@
     <string name="address_home">\"Address: \"</string>
     <string name="ppe_required_home">\"PPE required: \"</string>
     <string name="No_Application_available_to_view_PDF">No Application available to view PDF</string>
+    <string name="This_app_is_description">This app is for all types of health workers at the frontlines of care to learn about personal protection measures and PPE use.</string>
+    <string name="learn_about_personal_">learn about personal protection measures and PPE use.</string>
+    <string name="you_an_monitor_your_own_health_">You can monitor your own health daily and reach out for help if you think you may have had unsafe exposure and may be infected.</string>
+    <string name="monitor_your_own_health_daily_">monitor your own health daily</string>
+    <string name="please_select_language_">Please select language</string>
+    <string name="privacy_notice_consent_form">Privacy notice and consent form</string>
+    <string name="how_we_protect_info_">How we protect information</string>
+    <string name="amendments">Amendments</string>
 
 </resources>

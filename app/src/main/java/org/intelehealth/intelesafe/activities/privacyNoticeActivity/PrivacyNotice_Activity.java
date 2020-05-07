@@ -159,13 +159,13 @@ public class PrivacyNotice_Activity extends AppCompatActivity {
 
     private void changeColorOfText(String privacy_string) {
         //Highlighting Text
-        String second = "Privacy notice and consent form";
+        String second = getString(R.string.privacy_notice_consent_form);
         Spannable spannable = colorized(privacy_string, second, Color.RED);
-        spannable = textSize(spannable, privacy_string, "How we protect information");
-        spannable = boldSize(spannable, privacy_string, "How we protect information");
+        spannable = textSize(spannable, privacy_string, getString(R.string.how_we_protect_info_));
+        spannable = boldSize(spannable, privacy_string, getString(R.string.how_we_protect_info_));
 
-        spannable = textSize(spannable, privacy_string, "Amendments");
-        spannable = boldSize(spannable, privacy_string, "Amendments");
+        spannable = textSize(spannable, privacy_string, getString(R.string.amendments));
+        spannable = boldSize(spannable, privacy_string, getString(R.string.amendments));
 
         spannable = boldSize(spannable, privacy_string, "Telehealth Innovations Foundation Privacy Notice");
         spannable = boldSize(spannable, privacy_string, "INFORMATION WE COLLECT");
