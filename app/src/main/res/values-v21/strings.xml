@@ -68,4 +68,8 @@
     <string name="please_try_with_another_">Please try with another.</string>
     <string name="permission_denied_">Permission Denied\n</string>
     <string name="if_reject_cannot_use_this_service_"><![CDATA[If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > [Permission]]]></string>
+    <string name="click_on_submit_button_">Click on Submit button</string>
+    <string name="upload_before_going_home_">Please upload your visit before going to Home screen by clicking on the Submit button.</string>
+    <string name="hello_my_name_is_">\"Hello, my name is \"</string>
+    <string name="and_i_need_assistance_">\" and I need some assistance.\"</string>
 </resources>

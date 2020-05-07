@@ -338,8 +338,8 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                     finish();
                 } else {
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-                    alertDialogBuilder.setTitle("Click on Submit button");
-                    alertDialogBuilder.setMessage("Please upload your visit before going to Home screen by clicking on the Submit button.");
+                    alertDialogBuilder.setTitle(R.string.click_on_submit_button_);
+                    alertDialogBuilder.setMessage(R.string.upload_before_going_home_);
 
                     alertDialogBuilder.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
                         @Override
@@ -516,8 +516,8 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void onClick(View view) {
                 String phoneNumberWithCountryCode = "+919825989750";
-                String message = "Hello, my name is " + sessionManager.getUserName() +
-                        /*" from "+ sessionManager.getState() + */" and I need some assistance.";
+                String message = getString(R.string.hello_my_name_is_) + sessionManager.getUserName() +
+                        /*" from "+ sessionManager.getState() + */getString(R.string.and_i_need_assistance_);
 
                 startActivity(new Intent(Intent.ACTION_VIEW,
                         Uri.parse(
