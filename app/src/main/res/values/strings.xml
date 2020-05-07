@@ -707,4 +707,11 @@
     <string name="upload_before_going_home_">Please upload your visit before going to Home screen by clicking on the Submit button.</string>
     <string name="hello_my_name_is_">\"Hello, my name is \"</string>
     <string name="and_i_need_assistance_">\" and I need some assistance.\"</string>
+    <string name="reason_for_teleconsultation_">Reason for Teleconsultation?</string>
+    <string name="we_received_your_request_">We received your request, we will get back to you as soon as possible.\n -Thank you!</string>
+    <string name="request_submitted_">Request Submitted</string>
+    <string name="current_time__"><![CDATA[\"Current time => \"]]></string>
+    <string name="temperature_C">\"Temperature(C): \"</string>
+    <string name="Temperature_F__">\"Temperature(F): \"</string>
+    <string name="SPO2_">\"SpO2(%): \"</string>
 </resources>

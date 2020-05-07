@@ -1288,7 +1288,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void onClick(View view) {
                 final AlertDialog.Builder textEditInput = new AlertDialog.Builder(VisitSummaryActivity.this);
-                textEditInput.setTitle("Reason for Teleconsultation?");
+                textEditInput.setTitle(R.string.reason_for_teleconsultation_);
                 final EditText dialogEditText = new EditText(VisitSummaryActivity.this);
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams
                         (ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -1301,11 +1301,11 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                         //dialogEditText.getText();
 
                         final AlertDialog.Builder ok_clicked = new AlertDialog.Builder(VisitSummaryActivity.this);
-                        ok_clicked.setMessage("We received your request, we will get back to you as soon as possible.\n -Thank you!");
+                        ok_clicked.setMessage(R.string.we_received_your_request_);
                         ok_clicked.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                Toast.makeText(VisitSummaryActivity.this, "Request Submitted", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(VisitSummaryActivity.this, R.string.request_submitted_, Toast.LENGTH_SHORT).show();
                                 dialog.dismiss();
                             }
                         });
@@ -1609,7 +1609,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         String mGender = patient.getGender() != null ? patient.getGender() : ""; // Modified by venu N on 02/04/2020.
 
         Calendar c = Calendar.getInstance();
-        System.out.println("Current time => " + c.getTime());
+        System.out.println(getString(R.string.current_time__) + c.getTime());
 
         String[] columnsToReturn = {"startdate"};
         String visitIDorderBy = "startdate";
@@ -1645,19 +1645,19 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
             if (obj.getBoolean("mTemperature")) {
                 if (obj.getBoolean("mCelsius")) {
 
-                    mTemp = "Temperature(C): " + temperature.getValue();
+                    mTemp = getString(R.string.temperature_C) + temperature.getValue();
 
                 } else if (obj.getBoolean("mFahrenheit")) {
 
 //                    mTemp = "Temperature(F): " + temperature.getValue();
-                    mTemp = "Temperature(F): " + tempView.getText().toString();
+                    mTemp = getString(R.string.Temperature_F__) + tempView.getText().toString();
                 }
             }
         } catch (Exception e) {
             Crashlytics.getInstance().core.logException(e);
         }
         mresp = resp.getValue();
-        mSPO2 = "SpO2(%): " + spO2.getValue();
+        mSPO2 = getString(R.string.SPO2_) + spO2.getValue();
         String mComplaint = complaint.getValue();
 
         //Show only the headers of the complaints in the printed prescription
