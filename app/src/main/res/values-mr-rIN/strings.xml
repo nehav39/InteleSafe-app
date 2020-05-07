@@ -751,5 +751,10 @@
     <string name="access_and_correction_">Access and Correction</string>
     <string name="todays_checkin">Today\'s Check-in</string>
     <string name="visit_number_">Visit no.</string>
+    <string name="android_id_">\"Android Id: \"</string>
+    <string name="please_enter_alid_license_key_">Please enter a valid license key</string>
+    <string name="please_try_with_another_">Please try with another.</string>
+    <string name="permission_denied_">Permission Denied\n</string>
+    <string name="if_reject_cannot_use_this_service_"><![CDATA[If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > [Permission]]]></string>
 
 </resources>

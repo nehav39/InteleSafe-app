@@ -739,7 +739,7 @@ public class SignupActivity extends AppCompatActivity {
                 }
 
                 if(isUSerExistsAlready){
-                    Toast.makeText(context, getString(R.string.txt_user_exists)+"Please try with another.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, getString(R.string.txt_user_exists)+getString(R.string.please_try_with_another_), Toast.LENGTH_LONG).show();
                     mEmailView.setError(getString(R.string.txt_user_exists));
                     mEmailView.requestFocus();
                     return;
