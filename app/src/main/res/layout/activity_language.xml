@@ -51,7 +51,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="A"
+                        android:text="@string/a"
                         android:layout_marginStart="20dp"
                         android:textColor="@color/font_black_0"
                         android:textStyle="bold"
@@ -61,7 +61,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="English"
+                        android:text="@string/english"
                         android:layout_marginStart="30dp"
                         android:textColor="@color/font_black_0"
                         android:textSize="16sp"
@@ -89,7 +89,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="अ"
+                        android:text="@string/a_hindi"
                         android:visibility="gone"
                         android:textColor="@color/font_black_0"
                         android:textStyle="bold"
@@ -99,7 +99,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="हिंदी"
+                        android:text="@string/hindi_text"
                         android:layout_marginStart="30dp"
                         android:textColor="@color/font_black_0"
                         android:textSize="16sp"
@@ -127,7 +127,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="मी"
+                        android:text="@string/a_marathi"
                         android:textColor="@color/font_black_0"
                         android:textStyle="bold"
                         android:visibility="gone"
@@ -136,7 +136,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="मराठी"
+                        android:text="@string/marathi_text"
                         android:textColor="@color/font_black_0"
                         android:textSize="16sp"
                         android:layout_marginStart="30dp"
@@ -165,7 +165,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="मी"
+                    android:text="@string/a_other"
                     android:textColor="@color/font_black_0"
                     android:textStyle="bold"
                     android:visibility="gone"
@@ -174,7 +174,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="ಕನ್ನಡ"
+                    android:text="@string/other_text"
                     android:textColor="@color/font_black_0"
                     android:textSize="16sp"
                     android:layout_marginStart="30dp"

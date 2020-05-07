@@ -86,7 +86,7 @@
                                 android:layout_centerInParent="true"
                                 android:includeFontPadding="false"
                                 android:src="@drawable/svg_notofication"
-                                android:text="2"
+                                android:text="@string/_2"
                                 android:textColor="@color/white"
                                 android:textSize="10sp"
                                 android:textStyle="bold">
@@ -704,7 +704,7 @@
                     android:padding="10sp"
                     android:gravity="center"
                     android:textColor="@null"
-                    android:text="You don't have any visit."
+                    android:text="@string/you_don_t_have_any_visit"
                     android:textAppearance="@style/home_no_visit" />
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerview_data"

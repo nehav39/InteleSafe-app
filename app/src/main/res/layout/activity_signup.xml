@@ -257,7 +257,7 @@
                                 android:layout_marginTop="5dp"
                                 android:layout_weight="0.2"
                                 android:gravity="center"
-                                android:text="+91"
+                                android:text="@string/_91"
                                 android:textSize="16sp" />
 
                             <com.google.android.material.textfield.TextInputLayout
