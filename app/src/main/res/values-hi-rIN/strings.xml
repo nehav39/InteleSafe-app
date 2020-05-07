@@ -545,7 +545,6 @@
     <string name="filter_by_creator">Filter by creator</string>
     <string name="planet_name">Planet Name</string>
     <string name="ok">OK</string>
-    <string name="cancel">Cancel</string>
     <string name="unable_to_end">Unable to end</string>
     <string name="upload_before_end_visit_active"> visits.Please upload visit before attempting to end the visit.</string>
     <string name="active">Active</string>

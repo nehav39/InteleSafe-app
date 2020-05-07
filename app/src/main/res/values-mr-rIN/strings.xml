@@ -724,7 +724,6 @@
     <string name="address_line_1">Address Line 1*</string>
     <string name="address_line_2">Address Line 2</string>
     <string name="submit_ppe_alert">Submit</string>
-    <string name="cancel">Cancel</string>
     <string name="hello_my_name_is">\"Hello, my name is \"</string>
     <string name="and_I_need_some_assistance">\" and I need some assistance.\"</string>
     <string name="Day_Home">\"Day \"</string>
