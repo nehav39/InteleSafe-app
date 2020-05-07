@@ -145,7 +145,7 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder alertdialogBuilder = new AlertDialog.Builder(mcontext);
-                alertdialogBuilder.setTitle("Today's Check-in");
+                alertdialogBuilder.setTitle(R.string.todays_checkin);
 
 
                 View customView = LayoutInflater.from(mcontext).inflate(R.layout.custom_dialog_layout, null);
@@ -156,10 +156,10 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
                 Log.e("VENU: ", array_message.toString());
                 StringBuilder stringBuilder_2 = new StringBuilder();
                 for (int i = 0; i < array_message.size(); i++) {
-                    stringBuilder_2.append("Visit no." + (i + 1) + "-\t\t" + array_message.get(i));
+                    stringBuilder_2.append(mcontext.getString(R.string.visit_number_) + (i + 1) + "-\t\t" + array_message.get(i));
                     //stringBuilder_2.append("\n");
                     TextView visitText = new TextView(mcontext);
-                    visitText.setText("Visit no." + (i + 1) + "-\t\t" + array_message.get(i));
+                    visitText.setText(mcontext.getString(R.string.visit_number_) + (i + 1) + "-\t\t" + array_message.get(i));
                     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                             LinearLayout.LayoutParams.WRAP_CONTENT);
                     params.setMargins(0, 8, 0, 8);

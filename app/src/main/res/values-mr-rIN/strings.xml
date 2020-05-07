@@ -741,5 +741,15 @@
     <string name="privacy_notice_consent_form">Privacy notice and consent form</string>
     <string name="how_we_protect_info_">How we protect information</string>
     <string name="amendments">Amendments</string>
+    <string name="Telehealth_innov_">Telehealth Innovations Foundation Privacy Notice</string>
+    <string name="information_we_collect_">INFORMATION WE COLLECT</string>
+    <string name="use_privacy">Use</string>
+    <string name="your_contact_info_used_">Your contact information may be used to</string>
+    <string name="Intelehealth_generally_provides_">Intelehealth generally provides Personal Information to third parties where:</string>
+    <string name="we_may_also_disclose_">We may also disclose your personal information:</string>
+    <string name="protection_measures_">Protection Measures</string>
+    <string name="access_and_correction_">Access and Correction</string>
+    <string name="todays_checkin">Today\'s Check-in</string>
+    <string name="visit_number_">Visit no.</string>
 
 </resources>

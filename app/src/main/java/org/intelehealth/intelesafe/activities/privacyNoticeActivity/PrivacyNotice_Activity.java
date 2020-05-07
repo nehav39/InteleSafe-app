@@ -167,15 +167,15 @@ public class PrivacyNotice_Activity extends AppCompatActivity {
         spannable = textSize(spannable, privacy_string, getString(R.string.amendments));
         spannable = boldSize(spannable, privacy_string, getString(R.string.amendments));
 
-        spannable = boldSize(spannable, privacy_string, "Telehealth Innovations Foundation Privacy Notice");
-        spannable = boldSize(spannable, privacy_string, "INFORMATION WE COLLECT");
-        spannable = boldSize(spannable, privacy_string, "Use");
-        spannable = boldSize(spannable, privacy_string, "Your contact information may be used to");
-        spannable = boldSize(spannable, privacy_string, "Intelehealth generally provides Personal Information to third parties where:");
-        spannable = boldSize(spannable, privacy_string, "We may also disclose your personal information:");
-        spannable = boldSize(spannable, privacy_string, "Protection Measures");
-        spannable = boldSize(spannable, privacy_string, "Access and Correction");
-        spannable = boldSize(spannable, privacy_string, "Privacy notice and consent form");
+        spannable = boldSize(spannable, privacy_string, getString(R.string.Telehealth_innov_));
+        spannable = boldSize(spannable, privacy_string, getString(R.string.information_we_collect_));
+        spannable = boldSize(spannable, privacy_string, getString(R.string.use_privacy));
+        spannable = boldSize(spannable, privacy_string, getString(R.string.your_contact_info_used_));
+        spannable = boldSize(spannable, privacy_string, getString(R.string.Intelehealth_generally_provides_));
+        spannable = boldSize(spannable, privacy_string, getString(R.string.we_may_also_disclose_));
+        spannable = boldSize(spannable, privacy_string, getString(R.string.protection_measures_));
+        spannable = boldSize(spannable, privacy_string, getString(R.string.access_and_correction_));
+        spannable = boldSize(spannable, privacy_string, getString(R.string.privacy_notice_consent_form));
 
 
 
