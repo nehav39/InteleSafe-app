@@ -2,11 +2,16 @@ package org.intelehealth.intelesafe.activities.splash_activity;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -14,6 +19,8 @@ import com.crashlytics.android.Crashlytics;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Locale;
 
@@ -160,4 +167,5 @@ public class SplashActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
     }
+
 }
