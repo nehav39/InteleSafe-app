@@ -725,5 +725,13 @@
     <string name="address_line_2">Address Line 2</string>
     <string name="submit_ppe_alert">Submit</string>
     <string name="cancel">Cancel</string>
+    <string name="hello_my_name_is">\"Hello, my name is \"</string>
+    <string name="and_I_need_some_assistance">\" and I need some assistance.\"</string>
+    <string name="Day_Home">\"Day \"</string>
+    <string name="Hi_I_would_like_to_request_for_PPE_kits">Hi I would like to request for PPE kits.</string>
+    <string name="name_home">\"Name: \"</string>
+    <string name="address_home">\"Address: \"</string>
+    <string name="ppe_required_home">\"PPE required: \"</string>
+    <string name="No_Application_available_to_view_PDF">No Application available to view PDF</string>
 
 </resources>

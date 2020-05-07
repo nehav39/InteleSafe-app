@@ -224,8 +224,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             public void onClick(View view) {
                 String phoneNumberWithCountryCode = "+919825989750";
                 String message =
-                        "Hello, my name is " + sessionManager.getUserName() +
-                                /*" from " + sessionManager.getState() + */" and I need some assistance.";
+                        getString(R.string.hello_my_name_is) + sessionManager.getUserName() +
+                                /*" from " + sessionManager.getState() + */getString(R.string.and_I_need_some_assistance);
 
                 startActivity(new Intent(Intent.ACTION_VIEW,
                         Uri.parse(
@@ -637,7 +637,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         Collections.sort(new_arraylist); // added by venu N to sort the
 
         for (int j = 0; j < new_arraylist.size(); j++) {
-            recycler_arraylist.add(new Day_Date("Day " + a, new_arraylist.get(j)));
+            recycler_arraylist.add(new Day_Date(getString(R.string.Day_Home) + a, new_arraylist.get(j)));
             a++;
         }
 
@@ -828,10 +828,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                 String finalAddressStr = addressStr1 + " "+(!TextUtils.isEmpty(addressStr2+ " ")?addressStr2:"")+ cityStr + " "+ pinCodeStr;
                 String phoneNumberWithCountryCode = "+918108220025";
-                String messageStr = "Hi I would like to request for PPE kits."+"\n"+
-                        "Name: "+ sessionManager.getUserName()+"\n"+
-                        "Address: "+ finalAddressStr +"\n"+
-                        "PPE required: "+ ppeQtyStr;
+                String messageStr = getString(R.string.Hi_I_would_like_to_request_for_PPE_kits)+"\n"+
+                        getString(R.string.name_home)+ sessionManager.getUserName()+"\n"+
+                        getString(R.string.address_home)+ finalAddressStr +"\n"+
+                        getString(R.string.ppe_required_home)+ ppeQtyStr;
 
                 startActivity(new Intent(Intent.ACTION_VIEW,
                         Uri.parse(
@@ -895,7 +895,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             try {
                 startActivity(pdfIntent);
             } catch (ActivityNotFoundException e) {
-                Toast.makeText(HomeActivity.this, "No Application available to view PDF", Toast.LENGTH_SHORT).show();
+                Toast.makeText(HomeActivity.this, R.string.No_Application_available_to_view_PDF, Toast.LENGTH_SHORT).show();
             }
         }
     }
