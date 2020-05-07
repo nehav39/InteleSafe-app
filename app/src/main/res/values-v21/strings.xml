@@ -79,4 +79,13 @@
     <string name="temperature_C">\"Temperature(C): \"</string>
     <string name="Temperature_F__">\"Temperature(F): \"</string>
     <string name="SPO2_">\"SpO2(%): \"</string>
+    <string name="ADDRESS_">\"ADDRESS: \"</string>
+    <string name="CITY_">\"CITY: \"</string>
+    <string name="PHONE_">\"PHONE: \"</string>
+    <string name="no_history_of_illness_family_">No history of illness in family provided.</string>
+    <string name="no_history_of_patients_illness_">No history of patient\'s illness provided.</string>
+    <string name="Visit_Summary_Text_">\" Visit Summary\"</string>
+    <string name="Visit_Patient_ID_">\"Patient Id: \"</string>
+    <string name="Visit_Patient_Name_">\"Patient Name: \"</string>
+    <string name="Visit_Patient_DOB_">\"Patient DOB: \"</string>
 </resources>

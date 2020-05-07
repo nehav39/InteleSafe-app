@@ -1722,21 +1722,21 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         if (bp.equals("/")) bp = "";
 
         String address = mAddress + (mCityState != null ? " " + mCityState : "") + (mPhone != null ? " " + mPhone : "");
-        System.out.println("ADDRESSS: " + mAddress);
-        System.out.println("CITY: " + mCityState);
-        System.out.println("PHONE: " + mPhone);
+        System.out.println(getString(R.string.ADDRESS_) + mAddress);
+        System.out.println(getString(R.string.CITY_) + mCityState);
+        System.out.println(getString(R.string.PHONE_) + mPhone);
 
         String fam_hist = mFamHist;
         String pat_hist = mPatHist;
 
         if (fam_hist.trim().isEmpty()) {
-            fam_hist = "No history of illness in family provided.";
+            fam_hist = getString(R.string.no_history_of_illness_family_);
         } else {
             fam_hist = fam_hist.replaceAll(Node.bullet, Node.big_bullet);
         }
 
         if (pat_hist.trim().isEmpty()) {
-            pat_hist = "No history of patient's illness provided.";
+            pat_hist = getString(R.string.no_history_of_patients_illness_);
         }
 
 
@@ -1838,7 +1838,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         PrintDocumentAdapter printAdapter = webView.createPrintDocumentAdapter();
 
         // Create a print job with name and adapter instance
-        String jobName = getString(R.string.app_name) + " Visit Summary";
+        String jobName = getString(R.string.app_name) + getString(R.string.Visit_Summary_Text_);
         printManager.print(jobName, printAdapter,           //removed PrintJob instance as it was of no use - Prajwal.
                 new PrintAttributes.Builder().build());
 
@@ -2436,9 +2436,9 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                     openMRSID = getString(R.string.patient_not_registered);
                 }
 
-                header = "Patient Id: " + patient.getOpenmrs_id() + "\n"
-                        + "Patient Name: " + patient.getFirst_name() + " " + patient.getLast_name() + "\n"
-                        + "Patient DOB: " + patient.getDate_of_birth() + "\n";
+                header = getString(R.string.Visit_Patient_ID_) + patient.getOpenmrs_id() + "\n"
+                        + getString(R.string.Visit_Patient_Name_) + patient.getFirst_name() + " " + patient.getLast_name() + "\n"
+                        + getString(R.string.Visit_Patient_DOB_) + patient.getDate_of_birth() + "\n";
 
 
                 if (diagnosisCard.getVisibility() == View.VISIBLE) {
@@ -2723,7 +2723,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                 //endVisit();
 
             } else {
-                Log.i(TAG, "found sothing for test");
+                Log.i(TAG, "found something for test");
 
             }
 
