@@ -58,7 +58,7 @@
             android:textColor="@color/white"
             android:layout_gravity="center"
             android:textSize="24sp"
-            android:text="Stay Aware \u2022 Stay Safe"
+            android:text="@string/stay_aware_u2022_stay_safe"
             android:src="@drawable/ic_stay_safe"/>
 
     </LinearLayout>

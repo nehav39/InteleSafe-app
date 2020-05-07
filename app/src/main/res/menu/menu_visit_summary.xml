@@ -16,7 +16,7 @@
     <item
         android:id="@+id/summary_home"
         android:orderInCategory="500"
-        android:title="Home"
+        android:title="@string/home_menu_Visit"
         android:icon="@drawable/ic_home_white_48px"
         app:showAsAction="always">
 

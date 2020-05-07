@@ -718,5 +718,12 @@
     <string name="a_other">मी</string>
     <string name="other_text">ಕನ್ನಡ</string>
     <string name="_91">+91</string>
+    <string name="stay_aware_u2022_stay_safe">Stay Aware • Stay Safe</string>
+    <string name="help_visitSummary">Help</string>
+    <string name="home_menu_Visit">Home</string>
+    <string name="address_line_1">Address Line 1*</string>
+    <string name="address_line_2">Address Line 2</string>
+    <string name="submit_ppe_alert">Submit</string>
+    <string name="cancel">Cancel</string>
 
 </resources>
