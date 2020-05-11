@@ -495,7 +495,7 @@
     <string name="please_wait">Please wait...</string>
     <string name="sync_notif_title">sync</string>
     <string name="sync_background_completed">syncBackground Completed</string>
-    <string name="sync_not_available">Sync not available</string>
+    <string nFame="sync_not_available">Sync not available</string>
     <string name="please_connect_to_internet">Please connect to an internet connection!</string>
     <string name="image_upload">ImageUpload</string>
     <string name="image_upload_failed">ImageUpload failed</string>
@@ -673,11 +673,11 @@
     <string name="cancel">Cancel</string>
     <string name="hello_my_name_is">\"Hello, my name is \"</string>
     <string name="and_I_need_some_assistance">\" and I need some assistance.\"</string>
-    <string name="Day_Home">\"Day \"</string>
+    <string name="Day_Home">Day </string>
     <string name="Hi_I_would_like_to_request_for_PPE_kits">Hi I would like to request for PPE kits.</string>
-    <string name="name_home">\"Name: \"</string>
-    <string name="address_home">\"Address: \"</string>
-    <string name="ppe_required_home">\"PPE required: \"</string>
+    <string name="name_home">Name: </string>
+    <string name="address_home">Address: </string>
+    <string name="ppe_required_home">PPE required: </string>
     <string name="No_Application_available_to_view_PDF">No Application available to view PDF</string>
     <string name="This_app_is_description">This app is for all types of health workers at the frontlines of care to learn about personal protection measures and PPE use.</string>
     <string name="learn_about_personal_">learn about personal protection measures and PPE use.</string>
