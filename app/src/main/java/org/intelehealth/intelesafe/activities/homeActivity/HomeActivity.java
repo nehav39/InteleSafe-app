@@ -2,7 +2,7 @@ package org.intelehealth.intelesafe.activities.homeActivity;
 
 import android.Manifest;
 import android.accounts.Account;
-import android.accounts.AccountManager;
+//import android.accounts.AccountManager;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
@@ -166,7 +166,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     String encounterAdultIntials = "";
     String encoded = null;
     Base64Utils base64Utils = new Base64Utils();
-    protected AccountManager manager;
+    //protected AccountManager manager;
 
     private int versionCode = 0;
 
@@ -193,7 +193,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         customProgressDialog = new CustomProgressDialog(context);
         reMyreceive = new Myreceiver();
         filter = new IntentFilter("lasysync");
-        manager = AccountManager.get(HomeActivity.this);
+        //manager = AccountManager.get(HomeActivity.this);
 
         checkAppVer();  //auto-update feature.
 
@@ -1094,7 +1094,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 //        parseLogOut();
 
-        AccountManager manager = AccountManager.get(HomeActivity.this);
+        //Commented by Venu for Account Manager Issue.
+       /* AccountManager manager = AccountManager.get(HomeActivity.this);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.GET_ACCOUNTS) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -1116,7 +1117,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     manager.removeAccount(accountList[i], null, null); // Legacy implementation
                 }
             }
-        }
+        }*/
         sessionManager.setFirstCheckin("false");
         sessionManager.setReturningUser(false);
         Intent intent = new Intent(HomeActivity.this, LoginActivity.class);

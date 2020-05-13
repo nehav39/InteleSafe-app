@@ -2,7 +2,7 @@ package org.intelehealth.intelesafe.activities.loginActivity;
 
 import android.Manifest;
 import android.accounts.Account;
-import android.accounts.AccountManager;
+//import android.accounts.AccountManager;
 import android.content.Context;
 import android.content.ContentValues;
 import android.content.DialogInterface;
@@ -73,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
             "username:password", "admin:nimda"
     };
     private final String TAG = LoginActivity.class.getSimpleName();
-    protected AccountManager manager;
+    //protected AccountManager manager;
     //    ProgressDialog progress;
     Context context;
     CustomProgressDialog cpd;
@@ -119,7 +119,9 @@ public class LoginActivity extends AppCompatActivity {
                 cant_log();
             }
         });
-        manager = AccountManager.get(LoginActivity.this);
+
+        // Commented by Venu for Account Manager Issue.
+       /* manager = AccountManager.get(LoginActivity.this);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.GET_ACCOUNTS) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -141,7 +143,7 @@ public class LoginActivity extends AppCompatActivity {
 //            startJobDispatcherService(LoginActivity.this);
             startActivity(intent);
             finish();
-        }
+        }*/
 
         //Enforces Offline Login Check only if network not present
         if (!NetworkConnection.isOnline(this)) {
@@ -368,9 +370,9 @@ public class LoginActivity extends AppCompatActivity {
 
                                             provider_url_uuid = loginProviderModel.getResults().get(i).getUuid();
 //                                                success = true;
-                                            final Account account = new Account(mEmail, "io.intelehealth.openmrs");
+                                           /* final Account account = new Account(mEmail, "io.intelehealth.openmrs");
                                             manager.addAccountExplicitly(account, mPassword, null);
-                                            Log.d("MANAGER", "MANAGER " + account);
+                                            Log.d("MANAGER", "MANAGER " + account);*/
                                             //offlineLogin.invalidateLoginCredentials();
 
 

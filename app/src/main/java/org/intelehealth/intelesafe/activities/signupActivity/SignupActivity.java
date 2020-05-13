@@ -2,7 +2,7 @@ package org.intelehealth.intelesafe.activities.signupActivity;
 
 
 import android.accounts.Account;
-import android.accounts.AccountManager;
+//import android.accounts.AccountManager;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
@@ -202,7 +202,7 @@ public class SignupActivity extends AppCompatActivity {
     Pattern lowerCasePatten = Pattern.compile("[a-z ]");
     Pattern digitCasePatten = Pattern.compile("[0-9 ]");
 
-    protected AccountManager manager;
+   // protected AccountManager manager;
 
     private TextInputLayout input_state_field, input_state_spinner; //  state a text box if country is not India so that user can enter their state
     private EditText edt_state;
@@ -229,7 +229,7 @@ public class SignupActivity extends AppCompatActivity {
         i_privacy = getIntent();
         privacy_value = i_privacy.getStringExtra("privacy"); //privacy_accept value retrieved from previous act.
         sessionManager = new SessionManager(this);
-        manager = AccountManager.get(SignupActivity.this);
+        //manager = AccountManager.get(SignupActivity.this);
 
         mFirstName = findViewById(R.id.identification_first_name);
         mFirstName.setFilters(new InputFilter[]{new InputFilter.LengthFilter(41), inputFilter_Name}); //maxlength 41
@@ -1489,6 +1489,7 @@ public class SignupActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         Log.v(TAG, "Result Received");
         if (requestCode == CameraActivity.TAKE_IMAGE) {
             Log.v(TAG, "Request Code " + CameraActivity.TAKE_IMAGE);
@@ -1556,8 +1557,9 @@ public class SignupActivity extends AppCompatActivity {
 //                                        encoded = base64Utils.encoded(userName, password);
                                         sessionManager.setEncoded(encoded);
 
-                                        final Account account = new Account(userName, "io.intelehealth.openmrs");
-                                        manager.addAccountExplicitly(account, password, null);
+                                        //Commented by Venu For Account Manager Issue.
+                                      /*  final Account account = new Account(userName, "io.intelehealth.openmrs");
+                                        manager.addAccountExplicitly(account, password, null);*/
 
                                         sessionManager.setLocationName("" + userAddressData.getCountyDistrict());
                                         sessionManager.setLocationUuid("b56d5d16-bf89-4ac0-918d-e830fbfba290");
