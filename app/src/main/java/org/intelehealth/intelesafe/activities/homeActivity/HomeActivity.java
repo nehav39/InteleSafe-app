@@ -30,6 +30,7 @@ import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
+
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 import androidx.appcompat.app.AlertDialog;
@@ -38,6 +39,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
+
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.UnderlineSpan;
@@ -142,13 +144,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     IntentFilter filter;
     Myreceiver reMyreceive;
     SyncUtils syncUtils = new SyncUtils();
-    CardView c1, c2, c3, c4, c5,ppe_cardView_request;
+    CardView c1, c2, c3, c4, c5, ppe_cardView_request;
     private String key = null;
     private String licenseUrl = null;
     RecyclerView recyclerView;
     TextView tvNoVisit;
     Button help_watsapp;
-    TextView tvMentalHelpRequest, tv_ppe_request,mental_Help_Text;
+    TextView tvMentalHelpRequest, tv_ppe_request, mental_Help_Text;
 
     Context context;
     private String mindmapURL = "";
@@ -205,13 +207,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
 
 
-            if (fromActivity != null && !fromActivity.isEmpty() && fromActivity.equals("setup"))
-            //To handle null pointer exception.
-            {
-                UserLoginTask(username, password);
-            }
-
-
+        if (fromActivity != null && !fromActivity.isEmpty() && fromActivity.equals("setup"))
+        //To handle null pointer exception.
+        {
+            UserLoginTask(username, password);
+        }
 
 
         sessionManager.setCurrentLang(getResources().getConfiguration().locale.toString());
@@ -508,6 +508,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         }
 */
+        sessionManager.setSetupComplete(false);
         sessionManager.setMigration(true);
 
         if (sessionManager.isReturningUser()) {
@@ -544,16 +545,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         ppe_cardView_request = findViewById(R.id.ppe_cardView_request);
         mental_Help_Text = findViewById(R.id.mental_Help_Text);
         String teleconsult_request = "";
-        if(sessionManager.getPatientCountry().equals("India")){
+        if (sessionManager.getPatientCountry().equals("India")) {
             mental_Help_Text.setText(getString(R.string.tele_consultant_text));
             tvMentalHelpRequest.setText(getString(R.string.teleconsult_request));
             teleconsult_request = getString(R.string.teleconsult_request);
-          //  ppe_cardView_request.setVisibility(View.VISIBLE);
-        }else{
+            //  ppe_cardView_request.setVisibility(View.VISIBLE);
+        } else {
             mental_Help_Text.setText(getString(R.string.Mental_health_support_text));
             tvMentalHelpRequest.setText(getString(R.string.mental_health_support));
             teleconsult_request = getString(R.string.mental_health_support);
-           // ppe_cardView_request.setVisibility(View.GONE);
+            // ppe_cardView_request.setVisibility(View.GONE);
         }
 
         SpannableString content = new SpannableString(teleconsult_request);
@@ -798,18 +799,18 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 String addressStr2 = edt_address2.getText().toString();
                 String pinCodeStr = edt_pincode.getText().toString();
                 String ppeQtyStr = edt_ppe_qty.getText().toString();
-                if(TextUtils.isEmpty(cityStr)){
+                if (TextUtils.isEmpty(cityStr)) {
                     edt_city.setError(getString(R.string.error_field_required));
                     edt_city.requestFocus();
                     return;
                 }
-                if(TextUtils.isEmpty(addressStr1)){
+                if (TextUtils.isEmpty(addressStr1)) {
                     edt_address1.setError(getString(R.string.error_field_required));
                     edt_address1.requestFocus();
                     return;
                 }
 
-                if(TextUtils.isEmpty(pinCodeStr)){
+                if (TextUtils.isEmpty(pinCodeStr)) {
                     edt_pincode.setError(getString(R.string.error_field_required));
                     edt_pincode.requestFocus();
                     return;
@@ -820,18 +821,18 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     edt_pincode.requestFocus();
                     return;
                 }
-                if(TextUtils.isEmpty(ppeQtyStr)){
+                if (TextUtils.isEmpty(ppeQtyStr)) {
                     edt_ppe_qty.setError(getString(R.string.error_field_required));
                     edt_ppe_qty.requestFocus();
                     return;
                 }
 
-                String finalAddressStr = addressStr1 + " "+(!TextUtils.isEmpty(addressStr2+ " ")?addressStr2:"")+ cityStr + " "+ pinCodeStr;
+                String finalAddressStr = addressStr1 + " " + (!TextUtils.isEmpty(addressStr2 + " ") ? addressStr2 : "") + cityStr + " " + pinCodeStr;
                 String phoneNumberWithCountryCode = "+918108220025";
-                String messageStr = "Hi I would like to request for PPE kits."+"\n"+
-                        "Name: "+ sessionManager.getUserName()+"\n"+
-                        "Address: "+ finalAddressStr +"\n"+
-                        "PPE required: "+ ppeQtyStr;
+                String messageStr = "Hi I would like to request for PPE kits." + "\n" +
+                        "Name: " + sessionManager.getUserName() + "\n" +
+                        "Address: " + finalAddressStr + "\n" +
+                        "PPE required: " + ppeQtyStr;
 
                 startActivity(new Intent(Intent.ACTION_VIEW,
                         Uri.parse(
@@ -1443,7 +1444,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 "v.patientuuid = ? ORDER BY v.startdate";
         String[] visitArgs = {patientuuid};
 
-        Cursor visitCursor = db.rawQuery(query,visitArgs);
+        Cursor visitCursor = db.rawQuery(query, visitArgs);
         //Cursor visitCursor = db.query("tbl_visit", visitColumns, visitSelection, visitArgs, null, null, visitOrderBy);
 
         if (visitCursor.getCount() < 1) {
