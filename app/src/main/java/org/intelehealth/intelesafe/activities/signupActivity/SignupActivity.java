@@ -210,6 +210,8 @@ public class SignupActivity extends AppCompatActivity {
     private TextInputLayout input_state_field, input_state_spinner; //  state a text box if country is not India so that user can enter their state
     private EditText edt_state;
 
+    private ImageView image_username_valid;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -246,7 +248,8 @@ public class SignupActivity extends AppCompatActivity {
 
         mEmailView = findViewById(R.id.email);
 
-
+        image_username_valid = findViewById(R.id.image_username_valid);
+        image_username_valid.setVisibility(View.GONE);
         mEmailView.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -256,6 +259,7 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 // mEmailView.setError("");
+                image_username_valid.setVisibility(View.GONE);
             }
 
             @Override
@@ -733,11 +737,13 @@ public class SignupActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(userName)) {
                     mEmailView.setError(getString(R.string.error_field_required));
                     mEmailView.requestFocus();
+                    image_username_valid.setVisibility(View.GONE);
                     return;
                 }
 
                 if (userName.length() < 8) {
                     mEmailView.setError(getString(R.string.username_10digits));
+                    image_username_valid.setVisibility(View.GONE);
                     mEmailView.requestFocus();
                     return;
                 }
@@ -745,6 +751,7 @@ public class SignupActivity extends AppCompatActivity {
                 if (isUSerExistsAlready) {
                     Toast.makeText(context, getString(R.string.txt_user_exists) + "Please try with another.", Toast.LENGTH_LONG).show();
                     mEmailView.setError(getString(R.string.txt_user_exists));
+                    image_username_valid.setVisibility(View.GONE);
                     mEmailView.requestFocus();
                     return;
                 }
@@ -1115,7 +1122,9 @@ public class SignupActivity extends AppCompatActivity {
                         List<ResultsItem> resultList = clsUserGetResponse.getResults();
                         if (resultList == null || resultList.size() == 0) {
                             isUSerExistsAlready = false;
+                            image_username_valid.setVisibility(View.VISIBLE);
                         } else {
+                            image_username_valid.setVisibility(View.GONE);
                             isUSerExistsAlready = true;
                             mEmailView.setError(getString(R.string.txt_user_exists));
                             mEmailView.requestFocus();
