@@ -12,13 +12,16 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.StrictMode;
+
 import androidx.annotation.Nullable;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Spanned;
@@ -225,7 +228,8 @@ public class SignupActivity extends AppCompatActivity {
         });
 
         progress = new ProgressDialog(SignupActivity.this);
-
+        progress.setCancelable(false);
+        progress.setCanceledOnTouchOutside(false);
         i_privacy = getIntent();
         privacy_value = i_privacy.getStringExtra("privacy"); //privacy_accept value retrieved from previous act.
         sessionManager = new SessionManager(this);
@@ -251,16 +255,16 @@ public class SignupActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-               // mEmailView.setError("");
+                // mEmailView.setError("");
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-               if(editable.length() == 8){
-                   InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
-                   imm.hideSoftInputFromWindow(mEmailView.getWindowToken(), 0);
-                   checkUserExistsOrNot(mEmailView.getText().toString());
-               }
+                if (editable.length() == 8) {
+                    InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(mEmailView.getWindowToken(), 0);
+                    checkUserExistsOrNot(mEmailView.getText().toString());
+                }
             }
         });
 
@@ -738,8 +742,8 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }
 
-                if(isUSerExistsAlready){
-                    Toast.makeText(context, getString(R.string.txt_user_exists)+"Please try with another.", Toast.LENGTH_LONG).show();
+                if (isUSerExistsAlready) {
+                    Toast.makeText(context, getString(R.string.txt_user_exists) + "Please try with another.", Toast.LENGTH_LONG).show();
                     mEmailView.setError(getString(R.string.txt_user_exists));
                     mEmailView.requestFocus();
                     return;
@@ -892,8 +896,8 @@ public class SignupActivity extends AppCompatActivity {
                 if (country.equalsIgnoreCase("") || country.equalsIgnoreCase("Select Country")) {
                     Toast.makeText(context, getString(R.string.please_select_country), Toast.LENGTH_LONG).show();
                     return;
-                }else{
-                    if(country.equalsIgnoreCase("India")){
+                } else {
+                    if (country.equalsIgnoreCase("India")) {
                         isNotIndia = false;
                     }
                 }
@@ -1101,7 +1105,7 @@ public class SignupActivity extends AppCompatActivity {
         UrlModifiers urlModifiers = new UrlModifiers();
         String urlString = urlModifiers.setRegistrationURL();
         encoded = base64Utils.encoded("admin", "Admin123");
-        Observable<ClsUserGetResponse> userGetResponse = AppConstants.apiInterface.getUsersFromServer(urlString,"Basic " +encoded);
+        Observable<ClsUserGetResponse> userGetResponse = AppConstants.apiInterface.getUsersFromServer(urlString, "Basic " + encoded, enteredUserName);
         userGetResponse.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new DisposableObserver<ClsUserGetResponse>() {
@@ -1109,15 +1113,22 @@ public class SignupActivity extends AppCompatActivity {
                     public void onNext(ClsUserGetResponse clsUserGetResponse) {
                         progress.dismiss();
                         List<ResultsItem> resultList = clsUserGetResponse.getResults();
-                        ResultsItem objResultsItem  = new ResultsItem();
+                        if (resultList == null || resultList.size() == 0) {
+                            isUSerExistsAlready = false;
+                        } else {
+                            isUSerExistsAlready = true;
+                            mEmailView.setError(getString(R.string.txt_user_exists));
+                            mEmailView.requestFocus();
+                        }
+                         /*ResultsItem objResultsItem  = new ResultsItem();
                         objResultsItem.setDisplay(enteredUserName);
-                        if(resultList.contains(objResultsItem)){
+                       if(resultList.contains(objResultsItem)){
                             isUSerExistsAlready = true;
                             mEmailView.setError(getString(R.string.txt_user_exists));
                             mEmailView.requestFocus();
                         }else{
                             isUSerExistsAlready = false;
-                        }
+                        }*/
                     }
 
                     @Override
@@ -1489,6 +1500,7 @@ public class SignupActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         Log.v(TAG, "Result Received");
         if (requestCode == CameraActivity.TAKE_IMAGE) {
             Log.v(TAG, "Request Code " + CameraActivity.TAKE_IMAGE);
