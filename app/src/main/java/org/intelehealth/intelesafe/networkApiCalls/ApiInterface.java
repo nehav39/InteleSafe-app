@@ -135,7 +135,7 @@ public interface ApiInterface {
     Observable<ClsPersonGetResponse> getPersonDetails(@Url  String url, @Header("Authorization") String authHeader,@Query("v") String str);
 
     @GET
-    Observable<ClsUserGetResponse> getUsersFromServer(@Url String url,@Header("Authorization") String authHeader);
+    Observable<ClsUserGetResponse> getUsersFromServer(@Url String url,@Header("Authorization") String authHeader, @Query("username")  String userName);
 
 
 }

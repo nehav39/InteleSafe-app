@@ -12,13 +12,16 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.StrictMode;
+
 import androidx.annotation.Nullable;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Spanned;
@@ -207,6 +210,8 @@ public class SignupActivity extends AppCompatActivity {
     private TextInputLayout input_state_field, input_state_spinner; //  state a text box if country is not India so that user can enter their state
     private EditText edt_state;
 
+    private ImageView image_username_valid;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -225,7 +230,8 @@ public class SignupActivity extends AppCompatActivity {
         });
 
         progress = new ProgressDialog(SignupActivity.this);
-
+        progress.setCancelable(false);
+        progress.setCanceledOnTouchOutside(false);
         i_privacy = getIntent();
         privacy_value = i_privacy.getStringExtra("privacy"); //privacy_accept value retrieved from previous act.
         sessionManager = new SessionManager(this);
@@ -242,7 +248,8 @@ public class SignupActivity extends AppCompatActivity {
 
         mEmailView = findViewById(R.id.email);
 
-
+        image_username_valid = findViewById(R.id.image_username_valid);
+        image_username_valid.setVisibility(View.GONE);
         mEmailView.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -251,16 +258,17 @@ public class SignupActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-               // mEmailView.setError("");
+                // mEmailView.setError("");
+                image_username_valid.setVisibility(View.GONE);
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-               if(editable.length() == 8){
-                   InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
-                   imm.hideSoftInputFromWindow(mEmailView.getWindowToken(), 0);
-                   checkUserExistsOrNot(mEmailView.getText().toString());
-               }
+                if (editable.length() == 8) {
+                    InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(mEmailView.getWindowToken(), 0);
+                    checkUserExistsOrNot(mEmailView.getText().toString());
+                }
             }
         });
 
@@ -729,18 +737,21 @@ public class SignupActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(userName)) {
                     mEmailView.setError(getString(R.string.error_field_required));
                     mEmailView.requestFocus();
+                    image_username_valid.setVisibility(View.GONE);
                     return;
                 }
 
                 if (userName.length() < 8) {
                     mEmailView.setError(getString(R.string.username_10digits));
+                    image_username_valid.setVisibility(View.GONE);
                     mEmailView.requestFocus();
                     return;
                 }
 
-                if(isUSerExistsAlready){
-                    Toast.makeText(context, getString(R.string.txt_user_exists)+"Please try with another.", Toast.LENGTH_LONG).show();
+                if (isUSerExistsAlready) {
+                    Toast.makeText(context, getString(R.string.txt_user_exists) + "Please try with another.", Toast.LENGTH_LONG).show();
                     mEmailView.setError(getString(R.string.txt_user_exists));
+                    image_username_valid.setVisibility(View.GONE);
                     mEmailView.requestFocus();
                     return;
                 }
@@ -892,8 +903,8 @@ public class SignupActivity extends AppCompatActivity {
                 if (country.equalsIgnoreCase("") || country.equalsIgnoreCase("Select Country")) {
                     Toast.makeText(context, getString(R.string.please_select_country), Toast.LENGTH_LONG).show();
                     return;
-                }else{
-                    if(country.equalsIgnoreCase("India")){
+                } else {
+                    if (country.equalsIgnoreCase("India")) {
                         isNotIndia = false;
                     }
                 }
@@ -1101,7 +1112,7 @@ public class SignupActivity extends AppCompatActivity {
         UrlModifiers urlModifiers = new UrlModifiers();
         String urlString = urlModifiers.setRegistrationURL();
         encoded = base64Utils.encoded("admin", "Admin123");
-        Observable<ClsUserGetResponse> userGetResponse = AppConstants.apiInterface.getUsersFromServer(urlString,"Basic " +encoded);
+        Observable<ClsUserGetResponse> userGetResponse = AppConstants.apiInterface.getUsersFromServer(urlString, "Basic " + encoded, enteredUserName);
         userGetResponse.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new DisposableObserver<ClsUserGetResponse>() {
@@ -1109,15 +1120,24 @@ public class SignupActivity extends AppCompatActivity {
                     public void onNext(ClsUserGetResponse clsUserGetResponse) {
                         progress.dismiss();
                         List<ResultsItem> resultList = clsUserGetResponse.getResults();
-                        ResultsItem objResultsItem  = new ResultsItem();
+                        if (resultList == null || resultList.size() == 0) {
+                            isUSerExistsAlready = false;
+                            image_username_valid.setVisibility(View.VISIBLE);
+                        } else {
+                            image_username_valid.setVisibility(View.GONE);
+                            isUSerExistsAlready = true;
+                            mEmailView.setError(getString(R.string.txt_user_exists));
+                            mEmailView.requestFocus();
+                        }
+                         /*ResultsItem objResultsItem  = new ResultsItem();
                         objResultsItem.setDisplay(enteredUserName);
-                        if(resultList.contains(objResultsItem)){
+                       if(resultList.contains(objResultsItem)){
                             isUSerExistsAlready = true;
                             mEmailView.setError(getString(R.string.txt_user_exists));
                             mEmailView.requestFocus();
                         }else{
                             isUSerExistsAlready = false;
-                        }
+                        }*/
                     }
 
                     @Override
