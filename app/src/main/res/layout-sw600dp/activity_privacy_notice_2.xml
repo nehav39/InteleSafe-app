@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".activities.privacyNoticeActivity.PrivacyNotice_Activity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/actionbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="@string/privacy_notice_title"
+            app:titleTextColor="@color/font_black_0" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <LinearLayout
+        android:id="@+id/buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <CheckBox
+            android:id="@+id/chb_agree_privacy"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.75"
+            android:fontFamily="@fonts/Lato_Regular"
+            android:text="@string/privacy_agree" />
+
+        <TextView
+            android:id="@+id/txt_privacy"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="15dp"
+            android:layout_weight="0.25"
+            android:drawableEnd="@drawable/ic_keyboard_arrow_right"
+            android:fontFamily="@fonts/Lato_Regular"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:gravity="end"
+            android:padding="10dp"
+            android:text="@string/next"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/buttons"
+        android:layout_below="@+id/actionbar"
+        android:layout_marginBottom="15dp">
+        <!--Scrollable content here-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/privacy_text"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_weight="1"
+                android:fontFamily="@fonts/Lato_Regular"
+                android:padding="10dp"
+                android:autoLink="all"
+                android:textAlignment="gravity"
+                android:textFontWeight="1" />
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
