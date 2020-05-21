@@ -1,0 +1,60 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context="io.intelehealth.client.activities.physical_exam_activity.PhysicalExamActivity$PlaceholderFragment">
+
+
+    <TextView
+        android:id="@+id/physical_exam_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:textSize="@dimen/physical_node_title"
+        />
+
+    <ImageView
+        android:id="@+id/physical_exam_image_view"
+        android:layout_width="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="@dimen/physical_exam_img_max_height"
+        android:paddingTop="10dp"
+        android:contentDescription="TODO"
+        android:paddingBottom="10dp"
+        />
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="10dp"
+        app:cardCornerRadius="10sp"
+        app:cardElevation="5sp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/white_rectangular_bg"
+            android:paddingBottom="10dp"
+            >
+            <ExpandableListView
+                android:id="@+id/physical_exam_expandable_list_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            </ExpandableListView>
+
+        </RelativeLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+</LinearLayout>
