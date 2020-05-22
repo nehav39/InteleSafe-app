@@ -18,6 +18,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Paint;
 import android.graphics.Typeface;
@@ -67,6 +68,7 @@ import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -173,6 +175,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private int versionCode = 0;
 
     private CompositeDisposable disposable = new CompositeDisposable();
+    List<String> stringListOBS = new ArrayList<>();
+    List<String> stringEncounterUUID = new ArrayList<>();
 
 
     @Override
@@ -198,6 +202,17 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         //manager = AccountManager.get(HomeActivity.this);
 
         checkAppVer();  //auto-update feature.
+
+        if (sessionManager.getDBCLEAR().equalsIgnoreCase("")) {
+
+            try {
+                delDb();
+            } catch (DAOException e) {
+                e.printStackTrace();
+            }
+            sessionManager.setDBCLEAR("DONE");
+
+        }
 
         Intent intent = this.getIntent(); // The intent was passed to the activity
         if (intent != null) {
@@ -229,7 +244,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                 startActivity(new Intent(Intent.ACTION_VIEW,
                         Uri.parse(
-                                String.format("http://api.whatsapp.com/send?phone=%s&text=%s",
+                                String.format("https://api.whatsapp.com/send?phone=%s&text=%s",
                                         phoneNumberWithCountryCode, message))));
             }
         });
@@ -573,6 +588,242 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    private void delDb() throws DAOException {
+
+        SQLiteDatabase db = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
+        db.beginTransaction();
+        try {
+
+            //Delete Patients
+            db.delete("tbl_patient", "uuid != ?", new String[]{"" + sessionManager.getPersionUUID()});
+
+            //Delete Patient Attribute
+            db.delete("tbl_patient_attribute", "patientuuid != ?", new String[]{"" + sessionManager.getPersionUUID()});
+
+            String[] strVisitsUUID = fetchVisits();
+
+            if (strVisitsUUID.length > 0) {
+                for (int j = 0; j < strVisitsUUID.length; j++) {
+
+                    String table = "tbl_encounter";
+                    String whereClause = "visituuid=?";
+                    String[] whereArgs = new String[]{String.valueOf(strVisitsUUID[j])};
+                    String rawQuery = "Delete from tbl_encounter where (visituuid=?)";
+                    db.execSQL(rawQuery, whereArgs);
+
+                }
+            }
+
+/////////////////////////////
+            //Delete visits
+            db.delete("tbl_visit", "patientuuid != ?", new String[]{"" + sessionManager.getPersionUUID()});
+/////////////////////////////
+
+            String[] strclrVisitsUUID = fetchVisits1();
+
+            String[] strEncounterUUID = new String[0];
+
+            if (strclrVisitsUUID.length > 0) {
+                for (int j = 0; j < strclrVisitsUUID.length; j++) {
+
+                    strEncounterUUID = fetchEncountersUUID(strclrVisitsUUID[j].toString());
+
+                }
+            }
+
+            String[] strEncountersUUID = fetchEncounters();
+
+            List<String> EncounterUUIDList = new ArrayList<>();
+
+            if (strEncounterUUID.length > 0) {
+                Collections.addAll(EncounterUUIDList, strEncounterUUID);
+            }
+
+            List<String> allEncountersList = new ArrayList<>();
+
+            if (strEncountersUUID.length > 0) {
+                Collections.addAll(allEncountersList, strEncountersUUID);
+            }
+
+            if (allEncountersList.size() > 0 && EncounterUUIDList.size() > 0) {
+                allEncountersList.removeAll(EncounterUUIDList);
+
+                for (int j = 0; j < allEncountersList.size(); j++) {
+
+                    db.delete("tbl_encounter", "uuid = ?", new String[]{"" + allEncountersList.get(j)});
+
+                }
+            }
+
+            String[] strFinalEncountersUUID = fetchEncounters();
+
+            //Delete OBS
+            String[] strOBSUUID = new String[0];
+
+            if (strFinalEncountersUUID.length > 0) {
+                for (int j = 0; j < strFinalEncountersUUID.length; j++) {
+
+                    strOBSUUID = fetchOBSUUID(strFinalEncountersUUID[j].toString());
+                }
+            }
+
+            String[] strAllOBSUUID = fetchAllOBS();
+
+            List<String> stringUUIDList = new ArrayList<>();
+
+            if (strOBSUUID.length > 0) {
+                Collections.addAll(stringUUIDList, strOBSUUID);
+            }
+
+            List<String> stringList = new ArrayList<>();
+            if (strAllOBSUUID.length > 0) {
+                Collections.addAll(stringList, strAllOBSUUID);
+            }
+
+            if (stringList.size() > 0) {
+
+                stringList.removeAll(stringUUIDList);
+
+                for (int j = 0; j < stringList.size(); j++) {
+
+                    db.delete("tbl_obs", "uuid = ?", new String[]{"" + stringList.get(j)});
+
+                }
+            }
+
+            db.setTransactionSuccessful();
+        } catch (SQLException s) {
+            Crashlytics.getInstance().core.logException(s);
+            throw new DAOException(s);
+        } finally {
+            db.endTransaction();
+        }
+    }
+
+    private String[] fetchVisits() {
+
+        List<String> visitList = new ArrayList<>();
+        SQLiteDatabase db = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
+        db.beginTransaction();
+        Cursor idCursor = db.rawQuery("SELECT * FROM tbl_visit where (patientuuid != ?)", new String[]{"" + sessionManager.getPersionUUID()});
+
+        if (idCursor.getCount() != 0) {
+            while (idCursor.moveToNext()) {
+
+                visitList.add(idCursor.getString(idCursor.getColumnIndexOrThrow("uuid")));
+
+            }
+        }
+        idCursor.close();
+        db.setTransactionSuccessful();
+        db.endTransaction();
+
+        return visitList.toArray(new String[0]);
+    }
+
+    private String[] fetchVisits1() {
+
+        List<String> visitList = new ArrayList<>();
+        SQLiteDatabase db = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
+        db.beginTransaction();
+        Cursor idCursor = db.rawQuery("SELECT * FROM tbl_visit where (patientuuid = ?)", new String[]{"" + sessionManager.getPersionUUID()});
+
+        if (idCursor.getCount() != 0) {
+            while (idCursor.moveToNext()) {
+
+                visitList.add(idCursor.getString(idCursor.getColumnIndexOrThrow("uuid")));
+
+            }
+        }
+        idCursor.close();
+        db.setTransactionSuccessful();
+        db.endTransaction();
+
+        return visitList.toArray(new String[0]);
+    }
+
+    private String[] fetchAllOBS() {
+
+        List<String> stringList = new ArrayList<>();
+        SQLiteDatabase db = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
+        db.beginTransaction();
+        Cursor idCursor = db.rawQuery("SELECT * FROM tbl_obs", null);
+
+        if (idCursor.getCount() != 0) {
+            while (idCursor.moveToNext()) {
+
+                stringList.add(idCursor.getString(idCursor.getColumnIndexOrThrow("uuid")));
+
+            }
+        }
+        idCursor.close();
+        db.setTransactionSuccessful();
+        db.endTransaction();
+
+        return stringList.toArray(new String[0]);
+    }
+
+    private String[] fetchEncounters() {
+
+        List<String> stringUUID = new ArrayList<>();
+        SQLiteDatabase db = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
+        db.beginTransaction();
+        Cursor idCursor = db.rawQuery("SELECT * FROM tbl_encounter", null);
+
+        if (idCursor.getCount() != 0) {
+            while (idCursor.moveToNext()) {
+
+                stringUUID.add(idCursor.getString(idCursor.getColumnIndexOrThrow("uuid")));
+
+            }
+        }
+        idCursor.close();
+        db.setTransactionSuccessful();
+        db.endTransaction();
+
+        return stringUUID.toArray(new String[0]);
+    }
+
+    private String[] fetchOBSUUID(String encounterUUID) {
+
+        SQLiteDatabase db = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
+        db.beginTransaction();
+        Cursor idCursor = db.rawQuery("SELECT * FROM tbl_obs where (encounteruuid = ?)", new String[]{"" + encounterUUID});
+
+        if (idCursor.getCount() != 0) {
+            while (idCursor.moveToNext()) {
+
+                stringListOBS.add(idCursor.getString(idCursor.getColumnIndexOrThrow("uuid")));
+
+            }
+        }
+        idCursor.close();
+        db.setTransactionSuccessful();
+        db.endTransaction();
+
+        return stringListOBS.toArray(new String[0]);
+    }
+
+    private String[] fetchEncountersUUID(String visitUUID) {
+
+        SQLiteDatabase db = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
+        db.beginTransaction();
+        Cursor idCursor = db.rawQuery("SELECT * FROM tbl_encounter where (visituuid = ?)", new String[]{"" + visitUUID});
+
+        if (idCursor.getCount() != 0) {
+            while (idCursor.moveToNext()) {
+
+                stringEncounterUUID.add(idCursor.getString(idCursor.getColumnIndexOrThrow("uuid")));
+
+            }
+        }
+        idCursor.close();
+        db.setTransactionSuccessful();
+        db.endTransaction();
+
+        return stringEncounterUUID.toArray(new String[0]);
+    }
+
     private void renderList() {
         recycler_arraylist = new ArrayList<Day_Date>();
         String endDate = "";
@@ -836,7 +1087,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                 startActivity(new Intent(Intent.ACTION_VIEW,
                         Uri.parse(
-                                String.format("http://api.whatsapp.com/send?phone=%s&text=%s",
+                                String.format("https://api.whatsapp.com/send?phone=%s&text=%s",
                                         phoneNumberWithCountryCode, messageStr))));
 
                 alert.dismiss();
@@ -859,7 +1110,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         @Override
         protected Void doInBackground(String... strings) {
-            String fileUrl = strings[0];   // -> http://maven.apache.org/maven-1.x/maven.pdf
+            String fileUrl = strings[0];   // -> https://maven.apache.org/maven-1.x/maven.pdf
             String fileName = strings[1];  // -> maven.pdf
             String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
             File folder = new File(extStorageDirectory, "Intelehealth_COVID_PDF");
@@ -1400,7 +1651,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                                             try {
                                                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
                                             } catch (ActivityNotFoundException anfe) {
-                                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + appPackageName)));
+                                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
                                             }
 
                                         }

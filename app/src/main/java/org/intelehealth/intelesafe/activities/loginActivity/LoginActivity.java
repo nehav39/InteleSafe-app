@@ -474,9 +474,9 @@ public class LoginActivity extends AppCompatActivity {
                     sessionManager.setReturningUser(true);
                     sessionManager.setLocationUuid("b56d5d16-bf89-4ac0-918d-e830fbfba290");
                     sessionManager.setServerUrl(BuildConfig.CLEAN_URL);
-                    sessionManager.setServerUrlRest("http://" + BuildConfig.CLEAN_URL + "/openmrs/ws/rest/v1/");
-                    sessionManager.setServerUrlBase("http://" + BuildConfig.CLEAN_URL + "/openmrs");
-                    sessionManager.setBaseUrl("http://" + BuildConfig.CLEAN_URL + "/openmrs/ws/rest/v1/");
+                    sessionManager.setServerUrlRest("https://" + BuildConfig.CLEAN_URL + "/openmrs/ws/rest/v1/");
+                    sessionManager.setServerUrlBase("https://" + BuildConfig.CLEAN_URL + "/openmrs");
+                    sessionManager.setBaseUrl("https://" + BuildConfig.CLEAN_URL + "/openmrs/ws/rest/v1/");
                     sessionManager.setTriggerNoti("yes");
                     sessionManager.setPrivacyValue("Accept");
                     sessionManager.setFirstTimeLaunch(false);

@@ -71,10 +71,10 @@ public class AppConstants {
     public static int REPEAT_INTERVAL = 15;
 
     public static Constraints MY_CONSTRAINTS = new Constraints.Builder()
-            .setRequiresCharging(true)
+            .setRequiresCharging(false)
             .setRequiredNetworkType(NetworkType.CONNECTED)
-            .setRequiresBatteryNotLow(true)
-            .setRequiresStorageNotLow(true)
+            .setRequiresBatteryNotLow(false)
+            .setRequiresStorageNotLow(false)
             .build();
 
     public static PeriodicWorkRequest PERIODIC_WORK_REQUEST =
