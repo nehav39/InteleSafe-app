@@ -133,7 +133,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="18dp"
                     android:background="@drawable/button_bg_rounded_corners"
                     android:text="@string/action_sign_in"
                     android:fontFamily="@font/lato_bold"
