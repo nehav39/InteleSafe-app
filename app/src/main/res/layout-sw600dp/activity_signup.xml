@@ -56,7 +56,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:textAppearance="@style/please_fill"
+                    android:textAppearance="@style/please_fill_600dp"
                     android:lineSpacingExtra="3sp"
                     android:translationY="-1.6sp"
                     android:gravity="top"
@@ -71,7 +71,8 @@
                     android:drawablePadding="10dp"
                     android:ems="10"
                     android:text="@string/personal_information"
-                    android:textAppearance="@style/sign_up_title" />
+                    android:textAppearance=
+                        "@style/sign_up_title_600dp" />
                 <Space
                     android:layout_width="20dp"
                     android:layout_height="20dp" />
@@ -111,7 +112,7 @@
                                 android:maxLength="25"
                                 android:maxLines="1"
                                 android:singleLine="true"
-                                android:textAppearance="@style/sign_up_input"/>
+                                android:textAppearance="@style/sign_up_input_600dp"/>
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -133,7 +134,7 @@
                                 android:maxLines="1"
                                 android:singleLine="true"
                                 android:tag="@string/tag_optional"
-                                android:textAppearance="@style/sign_up_input"/>
+                                android:textAppearance="@style/sign_up_input_600dp"/>
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -154,7 +155,7 @@
                                 android:maxLength="25"
                                 android:maxLines="1"
                                 android:singleLine="true"
-                                android:textAppearance="@style/sign_up_input"/>
+                                android:textAppearance="@style/sign_up_input_600dp"/>
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -182,7 +183,7 @@
                                 android:drawableLeft="@drawable/icon_male"
                                 android:drawablePadding="5dp"
                                 android:text="@string/identification_screen_checkbox_male"
-                                android:textAppearance="@style/sign_up_gender" />
+                                android:textAppearance="@style/sign_up_gender_600dp" />
 
                             <RadioButton
                                 android:id="@+id/identification_gender_female"
@@ -193,7 +194,7 @@
                                 android:drawableLeft="@drawable/icon_female"
                                 android:drawablePadding="5dp"
                                 android:text="@string/identification_screen_checkbox_female"
-                                android:textAppearance="@style/sign_up_gender"/>
+                                android:textAppearance="@style/sign_up_gender_600dp"/>
 
                         </RadioGroup>
 
@@ -217,7 +218,7 @@
                                 android:inputType=""
                                 android:maxLines="1"
                                 android:singleLine="true"
-                                android:textAppearance="@style/sign_up_input"/>
+                                android:textAppearance="@style/sign_up_input_600dp"/>
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <!--    <android.support.design.widget.TextInputLayout
@@ -279,7 +280,7 @@
                                     android:maxLines="1"
                                     android:singleLine="true"
                                     android:tag="@string/tag_optional"
-                                    android:textAppearance="@style/sign_up_input"/>
+                                    android:textAppearance="@style/sign_up_input_600dp"/>
 
                             </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
@@ -314,7 +315,7 @@
                                         android:inputType="textCapWords"
                                         android:maxLines="1"
                                         android:text="@string/txt_personal_caste_header"
-                                        android:textSize="14sp" />
+                                        android:textSize="18sp" />
 
                                     <Spinner
                                         android:id="@+id/spinner_Caste"
@@ -343,7 +344,7 @@
                                     android:maxLength="25"
                                     android:maxLines="1"
                                     android:singleLine="true"
-                                    android:textSize="14sp"
+                                    android:textSize="18sp"
                                     android:fontFamily="@font/lato_regular"/>
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -360,7 +361,7 @@
                                     android:autofillHints="@string/action_settings"
                                     android:ems="10"
                                     android:fontFamily="@font/lato_regular"
-                                    android:textSize="14sp"
+                                    android:textSize="18sp"
                                     android:freezesText="true"
                                     android:hint="@string/medical_registration_number_license_id"
                                     android:imeOptions="actionUnspecified"
@@ -368,7 +369,7 @@
                                     android:maxLength="25"
                                     android:maxLines="1"
                                     android:singleLine="true"
-                                    android:textAppearance="@style/sign_up_input"/>
+                                    android:textAppearance="@style/sign_up_input_600dp"/>
 
                             </com.google.android.material.textfield.TextInputLayout>
 
@@ -391,9 +392,9 @@
                                     android:maxLength="25"
                                     android:maxLines="1"
                                     android:fontFamily="@font/lato_regular"
-                                    android:textSize="14sp"
+                                    android:textSize="18sp"
                                     android:singleLine="true"
-                                    android:textAppearance="@style/sign_up_input"/>
+                                    android:textAppearance="@style/sign_up_input_600dp"/>
 
                             </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
@@ -427,7 +428,7 @@
                     android:drawablePadding="10dp"
                     android:ems="10"
                     android:text="@string/login_details"
-                    android:textAppearance="@style/sign_up_title" />/>
+                    android:textAppearance="@style/sign_up_title_600dp" />
                 <Space
                     android:layout_width="20dp"
                     android:layout_height="20dp" />
@@ -464,7 +465,7 @@
                         android:maxLines="1"
                         android:maxLength="8"
                         android:nextFocusForward="@id/password"
-                        android:textAppearance="@style/sign_up_input"/>
+                        android:textAppearance="@style/sign_up_input_600dp"/>
                        <!-- android:maxLines="1"
                         android:nextFocusForward="@id/password" />-->
 
@@ -476,7 +477,7 @@
                     android:layout_margin="2dp"
                     android:text="@string/username_condition"
                     android:textColor="@null"
-                    android:textAppearance="@style/login_details_conditions"
+                    android:textAppearance="@style/login_details_conditions_600dp"
                     android:lineSpacingExtra="2sp"
                     android:visibility="visible"
                     android:translationY="-1sp"/>
@@ -496,7 +497,7 @@
                         android:inputType="textPassword"
                         android:maxLength="12"
                         android:singleLine="true"
-                        android:textAppearance="@style/sign_up_input"/>
+                        android:textAppearance="@style/sign_up_input_600dp"/>
                         android:maxLines="1"
                         android:singleLine="true" />
 
@@ -516,7 +517,7 @@
                         android:inputType="textPassword"
                         android:maxLength="12"
                         android:singleLine="true"
-                        android:textAppearance="@style/sign_up_input"/>
+                        android:textAppearance="@style/sign_up_input_600dp"/>
                         android:maxLines="1"
                         android:singleLine="true" />
 
@@ -528,7 +529,7 @@
                     android:layout_margin="2dp"
                     android:textColor="@null"
                     android:text="@string/password_should_be_8_characters_long_and_should_have_both_upper_and_lower_case_characters_at_least_one_digit"
-                    android:textAppearance="@style/login_details_conditions"
+                    android:textAppearance="@style/login_details_conditions_600dp"
                     android:lineSpacingExtra="2sp"
                     android:translationY="-1sp"/>
             </LinearLayout>
@@ -546,7 +547,7 @@
                     android:drawablePadding="10dp"
                     android:ems="10"
                     android:text="@string/address_details"
-                    android:textAppearance="@style/sign_up_title"/>/>
+                    android:textAppearance="@style/sign_up_title_600dp"/>/>
 
                 <Space
                     android:layout_width="20dp"
@@ -586,7 +587,7 @@
                         android:maxLines="2"
                         android:singleLine="false"
                         android:tag="@string/tag_optional"
-                        android:textAppearance="@style/sign_up_input"/>
+                        android:textAppearance="@style/sign_up_input_600dp"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -607,7 +608,7 @@
                         android:maxLength="50"
                         android:maxLines="2"
                         android:tag="@string/tag_optional"
-                        android:textAppearance="@style/sign_up_input"/>
+                        android:textAppearance="@style/sign_up_input_600dp"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -626,7 +627,7 @@
                         android:inputType="textCapWords"
                         android:maxLength="25"
                         android:maxLines="1"
-                        android:textAppearance="@style/sign_up_input"/>
+                        android:textAppearance="@style/sign_up_input_600dp"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -669,7 +670,7 @@
                                     android:inputType="textCapWords"
                                     android:maxLines="1"
                                     android:text="@string/identification_screen_prompt_country"
-                                    android:textAppearance="@style/sign_up_input"/>
+                                    android:textAppearance="@style/sign_up_input_600dp"/>
 
                                 <Spinner
                                     android:id="@+id/spinner_country"
@@ -720,7 +721,7 @@
                                     android:inputType="textCapWords"
                                     android:maxLines="1"
                                     android:text="@string/identification_screen_prompt_state"
-                                    android:textAppearance="@style/sign_up_input"/>
+                                    android:textAppearance="@style/sign_up_input_600dp"/>
 
                                 <Spinner
                                     android:id="@+id/spinner_state"
@@ -754,7 +755,7 @@
                                 android:maxLength="25"
                                 android:maxLines="1"
                                 android:singleLine="true"
-                                android:textAppearance="@style/sign_up_input"/>
+                                android:textAppearance="@style/sign_up_input_600dp"/>
 
                         </com.google.android.material.textfield.TextInputLayout>
 
@@ -855,7 +856,7 @@
                         android:maxLength="6"
                         android:maxLines="1"
                         android:tag="@string/tag_optional"
-                        android:textAppearance="@style/sign_up_input"/>
+                        android:textAppearance="@style/sign_up_input_600dp"/>
 
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -867,9 +868,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="15dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:paddingVertical="15dp"
                     android:background="@drawable/rectangle_7"
                     android:text="@string/save"
-                    android:textAppearance="@style/sign_up_save" />
+                    android:textAppearance=
+                        "@style/sign_up_save_600dp" />
 
                 <!--                <android.support.design.widget.TextInputLayout-->
                 <!--                    android:layout_width="match_parent"-->
