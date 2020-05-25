@@ -80,7 +80,7 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:background="@drawable/tab_layout_background"
             android:layout_margin="15dp"
@@ -114,7 +114,7 @@
         app:srcCompat="@drawable/svg_right_arrow"
         tools:ignore="VectorDrawableCompat"
         android:scaleType="center"
-        app:fabCustomSize="80dp"
-        app:maxImageSize="35dp"/>
+        app:fabCustomSize="70dp"
+        app:maxImageSize="30dp"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
