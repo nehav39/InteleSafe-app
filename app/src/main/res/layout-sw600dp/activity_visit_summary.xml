@@ -17,11 +17,11 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             app:titleTextColor="@color/txt_sub_header_color"
-            android:textSize="30sp"
+            android:textSize="34sp"
             android:fontFamily="@font/lato_bold"
             android:layout_gravity="center_vertical"
             android:includeFontPadding="false"
-            android:paddingVertical="2dp"
+            android:paddingVertical="6dp"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
