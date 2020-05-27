@@ -12,6 +12,7 @@
     <dimen name="edit_icon_height">32dp</dimen>
     <dimen name="edit_icon_width">32dp</dimen>
     <dimen name="appbar_padding_top">12dp</dimen>
-
     <dimen name="text_18sp">22sp</dimen>
+    <dimen name="text_20sp">24sp</dimen>
+    <bool name="isTab">true</bool>
 </resources>
