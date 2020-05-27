@@ -27,9 +27,9 @@
                     android:id="@+id/welcome_user_part"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginEnd="10dp">
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="19dp"
+                    android:layout_marginEnd="14dp">
 
                     <TextView
                         android:id="@+id/welcomeUser"
@@ -42,29 +42,29 @@
                         android:fontFamily="@font/lato_bold"
                         android:includeFontPadding="false"
                         android:text="@string/prajwal_waingankar"
-                        android:textSize="30sp" />
+                        android:textSize="34sp" />
 
 
                     <FrameLayout
                         android:id="@+id/user_notification"
-                        android:layout_width="42dp"
-                        android:layout_height="42dp"
+                        android:layout_width="46dp"
+                        android:layout_height="46dp"
                         android:layout_centerVertical="true"
-                        android:layout_marginEnd="8dp"
+                        android:layout_marginEnd="12dp"
                         android:layout_toStartOf="@+id/user_location"
                         android:visibility="gone">
 
 
                         <RelativeLayout
                             android:id="@+id/notification_view"
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
                             android:layout_gravity="center"
                             android:background="@drawable/oval_home_notification">
 
                             <ImageView
-                                android:layout_width="16dp"
-                                android:layout_height="16dp"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
                                 android:layout_centerInParent="true"
                                 android:src="@drawable/svg_notofication">
 
@@ -75,8 +75,8 @@
 
                         <RelativeLayout
                             android:id="@+id/notification_count"
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
                             android:layout_gravity="right|top"
                             android:background="@drawable/oval_home_count">
 
@@ -88,7 +88,7 @@
                                 android:src="@drawable/svg_notofication"
                                 android:text="2"
                                 android:textColor="@color/white"
-                                android:textSize="10sp"
+                                android:textSize="14sp"
                                 android:textStyle="bold">
 
                             </TextView>
@@ -99,16 +99,16 @@
 
                     <RelativeLayout
                         android:id="@+id/user_location"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:background="@drawable/oval_home_location"
                         android:visibility="gone">
 
                         <ImageView
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
                             android:layout_centerInParent="true"
                             android:src="@drawable/svg_location">
 
@@ -118,15 +118,15 @@
 
                     <RelativeLayout
                         android:id="@+id/user_logout"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:background="@drawable/oval_home_notification">
 
                         <ImageView
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
                             android:layout_centerInParent="true"
                             android:src="@drawable/svg_logout">
 
@@ -152,9 +152,9 @@
                     <RelativeLayout
                         android:id="@+id/button_enter_checkin"
                         android:layout_width="match_parent"
-                        android:layout_height="171dp"
+                        android:layout_height="180dp"
                         android:background="@drawable/ic_self_assessment"
-                        android:padding="10dp">
+                        android:padding="14dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -171,23 +171,23 @@
                                 android:includeFontPadding="false"
                                 android:text="@string/how_are_you_today"
                                 android:textColor="@color/white"
-                                android:textSize="12sp" />
+                                android:textSize="16sp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="20dp"
+                                android:layout_marginTop="24dp"
                                 android:fontFamily="@font/lato_bold"
                                 android:includeFontPadding="false"
                                 android:text="@string/txt_self_assessment"
                                 android:textColor="@color/white"
-                                android:textSize="32sp" />
+                                android:textSize="36sp" />
 
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="20dp"
+                                android:layout_marginTop="24dp"
                                 android:orientation="horizontal">
 
                                 <TextView
@@ -197,12 +197,12 @@
                                     android:includeFontPadding="false"
                                     android:text="@string/txt_start_now"
                                     android:textColor="@color/white"
-                                    android:textSize="18sp" />
+                                    android:textSize="22sp" />
 
                                 <ImageView
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    android:layout_marginStart="10dp"
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:layout_marginStart="14dp"
                                     android:src="@drawable/svg_right_arrow" />
 
 
@@ -217,8 +217,8 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
                             android:layout_alignParentBottom="true"
-                            android:layout_marginRight="5dp"
-                            android:layout_marginBottom="5dp"
+                            android:layout_marginRight="9dp"
+                            android:layout_marginBottom="9dp"
                             android:src="@drawable/svg_sethascope">
 
                         </ImageView>
@@ -233,9 +233,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/cardview_self_assessment"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="19dp"
+                    android:layout_marginEnd="14dp"
                     android:orientation="horizontal">
 
 
@@ -249,7 +249,7 @@
                         android:includeFontPadding="false"
                         android:text="@string/personal_pr"
                         android:textColor="@color/txt_sub_header_color"
-                        android:textSize="13sp" />
+                        android:textSize="17sp" />
 
 
                     <TextView
@@ -262,7 +262,7 @@
                         android:includeFontPadding="false"
                         android:text="@string/ppe_faq"
                         android:textColor="@color/txt_sub_header_color"
-                        android:textSize="13sp" />
+                        android:textSize="17sp" />
 
 
                 </LinearLayout>
@@ -274,8 +274,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/sub_header_view"
                     android:orientation="horizontal"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="9dp"
+                    android:layout_marginRight="9dp"
                     >
 
                     <androidx.cardview.widget.CardView
@@ -283,8 +283,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_marginVertical="10dp"
-                        android:layout_marginHorizontal="5dp"
+                        android:layout_marginVertical="14dp"
+                        android:layout_marginHorizontal="9dp"
                         app:cardCornerRadius="10dp"
                         app:cardElevation="8dp"
                         app:cardPreventCornerOverlap="false">
@@ -312,8 +312,8 @@
                         android:id="@+id/cardview_button_educational_videos"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="10dp"
-                        android:layout_marginHorizontal="5dp"
+                        android:layout_marginVertical="14dp"
+                        android:layout_marginHorizontal="9dp"
                         android:layout_weight="1"
                         app:cardCornerRadius="10dp"
                         app:cardElevation="8dp"
@@ -415,27 +415,28 @@
                      android:textSize="16sp"
                      android:textStyle="bold" />-->
 
+
                 <TextView
                     android:id="@+id/help_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/cardview_two_action_View"
+                    android:layout_marginHorizontal="14dp"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="12dp"
                     android:fontFamily="@font/lato_bold"
                     android:includeFontPadding="false"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_below="@+id/cardview_two_action_View"
+                    android:textSize="20sp"
                     android:text="@string/help"
                     android:textColor="@color/txt_sub_header_color" />
-
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardview_help"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/help_title"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginHorizontal="14dp"
+                    android:layout_marginTop="19dp"
                     app:cardCornerRadius="10sp"
                     app:cardElevation="5sp"
                     >
@@ -443,15 +444,15 @@
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="5dp">
+                        android:padding="9dp">
 
                         <RelativeLayout
                             android:id="@+id/help_relative"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginEnd="40dp">
+                            android:layout_marginTop="14dp"
+                            android:layout_marginStart="9dp"
+                            android:layout_marginEnd="44dp">
 
 
 
@@ -460,29 +461,29 @@
                                 android:id="@+id/Help_Text"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="5dp"
+                                android:layout_marginTop="9dp"
                                 android:fontFamily="@font/lato_regular"
                                 android:includeFontPadding="false"
                                 android:text="@string/if_you_star"
-                                android:textSize="14sp" />
+                                android:textSize="18sp" />
 
                             <Button
                                 android:id="@+id/Help_Watsapp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/Help_Text"
-                                android:layout_marginStart="10sp"
+                                android:layout_marginStart="14sp"
                                 android:background="@android:color/transparent"
                                 android:drawableStart="@drawable/ic_icons8_whatsapp"
                                 android:drawableLeft="@drawable/ic_icons8_whatsapp"
-                                android:drawablePadding="10sp"
-                                android:fontFamily="@font/lato_medium"
+                                android:drawablePadding="14sp"
+                                android:fontFamily="@font/lato_bold"
                                 android:gravity="start|center"
                                 android:hint=""
                                 android:textStyle="bold"
                                 android:text="@string/txt_whatsapp_helpline"
                                 android:textColor="@color/txt_sub_header_color"
-                                android:textSize="18sp" />
+                                android:textSize="22sp" />
 
                             <!-- Icon Credits:- <a target="_blank" href="https://icons8.com/icons/set/whatsapp">WhatsApp icon</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>-->
 
@@ -494,8 +495,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="bottom|right"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginBottom="8dp"
+                            android:layout_marginEnd="12dp"
+                            android:layout_marginBottom="12dp"
                             android:src="@drawable/ic_heart">
 
                         </ImageView>
@@ -512,23 +513,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/cardview_help"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginHorizontal="14dp"
+                    android:layout_marginTop="19dp"
                     app:cardCornerRadius="10sp"
                     app:cardElevation="5sp">
 
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="5dp">
+                        android:padding="9dp">
 
                         <RelativeLayout
                             android:id="@+id/mental_help_relative"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginEnd="40dp">
+                            android:layout_marginTop="14dp"
+                            android:layout_marginStart="9dp"
+                            android:layout_marginEnd="44dp">
 
                          <!--   <TextView
                                 android:id="@+id/mental_help_title"
@@ -545,25 +546,26 @@
                                 android:id="@+id/mental_Help_Text"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="5dp"
+                                android:layout_marginTop="9dp"
                                 android:fontFamily="@font/lato_regular"
                                 android:includeFontPadding="false"
                                 android:text="@string/tele_consultant_text"
-                                android:textSize="14sp" />
+                                android:textSize="18sp" />
 
                             <TextView
                                 android:id="@+id/tv_mental_help_request"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/mental_Help_Text"
-                                android:layout_marginStart="10sp"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginBottom="10dp"
+                                android:layout_marginStart="14sp"
+                                android:layout_marginTop="14dp"
+                                android:layout_marginBottom="14dp"
                                 android:background="@android:color/transparent"
                                 android:fontFamily="@font/lato_bold"
                                 android:gravity="start|center"
                                 android:hint=""
-                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                android:textSize="24sp"
                                 android:text="@string/teleconsult_request"
                                 android:textColor="@color/txt_sub_header_color" />
 
@@ -577,9 +579,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="bottom|right"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="8dp"
+                            android:layout_marginEnd="12dp"
+                            android:layout_marginTop="14dp"
+                            android:layout_marginBottom="12dp"
                             android:src="@mipmap/ic_mental_health">
 
                         </ImageView>
@@ -594,23 +596,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/mental_cardview_help"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginHorizontal="14dp"
+                    android:layout_marginTop="19dp"
                     app:cardCornerRadius="10sp"
                     app:cardElevation="5sp">
 
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="5dp">
+                        android:padding="9dp">
 
                         <RelativeLayout
                             android:id="@+id/ppe_help_relative"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginEnd="40dp">
+                            android:layout_marginTop="14dp"
+                            android:layout_marginStart="9dp"
+                            android:layout_marginEnd="44dp">
 
                             <!--   <TextView
                                    android:id="@+id/mental_help_title"
@@ -626,37 +628,37 @@
                                 android:id="@+id/ppe_Help_Text"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="5dp"
+                                android:layout_marginTop="9dp"
                                 android:fontFamily="@font/lato_medium"
                                 android:includeFontPadding="false"
                                 android:text="@string/ppe_req_header"
-                                android:textSize="14sp" />
+                                android:textSize="18sp" />
 
 
                             <TextView
                                 android:id="@+id/ppe_Help_Text1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="5dp"
+                                android:layout_marginTop="9dp"
                                 android:layout_below="@+id/ppe_Help_Text"
                                 android:fontFamily="@font/lato_regular"
                                 android:includeFontPadding="false"
                                 android:text="@string/ppe_req_sub_header"
-                                android:textSize="14sp" />
+                                android:textSize="18sp" />
 
                             <TextView
                                 android:id="@+id/tv_ppe_request"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/ppe_Help_Text1"
-                                android:layout_marginStart="10sp"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginBottom="10dp"
+                                android:layout_marginStart="14sp"
+                                android:layout_marginTop="14dp"
+                                android:layout_marginBottom="14dp"
                                 android:background="@android:color/transparent"
                                 android:fontFamily="@font/lato_bold"
                                 android:gravity="start|center"
                                 android:hint=""
-                                android:textSize="18sp"
+                                android:textSize="22sp"
                                 android:text="@string/ppe_req"
                                 android:textColor="@color/txt_sub_header_color" />
 
@@ -667,11 +669,11 @@
 
 
                         <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
                             android:layout_gravity="bottom|right"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="12dp"
+                            android:layout_marginTop="14dp"
                             android:src="@drawable/svg_mask">
 
                         </ImageView>
@@ -687,21 +689,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/ppe_cardView_request"
-                    android:layout_marginTop="15sp"
+                    android:layout_marginTop="19sp"
                     android:fontFamily="@font/lato_bold"
-                    android:padding="10sp"
-                    android:paddingStart="15sp"
+                    android:padding="14sp"
+                    android:paddingStart="19sp"
                     android:text="@string/your_check_in_overview"
                     android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                    android:textSize="20sp" />
+                    android:textSize="24sp" />
 
                 <TextView
                     android:id="@+id/tv_no_visit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/your_data_overview"
-                    android:layout_marginTop="10sp"
-                    android:padding="10sp"
+                    android:layout_marginTop="14sp"
+                    android:padding="14sp"
                     android:gravity="center"
                     android:textColor="@null"
                     android:text="You don't have any visit."

@@ -1,5 +1,17 @@
 <resources>
 
     <dimen name="physical_exam_img_max_height">200dp</dimen>
+    //Visit Summary Screen
+    <dimen name="padding_visit_summary_screen">14dp</dimen>
+    <dimen name="padding_card">20dp</dimen>
+    <dimen name="padding_card_action">12dp</dimen>
+    <dimen name="padding_card_title_text">12dp</dimen>
+    <dimen name="card_corner_radius">0dp</dimen>
+    <dimen name="card_title_text_size">32sp</dimen>
+    <dimen name="card_content_text_size">22sp</dimen>
+    <dimen name="edit_icon_height">32dp</dimen>
+    <dimen name="edit_icon_width">32dp</dimen>
+    <dimen name="appbar_padding_top">12dp</dimen>
 
+    <dimen name="text_18sp">22sp</dimen>
 </resources>
