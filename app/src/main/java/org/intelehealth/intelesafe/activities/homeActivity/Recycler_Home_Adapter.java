@@ -162,10 +162,17 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
                     visitText.setText("Visit no." + (i + 1) + "-\t\t" + array_message.get(i));
                     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                             LinearLayout.LayoutParams.WRAP_CONTENT);
-                    params.setMargins(0, 8, 0, 8);
-                    visitText.setLayoutParams(params);
-                    visitText.setPadding(5, 10, 5, 10);
-                    visitText.setTextSize(14);
+                    if(mcontext.getResources().getBoolean(R.bool.isTab)) {
+                        params.setMargins(0, 12, 0, 12);
+                        visitText.setLayoutParams(params);
+                        visitText.setPadding(9, 14, 9, 14);
+                        visitText.setTextSize(20);
+                    } else {
+                        params.setMargins(0, 8, 0, 8);
+                        visitText.setLayoutParams(params);
+                        visitText.setPadding(5, 10, 5, 10);
+                        visitText.setTextSize(14);
+                    }
                     visitText.setTextColor(mcontext.getResources().getColor(R.color.colorPrimary));
                     Typeface typeface = ResourcesCompat.getFont(mcontext, R.font.lato_regular);
                     visitText.setTypeface(typeface);
