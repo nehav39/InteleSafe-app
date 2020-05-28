@@ -1,7 +1,5 @@
 package org.intelehealth.intelesafe.activities.homeActivity;
 
-import android.Manifest;
-import android.accounts.Account;
 //import android.accounts.AccountManager;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -32,8 +30,7 @@ import android.os.Environment;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
 
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.FileProvider;
+        import androidx.core.content.FileProvider;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -68,8 +65,7 @@ import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
+        import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
@@ -80,6 +76,7 @@ import java.util.UUID;
 
 import org.intelehealth.intelesafe.BuildConfig;
 import org.intelehealth.intelesafe.R;
+import org.intelehealth.intelesafe.activities.CardGuidelines.Card_Guidelines;
 import org.intelehealth.intelesafe.activities.loginActivity.LoginActivity;
 import org.intelehealth.intelesafe.activities.physcialExamActivity.PhysicalExamActivity;
 import org.intelehealth.intelesafe.activities.settingsActivity.SettingsActivity;
@@ -1036,7 +1033,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.button_home_quarantine:
-                Intent i = new Intent(this,Card_Guidelines.class);
+                Intent i = new Intent(this, Card_Guidelines.class);
                 i.putExtra("PPE_1", 1);
                 startActivity(i);
                 break;
