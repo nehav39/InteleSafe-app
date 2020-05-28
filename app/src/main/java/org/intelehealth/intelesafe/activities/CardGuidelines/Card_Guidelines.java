@@ -43,41 +43,46 @@ public class Card_Guidelines extends AppCompatActivity {
                 model_cardGuidelines.add(new Model_CardGuidelines("Title A3", "Descrip A3"));
                 recyclerAdapter_cardGuidelines =
                         new RecyclerAdapter_CardGuidelines(context, model_cardGuidelines);
+                recyclerView.setAdapter(recyclerAdapter_cardGuidelines);
             }
             else if (bundle.containsKey("PPE_2")) {
                 model_cardGuidelines_1.add(new Model_CardGuidelines("Title B1", "Descrp B1"));
                 model_cardGuidelines_1.add(new Model_CardGuidelines("Title B2", "Descrip B2"));
                 model_cardGuidelines_1.add(new Model_CardGuidelines("Title B3", "Descrip B3"));
                 recyclerAdapter_cardGuidelines =
-                        new RecyclerAdapter_CardGuidelines(context, model_cardGuidelines);
+                        new RecyclerAdapter_CardGuidelines(context, model_cardGuidelines_1);
+                recyclerView.setAdapter(recyclerAdapter_cardGuidelines);
             }
             else if (bundle.containsKey("PPE_3")) {
                 model_cardGuidelines_2.add(new Model_CardGuidelines("Title C1", "Descrp C1"));
                 model_cardGuidelines_2.add(new Model_CardGuidelines("Title C2", "Descrip C2"));
                 model_cardGuidelines_2.add(new Model_CardGuidelines("Title C3", "Descrip C3"));
                 recyclerAdapter_cardGuidelines =
-                        new RecyclerAdapter_CardGuidelines(context, model_cardGuidelines);
+                        new RecyclerAdapter_CardGuidelines(context, model_cardGuidelines_2);
+                recyclerView.setAdapter(recyclerAdapter_cardGuidelines);
             }
             else if (bundle.containsKey("PPE_4")) {
                 model_cardGuidelines_3.add(new Model_CardGuidelines("Title D1", "Descrp D1"));
                 model_cardGuidelines_3.add(new Model_CardGuidelines("Title D2", "Descrip D2"));
                 model_cardGuidelines_3.add(new Model_CardGuidelines("Title D3", "Descrip D3"));
                 recyclerAdapter_cardGuidelines =
-                        new RecyclerAdapter_CardGuidelines(context, model_cardGuidelines);
+                        new RecyclerAdapter_CardGuidelines(context, model_cardGuidelines_3);
+                recyclerView.setAdapter(recyclerAdapter_cardGuidelines);
             }
-            else if (bundle.containsKey("PPE_1")) {
+            else if (bundle.containsKey("PPE_5")) {
                 model_cardGuidelines_4.add(new Model_CardGuidelines("Title E1", "Descrp E1"));
                 model_cardGuidelines_4.add(new Model_CardGuidelines("Title E2", "Descrip E2"));
                 model_cardGuidelines_4.add(new Model_CardGuidelines("Title E3", "Descrip E3"));
                 recyclerAdapter_cardGuidelines =
-                        new RecyclerAdapter_CardGuidelines(context, model_cardGuidelines);
+                        new RecyclerAdapter_CardGuidelines(context, model_cardGuidelines_4);
+                recyclerView.setAdapter(recyclerAdapter_cardGuidelines);
             }
             else {
                 Toast.makeText(context, "No Card Error", Toast.LENGTH_SHORT).show();
             }
         }
 
-        recyclerView.setAdapter(recyclerAdapter_cardGuidelines);
+
 
     }
 }

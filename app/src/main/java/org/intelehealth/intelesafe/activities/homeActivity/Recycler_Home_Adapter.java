@@ -56,35 +56,6 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int position) {
-        //SimpleDateFormat currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-
-    /*    try {
-            Date first_visit = currentDate.parse(arrayList.get(position).getDate());
-            Date array_visit = currentDate.parse(arrayList.get(position+1).getDate());
-
-            if((array_visit.getTime() > first_visit.getTime() || arrayList.size() > 0) &&
-            array_visit.getTime() != first_visit.getTime())
-            //25 after 26 -> true. --- 26 before 25 -> true.
-            {
-                myViewHolder.day_text.setText(arrayList.get(position).getDay());
-                StringBuilder stringBuilder = new StringBuilder(arrayList.get(position).getDate());
-                int a1 = stringBuilder.indexOf("T");
-                myViewHolder.date_text.setText(stringBuilder.substring(0, a1));
-                Log.d("GG","GG: "+stringBuilder.substring(0, a1));
-                Log.d("GG","GG_1: "+myViewHolder.date_text.getText().toString());
-            }
-            else
-            {
-                Toast.makeText(mcontext, "Hello", Toast.LENGTH_SHORT).show();
-                myViewHolder.cardView.setVisibility(View.GONE);
-            }
-
-        }
-        catch (Exception e)
-        {
-
-        }*/
-
 
         myViewHolder.day_text.setText(arrayList.get(position).getDay());
 //        StringBuilder stringBuilder = new StringBuilder(arrayList.get(position).getDate());
