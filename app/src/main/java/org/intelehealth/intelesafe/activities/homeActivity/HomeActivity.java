@@ -142,7 +142,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     TextView lastSyncAgo;
     TextView welcomeUser;
     Button manualSyncButton;
-    RelativeLayout enter_check_in, home_quarantine_guidelines, educational_videos, user_logout; // modified by Venu N on 01/04/2020
+    RelativeLayout enter_check_in, home_quarantine_guidelines,
+            educational_videos, educational_videos_1, educational_videos_2, educational_videos_3, user_logout; // modified by Venu N on 01/04/2020
     IntentFilter filter;
     Myreceiver reMyreceive;
     SyncUtils syncUtils = new SyncUtils();
@@ -340,7 +341,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         enter_check_in = findViewById(R.id.button_enter_checkin);
         home_quarantine_guidelines = findViewById(R.id.button_home_quarantine);
+        home_quarantine_guidelines.setOnClickListener(this);
         educational_videos = findViewById(R.id.button_educational_videos);
+        educational_videos.setOnClickListener(this);
+        educational_videos_1 = findViewById(R.id.button_educational_videos_1);
+        educational_videos_1.setOnClickListener(this);
+        educational_videos_2 = findViewById(R.id.button_educational_videos_2);
+        educational_videos_2.setOnClickListener(this);
+        educational_videos_3 = findViewById(R.id.button_educational_videos_3);
+        educational_videos_3.setOnClickListener(this);
+
         welcomeUser = findViewById(R.id.welcomeUser);
 
         welcomeUser.setText("" + sessionManager.getUserName());
@@ -356,19 +366,19 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        home_quarantine_guidelines.setOnClickListener(new View.OnClickListener() {
+    /*    home_quarantine_guidelines.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Intent home_quarantine = new Intent(Intent.ACTION_VIEW,
+                *//*Intent home_quarantine = new Intent(Intent.ACTION_VIEW,
                         Uri.parse("http://www.intelehealth.org/ppe-guidelines"));
-                startActivity(home_quarantine);*/
+                startActivity(home_quarantine);*//*
 
                 Intent ppe = new Intent(HomeActivity.this, Webview.class);
                 ppe.putExtra("PPE", 1);
                 startActivity(ppe);
             }
         });
-
+*/
 /*
         home_quarantine_guidelines.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -404,18 +414,18 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 */
 
 
-        educational_videos.setOnClickListener(new View.OnClickListener() {
+      /*  educational_videos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //open youtube page.
-                /*startActivity
+                *//*startActivity
                         (new Intent(Intent.ACTION_VIEW,
-                                Uri.parse("http://www.intelehealth.org/ppe-faqs")));*/
+                                Uri.parse("http://www.intelehealth.org/ppe-faqs")));*//*
                 Intent faq = new Intent(HomeActivity.this, Webview.class);
                 faq.putExtra("FAQ", 1);
                 startActivity(faq);
             }
-        });
+        });*/
         Logger.logD(TAG, "onCreate: " + getFilesDir().toString());
         // lastSyncTextView = findViewById(R.id.lastsynctextview);
         // lastSyncAgo = findViewById(R.id.lastsyncago);
@@ -1023,6 +1033,36 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.tv_ppe_request:
                 showAlertToRequestPPE();
+                break;
+
+            case R.id.button_home_quarantine:
+                Intent i = new Intent(this,Card_Guidelines.class);
+                i.putExtra("PPE_1", 1);
+                startActivity(i);
+                break;
+
+            case R.id.button_educational_videos:
+                Intent i1 = new Intent(this,Card_Guidelines.class);
+                i1.putExtra("PPE_2", 2);
+                startActivity(i1);
+                break;
+
+            case R.id.button_educational_videos_1:
+                Intent i2 = new Intent(this,Card_Guidelines.class);
+                i2.putExtra("PPE_3", 3);
+                startActivity(i2);
+                break;
+
+            case R.id.button_educational_videos_2:
+                Intent i3 = new Intent(this,Card_Guidelines.class);
+                i3.putExtra("PPE_4", 4);
+                startActivity(i3);
+                break;
+
+            case R.id.button_educational_videos_3:
+                Intent i4 = new Intent(this,Card_Guidelines.class);
+                i4.putExtra("PPE_5", 5);
+                startActivity(i4);
                 break;
         }
     }

@@ -367,7 +367,7 @@
                             app:cardPreventCornerOverlap="true">
 
                             <RelativeLayout
-                                android:id="@+id/button_educational_videos"
+                                android:id="@+id/button_educational_videos_1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="bottom">
@@ -404,7 +404,7 @@
                             app:cardPreventCornerOverlap="true">
 
                             <RelativeLayout
-                                android:id="@+id/button_educational_videos"
+                                android:id="@+id/button_educational_videos_2"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="bottom">
@@ -433,7 +433,7 @@
                             app:cardPreventCornerOverlap="true">
 
                             <RelativeLayout
-                                android:id="@+id/button_educational_videos"
+                                android:id="@+id/button_educational_videos_3"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="bottom">
