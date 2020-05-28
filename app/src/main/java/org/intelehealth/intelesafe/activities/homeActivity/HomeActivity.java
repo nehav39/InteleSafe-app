@@ -1034,31 +1034,31 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.button_home_quarantine:
                 Intent i = new Intent(this, Card_Guidelines.class);
-                i.putExtra("PPE_1", 1);
+                i.putExtra("PPE_1", "PPE_1");
                 startActivity(i);
                 break;
 
             case R.id.button_educational_videos:
                 Intent i1 = new Intent(this,Card_Guidelines.class);
-                i1.putExtra("PPE_2", 2);
+                i1.putExtra("PPE_2", "PPE_2");
                 startActivity(i1);
                 break;
 
             case R.id.button_educational_videos_1:
                 Intent i2 = new Intent(this,Card_Guidelines.class);
-                i2.putExtra("PPE_3", 3);
+                i2.putExtra("PPE_3", "PPE_3");
                 startActivity(i2);
                 break;
 
             case R.id.button_educational_videos_2:
                 Intent i3 = new Intent(this,Card_Guidelines.class);
-                i3.putExtra("PPE_4", 4);
+                i3.putExtra("PPE_4", "PPE_4");
                 startActivity(i3);
                 break;
 
             case R.id.button_educational_videos_3:
                 Intent i4 = new Intent(this,Card_Guidelines.class);
-                i4.putExtra("PPE_5", 5);
+                i4.putExtra("PPE_5", "PPE_5");
                 startActivity(i4);
                 break;
         }

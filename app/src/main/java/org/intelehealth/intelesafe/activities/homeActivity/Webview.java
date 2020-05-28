@@ -36,12 +36,16 @@ public class Webview extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         if(bundle != null) {
-            if(bundle.containsKey("FAQ")) {
+            if(bundle.containsKey("Webview0PPE_1")) {
                 setTitle("FAQ's");
                 webUrl = "https://www.intelehealth.org/ppe-faqs"; // FAQs url
-            } else if(bundle.containsKey("PPE")) {
+            } else if(bundle.containsKey("Webview1PPE_2")) {
                 setTitle("PPE Guidelines");
                 webUrl = "https://www.intelehealth.org/ppe-guidelines"; // PPE url
+            }
+            else
+            {
+                webUrl = "https://www.intelehealth.org";
             }
             webView.loadUrl(webUrl);
             webView.getSettings().setJavaScriptEnabled(true);
