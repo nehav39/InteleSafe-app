@@ -1,10 +1,13 @@
 package org.intelehealth.intelesafe.activities.CardGuidelines;
 
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.List;
 
 /**
  * Created by Prajwal Waingankar
@@ -14,6 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 public class RecyclerAdapter_CardGuidelines extends RecyclerView.Adapter<RecyclerAdapter_CardGuidelines.MyViewModel> {
+
+    public RecyclerAdapter_CardGuidelines(Context context, List<Model_CardGuidelines> model_cardGuidelines) {
+    }
 
     @NonNull
     @Override
