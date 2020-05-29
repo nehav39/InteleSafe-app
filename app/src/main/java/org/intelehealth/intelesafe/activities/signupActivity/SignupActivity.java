@@ -180,7 +180,8 @@ public class SignupActivity extends AppCompatActivity {
     private TextInputEditText mEmailView;
     private EditText mPasswordView;
     private EditText mCPassword;
-
+    private EditText emailId;
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 //    private UserSignupData userSignupData;
 //    private List<UserSignupData.Person> personList = new ArrayList<>();
 
@@ -239,7 +240,7 @@ public class SignupActivity extends AppCompatActivity {
 
         mLastName = findViewById(R.id.identification_last_name);
         mLastName.setFilters(new InputFilter[]{new InputFilter.LengthFilter(41), inputFilter_Name}); //maxlength 41
-
+        emailId  = findViewById(R.id.identification_email);
         mEmailView = findViewById(R.id.email);
 
 
@@ -711,6 +712,18 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }
 
+                if(emailId.getText().toString().isEmpty()) {
+                    emailId.setError(getString(R.string.error_field_required));
+                    emailId.requestFocus();
+                    return;
+                }else {
+                    if (emailId.getText().toString().trim().matches(emailPattern)) {
+                    } else {
+                        emailId.setError(getString(R.string.error_invalid_email_address));
+                        emailId.requestFocus();
+                        return;
+                    }
+                }
 
                 // commented by venu  N on 04/04/2020.
                /* if (licenseID.getText().toString().equals("")) {

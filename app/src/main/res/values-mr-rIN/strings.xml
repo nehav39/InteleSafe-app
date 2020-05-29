@@ -113,6 +113,7 @@
     <string name="error_invalid_password" translatable="false">This password is too short</string>
     <string name="error_incorrect_password" translatable="false">please check username and password entered</string>
     <string name="error_field_required" translatable="false">This field is required</string>
+    <string name="error_invalid_email_address" translatable="false">Invalid email address</string>
     <string name="error_network" translatable="false">Network Error</string>
     <string name="error_location_not_selected" translatable="false">Please select a value form the location dropdown</string>
     <string name="error_location_not_fetched" translatable="false">Unable to fetch locations</string>
@@ -120,6 +121,12 @@
     </string>
     <string name="device_id" translatable="false">Device ID:</string>
 
+    // Forgot Activity
+    <string name="title_activity_forgot" translatable="false">Forgot Password</string>
+    <string name="email_id" translatable="false">Email ID</string>
+    <string name="forgot_title" translatable="false">Please enter your registered email ID</string>
+    <string name="verification_code" translatable="false">Please enter your verification code</string>
+    <string name="new_password" translatable="false">Please enter a new password</string>
 
     <string name="cant_login_user" translatable="false">Forgot password?</string>
     <string name="email_link" translatable="false"> To reset your password send an email to support@intelehealth.io</string>
@@ -141,6 +148,7 @@
     <string name="identification_screen_prompt_first_name">First name*</string>
     <string name="identification_screen_prompt_middle_name">Middle name</string>
     <string name="identification_screen_prompt_last_name">Last name*</string>
+    <string name="identification_screen_prompt_email">Email*</string>
     <string name="identification_screen_prompt_address">Address line 1</string>
     <string name="identification_screen_prompt_address2">Address line 2</string>
     <string name="identification_screen_prompt_phone_number">Mobile Number*</string>

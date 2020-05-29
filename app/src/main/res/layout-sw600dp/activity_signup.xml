@@ -159,6 +159,25 @@
 
                         </com.google.android.material.textfield.TextInputLayout>
 
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/identification_email"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:autofillHints="@string/action_settings"
+                                android:ems="10"
+                                android:freezesText="true"
+                                android:hint="@string/identification_screen_prompt_email"
+                                android:imeOptions="actionUnspecified"
+                                android:inputType="textWebEmailAddress"
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                android:textAppearance="@style/sign_up_input"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
 
 
                        <!-- <Space

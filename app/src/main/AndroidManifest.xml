@@ -220,7 +220,11 @@
             android:label="Signup"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-
+        <activity
+            android:name=".activities.forgotActivity.ForgotPasswordActivity"
+            android:label="@string/title_activity_forgot"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <meta-data
             android:name="firebase_crashlytics_collection_enabled"
             android:value="true" />
