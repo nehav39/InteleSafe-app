@@ -23,6 +23,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Locale;
+import java.util.Objects;
 
 import org.intelehealth.intelesafe.R;
 import org.intelehealth.intelesafe.activities.signupActivity.SignupActivity;
@@ -56,7 +57,7 @@ public class PrivacyNotice_Activity extends AppCompatActivity {
          * Add the below lines for every activity*/
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,11 +1,13 @@
 package org.intelehealth.intelesafe.activities.CardGuidelines;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import org.intelehealth.intelesafe.R;
@@ -24,6 +26,21 @@ public class Card_Guidelines extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card__guidelines);
+        setTitle("Card Guidelines");
+
+        /*
+         * Toolbar which displays back arrow on action bar
+         * Add the below lines for every activity*/
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         Bundle bundle = getIntent().getExtras();
         model_cardGuidelines = new ArrayList<>();
