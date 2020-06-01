@@ -122,8 +122,8 @@ dependencies {
     implementation "com.google.firebase:firebase-messaging:17.3.4"
     implementation 'com.google.firebase:firebase-crash:16.2.1'
 
-
-    implementation 'com.facebook.android:facebook-android-sdk:[5,6)' //facebook sdk
+    //facebook sdk
+    implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
 
 }
 apply plugin: 'com.google.gms.google-services'  // Google Play services Gradle plugin

@@ -656,6 +656,6 @@
 
 
     //Facebook SDK - Prajwal
-    <string name="facebook_app_id">org.intelehealth.intelesafe</string>
-    <string name="fb_login_protocol_scheme">307013896947807</string>
+    <string name="facebook_app_id">307013896947807</string>
+    <string name="fb_login_protocol_scheme">fb307013896947807</string>
 </resources>
