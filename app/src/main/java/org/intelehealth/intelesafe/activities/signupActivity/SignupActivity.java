@@ -2,7 +2,7 @@ package org.intelehealth.intelesafe.activities.signupActivity;
 
 
 import android.accounts.Account;
-import android.accounts.AccountManager;
+//import android.accounts.AccountManager;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
@@ -12,13 +12,16 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.StrictMode;
+
 import androidx.annotation.Nullable;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Spanned;
@@ -202,10 +205,12 @@ public class SignupActivity extends AppCompatActivity {
     Pattern lowerCasePatten = Pattern.compile("[a-z ]");
     Pattern digitCasePatten = Pattern.compile("[0-9 ]");
 
-    protected AccountManager manager;
+   // protected AccountManager manager;
 
     private TextInputLayout input_state_field, input_state_spinner; //  state a text box if country is not India so that user can enter their state
     private EditText edt_state;
+
+    private ImageView image_username_valid;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -225,11 +230,12 @@ public class SignupActivity extends AppCompatActivity {
         });
 
         progress = new ProgressDialog(SignupActivity.this);
-
+        progress.setCancelable(false);
+        progress.setCanceledOnTouchOutside(false);
         i_privacy = getIntent();
         privacy_value = i_privacy.getStringExtra("privacy"); //privacy_accept value retrieved from previous act.
         sessionManager = new SessionManager(this);
-        manager = AccountManager.get(SignupActivity.this);
+        //manager = AccountManager.get(SignupActivity.this);
 
         mFirstName = findViewById(R.id.identification_first_name);
         mFirstName.setFilters(new InputFilter[]{new InputFilter.LengthFilter(41), inputFilter_Name}); //maxlength 41
@@ -242,7 +248,8 @@ public class SignupActivity extends AppCompatActivity {
 
         mEmailView = findViewById(R.id.email);
 
-
+        image_username_valid = findViewById(R.id.image_username_valid);
+        image_username_valid.setVisibility(View.GONE);
         mEmailView.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -251,16 +258,17 @@ public class SignupActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-               // mEmailView.setError("");
+                // mEmailView.setError("");
+                image_username_valid.setVisibility(View.GONE);
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-               if(editable.length() == 8){
-                   InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
-                   imm.hideSoftInputFromWindow(mEmailView.getWindowToken(), 0);
-                   checkUserExistsOrNot(mEmailView.getText().toString());
-               }
+                if (editable.length() == 8) {
+                    InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(mEmailView.getWindowToken(), 0);
+                    checkUserExistsOrNot(mEmailView.getText().toString());
+                }
             }
         });
 
@@ -729,18 +737,21 @@ public class SignupActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(userName)) {
                     mEmailView.setError(getString(R.string.error_field_required));
                     mEmailView.requestFocus();
+                    image_username_valid.setVisibility(View.GONE);
                     return;
                 }
 
                 if (userName.length() < 8) {
                     mEmailView.setError(getString(R.string.username_10digits));
+                    image_username_valid.setVisibility(View.GONE);
                     mEmailView.requestFocus();
                     return;
                 }
 
-                if(isUSerExistsAlready){
-                    Toast.makeText(context, getString(R.string.txt_user_exists)+"Please try with another.", Toast.LENGTH_LONG).show();
+                if (isUSerExistsAlready) {
+                    Toast.makeText(context, getString(R.string.txt_user_exists) + "Please try with another.", Toast.LENGTH_LONG).show();
                     mEmailView.setError(getString(R.string.txt_user_exists));
+                    image_username_valid.setVisibility(View.GONE);
                     mEmailView.requestFocus();
                     return;
                 }
@@ -892,8 +903,8 @@ public class SignupActivity extends AppCompatActivity {
                 if (country.equalsIgnoreCase("") || country.equalsIgnoreCase("Select Country")) {
                     Toast.makeText(context, getString(R.string.please_select_country), Toast.LENGTH_LONG).show();
                     return;
-                }else{
-                    if(country.equalsIgnoreCase("India")){
+                } else {
+                    if (country.equalsIgnoreCase("India")) {
                         isNotIndia = false;
                     }
                 }
@@ -1101,7 +1112,7 @@ public class SignupActivity extends AppCompatActivity {
         UrlModifiers urlModifiers = new UrlModifiers();
         String urlString = urlModifiers.setRegistrationURL();
         encoded = base64Utils.encoded("admin", "Admin123");
-        Observable<ClsUserGetResponse> userGetResponse = AppConstants.apiInterface.getUsersFromServer(urlString,"Basic " +encoded);
+        Observable<ClsUserGetResponse> userGetResponse = AppConstants.apiInterface.getUsersFromServer(urlString, "Basic " + encoded, enteredUserName);
         userGetResponse.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new DisposableObserver<ClsUserGetResponse>() {
@@ -1109,15 +1120,24 @@ public class SignupActivity extends AppCompatActivity {
                     public void onNext(ClsUserGetResponse clsUserGetResponse) {
                         progress.dismiss();
                         List<ResultsItem> resultList = clsUserGetResponse.getResults();
-                        ResultsItem objResultsItem  = new ResultsItem();
+                        if (resultList == null || resultList.size() == 0) {
+                            isUSerExistsAlready = false;
+                            image_username_valid.setVisibility(View.VISIBLE);
+                        } else {
+                            image_username_valid.setVisibility(View.GONE);
+                            isUSerExistsAlready = true;
+                            mEmailView.setError(getString(R.string.txt_user_exists));
+                            mEmailView.requestFocus();
+                        }
+                         /*ResultsItem objResultsItem  = new ResultsItem();
                         objResultsItem.setDisplay(enteredUserName);
-                        if(resultList.contains(objResultsItem)){
+                       if(resultList.contains(objResultsItem)){
                             isUSerExistsAlready = true;
                             mEmailView.setError(getString(R.string.txt_user_exists));
                             mEmailView.requestFocus();
                         }else{
                             isUSerExistsAlready = false;
-                        }
+                        }*/
                     }
 
                     @Override
@@ -1489,6 +1509,7 @@ public class SignupActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         Log.v(TAG, "Result Received");
         if (requestCode == CameraActivity.TAKE_IMAGE) {
             Log.v(TAG, "Request Code " + CameraActivity.TAKE_IMAGE);
@@ -1556,21 +1577,22 @@ public class SignupActivity extends AppCompatActivity {
 //                                        encoded = base64Utils.encoded(userName, password);
                                         sessionManager.setEncoded(encoded);
 
-                                        final Account account = new Account(userName, "io.intelehealth.openmrs");
-                                        manager.addAccountExplicitly(account, password, null);
+                                        //Commented by Venu For Account Manager Issue.
+                                      /*  final Account account = new Account(userName, "io.intelehealth.openmrs");
+                                        manager.addAccountExplicitly(account, password, null);*/
 
                                         sessionManager.setLocationName("" + userAddressData.getCountyDistrict());
                                         sessionManager.setLocationUuid("b56d5d16-bf89-4ac0-918d-e830fbfba290");
                                         sessionManager.setLocationDescription("In Maharashtra State");
                                         sessionManager.setServerUrl(BuildConfig.CLEAN_URL);
-                                        sessionManager.setServerUrlRest("http://" + BuildConfig.CLEAN_URL + "/openmrs/ws/rest/v1/");
-                                        sessionManager.setServerUrlBase("http://" + BuildConfig.CLEAN_URL + "/openmrs");
-                                        sessionManager.setBaseUrl("http://" + BuildConfig.CLEAN_URL + "/openmrs/ws/rest/v1/");
+                                        sessionManager.setServerUrlRest("https://" + BuildConfig.CLEAN_URL + "/openmrs/ws/rest/v1/");
+                                        sessionManager.setServerUrlBase("https://" + BuildConfig.CLEAN_URL + "/openmrs");
+                                        sessionManager.setBaseUrl("https://" + BuildConfig.CLEAN_URL + "/openmrs/ws/rest/v1/");
 //                                        sessionManager.setSetupComplete(true);
 
                                         Parse.initialize(new Parse.Configuration.Builder(getApplicationContext())
                                                 .applicationId(AppConstants.IMAGE_APP_ID)
-                                                .server("http://" + BuildConfig.CLEAN_URL + "/parse/")
+                                                .server("https://" + BuildConfig.CLEAN_URL + "/parse/")
                                                 .build()
                                         );
 

@@ -53,6 +53,7 @@ public class SessionManager {
     private static final String CURRENT_LANG = "CURRENT_LANG";
     private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
     private static final String FIRST_CHECKIN = "FIRST_CHECKIN";
+    private static final String DB_CLEAR = "DB_CLEAR";
     // LogCat tag
     private static String TAG = SessionManager.class.getSimpleName();
     // Shared Preferences
@@ -82,7 +83,7 @@ public class SessionManager {
     }
 
     public String getBaseUrl() {
-        return pref.getString(BASE_URL, "http://openmrs.intelehealth.io");
+        return pref.getString(BASE_URL, "https://openmrs.intelehealth.io");
     }
 
     public void setBaseUrl(String baseUrl) {
@@ -231,6 +232,15 @@ public class SessionManager {
 
     public void setCurrentLang(String lang) {
         editor.putString(CURRENT_LANG, lang);
+        editor.commit();
+    }
+
+    public String getDBCLEAR() {
+        return pref.getString(DB_CLEAR, "");
+    }
+
+    public void setDBCLEAR(String flag) {
+        editor.putString(DB_CLEAR, flag);
         editor.commit();
     }
 
@@ -437,7 +447,7 @@ public class SessionManager {
     }
 
     public String getMindMapServerUrl() {
-        return pref.getString(MIND_MAP_SERVER_URL, "http://mindmaps2.intelehealth.io");
+        return pref.getString(MIND_MAP_SERVER_URL, "https://mindmaps2.intelehealth.io");
     }  //getting the sync value  and time and saving in the sharedpref
 
     public void setMindMapServerUrl(String mindMapServerUrl) {

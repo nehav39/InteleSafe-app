@@ -521,7 +521,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
                 startActivity(new Intent(Intent.ACTION_VIEW,
                         Uri.parse(
-                                String.format("http://api.whatsapp.com/send?phone=%s&text=%s",
+                                String.format("https://api.whatsapp.com/send?phone=%s&text=%s",
                                         phoneNumberWithCountryCode, message))));
             }
         });
@@ -1897,7 +1897,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
                 //SyncDAO syncDAO = new SyncDAO();
                 //syncDAO.pushDataApi();
-                syncUtils.syncForeground("survey"); //Sync function will work in foreground of app and
+//                syncUtils.syncForeground("survey"); //Sync function will work in foreground of app and
                 // the Time will be changed for last sync.
 
 //               sessionManager.removeVisitSummary(patientUuid, visitUuid);
@@ -2393,7 +2393,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_mental_help_request:
-                Uri uri = Uri.parse("http://www.intelehealth.org/mental-health-consult"); // missing 'http://' will cause crashed
+                Uri uri = Uri.parse("https://www.intelehealth.org/mental-health-consult"); // missing 'http://' will cause crashed
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
         }

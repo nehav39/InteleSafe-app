@@ -36,7 +36,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.homeActivity.Webview"></activity>
+
+        <activity android:name=".activities.CardGuidelines.Card_Guidelines"
+            android:label="Card Guidelines"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <activity android:name=".activities.homeActivity.Webview" />
 
         <receiver
             android:name=".activities.homeActivity.DeviceBootReceiver"
@@ -224,7 +231,7 @@
         <meta-data
             android:name="firebase_crashlytics_collection_enabled"
             android:value="true" />
-      
+
         <provider
             android:name=".activities.searchPatientActivity.SearchSuggestionProvider"
             android:authorities="org.intelehealth.intelesafe.activities.searchPatientActivity.SearchSuggestionProvider"

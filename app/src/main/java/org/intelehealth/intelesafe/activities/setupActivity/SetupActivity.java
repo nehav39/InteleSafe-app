@@ -1,7 +1,7 @@
 package org.intelehealth.intelesafe.activities.setupActivity;
 
 import android.accounts.Account;
-import android.accounts.AccountManager;
+//import android.accounts.AccountManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -84,7 +84,7 @@ public class SetupActivity extends AppCompatActivity {
     private static final int PERMISSION_ALL = 1;
     private long createdRecordsCount = 0;
 
-    protected AccountManager manager;
+   // protected AccountManager manager;
     UrlModifiers urlModifiers = new UrlModifiers();
     Base64Utils base64Utils = new Base64Utils();
     String encoded = null;
@@ -119,7 +119,7 @@ public class SetupActivity extends AppCompatActivity {
         getSupportActionBar();
         sessionManager = new SessionManager(this);
         // Persistent login information
-        manager = AccountManager.get(SetupActivity.this);
+        //manager = AccountManager.get(SetupActivity.this);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -204,7 +204,7 @@ public class SetupActivity extends AppCompatActivity {
                     // user didn't typed for 1.5 seconds, do whatever you want
                     if (!mUrlField.getText().toString().trim().isEmpty() && mUrlField.getText().toString().length() >= 12) {
                         if (Patterns.WEB_URL.matcher(mUrlField.getText().toString()).matches()) {
-                            String BASE_URL = "http://" + mUrlField.getText().toString() + "/openmrs/ws/rest/v1/";
+                            String BASE_URL = "https://" + mUrlField.getText().toString() + "/openmrs/ws/rest/v1/";
                             if (URLUtil.isValidUrl(BASE_URL) && !isLocationFetched)
                                 getLocationFromServer(BASE_URL);
                             else
@@ -401,7 +401,7 @@ public class SetupActivity extends AppCompatActivity {
                                         text.setError(getResources().getString(R.string.enter_license_key));
                                     }
 
-                                    if (sessionManager.getLicenseKey() != null && sessionManager.getLicenseKey().equalsIgnoreCase("http://mindmaps.intelehealth.io:4040")) {
+                                    if (sessionManager.getLicenseKey() != null && sessionManager.getLicenseKey().equalsIgnoreCase("https://mindmaps.intelehealth.io:4040")) {
                                         text.setText(sessionManager.getLicenseKey());
                                         url.setText(sessionManager.getMindMapServerUrl());
                                     }
@@ -440,7 +440,7 @@ public class SetupActivity extends AppCompatActivity {
                                         // updateProtocolsTask.execute(null, "AllFiles", "TRUE");
 //                                        DownloadProtocolsTask downloadProtocolsTask = new DownloadProtocolsTask(SetupActivity.this);
 //                                        downloadProtocolsTask.execute(key);
-                                        getMindmapDownloadURL("http://" + licenseUrl + ":3004/");
+                                        getMindmapDownloadURL("https://" + licenseUrl + ":3004/");
 
 
                                     }
@@ -531,15 +531,15 @@ public class SetupActivity extends AppCompatActivity {
                                             Log.i(TAG, "doInBackground: " + loginProviderModel.getResults().get(i).getUuid());
                                             sessionManager.setProviderID(loginProviderModel.getResults().get(i).getUuid());
 //                                                responsecode = 200;
-                                            final Account account = new Account(USERNAME, "io.intelehealth.openmrs");
-                                            manager.addAccountExplicitly(account, PASSWORD, null);
+                                            /*final Account account = new Account(USERNAME, "io.intelehealth.openmrs");
+                                            manager.addAccountExplicitly(account, PASSWORD, null);*/
 
                                             sessionManager.setLocationName(location.getDisplay());
                                             sessionManager.setLocationUuid(location.getUuid());
                                             sessionManager.setLocationDescription(location.getDescription());
                                             sessionManager.setServerUrl(CLEAN_URL);
                                             sessionManager.setServerUrlRest(BASE_URL);
-                                            sessionManager.setServerUrlBase("http://" + CLEAN_URL + "/openmrs");
+                                            sessionManager.setServerUrlBase("https://" + CLEAN_URL + "/openmrs");
                                             sessionManager.setBaseUrl(BASE_URL);
                                             sessionManager.setSetupComplete(true);
 
@@ -548,7 +548,7 @@ public class SetupActivity extends AppCompatActivity {
 
                                             Parse.initialize(new Parse.Configuration.Builder(getApplicationContext())
                                                     .applicationId(AppConstants.IMAGE_APP_ID)
-                                                    .server("http://" + CLEAN_URL + ":1337/parse/")
+                                                    .server("https://" + CLEAN_URL + ":1337/parse/")
                                                     .build()
                                             );
 
