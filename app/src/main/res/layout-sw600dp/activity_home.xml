@@ -17,6 +17,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingHorizontal="10dp"
             android:fillViewport="true">
 
             <RelativeLayout
@@ -252,17 +253,17 @@
                         android:textSize="17sp" />
 
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal|center_vertical"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/lato_bold"
-                        android:gravity="center"
-                        android:includeFontPadding="false"
-                        android:text="@string/ppe_faq"
-                        android:textColor="@color/txt_sub_header_color"
-                        android:textSize="17sp" />
+<!--                    <TextView-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center_horizontal|center_vertical"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:fontFamily="@font/lato_bold"-->
+<!--                        android:gravity="center"-->
+<!--                        android:includeFontPadding="false"-->
+<!--                        android:text="@string/ppe_faq"-->
+<!--                        android:textColor="@color/txt_sub_header_color"-->
+<!--                        android:textSize="17sp" />-->
 
 
                 </LinearLayout>
@@ -273,10 +274,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/sub_header_view"
-                    android:orientation="horizontal"
-                    android:layout_marginLeft="9dp"
-                    android:layout_marginRight="9dp"
-                    >
+                    android:orientation="horizontal">
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardview_button_home_quarantine"
@@ -308,36 +306,148 @@
                         </RelativeLayout>
                     </androidx.cardview.widget.CardView>
 
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cardview_button_educational_videos"
-                        android:layout_width="0dp"
+<!--                    android:paddingRight="15dp"-->
+<!--                    android:paddingLeft="15dp"-->
+<!--                    android:paddingTop="10dp"-->
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ppe_parentlayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_below="@+id/cardview_two_action_View">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="14dp"
-                        android:layout_marginHorizontal="9dp"
-                        android:layout_weight="1"
-                        app:cardCornerRadius="10dp"
-                        app:cardElevation="8dp"
-                        app:cardPreventCornerOverlap="true">
+                        android:orientation="horizontal">
 
-                        <RelativeLayout
-                            android:id="@+id/button_educational_videos"
-                            android:layout_width="match_parent"
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cardview_button_educational_videos1"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:gravity="bottom">
+                            android:layout_weight="1"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="8dp"
+                            android:layout_marginVertical="10dp"
+                            android:layout_marginHorizontal="10dp"
+                            app:cardPreventCornerOverlap="true">
 
-                            <ImageView
-                                android:layout_width="wrap_content"
+                            <RelativeLayout
+                                android:id="@+id/button_educational_videos"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/ic_doctor_faq"
-                                android:layout_centerHorizontal="true"
-                                />
+                                android:gravity="bottom">
 
-                        </RelativeLayout>
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_doctor_faq"
+                                    android:layout_centerHorizontal="true"
+                                    />
+
+                            </RelativeLayout>
 
 
-                    </androidx.cardview.widget.CardView>
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cardview_button_educational_videos2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="8dp"
+                            android:layout_marginVertical="10dp"
+                            android:layout_marginHorizontal="10dp"
+                            app:cardPreventCornerOverlap="true">
+
+                            <RelativeLayout
+                                android:id="@+id/button_educational_videos_1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="bottom">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_doctor_faq"
+                                    android:layout_centerHorizontal="true"
+                                    />
+
+                            </RelativeLayout>
 
 
+                        </androidx.cardview.widget.CardView>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cardview_button_educational_videos3"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                             android:layout_weight="1"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="8dp"
+                            android:layout_marginVertical="10dp"
+                            android:layout_marginHorizontal="10dp"
+                            app:cardPreventCornerOverlap="true">
+
+                            <RelativeLayout
+                                android:id="@+id/button_educational_videos_2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="bottom">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_doctor_faq"
+                                    android:layout_centerHorizontal="true"
+                                    />
+
+                            </RelativeLayout>
+
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cardview_button_educational_videos4"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="8dp"
+                            android:layout_marginVertical="10dp"
+                            android:layout_marginHorizontal="10dp"
+                            app:cardPreventCornerOverlap="true">
+
+                            <RelativeLayout
+                                android:id="@+id/button_educational_videos_3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="bottom">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_doctor_faq"
+                                    android:layout_centerHorizontal="true"
+                                    />
+
+                            </RelativeLayout>
+
+
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
                 </LinearLayout>
 
                 <!--<TextView
@@ -420,7 +530,7 @@
                     android:id="@+id/help_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/cardview_two_action_View"
+                    android:layout_below="@+id/ppe_parentlayout"
                     android:layout_marginHorizontal="14dp"
                     android:layout_marginStart="14dp"
                     android:layout_marginTop="12dp"

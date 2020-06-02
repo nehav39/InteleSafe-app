@@ -8,12 +8,20 @@ package org.intelehealth.intelesafe.activities.CardGuidelines;
 
 
 public class Model_CardGuidelines {
-    private String title;
-    private String description;
+    private String title,description, url;
 
-    public Model_CardGuidelines(String title, String description) {
+    public Model_CardGuidelines(String title, String description, String url) {
         this.title = title;
         this.description = description;
+        this.url = url;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getTitle() {

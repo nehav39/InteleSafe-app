@@ -326,7 +326,7 @@
                         android:orientation="horizontal">
 
                         <androidx.cardview.widget.CardView
-                            android:id="@+id/cardview_button_educational_videos"
+                            android:id="@+id/cardview_button_educational_videos1"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="10dp"
@@ -355,7 +355,7 @@
                         </androidx.cardview.widget.CardView>
 
                         <androidx.cardview.widget.CardView
-                            android:id="@+id/cardview_button_educational_videos"
+                            android:id="@+id/cardview_button_educational_videos2"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="10dp"
@@ -392,7 +392,7 @@
                         android:orientation="horizontal">
 
                         <androidx.cardview.widget.CardView
-                            android:id="@+id/cardview_button_educational_videos"
+                            android:id="@+id/cardview_button_educational_videos3"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="10dp"
@@ -421,7 +421,7 @@
                         </androidx.cardview.widget.CardView>
 
                         <androidx.cardview.widget.CardView
-                            android:id="@+id/cardview_button_educational_videos"
+                            android:id="@+id/cardview_button_educational_videos4"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="10dp"

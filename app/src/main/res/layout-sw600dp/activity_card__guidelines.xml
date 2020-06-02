@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#fcfcff"
+    tools:context=".activities.CardGuidelines.Card_Guidelines">
+    <!--    <com.google.android.material.appbar.AppBarLayout-->
+    <!--        android:id="@+id/actionbar"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:theme="@style/AppTheme.AppBarOverlay">-->
+
+    <!--        <androidx.appcompat.widget.Toolbar-->
+    <!--            android:id="@+id/toolbar"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="?attr/actionBarSize"-->
+    <!--            android:background="@color/white"-->
+    <!--            app:popupTheme="@style/AppTheme.PopupOverlay"-->
+    <!--            app:title="Card Guidelines"-->
+    <!--            app:titleTextColor="@color/font_black_0" />-->
+
+    <!--    </com.google.android.material.appbar.AppBarLayout>-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:id="@+id/btn_back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/svg_header_left_arrow"
+                android:layout_centerInParent="true"/>
+
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/txt_sub_header_color"
+            android:textSize="38sp"
+            android:fontFamily="@font/lato_bold"
+            android:layout_gravity="center_vertical"
+            android:includeFontPadding="false"
+            android:text="@string/card_guidelines"
+            android:layout_marginStart="20dp"
+            android:layout_marginVertical="20dp"
+            />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/card_guidelines_recycler"
+        android:layout_width="match_parent"
+        android:background="#fcfcff"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

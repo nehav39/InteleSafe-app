@@ -14,5 +14,6 @@
     <dimen name="appbar_padding_top">12dp</dimen>
     <dimen name="text_18sp">22sp</dimen>
     <dimen name="text_20sp">24sp</dimen>
+    <dimen name="text_16sp">20sp</dimen>
     <bool name="isTab">true</bool>
 </resources>
