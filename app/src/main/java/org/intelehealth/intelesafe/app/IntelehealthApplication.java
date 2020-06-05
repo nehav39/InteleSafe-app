@@ -13,6 +13,8 @@ import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.core.CrashlyticsCore;
+import com.facebook.FacebookSdk;
+import com.facebook.LoggingBehavior;
 import com.parse.Parse;
 
 import org.intelehealth.intelesafe.BuildConfig;
@@ -58,6 +60,10 @@ public class IntelehealthApplication extends MultiDexApplication implements Appl
         sessionManager = new SessionManager(this);
 
         configureCrashReporting();
+
+        //Facebook App Events: Debugging...
+        FacebookSdk.setIsDebugEnabled(true);
+        FacebookSdk.addLoggingBehavior(LoggingBehavior.APP_EVENTS);
 
         RxJavaPlugins.setErrorHandler(throwable -> {
             Crashlytics.getInstance().core.logException(throwable);

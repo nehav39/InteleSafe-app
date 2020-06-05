@@ -36,7 +36,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.homeActivity.Webview"></activity>
+
+<!--        fb sdk-->
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"/>
+
+<!--        Fb App Events: Auto-Logging of events is enabled...-->
+        <meta-data
+            android:name="com.facebook.sdk.AutoLogAppEventsEnabled"
+            android:value="true"/>
+
+
+        <activity android:name=".activities.homeActivity.Webview" />
 
         <receiver
             android:name=".activities.homeActivity.DeviceBootReceiver"

@@ -651,7 +651,11 @@
     <string name="teleconsult_request">Teleconsult request</string>
     <string name="tele_consultant_text">Feeling stressed or anxious? Request for a free confidential mental health consultation with a counsellor.</string>
     <string name="txt_user_exists">Username already exists.</string>
-
     <!--Login Screen (New Changes)-->
     <string name="txt_sign_up_option">Don\'t have an account?</string>
+
+
+    //Facebook SDK - Prajwal
+    <string name="facebook_app_id">307013896947807</string>
+    <string name="fb_login_protocol_scheme">fb307013896947807</string>
 </resources>
