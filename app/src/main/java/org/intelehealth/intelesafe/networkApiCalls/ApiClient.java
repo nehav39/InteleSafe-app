@@ -19,7 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiClient {
     //http://testintelesafe2.covidhelp.in/
     private static OkHttpClient.Builder client = new OkHttpClient.Builder();
-    private static String apiBaseUrl = "https://testintelesafe2.covidhelp.in/" ;//Live = http://intelesafe.covidhelp.in/ // replaced for app_update_version.
+    private static String apiBaseUrl = "https://intelesafe.covidhelp.in/" ;//Live = http://intelesafe.covidhelp.in/ // replaced for app_update_version.
     private static Retrofit retrofit;
     private static Retrofit.Builder builder =
             new Retrofit.Builder()
