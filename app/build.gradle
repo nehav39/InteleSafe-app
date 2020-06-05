@@ -26,10 +26,10 @@ android {
 
         //Test BASE_URL = http://testintelesafe.covidhelp.in/
         //Test CLEAN_URL = testintelesafe.covidhelp.in
-
+//        http://testintelesafe2.covidhelp.in/
         debug{
-            buildConfigField "String", "BASE_URL", "\"https://testintelesafe.covidhelp.in/\"" // http://13.232.32.249:8080/
-            buildConfigField "String", "CLEAN_URL", "\"testintelesafe.covidhelp.in\"" // 13.232.32.249:8080
+            buildConfigField "String", "BASE_URL", "\"http://testintelesafe2.covidhelp.in/\"" // http://13.232.32.249:8080/
+            buildConfigField "String", "CLEAN_URL", "\"testintelesafe2.covidhelp.in\"" // 13.232.32.249:8080
 //            https://testssl.covidhelp.in/pulldata
         }
 
