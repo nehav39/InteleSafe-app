@@ -450,6 +450,10 @@
                         android:layout_weight="1"
                         android:orientation="vertical">
 
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -471,6 +475,19 @@
                         android:nextFocusForward="@id/password" />-->
 
                 </com.google.android.material.textfield.TextInputLayout>
+
+
+                            <ImageView
+                                android:id="@+id/image_username_valid"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginEnd="12dp"
+                                android:layout_marginTop="0dp"
+                                android:layout_gravity="center_vertical|right"
+                                app:srcCompat = "@drawable/svg_valid_icon">
+
+                            </ImageView>
+                        </FrameLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
