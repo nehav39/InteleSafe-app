@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10sp"
+        app:cardElevation="5sp"
+        android:layout_margin="10sp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <TextView
+                android:id="@+id/recycler_day_textview"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:text="@string/day_1"
+                android:fontFamily="@font/lato_bold"
+                android:textSize="22sp"
+                android:gravity="center_vertical"
+                android:paddingVertical="20sp"
+                android:paddingStart="20sp"/>
+
+            <TextView
+                android:id="@+id/recycler_date_textview"
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:layout_height="wrap_content"
+                tools:text="@string/recyclerview_home_date"
+                android:fontFamily="@font/lato_regular"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:layout_gravity="center"/>
+
+            <ImageView
+                android:id="@+id/recycler_tick_imageview"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:paddingVertical="10sp"
+                android:layout_gravity="center"
+                android:tint="@color/colorPrimary"
+                android:layout_marginEnd="10sp"
+                android:src="@drawable/ic_done_24dp"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+</LinearLayout>

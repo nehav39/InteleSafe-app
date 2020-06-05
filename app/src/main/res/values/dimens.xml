@@ -13,16 +13,23 @@
     //Identification Screen
     <dimen name="padding_identification_screen">10dp</dimen>
     <dimen name="id_screen_text_size">18dp</dimen>
+    //Identification Screen_Tablet
+    <dimen name="padding_identification_screen_tablet">15dp</dimen>
+    <dimen name="id_screen_text_size_tablet">22dp</dimen>
 
 
     //Complaint Select Screen
     <dimen name="padding_complaint_select">16dp</dimen>
+    <dimen name="padding_complaint_select_tablet">20dp</dimen>
+    <dimen name="margin_left_complaint_select_tablet">25dp</dimen>
     <dimen name="text_size_category">25sp</dimen>
     <dimen name="text_size_complaint">20sp</dimen>
+    <dimen name="text_size_complaint_tablet">24sp</dimen>
 
 
     //Physical Exam Screen
     <dimen name="physical_node_title">20sp</dimen>
+    <dimen name="physical_radio_item_paddingStart_tablet">15dp</dimen>
 
     //Visit Summary Screen
     <dimen name="padding_visit_summary_screen">10dp</dimen>
@@ -39,5 +46,6 @@
     <dimen name="physical_exam_img_max_height">125dp</dimen>
 
     <dimen name="text_18sp">18sp</dimen>
-
+    <dimen name="text_20sp">20sp</dimen>
+    <bool name="isTab">false</bool>
 </resources>

@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!--
-Created By: Prajwal Waingankar
-Github: prajwalmw
--->
-
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -48,8 +43,8 @@ Github: prajwalmw
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/padding_card"
             android:layout_marginBottom="@dimen/padding_card"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="16dp"
             app:cardUseCompatPadding="true"
             app:cardPreventCornerOverlap="false">
 
@@ -62,7 +57,7 @@ Github: prajwalmw
                     style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="48dp"
+                    android:layout_marginTop="52dp"
                     android:visibility="gone" />
 
                 <RelativeLayout
@@ -76,19 +71,19 @@ Github: prajwalmw
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:paddingStart="20dp"
+                        android:paddingStart="24dp"
                         android:layout_centerVertical="true"
                         android:text="@string/visit_summary_patient_details"
-                        android:textSize="18sp"/>
+                        android:textSize="22sp"/>
 
                     <ImageView
                         android:id="@+id/iv_prescription"
                         android:layout_width="wrap_content"
-                        android:layout_height="40dp"
+                        android:layout_height="44dp"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:visibility="invisible"
-                        android:layout_marginVertical="5dp"
+                        android:layout_marginVertical="9dp"
                         android:src="@drawable/ic_prescription_gray"/>
 
                 </RelativeLayout>
@@ -113,7 +108,7 @@ Github: prajwalmw
 
                         <TextView
                             android:id="@+id/textView_name_value"
-                            android:layout_width="1dp"
+                            android:layout_width="2dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="3"
                             android:gravity="fill"
@@ -189,9 +184,9 @@ Github: prajwalmw
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/visit_summary_vitals_heading"
-                    android:paddingVertical="12dp"
+                    android:paddingVertical="16dp"
                     android:textColor="@color/white"
-                    android:paddingStart="20dp"
+                    android:paddingStart="24dp"
                     android:background="@color/titleBar_cardview"
                     android:textSize="@dimen/card_content_text_size" />
 
@@ -204,7 +199,7 @@ Github: prajwalmw
                     android:contentDescription="TODO"
                     style="@style/SelectableItemBackground"
                     android:foreground="?android:attr/selectableItemBackground"
-                    android:padding="10dp"
+                    android:padding="14dp"
                     app:srcCompat="@drawable/edit_icon" />
 
                 <TableLayout
@@ -407,10 +402,10 @@ Github: prajwalmw
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/visit_Summary_cardview"
-                    android:paddingVertical="12dp"
+                    android:paddingVertical="16dp"
                     android:background="@color/titleBar_cardview"
                     android:textColor="@color/white"
-                    android:paddingStart="20dp"
+                    android:paddingStart="24dp"
                     android:textSize="@dimen/card_content_text_size" />
 
                 <ImageButton
@@ -422,7 +417,7 @@ Github: prajwalmw
                     android:contentDescription="TODO"
                     style="@style/SelectableItemBackground"
                     android:foreground="?android:attr/selectableItemBackground"
-                    android:padding="10dp"
+                    android:padding="14dp"
                     app:srcCompat="@drawable/edit_icon" />
 
                 <TextView
@@ -445,7 +440,7 @@ Github: prajwalmw
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="19dp"
             app:cardCornerRadius="10sp"
             android:elevation="40dp"
             app:cardUseCompatPadding="true"
@@ -459,12 +454,12 @@ Github: prajwalmw
                     android:id="@+id/textView_heading_physexam"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingVertical="12dp"
-                    android:paddingStart="20dp"
+                    android:paddingVertical="16dp"
+                    android:paddingStart="24dp"
                     android:text="@string/visit_Summary_cardview"
                     android:background="@color/white"
                     android:textColor="@color/txt_sub_header_color"
-                    android:textSize="16sp"
+                    android:textSize="20sp"
                     android:fontFamily="@font/lato_bold"/>
 
                 <ImageButton
@@ -476,7 +471,7 @@ Github: prajwalmw
                     android:contentDescription="TODO"
                     style="@style/SelectableItemBackground"
                     android:foreground="?android:attr/selectableItemBackground"
-                    android:padding="10dp"
+                    android:padding="14dp"
                     app:srcCompat="@drawable/edit_icon" />
 
                 <ImageButton
@@ -489,7 +484,7 @@ Github: prajwalmw
                     android:contentDescription="TODO"
                     style="@style/SelectableItemBackground"
                     android:foreground="?android:attr/selectableItemBackground"
-                    android:padding="10dp"
+                    android:padding="14dp"
                     android:visibility="gone"
                     app:srcCompat="@drawable/download" />
 
@@ -497,9 +492,9 @@ Github: prajwalmw
                     android:id="@+id/textView_content_physexam"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:lineSpacingExtra="1sp"
+                    android:lineSpacingExtra="2sp"
                     android:layout_below="@+id/textView_heading_physexam"
-                    android:textSize="14sp"
+                    android:textSize="18sp"
                     android:paddingLeft="@dimen/padding_card"
                     android:paddingRight="@dimen/padding_card"
                     android:fontFamily="@font/lato_regular"
@@ -511,7 +506,7 @@ Github: prajwalmw
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/textView_content_physexam"
-                    android:padding="10dp"
+                    android:padding="14dp"
                     />
 
                 <TextView
@@ -533,7 +528,7 @@ Github: prajwalmw
             app:cardUseCompatPadding="true"
             app:cardPreventCornerOverlap="false"
             android:layout_gravity="center"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="19dp"
             app:cardCornerRadius="10sp"
             >
 
@@ -541,14 +536,14 @@ Github: prajwalmw
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="5dp">
+                android:padding="9dp">
 
                 <RelativeLayout
                     android:id="@+id/help_relative"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:layout_marginEnd="20dp">
+                    android:padding="14dp"
+                    android:layout_marginEnd="24dp">
 
                     <TextView
                         android:id="@+id/help_title"
@@ -557,7 +552,7 @@ Github: prajwalmw
                         android:text="Help"
                         android:background="@color/white"
                         android:textColor="@color/txt_sub_header_color"
-                        android:textSize="16sp"
+                        android:textSize="20sp"
                         android:fontFamily="@font/lato_bold"/>
 
 
@@ -569,9 +564,9 @@ Github: prajwalmw
                         android:fontFamily="@font/lato_regular"
                         android:text="@string/if_you_star"
                         android:layout_below="@id/help_title"
-                        android:textSize="14sp"
+                        android:textSize="18sp"
                         android:textColor="@color/txt_sub_header_color"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="14dp"
                         />
 
                     <Button
@@ -581,15 +576,15 @@ Github: prajwalmw
                         android:layout_below="@+id/visit_help_text"
                         android:text="@string/txt_whatsapp_helpline"
                         android:textSize="@dimen/text_18sp"
-                        android:layout_marginStart="10sp"
+                        android:layout_marginStart="14sp"
                         android:fontFamily="@font/lato_bold"
                         android:textColor="@color/txt_sub_header_color"
                         android:textStyle="bold"
                         android:background="@android:color/transparent"
                         android:drawableStart="@drawable/ic_icons8_whatsapp"
                         android:gravity="start|center"
-                        android:layout_marginTop="5dp"
-                        android:drawablePadding="10sp" />
+                        android:layout_marginTop="9dp"
+                        android:drawablePadding="14sp" />
 
                     <!-- Icon Credits:- <a target="_blank" href="https://icons8.com/icons/set/whatsapp">WhatsApp icon</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>-->
 
@@ -600,8 +595,8 @@ Github: prajwalmw
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|right"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="12dp"
                     android:src="@drawable/ic_heart">
 
                 </ImageView>
@@ -620,21 +615,21 @@ Github: prajwalmw
             app:cardUseCompatPadding="true"
             app:cardPreventCornerOverlap="false"
             android:layout_gravity="center"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="19dp"
             app:cardCornerRadius="10sp"
         >
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="5dp">
+                android:padding="9dp">
 
                 <RelativeLayout
                     android:id="@+id/mental_help_relative"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:layout_marginEnd="20dp">
+                    android:padding="14dp"
+                    android:layout_marginEnd="24dp">
 
                     <TextView
                         android:id="@+id/mental_visit_help_text"
@@ -643,7 +638,7 @@ Github: prajwalmw
                         android:textStyle="bold"
                         android:fontFamily="@font/lato_regular"
                         android:text="@string/tele_consultant_text"
-                        android:textSize="14sp"
+                        android:textSize="18sp"
                         android:textColor="@color/txt_sub_header_color"
                         />
 
@@ -652,13 +647,13 @@ Github: prajwalmw
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/mental_visit_help_text"
-                        android:layout_marginStart="10sp"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginStart="14sp"
+                        android:layout_marginTop="9dp"
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/lato_bold"
                         android:gravity="start|center"
-                        android:hint=""
                         android:textSize="@dimen/text_20sp"
+                        android:hint=""
                         android:textStyle="bold"
                         android:text="@string/teleconsult_request"
                         android:textColor="@color/txt_sub_header_color" />
@@ -672,9 +667,9 @@ Github: prajwalmw
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|right"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginBottom="12dp"
                     android:src="@mipmap/ic_mental_health">
 
                 </ImageView>
@@ -705,11 +700,11 @@ Github: prajwalmw
                     android:id="@+id/textView_heading_pathist"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                   android:paddingVertical="12dp"
+                   android:paddingVertical="16dp"
                     android:text="@string/visit_summary_medical_history"
                     android:background="@color/titleBar_cardview"
                     android:textColor="@color/white"
-                    android:paddingStart="20dp"
+                    android:paddingStart="24dp"
                     android:textSize="@dimen/card_content_text_size" />
 
                 <ImageButton
@@ -721,7 +716,7 @@ Github: prajwalmw
                     android:contentDescription="TODO"
                     style="@style/SelectableItemBackground"
                     android:foreground="?android:attr/selectableItemBackground"
-                    android:padding="10dp"
+                    android:padding="14dp"
                     app:srcCompat="@drawable/edit_icon" />
 
                 <TextView
@@ -759,8 +754,8 @@ Github: prajwalmw
                     android:text="@string/visit_summary_family_history"
                     android:background="@color/titleBar_cardview"
                     android:textColor="@color/white"
-                    android:paddingStart="20dp"
-                    android:paddingVertical="12dp"
+                    android:paddingStart="24dp"
+                    android:paddingVertical="16dp"
                     android:textSize="@dimen/card_content_text_size" />
 
                 <ImageButton
@@ -772,7 +767,7 @@ Github: prajwalmw
                     android:contentDescription="TODO"
                     style="@style/SelectableItemBackground"
                     android:foreground="?android:attr/selectableItemBackground"
-                    android:padding="10dp"
+                    android:padding="14dp"
                     app:srcCompat="@drawable/edit_icon" />
 
                 <TextView
@@ -809,8 +804,8 @@ Github: prajwalmw
                     android:text="@string/title_activity_additional_documents"
                     android:background="@color/titleBar_cardview"
                     android:textColor="@color/white"
-                    android:paddingStart="20dp"
-                    android:paddingVertical="12dp"
+                    android:paddingStart="24dp"
+                    android:paddingVertical="16dp"
                     android:textSize="@dimen/card_content_text_size" />
 
                 <ImageButton
@@ -822,7 +817,7 @@ Github: prajwalmw
                     android:contentDescription="TODO"
                     style="@style/SelectableItemBackground"
                     android:foreground="?android:attr/selectableItemBackground"
-                    android:padding="10dp"
+                    android:padding="14dp"
                     app:srcCompat="@drawable/edit_icon" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -870,9 +865,9 @@ Github: prajwalmw
                     android:id="@+id/textView_heading_diagnosis"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingStart="20dp"
+                    android:paddingStart="24dp"
                     android:text="@string/visit_summary_diagnosis"
-                    android:paddingVertical="12dp"
+                    android:paddingVertical="16dp"
                     android:background="@color/titleBar_cardview"
                     android:textColor="@color/white"
                     android:textSize="@dimen/card_content_text_size" />
@@ -925,8 +920,8 @@ Github: prajwalmw
                     android:id="@+id/textView_heading_rx"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingVertical="12dp"
-                    android:paddingStart="20dp"
+                    android:paddingVertical="16dp"
+                    android:paddingStart="24dp"
                     android:background="@color/titleBar_cardview"
                     android:textColor="@color/white"
                     android:textSize="@dimen/card_content_text_size"
@@ -980,8 +975,8 @@ Github: prajwalmw
                     android:id="@+id/textView_heading_medical_advice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingVertical="12dp"
-                    android:paddingStart="20dp"
+                    android:paddingVertical="16dp"
+                    android:paddingStart="24dp"
                     android:background="@color/titleBar_cardview"
                     android:textColor="@color/white"
                     android:textSize="@dimen/card_content_text_size"
@@ -1036,8 +1031,8 @@ Github: prajwalmw
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/visit_summary_tests_prescribed"
-                    android:paddingVertical="12dp"
-                    android:paddingStart="20dp"
+                    android:paddingVertical="16dp"
+                    android:paddingStart="24dp"
                     android:background="@color/titleBar_cardview"
                     android:textColor="@color/white"
                     android:textSize="@dimen/card_content_text_size"
@@ -1092,8 +1087,8 @@ Github: prajwalmw
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/visit_summary_additional_comments"
-                    android:paddingVertical="12dp"
-                    android:paddingStart="20dp"
+                    android:paddingVertical="16dp"
+                    android:paddingStart="24dp"
                     android:background="@color/titleBar_cardview"
                     android:textColor="@color/white"
                     android:textSize="@dimen/card_content_text_size"/>
@@ -1146,8 +1141,8 @@ Github: prajwalmw
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/visit_summary_follow_up_date"
-                    android:paddingVertical="12dp"
-                    android:paddingStart="20dp"
+                    android:paddingVertical="16dp"
+                    android:paddingStart="24dp"
                     android:background="@color/titleBar_cardview"
                     android:textColor="@color/white"
                     android:textSize="@dimen/card_content_text_size" />
@@ -1200,8 +1195,8 @@ Github: prajwalmw
                     android:id="@+id/title_doctor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingVertical="12dp"
-                    android:paddingStart="20dp"
+                    android:paddingVertical="16dp"
+                    android:paddingStart="24dp"
                     android:text="@string/doctor"
                     android:background="@color/titleBar_cardview"
                     android:textColor="@color/white"
@@ -1214,17 +1209,17 @@ Github: prajwalmw
                     android:layout_below="@+id/title_doctor"
                     android:padding="@dimen/padding_card"
                     android:text=""
-                    android:textSize="18sp" />
+                    android:textSize="22sp" />
 
                 <TextView
                     android:id="@+id/title_health_worker"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingVertical="12dp"
+                    android:paddingVertical="16dp"
                     android:text="@string/health_worker"
                     android:background="@color/titleBar_cardview"
                     android:textColor="@color/white"
-                    android:paddingStart="20dp"
+                    android:paddingStart="24dp"
                     android:textSize="@dimen/card_content_text_size" />
 
                 <TextView
@@ -1234,7 +1229,7 @@ Github: prajwalmw
                     android:layout_below="@+id/title_health_worker"
                     android:padding="@dimen/padding_card"
                     android:text=""
-                    android:textSize="18sp" />
+                    android:textSize="22sp" />
 
             </LinearLayout>
 
@@ -1266,8 +1261,8 @@ Github: prajwalmw
                     android:layout_height="wrap_content"
                     android:layout_weight="0.9"
                     android:text="@string/priority"
-                    android:paddingStart="5dp"
-                    android:paddingVertical="12dp"
+                    android:paddingStart="9dp"
+                    android:paddingVertical="16dp"
                     android:textSize="@dimen/card_content_text_size" />
 
                 <CheckBox
@@ -1275,7 +1270,7 @@ Github: prajwalmw
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.1"
-                    android:textSize="20sp" />
+                    android:textSize="24sp" />
 
 
             </LinearLayout>
@@ -1366,7 +1361,7 @@ Github: prajwalmw
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_alignParentBottom="true"
-            android:layout_margin="15dp">
+            android:layout_margin="20dp">
 
             <!-- <Button
                  android:id="@+id/button_upload"
@@ -1407,7 +1402,7 @@ Github: prajwalmw
                 style="@style/SelectableItemBackground"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="10dp"
                 android:gravity="center"
                 android:background="@color/colorPrimary"
                 android:layout_below="@+id/button_upload"
@@ -1416,7 +1411,7 @@ Github: prajwalmw
                 android:text="@string/teleconsultation_button_visitsummary"
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
-                android:textSize="24dp"
+                android:textSize="28dp"
                 android:visibility="gone"
                 android:textStyle="bold" />
 
