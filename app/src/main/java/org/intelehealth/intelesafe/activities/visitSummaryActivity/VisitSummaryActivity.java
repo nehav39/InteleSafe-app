@@ -1107,12 +1107,15 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                             public void onClick(DialogInterface dialog, int which) {
 
                                 phyExam.setValue(dialogEditText.getText().toString().replace("\n", "<br>"));
+                                String b = "";
                                 if (phyExam.getValue() != null) {
                                     String physicalExamStr = phyExam.getValue().replaceAll("<b>General exams: </b>", "<b>Self Assessment: </b>");
                                     physicalText.setText(Html.fromHtml(physicalExamStr));
                                     physFindingsView.setText(Html.fromHtml(physicalExamStr));
+                                     b = phyExam.getValue().replaceAll("Self Assessment: ", "<b>General exams: </b> ");
                                 }
-                                updateDatabase(phyExam.getValue(), UuidDictionary.PHYSICAL_EXAMINATION);
+
+                                updateDatabase(b, UuidDictionary.PHYSICAL_EXAMINATION);
                                 dialog.dismiss();
                             }
                         });
