@@ -2396,7 +2396,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_mental_help_request:
-                Uri uri = Uri.parse("https://www.intelehealth.org/mental-health-consult"); // missing 'http://' will cause crashed
+                Uri uri = Uri.parse("https://www.intelesafe.org/mental-health"); // missing 'http://' will cause crashed
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
         }
