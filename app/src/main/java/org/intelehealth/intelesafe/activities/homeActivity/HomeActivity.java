@@ -142,7 +142,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     TextView lastSyncAgo;
     TextView welcomeUser;
     Button manualSyncButton;
-    RelativeLayout enter_check_in, home_quarantine_guidelines, educational_videos, user_logout; // modified by Venu N on 01/04/2020
+    RelativeLayout enter_check_in, home_quarantine_guidelines, educational_videos, user_logout,
+            home_quarantine_guidelines_2, educational_videos_2;
     IntentFilter filter;
     Myreceiver reMyreceive;
     SyncUtils syncUtils = new SyncUtils();
@@ -340,6 +341,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         enter_check_in = findViewById(R.id.button_enter_checkin);
         home_quarantine_guidelines = findViewById(R.id.button_home_quarantine);
+        home_quarantine_guidelines_2 = findViewById(R.id.button_home_quarantine_2);
+        educational_videos_2 = findViewById(R.id.button_educational_videos_2);
         educational_videos = findViewById(R.id.button_educational_videos);
         welcomeUser = findViewById(R.id.welcomeUser);
 
@@ -365,6 +368,24 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                 Intent ppe = new Intent(HomeActivity.this, Webview.class);
                 ppe.putExtra("PPE", 1);
+                startActivity(ppe);
+            }
+        });
+
+        home_quarantine_guidelines_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent ppe = new Intent(HomeActivity.this, Webview.class);
+                ppe.putExtra("PPE2", 1);
+                startActivity(ppe);
+            }
+        });
+
+        educational_videos_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent ppe = new Intent(HomeActivity.this, Webview.class);
+                ppe.putExtra("FAQ2", 1);
                 startActivity(ppe);
             }
         });

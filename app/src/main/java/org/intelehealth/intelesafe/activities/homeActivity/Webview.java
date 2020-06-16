@@ -5,6 +5,7 @@ Created By: Prajwal Waingankar
 Github: prajwalmw
 */
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ public class Webview extends AppCompatActivity {
     private CustomProgressDialog customProgressDialog;
     private String webUrl;
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +44,14 @@ public class Webview extends AppCompatActivity {
             } else if(bundle.containsKey("PPE")) {
                 setTitle("PPE Guidelines");
                 webUrl = "https://www.intelehealth.org/ppe-guidelines"; // PPE url
+            }
+            else if(bundle.containsKey("FAQ2")) {
+                setTitle("Request for PPE kits");
+                webUrl = "https://www.intelesafe.org/ppe-help"; // Request for PPE kit url.
+            }
+            else if(bundle.containsKey("PPE2")) {
+                setTitle("Use of Telemedicine");
+                webUrl = "https://www.intelesafe.org/telemedicine"; // Use of Telemedicine url
             }
             webView.loadUrl(webUrl);
             webView.getSettings().setJavaScriptEnabled(true);
