@@ -40,10 +40,10 @@ public class Webview extends AppCompatActivity {
         if(bundle != null) {
             if(bundle.containsKey("FAQ")) {
                 setTitle("FAQ's");
-                webUrl = "https://www.intelehealth.org/ppe-faqs"; // FAQs url
+                webUrl = "https://www.intelesafe.org/ppe-reuse-alternatives"; // FAQs url
             } else if(bundle.containsKey("PPE")) {
                 setTitle("PPE Guidelines");
-                webUrl = "https://www.intelehealth.org/ppe-guidelines"; // PPE url
+                webUrl = "https://www.intelesafe.org/ppe-infection-control"; // PPE url
             }
             else if(bundle.containsKey("FAQ2")) {
                 setTitle("Request for PPE kits");
