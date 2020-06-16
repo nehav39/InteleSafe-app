@@ -1038,9 +1038,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_mental_help_request:
-                Uri uri = Uri.parse("https://www.intelesafe.org/mental-health"); // missing 'http://' will cause crashed
+                /*Uri uri = Uri.parse("https://www.intelesafe.org/mental-health"); // missing 'http://' will cause crashed
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
+                startActivity(intent);*/
+                Intent ppe = new Intent(HomeActivity.this, Webview.class);
+                ppe.putExtra("HomeMental", 1);
+                ppe.putExtra("HomeCardTitle", tvMentalHelpRequest.getText().toString());
+                startActivity(ppe);
                 break;
             case R.id.tv_ppe_request:
                 showAlertToRequestPPE();
