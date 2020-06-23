@@ -5,9 +5,15 @@ Created By: Prajwal Waingankar
 Github: prajwalmw
 */
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.net.Uri;
 import android.os.Bundle;
+import android.webkit.URLUtil;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
@@ -24,6 +30,7 @@ public class Webview extends AppCompatActivity {
     private CustomProgressDialog customProgressDialog;
     private String webUrl;
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,15 +44,49 @@ public class Webview extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if(bundle != null) {
             if(bundle.containsKey("FAQ")) {
-                setTitle("FAQ's");
-                webUrl = "https://www.intelehealth.org/ppe-faqs"; // FAQs url
+                setTitle("PPE reuse & Alternative");
+                webUrl = "https://www.intelesafe.org/ppe-reuse-alternatives"; // FAQs url
             } else if(bundle.containsKey("PPE")) {
                 setTitle("PPE Guidelines");
-                webUrl = "https://www.intelehealth.org/ppe-guidelines"; // PPE url
+                webUrl = "https://www.intelesafe.org/ppe-infection-control"; // PPE url
+            }
+            else if(bundle.containsKey("FAQ2")) {
+                setTitle("Request for PPE kits");
+                webUrl = "https://www.intelesafe.org/ppe-help"; // Request for PPE kit url.
+            }
+            else if(bundle.containsKey("PPE2")) {
+                setTitle("Use of Telemedicine");
+                webUrl = "https://www.intelesafe.org/telemedicine"; // Use of Telemedicine url
+            }
+            else if(bundle.containsKey("HomeMental")) {
+                String title = bundle.getString("HomeCardTitle");
+                setTitle(title);
+                webUrl = "https://www.intelesafe.org/mental-health";
+            }
+            else if(bundle.containsKey("VisitMental")) {
+                String title = bundle.getString("VisitTitle");
+                setTitle(title);
+                webUrl = "https://www.intelesafe.org/mental-health";
             }
             webView.loadUrl(webUrl);
             webView.getSettings().setJavaScriptEnabled(true);
             webView.setWebViewClient(new WebViewClient() {
+
+                @Override
+                public boolean shouldOverrideUrlLoading(WebView view, String url) {
+
+                    if(URLUtil.isNetworkUrl(url))
+                    {
+                        return false;
+                    }
+
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                        startActivity(intent);
+                        finish();
+
+                    return true;
+                }
+
                 @Override
                 public void onPageStarted(WebView view, String url, Bitmap favicon) {
                     super.onPageStarted(view, url, favicon);
@@ -66,4 +107,5 @@ public class Webview extends AppCompatActivity {
             });
         }
     }
+
 }

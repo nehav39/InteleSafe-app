@@ -61,6 +61,7 @@ import android.widget.Toast;
 import com.crashlytics.android.Crashlytics;
 
 import org.apache.commons.lang3.StringUtils;
+import org.intelehealth.intelesafe.activities.homeActivity.Webview;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -2396,9 +2397,13 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_mental_help_request:
-                Uri uri = Uri.parse("https://www.intelehealth.org/mental-health-consult"); // missing 'http://' will cause crashed
+               /* Uri uri = Uri.parse("https://www.intelesafe.org/mental-health"); // missing 'http://' will cause crashed
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
+                startActivity(intent);*/
+                Intent ppe = new Intent(VisitSummaryActivity.this, Webview.class);
+                ppe.putExtra("VisitMental", 1);
+                ppe.putExtra("VisitTitle", tvMentalHelpRequest.getText().toString());
+                startActivity(ppe);
         }
     }
 
