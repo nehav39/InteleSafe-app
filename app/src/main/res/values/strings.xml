@@ -658,4 +658,5 @@
     //Facebook SDK - Prajwal
     <string name="facebook_app_id">307013896947807</string>
     <string name="fb_login_protocol_scheme">fb307013896947807</string>
+    <string name="username_password_must_be_different">Username and Password must be different</string>
 </resources>

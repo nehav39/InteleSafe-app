@@ -803,6 +803,12 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }
 
+                if (cPassword.equals(userName)) {
+                    mCPassword.setError(getString(R.string.username_password_must_be_different));
+                    mCPassword.requestFocus();
+                    return;
+                }
+
                 if (!mGenderF.isChecked() && !mGenderM.isChecked()) {
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(SignupActivity.this);
                     alertDialogBuilder.setTitle(R.string.error);

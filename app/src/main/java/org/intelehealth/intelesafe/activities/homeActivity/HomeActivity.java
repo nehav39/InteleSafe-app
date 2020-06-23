@@ -1370,6 +1370,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         }*/
+        sessionManager.setDBCLEAR("");
+        sessionManager.setPullExcutedTime("2020-01-23 22:21:48");
         sessionManager.setFirstCheckin("false");
         sessionManager.setReturningUser(false);
         Intent intent = new Intent(HomeActivity.this, LoginActivity.class);

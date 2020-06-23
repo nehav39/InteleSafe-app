@@ -19,7 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiClient {
     //http://testintelesafe2.covidhelp.in/
     private static OkHttpClient.Builder client = new OkHttpClient.Builder();
-    private static String apiBaseUrl = "https://intelesafe.covidhelp.in/" ;//Live = http://intelesafe.covidhelp.in/ // replaced for app_update_version.
+    private static String apiBaseUrl = "https://testintelesafe2.covidhelp.in/" ;//Live = http://intelesafe.covidhelp.in/ // replaced for app_update_version.
     private static Retrofit retrofit;
     private static Retrofit.Builder builder =
             new Retrofit.Builder()
@@ -73,7 +73,7 @@ public class ApiClient {
             final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
 
             HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.NONE);
+            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             client.addInterceptor(loggingInterceptor);
             client.connectTimeout(70, TimeUnit.SECONDS);
             client.readTimeout(70, TimeUnit.SECONDS);

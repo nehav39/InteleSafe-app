@@ -703,4 +703,5 @@
 
     <!--Login Screen (New Changes)-->
     <string name="txt_sign_up_option">Don\'t have an account?</string>
+    <string name="username_password_must_be_different">Username and Password must be different</string>
 </resources>
