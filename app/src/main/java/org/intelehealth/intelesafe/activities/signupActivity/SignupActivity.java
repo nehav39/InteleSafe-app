@@ -44,7 +44,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.crashlytics.android.Crashlytics;
+
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.gson.Gson;
 import com.parse.Parse;
 
@@ -1481,7 +1482,7 @@ public class SignupActivity extends AppCompatActivity {
 //                Toast.makeText(SignupActivity.this, "Error of adding the data", Toast.LENGTH_SHORT).show();
 //            }
         } catch (DAOException e) {
-            Crashlytics.getInstance().core.logException(e);
+            FirebaseCrashlytics.getInstance().recordException(e);
         }
 
     }

@@ -11,6 +11,8 @@ import android.os.Environment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -28,7 +30,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.crashlytics.android.Crashlytics;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -153,7 +155,7 @@ public class PhysicalExamActivity extends AppCompatActivity {
         try {
             encounterDAO.createEncountersToDB(encounterDTO);
         } catch (DAOException e) {
-            Crashlytics.getInstance().core.logException(e);
+            FirebaseCrashlytics.getInstance().recordException(e);
         }
 
         encounterVitals = encounterDTO.getUuid();
@@ -186,7 +188,7 @@ public class PhysicalExamActivity extends AppCompatActivity {
                     currentFile = new JSONObject(FileUtils.readFileRoot(mFileName, this));
                     physicalExamMap = new PhysicalExam(currentFile, selectedExamsList);
                 } catch (JSONException e) {
-                    Crashlytics.getInstance().core.logException(e);
+                    FirebaseCrashlytics.getInstance().recordException(e);
                 }
             } else {
 
@@ -357,7 +359,7 @@ public class PhysicalExamActivity extends AppCompatActivity {
         try {
             isInserted = obsDAO.insertObs(obsDTO);
         } catch (DAOException e) {
-            Crashlytics.getInstance().core.logException(e);
+            FirebaseCrashlytics.getInstance().recordException(e);
         }
 
         return isInserted;
@@ -408,7 +410,7 @@ public class PhysicalExamActivity extends AppCompatActivity {
             obsDAO.updateObs(obsDTO);
 
         } catch (DAOException dao) {
-            Crashlytics.getInstance().core.logException(dao);
+            FirebaseCrashlytics.getInstance().recordException(dao);
         }
 
         EncounterDAO encounterDAO = new EncounterDAO();
@@ -416,7 +418,7 @@ public class PhysicalExamActivity extends AppCompatActivity {
             encounterDAO.updateEncounterSync("false", encounterAdultIntials);
             encounterDAO.updateEncounterModifiedDate(encounterAdultIntials);
         } catch (DAOException e) {
-            Crashlytics.getInstance().core.logException(e);
+            FirebaseCrashlytics.getInstance().recordException(e);
         }
     }
 
@@ -439,7 +441,7 @@ public class PhysicalExamActivity extends AppCompatActivity {
         try {
             imagesDAO.insertObsImageDatabase(imageName, encounterAdultIntials, UuidDictionary.COMPLEX_IMAGE_PE);
         } catch (DAOException e) {
-            Crashlytics.getInstance().core.logException(e);
+            FirebaseCrashlytics.getInstance().recordException(e);
         }
     }
 

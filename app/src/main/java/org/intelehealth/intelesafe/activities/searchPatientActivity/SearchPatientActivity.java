@@ -28,7 +28,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.crashlytics.android.Crashlytics;
+
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,7 +111,7 @@ public class SearchPatientActivity extends AppCompatActivity {
             recyclerView.setAdapter(recycler);
 
         } catch (Exception e) {
-            Crashlytics.getInstance().core.logException(e);
+            FirebaseCrashlytics.getInstance().recordException(e);
             Logger.logE("doquery", "doquery", e);
         }
     }
@@ -131,7 +132,7 @@ public class SearchPatientActivity extends AppCompatActivity {
             recyclerView.setAdapter(recycler);
 
         } catch (Exception e) {
-            Crashlytics.getInstance().core.logException(e);
+            FirebaseCrashlytics.getInstance().recordException(e);
             Logger.logE("firstquery", "exception", e);
         }
     }
@@ -366,7 +367,7 @@ public class SearchPatientActivity extends AppCompatActivity {
                 } while (searchCursor.moveToNext());
             }
         } catch (DAOException e) {
-            Crashlytics.getInstance().core.logException(e);
+            FirebaseCrashlytics.getInstance().recordException(e);
         }
         return modelList;
 
@@ -456,7 +457,7 @@ public class SearchPatientActivity extends AppCompatActivity {
                 }
                 cursor.close();
             } catch (DAOException sql) {
-                Crashlytics.getInstance().core.logException(sql);
+                FirebaseCrashlytics.getInstance().recordException(sql);
             }
 
 
@@ -470,7 +471,7 @@ public class SearchPatientActivity extends AppCompatActivity {
                 recyclerView.setAdapter(recycler);
 
             } catch (Exception e) {
-                Crashlytics.getInstance().core.logException(e);
+                FirebaseCrashlytics.getInstance().recordException(e);
                 Logger.logE("doquery", "doquery", e);
             }
         }
@@ -490,7 +491,7 @@ public class SearchPatientActivity extends AppCompatActivity {
                 }
             }
         } catch (SQLException s) {
-            Crashlytics.getInstance().core.logException(s);
+            FirebaseCrashlytics.getInstance().recordException(s);
         }
         idCursor.close();
 

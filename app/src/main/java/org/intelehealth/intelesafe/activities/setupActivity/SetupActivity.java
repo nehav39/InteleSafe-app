@@ -35,7 +35,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.crashlytics.android.Crashlytics;
+
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.gson.Gson;
 import com.parse.Parse;
 
@@ -345,7 +346,7 @@ public class SetupActivity extends AppCompatActivity {
                         }
                     });
         } catch (IllegalArgumentException e) {
-            Crashlytics.getInstance().core.logException(e);
+            FirebaseCrashlytics.getInstance().recordException(e);
             mUrlField.setError(getString(R.string.url_invalid));
         }
 
@@ -573,7 +574,7 @@ public class SetupActivity extends AppCompatActivity {
                                                 //hash_email = StringEncryption.convertToSHA256(random_salt + mEmail);
                                                 hash_password = StringEncryption.convertToSHA256(random_salt + PASSWORD);
                                             } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
-                                                Crashlytics.getInstance().core.logException(e);
+                                                FirebaseCrashlytics.getInstance().recordException(e);
                                             }
 
                                             try {

@@ -22,7 +22,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.crashlytics.android.Crashlytics;
+
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -398,7 +399,7 @@ public class ActivePatientActivity extends AppCompatActivity {
                 }
             }
         } catch (SQLException s) {
-            Crashlytics.getInstance().core.logException(s);
+            FirebaseCrashlytics.getInstance().recordException(s);
         }
         idCursor.close();
 

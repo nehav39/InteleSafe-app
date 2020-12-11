@@ -11,17 +11,16 @@ import androidx.multidex.MultiDexApplication;
 import androidx.appcompat.app.AppCompatDelegate;
 import android.util.Log;
 
-import com.crashlytics.android.Crashlytics;
-import com.crashlytics.android.core.CrashlyticsCore;
 import com.facebook.FacebookSdk;
 import com.facebook.LoggingBehavior;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.parse.Parse;
 
 import org.intelehealth.intelesafe.BuildConfig;
 import org.intelehealth.intelesafe.database.InteleHealthDatabaseHelper;
 import org.intelehealth.intelesafe.utilities.SessionManager;
 
-import io.fabric.sdk.android.Fabric;
+
 
 import io.reactivex.plugins.RxJavaPlugins;
 import okhttp3.Dispatcher;
@@ -66,7 +65,7 @@ public class IntelehealthApplication extends MultiDexApplication implements Appl
         FacebookSdk.addLoggingBehavior(LoggingBehavior.APP_EVENTS);
 
         RxJavaPlugins.setErrorHandler(throwable -> {
-            Crashlytics.getInstance().core.logException(throwable);
+            FirebaseCrashlytics.getInstance().recordException(throwable);
         });
         androidId = String
                 .format("%16s", Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID))
@@ -98,10 +97,12 @@ public class IntelehealthApplication extends MultiDexApplication implements Appl
     }
 
     private void configureCrashReporting() {
-        CrashlyticsCore crashlyticsCore = new CrashlyticsCore.Builder()
-                //.disabled(BuildConfig.DEBUG)
-                .build();
-        Fabric.with(this, new Crashlytics.Builder().core(crashlyticsCore).build());
+//        CrashlyticsCore crashlyticsCore = new CrashlyticsCore.Builder()
+//                //.disabled(BuildConfig.DEBUG)
+//                .build();
+//        Fabric.with(this, new Crashlytics.Builder().core(crashlyticsCore).build());
+
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true);
     }
 
     @Override

@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.text.Editable;
@@ -18,7 +20,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.crashlytics.android.Crashlytics;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -174,7 +176,7 @@ public class VitalsActivity extends AppCompatActivity {
             }
         } catch (JSONException e) {
             Toast.makeText(this, "config file error", Toast.LENGTH_SHORT).show();
-            Crashlytics.getInstance().core.logException(e);
+            FirebaseCrashlytics.getInstance().recordException(e);
         }
         if (intentTag != null && intentTag.equals("edit")) {
             loadPrevious();
@@ -832,7 +834,7 @@ public class VitalsActivity extends AppCompatActivity {
                     encounterDAO.updateEncounterSync("false", encounterVitals);
                     encounterDAO.updateEncounterModifiedDate(encounterVitals);
                 } catch (DAOException e) {
-                    Crashlytics.getInstance().core.logException(e);
+                    FirebaseCrashlytics.getInstance().recordException(e);
                 }
 
                 Intent intent = new Intent(VitalsActivity.this, VisitSummaryActivity.class);
@@ -846,7 +848,7 @@ public class VitalsActivity extends AppCompatActivity {
                 intent.putExtra("hasPrescription", "false");
                 startActivity(intent);
             } catch (DAOException dao) {
-                Crashlytics.getInstance().core.logException(dao);
+                FirebaseCrashlytics.getInstance().recordException(dao);
             }
         } else {
 
@@ -860,7 +862,7 @@ public class VitalsActivity extends AppCompatActivity {
             try {
                 obsDAO.insertObs(obsDTO);
             } catch (DAOException e) {
-                Crashlytics.getInstance().core.logException(e);
+                FirebaseCrashlytics.getInstance().recordException(e);
             }
 
             obsDTO = new ObsDTO();
@@ -872,7 +874,7 @@ public class VitalsActivity extends AppCompatActivity {
             try {
                 obsDAO.insertObs(obsDTO);
             } catch (DAOException e) {
-                Crashlytics.getInstance().core.logException(e);
+                FirebaseCrashlytics.getInstance().recordException(e);
             }
 
             obsDTO = new ObsDTO();
@@ -884,7 +886,7 @@ public class VitalsActivity extends AppCompatActivity {
             try {
                 obsDAO.insertObs(obsDTO);
             } catch (DAOException e) {
-                Crashlytics.getInstance().core.logException(e);
+                FirebaseCrashlytics.getInstance().recordException(e);
             }
 
             obsDTO = new ObsDTO();
@@ -896,7 +898,7 @@ public class VitalsActivity extends AppCompatActivity {
             try {
                 obsDAO.insertObs(obsDTO);
             } catch (DAOException e) {
-                Crashlytics.getInstance().core.logException(e);
+                FirebaseCrashlytics.getInstance().recordException(e);
             }
 
             obsDTO = new ObsDTO();
@@ -908,7 +910,7 @@ public class VitalsActivity extends AppCompatActivity {
             try {
                 obsDAO.insertObs(obsDTO);
             } catch (DAOException e) {
-                Crashlytics.getInstance().core.logException(e);
+                FirebaseCrashlytics.getInstance().recordException(e);
             }
 
             obsDTO = new ObsDTO();
@@ -920,7 +922,7 @@ public class VitalsActivity extends AppCompatActivity {
             try {
                 obsDAO.insertObs(obsDTO);
             } catch (DAOException e) {
-                Crashlytics.getInstance().core.logException(e);
+                FirebaseCrashlytics.getInstance().recordException(e);
             }
 
             obsDTO = new ObsDTO();
@@ -932,7 +934,7 @@ public class VitalsActivity extends AppCompatActivity {
             try {
                 obsDAO.insertObs(obsDTO);
             } catch (DAOException e) {
-                Crashlytics.getInstance().core.logException(e);
+                FirebaseCrashlytics.getInstance().recordException(e);
             }
 
             obsDTO = new ObsDTO();
@@ -944,7 +946,7 @@ public class VitalsActivity extends AppCompatActivity {
             try {
                 obsDAO.insertObs(obsDTO);
             } catch (DAOException e) {
-                Crashlytics.getInstance().core.logException(e);
+                FirebaseCrashlytics.getInstance().recordException(e);
             }
             Intent intent = new Intent(VitalsActivity.this, ComplaintNodeActivity.class);
 

@@ -56,7 +56,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.crashlytics.android.Crashlytics;
+
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.gson.Gson;
 
 import androidx.work.ExistingPeriodicWorkPolicy;
@@ -714,7 +715,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
             db.setTransactionSuccessful();
         } catch (SQLException s) {
-            Crashlytics.getInstance().core.logException(s);
+            FirebaseCrashlytics.getInstance().recordException(s);
             throw new DAOException(s);
         } finally {
             db.endTransaction();
@@ -953,7 +954,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         try {
             encounterDAO.createEncountersToDB(encounterDTO);
         } catch (DAOException e) {
-            Crashlytics.getInstance().core.logException(e);
+            FirebaseCrashlytics.getInstance().recordException(e);
         }
 
         InteleHealthDatabaseHelper mDatabaseHelper = new InteleHealthDatabaseHelper(HomeActivity.this);
@@ -1019,7 +1020,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         try {
             visitsDAO.insertPatientToDB(visitDTO);
         } catch (DAOException e) {
-            Crashlytics.getInstance().core.logException(e);
+            FirebaseCrashlytics.getInstance().recordException(e);
         }
 
         // visitUuid = String.valueOf(visitLong);
@@ -1774,7 +1775,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     String visitDate = currentDate.format(formatted);
                     OldVisit(visitDate, visitList.get(position), end_date, "", ""/*encounterVitalList.get(position)*/, encounterAdultList.get(position));
                 } catch (ParseException e) {
-                    Crashlytics.getInstance().core.logException(e);
+                    FirebaseCrashlytics.getInstance().recordException(e);
                 }
             }
         }

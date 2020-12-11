@@ -3,7 +3,8 @@ package org.intelehealth.intelesafe.services;
 import android.app.IntentService;
 import android.content.Intent;
 
-import com.crashlytics.android.Crashlytics;
+
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import org.intelehealth.intelesafe.utilities.Logger;
 
@@ -18,7 +19,7 @@ public class MyIntentService extends IntentService {
         try {
             Thread.sleep(3000);
         } catch (Exception e) {
-            Crashlytics.getInstance().core.logException(e);
+            FirebaseCrashlytics.getInstance().recordException(e);
             Logger.logE(MyIntentService.class.getSimpleName(), "Exception in onHandleIntent method", e);
         }
 

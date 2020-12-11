@@ -4,7 +4,8 @@ import android.app.IntentService;
 import android.content.Intent;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import com.crashlytics.android.Crashlytics;
+
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -80,7 +81,7 @@ public class DownloadService extends IntentService {
                             try {
                                 downloadFile(responseBody, finalImageObsList1.get(finalI1));
                             } catch (IOException e) {
-                                Crashlytics.getInstance().core.logException(e);
+                                FirebaseCrashlytics.getInstance().recordException(e);
                             }
                         }
 
@@ -142,7 +143,7 @@ public class DownloadService extends IntentService {
         try {
             imagesDAO.updateObs(imageuuid);
         } catch (DAOException e) {
-            Crashlytics.getInstance().core.logException(e);
+            FirebaseCrashlytics.getInstance().recordException(e);
         }
 
     }
