@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Locale;
 
 import org.intelehealth.intelesafe.R;
+import org.intelehealth.intelesafe.activities.chooseLanguageActivity.ChooseLanguageActivity;
 import org.intelehealth.intelesafe.activities.homeActivity.HomeActivity;
 import org.intelehealth.intelesafe.activities.introActivity.IntroActivity;
 import org.intelehealth.intelesafe.dataMigration.SmoothUpgrade;
@@ -145,7 +146,7 @@ public class SplashActivity extends AppCompatActivity {
 
             if (sessionManager.isFirstTimeLaunch()) {
                 Logger.logD(LOG_TAG, "Starting setup");
-                Intent intent = new Intent(this, IntroActivity.class);
+                Intent intent = new Intent(this, ChooseLanguageActivity.class);
                 startActivity(intent);
                 finish();
             } else {

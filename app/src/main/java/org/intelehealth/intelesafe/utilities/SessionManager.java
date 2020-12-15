@@ -110,9 +110,15 @@ public class SessionManager {
     }
 
     public String getAppLanguage() {
-        return pref.getString(APP_LANGUAGE, "");
-    }
+        if(pref.getString(APP_LANGUAGE, "").equals("हिंदी"))
+            return "hi";
 
+        if(pref.getString(APP_LANGUAGE, "").equals("मराठी"))
+        return "mr";
+
+        else
+            return "en";
+    }
     public void setAppLanguage(String pullExcutedTime) {
         editor.putString(APP_LANGUAGE, pullExcutedTime);
         editor.commit();

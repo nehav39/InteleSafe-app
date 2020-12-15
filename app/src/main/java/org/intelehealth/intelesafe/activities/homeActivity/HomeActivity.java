@@ -23,6 +23,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
+import android.net.InetAddresses;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -52,6 +53,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -81,6 +84,8 @@ import java.util.UUID;
 
 import org.intelehealth.intelesafe.BuildConfig;
 import org.intelehealth.intelesafe.R;
+import org.intelehealth.intelesafe.activities.chooseLanguageActivity.ChooseLanguageActivity;
+import org.intelehealth.intelesafe.activities.introActivity.IntroActivity;
 import org.intelehealth.intelesafe.activities.loginActivity.LoginActivity;
 import org.intelehealth.intelesafe.activities.physcialExamActivity.PhysicalExamActivity;
 import org.intelehealth.intelesafe.activities.settingsActivity.SettingsActivity;
@@ -155,6 +160,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     TextView tvNoVisit;
     Button help_watsapp;
     TextView tvMentalHelpRequest, tv_ppe_request, mental_Help_Text;
+    ImageView home_popup_menu;
+    String appLanguage;
 
     Context context;
     private String mindmapURL = "";
@@ -184,8 +191,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
         sessionManager = new SessionManager(this);
+        sessionManager = new SessionManager(HomeActivity.this);
+        appLanguage = sessionManager.getAppLanguage();
+        if (!appLanguage.equalsIgnoreCase("")) {
+            setLocale(appLanguage);
+        }
+        setContentView(R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         String language = sessionManager.getAppLanguage();
@@ -201,6 +213,32 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         customProgressDialog = new CustomProgressDialog(context);
         reMyreceive = new Myreceiver();
         filter = new IntentFilter("lasysync");
+        home_popup_menu = findViewById(R.id.popup_menu);
+        home_popup_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popupMenu = new PopupMenu(HomeActivity.this, view);
+                popupMenu.getMenuInflater().inflate(R.menu.home_popup_menu, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.changeLanguage:
+                                chooseLanguageMenu();
+                                return true;
+                            case R.id.logout:
+                                logoutMenu();
+                                return true;
+                            default:
+                                return false;
+                        }
+                    }
+
+                });
+                popupMenu.show();
+            }
+        });
+
+
         //manager = AccountManager.get(HomeActivity.this);
 
         checkAppVer();  //auto-update feature.
@@ -609,6 +647,43 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         WorkManager.getInstance().enqueueUniquePeriodicWork(AppConstants.UNIQUE_WORK_NAME, ExistingPeriodicWorkPolicy.KEEP, AppConstants.PERIODIC_WORK_REQUEST);
 
     }
+
+    public void setLocale(String appLanguage)
+    {
+        Locale locale = new Locale(appLanguage);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+    }
+
+    private void chooseLanguageMenu()
+    {
+        Intent intent = new Intent(HomeActivity.this, ChooseLanguageActivity.class);
+        startActivity(intent);
+    }
+    private void logoutMenu()
+    {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage(getString(R.string.logout_dialog));
+        alertDialogBuilder.setNegativeButton(R.string.generic_no, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        alertDialogBuilder.setPositiveButton(R.string.generic_yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                logout();
+            }
+        });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+
+    }
+
 
     private void delDb() throws DAOException {
 

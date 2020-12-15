@@ -679,22 +679,22 @@
 
 
     //HomeScreen (New Changes)
-    <string name="txt_self_assessment">Self Assessment</string>
-    <string name="txt_start_now">Start Now</string>
-    <string name="personal_pr">Personal protection guidelines</string>
+    <string name="txt_self_assessment">आत्मपरीक्षण</string>
+    <string name="txt_start_now">आता प्रारंभ करा</string>
+    <string name="personal_pr">वैयक्तिक संरक्षण मार्गदर्शक तत्त्वे</string>
     <string name="if_you_star">Got questions about PPE and infection control? Concerned you\'re showing symptoms of Covid-19? Send us a WhatsApp message at our helpline number below to talk with an expert about your concerns.</string>
     <string name="some_id">+91 9825989750</string>
     <string name="ppe_faq">PPE reuse, alternatives and FAQs</string>
     <string name="ppe_req_header">Running low on PPE? Request for PPE Kits</string>
     <string name="ppe_req_sub_header">This service is currently available in Mumbai and Delhi only. We aim to serve as many as possible and hope to expand this service to other areas soon.</string>
-    <string name="ppe_req">Order PPE kits</string>
+    <string name="ppe_req">पीपीई किट ऑर्डर करा</string>
     <string name="ppe_req_hint">What PPE do you require with quantity*</string>
 
-    <string name="txt_whatsapp_helpline">WhatsApp Helpline</string>
+    <string name="txt_whatsapp_helpline">व्हॉट्सअ‍ॅप हेल्पलाइन</string>
     <string name="Mental_health_support_text">Feeling stressed or anxious? Here are some self-care and support resources for healthcare providers</string>
     <string name="tele_consultant_text">Feeling stressed or anxious? Request for a free confidential mental health consultation with a counsellor.</string>
-    <string name="mental_health_support">Mental health support</string>
-    <string name="teleconsult_request">Teleconsult request</string>
+    <string name="mental_health_support">मानसिक आरोग्य समर्थन</string>
+    <string name="teleconsult_request">टेलिकॉन्सल्ट विनंती</string>
 
 
     // SignUP Screen(New Changes)

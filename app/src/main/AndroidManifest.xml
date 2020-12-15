@@ -70,6 +70,10 @@
         </provider>
 
         <activity
+            android:name="org.intelehealth.intelesafe.activities.chooseLanguageActivity.ChooseLanguageActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
             android:name=".activities.introActivity.IntroActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />

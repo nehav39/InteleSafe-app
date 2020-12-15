@@ -77,6 +77,11 @@
     <string name="menu_option_logout" translatable="false">Logout</string>
 
 
+    //Language Screen
+    <string name="choose_lang_title">Choose your Language</string>
+    <string name="save_button">Save</string>
+    <string name="selectLanguageToast">Please select Language</string>
+
     //Identification Screen
     <string name="title_activity_identification" translatable="false">Add New Patient</string>
     <string name="identification_screen_prompt_first_name">First name*</string>
