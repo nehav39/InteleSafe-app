@@ -146,7 +146,7 @@ public class PrivacyNotice_Activity extends AppCompatActivity {
                                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                     } else {
-                        Toast.makeText(getApplicationContext(), getString(R.string.privacy_toast), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), getString(R.string.privacy_toast2), Toast.LENGTH_LONG).show();
                     }
                 }
             });
