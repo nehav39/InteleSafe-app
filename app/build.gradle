@@ -29,8 +29,8 @@ android {
         //Test CLEAN_URL = testintelesafe.covidhelp.in
 //        http://testintelesafe2.covidhelp.in/
         debug{
-            buildConfigField "String", "BASE_URL", "\"https://testintelesafe2.covidhelp.in/\"" // http://13.232.32.249:8080/
-            buildConfigField "String", "CLEAN_URL", "\"testintelesafe2.covidhelp.in\"" // 13.232.32.249:8080
+            buildConfigField "String", "BASE_URL", "\"https://intelecare.intelehealth.org/\"" // http://13.232.32.249:8080/
+            buildConfigField "String", "CLEAN_URL", "\"intelecare.intelehealth.org\"" // 13.232.32.249:8080
 //            https://testssl.covidhelp.in/pulldata
         }
 
@@ -42,8 +42,8 @@ android {
             }
             minifyEnabled true
 
-            buildConfigField "String", "BASE_URL", "\"https://intelesafe.covidhelp.in/\"" // http://13.232.32.249:8080/
-            buildConfigField "String", "CLEAN_URL", "\"intelesafe.covidhelp.in\"" // 13.232.32.249:8080
+            buildConfigField "String", "BASE_URL", "\"https://intelecare.intelehealth.org/\"" // http://13.232.32.249:8080/
+            buildConfigField "String", "CLEAN_URL", "\"intelecare.intelehealth.org\"" // 13.232.32.249:8080
 
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
