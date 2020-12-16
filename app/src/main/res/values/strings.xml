@@ -54,13 +54,14 @@
     <string name="error_network" translatable="false">Network Error</string>
     <string name="error_location_not_selected" translatable="false">Please select a value form the location dropdown</string>
     <string name="error_location_not_fetched" translatable="false">Unable to fetch locations</string>
-    <string name="permission_rationale" translatable="false">"Contacts permissions are needed for providing email completions."
-    </string>
+    <string name="permission_rationale" translatable="false">"Contacts permissions are needed for providing email completions."</string>
     <string name="device_id" translatable="false">Device ID:</string>
-
-
     <string name="cant_login_user" translatable="false">Forgot password?</string>
     <string name="email_link" translatable="false"> To reset your password send an email to support@intelehealth.io</string>
+
+    //Intro
+    <string name="intro_text1">This app is for all types of health workers at the frontlines of care to learn about personal protection measures and PPE use.</string>
+    <string name="intro_text2">You can monitor your own health daily and reach out for help if you think you may have had unsafe exposure and may be infected.</string>
 
     // Sign up
     <string name="title_sign_up" translatable="false">Sign Up</string>
@@ -76,11 +77,28 @@
     <string name="menu_option_end_of_day" translatable="false">End of Day</string>
     <string name="menu_option_logout" translatable="false">Logout</string>
 
-
     //Language Screen
     <string name="choose_lang_title">Choose your Language</string>
     <string name="save_button">Save</string>
     <string name="selectLanguageToast">Please select Language</string>
+
+    //Home Screen
+    <string name="PPE_and_infection">Personal Protective Equipment (PPE) &amp; Infection control</string>
+    <string name="PPE_reuse">PPE reuse &amp; alternatives</string>
+    <string name="telemedicine_use_covid">Use of telemedicine during COVID-19</string>
+    <string name="request_ppe">Request for PPE kits</string>
+    <string name="no_visits">You do not have any visit.</string>
+    <string name="change_lang_menu">Change Language</string>
+    <string name="logout_menu">Logout</string>
+    <string name="hello_my_name">Hello, my name is </string>
+    <string name="need_some_assisstance">and I need some assistance.</string>
+    <string name="hi_request_for_ppe">Hi I would like to request for PPE kits. </string>
+    <string name="name_ppe">Name:</string>
+    <string name="address_ppe">Address:</string>
+    <string name="ppe_required">PPE Required:</string>
+    <string name="no_application">No Application available to view PDF</string>
+    <string name="today_checkin">Today\'s Check-in</string>
+
 
     //Identification Screen
     <string name="title_activity_identification" translatable="false">Add New Patient</string>

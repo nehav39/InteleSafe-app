@@ -279,8 +279,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             public void onClick(View view) {
                 String phoneNumberWithCountryCode = "+919825989750";
                 String message =
-                        "Hello, my name is " + sessionManager.getUserName() +
-                                /*" from " + sessionManager.getState() + */" and I need some assistance.";
+                        R.string.hello_my_name + sessionManager.getUserName() +
+                                /*" from " + sessionManager.getState() + */ R.string.need_some_assisstance;
 
                 startActivity(new Intent(Intent.ACTION_VIEW,
                         Uri.parse(
@@ -1181,10 +1181,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                 String finalAddressStr = addressStr1 + " " + (!TextUtils.isEmpty(addressStr2 + " ") ? addressStr2 : "") + cityStr + " " + pinCodeStr;
                 String phoneNumberWithCountryCode = "+918108220025";
-                String messageStr = "Hi I would like to request for PPE kits." + "\n" +
-                        "Name: " + sessionManager.getUserName() + "\n" +
-                        "Address: " + finalAddressStr + "\n" +
-                        "PPE required: " + ppeQtyStr;
+                String messageStr = R.string.hi_request_for_ppe + "\n" +
+                        R.string.name_ppe + sessionManager.getUserName() + "\n" +
+                        R.string.address_ppe + finalAddressStr + "\n" +
+                        R.string.ppe_required + ppeQtyStr;
 
                 startActivity(new Intent(Intent.ACTION_VIEW,
                         Uri.parse(
@@ -1248,7 +1248,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             try {
                 startActivity(pdfIntent);
             } catch (ActivityNotFoundException e) {
-                Toast.makeText(HomeActivity.this, "No Application available to view PDF", Toast.LENGTH_SHORT).show();
+                Toast.makeText(HomeActivity.this, R.string.no_application, Toast.LENGTH_SHORT).show();
             }
         }
     }

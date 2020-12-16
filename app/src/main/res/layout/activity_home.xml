@@ -248,7 +248,7 @@
                         android:fontFamily="@font/lato_bold"
                         android:gravity="center"
                         android:includeFontPadding="false"
-                        android:text="Personal Protective Equipment (PPE) &amp; Infection control "
+                        android:text="@string/PPE_and_infection"
                         android:textColor="@color/txt_sub_header_color"
                         android:textSize="13sp" />
 
@@ -261,7 +261,7 @@
                         android:fontFamily="@font/lato_bold"
                         android:gravity="center"
                         android:includeFontPadding="false"
-                        android:text="PPE reuse &amp; alternatives"
+                        android:text="@string/PPE_reuse"
                         android:textColor="@color/txt_sub_header_color"
                         android:textSize="13sp" />
 
@@ -361,7 +361,7 @@
                         android:fontFamily="@font/lato_bold"
                         android:gravity="center"
                         android:includeFontPadding="false"
-                        android:text="Use of telemedicine during COVID-19"
+                        android:text="@string/telemedicine_use_covid"
                         android:textColor="@color/txt_sub_header_color"
                         android:textSize="13sp" />
 
@@ -374,7 +374,7 @@
                         android:fontFamily="@font/lato_bold"
                         android:gravity="center"
                         android:includeFontPadding="false"
-                        android:text="Request for PPE kits"
+                        android:text="@string/request_ppe"
                         android:textColor="@color/txt_sub_header_color"
                         android:textSize="13sp" />
 
@@ -819,7 +819,7 @@
                     android:padding="10sp"
                     android:gravity="center"
                     android:textColor="@null"
-                    android:text="You don't have any visit."
+                    android:text="@string/no_visits"
                     android:textAppearance="@style/home_no_visit" />
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerview_data"

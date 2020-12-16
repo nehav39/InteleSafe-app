@@ -131,15 +131,14 @@
                     android:id="@+id/email_sign_in_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="18dp"
+                    android:layout_marginEnd="10dp"
                     android:background="@drawable/button_bg_rounded_corners"
-                    android:text="@string/action_sign_in"
                     android:fontFamily="@font/lato_bold"
+                    android:text="@string/action_sign_in"
                     android:textColor="@color/button_text_color"
-                    android:textSize="16sp"
-                    />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/cant_login_id"

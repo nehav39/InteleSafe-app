@@ -554,7 +554,7 @@ Github: prajwalmw
                         android:id="@+id/help_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Help"
+                        android:text="@string/help"
                         android:background="@color/white"
                         android:textColor="@color/txt_sub_header_color"
                         android:textSize="16sp"

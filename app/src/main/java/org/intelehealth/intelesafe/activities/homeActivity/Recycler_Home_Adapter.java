@@ -40,6 +40,7 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
     ArrayList<String> stringArrayList_date;
     private Context mcontext;
     SessionManager sessionManager;
+    AlertDialog.Builder alertdialogBuilder;
 
     public Recycler_Home_Adapter(Context context, ArrayList<Day_Date> recycler_arraylist, ArrayList<String> array_og_date) {
         this.arrayList = recycler_arraylist;
@@ -144,14 +145,25 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
 
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder alertdialogBuilder = new AlertDialog.Builder(mcontext);
-                alertdialogBuilder.setTitle("Today's Check-in");
+                alertdialogBuilder = new AlertDialog.Builder(mcontext);
+                alertdialogBuilder.setTitle(R.string.today_checkin);
 
 
                 View customView = LayoutInflater.from(mcontext).inflate(R.layout.custom_dialog_layout, null);
                 alertdialogBuilder.setView(customView);
 
                 LinearLayout visit_list_view = customView.findViewById(R.id.visit_list_view);
+
+                alertdialogBuilder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // moveTaskToBack(true);
+                        // finish();
+                    }
+                });
+
+                AlertDialog alertDialog = alertdialogBuilder.create();
+                alertDialog.show();
 
                 Log.e("VENU: ", array_message.toString());
                 StringBuilder stringBuilder_2 = new StringBuilder();
@@ -184,6 +196,7 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
                         public void onClick(View view) {
                             int pos = (int) view.getTag();
                             ((HomeActivity) mcontext).pastVisits(pos, array_message.get(pos));
+                            alertDialog.dismiss();
                         }
                     });
 
@@ -205,17 +218,9 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
                 };
                 ss.setSpan(clickableSpan, 22, 27, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);*/
 
-                alertdialogBuilder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        // moveTaskToBack(true);
-                        // finish();
-                    }
-                });
+
                 //alertdialogBuilder.setNegativeButton(R.string.generic_no, null);
 
-                AlertDialog alertDialog = alertdialogBuilder.create();
-                alertDialog.show();
 
                 Button positiveButton = alertDialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE);
                 Button negativeButton = alertDialog.getButton(android.app.AlertDialog.BUTTON_NEGATIVE);
@@ -225,19 +230,10 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
 
                 negativeButton.setTextColor(mcontext.getResources().getColor(R.color.colorPrimary));
                 negativeButton.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
-
-
             }
         });
 
     }
-
-
-    private void setAlertDialog() {
-        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(mcontext);
-
-    }
-
     @Override
     public int getItemCount() {
         return arrayList.size();

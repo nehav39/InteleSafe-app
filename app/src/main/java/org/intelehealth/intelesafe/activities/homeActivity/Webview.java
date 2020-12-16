@@ -44,6 +44,10 @@ public class Webview extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if(bundle != null) {
             if(bundle.containsKey("FAQ")) {
+
+
+
+
                 setTitle("PPE reuse & Alternative");
                 webUrl = "https://www.intelesafe.org/ppe-reuse-alternatives"; // FAQs url
             } else if(bundle.containsKey("PPE")) {
@@ -73,17 +77,13 @@ public class Webview extends AppCompatActivity {
             webView.setWebViewClient(new WebViewClient() {
 
                 @Override
-                public boolean shouldOverrideUrlLoading(WebView view, String url) {
-
+                public boolean shouldOverrideUrlLoading(WebView view, String url)
+                {
                     if(URLUtil.isNetworkUrl(url))
-                    {
-                        return false;
-                    }
-
+                    { return false; }
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                         startActivity(intent);
                         finish();
-
                     return true;
                 }
 
