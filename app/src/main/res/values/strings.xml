@@ -465,6 +465,7 @@
     <!--Privacy Notice Activity-->
     <string name="privacy_agree">Agree to the privacy notice.</string>
     <string name="privacy_toast">Please select an option</string>
+    <string name="privacy_toast2">Please agree to Privacy Notice</string>
     <string name="temperature_f">Temperature (F)</string>
     <string name="sync_now">Sync Now</string>
     <string name="lastsync">lastsync</string>
@@ -631,6 +632,7 @@
     <string name="prajwal_waingankar">Prajwal Waingankar</string>
     <string name="recyclerview_home_date">01 January 2020, 12:00 AM</string>
     <string name="intelesafe">InteleSafe</string>
+    <string name="intelecare">InteleCare</string>
     <string name="who_is_this_napplication_for">Who is this \napplication for?</string>
     <string name="submit_visitSummary_Button">Submit</string>
     <string name="medical_registration_number_license_id">Medical registration number/license ID</string>
@@ -647,6 +649,7 @@
 
     //HomeScreen (New Changes)
     <string name="txt_self_assessment">Self Assessment</string>
+    <string name="txt_doctor_consulation">Doctor Consultation</string>
     <string name="txt_start_now">Start Now</string>
     <string name="personal_pr">Personal protection guidelines</string>
     <string name="if_you_star">Got questions about PPE and infection control? Concerned you\'re showing symptoms of Covid-19? Send us a WhatsApp message at our helpline number below to talk with an expert about your concerns.</string>

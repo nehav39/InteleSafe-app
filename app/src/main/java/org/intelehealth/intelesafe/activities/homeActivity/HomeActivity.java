@@ -986,7 +986,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         Collections.sort(new_arraylist); // added by venu N to sort the
 
         for (int j = 0; j < new_arraylist.size(); j++) {
-            recycler_arraylist.add(new Day_Date("Day " + a, new_arraylist.get(j)));
+            recycler_arraylist.add(new Day_Date("Visit " + a, new_arraylist.get(j)));
             a++;
         }
 
