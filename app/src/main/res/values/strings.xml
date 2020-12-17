@@ -98,7 +98,7 @@
     <string name="ppe_required">PPE Required:</string>
     <string name="no_application">No Application available to view PDF</string>
     <string name="today_checkin">Today\'s Check-in</string>
-
+    <string name="visit">Visit</string>
 
     //Identification Screen
     <string name="title_activity_identification" translatable="false">Add New Patient</string>
@@ -343,7 +343,6 @@
     <string name="uploading" translatable="false">Uploading</string>
     <string name="downloading" translatable="false">Downloading...</string>
 
-    <string name="visit" translatable="false">Visit</string>
     <string name="visit_update" translatable="false">Visit Update</string>
     <string name="patient" translatable="false">Patient</string>
     <string name="patient_update" translatable="false">Patient Update</string>
@@ -661,8 +660,7 @@
     <string name="ppe_req_sub_header">This service is currently available in Mumbai and Delhi only. We aim to serve as many as possible and hope to expand this service to other areas soon.</string>
     <string name="ppe_req">Order PPE kits</string>
     <string name="ppe_req_hint">What PPE do you require with quantity*</string>
-
-    <string name="txt_whatsapp_helpline">WhatsApp Helpline</string>
+    <string name="txt_whatsapp_helpline"><u>WhatsApp Helpline</u></string>
     <string name="Mental_health_support_text">Feeling stressed or anxious? Here are some self-care and support resources for healthcare providers</string>
     <string name="mental_health_support">Mental health support</string>
 

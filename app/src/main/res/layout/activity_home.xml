@@ -348,6 +348,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/cardview_two_action_View"
                     android:layout_marginStart="10dp"
+                    android:visibility="gone"
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="10dp"
                     android:orientation="horizontal">
@@ -387,6 +388,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/sub_header_view_2"
                     android:orientation="horizontal"
+                    android:visibility="gone"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     >

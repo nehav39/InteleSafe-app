@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">InteleSafe</string>
+    <string name="intelecare"></string>
     <string name="select_language">Select Language</string>
     <string name="accept">स्वीकार</string>
     <string name="reject">अस्वीकार</string>
@@ -26,7 +27,7 @@
     <string name="confirm_password_is_mismatched">Confirm password is not matched with Password</string>
     <string name="invalid_phone_number">Invalid Phone Number</string>
     <string name="postal_code_validation">Enter valid Postal Code</string>
-    <string name="how_are_you_today">How are you today?</string>
+    <string name="how_are_you_today">आज आप कैसे हैं?</string>
     <string name="error_while_gen_mrs_id">Error while generating ID</string>
     <string name="user_register_successfully">User Registered Successfully</string>
     <string name="new_update_available">New Update Available</string>
@@ -45,8 +46,8 @@
     <string name="enter_check_in">Enter Check-in</string>
     <string name="home_quarantine_guidelines">Guidelines for use of PPE</string>
     <string name="education_videos">FAQs</string>
-    <string name="help">Help</string>
-    <string name="your_check_in_overview">Your check in overview :</string>
+    <string name="help">सहायता</string>
+    <string name="your_check_in_overview">अवलोकन में आपकी जाँच:</string>
     <string name="do_i_have_covid_19">Do I have Covid-19?</string>
     <string name="the_novel_coronavirus_disease_or_covid_19_is_an_infectious_disease_that_is_spreading_globally_you_may_have_the_disease_if_you_have_recently_traveled_abroad_or_came_in_contact_with_someone_who_is_known_to_be_infected_with_the_disease_in_such_cases_it_is_recommended_that_you_get_tested_and_also_self_quarantine_for_14_days">The novel Coronavirus disease or CoVid-19 is an infectious disease that is spreading globally. You may have the disease if you have recently traveled abroad, or came in contact with someone who is known to be infected with the disease. In such cases it is recommended that you get tested and also self-quarantine for 14 days.</string>
     <string name="_14_day_quarantine_and_care">14-day quarantine and care</string>
@@ -126,6 +127,8 @@
     <string name="email_link" translatable="false"> To reset your password send an email to support@intelehealth.io</string>
 
     //Home Screen (after login)
+    <string name="PPE_and_infection">व्यक्तिगत सुरक्षा उपकरण (पीपीई) और संक्रमण नियंत्रण</string>
+    <string name="PPE_reuse">पीपीई पुन: उपयोग और विकल्प</string>
     <string name="title_home_screen" translatable="false">Home</string>
     <string name="button_new_pt">New Patient</string>
     <string name="button_find_pt" translatable="false">Find Patient</string>
@@ -380,7 +383,6 @@
     <string name="uploading" translatable="false">Uploading</string>
     <string name="downloading" translatable="false">Downloading...</string>
 
-    <string name="visit" translatable="false">Visit</string>
     <string name="visit_update" translatable="false">Visit Update</string>
     <string name="patient" translatable="false">Patient</string>
     <string name="patient_update" translatable="false">Patient Update</string>
@@ -501,6 +503,7 @@
 
     <!--Privacy Notice Activity-->
     <string name="privacy_toast">Please select an option</string>
+    <string name="privacy_toast2">कृपया गोपनीयता सूचना से सहमत हों</string>
     <string name="temperature_f">Temperature (F)</string>
     <string name="sync_now">Sync Now</string>
     <string name="lastsync">lastsync</string>
@@ -678,30 +681,33 @@
 
     //HomeScreen (New Changes)
     <string name="txt_self_assessment">आत्म मूल्यांकन</string>
+    <string name="txt_doctor_consulation">डॉक्टर का परामर्श</string>
     <string name="txt_start_now">अभी शुरू करो</string>
     <string name="personal_pr">व्यक्तिगत सुरक्षा दिशानिर्देश</string>
-    <string name="if_you_star">Got questions about PPE and infection control? Concerned you\'re showing symptoms of Covid-19? Send us a WhatsApp message at our helpline number below to talk with an expert about your concerns.</string>
+    <string name="if_you_star">PPE और संक्रमण नियंत्रण के बारे में प्रश्न प्राप्त करें आप कोविद -19 के लक्षण दिखा रहे हैं? अपनी चिंताओं के बारे में किसी विशेषज्ञ से बात करने के लिए नीचे दिए गए हमारे हेल्पलाइन नंबर पर हमें एक व्हाट्सएप संदेश भेजें।</string>
     <string name="some_id">+91 9825989750</string>
     <string name="ppe_faq">पीपीई का पुन: उपयोग, विकल्प और एफएक्यू</string>
     <string name="ppe_req_header">Running low on PPE? Request for PPE Kits</string>
-    <string name="ppe_req_sub_header">This service is currently available in Mumbai and Delhi only. We aim to serve as many as possible and hope to expand this service to other areas soon.</string>
+    <string name="ppe_req_sub_header">यह सेवा वर्तमान में केवल मुंबई और दिल्ली में उपलब्ध है। हम अधिक से अधिक सेवा करने का लक्ष्य रखते हैं और जल्द ही अन्य क्षेत्रों में इस सेवा का विस्तार करने की उम्मीद करते हैं।</string>
     <string name="ppe_req">पीपीई किट ऑर्डर करें</string>
-    <string name="ppe_req_hint">What PPE do you require with quantity*</string>
-    <string name="txt_whatsapp_helpline">WhatsApp हेल्पलाइन</string>
-    <string name="Mental_health_support_text">Feeling stressed or anxious? Here are some self-care and support resources for healthcare providers</string>
-    <string name="tele_consultant_text">Feeling stressed or anxious? Request for a free confidential mental health consultation with a counsellor.</string>
+    <string name="ppe_req_hint">पीपीई की आपको मात्रा की क्या आवश्यकता है *</string>
+    <string name="txt_whatsapp_helpline"><u>WhatsApp हेल्पलाइन</u></string>
+    <string name="Mental_health_support_text">तनाव या चिंता महसूस करना? स्वास्थ्य सेवा प्रदाताओं के लिए कुछ स्व-देखभाल और समर्थन संसाधन यहां दिए गए हैं</string>
+    <string name="tele_consultant_text">तनाव या चिंता महसूस करना? एक परामर्शदाता के साथ एक मुफ्त मानसिक मानसिक स्वास्थ्य परामर्श के लिए अनुरोध करें।</string>
     <string name="mental_health_support">मानसिक स्वास्थ्य समर्थन</string>
     <string name="teleconsult_request">टेलीकॉन्सल्ट के लिए अनुरोध</string>
+    <string name="visit">जांच</string>
+
 
     // SignUP Screen(New Changes)
-    <string name="txt_personal_caste_header">I am a...*</string>
-    <string name="txt_prompt_caste">Select Caste</string>
-    <string name="txt_enter_caste">Designation</string>
-    <string name="toast_select_designation">Please select your designation.</string>
-    <string name="error_empty_designation">Enter your designation.</string>
-    <string name="txt_user_exists">Username already exists.</string>
+    <string name="txt_personal_caste_header">मैं एक...*</string>
+    <string name="txt_prompt_caste">जाति का चयन करें</string>
+    <string name="txt_enter_caste">पद</string>
+    <string name="toast_select_designation">कृपया अपना पदनाम चुनें।</string>
+    <string name="error_empty_designation">अपना पदनाम दर्ज करें।</string>
+    <string name="txt_user_exists">उपयोगकर्ता का नाम पहले से मौजूद है।</string>
 
     <!--Login Screen (New Changes)-->
-    <string name="txt_sign_up_option">Don\'t have an account?</string>
-    <string name="username_password_must_be_different">Username and Password must be different</string>
+    <string name="txt_sign_up_option">खाता नहीं है?</string>
+    <string name="username_password_must_be_different">उपयोगकर्ता नाम और पासवर्ड अलग होना चाहिए</string>
 </resources>

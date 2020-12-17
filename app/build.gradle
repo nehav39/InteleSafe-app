@@ -42,11 +42,8 @@ android {
             }
             minifyEnabled true
 
-<<<<<<< HEAD
             buildConfigField "String", "BASE_URL", "\"intelecare.intelehealth.org/\"" // http://13.232.32.249:8080/
-=======
             buildConfigField "String", "BASE_URL", "\"https://intelecare.intelehealth.org/\"" // http://13.232.32.249:8080/
->>>>>>> Priyam_Changes
             buildConfigField "String", "CLEAN_URL", "\"intelecare.intelehealth.org\"" // 13.232.32.249:8080
 
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
