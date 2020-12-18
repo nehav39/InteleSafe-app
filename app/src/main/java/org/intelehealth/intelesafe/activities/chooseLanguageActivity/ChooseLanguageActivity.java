@@ -1,15 +1,19 @@
 package org.intelehealth.intelesafe.activities.chooseLanguageActivity;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckedTextView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import org.intelehealth.intelesafe.R;
 import org.intelehealth.intelesafe.activities.homeActivity.HomeActivity;
@@ -24,9 +28,13 @@ public class ChooseLanguageActivity extends AppCompatActivity {
     String langaugeSelected;
     ListView LanguageListView;
     Button SaveButton;
+    ImageView BackImage;
+    ArrayList<String> languages_list;
     SessionManager sessionManager = null;
     CheckedTextView v;
     String LOG_TAG = "ChooseLanguageActivity";
+    String systemLanguage = Resources.getSystem().getConfiguration().locale.getLanguage();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +42,17 @@ public class ChooseLanguageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_choose_language);
         initViews();
         PopulatingLanguages();
+        if(!sessionManager.isFirstTimeLaunch())
+        {
+            BackImage.setVisibility(View.VISIBLE);
+            BackImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onBackPressed();
+                }
+            });
+        }
+
         LanguageListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -54,13 +73,11 @@ public class ChooseLanguageActivity extends AppCompatActivity {
                     Intent intent = new Intent(ChooseLanguageActivity.this, IntroActivity.class);
                     startActivity(intent);
                 } else {
-
                     Intent intent = new Intent(ChooseLanguageActivity.this, HomeActivity.class);
                     intent.putExtra("from", "splash");
                     intent.putExtra("username", "");
                     intent.putExtra("password", "");
                     startActivity(intent);
-
                 }
             }
         });    }
@@ -69,6 +86,7 @@ public class ChooseLanguageActivity extends AppCompatActivity {
         sessionManager = new SessionManager(ChooseLanguageActivity.this);
         LanguageListView = findViewById(R.id.language_listview);
         SaveButton = findViewById(R.id.save_button);
+        BackImage = findViewById(R.id.backButton);
     }
     public void PopulatingLanguages()
     {

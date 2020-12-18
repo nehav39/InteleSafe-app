@@ -1,30 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">InteleSafe</string>
-    <string name="intelecare"></string>
+    <string name="intelecare">InteleCare</string>
     <string name="select_language">Select Language</string>
     <string name="accept">स्वीकार</string>
     <string name="reject">अस्वीकार</string>
-    <string name="next">आगे</string>
-    <string name="privacy_reject_toast">आप बिना सहमति के मरीज का पंजीकरण नहीं कर सकते</string>
     <string name="address_of_line_2">Address of Line 2</string>
     <string name="HomeScreen_Header_Title">Welcome</string>
     <string name="if_you_get_much_sicker_please_call_your_nearest_doctor_020_26127394">You can message us with your PPE related queries on our WhatsApp Helpline below by clicking on it.</string>
-    <string name="visit_Summary_cardview">Summary</string>
+    <string name="visit_Summary_cardview">सारांश</string>
     <string name="address_of_line_1">Address of Line 1*</string>
     <string name="skip">skip</string>
     <string name="start">Start</string>
     <string name="error_while_fetching_location">Error while fetching locations</string>
     <string name="something_went_wrong">Something went wrong, please try again</string>
-    <string name="password_should_be_8_characters_long_and_should_have_both_upper_and_lower_case_characters_at_least_one_digit">Password should be 8 characters long and should have both upper and lower case characters, at least one digit.</string>
     <string name="phone_number_validation">Phone number must be 10 digits</string>
-    <string name="please_select_country">Please select country</string>
     <string name="please_select_location">Please select Location</string>
     <string name="please_select_districts">Please select District/Municipal Corporations</string>
     <string name="invalid_password">Invalid Password</string>
-    <string name="username_should_be_6_digits">Username should be 6 digits</string>
-    <string name="confirm_password">Confirm Password*</string>
-    <string name="confirm_password_is_mismatched">Confirm password is not matched with Password</string>
     <string name="invalid_phone_number">Invalid Phone Number</string>
     <string name="postal_code_validation">Enter valid Postal Code</string>
     <string name="how_are_you_today">आज आप कैसे हैं?</string>
@@ -33,15 +26,10 @@
     <string name="new_update_available">New Update Available</string>
     <string name="update_app_note">New version is available with new features please update app</string>
     <string name="update">Update</string>
-    <string name="password_validation_two">Password must have atleast one lowercase character</string>
-
-    <string name="password_validation">Password must have atleast one digit character</string>
     <string name="thank_you">Thank you</string>
     <string name="your_checkin_is_uploaded_successfully">Your check-in submitted successfully.</string>
-    <string name="upper_case_validation">Password must have atleast one uppercase character</string>
-    <string name="password_must_eight">Password must have 8 character</string>
     <string name="check_in">Check In</string>
-    <string name="logout_dialog">Are you sure you want to Logout?</string>
+    <string name="logout_dialog">क्या आप लॉग आउट करना चाहते हैं?</string>
     <string name="day_1">Day 1</string>
     <string name="enter_check_in">Enter Check-in</string>
     <string name="home_quarantine_guidelines">Guidelines for use of PPE</string>
@@ -72,8 +60,8 @@
     <string name="tag_optional" translatable="false">optional</string>
     <string name="generic_ok" translatable="false">OK</string>
     <string name="generic_cancel" translatable="false">Cancel</string>
-    <string name="generic_yes" translatable="false">Yes</string>
-    <string name="generic_no" translatable="false">No</string>
+    <string name="generic_yes">हाँ</string>
+    <string name="generic_no">नहीं</string>
     <string name="generic_back" translatable="false">Back</string>
     <string name="generic_coming_soon" translatable="false">Coming Soon.....</string>
     <string name="action_print" translatable="false">Print</string>
@@ -104,27 +92,24 @@
 
     //Login Screen
     <string name="title_activity_login" translatable="false">Intelehealth</string>
-    <string name="prompt_email" translatable="false">Username</string>
-    <string name="prompt_password" translatable="false">Password*</string>
+    <string name="prompt_email">उपयोगकर्ता नाम</string>
+    <string name="prompt_password">कुंजिका*</string>
     <string name="prompt_admin_password" translatable="false">Admin Password</string>
-    <string name="action_sign_in" translatable="false">Login</string>
-    <string name="action_sign_in_short" translatable="false">Sign in</string>
+    <string name="action_sign_in">लॉग इन</string>
+    <string name="action_sign_in_short">साइन इन करें</string>
     <string name="url_invalid" translatable="false">Check your URL.</string>
     <string name="prefix_invalid" translatable="false">Select a different prefix!</string>
-    <string name="error_invalid_email" translatable="false">This username is invalid</string>
-    <string name="error_invalid_password" translatable="false">This password is too short</string>
-    <string name="error_incorrect_password" translatable="false">please check username and password entered</string>
-    <string name="error_field_required" translatable="false">This field is required</string>
+    <string name="error_invalid_email" translatable="false">यह उपयोगकर्ता नाम अमान्य है</string>
+    <string name="error_invalid_password" translatable="false">यह पासवर्ड बहुत छोटा है</string>
+    <string name="error_incorrect_password" translatable="false">कृपया उपयोगकर्ता नाम और पासवर्ड की जाँच करें</string>
+    <string name="error_field_required" translatable="false">यह फ़ील्ड आवश्यक है</string>
     <string name="error_network" translatable="false">Network Error</string>
     <string name="error_location_not_selected" translatable="false">Please select a value form the location dropdown</string>
     <string name="error_location_not_fetched" translatable="false">Unable to fetch locations</string>
-    <string name="permission_rationale" translatable="false">"Contacts permissions are needed for providing email completions."
-    </string>
+    <string name="permission_rationale" translatable="false">"Contacts permissions are needed for providing email completions."</string>
     <string name="device_id" translatable="false">Device ID:</string>
-
-
-    <string name="cant_login_user" translatable="false">Forgot password?</string>
-    <string name="email_link" translatable="false"> To reset your password send an email to support@intelehealth.io</string>
+    <string name="cant_login_user">पासवर्ड भूल गए?</string>
+    <string name="email_link">अपना पासवर्ड रीसेट करने के लिए support@intelehealth.io पर एक ईमेल भेजें</string>
 
     //Home Screen (after login)
     <string name="PPE_and_infection">व्यक्तिगत सुरक्षा उपकरण (पीपीई) और संक्रमण नियंत्रण</string>
@@ -138,36 +123,70 @@
     <string name="menu_option_settings" translatable="false">Settings</string>
     <string name="menu_option_end_of_day" translatable="false">End of Day</string>
     <string name="menu_option_logout" translatable="false">Logout</string>
+    <string name="today_checkin">आज का चेक-इन</string>
+    <string name="change_lang_menu">भाषा बदलो</string>
+    <string name="logout_menu">लॉग आउट</string>
 
+    //Sign Up Screen
+    <string name="title_sign_up">साइन अप</string>
+    <string name="personal_information">व्यक्तिगत जानकारी</string>
+    <string name="login_details">लॉगइन विवरण</string>
+    <string name="username">उपयोगकर्ता नाम*</string>
+    <string name="username_condition">उपयोगकर्ता नाम अक्षर और संख्या और 8 वर्णों का संयोजन होना चाहिए।</string>
+    <string name="identification_screen_prompt_first_name">पहला नाम*</string>
+    <string name="identification_screen_prompt_last_name">उपनाम*</string>
+    <string name="identification_screen_checkbox_male">पुरुष</string>
+    <string name="identification_screen_checkbox_female">महिला</string>
+    <string name="identification_screen_prompt_birthday">जन्म की तारीख*</string>
+    <string name="identification_screen_prompt_country">देश *</string>
+    <string name="confirm_password">पासवर्ड की पुष्टि कीजिये*</string>
+    <string name="password_should_be_8_characters_long_and_should_have_both_upper_and_lower_case_characters_at_least_one_digit">पासवर्ड 8 अक्षर लंबा होना चाहिए और इसमें ऊपरी और निचले दोनों प्रकार के अक्षर होने चाहिए, कम से कम एक अंक।</string>
+    <string name="txt_personal_caste_header">मैं एक...*</string>
+    <string name="txt_prompt_caste">जाति का चयन करें</string>
+    <string name="txt_enter_caste">पद</string>
+    <string name="toast_select_designation">कृपया अपना पदनाम चुनें।</string>
+    <string name="error_empty_designation">अपना पदनाम दर्ज करें।</string>
+    <string name="txt_user_exists">उपयोगकर्ता का नाम पहले से मौजूद है।</string>
+    <string name="address_details">पता दे</string>
+    <string name="please_fill_your_details">कृपया अपना विवरण भरें</string>
+    <string name="save">सहेजें</string>
+    <string name="identification_screen_dialog_error_gender">लिंग का चयन नहीं किया गया है</string>
+    <string name="error">त्रुटि</string>
+    <string name="identification_screen_dialog_error_dob">आज के बाद जन्म की तारीख निर्धारित की जाती है</string>
+    <string name="username_should_be_6_digits">उपयोगकर्ता नाम 6 अंकों का होना चाहिए</string>
+    <string name="confirm_password_is_mismatched">पासवर्ड की पुष्टि पासवर्ड से नहीं होती है</string>
+    <string name="password_validation">पासवर्ड में कम से कम एक अंक का वर्ण होना चाहिए</string>
+    <string name="password_validation_two">पासवर्ड में कम से कम एक वर्ण होना चाहिए</string>
+    <string name="upper_case_validation">पासवर्ड में कम से कम एक बड़ा अक्षर होना चाहिए</string>
+    <string name="password_must_eight">पासवर्ड में 8 वर्ण होने चाहिए</string>
+    <string name="please_select_country">कृपया देश का चयन करें</string>
+
+
+    //Privacy Notice
+    <string name="privacy_agree">गोपनीयता नोटिस से सहमत हों।</string>
+    <string name="next">आगे</string>
+    <string name="privacy_reject_toast">आप बिना सहमति के मरीज का पंजीकरण नहीं कर सकते</string>
 
     //Identification Screen
     <string name="title_activity_identification" translatable="false">Add New Patient</string>
-    <string name="identification_screen_prompt_first_name">First name*</string>
     <string name="identification_screen_prompt_middle_name">Middle name</string>
-    <string name="identification_screen_prompt_last_name">Last name*</string>
     <string name="identification_screen_prompt_address">Address line 1*</string>
     <string name="identification_screen_prompt_address2">Address line 2*</string>
     <string name="identification_screen_prompt_phone_number">Mobile Number*</string>
     <string name="admin_password_dialog_heading" translatable="false">Enter Admin Password</string>
     <string name="identification_screen_prompt_gender" translatable="false">Gender</string>
-    <string name="identification_screen_checkbox_male">Male</string>
-    <string name="identification_screen_checkbox_female">Female</string>
-    <string name="identification_screen_prompt_birthday">Date of Birth*</string>
     <string name="identification_screen_prompt_age">Age:</string>
     <string name="identification_screen_prompt_city">Village/Town/City*</string>
     <string name="identification_screen_prompt_state">State*</string>
     <string name="identification_screen_prompt_caste" translatable="false">Caste</string>
     <string name="identification_screen_prompt_economic_status" translatable="false">Economic status</string>
     <string name="identification_screen_prompt_education" translatable="false">Education level</string>
-    <string name="identification_screen_prompt_country" translatable="false">Country*</string>
     <string name="identification_screen_prompt_postal_code" translatable="false">Postal code*</string>
     <string name="identification_screen_prompt_relationship" translatable="false">Son/Daughter/Wife of</string>
     <string name="identification_screen_prompt_occupation" translatable="false">Occupation</string>
     <string name="identification_screen_snack_patient_created" translatable="false">Patient created! Uploading to server.</string>
     <string name="identification_screen_error_data_fields" translatable="false">Error: data fields are not formatted correctly</string>
     <string name="identification_screen_dialog_age" translatable="false">Please enter age in years</string>
-    <string name="identification_screen_dialog_error_dob" translatable="false">Date of birth is set for date after today</string>
-    <string name="identification_screen_dialog_error_gender" translatable="false">Gender is not selected</string>
     <string name="identification_screen_required_fields" translatable="false">Please enter required fields</string>
     <string name="identification_screen_error_dob" translatable="false">Enter a valid DOB</string>
     <string name="identification_screen_error_age" translatable="false">Enter a valid age</string>
@@ -175,6 +194,14 @@
     <string name="identification_screen_text_months" translatable="false"> months</string>
     <string name="identification_screen_picker_years" translatable="false">years</string>
     <string name="identification_screen_picker_months" translatable="false">months</string>
+
+    //Intro Screen
+    <string name="intro_text1">यह ऐप व्यक्तिगत सुरक्षा उपायों और पीपीई उपयोग के बारे में जानने के लिए देखभाल के मोर्चे पर सभी प्रकार के स्वास्थ्य कार्यकर्ताओं के लिए है।</string>
+    <string name="intro_text2">आप अपने स्वयं के स्वास्थ्य की दैनिक निगरानी कर सकते हैं और मदद के लिए पहुंच सकते हैं यदि आपको लगता है कि आपके पास असुरक्षित जोखिम हो सकता है और संक्रमित हो सकता है।</string>
+    <string name="intro_text1_part"> व्यक्तिगत सुरक्षा उपायों और पीपीई उपयोग के बारे में </string>
+    <string name="intro_text2_part">स्वयं के स्वास्थ्य की दैनिक निगरानी कर</string>
+
+
 
     //Active Patients Screen
     <string name="title_activity_active_patient" translatable="false">"Active Visits"</string>
@@ -547,7 +574,7 @@
     <string name="end_all_visit">End All Visit</string>
     <string name="filter_by_creator">Filter by creator</string>
     <string name="planet_name">Planet Name</string>
-    <string name="ok">OK</string>
+    <string name="ok">ठीक</string>
     <string name="cancel">Cancel</string>
     <string name="unable_to_end">Unable to end</string>
     <string name="upload_before_end_visit_active"> visits.Please upload visit before attempting to end the visit.</string>
@@ -562,11 +589,10 @@
     <string name="please_connect_to_internet">Please connect to an internet connection!</string>
     <string name="image_upload">ImageUpload</string>
     <string name="image_upload_failed">ImageUpload failed</string>
-    <string name="sure_to_exit">Are you sure you want to EXIT ?</string>
+    <string name="sure_to_exit">क्या आप निसंदेह बाहर निकलना चाहते हैं?</string>
     <string name="lastsync_normal">Last sync</string>
     <string name="update_patient_identification">Update Patient</string>
     <string name="are_you_want_go_back">Are you sure you want to go back ?</string>
-    <string name="error">Error</string>
     <string name="patient_data_upload">Patient Data Upload</string>
     <string name="patient_image_download_notifi">Patient Image Download</string>
     <string name="image_download_complete_notifi">\'s Image Download complete.</string>
@@ -619,14 +645,14 @@
     <string name="teleconsultation_button_visitsummary">Teleconsultation</string>
     <string name="help_cardview_visit">If you get much sicker please call your nearest doctor - 73054154312</string>
     <string name="intelesafe">InteleSafe</string>
-    <string name="who_is_this_napplication_for">Who is this  application for?</string>
+    <string name="who_is_this_napplication_for">यह आवेदन किसके लिए है?</string>
     <string name="submit_visitSummary_Button">Submit</string>
     <string name="medical_registration_number_license_id">Medical registration number/license ID</string>
     <string name="name_of_health_organization_hospital_where_you_primarily_work">Health org./hospital where you work</string>
     <string name="username_10digits">Username should be 8 characters</string>
     <string name="please_select_state">Please select state</string>
     <string name="stay_aware_stay_safe">Stay Aware | Stay Safe</string>
-    <string name="assessment_visit_title">Assessment</string>
+    <string name="assessment_visit_title">मूल्यांकन</string>
     <!-- <string name="select_language">Select Language</string>
      <string name="address_of_isolation_line_2">Address of isolation, Line 2</string>
      <string name="HomeScreen_Header_Title">Welcome</string>
@@ -695,17 +721,8 @@
     <string name="Mental_health_support_text">तनाव या चिंता महसूस करना? स्वास्थ्य सेवा प्रदाताओं के लिए कुछ स्व-देखभाल और समर्थन संसाधन यहां दिए गए हैं</string>
     <string name="tele_consultant_text">तनाव या चिंता महसूस करना? एक परामर्शदाता के साथ एक मुफ्त मानसिक मानसिक स्वास्थ्य परामर्श के लिए अनुरोध करें।</string>
     <string name="mental_health_support">मानसिक स्वास्थ्य समर्थन</string>
-    <string name="teleconsult_request">टेलीकॉन्सल्ट के लिए अनुरोध</string>
+    <string name="teleconsult_request">टेलीकॉन्सेल्ट अनुरोध</string>
     <string name="visit">जांच</string>
-
-
-    // SignUP Screen(New Changes)
-    <string name="txt_personal_caste_header">मैं एक...*</string>
-    <string name="txt_prompt_caste">जाति का चयन करें</string>
-    <string name="txt_enter_caste">पद</string>
-    <string name="toast_select_designation">कृपया अपना पदनाम चुनें।</string>
-    <string name="error_empty_designation">अपना पदनाम दर्ज करें।</string>
-    <string name="txt_user_exists">उपयोगकर्ता का नाम पहले से मौजूद है।</string>
 
     <!--Login Screen (New Changes)-->
     <string name="txt_sign_up_option">खाता नहीं है?</string>

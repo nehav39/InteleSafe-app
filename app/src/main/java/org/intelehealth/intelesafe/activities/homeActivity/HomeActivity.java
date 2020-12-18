@@ -162,6 +162,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     TextView tvMentalHelpRequest, tv_ppe_request, mental_Help_Text;
     ImageView home_popup_menu;
     String appLanguage;
+    private String name;
 
     Context context;
     private String mindmapURL = "";
@@ -213,30 +214,31 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         customProgressDialog = new CustomProgressDialog(context);
         reMyreceive = new Myreceiver();
         filter = new IntentFilter("lasysync");
-        home_popup_menu = findViewById(R.id.popup_menu);
-        home_popup_menu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                PopupMenu popupMenu = new PopupMenu(HomeActivity.this, view);
-                popupMenu.getMenuInflater().inflate(R.menu.home_popup_menu, popupMenu.getMenu());
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.changeLanguage:
-                                chooseLanguageMenu();
-                                return true;
-                            case R.id.logout:
-                                logoutMenu();
-                                return true;
-                            default:
-                                return false;
-                        }
-                    }
-
-                });
-                popupMenu.show();
-            }
-        });
+        name = sessionManager.getUserName();
+//        home_popup_menu = findViewById(R.id.popup_menu);
+//        home_popup_menu.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                PopupMenu popupMenu = new PopupMenu(HomeActivity.this, view);
+//                popupMenu.getMenuInflater().inflate(R.menu.home_popup_menu, popupMenu.getMenu());
+//                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+//                    public boolean onMenuItemClick(MenuItem item) {
+//                        switch (item.getItemId()) {
+//                            case R.id.changeLanguage:
+//                                chooseLanguageMenu();
+//                                return true;
+//                            case R.id.logout:
+//                                logoutMenu();
+//                                return true;
+//                            default:
+//                                return false;
+//                        }
+//                    }
+//
+//                });
+//                popupMenu.show();
+//            }
+//        });
 
 
         //manager = AccountManager.get(HomeActivity.this);
@@ -279,8 +281,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             public void onClick(View view) {
                 String phoneNumberWithCountryCode = "+919825989750";
                 String message =
-                        R.string.hello_my_name + sessionManager.getUserName() +
-                                /*" from " + sessionManager.getState() + */ R.string.need_some_assisstance;
+                        getString(R.string.hello_my_name) + sessionManager.getUserName() +
+                                /*" from " + sessionManager.getState() + */ getString(R.string.need_some_assisstance);
 
                 startActivity(new Intent(Intent.ACTION_VIEW,
                         Uri.parse(
@@ -290,6 +292,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         });
 
         tvMentalHelpRequest = findViewById(R.id.tv_mental_help_request);
+        tvMentalHelpRequest.setPaintFlags(tvMentalHelpRequest.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
         tvMentalHelpRequest.setOnClickListener(this);
 
         SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(context));
@@ -385,7 +389,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         educational_videos = findViewById(R.id.button_educational_videos);
         welcomeUser = findViewById(R.id.welcomeUser);
 
-        welcomeUser.setText("" + sessionManager.getUserName());
+        welcomeUser.setText(name);
 
         enter_check_in.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -598,23 +602,41 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         user_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(HomeActivity.this);
-                alertDialogBuilder.setMessage(getString(R.string.logout_dialog));
-                alertDialogBuilder.setNegativeButton(R.string.generic_no, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
+                PopupMenu popupMenu = new PopupMenu(HomeActivity.this, v);
+                popupMenu.getMenuInflater().inflate(R.menu.home_popup_menu, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.changeLanguage:
+                                chooseLanguageMenu();
+                                return true;
+                            case R.id.logout:
+                                logoutMenu();
+                                return true;
+                            default:
+                                return false;
+                        }
                     }
+
                 });
-                alertDialogBuilder.setPositiveButton(R.string.generic_yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        logout();
-                    }
-                });
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
+                popupMenu.show();
+//                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(HomeActivity.this);
+//                alertDialogBuilder.setMessage(getString(R.string.logout_dialog));
+//                alertDialogBuilder.setNegativeButton(R.string.generic_no, new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        dialogInterface.dismiss();
+//                    }
+//                });
+//                alertDialogBuilder.setPositiveButton(R.string.generic_yes, new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        dialog.dismiss();
+//                        logout();
+//                    }
+//                });
+//                AlertDialog alertDialog = alertDialogBuilder.create();
+//                alertDialog.show();
             }
         });
         ppe_cardView_request = findViewById(R.id.ppe_cardView_request);
@@ -986,7 +1008,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         Collections.sort(new_arraylist); // added by venu N to sort the
 
         for (int j = 0; j < new_arraylist.size(); j++) {
-            recycler_arraylist.add(new Day_Date("Visit" + a, new_arraylist.get(j)));
+            recycler_arraylist.add(new Day_Date(getString(R.string.visit) + " " + a, new_arraylist.get(j)));
             a++;
         }
 

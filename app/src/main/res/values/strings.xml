@@ -62,9 +62,13 @@
     //Intro
     <string name="intro_text1">This app is for all types of health workers at the frontlines of care to learn about personal protection measures and PPE use.</string>
     <string name="intro_text2">You can monitor your own health daily and reach out for help if you think you may have had unsafe exposure and may be infected.</string>
+    <string name="intro_text1_part">learn about personal protection measures and PPE use.</string>
+    <string name="intro_text2_part">monitor your own health daily</string>
 
     // Sign up
     <string name="title_sign_up" translatable="false">Sign Up</string>
+    <string name="address_details">Address Details</string>
+
 
     //Home Screen (after login)
     <string name="title_home_screen" translatable="false">Home</string>
@@ -643,7 +647,6 @@
     <string name="login_details">Login Details</string>
     <string name="username">Username*</string>
     <string name="username_condition">Username should be combination of Alphabets and Numbers and 8 characters long.</string>
-    <string name="address_details">Address Details</string>
     <string name="stay_aware_stay_safe">Stay Aware | Stay Safe</string>
 
     //HomeScreen (New Changes)

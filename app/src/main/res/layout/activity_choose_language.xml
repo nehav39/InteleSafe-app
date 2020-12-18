@@ -9,6 +9,15 @@
     tools:context="org.intelehealth.intelesafe.activities.chooseLanguageActivity.ChooseLanguageActivity"
     android:background="@color/white">
 
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@color/transparent"
+        android:id="@+id/backButton"
+        android:visibility="gone"
+        android:src="@drawable/svg_header_left_arrow"
+        android:padding="10dp"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

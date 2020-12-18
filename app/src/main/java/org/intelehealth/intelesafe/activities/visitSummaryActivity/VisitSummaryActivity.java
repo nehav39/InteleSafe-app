@@ -530,7 +530,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
 
         tvMentalHelpRequest = findViewById(R.id.tv_mental_help_request);
-        tvMentalHelpRequest.setPaintFlags(tvMentalHelpRequest.getPaintFlags()|Paint.UNDERLINE_TEXT_FLAG);
+        tvMentalHelpRequest.setPaintFlags(tvMentalHelpRequest.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         tvMentalHelpRequest.setOnClickListener(this);
         ivPrescription = findViewById(R.id.iv_prescription);
 

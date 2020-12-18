@@ -2,6 +2,7 @@ package org.intelehealth.intelesafe.utilities;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.preference.PreferenceManager;
 
 import java.util.Set;
@@ -70,6 +71,14 @@ public class SessionManager {
         this._context = context;
         pref = _context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
         editor = pref.edit();
+    }
+
+    public String getSystemLanguage(String systemLanguage)
+    {
+        if(systemLanguage == "hi")
+            return "हिंदी";
+        else
+            return "English";
     }
 
 

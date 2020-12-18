@@ -213,13 +213,13 @@ public class IntroActivity extends AppCompatActivity {
             tvIntroTwo = view.findViewById(R.id.tv_intro_two);
 
             //Highlighting Text
-            String introOne = "This app is for all types of health workers at the frontlines of care to learn about personal protection measures and PPE use.";
-            String textToHighlightOne = "learn about personal protection measures and PPE use.";
+            String introOne = getString(R.string.intro_text1);
+            String textToHighlightOne = getString(R.string.intro_text1_part);
             String newString = introOne.replaceAll(textToHighlightOne, "<font color='blue'>" + textToHighlightOne + "</font>");
             tvIntroOne.setText(Html.fromHtml(newString));
 
-            String introTwo = "You can monitor your own health daily and reach out for help if you think you may have had unsafe exposure and may be infected.";
-            String textToHighlightTwo = "monitor your own health daily";
+            String introTwo = getString(R.string.intro_text2);
+            String textToHighlightTwo = getString(R.string.intro_text2_part);
             String newStringTwo = introTwo.replaceAll(textToHighlightTwo, "<font color='blue'>" + textToHighlightTwo + "</font>");
             tvIntroTwo.setText(Html.fromHtml(newStringTwo));
 

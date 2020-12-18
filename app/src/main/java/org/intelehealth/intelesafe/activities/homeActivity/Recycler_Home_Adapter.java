@@ -167,11 +167,12 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
 
                 Log.e("VENU: ", array_message.toString());
                 StringBuilder stringBuilder_2 = new StringBuilder();
+
                 for (int i = 0; i < array_message.size(); i++) {
-                    stringBuilder_2.append("Visit no." + (i + 1) + "-\t\t" + array_message.get(i));
+                    stringBuilder_2.append(R.string.visit + (i + 1) + "-\t\t" + array_message.get(i));
                     //stringBuilder_2.append("\n");
                     TextView visitText = new TextView(mcontext);
-                    visitText.setText("Visit no." + (i + 1) + "-\t\t" + array_message.get(i));
+                    visitText.setText( "Visit no." + (i + 1) + "-\t\t" + array_message.get(i));
                     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                             LinearLayout.LayoutParams.WRAP_CONTENT);
                     if(mcontext.getResources().getBoolean(R.bool.isTab)) {
