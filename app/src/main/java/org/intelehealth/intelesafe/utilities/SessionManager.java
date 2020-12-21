@@ -73,12 +73,12 @@ public class SessionManager {
         editor = pref.edit();
     }
 
-    public String getSystemLanguage(String systemLanguage)
+    public int getSystemLanguage(String systemLanguage)
     {
         if(systemLanguage == "hi")
-            return "हिंदी";
+            return 0;
         else
-            return "English";
+            return 1;
     }
 
 

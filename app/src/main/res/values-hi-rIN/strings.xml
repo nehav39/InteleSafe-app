@@ -288,6 +288,8 @@
     <string name="visit_summary_follow_up_date" translatable="false">Follow Up Date</string>
     <string name="visit_summary_follow_up_reminder" translatable="false">Please remind the patient of their follow up date: </string>
     <string name="visit_summary_upload_reminder" translatable="false">Please upload first before attempting to end the visit.</string>
+    <string name="click_submit">सबमिट बटन पर क्लिक करें</string>
+    <string name="upload_before_home">सबमिट बटन पर क्लिक करके होम स्क्रीन पर जाने से पहले कृपया अपनी यात्रा अपलोड करें।</string>
 
 
     //Diagnostic Tests Screen

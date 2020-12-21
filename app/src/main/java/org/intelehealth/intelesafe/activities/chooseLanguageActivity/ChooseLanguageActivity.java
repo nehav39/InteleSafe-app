@@ -34,6 +34,7 @@ public class ChooseLanguageActivity extends AppCompatActivity {
     CheckedTextView v;
     String LOG_TAG = "ChooseLanguageActivity";
     String systemLanguage = Resources.getSystem().getConfiguration().locale.getLanguage();
+    int getSystemLanguagePosition;
 
 
     @Override
@@ -51,6 +52,21 @@ public class ChooseLanguageActivity extends AppCompatActivity {
                     onBackPressed();
                 }
             });
+            if(sessionManager.getAppLanguage()=="hi")
+            {
+                LanguageListView.setItemChecked(0,true);
+                LanguageListView.setSelection(0);
+            }
+            else
+            {
+                LanguageListView.setItemChecked(1,true);
+                LanguageListView.setSelection(1);
+            }
+        }
+        if(sessionManager.isFirstTimeLaunch())
+        {
+            LanguageListView.setItemChecked(getSystemLanguagePosition,true);
+            LanguageListView.setSelection(getSystemLanguagePosition);
         }
 
         LanguageListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -61,7 +77,6 @@ public class ChooseLanguageActivity extends AppCompatActivity {
                 if(currentCheck == true) {
                     langaugeSelected = v.getText().toString();
                     sessionManager.setAppLanguage(langaugeSelected);
-                    SaveButton.setEnabled(true);
                 }
             }
         });
@@ -87,6 +102,7 @@ public class ChooseLanguageActivity extends AppCompatActivity {
         LanguageListView = findViewById(R.id.language_listview);
         SaveButton = findViewById(R.id.save_button);
         BackImage = findViewById(R.id.backButton);
+        getSystemLanguagePosition = sessionManager.getSystemLanguage(systemLanguage);
     }
     public void PopulatingLanguages()
     {

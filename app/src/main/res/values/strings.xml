@@ -225,6 +225,8 @@
     <string name="visit_summary_follow_up_date" translatable="false">Follow Up Date</string>
     <string name="visit_summary_follow_up_reminder" translatable="false">Please remind the patient of their follow up date: </string>
     <string name="visit_summary_upload_reminder" translatable="false">Please upload first before attempting to end the visit.</string>
+    <string name="click_submit">Click on Submit button</string>
+    <string name="upload_before_home">Please upload your visit before going to Home screen by clicking on the Submit button.</string>
 
 
     //Diagnostic Tests Screen
@@ -675,7 +677,7 @@
     <string name="txt_enter_caste">Designation</string>
     <string name="toast_select_designation">Please select your designation.</string>
     <string name="error_empty_designation">Enter your designation.</string>
-    <string name="teleconsult_request">Teleconsult request</string>
+    <string name="teleconsult_request"><u>Teleconsult request</u></string>
     <string name="tele_consultant_text">Feeling stressed or anxious? Request for a free confidential mental health consultation with a counsellor.</string>
     <string name="txt_user_exists">Username already exists.</string>
     <!--Login Screen (New Changes)-->

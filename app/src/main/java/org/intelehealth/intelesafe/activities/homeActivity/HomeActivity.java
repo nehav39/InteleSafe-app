@@ -292,8 +292,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         });
 
         tvMentalHelpRequest = findViewById(R.id.tv_mental_help_request);
-        tvMentalHelpRequest.setPaintFlags(tvMentalHelpRequest.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-
         tvMentalHelpRequest.setOnClickListener(this);
 
         SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(context));

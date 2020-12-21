@@ -37,7 +37,9 @@ import androidx.appcompat.widget.Toolbar;
 import android.telephony.SmsManager;
 import android.text.Html;
 import android.text.InputType;
+import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -340,10 +342,10 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                     finish();
                 } else {
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-                    alertDialogBuilder.setTitle("Click on Submit button");
-                    alertDialogBuilder.setMessage("Please upload your visit before going to Home screen by clicking on the Submit button.");
+                    alertDialogBuilder.setTitle(R.string.click_submit);
+                    alertDialogBuilder.setMessage(R.string.upload_before_home);
 
-                    alertDialogBuilder.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+                    alertDialogBuilder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
@@ -530,7 +532,6 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
 
         tvMentalHelpRequest = findViewById(R.id.tv_mental_help_request);
-        tvMentalHelpRequest.setPaintFlags(tvMentalHelpRequest.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         tvMentalHelpRequest.setOnClickListener(this);
         ivPrescription = findViewById(R.id.iv_prescription);
 
@@ -577,13 +578,22 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         }
 
         mental_visit_help_text = findViewById(R.id.mental_visit_help_text);
+        String teleconsult_request = "";
         if(sessionManager.getPatientCountry().equals("India")){
             mental_visit_help_text.setText(getString(R.string.tele_consultant_text));
             tvMentalHelpRequest.setText(getString(R.string.teleconsult_request));
+            teleconsult_request = getString(R.string.teleconsult_request);
+
         }else{
             mental_visit_help_text.setText(getString(R.string.Mental_health_support_text));
             tvMentalHelpRequest.setText(getString(R.string.mental_health_support));
+            teleconsult_request = getString(R.string.mental_health_support);
+
         }
+
+        SpannableString content = new SpannableString(teleconsult_request);
+        content.setSpan(new UnderlineSpan(), 0, teleconsult_request.length(), 0);
+        tvMentalHelpRequest.setText(content);
 
 
         //  downloadButton = findViewById(R.id.button_download);
