@@ -1,5 +1,6 @@
 package org.intelehealth.intelesafe.activities.visitSummaryActivity;
 
+import android.app.Dialog;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -14,11 +15,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -265,6 +268,12 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
     SyncUtils syncUtils = new SyncUtils();
 
+    //dialog added: By Nishita
+    TextView timer_textView, callButton;
+    ImageView ivCloseDialog;
+    public int counter;
+    Dialog customDialog;
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -506,7 +515,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         mDoctorName = findViewById(R.id.doctor_details);
         mDoctorTitle.setVisibility(View.GONE);
         mDoctorName.setVisibility(View.GONE);
-
+        customDialog = new Dialog(this);
         diagnosisTextView = findViewById(R.id.textView_content_diagnosis);
         prescriptionTextView = findViewById(R.id.textView_content_rx);
         medicalAdviceTextView = findViewById(R.id.textView_content_medical_advice);
@@ -753,7 +762,13 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                                 uploadButton.setEnabled(false);
                                 uploadButton.setAlpha(0.5f);
                                 editPhysical.setVisibility(View.GONE);
-
+//                                Handler handler1 = new Handler();
+//                                handler.postDelayed(new Runnable() {
+//                                    @Override
+//                                    public void run() {
+//                                        launchDialog();
+//                                    }
+//                                },4000);
                             } else {
                                 AppConstants.notificationUtils.DownloadDone(patientName + " " + getString(R.string.visit_data_failed), getString(R.string.visit_uploaded_failed), 3, VisitSummaryActivity.this);
                             }
@@ -1413,12 +1428,12 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 //                dialogInterface.dismiss();
 //            }
 //        });
-        alertDialogBuilder.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+        alertDialogBuilder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-
                 sessionManager.setFirstCheckin("true");
+                launchDialog();
                 // Modified by Venu N on 06/04/2020.
                /* Intent i = new Intent(context, HomeActivity.class);
                 i.putExtra("from", "visitSummary");
@@ -1430,6 +1445,47 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         });
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
+
+    }
+    private void launchDialog() {
+        customDialog.setContentView(R.layout.custom_wait_dialog);
+        ivCloseDialog = (ImageView) customDialog.findViewById(R.id.closeDialog);
+        callButton = (TextView) customDialog.findViewById(R.id.callButton);
+        timer_textView = (TextView) customDialog.findViewById(R.id.timerTV);
+        showConsulation();
+        ivCloseDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                customDialog.dismiss();
+            }
+        });
+        callButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Intent intent = new Intent(WaitWindowActivity.this, VideoCallActivity.class);
+//                startActivity(intent);
+                customDialog.dismiss();            }
+        });
+
+        customDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        customDialog.show();
+    }
+    private void showConsulation() {
+
+        new CountDownTimer(30000, 1000) {
+            @Override
+            public void onTick(long l) {
+                timer_textView.setText(String.valueOf(l / 1000));
+                counter++;
+            }
+
+            @Override
+            public void onFinish() {
+                timer_textView.setText(R.string.dialogText2);
+                callButton.setAlpha(1);
+                callButton.setEnabled(true);
+            }
+        }.start();
 
     }
 

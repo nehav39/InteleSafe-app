@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".activities.privacyNoticeActivity.PrivacyNotice_Activity">
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="org.intelehealth.intelesafe.activities.privacyNoticeActivity.PrivacyNotice_Activity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/actionbar"
@@ -18,72 +18,261 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/white"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
             app:title="@string/privacy_notice_title"
-            app:titleTextColor="@color/font_black_0" />
+            app:titleTextColor="@color/font_black_0"
+            android:background="@color/white"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:gravity="center"
         android:orientation="horizontal"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:layout_alignParentBottom="true">
 
         <CheckBox
-            android:id="@+id/chb_agree_privacy"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.75"
-            android:fontFamily="@fonts/Lato_Regular"
-            android:text="@string/privacy_agree" />
+            android:text="@string/privacy_agree"
+            android:id="@+id/agree_checkbox"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="@dimen/arrow_button_padding"
+            android:textSize="@dimen/intro_button_text"/>
 
         <TextView
-            android:id="@+id/txt_privacy"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="15dp"
-            android:layout_weight="0.25"
-            android:drawableEnd="@drawable/ic_keyboard_arrow_right"
-            android:fontFamily="@fonts/Lato_Regular"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:gravity="end"
-            android:padding="10dp"
+            android:id="@+id/privacy_next_button"
             android:text="@string/next"
-            android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="16sp" />
-    </LinearLayout>
+            android:drawableEnd="@drawable/ic_keyboard_arrow_right"
+            android:fontFamily="@font/lato_regular"
+            android:textSize="@dimen/intro_button_text"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:padding="@dimen/arrow_button_padding"
+            android:layout_margin="@dimen/arrow_button_margin"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/buttons"
         android:layout_below="@+id/actionbar"
-        android:layout_marginBottom="15dp">
+        android:padding="@dimen/padding_screen"
+        android:layout_marginBottom="@dimen/margin_between_views">
         <!--Scrollable content here-->
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
             <TextView
                 android:id="@+id/privacy_text"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginHorizontal="5dp"
-                android:layout_weight="1"
-                android:fontFamily="@fonts/Lato_Regular"
-                android:padding="10dp"
-                android:autoLink="all"
-                android:textAlignment="gravity"
-                android:textFontWeight="1" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sample_privacy_text"
+                android:textSize="@dimen/privacy_text"
+                android:fontFamily="@font/lato_regular"
+                android:layout_marginBottom="20dp"
+                android:textAlignment="gravity"/>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/colorPrimaryDark"
+                android:layout_marginBottom="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/privacyCV1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato_regular"
+                        android:padding="10dp"
+                        android:drawableRight="@drawable/ic_baseline_add_24"
+                        android:text="What information do we collect about you?"
+                        android:textAlignment="gravity"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/medium_text_size"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/privacyCV1a"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/lato_regular"
+                        android:padding="10dp"
+                        android:text="Health Workers will collect personal information and health information from you for your medical records.\nYour information is\n-used for diagnosing and treating you.\n-used to send you reminders, prescription information, and other related communication."
+                        android:textAlignment="gravity"
+                        android:visibility="gone"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/small_text_size"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/colorPrimaryDark"
+                android:layout_marginBottom="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/privacyCV2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato_regular"
+                        android:padding="10dp"
+                        android:drawableEnd="@drawable/ic_baseline_add_24"
+                        android:text="How do we use your information?"
+                        android:textAlignment="gravity"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/medium_text_size"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/privacyCV2a"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/lato_regular"
+                        android:padding="10dp"
+                        android:text="Health Workers will collect personal information and health information from you for your medical records.\nYour information is\n-used for diagnosing and treating you.\n-used to send you reminders, prescription information, and other related communication."
+                        android:textAlignment="gravity"
+                        android:visibility="gone"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/small_text_size"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/colorPrimaryDark"
+                android:layout_marginBottom="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/privacyCV3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato_regular"
+                        android:padding="10dp"
+                        android:drawableEnd="@drawable/ic_baseline_add_24"
+                        android:text="To whom do we disclose your information?"
+                        android:textAlignment="gravity"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/medium_text_size"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/privacyCV3a"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/lato_regular"
+                        android:padding="10dp"
+                        android:text="Health Workers will collect personal information and health information from you for your medical records.\nYour information is\n-used for diagnosing and treating you.\n-used to send you reminders, prescription information, and other related communication."
+                        android:textAlignment="gravity"
+                        android:visibility="gone"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/small_text_size"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/colorPrimaryDark"
+                android:layout_marginBottom="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/privacyCV4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato_regular"
+                        android:padding="10dp"
+                        android:drawableEnd="@drawable/ic_baseline_add_24"
+                        android:text="What do we do to keep your information secure?"
+                        android:textAlignment="gravity"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/medium_text_size"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/privacyCV4a"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/lato_regular"
+                        android:padding="10dp"
+                        android:text="@string/sample_privacy_text"
+                        android:textAlignment="gravity"
+                        android:visibility="gone"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/small_text_size"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/colorPrimaryDark"
+                android:layout_marginBottom="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/privacyCV5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato_regular"
+                        android:padding="10dp"
+                        android:drawableEnd="@drawable/ic_baseline_add_24"
+                        android:text="Cookies, beacons and geo tracking"
+                        android:textAlignment="gravity"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/medium_text_size"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/privacyCV5a"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/lato_regular"
+                        android:padding="10dp"
+                        android:text="@string/sample_privacy_text"
+                        android:textAlignment="gravity"
+                        android:visibility="gone"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/small_text_size"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

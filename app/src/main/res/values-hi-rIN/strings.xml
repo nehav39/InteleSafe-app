@@ -26,8 +26,8 @@
     <string name="new_update_available">New Update Available</string>
     <string name="update_app_note">New version is available with new features please update app</string>
     <string name="update">Update</string>
-    <string name="thank_you">Thank you</string>
-    <string name="your_checkin_is_uploaded_successfully">Your check-in submitted successfully.</string>
+    <string name="thank_you">धन्यवाद</string>
+    <string name="your_checkin_is_uploaded_successfully">आपका चेक-इन सफलतापूर्वक सबमिट किया गया।</string>
     <string name="check_in">Check In</string>
     <string name="logout_dialog">क्या आप लॉग आउट करना चाहते हैं?</string>
     <string name="day_1">Day 1</string>
@@ -110,6 +110,21 @@
     <string name="device_id" translatable="false">Device ID:</string>
     <string name="cant_login_user">पासवर्ड भूल गए?</string>
     <string name="email_link">अपना पासवर्ड रीसेट करने के लिए support@intelehealth.io पर एक ईमेल भेजें</string>
+
+    //Intro Screen (from d2p)
+    <string name="intro_title">टेलीमेडिसिन पर एक डॉक्टर के साथ जुड़ें</string>
+    <string name="intro_text">यह ऐप आपको स्पेशलाइजेशन के आधार पर डॉक्टर्स से टेलीकॉन्लेशन प्राप्त करने की सुविधा देता है। यह आपको ओपीडी के बाहर लंबी कतारों से मुक्त करता है और आपके कदमों पर ओपीडी लाता है और अपने पसंदीदा डॉक्टरों से हैसेल फ्री परामर्श प्राप्त करता है।</string>
+
+    //PrivacyNotice
+    <string name="sample_privacy_text">स्वास्थ्य कार्यकर्ता आपके मेडिकल रिकॉर्ड के लिए आपसे व्यक्तिगत जानकारी और स्वास्थ्य जानकारी एकत्र करेंगे। आपकी व्यक्तिगत जानकारी को हमारे उत्पादों और सेवाओं में मदद करने के लिए अनुसंधान, रोग की निगरानी, और विश्लेषण में उपयोग के लिए अज्ञात किया जाएगा। हम कुछ विशिष्ट परिस्थितियों में आपकी व्यक्तिगत जानकारी का खुलासा कर सकते हैं</string>
+
+    //Wait window
+    <string name="WaitWindowTitle">टेलीकॉन्सेलेशन रिक्वेस्ट</string>
+    <string name="EditTextHint">अपनी शिकायत दर्ज करें (उदाहरण: बुखार)</string>
+    <string name="FindButton">एक विशेषज्ञ खोजें</string>
+    <string name="dialogText1">कृपया अपनी बारी की प्रतीक्षा करें ..</string>
+    <string name="dialogText2">अपना परामर्श शुरू करें</string>
+    <string name="dialogText3">कॉल करें</string>
 
     //Home Screen (after login)
     <string name="PPE_and_infection">व्यक्तिगत सुरक्षा उपकरण (पीपीई) और संक्रमण नियंत्रण</string>
@@ -648,7 +663,7 @@
     <string name="help_cardview_visit">If you get much sicker please call your nearest doctor - 73054154312</string>
     <string name="intelesafe">InteleSafe</string>
     <string name="who_is_this_napplication_for">यह आवेदन किसके लिए है?</string>
-    <string name="submit_visitSummary_Button">Submit</string>
+    <string name="submit_visitSummary_Button">सबमिट</string>
     <string name="medical_registration_number_license_id">Medical registration number/license ID</string>
     <string name="name_of_health_organization_hospital_where_you_primarily_work">Health org./hospital where you work</string>
     <string name="username_10digits">Username should be 8 characters</string>

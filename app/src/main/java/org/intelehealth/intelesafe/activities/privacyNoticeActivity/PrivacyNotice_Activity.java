@@ -36,184 +36,235 @@ import org.intelehealth.intelesafe.utilities.SessionManager;
 * 
 * */
 public class PrivacyNotice_Activity extends AppCompatActivity {
-    TextView privacy_textview;
-    SessionManager sessionManager = null;
-    private boolean hasLicense = false;
-//    RadioGroup radiogrp;
-//    RadioButton radiobtn;
-//    RadioButton radio_acc;
-//    RadioButton radio_rej;
-    CheckBox chbAgreePrivacy;
-    TextView txt_next;
+////    TextView privacy_textview;
+//    SessionManager sessionManager = null;
+//    private boolean hasLicense = false;
+////    RadioGroup radiogrp;
+////    RadioButton radiobtn;
+////    RadioButton radio_acc;
+////    RadioButton radio_rej;
+//    CheckBox chbAgreePrivacy;
+//    TextView txt_next;
+    TextView privacy_textview,privacyCV_textview1,privacyCV_textview1a,privacyCV_textview3,privacyCV_textview3a;
+    TextView privacyNextTV;
+    CheckBox checkBox_privacy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_privacy_notice_2);
-        setTitle(getString(R.string.privacy_notice_title));
+        setToolbar();
+        initViews();
 
         /*
          * Toolbar which displays back arrow on action bar
          * Add the below lines for every activity*/
+//        Toolbar toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//
+//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                onBackPressed();
+//            }
+//        });
+//
+//        sessionManager = new SessionManager(this);
+//        privacy_textview = findViewById(R.id.privacy_text);
+
+//        radiogrp = findViewById(R.id.radio_privacy_grp);
+//        radio_acc = findViewById(R.id.radio_accept);
+//        radio_rej = findViewById(R.id.radio_reject);
+
+//        chbAgreePrivacy = findViewById(R.id.agree_checkbox);
+//
+//        txt_next = findViewById(R.id.privacy_next_button);
+//
+//        if (!sessionManager.getLicenseKey().isEmpty())
+//            hasLicense = true;
+
+        //Check for license key and load the correct config file
+ //       try {
+//            JSONObject obj = null;
+//            if (hasLicense) {
+//                obj = new JSONObject(FileUtils.readFileRoot(AppConstants.CONFIG_FILE_NAME, this)); //Load the config file
+//
+//            } else {
+//                obj = new JSONObject(String.valueOf(FileUtils.encodeJSON(this, AppConstants.CONFIG_FILE_NAME)));
+//            }
+//
+////            SharedPreferences sharedPreferences = getSharedPreferences("CommonPrefs", Activity.MODE_PRIVATE);
+////            if(sharedPreferences.getAll().values().contains("cb"))
+//            Locale current = getResources().getConfiguration().locale;
+//            if (current.toString().equals("cb")) {
+//                String privacy_string = obj.getString("privacyNoticeText_Cebuano");
+//                if (privacy_string.isEmpty()) {
+//                    privacy_string = obj.getString("privacyNoticeText");
+//                    privacy_textview.setText(privacy_string);
+//                } else {
+//                    privacy_textview.setText(privacy_string);
+//                }
+//
+//            } else if (current.toString().equals("hi")) {
+//                String privacy_string = obj.getString("privacyNoticeText_Hindi");
+//                if (privacy_string.isEmpty()) {
+//                    privacy_string = obj.getString("privacyNoticeText");
+//                    privacy_textview.setText(privacy_string);
+//                } else {
+//                    privacy_textview.setText(privacy_string);
+//                }
+//
+//            } else if (current.toString().equals("mr")) {
+//                String privacy_string = obj.getString("privacyNoticeText_Marathi");
+//                if (privacy_string.isEmpty()) {
+//                    privacy_string = obj.getString("privacyNoticeText");
+//                    privacy_textview.setText(privacy_string);
+//                } else {
+//                    privacy_textview.setText(privacy_string);
+//                }
+//
+//            } else if (current.toString().equals("or")) {
+//                String privacy_string = obj.getString("privacyNoticeText_Odiya");
+//                if (privacy_string.isEmpty()) {
+//                    privacy_string = obj.getString("privacyNoticeText");
+//                    privacy_textview.setText(privacy_string);
+//                } else {
+//                    privacy_textview.setText(privacy_string);
+//                }
+//
+//            } else {
+//                String privacy_string = obj.getString("privacyNoticeText");
+//                //changeColorOfText(privacy_string);
+//            }
+
+//            txt_next.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    if (chbAgreePrivacy.isChecked()) {
+////                            sessionManager.setOfllineOpenMRSID("");
+//                        Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
+//                        intent.putExtra("privacy", "Accept"); //privacy value send to identificationActivity
+//                        intent
+//                                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+//                                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                        startActivity(intent);
+//                    } else {
+//                        Toast.makeText(getApplicationContext(), getString(R.string.privacy_toast2), Toast.LENGTH_LONG).show();
+//                    }
+//                }
+//            });
+
+
+//        } catch (JSONException e) {
+//            FirebaseCrashlytics.getInstance().recordException(e);
+//            Toast.makeText(getApplicationContext(), "JsonException" + e, Toast.LENGTH_LONG).show();
+//        }
+    }
+    public void setToolbar()
+    {
+        setTitle(getString(R.string.privacy_notice_title));
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
-
-        sessionManager = new SessionManager(this);
+    }
+    public void initViews()
+    {
         privacy_textview = findViewById(R.id.privacy_text);
-
-//        radiogrp = findViewById(R.id.radio_privacy_grp);
-//        radio_acc = findViewById(R.id.radio_accept);
-//        radio_rej = findViewById(R.id.radio_reject);
-
-        chbAgreePrivacy = findViewById(R.id.chb_agree_privacy);
-
-        txt_next = findViewById(R.id.txt_privacy);
-
-        if (!sessionManager.getLicenseKey().isEmpty())
-            hasLicense = true;
-
-        //Check for license key and load the correct config file
-        try {
-            JSONObject obj = null;
-            if (hasLicense) {
-                obj = new JSONObject(FileUtils.readFileRoot(AppConstants.CONFIG_FILE_NAME, this)); //Load the config file
-
-            } else {
-                obj = new JSONObject(String.valueOf(FileUtils.encodeJSON(this, AppConstants.CONFIG_FILE_NAME)));
+        privacyCV_textview1 = findViewById(R.id.privacyCV1);
+        privacyCV_textview3 = findViewById(R.id.privacyCV3);
+        privacyCV_textview1a = findViewById(R.id.privacyCV1a);
+        privacyCV_textview3a = findViewById(R.id.privacyCV3a);
+        privacyNextTV = findViewById(R.id.privacy_next_button);
+        checkBox_privacy = findViewById(R.id.agree_checkbox);
+        privacyNextTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
+                startActivity(intent);
+                finish();
             }
+        });
+        privacyCV_textview1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                privacyCV_textview1a.setVisibility(View.VISIBLE);
+                privacyCV_textview1.setCompoundDrawables(null,null,null,null);
 
-//            SharedPreferences sharedPreferences = getSharedPreferences("CommonPrefs", Activity.MODE_PRIVATE);
-//            if(sharedPreferences.getAll().values().contains("cb"))
-            Locale current = getResources().getConfiguration().locale;
-            if (current.toString().equals("cb")) {
-                String privacy_string = obj.getString("privacyNoticeText_Cebuano");
-                if (privacy_string.isEmpty()) {
-                    privacy_string = obj.getString("privacyNoticeText");
-                    privacy_textview.setText(privacy_string);
-                } else {
-                    privacy_textview.setText(privacy_string);
-                }
-
-            } else if (current.toString().equals("hi")) {
-                String privacy_string = obj.getString("privacyNoticeText_Hindi");
-                if (privacy_string.isEmpty()) {
-                    privacy_string = obj.getString("privacyNoticeText");
-                    privacy_textview.setText(privacy_string);
-                } else {
-                    privacy_textview.setText(privacy_string);
-                }
-
-            } else if (current.toString().equals("mr")) {
-                String privacy_string = obj.getString("privacyNoticeText_Marathi");
-                if (privacy_string.isEmpty()) {
-                    privacy_string = obj.getString("privacyNoticeText");
-                    privacy_textview.setText(privacy_string);
-                } else {
-                    privacy_textview.setText(privacy_string);
-                }
-
-            } else if (current.toString().equals("or")) {
-                String privacy_string = obj.getString("privacyNoticeText_Odiya");
-                if (privacy_string.isEmpty()) {
-                    privacy_string = obj.getString("privacyNoticeText");
-                    privacy_textview.setText(privacy_string);
-                } else {
-                    privacy_textview.setText(privacy_string);
-                }
-
-            } else {
-                String privacy_string = obj.getString("privacyNoticeText");
-                changeColorOfText(privacy_string);
             }
+        });
+        privacyCV_textview3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                privacyCV_textview3a.setVisibility(View.VISIBLE);
+                privacyCV_textview3.setCompoundDrawables(null,null,null,null);
 
-            txt_next.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (chbAgreePrivacy.isChecked()) {
-//                            sessionManager.setOfllineOpenMRSID("");
-                        Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
-                        intent.putExtra("privacy", "Accept"); //privacy value send to identificationActivity
-                        intent
-                                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                    } else {
-                        Toast.makeText(getApplicationContext(), getString(R.string.privacy_toast2), Toast.LENGTH_LONG).show();
-                    }
-                }
-            });
-
-
-        } catch (JSONException e) {
-            FirebaseCrashlytics.getInstance().recordException(e);
-            Toast.makeText(getApplicationContext(), "JsonException" + e, Toast.LENGTH_LONG).show();
-        }
+            }
+        });
     }
 
-    private void changeColorOfText(String privacy_string) {
-        //Highlighting Text
-        String second = "Privacy notice and consent form";
-        Spannable spannable = colorized(privacy_string, second, Color.RED);
-        spannable = textSize(spannable, privacy_string, "How we protect information");
-        spannable = boldSize(spannable, privacy_string, "How we protect information");
+//    private void changeColorOfText(String privacy_string) {
+//        //Highlighting Text
+//        String second = "Privacy notice and consent form";
+//        Spannable spannable = colorized(privacy_string, second, Color.RED);
+//        spannable = textSize(spannable, privacy_string, "How we protect information");
+//        spannable = boldSize(spannable, privacy_string, "How we protect information");
+//
+//        spannable = textSize(spannable, privacy_string, "Amendments");
+//        spannable = boldSize(spannable, privacy_string, "Amendments");
+//
+//        spannable = boldSize(spannable, privacy_string, "Telehealth Innovations Foundation Privacy Notice");
+//        spannable = boldSize(spannable, privacy_string, "INFORMATION WE COLLECT");
+//        spannable = boldSize(spannable, privacy_string, "Use");
+//        spannable = boldSize(spannable, privacy_string, "Your contact information may be used to");
+//        spannable = boldSize(spannable, privacy_string, "Intelehealth generally provides Personal Information to third parties where:");
+//        spannable = boldSize(spannable, privacy_string, "We may also disclose your personal information:");
+//        spannable = boldSize(spannable, privacy_string, "Protection Measures");
+//        spannable = boldSize(spannable, privacy_string, "Access and Correction");
+//        spannable = boldSize(spannable, privacy_string, "Privacy notice and consent form");
+//
+//
+//
+//        privacy_textview.setText(spannable, TextView.BufferType.SPANNABLE);
+//    }
 
-        spannable = textSize(spannable, privacy_string, "Amendments");
-        spannable = boldSize(spannable, privacy_string, "Amendments");
-
-        spannable = boldSize(spannable, privacy_string, "Telehealth Innovations Foundation Privacy Notice");
-        spannable = boldSize(spannable, privacy_string, "INFORMATION WE COLLECT");
-        spannable = boldSize(spannable, privacy_string, "Use");
-        spannable = boldSize(spannable, privacy_string, "Your contact information may be used to");
-        spannable = boldSize(spannable, privacy_string, "Intelehealth generally provides Personal Information to third parties where:");
-        spannable = boldSize(spannable, privacy_string, "We may also disclose your personal information:");
-        spannable = boldSize(spannable, privacy_string, "Protection Measures");
-        spannable = boldSize(spannable, privacy_string, "Access and Correction");
-        spannable = boldSize(spannable, privacy_string, "Privacy notice and consent form");
-
-
-
-        privacy_textview.setText(spannable, TextView.BufferType.SPANNABLE);
-    }
-
-    public static Spannable colorized(final String text, final String word, final int argb) {
-        final Spannable spannable = new SpannableString(text);
-        int substringStart = 0;
-        int start;
-        while ((start = text.indexOf(word, substringStart)) >= 0) {
-            spannable.setSpan(
-                    new ForegroundColorSpan(argb), start, start + word.length(),
-                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-            );
-            substringStart = start + word.length();
-        }
-        return spannable;
-    }
-
-    private static Spannable textSize(Spannable spannable, String text, String word){
-        int substringStart = 0;
-        int start;
-        while ((start = text.indexOf(word, substringStart)) >= 0) {
-            spannable.setSpan(new RelativeSizeSpan(1.5f), start, start + word.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            substringStart = start + word.length();
-        }
-        return spannable;
-    }
-
-    private static Spannable boldSize(Spannable spannable, String text, String word){
-        int substringStart = 0;
-        int start;
-        while ((start = text.indexOf(word, substringStart)) >= 0) {
-            spannable.setSpan(new StyleSpan(Typeface.BOLD), start, start + word.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            substringStart = start + word.length();
-        }
-        return spannable;
-    }
+//    public static Spannable colorized(final String text, final String word, final int argb) {
+//        final Spannable spannable = new SpannableString(text);
+//        int substringStart = 0;
+//        int start;
+//        while ((start = text.indexOf(word, substringStart)) >= 0) {
+//            spannable.setSpan(
+//                    new ForegroundColorSpan(argb), start, start + word.length(),
+//                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+//            );
+//            substringStart = start + word.length();
+//        }
+//        return spannable;
+//    }
+//
+//    private static Spannable textSize(Spannable spannable, String text, String word){
+//        int substringStart = 0;
+//        int start;
+//        while ((start = text.indexOf(word, substringStart)) >= 0) {
+//            spannable.setSpan(new RelativeSizeSpan(1.5f), start, start + word.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//            substringStart = start + word.length();
+//        }
+//        return spannable;
+//    }
+//
+//    private static Spannable boldSize(Spannable spannable, String text, String word){
+//        int substringStart = 0;
+//        int start;
+//        while ((start = text.indexOf(word, substringStart)) >= 0) {
+//            spannable.setSpan(new StyleSpan(Typeface.BOLD), start, start + word.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//            substringStart = start + word.length();
+//        }
+//        return spannable;
+//    }
 }

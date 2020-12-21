@@ -196,8 +196,8 @@ public class IntroActivity extends AppCompatActivity {
 
     public class MyViewPagerAdapter extends PagerAdapter {
         private LayoutInflater layoutInflater;
-        private TextView tvIntroOne;
-        private TextView tvIntroTwo;
+//        private TextView tvIntroOne;
+//        private TextView tvIntroTwo;
 
         public MyViewPagerAdapter() {
         }
@@ -208,20 +208,19 @@ public class IntroActivity extends AppCompatActivity {
 
             View view = layoutInflater.inflate(layouts[position], container, false);
             container.addView(view);
-
-            tvIntroOne = view.findViewById(R.id.tv_intro_one);
-            tvIntroTwo = view.findViewById(R.id.tv_intro_two);
-
-            //Highlighting Text
-            String introOne = getString(R.string.intro_text1);
-            String textToHighlightOne = getString(R.string.intro_text1_part);
-            String newString = introOne.replaceAll(textToHighlightOne, "<font color='blue'>" + textToHighlightOne + "</font>");
-            tvIntroOne.setText(Html.fromHtml(newString));
-
-            String introTwo = getString(R.string.intro_text2);
-            String textToHighlightTwo = getString(R.string.intro_text2_part);
-            String newStringTwo = introTwo.replaceAll(textToHighlightTwo, "<font color='blue'>" + textToHighlightTwo + "</font>");
-            tvIntroTwo.setText(Html.fromHtml(newStringTwo));
+//            tvIntroOne = view.findViewById(R.id.tv_intro_one);
+//            tvIntroTwo = view.findViewById(R.id.tv_intro_two);
+//
+//            //Highlighting Text
+//            String introOne = getString(R.string.intro_text1);
+//            String textToHighlightOne = getString(R.string.intro_text1_part);
+//            String newString = introOne.replaceAll(textToHighlightOne, "<font color='blue'>" + textToHighlightOne + "</font>");
+//            tvIntroOne.setText(Html.fromHtml(newString));
+//
+//            String introTwo = getString(R.string.intro_text2);
+//            String textToHighlightTwo = getString(R.string.intro_text2_part);
+//            String newStringTwo = introTwo.replaceAll(textToHighlightTwo, "<font color='blue'>" + textToHighlightTwo + "</font>");
+//            tvIntroTwo.setText(Html.fromHtml(newStringTwo));
 
             return view;
         }

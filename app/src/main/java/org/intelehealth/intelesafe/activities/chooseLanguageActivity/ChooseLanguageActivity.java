@@ -76,7 +76,6 @@ public class ChooseLanguageActivity extends AppCompatActivity {
                 boolean currentCheck = v.isChecked();
                 if(currentCheck == true) {
                     langaugeSelected = v.getText().toString();
-                    sessionManager.setAppLanguage(langaugeSelected);
                 }
             }
         });
@@ -84,10 +83,12 @@ public class ChooseLanguageActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (sessionManager.isFirstTimeLaunch()) {
+                    sessionManager.setAppLanguage(langaugeSelected);
                     Logger.logD(LOG_TAG, "Starting setup");
                     Intent intent = new Intent(ChooseLanguageActivity.this, IntroActivity.class);
                     startActivity(intent);
                 } else {
+                    sessionManager.setAppLanguage(langaugeSelected);
                     Intent intent = new Intent(ChooseLanguageActivity.this, HomeActivity.class);
                     intent.putExtra("from", "splash");
                     intent.putExtra("username", "");

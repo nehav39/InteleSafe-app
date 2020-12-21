@@ -64,11 +64,25 @@
     <string name="intro_text2">You can monitor your own health daily and reach out for help if you think you may have had unsafe exposure and may be infected.</string>
     <string name="intro_text1_part">learn about personal protection measures and PPE use.</string>
     <string name="intro_text2_part">monitor your own health daily</string>
+    //Intro Screen (from d2p)
+    <string name="intro_title">Connect with a doctor over telemedicine</string>
+    <string name="intro_text">This app allows you to get teleconsultation from the doctors based on specialization.This sets you free from long queues outside OPD and bring OPD at your footstep and get hassel free consultation from your favourite doctors.</string>
+
+    //PrivacyNotice
+    <string name="sample_privacy_text">Health Workers will collect personal information and health information from you for your medical records. Your personal information will be anonymized for use in research, disease monitoring, and analysis to help us imrpove our products and services. We may disclose your personal information in certain specific circumstances.</string>
+    <string name="privacy_text">Personal Information,\nHealth Workers will collect personal information and health information from you for your medical records.\n\nUse,\nYour information is\n-used for diagnosing and treating you.\n-used to send you reminders, prescription information, and other related communication.\n\nYour personal information will be anonymized for use in research, disease monitoring, and analysis to help us imrpove our products and services. We may disclose your personal information in certain specific circumstances.\n\nProtection Measures,\nWe provide you physical, electronic and procedural safeguards to protect information we process and maintain.\n\nAccess and Correction,\nYou have the right to ask for a copy of any personal information we have about you, as well as to ask for it to be corrected if you think it is wrong.\n\nOn clicking "Agree", I consent to the collection and use of my personal data, including health information, and to give access to the above-mentioned entities. </string>
 
     // Sign up
     <string name="title_sign_up" translatable="false">Sign Up</string>
     <string name="address_details">Address Details</string>
 
+    //Wait window (dialog)
+    <string name="WaitWindowTitle">Teleconsultation Request</string>
+    <string name="EditTextHint">Enter your complaint (ex- Fever)</string>
+    <string name="FindButton">Find a Specialist</string>
+    <string name="dialogText1">Please wait for your turn..</string>
+    <string name="dialogText2">Start your consultation</string>
+    <string name="dialogText3">Call now</string>
 
     //Home Screen (after login)
     <string name="title_home_screen" translatable="false">Home</string>
