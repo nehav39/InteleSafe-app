@@ -5,7 +5,7 @@ android {
     compileSdkVersion 30
     defaultConfig {
         applicationId "org.intelehealth.intelesafe"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 11
         buildToolsVersion('29.0.2')
@@ -126,6 +126,10 @@ dependencies {
 
     //facebook sdk
     implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
+
+    //webrtc
+    implementation 'org.webrtc:google-webrtc:1.0.+'
+    implementation files('libs/autobanh.jar')
 
 }
 apply plugin: 'com.google.gms.google-services'  // Google Play services Gradle plugin

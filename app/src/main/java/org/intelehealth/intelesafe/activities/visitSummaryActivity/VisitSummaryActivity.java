@@ -68,6 +68,7 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import org.apache.commons.lang3.StringUtils;
 import org.intelehealth.intelesafe.activities.homeActivity.Webview;
+import org.intelehealth.intelesafe.apprtc.ConnectActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -1462,9 +1463,10 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         callButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(WaitWindowActivity.this, VideoCallActivity.class);
-//                startActivity(intent);
-                customDialog.dismiss();            }
+                Intent intent = new Intent(VisitSummaryActivity.this, ConnectActivity.class);
+                startActivity(intent);
+               // customDialog.dismiss();
+            }
         });
 
         customDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
