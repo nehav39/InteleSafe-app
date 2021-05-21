@@ -247,7 +247,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
-                            android:visibility="gone"
                             android:weightSum="2">
 
                             <TextView
@@ -298,6 +297,7 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:visibility="gone"
                                     android:orientation="vertical">
 
                                     <EditText
@@ -328,6 +328,7 @@
 
                             <com.google.android.material.textfield.TextInputLayout
                                 android:layout_width="match_parent"
+                                android:visibility="gone"
                                 android:layout_height="wrap_content">
 
                                 <EditText
@@ -560,6 +561,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:visibility="gone"
                     android:drawableStart="@drawable/icon_address"
                     android:drawableLeft="@drawable/icon_address"
                     android:drawablePadding="10dp"
@@ -569,11 +571,13 @@
 
                 <Space
                     android:layout_width="20dp"
+                    android:visibility="gone"
                     android:layout_height="20dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:visibility="gone"
                     android:background="@drawable/white_rectangular_bg"
                     android:elevation="40dp"
                     android:padding="10dp">

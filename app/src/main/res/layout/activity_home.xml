@@ -181,7 +181,7 @@
                                 android:layout_marginTop="20dp"
                                 android:fontFamily="@font/lato_bold"
                                 android:includeFontPadding="false"
-                                android:text="@string/txt_doctor_consulation"
+                                android:text="@string/txt_selfCheck"
                                 android:textColor="@color/white"
                                 android:textSize="32sp" />
 
@@ -249,7 +249,7 @@
                         android:fontFamily="@font/lato_bold"
                         android:gravity="center"
                         android:includeFontPadding="false"
-                        android:text="@string/PPE_and_infection"
+                        android:text="@string/covid_home_care"
                         android:textColor="@color/txt_sub_header_color"
                         android:textSize="13sp" />
 
@@ -262,7 +262,7 @@
                         android:fontFamily="@font/lato_bold"
                         android:gravity="center"
                         android:includeFontPadding="false"
-                        android:text="@string/PPE_reuse"
+                        android:text="@string/about_covid"
                         android:textColor="@color/txt_sub_header_color"
                         android:textSize="13sp" />
 
@@ -581,7 +581,7 @@
                                 android:layout_marginTop="5dp"
                                 android:fontFamily="@font/lato_regular"
                                 android:includeFontPadding="false"
-                                android:text="@string/if_you_star"
+                                android:text="@string/whatsApp_description"
                                 android:textSize="14sp" />
 
                             <Button
@@ -598,7 +598,7 @@
                                 android:gravity="start|center"
                                 android:hint=""
                                 android:textStyle="bold"
-                                android:text="@string/txt_whatsapp_helpline"
+                                android:text="@string/txt_get_help_now"
                                 android:textColor="@color/txt_sub_header_color"
                                 android:textSize="18sp" />
 

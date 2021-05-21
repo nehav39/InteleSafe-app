@@ -88,6 +88,7 @@
 
     //Home Screen
     <string name="PPE_and_infection">Personal Protective Equipment (PPE) &amp; Infection control</string>
+    <string name="covid_home_care">Covid Home Care</string>
     <string name="PPE_reuse">PPE reuse &amp; alternatives</string>
     <string name="telemedicine_use_covid">Use of telemedicine during COVID-19</string>
     <string name="request_ppe">Request for PPE kits</string>
@@ -654,18 +655,22 @@
     //HomeScreen (New Changes)
     <string name="txt_self_assessment">Self Assessment</string>
     <string name="txt_doctor_consulation">Doctor Consultation</string>
+    <string name="txt_selfCheck">Self Check-In</string>
     <string name="txt_start_now">Start Now</string>
     <string name="personal_pr">Personal protection guidelines</string>
     <string name="if_you_star">Got questions about PPE and infection control? Concerned you\'re showing symptoms of Covid-19? Send us a WhatsApp message at our helpline number below to talk with an expert about your concerns.</string>
+    <string name="whatsApp_description">Send us a WhatsApp message or a call to our home care team about your concern.</string>
     <string name="some_id">+91 9825989750</string>
     <string name="assessment_visit_title">Assessment</string>
     <string name="please_fill_your_details">Please fill your details</string>
     <string name="ppe_faq">PPE reuse, alternatives and FAQs</string>
+    <string name="about_covid">About COVID-19</string>
     <string name="ppe_req_header">Running low on PPE? Request for PPE Kits</string>
     <string name="ppe_req_sub_header">This service is currently available in Mumbai and Delhi only. We aim to serve as many as possible and hope to expand this service to other areas soon.</string>
     <string name="ppe_req">Order PPE kits</string>
     <string name="ppe_req_hint">What PPE do you require with quantity*</string>
     <string name="txt_whatsapp_helpline"><u>WhatsApp Helpline</u></string>
+    <string name="txt_get_help_now"><u>Get Help Now</u></string>
     <string name="Mental_health_support_text">Feeling stressed or anxious? Here are some self-care and support resources for healthcare providers</string>
     <string name="mental_health_support">Mental health support</string>
 

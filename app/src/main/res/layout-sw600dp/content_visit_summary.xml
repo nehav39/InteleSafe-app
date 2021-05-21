@@ -522,6 +522,7 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/help_cardview"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:elevation="40dp"
@@ -562,7 +563,7 @@
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:fontFamily="@font/lato_regular"
-                        android:text="@string/if_you_star"
+                        android:text="@string/whatsApp_description"
                         android:layout_below="@id/help_title"
                         android:textSize="18sp"
                         android:textColor="@color/txt_sub_header_color"
@@ -574,7 +575,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/visit_help_text"
-                        android:text="@string/txt_whatsapp_helpline"
+                        android:text="@string/txt_get_help_now"
                         android:textSize="@dimen/text_18sp"
                         android:layout_marginStart="14sp"
                         android:fontFamily="@font/lato_bold"
@@ -608,6 +609,7 @@
 
 
         <androidx.cardview.widget.CardView
+            android:visibility="gone"
             android:id="@+id/mental_help_cardview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

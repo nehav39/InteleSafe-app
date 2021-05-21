@@ -113,6 +113,7 @@
 
     //Home Screen (after login)
     <string name="PPE_and_infection">व्यक्तिगत सुरक्षा उपकरण (पीपीई) और संक्रमण नियंत्रण</string>
+    <string name="covid_home_care">कोविड होम केयर</string>
     <string name="PPE_reuse">पीपीई पुन: उपयोग और विकल्प</string>
     <string name="title_home_screen" translatable="false">Home</string>
     <string name="button_new_pt">New Patient</string>
@@ -710,16 +711,20 @@
     //HomeScreen (New Changes)
     <string name="txt_self_assessment">आत्म मूल्यांकन</string>
     <string name="txt_doctor_consulation">डॉक्टर का परामर्श</string>
+    <string name="txt_selfCheck">स्वयं चेक-इन</string>
     <string name="txt_start_now">अभी शुरू करो</string>
     <string name="personal_pr">व्यक्तिगत सुरक्षा दिशानिर्देश</string>
     <string name="if_you_star">PPE और संक्रमण नियंत्रण के बारे में प्रश्न प्राप्त करें आप कोविद -19 के लक्षण दिखा रहे हैं? अपनी चिंताओं के बारे में किसी विशेषज्ञ से बात करने के लिए नीचे दिए गए हमारे हेल्पलाइन नंबर पर हमें एक व्हाट्सएप संदेश भेजें।</string>
+    <string name="whatsApp_description">अपनी चिंता के बारे में हमें व्हाट्सएप संदेश भेजें या हमारी होम केयर टीम को कॉल करें।</string>
     <string name="some_id">+91 9825989750</string>
     <string name="ppe_faq">पीपीई का पुन: उपयोग, विकल्प और एफएक्यू</string>
+    <string name="about_covid">COVID-19 के बारे में</string>
     <string name="ppe_req_header">Running low on PPE? Request for PPE Kits</string>
     <string name="ppe_req_sub_header">यह सेवा वर्तमान में केवल मुंबई और दिल्ली में उपलब्ध है। हम अधिक से अधिक सेवा करने का लक्ष्य रखते हैं और जल्द ही अन्य क्षेत्रों में इस सेवा का विस्तार करने की उम्मीद करते हैं।</string>
     <string name="ppe_req">पीपीई किट ऑर्डर करें</string>
     <string name="ppe_req_hint">पीपीई की आपको मात्रा की क्या आवश्यकता है *</string>
     <string name="txt_whatsapp_helpline"><u>WhatsApp हेल्पलाइन</u></string>
+    <string name="txt_get_help_now"><u>अभी सहायता प्राप्त करें</u></string>
     <string name="Mental_health_support_text">तनाव या चिंता महसूस करना? स्वास्थ्य सेवा प्रदाताओं के लिए कुछ स्व-देखभाल और समर्थन संसाधन यहां दिए गए हैं</string>
     <string name="tele_consultant_text">तनाव या चिंता महसूस करना? एक परामर्शदाता के साथ एक मुफ्त मानसिक मानसिक स्वास्थ्य परामर्श के लिए अनुरोध करें।</string>
     <string name="mental_health_support">मानसिक स्वास्थ्य समर्थन</string>

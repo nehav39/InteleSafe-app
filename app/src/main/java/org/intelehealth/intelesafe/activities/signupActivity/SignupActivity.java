@@ -149,7 +149,7 @@ public class SignupActivity extends AppCompatActivity {
 
     EditText mEdtCaste; // Added by Venu N on 03/04/2020.
     Spinner mCaste; // Added by venu N on 03/04/2020.
-    Spinner mCountry;
+    Spinner mCountry; //not using this spinner instead hardcoding Country as India
     Spinner mState;
 /*
     Spinner selectDistrict;
@@ -172,7 +172,7 @@ public class SignupActivity extends AppCompatActivity {
     String userName = "";
     String password = "";
     String cPassword = "";
-    String country = "";
+    String country = "India";
     String state = "";
     //   String district = "";
     private String personUUID = "";
@@ -323,7 +323,7 @@ public class SignupActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                mEmailView.setText(mPhoneNum.getText().toString());
+//                mEmailView.setText(mPhoneNum.getText().toString());
             }
         });
 
@@ -332,10 +332,10 @@ public class SignupActivity extends AppCompatActivity {
         mEdtCaste = findViewById(R.id.identification_other_caste);
         mEdtCaste.setVisibility(View.GONE);
 
-        ArrayAdapter<CharSequence> countryAdapter = ArrayAdapter.createFromResource(this,
+        /*ArrayAdapter<CharSequence> countryAdapter = ArrayAdapter.createFromResource(this,
                 R.array.countries_array, android.R.layout.simple_spinner_item);
         countryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mCountry.setAdapter(countryAdapter);
+        mCountry.setAdapter(countryAdapter);*/
 
       /*  ArrayAdapter<CharSequence> distAdapter = ArrayAdapter.createFromResource(SignupActivity.this,
                 R.array.selectDist, android.R.layout.simple_spinner_item);
@@ -401,7 +401,7 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
-        mCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        /*mCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 //                if (i != 0) {
@@ -440,7 +440,7 @@ public class SignupActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
-        });
+        }); */
 
       /*  selectDistrict.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -879,7 +879,8 @@ public class SignupActivity extends AppCompatActivity {
                 }*/
 
                 // Added by venu N on 03/04/202.
-                if ((selectedPersonalCaste == null && selectedPersonalCaste.length() <= 0) || selectedPersonalCaste.equalsIgnoreCase("Select Designation")) {
+                //Commenting out on 21/05/21 : By Nishita
+                /*if ((selectedPersonalCaste == null && selectedPersonalCaste.length() <= 0) || selectedPersonalCaste.equalsIgnoreCase("Select Designation")) {
                     Toast.makeText(context, getString(R.string.toast_select_designation), Toast.LENGTH_LONG).show();
                     return;
                 } else if (selectedPersonalCaste.equalsIgnoreCase("Other")) {
@@ -890,7 +891,7 @@ public class SignupActivity extends AppCompatActivity {
                         mEdtCaste.requestFocus();
                         return;
                     }
-                }
+                }*/
 
                 System.out.println("DESIGATION: " + selectedPersonalCaste);
 
@@ -906,7 +907,7 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }*/
 
-                boolean isNotIndia = true;
+                /*boolean isNotIndia = true;
                 if (country.equalsIgnoreCase("") || country.equalsIgnoreCase("Select Country")) {
                     Toast.makeText(context, getString(R.string.please_select_country), Toast.LENGTH_LONG).show();
                     return;
@@ -914,7 +915,7 @@ public class SignupActivity extends AppCompatActivity {
                     if (country.equalsIgnoreCase("India")) {
                         isNotIndia = false;
                     }
-                }
+                }*/
 
                /* if (state.equalsIgnoreCase("")) {
                     if(isNotIndia){
@@ -1368,7 +1369,7 @@ public class SignupActivity extends AppCompatActivity {
         patientdto.setAddress2(StringUtils.getValue(mAddress2.getText().toString()));
         patientdto.setCityvillage(StringUtils.getValue(mCity.getText().toString()));
         patientdto.setPostalcode(StringUtils.getValue(mPostal.getText().toString()));
-        patientdto.setCountry(StringUtils.getValue(mCountry.getSelectedItem().toString()));
+        patientdto.setCountry(country); //mCountry.getSelectedItem().toString()) here, country = India
         patientdto.setPatientPhoto(mCurrentPhotoPath);
 //      patientdto.setEconomic(StringUtils.getValue(m));
         patientdto.setOpenmrsId("" + OpenMRSID);

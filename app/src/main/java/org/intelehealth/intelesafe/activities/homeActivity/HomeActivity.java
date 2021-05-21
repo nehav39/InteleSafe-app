@@ -34,6 +34,7 @@ import android.os.StrictMode;
 import android.preference.PreferenceManager;
 
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,6 +43,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 
+import android.provider.ContactsContract;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.UnderlineSpan;
@@ -122,6 +124,9 @@ import io.reactivex.observers.DisposableObserver;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 
+import static android.Manifest.permission.CALL_PHONE;
+import static android.Manifest.permission.READ_CONTACTS;
+
 /**
  * Created By: Prajwal Waingankar
  * Github: prajwalmw
@@ -131,6 +136,9 @@ import io.reactivex.schedulers.Schedulers;
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = HomeActivity.class.getSimpleName();
+    private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 100;
+    private static final int PERMISSIONS_REQUEST_CALL_PHONE = 101;
+    private static final int PERMISSIONS_REQUEST_CODE = 1001;
     SessionManager sessionManager = null;
     ProgressDialog TempDialog;
     CountDownTimer CDT;
@@ -279,16 +287,20 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         help_watsapp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String phoneNumberWithCountryCode = "+919825989750";
-                String message =
-                        getString(R.string.hello_my_name) + sessionManager.getUserName() +
-                                /*" from " + sessionManager.getState() + */ getString(R.string.need_some_assisstance);
+//                String phoneNumberWithCountryCode = "919958392968"; //+919825989750
+//                String message =
+//                        getString(R.string.hello_my_name) + sessionManager.getUserName() +
+//                                /*" from " + sessionManager.getState() + */ getString(R.string.need_some_assisstance);
+//
+//                startActivity(new Intent(Intent.ACTION_VIEW,
+//                        Uri.parse(
+//                                String.format("https://api.whatsapp.com/send?phone=%s&text=%s",
+//                                        phoneNumberWithCountryCode, message))));
 
-                startActivity(new Intent(Intent.ACTION_VIEW,
-                        Uri.parse(
-                                String.format("https://api.whatsapp.com/send?phone=%s&text=%s",
-                                        phoneNumberWithCountryCode, message))));
+            startVideoCall();
+
             }
+
         });
 
         tvMentalHelpRequest = findViewById(R.id.tv_mental_help_request);
@@ -407,9 +419,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         Uri.parse("http://www.intelehealth.org/ppe-guidelines"));
                 startActivity(home_quarantine);*/
 
-                Intent ppe = new Intent(HomeActivity.this, Webview.class);
-                ppe.putExtra("PPE", 1);
-                startActivity(ppe);
+//                Intent ppe = new Intent(HomeActivity.this, Webview.class);
+//                ppe.putExtra("PPE", 1);
+//                startActivity(ppe);
+
+                watchYoutubeVideo(HomeActivity.this, "xTvd7oAEyhs" );
             }
         });
 
@@ -473,9 +487,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 /*startActivity
                         (new Intent(Intent.ACTION_VIEW,
                                 Uri.parse("http://www.intelehealth.org/ppe-faqs")));*/
-                Intent faq = new Intent(HomeActivity.this, Webview.class);
-                faq.putExtra("FAQ", 1);
-                startActivity(faq);
+//                Intent faq = new Intent(HomeActivity.this, Webview.class);
+//                faq.putExtra("FAQ", 1);
+//                startActivity(faq);
+                watchYoutubeVideo(HomeActivity.this, "I47QOyX71kg" );
             }
         });
         Logger.logD(TAG, "onCreate: " + getFilesDir().toString());
@@ -666,6 +681,86 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         WorkManager.getInstance().enqueueUniquePeriodicWork(AppConstants.UNIQUE_WORK_NAME, ExistingPeriodicWorkPolicy.KEEP, AppConstants.PERIODIC_WORK_REQUEST);
 
+    }
+
+    public static void watchYoutubeVideo(Context context, String id){
+        Intent appIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:" + id));
+        Intent webIntent = new Intent(Intent.ACTION_VIEW,
+                Uri.parse("http://www.youtube.com/watch?v=" + id));
+        try {
+            context.startActivity(appIntent);
+        } catch (ActivityNotFoundException ex) {
+            context.startActivity(webIntent);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                           int[] grantResults) {
+        if (requestCode == PERMISSIONS_REQUEST_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission is granted
+                startVideoCall();
+            } else {
+                Toast.makeText(this, "In order to get help, accept phone permission in Settings -> Permissions.", Toast.LENGTH_LONG).show();
+            }
+        }
+
+    }
+
+    private void startVideoCall() {
+        String phoneNumberWithCountryCode = "918433750434"; //+919825989750
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ((checkSelfPermission(Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) ||(checkSelfPermission(CALL_PHONE) != PackageManager.PERMISSION_GRANTED))) {
+            requestPermissions(new String[]{Manifest.permission.CALL_PHONE, READ_CONTACTS}, PERMISSIONS_REQUEST_CODE);
+        }
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !checkPermission())
+//        {
+//            ActivityCompat.requestPermissions(this, new String[]{READ_CONTACTS, CALL_PHONE}, PERMISSIONS_REQUEST_CODE);
+//        }
+        else
+        {
+             Cursor cursor = context.getContentResolver ()
+                .query (
+                        ContactsContract.Data.CONTENT_URI,
+                        new String [] { ContactsContract.Data._ID },
+                        ContactsContract.RawContacts.ACCOUNT_TYPE + " = 'com.whatsapp' " +
+                                "AND " + ContactsContract.Data.MIMETYPE + " = 'vnd.android.cursor.item/vnd.com.whatsapp.video.call' " +
+                                "AND " + ContactsContract.CommonDataKinds.Phone.NUMBER + " LIKE '%" + phoneNumberWithCountryCode + "%'",
+                        null,
+                        ContactsContract.Contacts.DISPLAY_NAME
+                );
+
+                if (cursor == null) {
+                    // throw an exception
+                }
+
+                long id = -1;
+                while (cursor.moveToNext()) {
+                    id = cursor.getLong (cursor.getColumnIndex (ContactsContract.Data._ID));
+                }
+
+                if (!cursor.isClosed ()) {
+                    cursor.close ();
+                }
+                String voiceCallID = Long.toString(id);
+                Intent intent = new Intent ();
+                intent.setAction (Intent.ACTION_VIEW);
+                intent.setDataAndType (Uri.parse ("content://com.android.contacts/data/" + voiceCallID), "vnd.android.cursor.item/vnd.com.whatsapp.voip.call");
+                intent.setPackage ("com.whatsapp");
+
+                startActivity (intent);
+
+        }
+
+    }
+
+    private boolean checkPermission() {
+        int result = ContextCompat.checkSelfPermission(getApplicationContext(), READ_CONTACTS);
+        int result1 = ContextCompat.checkSelfPermission(getApplicationContext(), CALL_PHONE);
+
+        return result == PackageManager.PERMISSION_GRANTED && result1 == PackageManager.PERMISSION_GRANTED;
     }
 
     public void setLocale(String appLanguage)
