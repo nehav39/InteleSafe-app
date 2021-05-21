@@ -23,6 +23,7 @@
             android:textSize="30sp"
             android:textStyle="bold" />
 
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,7 +32,7 @@
             android:id="@+id/tv_intro_one"
             app:fontFamily="@fonts/Lato-Regular"
             android:paddingEnd="20dp"
-            tools:text="@string/intro_text1"
+            tools:text="This app is designed to enhance the knowledge of the general public by providing them authentic information on Covid19 including measures of personal protection and education resources on Covid19."
             android:textColor="@color/font_black_0"
             android:textSize="16sp" />
 
@@ -43,7 +44,7 @@
             android:id="@+id/tv_intro_two"
             app:fontFamily="@fonts/Lato-Regular"
             android:paddingEnd="20dp"
-            tools:text=""
+            tools:text="Here you can monitor your own health daily and reach out for help if you think you may have had unsafe exposure and may be infected."
             android:textColor="@color/font_black_0"
             android:textSize="16sp" />
 
@@ -53,7 +54,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="40dp"
             android:layout_marginBottom="20dp"
-            android:src="@drawable/ic_intro" />
+            android:src="@drawable/ic_intro_new" />
 
     </LinearLayout>
 </RelativeLayout>
