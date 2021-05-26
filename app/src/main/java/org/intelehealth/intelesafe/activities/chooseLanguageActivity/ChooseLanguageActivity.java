@@ -110,13 +110,13 @@ public class ChooseLanguageActivity extends AppCompatActivity {
         ArrayList<String> languages_list = new ArrayList<String>();
         languages_list.add("हिंदी");
         languages_list.add("English");
-        languages_list.add("ગુજરાતી");
+       // languages_list.add("ગુજરાતી");
         languages_list.add("मराठी");
-        languages_list.add("മലയാളം");
+       /* languages_list.add("മലയാളം");
         languages_list.add("ਪੰਜਾਬੀ");
         languages_list.add("বাংলা");
         languages_list.add("తెలుగు");
-        languages_list.add("தமிழ்");
+        languages_list.add("தமிழ்");*/
         ArrayAdapter<String> language_adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_checked,languages_list);
         LanguageListView.setAdapter(language_adapter);
     }
