@@ -111,7 +111,7 @@ public class ChooseLanguageActivity extends AppCompatActivity {
         languages_list.add("हिंदी");
         languages_list.add("English");
        // languages_list.add("ગુજરાતી");
-        languages_list.add("मराठी");
+       // languages_list.add("मराठी");
        /* languages_list.add("മലയാളം");
         languages_list.add("ਪੰਜਾਬੀ");
         languages_list.add("বাংলা");
