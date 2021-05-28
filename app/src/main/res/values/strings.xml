@@ -95,8 +95,8 @@
     <string name="no_visits">You do not have any visit.</string>
     <string name="change_lang_menu">Change Language</string>
     <string name="logout_menu">Logout</string>
-    <string name="hello_my_name">Hello, my name is </string>
-    <string name="need_some_assisstance">and I need some assistance.</string>
+    <string name="hello_my_name">"Hello, my name is "</string>
+    <string name="need_some_assisstance">" and I need some assistance."</string>
     <string name="hi_request_for_ppe">Hi I would like to request for PPE kits. </string>
     <string name="name_ppe">Name:</string>
     <string name="address_ppe">Address:</string>

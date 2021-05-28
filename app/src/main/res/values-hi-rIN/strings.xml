@@ -734,4 +734,6 @@
     <!--Login Screen (New Changes)-->
     <string name="txt_sign_up_option">खाता नहीं है?</string>
     <string name="username_password_must_be_different">उपयोगकर्ता नाम और पासवर्ड अलग होना चाहिए</string>
+    <string name="hello_my_name">"नमस्ते मेरा नाम है "</string>
+    <string name="need_some_assisstance">" और मुझे कुछ सहायता चाहिए।"</string>
 </resources>
