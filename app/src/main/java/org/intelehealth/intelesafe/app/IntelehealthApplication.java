@@ -6,21 +6,19 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
+
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
-import androidx.appcompat.app.AppCompatDelegate;
-import android.util.Log;
 
 import com.facebook.FacebookSdk;
 import com.facebook.LoggingBehavior;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.parse.Parse;
 
-import org.intelehealth.intelesafe.BuildConfig;
 import org.intelehealth.intelesafe.database.InteleHealthDatabaseHelper;
 import org.intelehealth.intelesafe.utilities.SessionManager;
-
-
 
 import io.reactivex.plugins.RxJavaPlugins;
 import okhttp3.Dispatcher;
@@ -33,7 +31,13 @@ public class IntelehealthApplication extends MultiDexApplication implements Appl
     private static Context mContext;
     private static String androidId;
     private Activity currentActivity;
+    private static IntelehealthApplication sIntelehealthApplication;
+    public String refreshedFCMTokenID = "";
     SessionManager sessionManager;
+
+    public static IntelehealthApplication getInstance() {
+        return sIntelehealthApplication;
+    }
 
     public static Context getAppContext() {
         return mContext;
@@ -53,6 +57,7 @@ public class IntelehealthApplication extends MultiDexApplication implements Appl
     @Override
     public void onCreate() {
         super.onCreate();
+        sIntelehealthApplication = this;
         //For Vector Drawables Backward Compatibility(<API 21)
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         mContext = getApplicationContext();

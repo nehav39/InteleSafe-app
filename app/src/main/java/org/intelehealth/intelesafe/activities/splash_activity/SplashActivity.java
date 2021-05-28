@@ -31,6 +31,7 @@ import org.intelehealth.intelesafe.activities.homeActivity.HomeActivity;
 import org.intelehealth.intelesafe.activities.introActivity.IntroActivity;
 import org.intelehealth.intelesafe.dataMigration.SmoothUpgrade;
 import org.intelehealth.intelesafe.fcm.util.FCMUtils;
+import org.intelehealth.intelesafe.services.fcm_service.TokenRefreshUtils;
 import org.intelehealth.intelesafe.utilities.Logger;
 import org.intelehealth.intelesafe.utilities.SessionManager;
 
@@ -62,6 +63,8 @@ public class SplashActivity extends AppCompatActivity {
         }
         fcmUtils = new FCMUtils(SplashActivity.this);
         fcmUtils.fcm();
+        // refresh the fcm token
+        TokenRefreshUtils.refreshToken(this);
         checkPerm();
     }
 
@@ -125,6 +128,7 @@ public class SplashActivity extends AppCompatActivity {
                         Manifest.permission.ACCESS_NETWORK_STATE,
                         Manifest.permission.GET_ACCOUNTS,
                         Manifest.permission.CAMERA,
+                        Manifest.permission.READ_PHONE_STATE,
                         Manifest.permission.READ_EXTERNAL_STORAGE,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .check();

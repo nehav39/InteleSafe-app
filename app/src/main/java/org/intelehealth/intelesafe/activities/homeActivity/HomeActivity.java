@@ -84,6 +84,8 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.UUID;
 
+import org.intelehealth.apprtc.data.Manager;
+import org.intelehealth.apprtc.utils.FirebaseUtils;
 import org.intelehealth.intelesafe.BuildConfig;
 import org.intelehealth.intelesafe.R;
 import org.intelehealth.intelesafe.activities.chooseLanguageActivity.ChooseLanguageActivity;
@@ -93,6 +95,7 @@ import org.intelehealth.intelesafe.activities.physcialExamActivity.PhysicalExamA
 import org.intelehealth.intelesafe.activities.settingsActivity.SettingsActivity;
 import org.intelehealth.intelesafe.activities.visitSummaryActivity.VisitSummaryActivity;
 import org.intelehealth.intelesafe.app.AppConstants;
+import org.intelehealth.intelesafe.app.IntelehealthApplication;
 import org.intelehealth.intelesafe.database.InteleHealthDatabaseHelper;
 import org.intelehealth.intelesafe.database.dao.EncounterDAO;
 import org.intelehealth.intelesafe.database.dao.VisitsDAO;
@@ -680,7 +683,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         //tv_ppe_request.setText(getString(R.string.ppe_req));
 
         WorkManager.getInstance().enqueueUniquePeriodicWork(AppConstants.UNIQUE_WORK_NAME, ExistingPeriodicWorkPolicy.KEEP, AppConstants.PERIODIC_WORK_REQUEST);
+        saveToken();
+    }
 
+    private void saveToken() {
+        Manager.getInstance().setBaseUrl("https://" + sessionManager.getServerUrl());
+        // save fcm reg. token for chat (Video)
+        FirebaseUtils.saveToken(this, sessionManager.getProviderID(), IntelehealthApplication.getInstance().refreshedFCMTokenID);
     }
 
     public static void watchYoutubeVideo(Context context, String id){
