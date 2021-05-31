@@ -26,8 +26,8 @@
     <string name="new_update_available">New Update Available</string>
     <string name="update_app_note">New version is available with new features please update app</string>
     <string name="update">Update</string>
-    <string name="thank_you">Thank you</string>
-    <string name="your_checkin_is_uploaded_successfully">Your check-in submitted successfully.</string>
+    <string name="thank_you">धन्यवाद</string>
+    <string name="your_checkin_is_uploaded_successfully">आपका चेक-इन सफलतापूर्वक सबमिट किया गया।</string>
     <string name="check_in">Check In</string>
     <string name="logout_dialog">क्या आप लॉग आउट करना चाहते हैं?</string>
     <string name="day_1">Day 1</string>
@@ -58,8 +58,8 @@
     <string name="hint_required" translatable="false">Required</string>
     <string name="hint_optional" translatable="false">Optional</string>
     <string name="tag_optional" translatable="false">optional</string>
-    <string name="generic_ok" translatable="false">OK</string>
-    <string name="generic_cancel" translatable="false">Cancel</string>
+    <string name="generic_ok" translatable="false">ठीक है</string>
+    <string name="generic_cancel" translatable="false">रद्द करना</string>
     <string name="generic_yes">हाँ</string>
     <string name="generic_no">नहीं</string>
     <string name="generic_back" translatable="false">Back</string>
@@ -173,7 +173,7 @@
     <string name="identification_screen_prompt_middle_name">Middle name</string>
     <string name="identification_screen_prompt_address">Address line 1*</string>
     <string name="identification_screen_prompt_address2">Address line 2*</string>
-    <string name="identification_screen_prompt_phone_number">Mobile Number*</string>
+    <string name="identification_screen_prompt_phone_number">मोबाइल नंबर*</string>
     <string name="admin_password_dialog_heading" translatable="false">Enter Admin Password</string>
     <string name="identification_screen_prompt_gender" translatable="false">Gender</string>
     <string name="identification_screen_prompt_age">Age:</string>
@@ -224,15 +224,15 @@
     <string name="title_activity_question_node" translatable="false">QuestionNodeActivity</string>
     <string name="complaint_change_selected" translatable="false">Modify</string>
     <string name="question_answer_all" translatable="false">Are you sure you have answered all questions.</string>
-    <string name="question_answer_all_phy_exam" translatable="false">Please answer all Self Assessment questions.</string> <!--Modified by venu N on 02/04/2020.-->
-    <string name="question_duration_picker" translatable="false">Please enter duration</string>
-    <string name="question_text_input" translatable="false">Please enter text</string>
-    <string name="question_date_picker" translatable="false">Please select date</string>
-    <string name="question_location_picker" translatable="false">Please select locations</string>
-    <string name="question_number_picker" translatable="false">Please enter number</string>
+    <string name="question_answer_all_phy_exam" translatable="false">कृपया सभी स्व-मूल्यांकन प्रश्नों के उत्तर दें।</string> <!--Modified by venu N on 02/04/2020.-->
+    <string name="question_duration_picker" translatable="false">कृपया अवधि दर्ज करें</string>
+    <string name="question_text_input" translatable="false">कृपया टेक्स्ट दर्ज करें</string>
+    <string name="question_date_picker" translatable="false">कृपया तिथि चुनें</string>
+    <string name="question_location_picker" translatable="false">कृपया स्थानों का चयन करें</string>
+    <string name="question_number_picker" translatable="false">कृपया नंबर दर्ज करें</string>
     <string name="question_area_picker" translatable="false">Please enter the area (width X length)</string>
-    <string name="question_range_picker" translatable="false">Please enter a range</string>
-    <string name="question_frequency_picker" translatable="false">Please enter how many times</string>
+    <string name="question_range_picker" translatable="false">कृपया एक श्रेणी दर्ज करें</string>
+    <string name="question_frequency_picker" translatable="false">कृपया कितनी बार दर्ज करें</string>
 
 
     //Table Exam Screen
@@ -272,7 +272,7 @@
     <string name="visit_summary_previous_reports" translatable="false">Previous Reports</string>
     <string name="visit_summary_medical_history">Medical history</string>
     <string name="visit_summary_family_history" translatable="false">Family history</string>
-    <string name="visit_summary_on_examination" translatable="false">On examination</string>
+    <string name="visit_summary_on_examination" translatable="false">परीक्षा पर</string>
     <string name="visit_summary_complaint" translatable="false">Reason for visit</string>
     <string name="visit_summary_vitals" translatable="false">Vitals</string>
     <string name="visit_summary_doctor_details" translatable="false">Doctor Details</string>
@@ -357,8 +357,8 @@
 
     <!--Setup Activity-->
     <string name="setup_internet" translatable="false">A strong Internet connection is required for setup.</string>
-    <string name="generic_manual_entry" translatable="false">Manual Entry</string>
-    <string name="generic_erase_redo" translatable="false">Erase and Re-Do</string>
+    <string name="generic_manual_entry" translatable="false">हस्त प्रविष्टि</string>
+    <string name="generic_erase_redo" translatable="false">मिटाएं और फिर से करें</string>
     <string name="visit_summary_edit_vitals" translatable="false">You can re-do the vitals from the vitals screen</string>
 
     //Camera Permissions
@@ -400,7 +400,7 @@
 
     <string name="please_wait_progress" translatable="false">Please Wait</string>
     <string name="downloading_protocols" translatable="false">Downloading protocols</string>
-    <string name="logging_in" translatable="false">Logging in</string>
+    <string name="logging_in" translatable="false">लॉगिंग</string>
     <string name="error_downloading_protocols" translatable="false">Error Downloading Mind Maps</string>
 
     //Sync strings
@@ -469,7 +469,7 @@
     <string name="exit_survey_label" translatable="false">How was your experience?</string>
     <string name="exit_survey_prompt" translatable="false">Enter your comments here</string>
     <string name="exit_survey_skip" translatable="false">SKIP</string>
-    <string name="exit_survey_submit" translatable="false">Submit</string>
+    <string name="exit_survey_submit" translatable="false">प्रस्तुत</string>
     <string name="exit_survey_toast">Please select a smiley before submitting</string>
 
 
@@ -537,8 +537,8 @@
     <string name="temperature_f">Temperature (F)</string>
     <string name="sync_now">Sync Now</string>
     <string name="lastsync">lastsync</string>
-    <string name="enter_password">Enter your password</string>
-    <string name="enter_username">Enter your username</string>
+    <string name="enter_password">अपना पासवर्ड डालें</string>
+    <string name="enter_username">अपना उपयोगकर्ता नाम दर्ज करें</string>
     <string name="has_a_new_prescription">has a new prescription</string>
     <string name="patient_denies">Patient denies</string>
     <string name="patient_reports">Patient reports</string>
@@ -615,7 +615,7 @@
     <string name="downloading_prescription">Downloading prescription</string>
     <string name="visit_data_failed">Visit Data Failed</string>
     <string name="patient_data_failed">Patient Data Failed</string>
-    <string name="privacy_notice_title">Privacy Notice</string>
+    <string name="privacy_notice_title">गोपनीयता सूचना</string>
     <string name="no_data_active_patients">No patient records for this health worker found.</string>
     <string name="syncing_visitDialog">Syncing</string>
     <string name="successfully_synced_notif">Successfully synced</string>
@@ -636,7 +636,7 @@
     <string name="successfully_synced" translatable="false">Successfully synced</string>
     <string name="failed_synced"><![CDATA[Failed synced, check your internet connection]]></string>
     <string name="visit_not_uploaded">Visit Not Uploaded</string>
-    <string name="upload_started">Uploading...</string>
+    <string name="upload_started">अपलोड हो रहा है...</string>
     <string name="visit_uploaded_successfully">Visit Uploaded Successfully</string>
     <string name="visit_uploaded_failed">Will be uploaded when internet is available</string>
     <string name="visitID">Visit ID</string>
@@ -649,7 +649,7 @@
     <string name="help_cardview_visit">If you get much sicker please call your nearest doctor - 73054154312</string>
     <string name="intelesafe">InteleSafe</string>
     <string name="who_is_this_napplication_for">यह आवेदन किसके लिए है?</string>
-    <string name="submit_visitSummary_Button">Submit</string>
+    <string name="submit_visitSummary_Button">प्रस्तुत</string>
     <string name="medical_registration_number_license_id">Medical registration number/license ID</string>
     <string name="name_of_health_organization_hospital_where_you_primarily_work">Health org./hospital where you work</string>
     <string name="username_10digits">Username should be 8 characters</string>
@@ -734,4 +734,11 @@
     <!--Login Screen (New Changes)-->
     <string name="txt_sign_up_option">खाता नहीं है?</string>
     <string name="username_password_must_be_different">उपयोगकर्ता नाम और पासवर्ड अलग होना चाहिए</string>
+    <string name="hello_my_name">"नमस्ते मेरा नाम है "</string>
+    <string name="need_some_assisstance">" और मुझे कुछ सहायता चाहिए।"</string>
+    <string name="no_visits">आपका कोई दौरा नहीं है।</string>
+    <string name="This_app_is_designed">इस ऐप को आम जनता के ज्ञान को बढ़ाने के लिए डिज़ाइन किया गया है ताकि उन्हें Covid19 पर व्यक्तिगत सुरक्षा और शैक्षिक संसाधनों के उपायों सहित Covid19 पर प्रामाणिक जानकारी प्रदान की जा सके। \n</string>
+    <string name="authentic_information">Covid19 पर व्यक्तिगत सुरक्षा और शैक्षिक संसाधनों के उपायों सहित Covid19 पर प्रामाणिक जानकारी</string>
+    <string name="Here_you_can_monitor">यहां आप रोजाना अपने स्वास्थ्य की निगरानी कर सकते हैं और अगर आपको लगता है कि आप असुरक्षित संपर्क में हैं और संक्रमित हो सकते हैं तो मदद के लिए पहुंच सकते हैं। \n</string>
+    <string name="monitor_your_own_health">"यहां आप रोजाना अपने स्वास्थ्य की निगरानी कर सकते हैं"</string>
 </resources>

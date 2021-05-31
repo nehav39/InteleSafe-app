@@ -290,17 +290,18 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         help_watsapp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                String phoneNumberWithCountryCode = "919958392968"; //+919825989750
-//                String message =
-//                        getString(R.string.hello_my_name) + sessionManager.getUserName() +
-//                                /*" from " + sessionManager.getState() + */ getString(R.string.need_some_assisstance);
-//
-//                startActivity(new Intent(Intent.ACTION_VIEW,
-//                        Uri.parse(
-//                                String.format("https://api.whatsapp.com/send?phone=%s&text=%s",
-//                                        phoneNumberWithCountryCode, message))));
 
-            startVideoCall();
+                String phoneNumberWithCountryCode = "+917972269174"; //+919825989750
+                String message =
+                        getString(R.string.hello_my_name) + sessionManager.getUserName() +
+                                /*" from " + sessionManager.getState() + */ getString(R.string.need_some_assisstance);
+
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse(
+                                String.format("https://api.whatsapp.com/send?phone=%s&text=%s",
+                                        phoneNumberWithCountryCode, message))));
+
+        //    startVideoCall();
 
             }
 

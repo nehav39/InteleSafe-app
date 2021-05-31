@@ -95,8 +95,8 @@
     <string name="no_visits">You do not have any visit.</string>
     <string name="change_lang_menu">Change Language</string>
     <string name="logout_menu">Logout</string>
-    <string name="hello_my_name">Hello, my name is </string>
-    <string name="need_some_assisstance">and I need some assistance.</string>
+    <string name="hello_my_name">"Hello, my name is "</string>
+    <string name="need_some_assisstance">" and I need some assistance."</string>
     <string name="hi_request_for_ppe">Hi I would like to request for PPE kits. </string>
     <string name="name_ppe">Name:</string>
     <string name="address_ppe">Address:</string>
@@ -693,4 +693,8 @@
     <string name="facebook_app_id">307013896947807</string>
     <string name="fb_login_protocol_scheme">fb307013896947807</string>
     <string name="username_password_must_be_different">Username and Password must be different</string>
+    <string name="This_app_is_designed">This app is designed to enhance the knowledge of the general public by providing them authentic information on Covid19 including measures of personal protection and educational resources on Covid19.\n</string>
+    <string name="authentic_information">authentic information on Covid19 including measures of personal protection and educational resources on Covid19.</string>
+    <string name="Here_you_can_monitor">Here you can monitor your own health daily and reach out for help if you think you may have had unsafe exposure and may be infected.\n</string>
+    <string name="monitor_your_own_health">" monitor your own health daily"</string>
 </resources>
