@@ -50,7 +50,7 @@ public class FCMService extends FirebaseMessagingService {
                     Intent in = new Intent(this, CompleteActivity.class);
                     String roomId = remoteMessage.getData().get("roomId");
                     String doctorName = remoteMessage.getData().get("doctorName");
-                    String nurseId = remoteMessage.getData().get("nurseId");
+                    String nurseId = remoteMessage.getData().containsKey("nurseId") ? remoteMessage.getData().get("nurseId") : "";
                     in.putExtra("roomId", roomId);
                     in.putExtra("isInComingRequest", true);
                     in.putExtra("doctorname", doctorName);
