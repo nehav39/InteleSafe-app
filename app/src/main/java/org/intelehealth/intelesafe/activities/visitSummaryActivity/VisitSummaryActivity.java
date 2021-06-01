@@ -1809,17 +1809,64 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         physicalExamStr = physicalExamStr.replaceAll("Self Assessment:", "");// Added by venu N on 02/04/2020.
 
         // Generate an HTML document on the fly:
-        if (isRespiratory) {
-            String htmlDocument =
-                    String.format("<b><p id=\"heading_1\" style=\"font-size:16pt; margin: 0px; padding: 0px; text-align: center;\">%s</p>" +
-                                    "<p id=\"heading_2\" style=\"font-size:12pt; margin: 0px; padding: 0px; text-align: center;\">%s</p>" +
-                                    "<p id=\"heading_3\" style=\"font-size:12pt; margin: 0px; padding: 0px; text-align: center;\">%s</p>" +
-                                    "<hr style=\"font-size:12pt;\">" + "<br/>" +
-                                    "<p id=\"patient_name\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">%s</p></b>" +
-                                    "<p id=\"patient_details\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">Age: %s | Gender: %s  </p>" + // | Son/Daughter/Wife of: %s  Removed as per the Prajwal by Venu N on 02/04/2020.
-                                    /* "<p id=\"address_and_contact\" style=\"font-size:12pt; margin: 0px; padding: 0px;\"><b>Address and Contact:</b> %s</p>" +*/
-                                    "<b><p id=\"visit_details\" style=\"font-size:12pt; margin-top:5px; margin-bottom:0px; padding: 0px;\">User ID: %s | Date of Assessment: %s </p></b><br><br>" +
-                                    "<b><p id=\"Self Assessment\" style=\"font-size:12pt;margin-top:5px; margin-bottom:0px;; padding: 0px;\">Self Assessment:</p></b>" + physicalExamStr
+        if(objClsDoctorDetails != null) {
+            //this means the prescription is present...
+            if (isRespiratory) {
+                String htmlDocument =
+                        String.format(font_face + "<b><p id=\"heading_1\" style=\"font-size:16pt; margin: 0px; padding: 0px; text-align: center;\">%s</p>" +
+                                        "<p id=\"heading_2\" style=\"font-size:12pt; margin: 0px; padding: 0px; text-align: center;\">%s</p>" +
+                                        "<p id=\"heading_3\" style=\"font-size:12pt; margin: 0px; padding: 0px; text-align: center;\">%s</p>" +
+                                        "<hr style=\"font-size:12pt;\">" + "<br/>" +
+                                        /* doctorDetailStr +*/
+                                        "<p id=\"patient_name\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">%s</p></b>" +
+                                        "<p id=\"patient_details\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">Age: %s | Gender: %s  </p>" +
+                                        "<p id=\"address_and_contact\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">Address and Contact: %s</p>" +
+                                        "<p id=\"visit_details\" style=\"font-size:12pt; margin-top:5px; margin-bottom:0px; padding: 0px;\">Patient Id: %s | Date of visit: %s </p><br>" +
+                                        "<b><p id=\"vitals_heading\" style=\"font-size:12pt;margin-top:5px; margin-bottom:0px;; padding: 0px;\">Vitals</p></b>" +
+                                        "<p id=\"vitals\" style=\"font-size:12pt;margin:0px; padding: 0px;\">Height(cm): %s | Weight(kg): %s | BMI: %s | Blood Pressure: %s | Pulse(bpm): %s | %s | Respiratory Rate: %s |  %s </p><br>" +
+                                   /* "<b><p id=\"patient_history_heading\" style=\"font-size:11pt;margin-top:5px; margin-bottom:0px; padding: 0px;\">Patient History</p></b>" +
+                                    "<p id=\"patient_history\" style=\"font-size:11pt;margin:0px; padding: 0px;\"> %s</p><br>" +
+                                    "<b><p id=\"family_history_heading\" style=\"font-size:11pt;margin-top:5px; margin-bottom:0px; padding: 0px;\">Family History</p></b>" +
+                                    "<p id=\"family_history\" style=\"font-size:11pt;margin: 0px; padding: 0px;\"> %s</p><br>" +*/
+                                        "<b><p id=\"complaints_heading\" style=\"font-size:15pt;margin-top:5px; margin-bottom:0px; padding: 0px;\">Presenting complaint(s)</p></b>" +
+                                        para_open + "%s" + para_close + "<br><br>" +
+                                        "<u><b><p id=\"diagnosis_heading\" style=\"font-size:15pt;margin-top:5px; margin-bottom:0px; padding: 0px;\">Diagnosis</p></b></u>" +
+                                        "%s<br>" +
+                                        "<u><b><p id=\"rx_heading\" style=\"font-size:15pt;margin-top:5px; margin-bottom:0px; padding: 0px;\">Medication(s) plan</p></b></u>" +
+                                        "%s<br>" +
+                                        "<u><b><p id=\"tests_heading\" style=\"font-size:15pt;margin-top:5px; margin-bottom:0px; padding: 0px;\">Recommended Investigation(s)</p></b></u>" +
+                                        "%s<br>" +
+                                        "<u><b><p id=\"advice_heading\" style=\"font-size:15pt;margin-top:5px; margin-bottom:0px; padding: 0px;\">General Advice</p></b></u>" +
+                                        "%s<br>" +
+                                        "<u><b><p id=\"follow_up_heading\" style=\"font-size:15pt;margin-top:5px; margin-bottom:0px; padding: 0px;\">Follow Up Date</p></b></u>" +
+                                        "%s<br>" +
+                                        "<div style=\"text-align:right;margin-right:50px;margin-top:0px;\">" +
+                                        "<span style=\"font-size:80pt;font-family: MyFont;padding: 0px;\">" + doctorSign + "</span>" +
+                                        doctorDetailStr +
+                                        "<p style=\"font-size:12pt; margin-top:-0px; padding: 0px;\">" + doctrRegistartionNum + "</p>" +
+                                        "</div>"
+                                , heading, heading2, heading3, mPatientName, age, mGender, /*mSdw*/ address, mPatientOpenMRSID, mDate, (!TextUtils.isEmpty(mHeight)) ? mHeight : "", (!TextUtils.isEmpty(mWeight)) ? mWeight : "",
+                                (!TextUtils.isEmpty(mBMI)) ? mBMI : "", (!TextUtils.isEmpty(bp)) ? bp : "", (!TextUtils.isEmpty(mPulse)) ? mPulse : "", (!TextUtils.isEmpty(mTemp)) ? mTemp : "", (!TextUtils.isEmpty(mresp)) ? mresp : "", (!TextUtils.isEmpty(mSPO2)) ? mSPO2 : "",
+                                /*pat_hist, fam_hist,*/ mComplaint, diagnosis_web, rx_web, tests_web, advice_web, followUp_web, doctor_web);
+                webView.loadDataWithBaseURL(null, htmlDocument, "text/HTML", "UTF-8", null);
+
+            }
+            else {
+                // TODO: Write condition for No-Respiratory value present then...
+            }
+        }
+        else {
+            if (isRespiratory) {
+                String htmlDocument =
+                        String.format("<b><p id=\"heading_1\" style=\"font-size:16pt; margin: 0px; padding: 0px; text-align: center;\">%s</p>" +
+                                        "<p id=\"heading_2\" style=\"font-size:12pt; margin: 0px; padding: 0px; text-align: center;\">%s</p>" +
+                                        "<p id=\"heading_3\" style=\"font-size:12pt; margin: 0px; padding: 0px; text-align: center;\">%s</p>" +
+                                        "<hr style=\"font-size:12pt;\">" + "<br/>" +
+                                        "<p id=\"patient_name\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">%s</p></b>" +
+                                        "<p id=\"patient_details\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">Age: %s | Gender: %s  </p>" + // | Son/Daughter/Wife of: %s  Removed as per the Prajwal by Venu N on 02/04/2020.
+                                        /* "<p id=\"address_and_contact\" style=\"font-size:12pt; margin: 0px; padding: 0px;\"><b>Address and Contact:</b> %s</p>" +*/
+                                        "<b><p id=\"visit_details\" style=\"font-size:12pt; margin-top:5px; margin-bottom:0px; padding: 0px;\">User ID: %s | Date of Assessment: %s </p></b><br><br>" +
+                                        "<b><p id=\"Self Assessment\" style=\"font-size:12pt;margin-top:5px; margin-bottom:0px;; padding: 0px;\">Self Assessment:</p></b>" + physicalExamStr
                                     /* +
                                    "<b><p id=\"vitals_heading\" style=\"font-size:12pt;margin-top:5px; margin-bottom:0px;; padding: 0px;\">Vitals</p></b>" +
                                     "<p id=\"vitals\" style=\"font-size:12pt;margin:0px; padding: 0px;\">Height(cm): %s | Weight(kg): %s | BMI: %s | Blood Pressure: %s | Pulse(bpm): %s | %s | Respiratory Rate: %s |  %s </p>" +
@@ -1839,21 +1886,20 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                                     "%s" +
                                     "<b><p id=\"follow_up_heading\" style=\"font-size:12pt;margin-top:5px; margin-bottom:0px; padding: 0px;\">Follow Up Date</p></b>" +
                                     "%s"*/
-                            , heading, heading2, heading3, mPatientName, age, mGender/*, mSdw, address*/, mPatientOpenMRSID, (mDate != null ? mDate : ""), mHeight, mWeight,
-                            mBMI, bp, mPulse, mTemp, mresp, mSPO2, pat_hist, fam_hist, mComplaint, diagnosis_web, rx_web, tests_web, advice_web, followUp_web, doctor_web);
-            webView.loadDataWithBaseURL(null, htmlDocument, "text/HTML", "UTF-8", null);
-        }
-        else {
-            String htmlDocument =
-                    String.format("<b><p id=\"heading_1\" style=\"font-size:16pt; margin: 0px; padding: 0px; text-align: center;\">%s</p>" +
-                                    "<p id=\"heading_2\" style=\"font-size:12pt; margin: 0px; padding: 0px; text-align: center;\">%s</p>" +
-                                    "<p id=\"heading_3\" style=\"font-size:12pt; margin: 0px; padding: 0px; text-align: center;\">%s</p>" +
-                                    "<hr style=\"font-size:12pt;\">" + "<br/>" +
-                                    "<p id=\"patient_name\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">%s</p></b>" +
-                                    "<p id=\"patient_details\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">Age: %s | Gender: %s </p>" +  //  | Son/Daughter/Wife of: %s  modified by venu as per Prejwal on 02/04/2020.
-                                    /* "<p id=\"address_and_contact\" style=\"font-size:12pt; margin: 0px; padding: 0px;\"><b>Address and Contact:</b> %s</p>" +*/
-                                    "<b><p id=\"visit_details\" style=\"font-size:12pt; margin-top:5px; margin-bottom:0px; padding: 0px;\">User ID: %s | Date of Assessment: %s </p></b><br><br>" +
-                                    "<b><p id=\"Self Assessment\" style=\"font-size:12pt;margin-top:5px; margin-bottom:0px;; padding: 0px;\">Self Assessment:</p></b>" + physicalExamStr
+                                , heading, heading2, heading3, mPatientName, age, mGender/*, mSdw, address*/, mPatientOpenMRSID, (mDate != null ? mDate : ""), mHeight, mWeight,
+                                mBMI, bp, mPulse, mTemp, mresp, mSPO2, pat_hist, fam_hist, mComplaint, diagnosis_web, rx_web, tests_web, advice_web, followUp_web, doctor_web);
+                webView.loadDataWithBaseURL(null, htmlDocument, "text/HTML", "UTF-8", null);
+            } else {
+                String htmlDocument =
+                        String.format("<b><p id=\"heading_1\" style=\"font-size:16pt; margin: 0px; padding: 0px; text-align: center;\">%s</p>" +
+                                        "<p id=\"heading_2\" style=\"font-size:12pt; margin: 0px; padding: 0px; text-align: center;\">%s</p>" +
+                                        "<p id=\"heading_3\" style=\"font-size:12pt; margin: 0px; padding: 0px; text-align: center;\">%s</p>" +
+                                        "<hr style=\"font-size:12pt;\">" + "<br/>" +
+                                        "<p id=\"patient_name\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">%s</p></b>" +
+                                        "<p id=\"patient_details\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">Age: %s | Gender: %s </p>" +  //  | Son/Daughter/Wife of: %s  modified by venu as per Prejwal on 02/04/2020.
+                                        /* "<p id=\"address_and_contact\" style=\"font-size:12pt; margin: 0px; padding: 0px;\"><b>Address and Contact:</b> %s</p>" +*/
+                                        "<b><p id=\"visit_details\" style=\"font-size:12pt; margin-top:5px; margin-bottom:0px; padding: 0px;\">User ID: %s | Date of Assessment: %s </p></b><br><br>" +
+                                        "<b><p id=\"Self Assessment\" style=\"font-size:12pt;margin-top:5px; margin-bottom:0px;; padding: 0px;\">Self Assessment:</p></b>" + physicalExamStr
                             /*"<b><p id=\"vitals_heading\" style=\"font-size:12pt;margin-top:5px; margin-bottom:0px;; padding: 0px;\">Vitals</p></b>" +
                             "<p id=\"vitals\" style=\"font-size:12pt;margin:0px; padding: 0px;\">Height(cm): %s | Weight(kg): %s | BMI: %s | Blood Pressure: %s | Pulse(bpm): %s | %s | %s </p>" +
                                     "<b><p id=\"patient_history_heading\" style=\"font-size:11pt;margin-top:5px; margin-bottom:0px; padding: 0px;\">Patient History</p></b>" +
@@ -1872,10 +1918,13 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                                     "%s" +
                                     "<b><p id=\"follow_up_heading\" style=\"font-size:12pt;margin-top:5px; margin-bottom:0px; padding: 0px;\">Follow Up Date</p></b>" +
                                     "%s"*/
-                            , heading, heading2, heading3, mPatientName, age, mGender/*, mSdw, address*/, mPatientOpenMRSID, (mDate != null ? mDate : ""), mHeight, mWeight,
-                            mBMI, bp, mPulse, mTemp, mSPO2, pat_hist, fam_hist, mComplaint, diagnosis_web, rx_web, tests_web, advice_web, followUp_web, doctor_web);
-            webView.loadDataWithBaseURL(null, htmlDocument, "text/HTML", "UTF-8", null);
+                                , heading, heading2, heading3, mPatientName, age, mGender/*, mSdw, address*/, mPatientOpenMRSID, (mDate != null ? mDate : ""), mHeight, mWeight,
+                                mBMI, bp, mPulse, mTemp, mSPO2, pat_hist, fam_hist, mComplaint, diagnosis_web, rx_web, tests_web, advice_web, followUp_web, doctor_web);
+                webView.loadDataWithBaseURL(null, htmlDocument, "text/HTML", "UTF-8", null);
+            }
+            //end of if-else of design...
         }
+
 
 
         /**
@@ -2167,6 +2216,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         }
 
         downloadPrescriptionDefault();
+        downloadDoctorDetails();
     }
 
     /**
@@ -2697,6 +2747,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                         FirebaseCrashlytics.getInstance().recordException(e);
                     }
                 }
+                downloadDoctorDetails();
 
             }
 
@@ -2887,6 +2938,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         public void onReceive(Context context, Intent intent) {
             Logger.logD(TAG, "Download prescription happen" + new SimpleDateFormat("yyyy MM dd_HH mm ss").format(Calendar.getInstance().getTime()));
             downloadPrescriptionDefault();
+            downloadDoctorDetails();
         }
     }
 
@@ -2965,6 +3017,38 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
         }
     }
+
+    private void downloadDoctorDetails() {
+        String visitnote = "";
+        EncounterDAO encounterDAO = new EncounterDAO();
+        String encounterIDSelection = "visituuid = ? ";
+        String[] encounterIDArgs = {visitUuid};
+        String encounter_type_uuid_comp = "bd1fbfaa-f5fb-4ebd-b75c-564506fc309e";// make the encounter_type_uuid as constant later on.
+        Cursor encounterCursor = db.query("tbl_encounter", null, encounterIDSelection, encounterIDArgs, null, null, null);
+        if (encounterCursor != null && encounterCursor.moveToFirst()) {
+            do {
+                if (encounter_type_uuid_comp.equalsIgnoreCase(encounterCursor.getString
+                        (encounterCursor.getColumnIndexOrThrow("encounter_type_uuid")))) {
+                    visitnote = encounterCursor.getString(encounterCursor.getColumnIndexOrThrow("uuid"));
+                }
+            } while (encounterCursor.moveToNext());
+
+        }
+        encounterCursor.close();
+        String[] columns = {"value", " conceptuuid"};
+        String visitSelection = "encounteruuid = ? and voided!='1' ";
+        String[] visitArgs = {visitnote};
+        Cursor visitCursor = db.query("tbl_obs", columns, visitSelection, visitArgs, null, null, null);
+        if (visitCursor.moveToFirst()) {
+            do {
+                String dbConceptID = visitCursor.getString(visitCursor.getColumnIndex("conceptuuid"));
+                String dbValue = visitCursor.getString(visitCursor.getColumnIndex("value"));
+                parseDoctorDetails(dbValue);
+            } while (visitCursor.moveToNext());
+        }
+        visitCursor.close();
+    }
+
 
 
 }
