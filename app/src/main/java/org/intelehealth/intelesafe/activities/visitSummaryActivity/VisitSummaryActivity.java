@@ -1821,7 +1821,10 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                                         /* doctorDetailStr +*/
                                         "<p id=\"patient_name\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">%s</p></b>" +
                                         "<p id=\"patient_details\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">Age: %s | Gender: %s  </p>" +
-                                        "<p id=\"address_and_contact\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">Address and Contact: %s</p>" +
+
+                                //Address is commented...
+                                       /* "<p id=\"address_and_contact\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">Address and Contact: %s</p>" +*/
+
                                         "<p id=\"visit_details\" style=\"font-size:12pt; margin-top:5px; margin-bottom:0px; padding: 0px;\">Patient Id: %s | Date of visit: %s </p><br>" +
 
                                 //Vitals section commented
@@ -1850,7 +1853,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                                         doctorDetailStr +
                                         "<p style=\"font-size:12pt; margin-top:-0px; padding: 0px;\">" + doctrRegistartionNum + "</p>" +
                                         "</div>"
-                                , heading, heading2, heading3, mPatientName, age, mGender, /*mSdw*/ address, mPatientOpenMRSID, mDate/*, (!TextUtils.isEmpty(mHeight))
+                                , heading, heading2, heading3, mPatientName, age, mGender, /*mSdw address,*/ mPatientOpenMRSID, mDate/*, (!TextUtils.isEmpty(mHeight))
                                         ? mHeight : "", (!TextUtils.isEmpty(mWeight)) ? mWeight : "",
                                 (!TextUtils.isEmpty(mBMI)) ? mBMI : "", (!TextUtils.isEmpty(bp)) ? bp : "", (!TextUtils.isEmpty(mPulse))
                                         ? mPulse : "", (!TextUtils.isEmpty(mTemp)) ? mTemp : "", (!TextUtils.isEmpty(mresp)) ? mresp : "",
@@ -1868,7 +1871,9 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                                         "<hr style=\"font-size:12pt;\">" + "<br/>" +
                                         "<p id=\"patient_name\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">%s</p></b>" +
                                         "<p id=\"patient_details\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">Age: %s | Gender: %s </p>" +
-                                        "<p id=\"address_and_contact\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">Address and Contact: %s</p>" +
+
+                                      //  "<p id=\"address_and_contact\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">Address and Contact: %s</p>" +
+
                                         "<p id=\"visit_details\" style=\"font-size:12pt; margin-top:5px; margin-bottom:0px; padding: 0px;\">Patient Id: %s | Date of visit: %s </p><br>" +
 
                                 //Vitals section commented...
@@ -1897,7 +1902,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                                         doctorDetailStr +
                                         "<span style=\"font-size:12pt; margin-top:5px; padding: 0px;\">" + doctrRegistartionNum + "</span>" +
                                         "</div>"
-                                , heading, heading2, heading3, mPatientName, age, mGender, /*mSdw*/ address, mPatientOpenMRSID, mDate/*,
+                                , heading, heading2, heading3, mPatientName, age, mGender, /*mSdw address,*/ mPatientOpenMRSID, mDate/*,
                                 (!TextUtils.isEmpty(mHeight)) ? mHeight : "", (!TextUtils.isEmpty(mWeight)) ? mWeight : "",
                                 (!TextUtils.isEmpty(mBMI)) ? mBMI : "", (!TextUtils.isEmpty(bp)) ? bp : "", (!TextUtils.isEmpty(mPulse)) ?
                                         mPulse : "", (!TextUtils.isEmpty(mTemp)) ? mTemp : "", (!TextUtils.isEmpty(mSPO2)) ? mSPO2 : ""*/,
