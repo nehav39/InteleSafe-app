@@ -12,6 +12,7 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.intelehealth.intelesafe.models.dto.VisitAttribute_Speciality;
 import org.intelehealth.intelesafe.utilities.DateAndTimeUtils;
 import org.intelehealth.intelesafe.utilities.Logger;
 import org.intelehealth.intelesafe.app.AppConstants;
@@ -148,6 +149,10 @@ public class VisitsDAO {
                 visitDTO.setEnddate(idCursor.getString(idCursor.getColumnIndexOrThrow("enddate")));
                 visitDTO.setCreatoruuid(idCursor.getString(idCursor.getColumnIndexOrThrow("creator")));
                 visitDTO.setVisitTypeUuid(idCursor.getString(idCursor.getColumnIndexOrThrow("visit_type_uuid")));
+
+                List<VisitAttribute_Speciality> list = new ArrayList<>();
+                list = fetchVisitAttr_Speciality(visitDTO.getUuid());
+                visitDTO.setAttributes(list);
                 visitDTOList.add(visitDTO);
             }
         }
@@ -333,5 +338,38 @@ public class VisitsDAO {
 
         return isUpdated;
     }
+
+    /**
+     * @param visit_uuid : The visit uuid is passed from the tbl_visit
+     * @return Specialtylist : returns an ArrayList of type {@link VisitAttribute_Speciality}
+     * */
+    private List<VisitAttribute_Speciality> fetchVisitAttr_Speciality(String visit_uuid) {
+
+        List<VisitAttribute_Speciality> Specialtylist = new ArrayList<>();
+
+        SQLiteDatabase db = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
+        db.beginTransaction();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM tbl_visit_attribute WHERE sync=? AND visit_uuid=?",
+                new String[]{"0", visit_uuid});
+
+        VisitAttribute_Speciality data = new VisitAttribute_Speciality();
+        if (cursor.getCount() != 0) {
+            while (cursor.moveToNext()) {
+                data = new VisitAttribute_Speciality();
+                data.setUuid(cursor.getString(cursor.getColumnIndexOrThrow("uuid")));
+                data.setAttributeType(cursor.getString
+                        (cursor.getColumnIndexOrThrow("visit_attribute_type_uuid")));
+                data.setValue(cursor.getString(cursor.getColumnIndexOrThrow("value")));
+                Specialtylist.add(data);
+            }
+        }
+        cursor.close();
+        db.setTransactionSuccessful();
+        db.endTransaction();
+
+        return Specialtylist;
+    }
+
 
 }

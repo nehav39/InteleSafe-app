@@ -1,5 +1,7 @@
 package org.intelehealth.intelesafe.utilities;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 
@@ -9,6 +11,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.intelehealth.intelesafe.activities.visitSummaryActivity.VisitSummaryActivity;
 import org.intelehealth.intelesafe.app.AppConstants;
 import org.intelehealth.intelesafe.app.IntelehealthApplication;
 import org.intelehealth.intelesafe.database.dao.EncounterDAO;
@@ -120,7 +123,7 @@ public class PatientsFrameJson {
             visit.setStartDatetime(visitDTO.getStartdate());
             visit.setUuid(visitDTO.getUuid());
             visit.setVisitType(visitDTO.getVisitTypeUuid());
-            visit.setStopDatetime(visitDTO.getEnddate()!= null ?visitDTO.getEnddate(): AppConstants.dateAndTimeUtils.currentDateTime()); // if end date is null setting the End to current date by Venu N to ended the offline visit.
+            visit.setStopDatetime(visitDTO.getEnddate() != null ? visitDTO.getEnddate() : AppConstants.dateAndTimeUtils.currentDateTime()); // if end date is null setting the End to current date by Venu N to ended the offline visit.
             visitList.add(visit);
 
         }
@@ -139,9 +142,9 @@ public class PatientsFrameJson {
             List<EncounterProvider> encounterProviderList = new ArrayList<>();
             EncounterProvider encounterProvider = new EncounterProvider();
             encounterProvider.setEncounterRole("73bbb069-9781-4afc-a9d1-54b6b2270e04");
-          //  encounterProvider.setProvider(session.getProviderID());
+            //  encounterProvider.setProvider(session.getProviderID());
             encounterProvider.setProvider(encounterDTO.getProvideruuid());
-            Log.d("DTO","DTO:frame "+ encounterProvider.getProvider());
+            Log.d("DTO", "DTO:frame " + encounterProvider.getProvider());
             encounterProviderList.add(encounterProvider);
             encounter.setEncounterProviders(encounterProviderList);
 
@@ -165,8 +168,10 @@ public class PatientsFrameJson {
             }
             encounter.setObs(obsList);
             encounter.setLocation(session.getLocationUuid());
-
-            encounterList.add(encounter);
+            // encounterList.add(encounter);
+            if (speciality_row_exist_check(encounter.getVisit())) {
+                encounterList.add(encounter);
+            }
         }
 
 
@@ -175,9 +180,32 @@ public class PatientsFrameJson {
         pushRequestApiCall.setVisits(visitList);
         pushRequestApiCall.setEncounters(encounterList);
         Gson gson = new Gson();
-        Log.d("OBS: ","OBS: "+gson.toJson(pushRequestApiCall));
+        Log.d("OBS: ", "OBS: " + gson.toJson(pushRequestApiCall));
 
 
         return pushRequestApiCall;
+    }
+
+    /**
+     * @param uuid the visit uuid of the patient visit records is passed to the function.
+     * @return boolean value will be returned depending upon if the row exists in the tbl_visit_attribute tbl
+     */
+    private boolean speciality_row_exist_check(String uuid) {
+        boolean isExists = false;
+        SQLiteDatabase db = AppConstants.inteleHealthDatabaseHelper.getReadableDatabase();
+        db.beginTransaction();
+        Cursor cursor = db.rawQuery("SELECT * FROM tbl_visit_attribute WHERE visit_uuid=?",
+                new String[]{uuid});
+
+        if (cursor.getCount() != 0) {
+            while (cursor.moveToNext()) {
+                isExists = true;
+            }
+        }
+        cursor.close();
+        db.setTransactionSuccessful();
+        db.endTransaction();
+
+        return isExists;
     }
 }

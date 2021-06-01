@@ -32,6 +32,9 @@ public class VisitDTO {
     @SerializedName("syncd")
     @Expose
     private Boolean syncd;
+    @SerializedName("attributes")
+    @Expose
+    private List<VisitAttribute_Speciality> attributes = null;
 
     private Integer isSubmitted;
 
@@ -115,5 +118,13 @@ public class VisitDTO {
 
     public void setIsSubmitted(Integer isSubmitted) {
         this.isSubmitted = isSubmitted;
+    }
+
+    public List<VisitAttribute_Speciality> getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(List<VisitAttribute_Speciality> attributes) {
+        this.attributes = attributes;
     }
 }
