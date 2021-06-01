@@ -24,6 +24,7 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
+import android.print.PrintJob;
 import android.print.PrintManager;
 import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -1604,8 +1605,11 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
             @Override
             public void onPageFinished(WebView view, String url) {
-                Log.i("Patient WebView", "page finished loading " + url);
-                createWebPrintJob(view);
+               /* Log.i("Patient WebView", "page finished loading " + url);
+                createWebPrintJob(view);*/
+                int webview_heightContent = view.getContentHeight();
+                Log.d("variable i", "variable i: " + webview_heightContent);
+                createWebPrintJob_Button(view, webview_heightContent);
                 mWebView = null;
             }
         });
@@ -2798,6 +2802,81 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
+
+    /**
+     * @param webView Webview object.
+     * @param contentHeight Height of the overall contents of the HTML string in int datatype.
+     */
+    private void createWebPrintJob_Button(WebView webView, int contentHeight) {
+        // Get a PrintManager instance
+        PrintManager printManager = (PrintManager) this.getSystemService(Context.PRINT_SERVICE);
+
+        // Get a print adapter instance
+        PrintDocumentAdapter printAdapter = webView.createPrintDocumentAdapter();
+        Log.d("webview content height", "webview content height: " + contentHeight);
+
+        if (contentHeight > 2683 && contentHeight <= 3000) {
+            //medium size prescription...
+            PrintAttributes.Builder pBuilder = new PrintAttributes.Builder();
+            pBuilder.setMediaSize(PrintAttributes.MediaSize.ISO_B4);
+            pBuilder.setResolution(new PrintAttributes.Resolution("pdf", "pdf", 600, 600));
+            pBuilder.setMinMargins(PrintAttributes.Margins.NO_MARGINS);
+            // Create a print job with name and adapter instance
+            String jobName = getString(R.string.app_name) + " Visit Summary";
+
+            //To display the preview window to user...
+            PrintJob printJob = printManager.print(jobName, printAdapter,
+                    pBuilder.build());
+
+//            PrintJob printJob = printManager.print(jobName, printAdapter,
+//                    pBuilder.build());
+        } else if (contentHeight == 0) {
+            //in case of webview bug of 0 contents...
+            PrintAttributes.Builder pBuilder = new PrintAttributes.Builder();
+            pBuilder.setMediaSize(PrintAttributes.MediaSize.JIS_B4);
+            pBuilder.setResolution(new PrintAttributes.Resolution("pdf", "pdf", 600, 600));
+            pBuilder.setMinMargins(PrintAttributes.Margins.NO_MARGINS);
+            // Create a print job with name and adapter instance
+            String jobName = getString(R.string.app_name) + " Visit Summary";
+
+            //To display the preview window to user...
+            PrintJob printJob = printManager.print(jobName, printAdapter,
+                    pBuilder.build());
+
+//            PrintJob printJob = printManager.print(jobName, printAdapter,
+//                    pBuilder.build());
+        } else if (contentHeight > 3000) {
+            //large size prescription...
+            PrintAttributes.Builder pBuilder = new PrintAttributes.Builder();
+            pBuilder.setMediaSize(PrintAttributes.MediaSize.JIS_B4);
+            pBuilder.setResolution(new PrintAttributes.Resolution("pdf", "pdf", 600, 600));
+            pBuilder.setMinMargins(PrintAttributes.Margins.NO_MARGINS);
+            // Create a print job with name and adapter instance
+            String jobName = getString(R.string.app_name) + " Visit Summary";
+
+            //To display the preview window to user...
+            PrintJob printJob = printManager.print(jobName, printAdapter,
+                    pBuilder.build());
+
+//            PrintJob printJob = printManager.print(jobName, printAdapter,
+//                    pBuilder.build());
+        } else {
+            //small size prescription...
+            // Create a print job with name and adapter instance
+            String jobName = getString(R.string.app_name) + " Visit Summary";
+
+            Log.d("PrintPDF", "PrintPDF");
+            PrintAttributes.Builder pBuilder = new PrintAttributes.Builder();
+            pBuilder.setMediaSize(PrintAttributes.MediaSize.NA_LETTER);
+            pBuilder.setResolution(new PrintAttributes.Resolution("pdf", "pdf", 600, 600));
+            pBuilder.setMinMargins(PrintAttributes.Margins.NO_MARGINS);
+
+            //To display the preview window to user...
+            PrintJob printJob = printManager.print(jobName, printAdapter,
+                    pBuilder.build());
+
+        }
+    }
 
 
 }
