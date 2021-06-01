@@ -39,6 +39,7 @@ import android.telephony.SmsManager;
 import android.text.Html;
 import android.text.InputType;
 import android.text.SpannableString;
+import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
@@ -63,9 +64,11 @@ import android.widget.Toast;
 
 
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
+import com.google.gson.Gson;
 
 import org.apache.commons.lang3.StringUtils;
 import org.intelehealth.intelesafe.activities.homeActivity.Webview;
+import org.intelehealth.intelesafe.models.ClsDoctorDetails;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -1758,6 +1761,48 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
             pat_hist = "No history of patient's illness provided.";
         }
 
+        // Generate an HTML document on the fly:
+        String fontFamilyFile = "";
+        if (objClsDoctorDetails != null && objClsDoctorDetails.getFontOfSign() != null) {
+            Log.d("font", "font: " + objClsDoctorDetails.getFontOfSign());
+            if (objClsDoctorDetails.getFontOfSign().toLowerCase().equalsIgnoreCase("youthness")) {
+                fontFamilyFile = "src: url('file:///android_asset/fonts/Youthness.ttf');";
+            } else if (objClsDoctorDetails.getFontOfSign().toLowerCase().equalsIgnoreCase("asem")) {
+                fontFamilyFile = "src: url('file:///android_asset/fonts/Asem.otf');";
+            } else if (objClsDoctorDetails.getFontOfSign().toLowerCase().equalsIgnoreCase("arty")) {
+                fontFamilyFile = "src: url('file:///android_asset/fonts/Arty.otf');";
+            } else if (objClsDoctorDetails.getFontOfSign().toLowerCase().equalsIgnoreCase("almondita")) {
+                fontFamilyFile = "src: url('file:///android_asset/fonts/Almondita-mLZJP.ttf');";
+            }
+        }
+        String font_face = "<style>" +
+                "                @font-face {" +
+                "                    font-family: \"MyFont\";" +
+                fontFamilyFile +
+                "                }" +
+                "            </style>";
+
+        String doctorSign = "";
+        String doctrRegistartionNum = "";
+        // String docDigitallySign = "";
+        String doctorDetailStr = "";
+        if (objClsDoctorDetails != null) {
+            //  docDigitallySign = "Digitally Signed By";
+            doctorSign = objClsDoctorDetails.getTextOfSign();
+
+            doctrRegistartionNum = !TextUtils.isEmpty(objClsDoctorDetails.getRegistrationNumber()) ?
+                    "Registration No: " + objClsDoctorDetails.getRegistrationNumber() : "";
+            doctorDetailStr = "<div style=\"text-align:right;margin-right:0px;margin-top:3px;\">" +
+                    "<span style=\"font-size:12pt; color:#212121;padding: 0px;\">" + objClsDoctorDetails.getName() + "</span><br>" +
+                    "<span style=\"font-size:12pt; color:#212121;padding: 0px;\">" + "  " + objClsDoctorDetails.getQualification()
+                    + ", " + objClsDoctorDetails.getSpecialization() + "</span><br>" +
+                    //  "<span style=\"font-size:12pt;color:#212121;padding: 0px;\">" + (!TextUtils.isEmpty(objClsDoctorDetails.getPhoneNumber()) ?
+                    //  getString(R.string.dr_phone_number) + objClsDoctorDetails.getPhoneNumber() : "") + "</span><br>" +
+                    "<span style=\"font-size:12pt;color:#212121;padding: 0px;\">" + (!TextUtils.isEmpty(objClsDoctorDetails.getEmailId()) ?
+                    "Email: " + objClsDoctorDetails.getEmailId() : "") + "</span><br>" +
+                    "</div>";
+
+        }
 
         // Modified by the Venu N on for print option as per the Prajwal note on 02/04/2020.
         String physicalExamStr = phyExam.getValue().replaceAll("<b>General exams: </b>", "");
@@ -1797,7 +1842,8 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                             , heading, heading2, heading3, mPatientName, age, mGender/*, mSdw, address*/, mPatientOpenMRSID, (mDate != null ? mDate : ""), mHeight, mWeight,
                             mBMI, bp, mPulse, mTemp, mresp, mSPO2, pat_hist, fam_hist, mComplaint, diagnosis_web, rx_web, tests_web, advice_web, followUp_web, doctor_web);
             webView.loadDataWithBaseURL(null, htmlDocument, "text/HTML", "UTF-8", null);
-        } else {
+        }
+        else {
             String htmlDocument =
                     String.format("<b><p id=\"heading_1\" style=\"font-size:16pt; margin: 0px; padding: 0px; text-align: center;\">%s</p>" +
                                     "<p id=\"heading_2\" style=\"font-size:12pt; margin: 0px; padding: 0px; text-align: center;\">%s</p>" +
@@ -2297,6 +2343,48 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
         }
     }
+
+    ClsDoctorDetails objClsDoctorDetails;
+
+    private void parseDoctorDetails(String dbValue) {
+        Gson gson = new Gson();
+        //  dbValue = dbValue.replace("{", "");
+        try {
+            objClsDoctorDetails = gson.fromJson(dbValue, ClsDoctorDetails.class);
+            Log.e(TAG, "TEST DB: " + dbValue);
+            Log.e(TAG, "TEST VISIT: " + objClsDoctorDetails);
+        }
+        catch (Exception e) {
+            FirebaseCrashlytics.getInstance().recordException(e);
+            Toast.makeText(context, getResources().getString(R.string.something_went_wrong),
+                    Toast.LENGTH_SHORT).show();
+        }
+
+        String doctorSign = "";
+        String doctrRegistartionNum = "";
+        // String docDigitallySign = "";
+        String doctorDetailStr = "";
+        if (objClsDoctorDetails != null) {
+
+          //  frameLayout_doctor.setVisibility(View.VISIBLE);
+
+            doctorSign = objClsDoctorDetails.getTextOfSign();
+
+            doctrRegistartionNum = !TextUtils.isEmpty(objClsDoctorDetails.getRegistrationNumber()) ?
+                    "Registration No: " + objClsDoctorDetails.getRegistrationNumber() : "";
+            doctorDetailStr = "<div style=\"text-align:right;margin-right:0px;margin-top:3px;\">" +
+                    "<span style=\"font-size:12pt; color:#448AFF;padding: 0px;\">" + (!TextUtils.isEmpty(objClsDoctorDetails.getName()) ? objClsDoctorDetails.getName() : "") + "</span><br>" +
+                    "<span style=\"font-size:12pt; color:#448AFF;padding: 0px;\">" + "  " +
+                    (!TextUtils.isEmpty(objClsDoctorDetails.getQualification()) ? objClsDoctorDetails.getQualification() : "") + ", "
+                    + (!TextUtils.isEmpty(objClsDoctorDetails.getSpecialization()) ? objClsDoctorDetails.getSpecialization() : "") + "</span><br>" +
+                    // "<span style=\"font-size:12pt;color:#448AFF;padding: 0px;\">" + (!TextUtils.isEmpty(objClsDoctorDetails.getPhoneNumber()) ? "Phone Number: " + objClsDoctorDetails.getPhoneNumber() : "") + "</span><br>" +
+                    "<span style=\"font-size:12pt;color:#448AFF;padding: 0px;\">" + (!TextUtils.isEmpty(objClsDoctorDetails.getEmailId()) ? "Email: " + objClsDoctorDetails.getEmailId() : "") + "</span><br>" + (!TextUtils.isEmpty(objClsDoctorDetails.getRegistrationNumber()) ? "Registration No: " + objClsDoctorDetails.getRegistrationNumber() : "") +
+                    "</div>";
+
+            mDoctorName.setText(Html.fromHtml(doctorDetailStr).toString().trim());
+        }
+    }
+
 
 
     /**
