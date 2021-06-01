@@ -2334,7 +2334,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                     diagnosisReturned = value;
                 }
                 if (diagnosisCard.getVisibility() != View.VISIBLE) {
-                    diagnosisCard.setVisibility(View.VISIBLE);
+                 //   diagnosisCard.setVisibility(View.VISIBLE);
                 }
                 diagnosisTextView.setText(diagnosisReturned);
                 //checkForDoctor();
@@ -2350,7 +2350,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                 }
                 Log.i(TAG, "parseData: rxfin" + rxReturned);
                 if (prescriptionCard.getVisibility() != View.VISIBLE) {
-                    prescriptionCard.setVisibility(View.VISIBLE);
+                  //  prescriptionCard.setVisibility(View.VISIBLE);
                 }
                 prescriptionTextView.setText(rxReturned);
                 //checkForDoctor();
@@ -2365,7 +2365,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                     Log.d("GAME", "GAME_2: " + adviceReturned);
                 }
                 if (medicalAdviceCard.getVisibility() != View.VISIBLE) {
-                    medicalAdviceCard.setVisibility(View.VISIBLE);
+                  //  medicalAdviceCard.setVisibility(View.VISIBLE);
                 }
                 //medicalAdviceTextView.setText(adviceReturned);
                 Log.d("Hyperlink", "hyper_global: " + medicalAdvice_string);
@@ -2401,7 +2401,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                     testsReturned = Node.bullet + " " + value;
                 }
                 if (requestedTestsCard.getVisibility() != View.VISIBLE) {
-                    requestedTestsCard.setVisibility(View.VISIBLE);
+                  //  requestedTestsCard.setVisibility(View.VISIBLE);
                 }
                 requestedTestsTextView.setText(testsReturned);
                 //checkForDoctor();
@@ -2430,7 +2430,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                     followUpDate = value;
                 }
                 if (followUpDateCard.getVisibility() != View.VISIBLE) {
-                    followUpDateCard.setVisibility(View.VISIBLE);
+                   // followUpDateCard.setVisibility(View.VISIBLE);
                 }
                 followUpDateTextView.setText(followUpDate);
                 //checkForDoctor();
