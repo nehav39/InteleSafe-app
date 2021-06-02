@@ -247,10 +247,11 @@ public class SignupActivity extends AppCompatActivity {
         mLastName = findViewById(R.id.identification_last_name);
         mLastName.setFilters(new InputFilter[]{new InputFilter.LengthFilter(41), inputFilter_Name}); //maxlength 41
 
-        mEmailView = findViewById(R.id.email);
+      //  mEmailView = findViewById(R.id.email);
 
         image_username_valid = findViewById(R.id.image_username_valid);
         image_username_valid.setVisibility(View.GONE);
+/*
         mEmailView.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -272,6 +273,7 @@ public class SignupActivity extends AppCompatActivity {
                 }
             }
         });
+*/
 
 
         mPasswordView = findViewById(R.id.password);
