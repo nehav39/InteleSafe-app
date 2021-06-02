@@ -123,8 +123,14 @@ public class PatientsFrameJson {
             visit.setStartDatetime(visitDTO.getStartdate());
             visit.setUuid(visitDTO.getUuid());
             visit.setVisitType(visitDTO.getVisitTypeUuid());
-            visit.setStopDatetime(visitDTO.getEnddate() != null ? visitDTO.getEnddate() : AppConstants.dateAndTimeUtils.currentDateTime()); // if end date is null setting the End to current date by Venu N to ended the offline visit.
-            visitList.add(visit);
+            visit.setStopDatetime(visitDTO.getEnddate() != null ? visitDTO.getEnddate() :
+                    AppConstants.dateAndTimeUtils.currentDateTime());
+            // if end date is null setting the End to current date by Venu N to ended the offline visit.
+            visit.setAttributes(visitDTO.getAttributes());
+           // visitList.add(visit);
+            if (visitDTO.getAttributes().size() > 0) {
+                visitList.add(visit);
+            }
 
         }
 

@@ -4,6 +4,10 @@ package org.intelehealth.intelesafe.models.pushRequestApiCall;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.intelehealth.intelesafe.models.dto.VisitAttribute_Speciality;
+
+import java.util.List;
+
 public class Visit {
 
     @SerializedName("uuid")
@@ -24,9 +28,12 @@ public class Visit {
     @SerializedName("location")
     @Expose
     private String location;
-//    @SerializedName("attributes")
+    //    @SerializedName("attributes")
 //    @Expose
 //    private List<Attribute> attributes = null;
+    @SerializedName("attributes")
+    @Expose
+    private List<VisitAttribute_Speciality> attributes = null;
 
     public String getUuid() {
         return uuid;
@@ -74,6 +81,14 @@ public class Visit {
 
     public void setStopDatetime(String stopDatetime) {
         this.stopDatetime = stopDatetime;
+    }
+
+    public List<VisitAttribute_Speciality> getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(List<VisitAttribute_Speciality> attributes) {
+        this.attributes = attributes;
     }
 
 //    public List<Attribute> getAttributes() {
