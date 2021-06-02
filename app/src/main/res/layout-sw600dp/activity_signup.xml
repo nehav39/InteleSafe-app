@@ -465,7 +465,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="15dp"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="gone"
+                        tools:visibility="visible">
 
                         <!--OTP value-->
                         <com.google.android.material.textfield.TextInputLayout
@@ -906,7 +908,7 @@
                     android:layout_marginHorizontal="10dp"
                     android:paddingVertical="15dp"
                     android:background="@drawable/rectangle_7"
-                    android:text="@string/save"
+                    android:text="@string/send_otp"
                     android:textAppearance=
                         "@style/sign_up_save_600dp" />
 
