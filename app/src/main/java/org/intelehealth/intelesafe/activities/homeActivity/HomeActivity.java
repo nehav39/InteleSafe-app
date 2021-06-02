@@ -111,6 +111,7 @@ import org.intelehealth.intelesafe.syncModule.SyncUtils;
 import org.intelehealth.intelesafe.utilities.Base64Utils;
 import org.intelehealth.intelesafe.utilities.DownloadMindMaps;
 import org.intelehealth.intelesafe.utilities.Logger;
+import org.intelehealth.intelesafe.utilities.NetworkConnection;
 import org.intelehealth.intelesafe.utilities.OfflineLogin;
 import org.intelehealth.intelesafe.utilities.SessionManager;
 import org.intelehealth.intelesafe.utilities.UrlModifiers;
@@ -685,6 +686,18 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         WorkManager.getInstance().enqueueUniquePeriodicWork(AppConstants.UNIQUE_WORK_NAME, ExistingPeriodicWorkPolicy.KEEP, AppConstants.PERIODIC_WORK_REQUEST);
         saveToken();
+
+        findViewById(R.id.btn_refresh).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (NetworkConnection.isOnline(HomeActivity.this)) {
+                    customProgressDialog.show();
+                    syncUtils.syncForeground("HOME_SCREEN");
+                } else {
+                    Toast.makeText(context, R.string.please_connect_to_internet, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     private void saveToken() {
