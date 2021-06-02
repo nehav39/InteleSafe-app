@@ -82,6 +82,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Set;
 
 import org.intelehealth.intelesafe.R;
@@ -123,7 +124,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
     private WebView mWebView;
     private LinearLayout mLayout;
     TextView Help_Link_Whatsapp;
-    TextView tvMentalHelpRequest;
+    TextView tvMentalHelpRequest, prescriptionDataFormat;
     String mHeight, mWeight, mBMI, mBP, mPulse, mTemp, mSPO2, mresp;
 
     boolean uploaded = false;
@@ -212,7 +213,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
     CardView medicalAdviceCard;
     CardView requestedTestsCard;
     CardView additionalCommentsCard;
-    CardView followUpDateCard;
+    CardView followUpDateCard, cardView_prescription;
 
     TextView diagnosisTextView;
     TextView prescriptionTextView;
@@ -512,6 +513,8 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         mDoctorName = findViewById(R.id.doctor_details);
         mDoctorTitle.setVisibility(View.GONE);
         mDoctorName.setVisibility(View.GONE);
+        prescriptionDataFormat = findViewById(R.id.textView_content_prescription);
+        cardView_prescription = findViewById(R.id.cardView_prescription);
 
         diagnosisTextView = findViewById(R.id.textView_content_diagnosis);
         prescriptionTextView = findViewById(R.id.textView_content_rx);
@@ -2436,16 +2439,6 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
                 additionalCommentsCard.setVisibility(View.GONE);
 
-//                if (!additionalReturned.isEmpty()) {
-//                    additionalReturned = additionalReturned + "," + value;
-//                } else {
-//                    additionalReturned = value;
-//                }
-////                if (additionalCommentsCard.getVisibility() != View.VISIBLE) {
-////                    additionalCommentsCard.setVisibility(View.VISIBLE);
-////                }
-//                additionalCommentsTextView.setText(additionalReturned);
-                //checkForDoctor();
                 break;
             }
             case UuidDictionary.FOLLOW_UP_VISIT: {
@@ -2468,6 +2461,131 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                 break;
 
         }
+
+        //prescription format of web...
+        String htmlDocument = sms_web_prescription_format();
+        prescriptionDataFormat.setText(Html.fromHtml(htmlDocument)); //prescription data collected will be shown here...
+    }
+
+    /**
+     * @return htmlDocument : formatted stringof web prescription.
+     */
+    private String sms_web_prescription_format() {
+        //prescription...
+        if(cardView_prescription.getVisibility() == View.GONE)
+            cardView_prescription.setVisibility(View.VISIBLE);
+
+        //Check for license key and load the correct config file
+        try {
+            JSONObject obj = null;
+            if (hasLicense) {
+                obj = new JSONObject(Objects.requireNonNullElse
+                        (FileUtils.readFileRoot(AppConstants.CONFIG_FILE_NAME, this),
+                                String.valueOf(FileUtils.encodeJSON(this, AppConstants.CONFIG_FILE_NAME)))); //Load the config file
+            } else {
+                obj = new JSONObject(String.valueOf(FileUtils.encodeJSON(this, mFileName)));
+            }
+            prescription1 = obj.getString("presciptionHeader1");
+
+            prescription2 = obj.getString("presciptionHeader2");
+
+            //For AFI we are not using Respiratory Value
+            if (obj.getBoolean("mResp")) {
+                isRespiratory = true;
+            } else {
+                isRespiratory = false;
+            }
+
+        } catch (JSONException e) {
+            FirebaseCrashlytics.getInstance().recordException(e);
+        }
+
+        String heading = prescription1;
+        String heading2 = prescription2;
+
+        String mPatientName = patient.getFirst_name() + " " + ((!TextUtils.isEmpty(patient.getMiddle_name()))
+                ? patient.getMiddle_name() : "") + " " + patient.getLast_name();
+
+        Calendar today = Calendar.getInstance();
+        Calendar dob = Calendar.getInstance();
+
+        String mPatientDob = patient.getDate_of_birth();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = sdf.parse(mPatientDob);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        dob.setTime(date);
+
+        int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
+        String mGender = patient.getGender();
+
+        String doctorDetailStr = "";
+        if (objClsDoctorDetails != null) {
+            doctorDetailStr =
+                    "<span style=\"font-size:12pt; color:#212121;padding: 0px;\">" + objClsDoctorDetails.getName() + "</span><br>" +
+                            "<span style=\"font-size:12pt; color:#212121;padding: 0px;\">" + "+911141236457" + "</span>" ;
+        }
+
+        String diagnosis_web = stringToWeb_sms(diagnosisReturned);
+        String rx_web = stringToWeb_sms(rxReturned);
+
+        String tests_web = stringToWeb_sms(testsReturned.trim().replace("\n\n", "\n")
+                .replace(Node.bullet, ""));
+
+        String advice_web = stringToWeb_sms(medicalAdvice_string.trim().replace("\n\n", "\n"));
+        Log.d("Hyperlink", "hyper_print: " + advice_web);
+
+        String followUpDateStr = "";
+        if (followUpDate != null && followUpDate.contains(",")) {
+            String[] spiltFollowDate = followUpDate.split(",");
+            if (spiltFollowDate[0] != null && spiltFollowDate[0].contains("-")) {
+                String remainingStr = "";
+                for (int i = 1; i <= spiltFollowDate.length - 1; i++) {
+                    remainingStr = ((!TextUtils.isEmpty(remainingStr)) ? remainingStr + ", " : "") + spiltFollowDate[i];
+                }
+                followUpDateStr = parseDateToddMMyyyy(spiltFollowDate[0]) + ", " + remainingStr;
+            } else {
+                followUpDateStr = followUpDate;
+            }
+        } else {
+            followUpDateStr = followUpDate;
+        }
+        String followUp_web = stringToWeb_sms(followUpDateStr);
+
+        String doctor_web = stringToWeb_sms(doctorName);
+
+        String htmlDocument =
+                String.format("<b id=\"heading_1\" style=\"font-size:5pt; margin: 0px; padding: 0px; text-align: center;\">%s</b><br>" +
+                                "<b id=\"heading_2\" style=\"font-size:5pt; margin: 0px; padding: 0px; text-align: center;\">%s</b>" +
+                                "<br><br>" +
+
+                                "<b id=\"patient_name\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">%s</b><br>" +
+                                "<b id=\"patient_details\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">Age: %s | Gender: %s  </b>" +
+                                "<br><br>" +
+
+                                "<b id=\"diagnosis_heading\" style=\"font-size:15pt;margin-top:5px; margin-bottom:0px; padding: 0px;\">Diagnosis <br>" +
+                                "%s </b><br>" +
+                                "<b id=\"rx_heading\" style=\"font-size:15pt;margin-top:5px; margin-bottom:0px; padding: 0px;\">Medication(s) plan <br>" +
+                                "%s </b><br>" +
+                                "<b id=\"tests_heading\" style=\"font-size:15pt;margin-top:5px; margin-bottom:0px; padding: 0px;\">Recommended Investigation(s) <br>" +
+                                "%s " + "</b><br>" +
+                                "<b id=\"advice_heading\" style=\"font-size:15pt;margin-top:5px; margin-bottom:0px; padding: 0px;\">Advice <br>" +
+                                "%s" + "</b><br>" +
+                                "<b id=\"follow_up_heading\" style=\"font-size:15pt;margin-top:5px; margin-bottom:0px; padding: 0px;\">Follow Up Date <br>" +
+                                "%s" + "</b>" +
+
+                                doctorDetailStr, heading, heading2, mPatientName, age, mGender,
+                        (!diagnosis_web.isEmpty()) ? diagnosis_web : "- Not Provided" + "<br>",
+                        (!rx_web.isEmpty()) ? rx_web : "- Not Provided" + "<br>",
+                        (!tests_web.isEmpty()) ? tests_web : "- Not Provided" + "<br>",
+                        (!advice_web.isEmpty()) ? advice_web : "- Not Provided" + "<br>",
+                        (!followUp_web.isEmpty()) ? followUp_web : "- Not Provided" + "<br>",
+                        (!doctor_web.isEmpty()) ? doctor_web : "- Not Provided" + "<br>");
+
+        return htmlDocument;
     }
 
     ClsDoctorDetails objClsDoctorDetails;
@@ -2678,6 +2796,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                         + "Patient DOB: " + patient.getDate_of_birth() + "\n";
 
 
+                //ignore this
                 if (diagnosisCard.getVisibility() == View.VISIBLE) {
                     if (!diagnosisTextView.getText().toString().trim().isEmpty())
                         body = body + getString(R.string.visit_summary_diagnosis) + ":" +
@@ -2771,6 +2890,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                 if (encounterCursor != null) {
                     encounterCursor.close();
                 }
+                //ignore yhis...
                 if (!diagnosisReturned.isEmpty()) {
                     diagnosisReturned = "";
                     diagnosisTextView.setText("");
@@ -3145,6 +3265,42 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
             } while (visitCursor.moveToNext());
         }
         visitCursor.close();
+    }
+
+
+    /**
+     * @param input : pulled web presciption data of @type String
+     * @return : formatted HTML string.
+     */
+    private String stringToWeb_sms(String input) {
+        String formatted = "";
+        if (input != null && !input.isEmpty()) {
+
+            String para_open = "<b style=\"font-size:11pt; margin: 0px; padding: 0px;\">";
+            String para_close = "</b><br>";
+            formatted = para_open + "- " +
+                    input.replaceAll("\n", para_close + para_open + "- ")
+                    + para_close;
+        }
+        return formatted;
+    }
+
+    public String parseDateToddMMyyyy(String time) {
+        String inputPattern = "dd-MM-yyyy";
+        String outputPattern = "dd MMM yyyy";
+        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern, Locale.ENGLISH);
+        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern, Locale.ENGLISH);
+
+        Date date = null;
+        String str = null;
+
+        try {
+            date = inputFormat.parse(time);
+            str = outputFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return str;
     }
 
 

@@ -40,7 +40,8 @@ Github: prajwalmw
         android:orientation="vertical">
 
 
-        <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+        <androidx.cardview.widget.CardView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/cardView_patient_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -523,6 +524,62 @@ Github: prajwalmw
                     android:text="@string/click_to_download_the_images"
                     android:visibility="gone" />
             </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!--Prescription-->
+        <androidx.cardview.widget.CardView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/cardView_prescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:elevation="40dp"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:layout_marginTop="@dimen/padding_card"
+            android:layout_marginBottom="@dimen/padding_card"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:cardUseCompatPadding="true"
+            app:cardPreventCornerOverlap="false">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+     <!--   <TextView
+            android:id="@+id/textView_prescription_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="12dp"
+            android:paddingStart="20dp"
+            android:text="Prescription"
+            android:background="@color/white"
+            android:textColor="@color/txt_sub_header_color"
+            android:textSize="16sp"
+            android:fontFamily="@font/lato_bold"/>-->
+
+            <!--<Space
+                android:id="@+id/space_presc"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_below="@+id/textView_prescription_title"/> -->
+
+            <TextView
+                android:id="@+id/textView_content_prescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="1sp"
+                android:textSize="14sp"
+                android:paddingLeft="@dimen/padding_card"
+                android:paddingRight="@dimen/padding_card"
+                android:paddingTop="@dimen/padding_card"
+                android:fontFamily="@font/lato_regular"
+                android:textColor="@color/txt_sub_header_color"
+                />
+
+
+        </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
