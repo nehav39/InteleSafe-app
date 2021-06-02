@@ -803,6 +803,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         }
 
 
+        downloadDoctorDetails();
         queryData(String.valueOf(patientUuid));
         nameView = findViewById(R.id.textView_name_value);
 
@@ -2472,8 +2473,13 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
      */
     private String sms_web_prescription_format() {
         //prescription...
-        if(cardView_prescription.getVisibility() == View.GONE)
+        //If prescription is provided then show cardview...
+        if (objClsDoctorDetails != null) {
             cardView_prescription.setVisibility(View.VISIBLE);
+        }
+        else {
+            cardView_prescription.setVisibility(View.GONE);
+        }
 
         //Check for license key and load the correct config file
         try {
@@ -2575,15 +2581,15 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                                 "<b id=\"advice_heading\" style=\"font-size:15pt;margin-top:5px; margin-bottom:0px; padding: 0px;\">Advice <br>" +
                                 "%s" + "</b><br>" +
                                 "<b id=\"follow_up_heading\" style=\"font-size:15pt;margin-top:5px; margin-bottom:0px; padding: 0px;\">Follow Up Date <br>" +
-                                "%s" + "</b>" +
+                                "%s" + "</b>"/* +*/
 
-                                doctorDetailStr, heading, heading2, mPatientName, age, mGender,
+                               /* doctorDetailStr*/, heading, heading2, mPatientName, age, mGender,
                         (!diagnosis_web.isEmpty()) ? diagnosis_web : "- Not Provided" + "<br>",
                         (!rx_web.isEmpty()) ? rx_web : "- Not Provided" + "<br>",
                         (!tests_web.isEmpty()) ? tests_web : "- Not Provided" + "<br>",
                         (!advice_web.isEmpty()) ? advice_web : "- Not Provided" + "<br>",
-                        (!followUp_web.isEmpty()) ? followUp_web : "- Not Provided" + "<br>",
-                        (!doctor_web.isEmpty()) ? doctor_web : "- Not Provided" + "<br>");
+                        (!followUp_web.isEmpty()) ? followUp_web : "- Not Provided" + "<br>"/*,
+                        (!doctor_web.isEmpty()) ? doctor_web : "- Not Provided" + "<br>"*/);
 
         return htmlDocument;
     }

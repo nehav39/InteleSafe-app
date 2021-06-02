@@ -571,6 +571,7 @@ Github: prajwalmw
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="1sp"
                 android:textSize="14sp"
+                tools:text="web prescription"
                 android:paddingLeft="@dimen/padding_card"
                 android:paddingRight="@dimen/padding_card"
                 android:paddingTop="@dimen/padding_card"
