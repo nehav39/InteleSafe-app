@@ -700,6 +700,7 @@ public class SignupActivity extends AppCompatActivity {
                 boolean cancel = false;
                 View focusView = null;
 
+                //First name validation...
                 if (mFirstName.getText().toString().equals("")) {
                     mFirstName.setError(getString(R.string.error_field_required));
                     mFirstName.requestFocus();
@@ -714,12 +715,77 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }*/
 
+                //Lastname validation...
                 if (mLastName.getText().toString().equals("")) {
                     mLastName.setError(getString(R.string.error_field_required));
                     mLastName.requestFocus();
                     return;
                 }
 
+                //Gender validation...
+                if (!mGenderF.isChecked() && !mGenderM.isChecked()) {
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(SignupActivity.this);
+                    alertDialogBuilder.setTitle(R.string.error);
+                    alertDialogBuilder.setMessage(R.string.identification_screen_dialog_error_gender);
+                    alertDialogBuilder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();
+
+                    Button positiveButton = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                    positiveButton.setTextColor(getResources().getColor(R.color.colorPrimary));
+                    positiveButton.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+                    return;
+                }
+
+                //DOB validation...
+                if (mDOB.getText().toString().equals("")) {
+                    mDOB.setError(getString(R.string.error_field_required));
+                    mDOB.requestFocus();
+                    return;
+                }
+
+                if (dob.equals("") || dob.toString().equals("")) {
+                    if (dob.after(today)) {
+                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(SignupActivity.this);
+                        alertDialogBuilder.setTitle(R.string.error);
+                        alertDialogBuilder.setMessage(R.string.identification_screen_dialog_error_dob);
+                        //alertDialogBuilder.setMessage(getString(R.string.identification_dialog_date_error));
+                        alertDialogBuilder.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                        AlertDialog alertDialog = alertDialogBuilder.create();
+
+                        mDOBPicker.show();
+                        alertDialog.show();
+
+                        Button postiveButton = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                        postiveButton.setTextColor(getResources().getColor(R.color.colorPrimary));
+                        postiveButton.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+
+                        return;
+                    }
+                }
+
+                //PhoneNum validation...
+                if (mPhoneNum.getText().toString().equals("")) {
+                    mPhoneNum.setError(getString(R.string.error_field_required));
+                    mPhoneNum.requestFocus();
+                    return;
+                }
+
+                if (mPhoneNum.length() < 10) {
+                    mPhoneNum.setError(getString(R.string.invalid_phone_number));
+                    mPhoneNum.requestFocus();
+                    return;
+                }
 
                 // commented by venu  N on 04/04/2020.
                /* if (licenseID.getText().toString().equals("")) {
@@ -810,55 +876,8 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (!mGenderF.isChecked() && !mGenderM.isChecked()) {
-                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(SignupActivity.this);
-                    alertDialogBuilder.setTitle(R.string.error);
-                    alertDialogBuilder.setMessage(R.string.identification_screen_dialog_error_gender);
-                    alertDialogBuilder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-                    AlertDialog alertDialog = alertDialogBuilder.create();
-                    alertDialog.show();
 
-                    Button positiveButton = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
-                    positiveButton.setTextColor(getResources().getColor(R.color.colorPrimary));
-                    positiveButton.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
-                    return;
-                }
 
-                if (mDOB.getText().toString().equals("")) {
-                    mDOB.setError(getString(R.string.error_field_required));
-                    mDOB.requestFocus();
-                    return;
-                }
-
-                if (dob.equals("") || dob.toString().equals("")) {
-                    if (dob.after(today)) {
-                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(SignupActivity.this);
-                        alertDialogBuilder.setTitle(R.string.error);
-                        alertDialogBuilder.setMessage(R.string.identification_screen_dialog_error_dob);
-                        //alertDialogBuilder.setMessage(getString(R.string.identification_dialog_date_error));
-                        alertDialogBuilder.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                        AlertDialog alertDialog = alertDialogBuilder.create();
-
-                        mDOBPicker.show();
-                        alertDialog.show();
-
-                        Button postiveButton = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
-                        postiveButton.setTextColor(getResources().getColor(R.color.colorPrimary));
-                        postiveButton.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
-
-                        return;
-                    }
-                }
 
 //                if (mAge.getText().toString().equals("")) {
 //                    mAge.setError(getString(R.string.error_field_required));
@@ -866,17 +885,7 @@ public class SignupActivity extends AppCompatActivity {
 //                    return;
 //                }
 
-             /*   if (mPhoneNum.getText().toString().equals("")) {
-                    mPhoneNum.setError(getString(R.string.error_field_required));
-                    mPhoneNum.requestFocus();
-                    return;
-                }
 
-                if (mPhoneNum.length() < 10) {
-                    mPhoneNum.setError(getString(R.string.invalid_phone_number));
-                    mPhoneNum.requestFocus();
-                    return;
-                }*/
 
                 // Added by venu N on 03/04/202.
                 //Commenting out on 21/05/21 : By Nishita

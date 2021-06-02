@@ -65,6 +65,7 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import org.apache.commons.lang3.StringUtils;
 import org.intelehealth.intelesafe.activities.homeActivity.Webview;
+import org.intelehealth.intelesafe.database.dao.VisitAttributeListDAO;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -220,6 +221,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
     Boolean isPastVisit = false;
     Boolean isReceiverRegistered = false;
+    Boolean isVisitSpecialityExists = false;
 
     public static final String FILTER = "io.intelehealth.client.activities.visit_summary_activity.REQUEST_PROCESSED";
 
@@ -662,11 +664,29 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                 }
             }
         });
+
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 flag_upload = true;
+
+                //Adding default speciality as General Physician...
+                isVisitSpecialityExists = speciality_row_exist_check(visitUuid);
+                //we are getting this visitUuid in the intent.
+                VisitAttributeListDAO speciality_attributes = new VisitAttributeListDAO();
+                boolean isUpdateVisitDone = false;
+                try {
+                    if (!isVisitSpecialityExists) {
+                        isUpdateVisitDone = speciality_attributes
+                                .insertVisitAttributes(visitUuid, "General Physician");
+                    }
+                    Log.d("Update_Special_Visit", "Update_Special_Visit: " + isUpdateVisitDone);
+                } catch (DAOException e) {
+                    e.printStackTrace();
+                    Log.d("Update_Special_Visit", "Update_Special_Visit: " + isUpdateVisitDone);
+                }
+                //end...
+
 
                 if (flag.isChecked()) {
                     try {
@@ -2798,6 +2818,28 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
+    /**
+     * @param uuid the visit uuid of the patient visit records is passed to the function.
+     * @return boolean value will be returned depending upon if the row exists in the tbl_visit_attribute tbl
+     */
+    public boolean speciality_row_exist_check(String uuid) {
+        boolean isExists = false;
+        SQLiteDatabase db = AppConstants.inteleHealthDatabaseHelper.getReadableDatabase();
+        db.beginTransaction();
+        Cursor cursor = db.rawQuery("SELECT * FROM tbl_visit_attribute WHERE visit_uuid=?",
+                new String[]{uuid});
+
+        if (cursor.getCount() != 0) {
+            while (cursor.moveToNext()) {
+                isExists = true;
+            }
+        }
+        cursor.close();
+        db.setTransactionSuccessful();
+        db.endTransaction();
+
+        return isExists;
+    }
 
 
 }
