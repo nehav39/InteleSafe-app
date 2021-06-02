@@ -742,4 +742,5 @@
     <string name="Here_you_can_monitor">यहां आप रोजाना अपने स्वास्थ्य की निगरानी कर सकते हैं और अगर आपको लगता है कि आप असुरक्षित संपर्क में हैं और संक्रमित हो सकते हैं तो मदद के लिए पहुंच सकते हैं। \n</string>
     <string name="monitor_your_own_health">"यहां आप रोजाना अपने स्वास्थ्य की निगरानी कर सकते हैं"</string>
     <string name="enter_otp">Enter OTP</string>
+    <string name="send_otp">Send OTP</string>
 </resources>

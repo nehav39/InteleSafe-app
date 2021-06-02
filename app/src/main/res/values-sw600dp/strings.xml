@@ -7,4 +7,5 @@
     <string name="Here_you_can_monitor">Here you can monitor your own health daily and reach out for help if you think you may have had unsafe exposure and may be infected.\n</string>
     <string name="monitor_your_own_health">\" monitor your own health daily\"</string>
     <string name="enter_otp">Enter OTP</string>
+    <string name="send_otp">Send OTP</string>
 </resources>

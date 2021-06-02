@@ -136,21 +136,21 @@ public class SignupActivity extends AppCompatActivity {
     EditText mPhoneNum;
     //    EditText mAge;
     AlertDialog.Builder mAgePicker;
-    EditText mAddress1;
-    EditText mAddress2;
-    AutoCompleteTextView mCity;
-    EditText mPostal;
+//    EditText mAddress1;
+//    EditText mAddress2;
+//    AutoCompleteTextView mCity;
+//    EditText mPostal;
     RadioButton mGenderM;
     RadioButton mGenderF;
-    EditText countryText;
-    EditText stateText;
-    EditText licenseID;
-    EditText hospital_name;
+//    EditText countryText;
+//    EditText stateText;
+//    EditText licenseID;
+//    EditText hospital_name;
 
-    EditText mEdtCaste; // Added by Venu N on 03/04/2020.
-    Spinner mCaste; // Added by venu N on 03/04/2020.
-    Spinner mCountry; //not using this spinner instead hardcoding Country as India
-    Spinner mState;
+//    EditText mEdtCaste; // Added by Venu N on 03/04/2020.
+//    Spinner mCaste; // Added by venu N on 03/04/2020.
+//    Spinner mCountry; //not using this spinner instead hardcoding Country as India
+//    Spinner mState;
 /*
     Spinner selectDistrict;
     Spinner selectLocation;
@@ -279,16 +279,16 @@ public class SignupActivity extends AppCompatActivity {
         mPasswordView = findViewById(R.id.password);
         mCPassword = findViewById(R.id.cpassword);
 
-        licenseID = findViewById(R.id.identification_registration_no);
-        licenseID.setFilters(new InputFilter[]{new InputFilter.LengthFilter(50), inputFilter_Name}); //maxlength 50
-        hospital_name = findViewById(R.id.identification_hospital_name);
-        hospital_name.setFilters(new InputFilter[]{new InputFilter.LengthFilter(26), inputFilter_Name}); //maxlength 26
+       // licenseID = findViewById(R.id.identification_registration_no);
+      //  licenseID.setFilters(new InputFilter[]{new InputFilter.LengthFilter(50), inputFilter_Name}); //maxlength 50
+      //  hospital_name = findViewById(R.id.identification_hospital_name);
+       // hospital_name.setFilters(new InputFilter[]{new InputFilter.LengthFilter(26), inputFilter_Name}); //maxlength 26
 
 
         mDOB = findViewById(R.id.identification_birth_date_text_view);
         mPhoneNum = findViewById(R.id.identification_phone_number);
 //        mAge = findViewById(R.id.identification_age);
-        mAddress1 = findViewById(R.id.identification_address1);
+      /*  mAddress1 = findViewById(R.id.identification_address1);
         mAddress1.setFilters(new InputFilter[]{new InputFilter.LengthFilter(41), inputFilter_Name}); //maxlength 41
 
         mAddress2 = findViewById(R.id.identification_address2);
@@ -298,19 +298,19 @@ public class SignupActivity extends AppCompatActivity {
         mCity.setFilters(new InputFilter[]{new InputFilter.LengthFilter(26), inputFilter_Others}); //maxlength 26
 
         stateText = findViewById(R.id.identification_state);
-        mState = findViewById(R.id.spinner_state);
+        mState = findViewById(R.id.spinner_state);*/
         /*selectDistrict = findViewById(R.id.spinner_district);
         selectLocation = findViewById(R.id.spinner_location);*/
-        mPostal = findViewById(R.id.identification_postal_code);
+       /* mPostal = findViewById(R.id.identification_postal_code);
         countryText = findViewById(R.id.identification_country);
-        mCountry = findViewById(R.id.spinner_country);
+        mCountry = findViewById(R.id.spinner_country);*/
         mGenderM = findViewById(R.id.identification_gender_male);
         mGenderF = findViewById(R.id.identification_gender_female);
-        mImageView = findViewById(R.id.imageview_id_picture);
+      //  mImageView = findViewById(R.id.imageview_id_picture);
 
-        input_state_field = findViewById(R.id.input_state_field);
+      /*  input_state_field = findViewById(R.id.input_state_field);
         input_state_spinner = findViewById(R.id.input_state_spinner);
-        edt_state = findViewById(R.id.edt_state);
+        edt_state = findViewById(R.id.edt_state);*/
 
         mPhoneNum.addTextChangedListener(new TextWatcher() {
             @Override
@@ -330,10 +330,10 @@ public class SignupActivity extends AppCompatActivity {
         });
 
         // Added by venu N on 03/04/2020.
-        mCaste = findViewById(R.id.spinner_Caste);
+      /*  mCaste = findViewById(R.id.spinner_Caste);
         mEdtCaste = findViewById(R.id.identification_other_caste);
         mEdtCaste.setVisibility(View.GONE);
-
+*/
         /*ArrayAdapter<CharSequence> countryAdapter = ArrayAdapter.createFromResource(this,
                 R.array.countries_array, android.R.layout.simple_spinner_item);
         countryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -352,14 +352,15 @@ public class SignupActivity extends AppCompatActivity {
         ArrayAdapter<CharSequence> personalCasteAdapter = ArrayAdapter.createFromResource(SignupActivity.this,
                 R.array.personal_caste, R.layout.custom_spinner_item);
         // personalCasteAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mCaste.setAdapter(personalCasteAdapter);
+       // mCaste.setAdapter(personalCasteAdapter);
 
         generateUuid();
 
         ArrayAdapter<CharSequence> stateAdapter = ArrayAdapter.createFromResource(this, R.array.state_error, android.R.layout.simple_spinner_item);
         // stateAdapter.setDropDownViewResource(R.layout.custom_spinner_item);
-        mState.setAdapter(stateAdapter);
+      //  mState.setAdapter(stateAdapter);
 
+/*
         mState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -385,7 +386,9 @@ public class SignupActivity extends AppCompatActivity {
 
             }
         });
+*/
 
+/*
         edt_state.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -402,6 +405,7 @@ public class SignupActivity extends AppCompatActivity {
 
             }
         });
+*/
 
         /*mCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -495,6 +499,7 @@ public class SignupActivity extends AppCompatActivity {
         });*/
 
 
+/*
         mCaste.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -512,6 +517,7 @@ public class SignupActivity extends AppCompatActivity {
 
             }
         });
+*/
 
         mGenderF.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -527,6 +533,7 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
+/*
         mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -548,6 +555,7 @@ public class SignupActivity extends AppCompatActivity {
                 startActivityForResult(cameraIntent, CameraActivity.TAKE_IMAGE);
             }
         });
+*/
         mDOBYear = today.get(Calendar.YEAR);
         mDOBMonth = today.get(Calendar.MONTH);
         mDOBDay = today.get(Calendar.DAY_OF_MONTH);
@@ -1005,11 +1013,11 @@ public class SignupActivity extends AppCompatActivity {
 
                 UserBirthAttribute userBirthOccupationAttribute = new UserBirthAttribute();
                 userBirthOccupationAttribute.setAttributeType("ecdaadb6-14a0-4ed9-b5b7-cfed87b44b87"); // openmrsuuid occupation
-                userBirthOccupationAttribute.setValue("" + licenseID.getText().toString()); //license text
+              //  userBirthOccupationAttribute.setValue("" + licenseID.getText().toString()); //license text
 
                 UserBirthAttribute userBirthHosAttribute = new UserBirthAttribute();
                 userBirthHosAttribute.setAttributeType("1c718819-345c-4368-aad6-d69b4c267db7"); //openmrsuuid education
-                userBirthHosAttribute.setValue("" + hospital_name.getText().toString()); //hospital name text
+              //  userBirthHosAttribute.setValue("" + hospital_name.getText().toString()); //hospital name text
 
                 UserBirthAttribute userCasteAttribute = new UserBirthAttribute();
                 userCasteAttribute.setAttributeType("5a889d96-0c84-4a04-88dc-59a6e37db2d3"); // This is for Designation. openrms caste...
@@ -1028,13 +1036,13 @@ public class SignupActivity extends AppCompatActivity {
 
                 ////////////Data Model for step 3
                 UserAddressData userAddressData = new UserAddressData();
-                userAddressData.setAddress1("" + mAddress1.getText().toString() + " " + mAddress2.getText().toString());
-                userAddressData.setCityVillage("" + mCity.getText().toString());
+               /* userAddressData.setAddress1("" + mAddress1.getText().toString() + " " + mAddress2.getText().toString());
+                userAddressData.setCityVillage("" + mCity.getText().toString());*/
                 userAddressData.setCountry("" + country);
                 userAddressData.setStateProvince("" + state);
                 sessionManager.setState(state);
                 sessionManager.setPatientCountry(country);
-                userAddressData.setPostalCode("" + mPostal.getText().toString());
+              //  userAddressData.setPostalCode("" + mPostal.getText().toString());
                 // userAddressData.setCountyDistrict("" + selectedLocationName);
 
                 Log.e("JSON-STEP3- ", "" + gson.toJson(userAddressData));
@@ -1376,10 +1384,10 @@ public class SignupActivity extends AppCompatActivity {
         patientdto.setPhonenumber(StringUtils.getValue(mPhoneNum.getText().toString()));
         patientdto.setGender(StringUtils.getValue(mGender));
         patientdto.setDateofbirth(DateAndTimeUtils.getFormatedDateOfBirth(StringUtils.getValue(mDOB.getText().toString())));
-        patientdto.setAddress1(StringUtils.getValue(mAddress1.getText().toString()));
+       /* patientdto.setAddress1(StringUtils.getValue(mAddress1.getText().toString()));
         patientdto.setAddress2(StringUtils.getValue(mAddress2.getText().toString()));
         patientdto.setCityvillage(StringUtils.getValue(mCity.getText().toString()));
-        patientdto.setPostalcode(StringUtils.getValue(mPostal.getText().toString()));
+        patientdto.setPostalcode(StringUtils.getValue(mPostal.getText().toString()));*/
         patientdto.setCountry(country); //mCountry.getSelectedItem().toString()) here, country = India
         patientdto.setPatientPhoto(mCurrentPhotoPath);
 //      patientdto.setEconomic(StringUtils.getValue(m));
@@ -1413,7 +1421,7 @@ public class SignupActivity extends AppCompatActivity {
         patientAttributesDTO.setUuid(UUID.randomUUID().toString());
         patientAttributesDTO.setPatientuuid(uuid);
         patientAttributesDTO.setPersonAttributeTypeUuid(patientsDAO.getUuidForAttribute("occupation"));
-        patientAttributesDTO.setValue(StringUtils.getValue(licenseID.getText().toString()));
+      //  patientAttributesDTO.setValue(StringUtils.getValue(licenseID.getText().toString()));
         patientAttributesDTOList.add(patientAttributesDTO);
 
 //            patientAttributesDTO = new PatientAttributesDTO();
@@ -1427,7 +1435,7 @@ public class SignupActivity extends AppCompatActivity {
         patientAttributesDTO.setUuid(UUID.randomUUID().toString());
         patientAttributesDTO.setPatientuuid(uuid);
         patientAttributesDTO.setPersonAttributeTypeUuid(patientsDAO.getUuidForAttribute("Education Level"));
-        patientAttributesDTO.setValue(StringUtils.getValue(hospital_name.getText().toString()));
+     //   patientAttributesDTO.setValue(StringUtils.getValue(hospital_name.getText().toString()));
         patientAttributesDTOList.add(patientAttributesDTO);
 
         patientAttributesDTO = new PatientAttributesDTO();
@@ -1537,12 +1545,14 @@ public class SignupActivity extends AppCompatActivity {
                 mCurrentPhotoPath = data.getStringExtra("RESULT");
                 Log.v("IdentificationActivity", mCurrentPhotoPath);
 
+/*
                 Glide.with(this)
                         .load(new File(mCurrentPhotoPath))
                         .thumbnail(0.25f)
                         .diskCacheStrategy(DiskCacheStrategy.NONE)
                         .skipMemoryCache(true)
                         .into(mImageView);
+*/
             }
         }
     }
