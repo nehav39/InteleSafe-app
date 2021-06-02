@@ -702,7 +702,7 @@
                     android:fontFamily="@font/lato_bold"
                     android:padding="14sp"
                     android:paddingStart="19sp"
-                    android:text="@string/your_check_in_overview"
+                    android:text="@string/your_health_record"
                     android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                     android:textSize="24sp" />
 

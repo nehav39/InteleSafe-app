@@ -818,7 +818,7 @@
                     android:fontFamily="@font/lato_bold"
                     android:padding="10sp"
                     android:paddingStart="15sp"
-                    android:text="@string/your_check_in_overview"
+                    android:text="@string/your_health_record"
                     android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                     android:textSize="20sp" />
 
