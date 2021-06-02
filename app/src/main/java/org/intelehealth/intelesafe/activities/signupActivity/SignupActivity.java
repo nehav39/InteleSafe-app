@@ -184,6 +184,7 @@ public class SignupActivity extends AppCompatActivity {
     private TextInputEditText mEmailView;
     private EditText mPasswordView;
     private EditText mCPassword;
+    private EditText mOTP;
 
 //    private UserSignupData userSignupData;
 //    private List<UserSignupData.Person> personList = new ArrayList<>();
@@ -251,8 +252,17 @@ public class SignupActivity extends AppCompatActivity {
 
         image_username_valid = findViewById(R.id.image_username_valid);
         image_username_valid.setVisibility(View.GONE);
-/*
-        mEmailView.addTextChangedListener(new TextWatcher() {
+
+        mDOB = findViewById(R.id.identification_birth_date_text_view);
+        mPhoneNum = findViewById(R.id.identification_phone_number);
+        mPasswordView = findViewById(R.id.password);
+        mCPassword = findViewById(R.id.cpassword);
+        mOTP = findViewById(R.id.mOTP);
+        mGenderM = findViewById(R.id.identification_gender_male);
+        mGenderF = findViewById(R.id.identification_gender_female);
+
+        //mobile number when entered this code block will be executed...
+        mPhoneNum.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -266,18 +276,13 @@ public class SignupActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (editable.length() == 8) {
+                if (editable.length() == 10) {
                     InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(mEmailView.getWindowToken(), 0);
-                    checkUserExistsOrNot(mEmailView.getText().toString());
+                    imm.hideSoftInputFromWindow(mPhoneNum.getWindowToken(), 0);
+                    checkUserExistsOrNot(mPhoneNum.getText().toString());
                 }
             }
         });
-*/
-
-
-        mPasswordView = findViewById(R.id.password);
-        mCPassword = findViewById(R.id.cpassword);
 
        // licenseID = findViewById(R.id.identification_registration_no);
       //  licenseID.setFilters(new InputFilter[]{new InputFilter.LengthFilter(50), inputFilter_Name}); //maxlength 50
@@ -285,8 +290,7 @@ public class SignupActivity extends AppCompatActivity {
        // hospital_name.setFilters(new InputFilter[]{new InputFilter.LengthFilter(26), inputFilter_Name}); //maxlength 26
 
 
-        mDOB = findViewById(R.id.identification_birth_date_text_view);
-        mPhoneNum = findViewById(R.id.identification_phone_number);
+
 //        mAge = findViewById(R.id.identification_age);
       /*  mAddress1 = findViewById(R.id.identification_address1);
         mAddress1.setFilters(new InputFilter[]{new InputFilter.LengthFilter(41), inputFilter_Name}); //maxlength 41
@@ -304,14 +308,14 @@ public class SignupActivity extends AppCompatActivity {
        /* mPostal = findViewById(R.id.identification_postal_code);
         countryText = findViewById(R.id.identification_country);
         mCountry = findViewById(R.id.spinner_country);*/
-        mGenderM = findViewById(R.id.identification_gender_male);
-        mGenderF = findViewById(R.id.identification_gender_female);
+
       //  mImageView = findViewById(R.id.imageview_id_picture);
 
       /*  input_state_field = findViewById(R.id.input_state_field);
         input_state_spinner = findViewById(R.id.input_state_spinner);
         edt_state = findViewById(R.id.edt_state);*/
 
+/*
         mPhoneNum.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -328,6 +332,7 @@ public class SignupActivity extends AppCompatActivity {
 //                mEmailView.setText(mPhoneNum.getText().toString());
             }
         });
+*/
 
         // Added by venu N on 03/04/2020.
       /*  mCaste = findViewById(R.id.spinner_Caste);
@@ -698,12 +703,15 @@ public class SignupActivity extends AppCompatActivity {
 //                finish();
 
                 // Reset errors.
-                mEmailView.setError(null);
+               // mEmailView.setError(null);
+                mPhoneNum.setError(null);
+                mOTP.setError(null);
                 mPasswordView.setError(null);
                 mCPassword.setError(null);
 
                 // Store values at the time of the login attempt.
-                userName = mEmailView.getText().toString();
+              //  userName = mEmailView.getText().toString();
+                userName = mPhoneNum.getText().toString();
                 password = mPasswordView.getText().toString();
                 cPassword = mCPassword.getText().toString();
 
@@ -785,7 +793,7 @@ public class SignupActivity extends AppCompatActivity {
                 }
 
                 //PhoneNum validation...
-                if (mPhoneNum.getText().toString().equals("")) {
+          /*      if (mPhoneNum.getText().toString().equals("")) {
                     mPhoneNum.setError(getString(R.string.error_field_required));
                     mPhoneNum.requestFocus();
                     return;
@@ -795,7 +803,7 @@ public class SignupActivity extends AppCompatActivity {
                     mPhoneNum.setError(getString(R.string.invalid_phone_number));
                     mPhoneNum.requestFocus();
                     return;
-                }
+                }*/
 
                 // commented by venu  N on 04/04/2020.
                /* if (licenseID.getText().toString().equals("")) {
@@ -812,24 +820,24 @@ public class SignupActivity extends AppCompatActivity {
 
                 // Check for a valid email address.
                 if (TextUtils.isEmpty(userName)) {
-                    mEmailView.setError(getString(R.string.error_field_required));
-                    mEmailView.requestFocus();
+                    mPhoneNum.setError(getString(R.string.error_field_required));
+                    mPhoneNum.requestFocus();
                     image_username_valid.setVisibility(View.GONE);
                     return;
                 }
 
-                if (userName.length() < 8) {
-                    mEmailView.setError(getString(R.string.username_10digits));
+                if (userName.length() < 10) {
+                    mPhoneNum.setError(getString(R.string.invalid_phone_number));
                     image_username_valid.setVisibility(View.GONE);
-                    mEmailView.requestFocus();
+                    mPhoneNum.requestFocus();
                     return;
                 }
 
                 if (isUSerExistsAlready) {
-                    Toast.makeText(context, getString(R.string.txt_user_exists) + "Please try with another.", Toast.LENGTH_LONG).show();
-                    mEmailView.setError(getString(R.string.txt_user_exists));
+                    Toast.makeText(context, getString(R.string.txt_user_exists) + " Please Login.", Toast.LENGTH_LONG).show();
+                    mPhoneNum.setError(getString(R.string.txt_user_exists));
                     image_username_valid.setVisibility(View.GONE);
-                    mEmailView.requestFocus();
+                    mPhoneNum.requestFocus();
                     return;
                 }
 
@@ -1153,8 +1161,8 @@ public class SignupActivity extends AppCompatActivity {
                         } else {
                             image_username_valid.setVisibility(View.GONE);
                             isUSerExistsAlready = true;
-                            mEmailView.setError(getString(R.string.txt_user_exists));
-                            mEmailView.requestFocus();
+                            mPhoneNum.setError(getString(R.string.txt_user_exists));
+                            mPhoneNum.requestFocus();
                         }
                          /*ResultsItem objResultsItem  = new ResultsItem();
                         objResultsItem.setDisplay(enteredUserName);

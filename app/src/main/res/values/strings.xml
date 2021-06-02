@@ -684,7 +684,7 @@
     <string name="error_empty_designation">Enter your designation.</string>
     <string name="teleconsult_request"><u>Teleconsult request</u></string>
     <string name="tele_consultant_text">Feeling stressed or anxious? Request for a free confidential mental health consultation with a counsellor.</string>
-    <string name="txt_user_exists">Username already exists.</string>
+    <string name="txt_user_exists">Mobile Number already exists.</string>
     <!--Login Screen (New Changes)-->
     <string name="txt_sign_up_option">Don\'t have an account?</string>
 

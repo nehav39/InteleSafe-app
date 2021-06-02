@@ -147,7 +147,7 @@
     <string name="txt_enter_caste">पद</string>
     <string name="toast_select_designation">कृपया अपना पदनाम चुनें।</string>
     <string name="error_empty_designation">अपना पदनाम दर्ज करें।</string>
-    <string name="txt_user_exists">उपयोगकर्ता का नाम पहले से मौजूद है।</string>
+    <string name="txt_user_exists">Mobile number already...</string>
     <string name="address_details">पता दे</string>
     <string name="please_fill_your_details">कृपया अपना विवरण भरें</string>
     <string name="save">सहेजें</string>
