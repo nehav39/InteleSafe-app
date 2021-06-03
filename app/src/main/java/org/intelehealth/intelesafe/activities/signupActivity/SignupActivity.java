@@ -755,6 +755,8 @@ public class SignupActivity extends AppCompatActivity {
                 //DOB validation...
                 if (mDOB.getText().toString().equals("")) {
                     mDOB.setError(getString(R.string.error_field_required));
+                    mDOB.setFocusable(true);
+                    mDOB.setFocusableInTouchMode(true);
                     mDOB.requestFocus();
                     return;
                 }
