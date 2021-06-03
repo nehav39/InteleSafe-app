@@ -1,7 +1,6 @@
 package org.intelehealth.intelesafe.activities.homeActivity;
 
 import android.Manifest;
-import android.accounts.Account;
 //import android.accounts.AccountManager;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -23,7 +22,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
-import android.net.InetAddresses;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -33,7 +31,6 @@ import android.os.Environment;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
 
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.appcompat.app.AlertDialog;
@@ -74,7 +71,6 @@ import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -89,7 +85,6 @@ import org.intelehealth.apprtc.utils.FirebaseUtils;
 import org.intelehealth.intelesafe.BuildConfig;
 import org.intelehealth.intelesafe.R;
 import org.intelehealth.intelesafe.activities.chooseLanguageActivity.ChooseLanguageActivity;
-import org.intelehealth.intelesafe.activities.introActivity.IntroActivity;
 import org.intelehealth.intelesafe.activities.loginActivity.LoginActivity;
 import org.intelehealth.intelesafe.activities.physcialExamActivity.PhysicalExamActivity;
 import org.intelehealth.intelesafe.activities.settingsActivity.SettingsActivity;
@@ -111,6 +106,7 @@ import org.intelehealth.intelesafe.syncModule.SyncUtils;
 import org.intelehealth.intelesafe.utilities.Base64Utils;
 import org.intelehealth.intelesafe.utilities.DownloadMindMaps;
 import org.intelehealth.intelesafe.utilities.Logger;
+import org.intelehealth.intelesafe.utilities.NetworkConnection;
 import org.intelehealth.intelesafe.utilities.OfflineLogin;
 import org.intelehealth.intelesafe.utilities.SessionManager;
 import org.intelehealth.intelesafe.utilities.UrlModifiers;
@@ -685,6 +681,18 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         WorkManager.getInstance().enqueueUniquePeriodicWork(AppConstants.UNIQUE_WORK_NAME, ExistingPeriodicWorkPolicy.KEEP, AppConstants.PERIODIC_WORK_REQUEST);
         saveToken();
+
+        findViewById(R.id.btn_refresh).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (NetworkConnection.isOnline(HomeActivity.this)) {
+                    customProgressDialog.show();
+                    syncUtils.syncForeground("HOME_SCREEN");
+                } else {
+                    Toast.makeText(context, R.string.please_connect_to_internet, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     private void saveToken() {

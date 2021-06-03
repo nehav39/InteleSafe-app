@@ -19,16 +19,16 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_gravity="center"
-            android:src="@mipmap/ic_launcher_splash_login" />
+            android:src="@drawable/ic_logo" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="@string/intelecare"
+            android:text="@string/swasth_sampark"
             android:fontFamily="@font/lato_bold"
             android:textColor="@color/white"
             android:layout_gravity="center"
@@ -57,9 +57,11 @@
             android:fontFamily="@font/lato_bold"
             android:textColor="@color/white"
             android:layout_gravity="center"
-            android:textSize="24sp"
-            android:text="Stay Aware \u2022 Stay Safe"
+            android:textSize="18sp"
+            android:text="@string/splash_desc_text"
+            android:textAlignment="center"
             android:src="@drawable/ic_stay_safe"/>
+<!--        android:text="Stay Aware \u2022 Stay Safe"-->
 
     </LinearLayout>
 

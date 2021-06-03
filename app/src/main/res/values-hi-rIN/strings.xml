@@ -36,6 +36,7 @@
     <string name="education_videos">FAQs</string>
     <string name="help">सहायता</string>
     <string name="your_check_in_overview">अवलोकन में आपकी जाँच:</string>
+    <string name="your_health_record">आपका स्वास्थ्य रिकॉर्ड:</string>
     <string name="do_i_have_covid_19">Do I have Covid-19?</string>
     <string name="the_novel_coronavirus_disease_or_covid_19_is_an_infectious_disease_that_is_spreading_globally_you_may_have_the_disease_if_you_have_recently_traveled_abroad_or_came_in_contact_with_someone_who_is_known_to_be_infected_with_the_disease_in_such_cases_it_is_recommended_that_you_get_tested_and_also_self_quarantine_for_14_days">The novel Coronavirus disease or CoVid-19 is an infectious disease that is spreading globally. You may have the disease if you have recently traveled abroad, or came in contact with someone who is known to be infected with the disease. In such cases it is recommended that you get tested and also self-quarantine for 14 days.</string>
     <string name="_14_day_quarantine_and_care">14-day quarantine and care</string>
@@ -147,7 +148,7 @@
     <string name="txt_enter_caste">पद</string>
     <string name="toast_select_designation">कृपया अपना पदनाम चुनें।</string>
     <string name="error_empty_designation">अपना पदनाम दर्ज करें।</string>
-    <string name="txt_user_exists">उपयोगकर्ता का नाम पहले से मौजूद है।</string>
+    <string name="txt_user_exists">Mobile number already...</string>
     <string name="address_details">पता दे</string>
     <string name="please_fill_your_details">कृपया अपना विवरण भरें</string>
     <string name="save">सहेजें</string>
@@ -741,4 +742,6 @@
     <string name="authentic_information">Covid19 पर व्यक्तिगत सुरक्षा और शैक्षिक संसाधनों के उपायों सहित Covid19 पर प्रामाणिक जानकारी</string>
     <string name="Here_you_can_monitor">यहां आप रोजाना अपने स्वास्थ्य की निगरानी कर सकते हैं और अगर आपको लगता है कि आप असुरक्षित संपर्क में हैं और संक्रमित हो सकते हैं तो मदद के लिए पहुंच सकते हैं। \n</string>
     <string name="monitor_your_own_health">"यहां आप रोजाना अपने स्वास्थ्य की निगरानी कर सकते हैं"</string>
+    <string name="enter_otp">Enter OTP</string>
+    <string name="send_otp">Send OTP</string>
 </resources>

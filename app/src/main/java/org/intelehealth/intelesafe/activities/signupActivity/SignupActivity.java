@@ -1,7 +1,6 @@
 package org.intelehealth.intelesafe.activities.signupActivity;
 
 
-import android.accounts.Account;
 //import android.accounts.AccountManager;
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -30,27 +29,20 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
+        import android.widget.ArrayAdapter;
+        import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
-import android.widget.Spinner;
-import android.widget.Toast;
+        import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-
-import com.google.firebase.crashlytics.FirebaseCrashlytics;
+        import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.gson.Gson;
 import com.parse.Parse;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
+        import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -136,21 +128,21 @@ public class SignupActivity extends AppCompatActivity {
     EditText mPhoneNum;
     //    EditText mAge;
     AlertDialog.Builder mAgePicker;
-    EditText mAddress1;
-    EditText mAddress2;
-    AutoCompleteTextView mCity;
-    EditText mPostal;
+//    EditText mAddress1;
+//    EditText mAddress2;
+//    AutoCompleteTextView mCity;
+//    EditText mPostal;
     RadioButton mGenderM;
     RadioButton mGenderF;
-    EditText countryText;
-    EditText stateText;
-    EditText licenseID;
-    EditText hospital_name;
+//    EditText countryText;
+//    EditText stateText;
+//    EditText licenseID;
+//    EditText hospital_name;
 
-    EditText mEdtCaste; // Added by Venu N on 03/04/2020.
-    Spinner mCaste; // Added by venu N on 03/04/2020.
-    Spinner mCountry; //not using this spinner instead hardcoding Country as India
-    Spinner mState;
+//    EditText mEdtCaste; // Added by Venu N on 03/04/2020.
+//    Spinner mCaste; // Added by venu N on 03/04/2020.
+//    Spinner mCountry; //not using this spinner instead hardcoding Country as India
+//    Spinner mState;
 /*
     Spinner selectDistrict;
     Spinner selectLocation;
@@ -184,6 +176,7 @@ public class SignupActivity extends AppCompatActivity {
     private TextInputEditText mEmailView;
     private EditText mPasswordView;
     private EditText mCPassword;
+    private EditText mOTP;
 
 //    private UserSignupData userSignupData;
 //    private List<UserSignupData.Person> personList = new ArrayList<>();
@@ -247,11 +240,21 @@ public class SignupActivity extends AppCompatActivity {
         mLastName = findViewById(R.id.identification_last_name);
         mLastName.setFilters(new InputFilter[]{new InputFilter.LengthFilter(41), inputFilter_Name}); //maxlength 41
 
-        mEmailView = findViewById(R.id.email);
+      //  mEmailView = findViewById(R.id.email);
 
         image_username_valid = findViewById(R.id.image_username_valid);
         image_username_valid.setVisibility(View.GONE);
-        mEmailView.addTextChangedListener(new TextWatcher() {
+
+        mDOB = findViewById(R.id.identification_birth_date_text_view);
+        mPhoneNum = findViewById(R.id.identification_phone_number);
+        mPasswordView = findViewById(R.id.password);
+        mCPassword = findViewById(R.id.cpassword);
+        mOTP = findViewById(R.id.mOTP);
+        mGenderM = findViewById(R.id.identification_gender_male);
+        mGenderF = findViewById(R.id.identification_gender_female);
+
+        //mobile number when entered this code block will be executed...
+        mPhoneNum.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -265,28 +268,23 @@ public class SignupActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (editable.length() == 8) {
+                if (editable.length() == 10) {
                     InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(mEmailView.getWindowToken(), 0);
-                    checkUserExistsOrNot(mEmailView.getText().toString());
+                    imm.hideSoftInputFromWindow(mPhoneNum.getWindowToken(), 0);
+                    checkUserExistsOrNot(mPhoneNum.getText().toString());
                 }
             }
         });
 
-
-        mPasswordView = findViewById(R.id.password);
-        mCPassword = findViewById(R.id.cpassword);
-
-        licenseID = findViewById(R.id.identification_registration_no);
-        licenseID.setFilters(new InputFilter[]{new InputFilter.LengthFilter(50), inputFilter_Name}); //maxlength 50
-        hospital_name = findViewById(R.id.identification_hospital_name);
-        hospital_name.setFilters(new InputFilter[]{new InputFilter.LengthFilter(26), inputFilter_Name}); //maxlength 26
+       // licenseID = findViewById(R.id.identification_registration_no);
+      //  licenseID.setFilters(new InputFilter[]{new InputFilter.LengthFilter(50), inputFilter_Name}); //maxlength 50
+      //  hospital_name = findViewById(R.id.identification_hospital_name);
+       // hospital_name.setFilters(new InputFilter[]{new InputFilter.LengthFilter(26), inputFilter_Name}); //maxlength 26
 
 
-        mDOB = findViewById(R.id.identification_birth_date_text_view);
-        mPhoneNum = findViewById(R.id.identification_phone_number);
+
 //        mAge = findViewById(R.id.identification_age);
-        mAddress1 = findViewById(R.id.identification_address1);
+      /*  mAddress1 = findViewById(R.id.identification_address1);
         mAddress1.setFilters(new InputFilter[]{new InputFilter.LengthFilter(41), inputFilter_Name}); //maxlength 41
 
         mAddress2 = findViewById(R.id.identification_address2);
@@ -296,20 +294,20 @@ public class SignupActivity extends AppCompatActivity {
         mCity.setFilters(new InputFilter[]{new InputFilter.LengthFilter(26), inputFilter_Others}); //maxlength 26
 
         stateText = findViewById(R.id.identification_state);
-        mState = findViewById(R.id.spinner_state);
+        mState = findViewById(R.id.spinner_state);*/
         /*selectDistrict = findViewById(R.id.spinner_district);
         selectLocation = findViewById(R.id.spinner_location);*/
-        mPostal = findViewById(R.id.identification_postal_code);
+       /* mPostal = findViewById(R.id.identification_postal_code);
         countryText = findViewById(R.id.identification_country);
-        mCountry = findViewById(R.id.spinner_country);
-        mGenderM = findViewById(R.id.identification_gender_male);
-        mGenderF = findViewById(R.id.identification_gender_female);
-        mImageView = findViewById(R.id.imageview_id_picture);
+        mCountry = findViewById(R.id.spinner_country);*/
 
-        input_state_field = findViewById(R.id.input_state_field);
+      //  mImageView = findViewById(R.id.imageview_id_picture);
+
+      /*  input_state_field = findViewById(R.id.input_state_field);
         input_state_spinner = findViewById(R.id.input_state_spinner);
-        edt_state = findViewById(R.id.edt_state);
+        edt_state = findViewById(R.id.edt_state);*/
 
+/*
         mPhoneNum.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -326,12 +324,13 @@ public class SignupActivity extends AppCompatActivity {
 //                mEmailView.setText(mPhoneNum.getText().toString());
             }
         });
+*/
 
         // Added by venu N on 03/04/2020.
-        mCaste = findViewById(R.id.spinner_Caste);
+      /*  mCaste = findViewById(R.id.spinner_Caste);
         mEdtCaste = findViewById(R.id.identification_other_caste);
         mEdtCaste.setVisibility(View.GONE);
-
+*/
         /*ArrayAdapter<CharSequence> countryAdapter = ArrayAdapter.createFromResource(this,
                 R.array.countries_array, android.R.layout.simple_spinner_item);
         countryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -350,14 +349,15 @@ public class SignupActivity extends AppCompatActivity {
         ArrayAdapter<CharSequence> personalCasteAdapter = ArrayAdapter.createFromResource(SignupActivity.this,
                 R.array.personal_caste, R.layout.custom_spinner_item);
         // personalCasteAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mCaste.setAdapter(personalCasteAdapter);
+       // mCaste.setAdapter(personalCasteAdapter);
 
         generateUuid();
 
         ArrayAdapter<CharSequence> stateAdapter = ArrayAdapter.createFromResource(this, R.array.state_error, android.R.layout.simple_spinner_item);
         // stateAdapter.setDropDownViewResource(R.layout.custom_spinner_item);
-        mState.setAdapter(stateAdapter);
+      //  mState.setAdapter(stateAdapter);
 
+/*
         mState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -383,7 +383,9 @@ public class SignupActivity extends AppCompatActivity {
 
             }
         });
+*/
 
+/*
         edt_state.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -400,6 +402,7 @@ public class SignupActivity extends AppCompatActivity {
 
             }
         });
+*/
 
         /*mCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -493,6 +496,7 @@ public class SignupActivity extends AppCompatActivity {
         });*/
 
 
+/*
         mCaste.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -510,6 +514,7 @@ public class SignupActivity extends AppCompatActivity {
 
             }
         });
+*/
 
         mGenderF.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -525,6 +530,7 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
+/*
         mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -546,6 +552,7 @@ public class SignupActivity extends AppCompatActivity {
                 startActivityForResult(cameraIntent, CameraActivity.TAKE_IMAGE);
             }
         });
+*/
         mDOBYear = today.get(Calendar.YEAR);
         mDOBMonth = today.get(Calendar.MONTH);
         mDOBDay = today.get(Calendar.DAY_OF_MONTH);
@@ -688,12 +695,15 @@ public class SignupActivity extends AppCompatActivity {
 //                finish();
 
                 // Reset errors.
-                mEmailView.setError(null);
+               // mEmailView.setError(null);
+                mPhoneNum.setError(null);
+                mOTP.setError(null);
                 mPasswordView.setError(null);
                 mCPassword.setError(null);
 
                 // Store values at the time of the login attempt.
-                userName = mEmailView.getText().toString();
+              //  userName = mEmailView.getText().toString();
+                userName = mPhoneNum.getText().toString();
                 password = mPasswordView.getText().toString();
                 cPassword = mCPassword.getText().toString();
 
@@ -745,6 +755,8 @@ public class SignupActivity extends AppCompatActivity {
                 //DOB validation...
                 if (mDOB.getText().toString().equals("")) {
                     mDOB.setError(getString(R.string.error_field_required));
+                    mDOB.setFocusable(true);
+                    mDOB.setFocusableInTouchMode(true);
                     mDOB.requestFocus();
                     return;
                 }
@@ -775,7 +787,7 @@ public class SignupActivity extends AppCompatActivity {
                 }
 
                 //PhoneNum validation...
-                if (mPhoneNum.getText().toString().equals("")) {
+          /*      if (mPhoneNum.getText().toString().equals("")) {
                     mPhoneNum.setError(getString(R.string.error_field_required));
                     mPhoneNum.requestFocus();
                     return;
@@ -785,7 +797,7 @@ public class SignupActivity extends AppCompatActivity {
                     mPhoneNum.setError(getString(R.string.invalid_phone_number));
                     mPhoneNum.requestFocus();
                     return;
-                }
+                }*/
 
                 // commented by venu  N on 04/04/2020.
                /* if (licenseID.getText().toString().equals("")) {
@@ -802,24 +814,24 @@ public class SignupActivity extends AppCompatActivity {
 
                 // Check for a valid email address.
                 if (TextUtils.isEmpty(userName)) {
-                    mEmailView.setError(getString(R.string.error_field_required));
-                    mEmailView.requestFocus();
+                    mPhoneNum.setError(getString(R.string.error_field_required));
+                    mPhoneNum.requestFocus();
                     image_username_valid.setVisibility(View.GONE);
                     return;
                 }
 
-                if (userName.length() < 8) {
-                    mEmailView.setError(getString(R.string.username_10digits));
+                if (userName.length() < 10) {
+                    mPhoneNum.setError(getString(R.string.invalid_phone_number));
                     image_username_valid.setVisibility(View.GONE);
-                    mEmailView.requestFocus();
+                    mPhoneNum.requestFocus();
                     return;
                 }
 
                 if (isUSerExistsAlready) {
-                    Toast.makeText(context, getString(R.string.txt_user_exists) + "Please try with another.", Toast.LENGTH_LONG).show();
-                    mEmailView.setError(getString(R.string.txt_user_exists));
+                    Toast.makeText(context, getString(R.string.txt_user_exists) + " Please Login.", Toast.LENGTH_LONG).show();
+                    mPhoneNum.setError(getString(R.string.txt_user_exists));
                     image_username_valid.setVisibility(View.GONE);
-                    mEmailView.requestFocus();
+                    mPhoneNum.requestFocus();
                     return;
                 }
 
@@ -1003,11 +1015,11 @@ public class SignupActivity extends AppCompatActivity {
 
                 UserBirthAttribute userBirthOccupationAttribute = new UserBirthAttribute();
                 userBirthOccupationAttribute.setAttributeType("ecdaadb6-14a0-4ed9-b5b7-cfed87b44b87"); // openmrsuuid occupation
-                userBirthOccupationAttribute.setValue("" + licenseID.getText().toString()); //license text
+              //  userBirthOccupationAttribute.setValue("" + licenseID.getText().toString()); //license text
 
                 UserBirthAttribute userBirthHosAttribute = new UserBirthAttribute();
                 userBirthHosAttribute.setAttributeType("1c718819-345c-4368-aad6-d69b4c267db7"); //openmrsuuid education
-                userBirthHosAttribute.setValue("" + hospital_name.getText().toString()); //hospital name text
+              //  userBirthHosAttribute.setValue("" + hospital_name.getText().toString()); //hospital name text
 
                 UserBirthAttribute userCasteAttribute = new UserBirthAttribute();
                 userCasteAttribute.setAttributeType("5a889d96-0c84-4a04-88dc-59a6e37db2d3"); // This is for Designation. openrms caste...
@@ -1026,13 +1038,13 @@ public class SignupActivity extends AppCompatActivity {
 
                 ////////////Data Model for step 3
                 UserAddressData userAddressData = new UserAddressData();
-                userAddressData.setAddress1("" + mAddress1.getText().toString() + " " + mAddress2.getText().toString());
-                userAddressData.setCityVillage("" + mCity.getText().toString());
+               /* userAddressData.setAddress1("" + mAddress1.getText().toString() + " " + mAddress2.getText().toString());
+                userAddressData.setCityVillage("" + mCity.getText().toString());*/
                 userAddressData.setCountry("" + country);
                 userAddressData.setStateProvince("" + state);
                 sessionManager.setState(state);
                 sessionManager.setPatientCountry(country);
-                userAddressData.setPostalCode("" + mPostal.getText().toString());
+              //  userAddressData.setPostalCode("" + mPostal.getText().toString());
                 // userAddressData.setCountyDistrict("" + selectedLocationName);
 
                 Log.e("JSON-STEP3- ", "" + gson.toJson(userAddressData));
@@ -1143,8 +1155,8 @@ public class SignupActivity extends AppCompatActivity {
                         } else {
                             image_username_valid.setVisibility(View.GONE);
                             isUSerExistsAlready = true;
-                            mEmailView.setError(getString(R.string.txt_user_exists));
-                            mEmailView.requestFocus();
+                            mPhoneNum.setError(getString(R.string.txt_user_exists));
+                            mPhoneNum.requestFocus();
                         }
                          /*ResultsItem objResultsItem  = new ResultsItem();
                         objResultsItem.setDisplay(enteredUserName);
@@ -1374,10 +1386,10 @@ public class SignupActivity extends AppCompatActivity {
         patientdto.setPhonenumber(StringUtils.getValue(mPhoneNum.getText().toString()));
         patientdto.setGender(StringUtils.getValue(mGender));
         patientdto.setDateofbirth(DateAndTimeUtils.getFormatedDateOfBirth(StringUtils.getValue(mDOB.getText().toString())));
-        patientdto.setAddress1(StringUtils.getValue(mAddress1.getText().toString()));
+       /* patientdto.setAddress1(StringUtils.getValue(mAddress1.getText().toString()));
         patientdto.setAddress2(StringUtils.getValue(mAddress2.getText().toString()));
         patientdto.setCityvillage(StringUtils.getValue(mCity.getText().toString()));
-        patientdto.setPostalcode(StringUtils.getValue(mPostal.getText().toString()));
+        patientdto.setPostalcode(StringUtils.getValue(mPostal.getText().toString()));*/
         patientdto.setCountry(country); //mCountry.getSelectedItem().toString()) here, country = India
         patientdto.setPatientPhoto(mCurrentPhotoPath);
 //      patientdto.setEconomic(StringUtils.getValue(m));
@@ -1411,7 +1423,7 @@ public class SignupActivity extends AppCompatActivity {
         patientAttributesDTO.setUuid(UUID.randomUUID().toString());
         patientAttributesDTO.setPatientuuid(uuid);
         patientAttributesDTO.setPersonAttributeTypeUuid(patientsDAO.getUuidForAttribute("occupation"));
-        patientAttributesDTO.setValue(StringUtils.getValue(licenseID.getText().toString()));
+      //  patientAttributesDTO.setValue(StringUtils.getValue(licenseID.getText().toString()));
         patientAttributesDTOList.add(patientAttributesDTO);
 
 //            patientAttributesDTO = new PatientAttributesDTO();
@@ -1425,7 +1437,7 @@ public class SignupActivity extends AppCompatActivity {
         patientAttributesDTO.setUuid(UUID.randomUUID().toString());
         patientAttributesDTO.setPatientuuid(uuid);
         patientAttributesDTO.setPersonAttributeTypeUuid(patientsDAO.getUuidForAttribute("Education Level"));
-        patientAttributesDTO.setValue(StringUtils.getValue(hospital_name.getText().toString()));
+     //   patientAttributesDTO.setValue(StringUtils.getValue(hospital_name.getText().toString()));
         patientAttributesDTOList.add(patientAttributesDTO);
 
         patientAttributesDTO = new PatientAttributesDTO();
@@ -1535,12 +1547,14 @@ public class SignupActivity extends AppCompatActivity {
                 mCurrentPhotoPath = data.getStringExtra("RESULT");
                 Log.v("IdentificationActivity", mCurrentPhotoPath);
 
+/*
                 Glide.with(this)
                         .load(new File(mCurrentPhotoPath))
                         .thumbnail(0.25f)
                         .diskCacheStrategy(DiskCacheStrategy.NONE)
                         .skipMemoryCache(true)
                         .into(mImageView);
+*/
             }
         }
     }

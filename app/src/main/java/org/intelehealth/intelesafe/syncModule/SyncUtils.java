@@ -1,6 +1,5 @@
 package org.intelehealth.intelesafe.syncModule;
 
-import android.content.Intent;
 import android.os.Handler;
 
 import androidx.work.WorkManager;
@@ -9,7 +8,6 @@ import org.intelehealth.intelesafe.app.AppConstants;
 import org.intelehealth.intelesafe.app.IntelehealthApplication;
 import org.intelehealth.intelesafe.database.dao.ImagesPushDAO;
 import org.intelehealth.intelesafe.database.dao.SyncDAO;
-import org.intelehealth.intelesafe.services.UpdateDownloadPrescriptionService;
 import org.intelehealth.intelesafe.utilities.Logger;
 import org.intelehealth.intelesafe.utilities.NotificationUtils;
 

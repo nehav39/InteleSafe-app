@@ -38,7 +38,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:layout_marginEnd="5dp"
-                        android:layout_toStartOf="@+id/user_logout"
+                        android:layout_toStartOf="@+id/btn_refresh"
                         android:fontFamily="@font/lato_bold"
                         android:includeFontPadding="false"
                         android:text="@string/prajwal_waingankar"
@@ -135,6 +135,15 @@
                         </ImageView>
 
                     </RelativeLayout>
+
+                    <ImageView
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="8dp"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_toStartOf="@id/user_logout"
+                        android:src="@drawable/ic_sync_black_24dp"
+                        android:id="@+id/btn_refresh"/>
 
                 </RelativeLayout>
 
@@ -809,7 +818,7 @@
                     android:fontFamily="@font/lato_bold"
                     android:padding="10sp"
                     android:paddingStart="15sp"
-                    android:text="@string/your_check_in_overview"
+                    android:text="@string/your_health_record"
                     android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                     android:textSize="20sp" />
 

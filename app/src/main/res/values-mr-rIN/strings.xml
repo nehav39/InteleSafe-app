@@ -47,6 +47,7 @@
     <string name="education_videos">FAQs</string>
     <string name="help">Help</string>
     <string name="your_check_in_overview">Your check in overview :</string>
+    <string name="your_health_record">Your health record:</string>
     <string name="do_i_have_covid_19">Do I have Covid-19?</string>
     <string name="the_novel_coronavirus_disease_or_covid_19_is_an_infectious_disease_that_is_spreading_globally_you_may_have_the_disease_if_you_have_recently_traveled_abroad_or_came_in_contact_with_someone_who_is_known_to_be_infected_with_the_disease_in_such_cases_it_is_recommended_that_you_get_tested_and_also_self_quarantine_for_14_days">The novel Coronavirus disease or CoVid-19 is an infectious disease that is spreading globally. You may have the disease if you have recently traveled abroad, or came in contact with someone who is known to be infected with the disease. In such cases it is recommended that you get tested and also self-quarantine for 14 days.</string>
     <string name="_14_day_quarantine_and_care">14-day quarantine and care</string>
@@ -707,7 +708,7 @@
     <string name="txt_enter_caste">Designation</string>
     <string name="toast_select_designation">Please select your designation.</string>
     <string name="error_empty_designation">Enter your designation.</string>
-    <string name="txt_user_exists">Username already exists.</string>
+    <string name="txt_user_exists">Mobile Number already exists.</string>
 
     <!--Login Screen (New Changes)-->
     <string name="txt_sign_up_option">Don\'t have an account?</string>
@@ -716,5 +717,7 @@
     <string name="authentic_information">authentic information on Covid19 including measures of personal protection and educational resources on Covid19.</string>
     <string name="Here_you_can_monitor">Here you can monitor your own health daily and reach out for help if you think you may have had unsafe exposure and may be infected.\n</string>
     <string name="monitor_your_own_health">\" monitor your own health daily\"</string>
+    <string name="enter_otp">Enter OTP</string>
+    <string name="send_otp">Send OTP</string>
 
 </resources>

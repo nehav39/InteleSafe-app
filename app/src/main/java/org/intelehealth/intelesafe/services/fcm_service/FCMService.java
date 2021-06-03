@@ -1,6 +1,5 @@
 package org.intelehealth.intelesafe.services.fcm_service;
 
-import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;

@@ -11,7 +11,6 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.intelehealth.intelesafe.activities.visitSummaryActivity.VisitSummaryActivity;
 import org.intelehealth.intelesafe.app.AppConstants;
 import org.intelehealth.intelesafe.app.IntelehealthApplication;
 import org.intelehealth.intelesafe.database.dao.EncounterDAO;
@@ -123,8 +122,14 @@ public class PatientsFrameJson {
             visit.setStartDatetime(visitDTO.getStartdate());
             visit.setUuid(visitDTO.getUuid());
             visit.setVisitType(visitDTO.getVisitTypeUuid());
-            visit.setStopDatetime(visitDTO.getEnddate() != null ? visitDTO.getEnddate() : AppConstants.dateAndTimeUtils.currentDateTime()); // if end date is null setting the End to current date by Venu N to ended the offline visit.
-            visitList.add(visit);
+            visit.setStopDatetime(visitDTO.getEnddate() != null ? visitDTO.getEnddate() :
+                    AppConstants.dateAndTimeUtils.currentDateTime());
+            // if end date is null setting the End to current date by Venu N to ended the offline visit.
+            visit.setAttributes(visitDTO.getAttributes());
+           // visitList.add(visit);
+            if (visitDTO.getAttributes().size() > 0) {
+                visitList.add(visit);
+            }
 
         }
 

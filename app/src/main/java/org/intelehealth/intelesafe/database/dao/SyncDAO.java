@@ -18,7 +18,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import org.intelehealth.intelesafe.services.LastSyncIntentService;
 import org.intelehealth.intelesafe.utilities.Logger;
 import org.intelehealth.intelesafe.utilities.NotificationID;
 import org.intelehealth.intelesafe.utilities.PatientsFrameJson;
