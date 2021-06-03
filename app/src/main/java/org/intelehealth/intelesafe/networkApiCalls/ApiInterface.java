@@ -10,6 +10,7 @@ import org.intelehealth.intelesafe.models.Location;
 import org.intelehealth.intelesafe.models.NewUserCreationCall.UserCreationData;
 import org.intelehealth.intelesafe.models.ObsImageModel.ObsJsonResponse;
 import org.intelehealth.intelesafe.models.ObsImageModel.ObsPushDTO;
+import org.intelehealth.intelesafe.models.ResetPassoword;
 import org.intelehealth.intelesafe.models.Results;
 import org.intelehealth.intelesafe.models.UUIDResData;
 import org.intelehealth.intelesafe.models.UserAddressData;
@@ -137,5 +138,12 @@ public interface ApiInterface {
     @GET
     Observable<ClsUserGetResponse> getUsersFromServer(@Url String url,@Header("Authorization") String authHeader, @Query("username")  String userName);
 
+    @GET
+    Observable<ClsUserGetResponse> sendOtp(@Url String url,@Header("Authorization") String authHeader, @Query("username")  String userName);
 
+    @GET
+    Observable<ClsUserGetResponse> verifyOtp(@Url String url,@Header("Authorization") String authHeader, @Query("username")  String userName, @Query("otp")  String otp);
+
+    @POST
+    Observable<ResetPassoword> resetPassword(@Url String url, @Header("Authorization") String authHeader, @Body ResetPassoword resetPassoword);
 }

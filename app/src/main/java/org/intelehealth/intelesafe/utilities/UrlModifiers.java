@@ -104,4 +104,9 @@ public class UrlModifiers {
         return BASE_URL + provider;
     }
 
+    public String resetPassword(String CLEAN_URL) {
+        String urlModifier = "cpwd";
+        String BASE_URL = "https://" + CLEAN_URL + "/";
+        return BASE_URL + urlModifier;
+    }
 }

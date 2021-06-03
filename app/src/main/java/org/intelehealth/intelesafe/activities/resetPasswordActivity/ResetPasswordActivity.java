@@ -1,69 +1,55 @@
-package org.intelehealth.intelesafe.activities.loginActivity;
+package org.intelehealth.intelesafe.activities.resetPasswordActivity;
 
-import android.Manifest;
-import android.accounts.Account;
 //import android.accounts.AccountManager;
-import android.content.Context;
+
 import android.content.ContentValues;
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
-import android.os.Build;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.StrictMode;
-import androidx.core.app.ActivityCompat;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
-import android.text.util.Linkify;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.gson.Gson;
 
-import java.io.File;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
-import java.util.List;
-
 import org.intelehealth.intelesafe.BuildConfig;
 import org.intelehealth.intelesafe.R;
-import org.intelehealth.intelesafe.activities.privacyNoticeActivity.PrivacyNotice_Activity;
-import org.intelehealth.intelesafe.activities.resetPasswordActivity.ResetPasswordActivity;
+import org.intelehealth.intelesafe.activities.homeActivity.HomeActivity;
 import org.intelehealth.intelesafe.app.AppConstants;
+import org.intelehealth.intelesafe.models.ResetPassoword;
 import org.intelehealth.intelesafe.models.loginModel.LoginModel;
 import org.intelehealth.intelesafe.models.loginProviderModel.LoginProviderModel;
 import org.intelehealth.intelesafe.models.person.ClsPersonGetResponse;
 import org.intelehealth.intelesafe.models.user.ClsUserGetResponse;
-import org.intelehealth.intelesafe.models.user.ResultsItem;
 import org.intelehealth.intelesafe.utilities.Base64Utils;
 import org.intelehealth.intelesafe.utilities.Logger;
+import org.intelehealth.intelesafe.utilities.NetworkConnection;
 import org.intelehealth.intelesafe.utilities.OfflineLogin;
 import org.intelehealth.intelesafe.utilities.SessionManager;
 import org.intelehealth.intelesafe.utilities.StringEncryption;
 import org.intelehealth.intelesafe.utilities.UrlModifiers;
 import org.intelehealth.intelesafe.widget.materialprogressbar.CustomProgressDialog;
 
-import org.intelehealth.intelesafe.activities.homeActivity.HomeActivity;
-import org.intelehealth.intelesafe.utilities.NetworkConnection;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+import java.util.regex.Pattern;
+
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -71,15 +57,11 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class LoginActivity extends AppCompatActivity {
-    TextView txt_cant_login,txt_signup; // txt_signup added for signup navigation.
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     */
+public class ResetPasswordActivity extends AppCompatActivity {
     private static final String[] DUMMY_CREDENTIALS = new String[]{
             "username:password", "admin:nimda"
     };
-    private final String TAG = LoginActivity.class.getSimpleName();
+    private final String TAG = ResetPasswordActivity.class.getSimpleName();
     //protected AccountManager manager;
     //    ProgressDialog progress;
     Context context;
@@ -97,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
     // UI references.
     private EditText mUsernameView;
     //    private AutoCompleteTextView mUsernameView;
-    private EditText mPasswordView;
+    private EditText mPasswordView, mConfirmPasswordView;
     private ImageView icLogo;
 
     private long createdRecordsCount = 0;
@@ -105,30 +87,21 @@ public class LoginActivity extends AppCompatActivity {
     String privacy_value;
 
     Button mEmailSignInButton;
-    View llOtp;
-    TextInputLayout etPasswordLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_reset_password);
         sessionManager = new SessionManager(this);
         privacy_value = getIntent().getStringExtra("privacy"); //privacy_accept value retrieved from previous act.
 
-        context = LoginActivity.this;
+        context = ResetPasswordActivity.this;
         sessionManager = new SessionManager(context);
         cpd = new CustomProgressDialog(context);
 
         setTitle(R.string.title_activity_login);
 
         offlineLogin = OfflineLogin.getOfflineLogin();
-        txt_cant_login = findViewById(R.id.cant_login_id);
-        txt_cant_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cant_log();
-            }
-        });
 
         // Commented by Venu for Account Manager Issue.
        /* manager = AccountManager.get(LoginActivity.this);
@@ -177,6 +150,9 @@ public class LoginActivity extends AppCompatActivity {
         // populateAutoComplete(); TODO: create our own autocomplete code
         mPasswordView = findViewById(R.id.et_password);
         mPasswordView.setTransformationMethod(new PasswordTransformationMethod());
+
+        mConfirmPasswordView = findViewById(R.id.et_confirm_password);
+        mConfirmPasswordView.setTransformationMethod(new PasswordTransformationMethod());
 //      mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 //            @Override
 //            public boolean onEditorAction(TextView v, int id, KeyEvent event) {
@@ -195,61 +171,6 @@ public class LoginActivity extends AppCompatActivity {
                 attemptLogin();
             }
         });
-
-        llOtp = findViewById(R.id.llOtp);
-        etPasswordLayout = findViewById(R.id.etPasswordLayout);
-
-        Button sign_up_button = findViewById(R.id.sign_up_button);
-        sign_up_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signUp();
-            }
-        });
-
-        txt_signup = findViewById(R.id.txt_signup);
-        String signupStr = getString(R.string.txt_sign_up_option);
-       /* SpannableString spannableString = new SpannableString(signupStr);
-        int startIndex = signupStr.lastIndexOf("?");
-        Log.e("OnClick","startIndex" + startIndex);
-        int endIndex = signupStr.length();
-        Log.e("OnClick","endIndex" + endIndex);
-        ClickableSpan span1 = new ClickableSpan() {
-            @Override
-            public void onClick(View textView) {
-                // do some thing
-                Log.e("OnClick","txt_signup");
-                Intent intent = new Intent(LoginActivity.this, PrivacyNotice_Activity.class);
-                //intent.putExtra("privacy", privacy_value); //privacy value send to identificationActivity
-                intent//addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                       . addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            }
-        };
-        spannableString.setSpan(new android.text.style.StyleSpan(android.graphics.Typeface.BOLD), startIndex+1, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(span1, startIndex+1, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        txt_signup.setText(spannableString);
-        txt_signup.setMovementMethod(LinkMovementMethod.getInstance());*/
-
-        checkSetup();
-    }
-
-    private void checkSetup() {
-        if (sessionManager.isSetupComplete()) {
-            etPasswordLayout.setHint(R.string.prompt_password);
-            llOtp.setVisibility(View.VISIBLE);
-            mEmailSignInButton.setText(R.string.action_sign_in);
-        }
-    }
-
-    private void signUp() {
-        Intent intent = new Intent(LoginActivity.this, PrivacyNotice_Activity.class);
-        //intent.putExtra("privacy", privacy_value); //privacy value send to identificationActivity
-        intent//addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                . addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
     }
 
     private void setLogo() {
@@ -269,11 +190,15 @@ public class LoginActivity extends AppCompatActivity {
      *
      * @return void
      */
-    private void attemptLogin() {
+    Pattern UpperCasePatten = Pattern.compile("[A-Z ]");
+    Pattern lowerCasePatten = Pattern.compile("[a-z ]");
+    Pattern digitCasePatten = Pattern.compile("[0-9 ]");
 
+    private void attemptLogin() {
         // Store values at the time of the login attempt.
         String email = mUsernameView.getText().toString().trim();
         String password = mPasswordView.getText().toString().trim();
+        String confirmPassword = mConfirmPasswordView.getText().toString().trim();
 
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
@@ -282,24 +207,52 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        /*// Check for a valid password, if the user entered one.
+        // Check for a valid password, if the user entered one.
         if (TextUtils.isEmpty(password)) {
             mPasswordView.setError(getString(R.string.enter_password));
             mPasswordView.requestFocus();
             return;
         }
 
-        if (password.length() < 4) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
+        if (password.length() < 8) {
+            mPasswordView.setError(getString(R.string.password_must_eight));
             mPasswordView.requestFocus();
             return;
-        }*/
+        }
+
+        if (!UpperCasePatten.matcher(password).find()) {
+            mPasswordView.setError(getString(R.string.upper_case_validation));
+            mPasswordView.requestFocus();
+            return;
+        }
+        if (!lowerCasePatten.matcher(password).find()) {
+            mPasswordView.setError(getString(R.string.password_validation_two));
+            mPasswordView.requestFocus();
+            return;
+        }
+        if (!digitCasePatten.matcher(password).find()) {
+            mPasswordView.setError(getString(R.string.password_validation));
+            mPasswordView.requestFocus();
+            return;
+        }
+
+        if (TextUtils.isEmpty(confirmPassword)) {
+            mConfirmPasswordView.setError(getString(R.string.enter_password));
+            mConfirmPasswordView.requestFocus();
+            return;
+        }
+
+        if (!confirmPassword.equals(password)) {
+            mConfirmPasswordView.setError(getString(R.string.confirm_password_is_mismatched));
+            mConfirmPasswordView.requestFocus();
+            return;
+        }
 
         if (NetworkConnection.isOnline(this)) {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
 //            UserLoginTask(email, password);
-            checkUserExistsOrNot(email);
+            resetPassword(email, password);
         } else {
             //offlineLogin.login(email, password);
 //            offlineLogin.offline_login(email, password);
@@ -315,38 +268,6 @@ public class LoginActivity extends AppCompatActivity {
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
         return password.length() > 4;
-    }
-
-    public void cant_log() {
-
-        Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
-        startActivity(intent);
-
-        /*final SpannableString span_string = new SpannableString(getApplicationContext().getText(R.string.email_link)); //message is changed...
-        Linkify.addLinks(span_string, Linkify.EMAIL_ADDRESSES);
-
-        new AlertDialog.Builder(this)
-                .setMessage(span_string)
-                .setNegativeButton("Send Email", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //finish();
-                        Intent intent = new Intent(Intent.ACTION_SENDTO); //to get only the list of e-mail clients
-                        intent.setType("text/plain");
-                        intent.setData(Uri.parse("mailto:support@intelehealth.io"));
-                        // intent.putExtra(Intent.EXTRA_EMAIL, "support@intelehealth.io");
-                        // intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
-                        //  intent.putExtra(Intent.EXTRA_TEXT, "I'm email body.");
-
-                        startActivity(Intent.createChooser(intent, "Send Email"));
-                        //add email function here !
-                    }
-
-                })
-                .setPositiveButton("Close", null)
-                .show();
-
-        //prajwal_changes*/
     }
 
     /**
@@ -411,7 +332,7 @@ public class LoginActivity extends AppCompatActivity {
                                         }
                                     }
                                     String url = urlModifiers.getUrlForPersonDetails(loginModel.getUser().getPerson().getUuid());
-                                    getPersonDetails(url,mEmail,mPassword,loginModel.getUser().getUuid(),loginModel.getUser().getDisplay());
+                                    getPersonDetails(url, mEmail, mPassword, loginModel.getUser().getUuid(), loginModel.getUser().getDisplay());
 
                                     //  showProgress(false);
 
@@ -436,7 +357,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onError(Throwable e) {
                 Logger.logD(TAG, "Login Failure" + e.getMessage());
                 cpd.dismiss();
-                Toast.makeText(LoginActivity.this, getString(R.string.error_incorrect_password), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ResetPasswordActivity.this, getString(R.string.error_incorrect_password), Toast.LENGTH_SHORT).show();
 
             }
 
@@ -448,15 +369,15 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void getPersonDetails(String url, String mEmail,String mPassword,String userUUID,String chwname) {
-        Observable<ClsPersonGetResponse> personGetResponseObservable = AppConstants.apiInterface.getPersonDetails(url, "Basic " + encoded,"full");
+    private void getPersonDetails(String url, String mEmail, String mPassword, String userUUID, String chwname) {
+        Observable<ClsPersonGetResponse> personGetResponseObservable = AppConstants.apiInterface.getPersonDetails(url, "Basic " + encoded, "full");
 
         personGetResponseObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(new DisposableObserver<ClsPersonGetResponse>() {
             @Override
             public void onNext(ClsPersonGetResponse clsPersonGetResponse) {
-                if(clsPersonGetResponse != null){
-                    Log.e("VENU PERSON Details: "," : "+clsPersonGetResponse);
+                if (clsPersonGetResponse != null) {
+                    Log.e("VENU PERSON Details: ", " : " + clsPersonGetResponse);
                     SQLiteDatabase sqLiteDatabase = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
                     //SQLiteDatabase read_db = AppConstants.inteleHealthDatabaseHelper.getReadableDatabase();
 
@@ -498,7 +419,7 @@ public class LoginActivity extends AppCompatActivity {
                         sqLiteDatabase.endTransaction();
                     }
 
-                   // sessionManager.setState(clsPersonGetResponse.getPreferredAddress().getStateProvince()!= null?clsPersonGetResponse.getPreferredAddress().getStateProvince():"");
+                    // sessionManager.setState(clsPersonGetResponse.getPreferredAddress().getStateProvince()!= null?clsPersonGetResponse.getPreferredAddress().getStateProvince():"");
                     sessionManager.setPersionUUID(clsPersonGetResponse.getUuid());
                     sessionManager.setUserName(clsPersonGetResponse.getPreferredName().getDisplay());
                     sessionManager.setUseFirstName(clsPersonGetResponse.getPreferredName().getGivenName());
@@ -515,7 +436,7 @@ public class LoginActivity extends AppCompatActivity {
                     sessionManager.setPatientCountry(clsPersonGetResponse.getPreferredAddress().getCountry());
                     // offlineLogin.setUpOfflineLogin(mEmail, mPassword);
                     cpd.dismiss();
-                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                    Intent intent = new Intent(ResetPasswordActivity.this, HomeActivity.class);
                     intent.putExtra("login", true);
                     intent.putExtra("from", "login");
                     intent.putExtra("username", "");
@@ -523,9 +444,9 @@ public class LoginActivity extends AppCompatActivity {
 //                startJobDispatcherService(LoginActivity.this);
                     startActivity(intent);
                     finish();
-                }else{
+                } else {
                     cpd.dismiss();
-                    Toast.makeText(LoginActivity.this, getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ResetPasswordActivity.this, getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -534,7 +455,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onError(Throwable e) {
                 e.printStackTrace();
                 cpd.dismiss();
-                Toast.makeText(LoginActivity.this, getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ResetPasswordActivity.this, getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -574,7 +495,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void checkUserExistsOrNot(String enteredUserName) {
+    private void checkUserExistsOrNot(String enteredUserName, String password) {
         cpd.show();
         UrlModifiers urlModifiers = new UrlModifiers();
         String urlString = urlModifiers.setRegistrationURL();
@@ -586,33 +507,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onNext(ClsUserGetResponse clsUserGetResponse) {
                         cpd.dismiss();
-                        List<ResultsItem> resultList = clsUserGetResponse.getResults();
-                        if (resultList == null || resultList.size() == 0) {
-                            // new user - show sign up alert
-                            /*isUSerExistsAlready = false;
-                            image_username_valid.setVisibility(View.VISIBLE);*/
-                            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(LoginActivity.this);
-                            alertDialogBuilder.setMessage(R.string.warning_sign_up);
-                            alertDialogBuilder.setNeutralButton(R.string.title_sign_up, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                    signUp();
-                                }
-                            });
-                            AlertDialog alertDialog = alertDialogBuilder.create();
-                            alertDialog.show();
-
-                        } else {
-                            // existing uset - show otp
-                            /*image_username_valid.setVisibility(View.GONE);
-                            isUSerExistsAlready = true;
-                            mEmailView.setError(getString(R.string.txt_user_exists));
-                            mEmailView.requestFocus();*/
-
-                            llOtp.setVisibility(View.VISIBLE);
-                            mEmailSignInButton.setText(R.string.action_sign_in);
-                        }
+//                        resetPassword(enteredUserName, password);
                     }
 
                     @Override
@@ -626,46 +521,22 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    private void sendOtp(String enteredUserName) {
+    private void resetPassword(String enteredUserName, String password) {
         cpd.show();
         UrlModifiers urlModifiers = new UrlModifiers();
-        String urlString = urlModifiers.setRegistrationURL();
+        String urlString = urlModifiers.resetPassword(BuildConfig.CLEAN_URL);
         String encoded = base64Utils.encoded("admin", "Admin123");
-        Observable<ClsUserGetResponse> userGetResponse = AppConstants.apiInterface.sendOtp(urlString, "Basic " + encoded, enteredUserName);
+        ResetPassoword resetPassoword = new ResetPassoword();
+        resetPassoword.username = enteredUserName;
+        resetPassoword.password = password;
+        Observable<ResetPassoword> userGetResponse = AppConstants.apiInterface.resetPassword(urlString, "Basic " + encoded, resetPassoword);
         userGetResponse.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DisposableObserver<ClsUserGetResponse>() {
+                .subscribe(new DisposableObserver<ResetPassoword>() {
                     @Override
-                    public void onNext(ClsUserGetResponse clsUserGetResponse) {
+                    public void onNext(ResetPassoword clsUserGetResponse) {
                         cpd.dismiss();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        cpd.dismiss();
-                    }
-
-                    @Override
-                    public void onComplete() {
-                    }
-                });
-    }
-
-    private void verifyOtp(String enteredUserName, String otp) {
-        cpd.show();
-        UrlModifiers urlModifiers = new UrlModifiers();
-        String urlString = urlModifiers.setRegistrationURL();
-        String encoded = base64Utils.encoded("admin", "Admin123");
-        Observable<ClsUserGetResponse> userGetResponse = AppConstants.apiInterface.verifyOtp(urlString, "Basic " + encoded, enteredUserName, otp);
-        userGetResponse.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DisposableObserver<ClsUserGetResponse>() {
-                    @Override
-                    public void onNext(ClsUserGetResponse clsUserGetResponse) {
-                        cpd.dismiss();
-
-                        Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
-                        startActivity(intent);
+                        UserLoginTask(enteredUserName, password);
                     }
 
                     @Override

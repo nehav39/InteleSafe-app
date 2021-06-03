@@ -204,6 +204,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".activities.resetPasswordActivity.ResetPasswordActivity"
+            android:label="@string/title_activity_login"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".activities.homeActivity.HomeActivity"
             android:label="@string/title_activity_home"
             android:screenOrientation="portrait"

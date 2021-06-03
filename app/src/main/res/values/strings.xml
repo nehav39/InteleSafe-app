@@ -697,4 +697,10 @@
     <string name="authentic_information">authentic information on Covid19 including measures of personal protection and educational resources on Covid19.</string>
     <string name="Here_you_can_monitor">Here you can monitor your own health daily and reach out for help if you think you may have had unsafe exposure and may be infected.\n</string>
     <string name="monitor_your_own_health">" monitor your own health daily"</string>
+    <string name="warning_sign_up">Mobile number is not registered. Please sign up to continue.</string>
+    <string name="prompt_phone_number">Mobile Number</string>
+    <string name="prompt_otp" translatable="false">OTP</string>
+    <string name="action_send_otp" translatable="false">Send OTP</string>
+    <string name="action_reset_password" translatable="false">Reset Password</string>
+    <string name="prompt_confirm_password" translatable="false">Confirm Password*</string>
 </resources>
