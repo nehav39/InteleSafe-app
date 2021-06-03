@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Swasthya Sampark</string>
+    <string name="app_name" translatable="false">Swasthya Sampark </string>
 
     //Generic
     <string name="generic_the_flipping_word_next" translatable="false">Next</string>
@@ -39,7 +39,7 @@
     <string name="db_patient_id3" translatable="false">patient_identifier3</string>
 
     //Login Screen
-    <string name="title_activity_login" translatable="false">Intelehealth</string>
+    <string name="title_activity_login" translatable="false">Swasthya Sampark </string>
     <string name="prompt_email" translatable="false">Username</string>
     <string name="prompt_password" translatable="false">Password*</string>
     <string name="prompt_admin_password" translatable="false">Admin Password</string>
@@ -64,6 +64,11 @@
     <string name="intro_text2">You can monitor your own health daily and reach out for help if you think you may have had unsafe exposure and may be infected.</string>
     <string name="intro_text1_part">learn about personal protection measures and PPE use.</string>
     <string name="intro_text2_part">monitor your own health daily</string>
+    <string name="intro1_text1">The road to recovery from COVID-19 can be hard, we are here to help you on this journey.</string>
+    <string name="intro1_text2">The Swasthya Sampark app is an initiative by the National Health Mission, USAID NISHTHA and Jhpiego to help you return to your previous quality life.</string>
+    <string name="intro1_text3">Many individuals face a range of impairments after contracting with COVID-19 disease including weakness, fatigue, shortness of breath, chest pain, even mental health issues as well.  Early identification of post COVID complications and getting rehabilitative clinical treatment will play an important role in the recovery process and return to normal life.</string>
+    <string name="intro2_text1">The Swasthya Sampark app contain education materials to help you in your journey to recovery and also get you free access to teleconsultations with our team of experienced doctors and specialists including Gynaecologist, Paediatrician, Pulmonologist, Medicine, Cardiologist, ENT, Ophthalmologist, Rehabilitative Physiotherapist, Dietician, Nutritional counsellor, and Psychologist.</string>
+    <string name="intro2_text2">We appreciate the opportunity to participate in your care and with you all the best in your recovery.</string>
 
     // Sign up
     <string name="title_sign_up" translatable="false">Sign Up</string>
@@ -89,6 +94,7 @@
     //Home Screen
     <string name="PPE_and_infection">Personal Protective Equipment (PPE) &amp; Infection control</string>
     <string name="covid_home_care">Covid Home Care</string>
+    <string name="recovering_covid">Recovering from COVID</string>
     <string name="PPE_reuse">PPE reuse &amp; alternatives</string>
     <string name="telemedicine_use_covid">Use of telemedicine during COVID-19</string>
     <string name="request_ppe">Request for PPE kits</string>
@@ -640,7 +646,7 @@
     <string name="recyclerview_home_date">01 January 2020, 12:00 AM</string>
     <string name="intelesafe">InteleSafe</string>
     <string name="intelecare">InteleCare</string>
-    <string name="swasth_sampark">Swasthya Sampark</string>
+    <string name="swasth_sampark">Swasthya Sampark </string>
     <string name="splash_desc_text">Recovery &amp; Rehabilitation for \n COVID-19 Patients</string>
     <string name="who_is_this_napplication_for">Who is this \napplication for?</string>
     <string name="submit_visitSummary_Button">Submit</string>
@@ -659,21 +665,24 @@
     <string name="txt_self_assessment">Self Assessment</string>
     <string name="txt_doctor_consulation">Doctor Consultation</string>
     <string name="txt_selfCheck">Self Check-In</string>
+    <string name="txt_post_covid_selfCheck">Post-COVID recovery self assessment?</string>
     <string name="txt_start_now">Start Now</string>
     <string name="personal_pr">Personal protection guidelines</string>
     <string name="if_you_star">Got questions about PPE and infection control? Concerned you\'re showing symptoms of Covid-19? Send us a WhatsApp message at our helpline number below to talk with an expert about your concerns.</string>
-    <string name="whatsApp_description">Send us a WhatsApp message or a call to our home care team about your concern.</string>
+    <string name="whatsApp_description">Even after you have been cured from COVID you may be feeling symptoms like weakness, fatigue, shortness of breath, chest pain, anxiety or stress. We are here to help. It is important that we treat these symptoms and restore your health.</string>
     <string name="some_id">+91 9825989750</string>
     <string name="assessment_visit_title">Assessment</string>
     <string name="please_fill_your_details">Please fill your details</string>
     <string name="ppe_faq">PPE reuse, alternatives and FAQs</string>
     <string name="about_covid">About COVID-19</string>
+    <string name="simple_exercises">Simple exercises to do at home</string>
     <string name="ppe_req_header">Running low on PPE? Request for PPE Kits</string>
     <string name="ppe_req_sub_header">This service is currently available in Mumbai and Delhi only. We aim to serve as many as possible and hope to expand this service to other areas soon.</string>
     <string name="ppe_req">Order PPE kits</string>
     <string name="ppe_req_hint">What PPE do you require with quantity*</string>
     <string name="txt_whatsapp_helpline"><u>WhatsApp Helpline</u></string>
     <string name="txt_get_help_now"><u>Get Help Now</u></string>
+    <string name="txt_talk_to_doc"><u>Talk to a doctor</u></string>
     <string name="Mental_health_support_text">Feeling stressed or anxious? Here are some self-care and support resources for healthcare providers</string>
     <string name="mental_health_support">Mental health support</string>
 

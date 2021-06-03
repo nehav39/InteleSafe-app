@@ -32,8 +32,8 @@ android {
         //Test CLEAN_URL = testintelesafe.covidhelp.in
 //        http://testintelesafe2.covidhelp.in/
         debug{
-            buildConfigField "String", "BASE_URL", "\"https://intelesafe.intelehealth.org/\"" // http://13.232.32.249:8080/
-            buildConfigField "String", "CLEAN_URL", "\"intelesafe.intelehealth.org\"" // 13.232.32.249:8080
+            buildConfigField "String", "BASE_URL", "\"https:// trainingss.intelehealth.org/\"" // http://13.232.32.249:8080/
+            buildConfigField "String", "CLEAN_URL", "\" trainingss.intelehealth.org\"" // 13.232.32.249:8080
 //            https://testssl.covidhelp.in/pulldata
         }
 

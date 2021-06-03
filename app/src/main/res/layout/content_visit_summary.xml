@@ -541,14 +541,13 @@ Github: prajwalmw
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
                 android:padding="5dp">
 
                 <RelativeLayout
                     android:id="@+id/help_relative"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    android:padding="0dp"
                     android:layout_marginEnd="20dp">
 
                     <TextView
@@ -556,6 +555,7 @@ Github: prajwalmw
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/help"
+                        android:visibility="gone"
                         android:background="@color/white"
                         android:textColor="@color/txt_sub_header_color"
                         android:textSize="16sp"
@@ -570,6 +570,7 @@ Github: prajwalmw
                         android:text="@string/whatsApp_description"
                         android:layout_below="@id/help_title"
                         android:textSize="14sp"
+                        android:visibility="gone"
                         android:textColor="@color/txt_sub_header_color"
                         android:layout_marginTop="10dp"
                         />
@@ -579,16 +580,16 @@ Github: prajwalmw
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/visit_help_text"
-                        android:text="@string/txt_get_help_now"
-                        android:textSize="@dimen/text_18sp"
                         android:layout_marginStart="10sp"
-                        android:fontFamily="@font/lato_bold"
-                        android:textColor="@color/txt_sub_header_color"
+                        android:layout_marginTop="5dp"
                         android:background="@android:color/transparent"
                         android:drawableStart="@drawable/ic_icons8_whatsapp"
+                        android:drawablePadding="10sp"
+                        android:fontFamily="@font/lato_bold"
                         android:gravity="start|center"
-                        android:layout_marginTop="5dp"
-                        android:drawablePadding="10sp" />
+                        android:text="@string/txt_get_help_now"
+                        android:textColor="@color/txt_sub_header_color"
+                        android:textSize="@dimen/text_20sp" />
 
                     <!-- Icon Credits:- <a target="_blank" href="https://icons8.com/icons/set/whatsapp">WhatsApp icon</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>-->
 
@@ -600,6 +601,7 @@ Github: prajwalmw
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|right"
                     android:layout_marginEnd="8dp"
+                    android:visibility="gone"
                     android:layout_marginBottom="8dp"
                     android:src="@drawable/ic_heart">
 

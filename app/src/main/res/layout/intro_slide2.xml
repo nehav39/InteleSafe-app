@@ -32,7 +32,7 @@
             android:id="@+id/tv_intro_one"
             app:fontFamily="@fonts/Lato-Regular"
             android:paddingEnd="20dp"
-            tools:text="@string/intro1_text1"
+            tools:text="@string/intro2_text1"
             android:textColor="@color/font_black_0"
             android:textSize="13sp" />
 
@@ -44,7 +44,7 @@
             android:id="@+id/tv_intro_two"
             app:fontFamily="@fonts/Lato-Regular"
             android:paddingEnd="20dp"
-            tools:text="@string/intro1_text2"
+            tools:text="@string/intro2_text2"
             android:textColor="@color/font_black_0"
             android:textSize="13sp" />
 
@@ -54,6 +54,7 @@
             android:layout_marginTop="20dp"
             android:paddingStart="20dp"
             android:id="@+id/tv_intro_three"
+            android:visibility="gone"
             app:fontFamily="@fonts/Lato-Regular"
             android:paddingEnd="20dp"
             tools:text="@string/intro1_text3"
@@ -66,7 +67,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="40dp"
             android:layout_marginBottom="20dp"
-            android:src="@drawable/ic_intro_new" />
+            android:src="@drawable/ic_intro_two" />
 
     </LinearLayout>
 </RelativeLayout>

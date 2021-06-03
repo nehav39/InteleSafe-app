@@ -30,6 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="@string/swasth_sampark"
+            android:textAlignment="center"
             android:fontFamily="@font/lato_bold"
             android:textColor="@color/white"
             android:layout_gravity="center"
