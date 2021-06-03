@@ -183,7 +183,7 @@
                                 android:includeFontPadding="false"
                                 android:text="@string/txt_post_covid_selfCheck"
                                 android:textColor="@color/white"
-                                android:textSize="26sp" />
+                                android:textSize="22sp" />
 
 
                             <LinearLayout

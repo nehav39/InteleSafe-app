@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginStart="20dp"
-            android:text="@string/who_is_this_napplication_for"
+            android:text="@string/about_swasthya_sampark"
             android:textColor="@color/font_black_0"
             app:fontFamily="@fonts/Lato-Regular"
             android:textSize="30sp"

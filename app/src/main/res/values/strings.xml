@@ -69,6 +69,7 @@
     <string name="intro1_text3">Many individuals face a range of impairments after contracting with COVID-19 disease including weakness, fatigue, shortness of breath, chest pain, even mental health issues as well.  Early identification of post COVID complications and getting rehabilitative clinical treatment will play an important role in the recovery process and return to normal life.</string>
     <string name="intro2_text1">The Swasthya Sampark app contain education materials to help you in your journey to recovery and also get you free access to teleconsultations with our team of experienced doctors and specialists including Gynaecologist, Paediatrician, Pulmonologist, Medicine, Cardiologist, ENT, Ophthalmologist, Rehabilitative Physiotherapist, Dietician, Nutritional counsellor, and Psychologist.</string>
     <string name="intro2_text2">We appreciate the opportunity to participate in your care and with you all the best in your recovery.</string>
+    <string name="about_swasthya_sampark">About Swasthya Sampark</string>
 
     // Sign up
     <string name="title_sign_up" translatable="false">Sign Up</string>

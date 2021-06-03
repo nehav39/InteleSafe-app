@@ -581,13 +581,12 @@ Github: prajwalmw
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/visit_help_text"
                         android:layout_marginStart="10sp"
-                        android:layout_marginTop="5dp"
                         android:background="@android:color/transparent"
                         android:drawableStart="@drawable/ic_icons8_whatsapp"
                         android:drawablePadding="10sp"
                         android:fontFamily="@font/lato_bold"
                         android:gravity="start|center"
-                        android:text="@string/txt_get_help_now"
+                        android:text="@string/txt_talk_to_doc"
                         android:textColor="@color/txt_sub_header_color"
                         android:textSize="@dimen/text_20sp" />
 
