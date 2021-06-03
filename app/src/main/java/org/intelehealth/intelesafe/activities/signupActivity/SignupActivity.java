@@ -1,7 +1,6 @@
 package org.intelehealth.intelesafe.activities.signupActivity;
 
 
-import android.accounts.Account;
 //import android.accounts.AccountManager;
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -30,27 +29,20 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
+        import android.widget.ArrayAdapter;
+        import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
-import android.widget.Spinner;
-import android.widget.Toast;
+        import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-
-import com.google.firebase.crashlytics.FirebaseCrashlytics;
+        import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.gson.Gson;
 import com.parse.Parse;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
+        import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;

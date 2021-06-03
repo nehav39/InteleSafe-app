@@ -23,7 +23,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.intelehealth.intelesafe.R;
-import org.intelehealth.intelesafe.activities.visitSummaryActivity.MyViewHolder;
 import org.intelehealth.intelesafe.app.AppConstants;
 import org.intelehealth.intelesafe.utilities.SessionManager;
 

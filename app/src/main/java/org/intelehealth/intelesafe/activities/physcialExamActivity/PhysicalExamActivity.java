@@ -61,8 +61,6 @@ import org.intelehealth.intelesafe.utilities.UuidDictionary;
 import org.intelehealth.intelesafe.utilities.StringUtils;
 import org.intelehealth.intelesafe.utilities.exception.DAOException;
 
-import static java.security.AccessController.getContext;
-
 public class PhysicalExamActivity extends AppCompatActivity {
     final static String TAG = PhysicalExamActivity.class.getSimpleName();
     private SectionsPagerAdapter mSectionsPagerAdapter;
