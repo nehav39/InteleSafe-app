@@ -66,7 +66,7 @@
     <string name="intro_text2_part">monitor your own health daily</string>
 
     // Sign up
-    <string name="title_sign_up" translatable="false">Sign Up</string>
+    <string name="title_sign_up" translatable="false">Register</string>
     <string name="address_details">Address Details</string>
 
 
@@ -708,4 +708,8 @@
     <string name="prompt_confirm_password" translatable="false">Confirm Password*</string>
     <string name="enter_otp">Enter OTP</string>
     <string name="send_otp">Send OTP</string>
+    <string name="otp_sent">OTP is sent to your mobile number</string>
+    <string name="invalid_otp">Invalid OTP</string>
+    <string name="resend_otp">Resend OTP</string>
+    <string name="reset_password_success">Password reset successfully</string>
 </resources>

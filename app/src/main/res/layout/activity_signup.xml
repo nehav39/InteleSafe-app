@@ -465,6 +465,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginBottom="15dp"
                         android:orientation="vertical"
+                        android:animateLayoutChanges="true"
                         tools:visibility="visible">
 
                         <!--OTP No-->
@@ -483,6 +484,17 @@
                                 android:textAppearance="@style/sign_up_input" />
                         </com.google.android.material.textfield.TextInputLayout>
 
+                        <TextView
+                            android:id="@+id/tvResendOtp"
+                            android:text="@string/resend_otp"
+                            android:layout_marginTop="4dp"
+                            android:visibility="gone"
+                            tools:visibility="visible"
+                            android:minHeight="32dp"
+                            android:gravity="center"
+                            android:textColor="@color/colorPrimary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
@@ -904,7 +916,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="15dp"
                     android:background="@drawable/rectangle_7"
-                    android:text="@string/send_otp"
+                    android:text="@string/title_sign_up"
                     android:textAppearance="@style/sign_up_save" />
 
                 <!--                <android.support.design.widget.TextInputLayout-->

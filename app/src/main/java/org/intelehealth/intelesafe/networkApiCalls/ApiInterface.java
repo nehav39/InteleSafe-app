@@ -12,6 +12,7 @@ import org.intelehealth.intelesafe.models.ObsImageModel.ObsJsonResponse;
 import org.intelehealth.intelesafe.models.ObsImageModel.ObsPushDTO;
 import org.intelehealth.intelesafe.models.ResetPassoword;
 import org.intelehealth.intelesafe.models.Results;
+import org.intelehealth.intelesafe.models.SendOtp;
 import org.intelehealth.intelesafe.models.UUIDResData;
 import org.intelehealth.intelesafe.models.UserAddressData;
 import org.intelehealth.intelesafe.models.UserBirthData;
@@ -31,6 +32,8 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -138,8 +141,14 @@ public interface ApiInterface {
     @GET
     Observable<ClsUserGetResponse> getUsersFromServer(@Url String url,@Header("Authorization") String authHeader, @Query("username")  String userName);
 
-    @GET
-    Observable<ClsUserGetResponse> sendOtp(@Url String url,@Header("Authorization") String authHeader, @Query("username")  String userName);
+    @FormUrlEncoded
+    @POST
+    Observable<SendOtp> sendOtp(@Url String url, @Header("api-key") String apiKey,
+                                @Field("to")  String to,
+                                @Field("type")  String type,
+                                @Field("sender")  String sender,
+                                @Field("body")  String body,
+                                @Field("template_id")  String template_id);
 
     @GET
     Observable<ClsUserGetResponse> verifyOtp(@Url String url,@Header("Authorization") String authHeader, @Query("username")  String userName, @Query("otp")  String otp);

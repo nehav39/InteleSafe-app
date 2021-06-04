@@ -27,6 +27,7 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
         import android.widget.ArrayAdapter;
@@ -35,18 +36,22 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.NumberPicker;
 import android.widget.RadioButton;
-        import android.widget.Toast;
+import android.widget.TextView;
+import android.widget.Toast;
 
         import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.gson.Gson;
 import com.parse.Parse;
 
-        import java.text.SimpleDateFormat;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
@@ -65,6 +70,7 @@ import org.intelehealth.intelesafe.models.NewUserCreationCall.NameUser;
 import org.intelehealth.intelesafe.models.NewUserCreationCall.PersonUser;
 import org.intelehealth.intelesafe.models.NewUserCreationCall.UserCreationData;
 import org.intelehealth.intelesafe.models.Patient;
+import org.intelehealth.intelesafe.models.SendOtp;
 import org.intelehealth.intelesafe.models.UUIDResData;
 import org.intelehealth.intelesafe.models.UserAddressData;
 import org.intelehealth.intelesafe.models.UserBirthAttribute;
@@ -205,6 +211,7 @@ public class SignupActivity extends AppCompatActivity {
     private EditText edt_state;
 
     private ImageView image_username_valid;
+    private TextView tvResendOtp;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -602,12 +609,12 @@ public class SignupActivity extends AppCompatActivity {
 
         //DOB Picker is shown when clicked
         mDOBPicker.getDatePicker().setMaxDate(System.currentTimeMillis());
-        mDOB.setOnClickListener(new View.OnClickListener() {
+        /*mDOB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mDOBPicker.show();
             }
-        });
+        });*/
 
 
         //if patient update then age will be set
@@ -617,68 +624,68 @@ public class SignupActivity extends AppCompatActivity {
 //            int month = DateAndTimeUtils.getMonth(patient1.getDate_of_birth());
 //            mAge.setText(age + getString(R.string.identification_screen_text_years) + month + getString(R.string.identification_screen_text_months));
         }
-//        mAge.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mAgePicker = new AlertDialog.Builder(SignupActivity.this, R.style.AlertDialogStyle);
-//                mAgePicker.setTitle(R.string.identification_screen_prompt_age);
-//                final LayoutInflater inflater = getLayoutInflater();
-//                View convertView = inflater.inflate(R.layout.dialog_2_numbers_picker, null);
-//                mAgePicker.setView(convertView);
-//                final NumberPicker yearPicker = convertView.findViewById(R.id.dialog_2_numbers_quantity);
-//                final NumberPicker monthPicker = convertView.findViewById(R.id.dialog_2_numbers_unit);
-//                final TextView middleText = convertView.findViewById(R.id.dialog_2_numbers_text);
-//                final TextView endText = convertView.findViewById(R.id.dialog_2_numbers_text_2);
-//                middleText.setText(getString(R.string.identification_screen_picker_years));
-//                endText.setText(getString(R.string.identification_screen_picker_months));
-//                yearPicker.setMinValue(0);
-//                yearPicker.setMaxValue(100);
-//                monthPicker.setMinValue(0);
-//                monthPicker.setMaxValue(12);
-//                if (mAgeYears > 0) {
-//                    yearPicker.setValue(mAgeYears);
-//                }
-//                if (mAgeMonths > 0) {
-//                    monthPicker.setValue(mAgeMonths);
-//                }
-//
-//                mAgePicker.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        yearPicker.setValue(yearPicker.getValue());
-//                        monthPicker.setValue(monthPicker.getValue());
-//                        String ageString = yearPicker.getValue() + getString(R.string.identification_screen_text_years) + " - " + monthPicker.getValue() + getString(R.string.identification_screen_text_months);
-//                        mAge.setText(ageString);
-//
-//
-//                        Calendar calendar = Calendar.getInstance();
-//                        int curYear = calendar.get(Calendar.YEAR);
-//                        int birthYear = curYear - yearPicker.getValue();
-//                        int curMonth = calendar.get(Calendar.MONTH);
-//                        int birthMonth = curMonth - monthPicker.getValue();
-//                        mDOBYear = birthYear;
-//                        mDOBMonth = birthMonth;
-//                        mDOBDay = 1;
-//
-//                        Locale.setDefault(Locale.ENGLISH);
-//                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault());
-//                        dob.set(mDOBYear, mDOBMonth, mDOBDay);
-//                        String dobString = simpleDateFormat.format(dob.getTime());
-//                        mDOB.setText(dobString);
-//                        mDOBPicker.updateDate(mDOBYear, mDOBMonth, mDOBDay);
-//                        dialog.dismiss();
-//                    }
-//                });
-//                mAgePicker.setNegativeButton(R.string.generic_cancel, new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        dialog.dismiss();
-//                    }
-//                });
-//
-//                mAgePicker.show();
-//            }
-//        });
+        mDOB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAgePicker = new AlertDialog.Builder(SignupActivity.this, R.style.AlertDialogStyle);
+                mAgePicker.setTitle(R.string.identification_screen_prompt_age);
+                final LayoutInflater inflater = getLayoutInflater();
+                View convertView = inflater.inflate(R.layout.dialog_2_numbers_picker, null);
+                mAgePicker.setView(convertView);
+                final NumberPicker yearPicker = convertView.findViewById(R.id.dialog_2_numbers_quantity);
+                final NumberPicker monthPicker = convertView.findViewById(R.id.dialog_2_numbers_unit);
+                final TextView middleText = convertView.findViewById(R.id.dialog_2_numbers_text);
+                final TextView endText = convertView.findViewById(R.id.dialog_2_numbers_text_2);
+                middleText.setText(getString(R.string.identification_screen_picker_years));
+                endText.setText(getString(R.string.identification_screen_picker_months));
+                yearPicker.setMinValue(0);
+                yearPicker.setMaxValue(100);
+                monthPicker.setMinValue(0);
+                monthPicker.setMaxValue(12);
+                if (mAgeYears > 0) {
+                    yearPicker.setValue(mAgeYears);
+                }
+                if (mAgeMonths > 0) {
+                    monthPicker.setValue(mAgeMonths);
+                }
+
+                mAgePicker.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        yearPicker.setValue(yearPicker.getValue());
+                        monthPicker.setValue(monthPicker.getValue());
+                        String ageString = yearPicker.getValue() + getString(R.string.identification_screen_text_years) + " - " + monthPicker.getValue() + getString(R.string.identification_screen_text_months);
+                        mDOB.setText(ageString);
+
+
+                        Calendar calendar = Calendar.getInstance();
+                        int curYear = calendar.get(Calendar.YEAR);
+                        int birthYear = curYear - yearPicker.getValue();
+                        int curMonth = calendar.get(Calendar.MONTH);
+                        int birthMonth = curMonth - monthPicker.getValue();
+                        mDOBYear = birthYear;
+                        mDOBMonth = birthMonth;
+                        mDOBDay = 1;
+
+                        Locale.setDefault(Locale.ENGLISH);
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault());
+                        dob.set(mDOBYear, mDOBMonth, mDOBDay);
+                        String dobString = simpleDateFormat.format(dob.getTime());
+                        mDOB.setText(dobString);
+                        mDOBPicker.updateDate(mDOBYear, mDOBMonth, mDOBDay);
+                        dialog.dismiss();
+                    }
+                });
+                mAgePicker.setNegativeButton(R.string.generic_cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                mAgePicker.show();
+            }
+        });
 
         Button btnSave = findViewById(R.id.btnSave);
 
@@ -888,7 +895,22 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }
 
+                if (TextUtils.isEmpty(mOTP.getText().toString())) {
+                    mOTP.setError(getString(R.string.error_field_required));
+                    mOTP.requestFocus();
+                    return;
+                }
 
+                String otp = mOTP.getText().toString().trim();
+                if (!otp.equals(generatedOtp)) {
+                    if (BuildConfig.DEBUG && otp.equals("0000")) {
+                        System.out.println("testing with fake otp");
+                    } else {
+                        mOTP.setError(getString(R.string.invalid_otp));
+                        mOTP.requestFocus();
+                        return;
+                    }
+                }
 
 
 //                if (mAge.getText().toString().equals("")) {
@@ -1132,6 +1154,16 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
+        tvResendOtp = findViewById(R.id.tvResendOtp);
+        tvResendOtp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String mobile = String.format("91%s", mPhoneNum.getText().toString());
+                if (!TextUtils.isEmpty(mobile)) {
+                    sendOtp(mobile);
+                }
+            }
+        });
     }
 
     boolean isUSerExistsAlready = false;
@@ -1152,6 +1184,7 @@ public class SignupActivity extends AppCompatActivity {
                         if (resultList == null || resultList.size() == 0) {
                             isUSerExistsAlready = false;
                             image_username_valid.setVisibility(View.VISIBLE);
+                            sendOtp(String.format("91%s", enteredUserName));
                         } else {
                             image_username_valid.setVisibility(View.GONE);
                             isUSerExistsAlready = true;
@@ -1855,5 +1888,41 @@ public class SignupActivity extends AppCompatActivity {
                 });
     }
 
+
+    String generatedOtp;
+    private void sendOtp(String enteredUserName) {
+        progress.show();
+        UrlModifiers urlModifiers = new UrlModifiers();
+        String urlString = urlModifiers.sendOtp("HXIN1701481071IN");
+//        String encoded = base64Utils.encoded("admin", "Admin123");
+        generatedOtp = new DecimalFormat("0000").format(new Random().nextInt(9999));
+        Observable<SendOtp> userGetResponse = AppConstants.apiInterface.sendOtp(urlString,
+                "A39e1e65900618ef9b6e16da473f8894d",
+                enteredUserName,
+                "OTP",
+                "TIFDOC",
+                String.format("Your Intelehealth Swasthsampark account verification code is :%s", generatedOtp),
+                "1107162261167510445");
+        userGetResponse.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<SendOtp>() {
+                    @Override
+                    public void onNext(SendOtp clsUserGetResponse) {
+                        progress.dismiss();
+                        Toast.makeText(context, R.string.otp_sent, Toast.LENGTH_SHORT).show();
+                        mOTP.requestFocus();
+                        tvResendOtp.setVisibility(View.VISIBLE);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        progress.dismiss();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
 
 }

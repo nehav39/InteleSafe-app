@@ -109,4 +109,8 @@ public class UrlModifiers {
         String BASE_URL = "https://" + CLEAN_URL + "/";
         return BASE_URL + urlModifier;
     }
+
+    public String sendOtp(String SID) {
+        return String.format("https://api.kaleyra.io/v1/%s/messages", SID);
+    }
 }

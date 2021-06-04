@@ -9,17 +9,14 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 
         import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import android.text.SpannableString;
+
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
-import android.text.util.Linkify;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -39,13 +36,16 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Random;
 
 import org.intelehealth.intelesafe.BuildConfig;
 import org.intelehealth.intelesafe.R;
 import org.intelehealth.intelesafe.activities.privacyNoticeActivity.PrivacyNotice_Activity;
 import org.intelehealth.intelesafe.activities.resetPasswordActivity.ResetPasswordActivity;
 import org.intelehealth.intelesafe.app.AppConstants;
+import org.intelehealth.intelesafe.models.SendOtp;
 import org.intelehealth.intelesafe.models.loginModel.LoginModel;
 import org.intelehealth.intelesafe.models.loginProviderModel.LoginProviderModel;
 import org.intelehealth.intelesafe.models.person.ClsPersonGetResponse;
@@ -104,6 +104,7 @@ public class LoginActivity extends AppCompatActivity {
     Button mEmailSignInButton;
     View llOtp;
     TextInputLayout etPasswordLayout;
+    String generatedOtp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -189,7 +190,21 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Logger.logD(TAG, "button pressed");
-                attemptLogin();
+                if (!sessionManager.isSetupComplete()) {
+                    if (TextUtils.isEmpty(generatedOtp)) {
+                        attemptLogin();
+                    } else {
+                        String mobile = mUsernameView.getText().toString();
+                        String otp = mPasswordView.getText().toString();
+                        if (generatedOtp.equals(otp) || (BuildConfig.DEBUG && otp.equals("0000"))) {
+                            ResetPasswordActivity.start(context, mobile);
+                        } else {
+                            Toast.makeText(context, R.string.invalid_otp, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                } else {
+                    attemptLogin();
+                }
             }
         });
 
@@ -237,6 +252,10 @@ public class LoginActivity extends AppCompatActivity {
             etPasswordLayout.setHint(R.string.prompt_password);
             llOtp.setVisibility(View.VISIBLE);
             mEmailSignInButton.setText(R.string.action_sign_in);
+        } else {
+            etPasswordLayout.setHint(R.string.prompt_otp);
+            llOtp.setVisibility(View.GONE);
+            mEmailSignInButton.setText(R.string.action_send_otp);
         }
     }
 
@@ -279,24 +298,27 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        /*// Check for a valid password, if the user entered one.
-        if (TextUtils.isEmpty(password)) {
-            mPasswordView.setError(getString(R.string.enter_password));
-            mPasswordView.requestFocus();
-            return;
-        }
-
-        if (password.length() < 4) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            mPasswordView.requestFocus();
-            return;
-        }*/
-
         if (NetworkConnection.isOnline(this)) {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-//            UserLoginTask(email, password);
-            checkUserExistsOrNot(email);
+            if (sessionManager.isSetupComplete()) {
+                // Check for a valid password, if the user entered one.
+                if (TextUtils.isEmpty(password)) {
+                    mPasswordView.setError(getString(R.string.enter_password));
+                    mPasswordView.requestFocus();
+                    return;
+                }
+
+                if (password.length() < 4) {
+                    mPasswordView.setError(getString(R.string.error_invalid_password));
+                    mPasswordView.requestFocus();
+                    return;
+                }
+
+                UserLoginTask(email, password);
+            } else {
+                checkUserExistsOrNot(email);
+            }
         } else {
             //offlineLogin.login(email, password);
 //            offlineLogin.offline_login(email, password);
@@ -316,8 +338,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void cant_log() {
 
-        Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
-        startActivity(intent);
+        ResetPasswordActivity.start(context, null);
 
         /*final SpannableString span_string = new SpannableString(getApplicationContext().getText(R.string.email_link)); //message is changed...
         Linkify.addLinks(span_string, Linkify.EMAIL_ADDRESSES);
@@ -607,8 +628,7 @@ public class LoginActivity extends AppCompatActivity {
                             mEmailView.setError(getString(R.string.txt_user_exists));
                             mEmailView.requestFocus();*/
 
-                            llOtp.setVisibility(View.VISIBLE);
-                            mEmailSignInButton.setText(R.string.action_sign_in);
+                            sendOtp(String.format("91%s",mUsernameView.getText().toString().trim()));
                         }
                     }
 
@@ -626,43 +646,26 @@ public class LoginActivity extends AppCompatActivity {
     private void sendOtp(String enteredUserName) {
         cpd.show();
         UrlModifiers urlModifiers = new UrlModifiers();
-        String urlString = urlModifiers.setRegistrationURL();
-        String encoded = base64Utils.encoded("admin", "Admin123");
-        Observable<ClsUserGetResponse> userGetResponse = AppConstants.apiInterface.sendOtp(urlString, "Basic " + encoded, enteredUserName);
+        String urlString = urlModifiers.sendOtp("HXIN1701481071IN");
+//        String encoded = base64Utils.encoded("admin", "Admin123");
+        generatedOtp = new DecimalFormat("0000").format(new Random().nextInt(9999));
+        Observable<SendOtp> userGetResponse = AppConstants.apiInterface.sendOtp(urlString,
+                "A39e1e65900618ef9b6e16da473f8894d",
+                enteredUserName,
+                "OTP",
+                "TIFDOC",
+                String.format("Your Intelehealth Swasthsampark account verification code is :%s", generatedOtp),
+                "1107162261167510445");
         userGetResponse.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DisposableObserver<ClsUserGetResponse>() {
+                .subscribe(new DisposableObserver<SendOtp>() {
                     @Override
-                    public void onNext(ClsUserGetResponse clsUserGetResponse) {
+                    public void onNext(SendOtp clsUserGetResponse) {
                         cpd.dismiss();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        cpd.dismiss();
-                    }
-
-                    @Override
-                    public void onComplete() {
-                    }
-                });
-    }
-
-    private void verifyOtp(String enteredUserName, String otp) {
-        cpd.show();
-        UrlModifiers urlModifiers = new UrlModifiers();
-        String urlString = urlModifiers.setRegistrationURL();
-        String encoded = base64Utils.encoded("admin", "Admin123");
-        Observable<ClsUserGetResponse> userGetResponse = AppConstants.apiInterface.verifyOtp(urlString, "Basic " + encoded, enteredUserName, otp);
-        userGetResponse.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DisposableObserver<ClsUserGetResponse>() {
-                    @Override
-                    public void onNext(ClsUserGetResponse clsUserGetResponse) {
-                        cpd.dismiss();
-
-                        Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
-                        startActivity(intent);
+                        llOtp.setVisibility(View.VISIBLE);
+                        mEmailSignInButton.setText(R.string.action_sign_in);
+                        mPasswordView.requestFocus();
+                        Toast.makeText(context, R.string.otp_sent, Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

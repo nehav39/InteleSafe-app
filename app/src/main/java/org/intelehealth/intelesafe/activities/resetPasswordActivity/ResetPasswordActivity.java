@@ -58,6 +58,13 @@ import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
 public class ResetPasswordActivity extends AppCompatActivity {
+    private static final String EXTRA_MOBILE = "EXTRA_MOBILE";
+    public static void start(Context context, String mobile) {
+        Intent starter = new Intent(context, ResetPasswordActivity.class);
+        starter.putExtra(EXTRA_MOBILE, mobile);
+        context.startActivity(starter);
+    }
+
     private static final String[] DUMMY_CREDENTIALS = new String[]{
             "username:password", "admin:nimda"
     };
@@ -171,6 +178,15 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 attemptLogin();
             }
         });
+
+        if (getIntent() != null) {
+            String mobile = getIntent().getStringExtra(EXTRA_MOBILE);
+            if (!TextUtils.isEmpty(mobile)) {
+                mUsernameView.setText(mobile);
+                mUsernameView.setEnabled(false);
+                mPasswordView.requestFocus();
+            }
+        }
     }
 
     private void setLogo() {
@@ -536,6 +552,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                     @Override
                     public void onNext(ResetPassoword clsUserGetResponse) {
                         cpd.dismiss();
+                        Toast.makeText(context, R.string.reset_password_success, Toast.LENGTH_SHORT).show();
                         UserLoginTask(enteredUserName, password);
                     }
 
