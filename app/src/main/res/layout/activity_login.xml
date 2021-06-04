@@ -130,6 +130,21 @@
 
                 </LinearLayout>
 
+                <TextView
+                    android:id="@+id/tvResendOtp"
+                    android:text="@string/resend_otp"
+                    android:layout_marginTop="4dp"
+                    android:visibility="gone"
+                    tools:visibility="visible"
+                    android:minHeight="32dp"
+                    android:gravity="center"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="10dp"
+                    android:fontFamily="@font/lato_regular"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
                 <Button
                     android:id="@+id/email_sign_in_button"
                     android:layout_width="match_parent"

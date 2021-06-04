@@ -105,6 +105,7 @@ public class LoginActivity extends AppCompatActivity {
     View llOtp;
     TextInputLayout etPasswordLayout;
     String generatedOtp;
+    private TextView tvResendOtp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -214,6 +215,17 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         llOtp = findViewById(R.id.llOtp);
+        tvResendOtp = findViewById(R.id.tvResendOtp);
+        tvResendOtp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!NetworkConnection.isOnline(context)) {
+                    Toast.makeText(context, R.string.no_network, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                sendOtp(String.format("91%s",mUsernameView.getText().toString().trim()));
+            }
+        });
         etPasswordLayout = findViewById(R.id.etPasswordLayout);
 
         Button sign_up_button = findViewById(R.id.sign_up_button);
@@ -668,6 +680,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onNext(SendOtp clsUserGetResponse) {
                         cpd.dismiss();
                         llOtp.setVisibility(View.VISIBLE);
+                        tvResendOtp.setVisibility(View.VISIBLE);
                         mEmailSignInButton.setText(R.string.action_sign_in);
                         mPasswordView.requestFocus();
                         Toast.makeText(context, R.string.otp_sent, Toast.LENGTH_SHORT).show();
