@@ -57,7 +57,9 @@
     <string name="permission_rationale" translatable="false">"Contacts permissions are needed for providing email completions."</string>
     <string name="device_id" translatable="false">Device ID:</string>
     <string name="cant_login_user" translatable="false">Forgot password?</string>
-    <string name="email_link" translatable="false"> To reset your password send an email to support@intelehealth.io</string>
+    <string name="email_link" > To reset your password send an email to support@intelehealth.io</string>
+    <string name="send_email_button">Send Email</string>
+    <string name="close_button">Close</string>
 
     //Intro
     <string name="intro_text1">This app is for all types of health workers at the frontlines of care to learn about personal protection measures and PPE use.</string>
