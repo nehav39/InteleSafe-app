@@ -2,6 +2,8 @@
 <resources>
     <string name="app_name">InteleSafe</string>
     <string name="intelecare">InteleCare</string>
+    <string name="swasth_sampark">स्वास्थ्य संपर्क</string>
+    <string name="splash_desc_text">COVID-19 रोगियों के लिए रिकवरी और पुनर्वास</string>
     <string name="select_language">Select Language</string>
     <string name="accept">स्वीकार</string>
     <string name="reject">अस्वीकार</string>
@@ -11,7 +13,7 @@
     <string name="visit_Summary_cardview">सारांश</string>
     <string name="address_of_line_1">Address of Line 1*</string>
     <string name="skip">skip</string>
-    <string name="start">Start</string>
+    <string name="start">शुरू</string>
     <string name="error_while_fetching_location">Error while fetching locations</string>
     <string name="something_went_wrong">Something went wrong, please try again</string>
     <string name="phone_number_validation">Phone number must be 10 digits</string>
@@ -111,6 +113,8 @@
     <string name="device_id" translatable="false">Device ID:</string>
     <string name="cant_login_user">पासवर्ड भूल गए?</string>
     <string name="email_link">अपना पासवर्ड रीसेट करने के लिए support@intelehealth.io पर एक ईमेल भेजें</string>
+    <string name="send_email_button">ईमेल भेजें</string>
+    <string name="close_button">बंद करे</string>
 
     //Home Screen (after login)
     <string name="PPE_and_infection">व्यक्तिगत सुरक्षा उपकरण (पीपीई) और संक्रमण नियंत्रण</string>
@@ -202,6 +206,12 @@
     <string name="intro_text2">आप अपने स्वयं के स्वास्थ्य की दैनिक निगरानी कर सकते हैं और मदद के लिए पहुंच सकते हैं यदि आपको लगता है कि आपके पास असुरक्षित जोखिम हो सकता है और संक्रमित हो सकता है।</string>
     <string name="intro_text1_part"> व्यक्तिगत सुरक्षा उपायों और पीपीई उपयोग के बारे में </string>
     <string name="intro_text2_part">स्वयं के स्वास्थ्य की दैनिक निगरानी कर</string>
+    <string name="intro1_text1">कोविड से उबरने की राह कठिन हो सकती है, हम यहाँ इस यात्रा में आपकी मदद करने के लिए हैं।</string>
+    <string name="intro1_text2">स्वास्थ्य संपर्क ऐप, राष्ट्रीय स्वास्थ्य मिशन, यूएसएआईडी निष्ठा और झपाईगो  की एक पहल है जो आपको आपके पिछले स्वास्थ्य जीवन स्तर पर लौटने में मदद करती है।</string>
+    <string name="intro1_text3">कई व्यक्तियों को कोविड बीमारी होने के बाद कमजोरी, थकान, सांस लेने में तकलीफ, सीने में दर्द, यहां तक ​​कि मानसिक स्वास्थ्य के मुद्दों सहित कई प्रकार के नुकसान/समस्या का सामना करना पड़ता है। कोविड के बाद की जटिलताओं की शीघ्र पहचान और पुनर्वास नैदानिक उपचार प्राप्त करना, ठीक होने की प्रक्रिया और सामान्य जीवन में वापस आने में महत्वपूर्ण भूमिका निभाएगा।</string>
+    <string name="intro2_text1">स्वास्थ्य संपर्क ऐप में आपके स्वास्थ्य सुधार की यात्रा में मदद करने के लिए शिक्षा सामग्री शामिल है, साथ ही आप अनुभवी डॉक्टरों से निःशुल्क टेलीकंसल्टेंशन ले सकते है जिसमे स्त्री रोग विशेषज्ञ, बाल रोग विशेषज्ञ, श्वास-रोग विशेषज्ञ, मेडिसिन, हृदय रोग विशेषज्ञ, नाक कान गला रोग विशेषज्ञ, नेत्र रोग विशेषज्ञ, पुनर्वास फिजियोथेरेपिस्ट, आहार विशेषज्ञ, पोषण सलाहकार, और मनोवैज्ञानिक शामिल है |</string>
+    <string name="intro2_text2">हम आपकी देखभाल में भाग लेने के अवसर की सराहना करते हैं और आपके स्वस्थ होने की कामना करते हैं।</string>
+    <string name="about_swasthya_sampark">स्वास्थ संपर्क के बारे में</string>
 
 
 
@@ -657,6 +667,7 @@
     <string name="please_select_state">Please select state</string>
     <string name="stay_aware_stay_safe">Stay Aware | Stay Safe</string>
     <string name="assessment_visit_title">मूल्यांकन</string>
+
     <!-- <string name="select_language">Select Language</string>
      <string name="address_of_isolation_line_2">Address of isolation, Line 2</string>
      <string name="HomeScreen_Header_Title">Welcome</string>
@@ -714,9 +725,11 @@
     <string name="txt_doctor_consulation">डॉक्टर का परामर्श</string>
     <string name="txt_selfCheck">स्वयं चेक-इन</string>
     <string name="txt_start_now">अभी शुरू करो</string>
+    <string name="recovering_covid">कोविड से उबरना</string>
+    <string name="txt_post_covid_selfCheck">कोविड होने के बाद स्वास्थ्य में सुधार का स्वयं मुल्यांकन ?</string>
     <string name="personal_pr">व्यक्तिगत सुरक्षा दिशानिर्देश</string>
     <string name="if_you_star">PPE और संक्रमण नियंत्रण के बारे में प्रश्न प्राप्त करें आप कोविद -19 के लक्षण दिखा रहे हैं? अपनी चिंताओं के बारे में किसी विशेषज्ञ से बात करने के लिए नीचे दिए गए हमारे हेल्पलाइन नंबर पर हमें एक व्हाट्सएप संदेश भेजें।</string>
-    <string name="whatsApp_description">अपनी चिंता के बारे में हमें व्हाट्सएप संदेश भेजें या हमारी होम केयर टीम को कॉल करें।</string>
+    <string name="whatsApp_description">कोविड से ठीक होने के बाद भी आपको कमजोरी, थकान, सांस लेने में तकलीफ, सीने में दर्द, चिंता या तनाव जैसे लक्षण महसूस हो रहे हैं । हम यहाँ आपकी मदद करने के लिए हैं। यह महत्वपूर्ण है कि हम इन लक्षणों का इलाज करें और आपके स्वास्थ्य को ठीक करें।</string>
     <string name="some_id">+91 9825989750</string>
     <string name="ppe_faq">पीपीई का पुन: उपयोग, विकल्प और एफएक्यू</string>
     <string name="about_covid">COVID-19 के बारे में</string>
@@ -725,7 +738,9 @@
     <string name="ppe_req">पीपीई किट ऑर्डर करें</string>
     <string name="ppe_req_hint">पीपीई की आपको मात्रा की क्या आवश्यकता है *</string>
     <string name="txt_whatsapp_helpline"><u>WhatsApp हेल्पलाइन</u></string>
+    <string name="simple_exercises">घर पर करने के लिये सरल व्यायाम</string>
     <string name="txt_get_help_now"><u>अभी सहायता प्राप्त करें</u></string>
+    <string name="txt_talk_to_doc"><u>डॉक्टर से बात करें</u></string>
     <string name="Mental_health_support_text">तनाव या चिंता महसूस करना? स्वास्थ्य सेवा प्रदाताओं के लिए कुछ स्व-देखभाल और समर्थन संसाधन यहां दिए गए हैं</string>
     <string name="tele_consultant_text">तनाव या चिंता महसूस करना? एक परामर्शदाता के साथ एक मुफ्त मानसिक मानसिक स्वास्थ्य परामर्श के लिए अनुरोध करें।</string>
     <string name="mental_health_support">मानसिक स्वास्थ्य समर्थन</string>

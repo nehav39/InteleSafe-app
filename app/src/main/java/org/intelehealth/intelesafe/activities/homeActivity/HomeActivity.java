@@ -289,8 +289,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                 String phoneNumberWithCountryCode = "+917972269174"; //+919825989750
                 String message =
-                        getString(R.string.hello_my_name) + sessionManager.getUserName() +
-                                /*" from " + sessionManager.getState() + */ getString(R.string.need_some_assisstance);
+                        getResources().getString(R.string.hello_my_name) + sessionManager.getUserName() +
+                                /*" from " + sessionManager.getState() + */ getResources().getString(R.string.need_some_assisstance);
 
                 startActivity(new Intent(Intent.ACTION_VIEW,
                         Uri.parse(

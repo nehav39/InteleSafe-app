@@ -180,7 +180,7 @@
                                 android:includeFontPadding="false"
                                 android:text="@string/how_are_you_today"
                                 android:textColor="@color/white"
-                                android:textSize="16sp" />
+                                android:textSize="18sp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -188,9 +188,9 @@
                                 android:layout_marginTop="24dp"
                                 android:fontFamily="@font/lato_bold"
                                 android:includeFontPadding="false"
-                                android:text="@string/txt_selfCheck"
+                                android:text="@string/txt_post_covid_selfCheck"
                                 android:textColor="@color/white"
-                                android:textSize="36sp" />
+                                android:textSize="34sp" />
 
 
                             <LinearLayout
@@ -256,7 +256,7 @@
                         android:fontFamily="@font/lato_bold"
                         android:gravity="center"
                         android:includeFontPadding="false"
-                        android:text="@string/covid_home_care"
+                        android:text="@string/recovering_covid"
                         android:textColor="@color/txt_sub_header_color"
                         android:textSize="17sp" />
 
@@ -269,7 +269,7 @@
                         android:fontFamily="@font/lato_bold"
                         android:gravity="center"
                         android:includeFontPadding="false"
-                        android:text="@string/about_covid"
+                        android:text="@string/simple_exercises"
                         android:textColor="@color/txt_sub_header_color"
                         android:textSize="17sp" />
 
@@ -490,7 +490,7 @@
                                 android:gravity="start|center"
                                 android:hint=""
                                 android:textStyle="bold"
-                                android:text="@string/txt_get_help_now"
+                                android:text="@string/txt_talk_to_doc"
                                 android:textColor="@color/txt_sub_header_color"
                                 android:textSize="22sp" />
 
@@ -522,6 +522,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/cardview_help"
+                    android:visibility="gone"
                     android:layout_marginHorizontal="14dp"
                     android:layout_marginTop="19dp"
                     app:cardCornerRadius="10sp"

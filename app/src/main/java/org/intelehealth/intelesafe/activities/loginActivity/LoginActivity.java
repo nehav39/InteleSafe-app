@@ -350,7 +350,7 @@ public class LoginActivity extends AppCompatActivity {
 
         new AlertDialog.Builder(this)
                 .setMessage(span_string)
-                .setNegativeButton("Send Email", new DialogInterface.OnClickListener() {
+                .setNegativeButton(getResources().getString(R.string.send_email_button), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //finish();
@@ -366,7 +366,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
 
                 })
-                .setPositiveButton("Close", null)
+                .setPositiveButton(getResources().getString(R.string.close_button), null)
                 .show();
 
         //prajwal_changes*/

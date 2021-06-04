@@ -31,7 +31,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="35dp"
-                android:src="@mipmap/ic_launcher_splash_login" />
+                android:src="@drawable/ic_spash_logo_background" />
 
             <LinearLayout
                 android:id="@+id/ll_center"
