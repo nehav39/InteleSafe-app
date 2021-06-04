@@ -140,6 +140,7 @@
     <string name="identification_screen_text_months" translatable="false"> months</string>
     <string name="identification_screen_picker_years" translatable="false">years</string>
     <string name="identification_screen_picker_months" translatable="false">months</string>
+    <string name="identification_screen_picker_days" translatable="false">days</string>
 
     //Active Patients Screen
     <string name="title_activity_active_patient" translatable="false">"Active Visits"</string>

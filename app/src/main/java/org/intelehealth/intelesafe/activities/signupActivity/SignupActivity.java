@@ -124,6 +124,7 @@ public class SignupActivity extends AppCompatActivity {
     private DatePickerDialog mDOBPicker;
     private int mAgeYears = 0;
     private int mAgeMonths = 0;
+    private int mAgeDays = 0;
     private String country1;
 
     PatientsDAO patientsDAO = new PatientsDAO();
@@ -634,14 +635,20 @@ public class SignupActivity extends AppCompatActivity {
                 mAgePicker.setView(convertView);
                 final NumberPicker yearPicker = convertView.findViewById(R.id.dialog_2_numbers_quantity);
                 final NumberPicker monthPicker = convertView.findViewById(R.id.dialog_2_numbers_unit);
+                final NumberPicker dayPicker = convertView.findViewById(R.id.dialog_3_numbers_unit);
                 final TextView middleText = convertView.findViewById(R.id.dialog_2_numbers_text);
                 final TextView endText = convertView.findViewById(R.id.dialog_2_numbers_text_2);
+                final TextView dayTv = convertView.findViewById(R.id.dialog_2_numbers_text_3);
+                int totalDays = today.getActualMaximum(Calendar.DAY_OF_MONTH);
+                dayTv.setText(getString(R.string.identification_screen_picker_days));
                 middleText.setText(getString(R.string.identification_screen_picker_years));
                 endText.setText(getString(R.string.identification_screen_picker_months));
                 yearPicker.setMinValue(0);
                 yearPicker.setMaxValue(100);
                 monthPicker.setMinValue(0);
                 monthPicker.setMaxValue(12);
+                dayPicker.setMinValue(0);
+                dayPicker.setMaxValue(31);
                 if (mAgeYears > 0) {
                     yearPicker.setValue(mAgeYears);
                 }
@@ -649,12 +656,19 @@ public class SignupActivity extends AppCompatActivity {
                     monthPicker.setValue(mAgeMonths);
                 }
 
+                if (mAgeDays > 0) {
+                    dayPicker.setValue(mAgeDays);
+                }
+
                 mAgePicker.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         yearPicker.setValue(yearPicker.getValue());
                         monthPicker.setValue(monthPicker.getValue());
-                        String ageString = yearPicker.getValue() + getString(R.string.identification_screen_text_years) + " - " + monthPicker.getValue() + getString(R.string.identification_screen_text_months);
+                        monthPicker.setValue(monthPicker.getValue());
+                        dayPicker.setValue(dayPicker.getValue());
+                        String ageString = yearPicker.getValue() + getString(R.string.identification_screen_text_years) + " - " + monthPicker.getValue() + getString(R.string.identification_screen_text_months)  + " - " +
+                                dayPicker.getValue() + getString(R.string.identification_screen_picker_days);;
                         mDOB.setText(ageString);
 
 
@@ -666,6 +680,13 @@ public class SignupActivity extends AppCompatActivity {
                         mDOBYear = birthYear;
                         mDOBMonth = birthMonth;
                         mDOBDay = 1;
+                        int birthDay = calendar.get(Calendar.DAY_OF_MONTH) - dayPicker.getValue();
+                        if (birthDay < 0) {
+                            mDOBDay = birthDay + totalDays - 1;
+                            mDOBMonth--;
+                        } else {
+                            mDOBDay = birthDay;
+                        }
 
                         Locale.setDefault(Locale.ENGLISH);
                         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault());
