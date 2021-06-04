@@ -190,6 +190,11 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Logger.logD(TAG, "button pressed");
+                if (!NetworkConnection.isOnline(context)) {
+                    Toast.makeText(context, R.string.no_network, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 if (!sessionManager.isSetupComplete()) {
                     if (TextUtils.isEmpty(generatedOtp)) {
                         attemptLogin();

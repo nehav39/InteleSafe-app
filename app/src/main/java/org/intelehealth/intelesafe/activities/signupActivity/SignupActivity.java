@@ -714,7 +714,10 @@ public class SignupActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (!NetworkConnection.isOnline(context)) {
+                    Toast.makeText(context, R.string.no_network, Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
 //                sessionManager.setFirstTimeLaunch(false);
 //
@@ -1179,6 +1182,11 @@ public class SignupActivity extends AppCompatActivity {
         tvResendOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!NetworkConnection.isOnline(context)) {
+                    Toast.makeText(context, R.string.no_network, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 String mobile = String.format("91%s", mPhoneNum.getText().toString());
                 if (!TextUtils.isEmpty(mobile)) {
                     sendOtp(mobile);

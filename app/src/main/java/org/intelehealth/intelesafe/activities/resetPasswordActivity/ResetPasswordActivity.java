@@ -272,7 +272,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
         } else {
             //offlineLogin.login(email, password);
 //            offlineLogin.offline_login(email, password);
-
+            Toast.makeText(context, R.string.no_network, Toast.LENGTH_SHORT).show();
         }
 
     }
