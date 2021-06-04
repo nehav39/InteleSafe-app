@@ -160,7 +160,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/lato_regular"
-            android:text="Powered by Intelehealth, Ekal Arogya &amp; \n TRI"
+            android:text="Powered by Intelehealth, Ekal Arogya &amp; \n Transform Rural India"
             android:textColor="@color/white"
             android:layout_margin="3dp"
             android:textAlignment="center"/>
