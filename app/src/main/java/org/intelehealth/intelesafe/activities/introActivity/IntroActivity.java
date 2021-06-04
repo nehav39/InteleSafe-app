@@ -74,10 +74,11 @@ public class IntroActivity extends AppCompatActivity {
 
         layouts = new int[]{
                 R.layout.welcome_slide1,
+                R.layout.intro_slide2
         };
 
         // adding bottom dots
-        addBottomDots(0);
+        addBottomDots(1);
 
         // making notification bar transparent
         changeStatusBarColor();
@@ -198,6 +199,7 @@ public class IntroActivity extends AppCompatActivity {
         private LayoutInflater layoutInflater;
         private TextView tvIntroOne;
         private TextView tvIntroTwo;
+        private TextView tvIntroThree;
 
         public MyViewPagerAdapter() {
         }
@@ -209,19 +211,45 @@ public class IntroActivity extends AppCompatActivity {
             View view = layoutInflater.inflate(layouts[position], container, false);
             container.addView(view);
 
-            tvIntroOne = view.findViewById(R.id.tv_intro_one);
-            tvIntroTwo = view.findViewById(R.id.tv_intro_two);
+            if(position==0)
+            {
+                tvIntroOne = view.findViewById(R.id.tv_intro_one);
+                tvIntroTwo = view.findViewById(R.id.tv_intro_two);
+                tvIntroThree = view.findViewById(R.id.tv_intro_three);
 
-            //Highlighting Text
-            String introOne = getString(R.string.This_app_is_designed);
-            String textToHighlightOne = getString(R.string.authentic_information);
-            String newString = introOne.replaceAll(textToHighlightOne, "<font color='blue'>" + textToHighlightOne + "</font>");
-            tvIntroOne.setText(Html.fromHtml(newString));
+//            //Highlighting Text
+                String introOne = getString(R.string.intro1_text1);
+//            String textToHighlightOne = getString(R.string.authentic_information);
+//            String newString = introOne.replaceAll(textToHighlightOne, "<font color='blue'>" + textToHighlightOne + "</font>");
+                tvIntroOne.setText(Html.fromHtml(introOne));
 
-            String introTwo = getString(R.string.Here_you_can_monitor);
-            String textToHighlightTwo = getString(R.string.monitor_your_own_health);
-            String newStringTwo = introTwo.replaceAll(textToHighlightTwo, "<font color='blue'>" + textToHighlightTwo + "</font>");
-            tvIntroTwo.setText(Html.fromHtml(newStringTwo));
+                String introTwo = getString(R.string.intro1_text2);
+                String textToHighlightTwo = getString(R.string.swasth_sampark);
+                String newStringTwo = introTwo.replaceAll(textToHighlightTwo, "<font color='blue'>" + textToHighlightTwo + "</font>");
+                tvIntroTwo.setText(Html.fromHtml(newStringTwo));
+
+                String introThree = getString(R.string.intro1_text3);
+//            String textToHighlightOne = getString(R.string.authentic_information);
+//            String newString = introOne.replaceAll(textToHighlightOne, "<font color='blue'>" + textToHighlightOne + "</font>");
+                tvIntroThree.setText(Html.fromHtml(introThree));
+
+            }
+            else if(position==1)
+            {
+                tvIntroOne = view.findViewById(R.id.tv_intro_one);
+                tvIntroTwo = view.findViewById(R.id.tv_intro_two);
+
+                String introTwo = getString(R.string.intro2_text1);
+                String textToHighlightTwo = getString(R.string.swasth_sampark);
+                String newStringTwo = introTwo.replaceAll(textToHighlightTwo, "<font color='blue'>" + textToHighlightTwo + "</font>");
+                tvIntroOne.setText(Html.fromHtml(newStringTwo));
+
+                String introThree = getString(R.string.intro2_text2);
+//            String textToHighlightOne = getString(R.string.authentic_information);
+//            String newString = introOne.replaceAll(textToHighlightOne, "<font color='blue'>" + textToHighlightOne + "</font>");
+                tvIntroTwo.setText(Html.fromHtml(introThree));
+
+            }
 
             return view;
         }

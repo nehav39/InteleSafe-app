@@ -580,7 +580,6 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/help_cardview"
-            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:elevation="40dp"
@@ -601,7 +600,7 @@
                     android:id="@+id/help_relative"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="14dp"
+                    android:padding="0dp"
                     android:layout_marginEnd="24dp">
 
                     <TextView
@@ -609,6 +608,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Help"
+                        android:visibility="gone"
                         android:background="@color/white"
                         android:textColor="@color/txt_sub_header_color"
                         android:textSize="20sp"
@@ -620,6 +620,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
+                        android:visibility="gone"
                         android:fontFamily="@font/lato_regular"
                         android:text="@string/whatsApp_description"
                         android:layout_below="@id/help_title"
@@ -633,7 +634,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/visit_help_text"
-                        android:text="@string/txt_get_help_now"
+                        android:text="@string/txt_talk_to_doc"
                         android:textSize="@dimen/text_18sp"
                         android:layout_marginStart="14sp"
                         android:fontFamily="@font/lato_bold"
@@ -642,7 +643,6 @@
                         android:background="@android:color/transparent"
                         android:drawableStart="@drawable/ic_icons8_whatsapp"
                         android:gravity="start|center"
-                        android:layout_marginTop="9dp"
                         android:drawablePadding="14sp" />
 
                     <!-- Icon Credits:- <a target="_blank" href="https://icons8.com/icons/set/whatsapp">WhatsApp icon</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>-->
@@ -655,6 +655,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|right"
                     android:layout_marginEnd="12dp"
+                    android:visibility="gone"
                     android:layout_marginBottom="12dp"
                     android:src="@drawable/ic_heart">
 

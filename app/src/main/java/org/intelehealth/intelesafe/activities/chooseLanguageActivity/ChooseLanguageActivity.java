@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.intelehealth.intelesafe.R;
 import org.intelehealth.intelesafe.activities.homeActivity.HomeActivity;
 import org.intelehealth.intelesafe.activities.introActivity.IntroActivity;
+import org.intelehealth.intelesafe.activities.loginActivity.LoginActivity;
 import org.intelehealth.intelesafe.utilities.Logger;
 import org.intelehealth.intelesafe.utilities.SessionManager;
 
@@ -83,7 +84,8 @@ public class ChooseLanguageActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (sessionManager.isFirstTimeLaunch()) {
                     Logger.logD(LOG_TAG, "Starting setup");
-                    Intent intent = new Intent(ChooseLanguageActivity.this, IntroActivity.class);
+//                    Intent intent = new Intent(ChooseLanguageActivity.this, IntroActivity.class);
+                    Intent intent = new Intent(ChooseLanguageActivity.this, LoginActivity.class);
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(ChooseLanguageActivity.this, HomeActivity.class);
