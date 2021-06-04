@@ -528,10 +528,9 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         Help_Link_Whatsapp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String phoneNumberWithCountryCode = "+919825989750";
-                String message = "Hello, my name is " + sessionManager.getUserName() +
-                        /*" from "+ sessionManager.getState() + */" and I need some assistance.";
-
+                String phoneNumberWithCountryCode = "+917972269174";
+                String message =  getResources().getString(R.string.hello_my_name) + sessionManager.getUserName() +
+                        /*" from " + sessionManager.getState() + */ getResources().getString(R.string.need_some_assisstance);
                 startActivity(new Intent(Intent.ACTION_VIEW,
                         Uri.parse(
                                 String.format("https://api.whatsapp.com/send?phone=%s&text=%s",
