@@ -46,6 +46,7 @@
         android:layout_gravity="bottom|center"
         android:text="@string/save_button"
         android:fontFamily="@font/lato_regular"
+        android:textStyle="bold"
         android:textColor="@color/white"
         android:background="@drawable/button_bg_rounded_blue"
         android:layout_marginBottom="@dimen/margin_between_views"/>

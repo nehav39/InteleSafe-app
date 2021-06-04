@@ -28,8 +28,49 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="स्वास्थ्य संपर्क"
+            android:textAlignment="center"
+            android:fontFamily="@font/lato_bold"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:textSize="48sp" />
+
+        <!--<TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/stay_aware_stay_safe"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:fontFamily="@font/lato_bold"
+            android:textSize="24sp" />-->
+
+        <!--        <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/ic_stay_safe"/>-->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/lato_bold"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:textSize="34sp"
+            android:text="COVID-19 रोगियों के लिए रिकवरी और पुनर्वास"
+            android:textAlignment="center"
+            android:src="@drawable/ic_stay_safe"/>
+        <!--        android:text="Stay Aware \u2022 Stay Safe"-->
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="@string/swasth_sampark"
+            android:text="Swasthya Sampark"
             android:textAlignment="center"
             android:fontFamily="@font/lato_bold"
             android:textColor="@color/white"
@@ -60,7 +101,7 @@
             android:textColor="@color/white"
             android:layout_gravity="center"
             android:textSize="34sp"
-            android:text="@string/splash_desc_text"
+            android:text="Recovery and Rehabilitation for COVID-19 patients"
             android:src="@drawable/ic_stay_safe"/>
 
     </LinearLayout>
