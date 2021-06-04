@@ -291,12 +291,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void cant_log() {
-        final SpannableString span_string = new SpannableString(getApplicationContext().getText(R.string.email_link)); //message is changed...
+        final SpannableString span_string = new SpannableString(LoginActivity.this.getText(R.string.email_link)); //message is changed...
         Linkify.addLinks(span_string, Linkify.EMAIL_ADDRESSES);
 
         new AlertDialog.Builder(this)
                 .setMessage(span_string)
-                .setNegativeButton("Send Email", new DialogInterface.OnClickListener() {
+                .setNegativeButton(getResources().getString(R.string.send_email_button), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //finish();
@@ -312,7 +312,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
 
                 })
-                .setPositiveButton("Close", null)
+                .setPositiveButton(getResources().getString(R.string.close_button), null)
                 .show();
 
         //prajwal_changes
