@@ -216,7 +216,7 @@ public class SignupActivity extends AppCompatActivity {
     private ImageView image_username_valid;
     private TextView tvResendOtp;
 
-    private Spinner state_spinner, city_spinner;
+    private Spinner state_spinner, city_spinner, block_spinner;
     private EditText et_tested_positive_date;
     private String birthDate;
     private CheckBox chbAgreePrivacy;
@@ -810,6 +810,24 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }
 
+                if (state_spinner.getSelectedItemPosition() == 0) {
+                    state_spinner.requestFocus();
+                    Toast.makeText(context, R.string.error_mandatory_field, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (city_spinner.getSelectedItemPosition() == 0) {
+                    city_spinner.requestFocus();
+                    Toast.makeText(context, R.string.error_mandatory_field, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (block_spinner.getSelectedItemPosition() == 0) {
+                    block_spinner.requestFocus();
+                    Toast.makeText(context, R.string.error_mandatory_field, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 if (dob.equals("") || dob.toString().equals("")) {
                     if (dob.after(today)) {
                         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(SignupActivity.this);
@@ -1088,7 +1106,7 @@ public class SignupActivity extends AppCompatActivity {
 
                 UserBirthAttribute userBirthHosAttribute = new UserBirthAttribute();
                 userBirthHosAttribute.setAttributeType("1c718819-345c-4368-aad6-d69b4c267db7"); //openmrsuuid education
-              //  userBirthHosAttribute.setValue("" + hospital_name.getText().toString()); //hospital name text
+                userBirthHosAttribute.setValue("" + block_spinner.getSelectedItem().toString()); //hospital name text
 
                 UserBirthAttribute userCasteAttribute = new UserBirthAttribute();
                 userCasteAttribute.setAttributeType("5a889d96-0c84-4a04-88dc-59a6e37db2d3"); // This is for Designation. openrms caste...
@@ -1215,13 +1233,28 @@ public class SignupActivity extends AppCompatActivity {
 
         state_spinner = findViewById(R.id.state_spinner);
         city_spinner = findViewById(R.id.city_spinner);
+        city_spinner.setEnabled(false);
+        block_spinner = findViewById(R.id.block_spinner);
+        block_spinner.setEnabled(false);
         state_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(SignupActivity.this, position == 0 ? R.array.jh_city_values : R.array.mp_city_values, android.R.layout.simple_spinner_item);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                city_spinner.setAdapter(adapter);
-                state = state_spinner.getSelectedItem().toString();
+                if (position > 0) {
+                    city_spinner.setEnabled(true);
+                    block_spinner.setEnabled(true);
+
+                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(SignupActivity.this, position == 1 ? R.array.jh_city_values : R.array.mp_city_values, android.R.layout.simple_spinner_item);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    city_spinner.setAdapter(adapter);
+                    state = state_spinner.getSelectedItem().toString();
+
+                    ArrayAdapter<CharSequence> blockAdapter = ArrayAdapter.createFromResource(SignupActivity.this, position == 1 ? R.array.jh_block_values : R.array.mp_block_values, android.R.layout.simple_spinner_item);
+                    blockAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    block_spinner.setAdapter(blockAdapter);
+                } else {
+                    city_spinner.setEnabled(false);
+                    block_spinner.setEnabled(false);
+                }
             }
 
             @Override

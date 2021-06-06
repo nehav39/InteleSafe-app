@@ -733,4 +733,6 @@
     <string name="splash_subtitle">NISHTHA’s Comprehensive Post COVID Care\nInitiative</string>
     <string name="jharkhand">Jharkhand</string>
     <string name="madhya_pradesh">Madhya Pradesh</string>
+    <string name="hint_block">Block*</string>
+    <string name="error_mandatory_field">Please fill all the mandatory fields</string>
 </resources>

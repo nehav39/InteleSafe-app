@@ -275,6 +275,24 @@
                                 android:entries="@array/jh_city_values"
                                 />
 
+                        <TextView
+                            android:layout_marginTop="8dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:includeFontPadding="false"
+                            android:textSize="16sp"
+                            android:text="@string/hint_block"
+                            android:textAppearance="@style/sign_up_input" />
+                        <Spinner
+                            android:id="@+id/block_spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:focusable="true"
+                            android:entries="@array/jh_block_values"
+                            />
+
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
