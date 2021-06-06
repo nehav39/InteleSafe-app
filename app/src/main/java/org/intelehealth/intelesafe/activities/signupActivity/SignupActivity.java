@@ -2,6 +2,7 @@ package org.intelehealth.intelesafe.activities.signupActivity;
 
 
 //import android.accounts.AccountManager;
+
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
@@ -11,16 +12,6 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.StrictMode;
-
-import androidx.annotation.Nullable;
-
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Spanned;
@@ -32,7 +23,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-        import android.widget.Button;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -44,20 +35,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-        import com.google.firebase.crashlytics.FirebaseCrashlytics;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.gson.Gson;
 import com.parse.Parse;
-
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.Random;
-import java.util.UUID;
-import java.util.regex.Pattern;
 
 import org.intelehealth.intelesafe.BuildConfig;
 import org.intelehealth.intelesafe.R;
@@ -95,6 +82,17 @@ import org.intelehealth.intelesafe.utilities.StringUtils;
 import org.intelehealth.intelesafe.utilities.UrlModifiers;
 import org.intelehealth.intelesafe.utilities.UuidGenerator;
 import org.intelehealth.intelesafe.utilities.exception.DAOException;
+
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.Random;
+import java.util.UUID;
+import java.util.regex.Pattern;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -222,6 +220,8 @@ public class SignupActivity extends AppCompatActivity {
     private EditText et_tested_positive_date;
     private String birthDate;
     private CheckBox chbAgreePrivacy;
+    private View frRegister, login_linearlayout;
+    private Button btnSendOtp;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -1206,11 +1206,6 @@ public class SignupActivity extends AppCompatActivity {
         tvResendOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!NetworkConnection.isOnline(context)) {
-                    Toast.makeText(context, R.string.no_network, Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
                 String mobile = String.format("91%s", mPhoneNum.getText().toString());
                 if (!TextUtils.isEmpty(mobile)) {
                     sendOtp(mobile);
@@ -1257,6 +1252,30 @@ public class SignupActivity extends AppCompatActivity {
 
         mPostal = findViewById(R.id.identification_postal_code);
         chbAgreePrivacy = findViewById(R.id.chb_agree_privacy);
+        frRegister = findViewById(R.id.frRegister);
+        login_linearlayout = findViewById(R.id.login_linearlayout);
+        btnSendOtp = findViewById(R.id.btnSendOtp);
+        btnSendOtp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (TextUtils.isEmpty(mPhoneNum.getText().toString())) {
+                    mPhoneNum.setError(getString(R.string.error_field_required));
+                    mPhoneNum.requestFocus();
+                    image_username_valid.setVisibility(View.GONE);
+                    return;
+                }
+
+                if (mPhoneNum.getText().toString().length() < 10) {
+                    mPhoneNum.setError(getString(R.string.invalid_phone_number));
+                    image_username_valid.setVisibility(View.GONE);
+                    mPhoneNum.requestFocus();
+                    return;
+                }
+
+                String mobile = String.format("91%s", mPhoneNum.getText().toString());
+                sendOtp(mobile);
+            }
+        });
     }
 
     boolean isUSerExistsAlready = false;
@@ -1277,7 +1296,7 @@ public class SignupActivity extends AppCompatActivity {
                         if (resultList == null || resultList.size() == 0) {
                             isUSerExistsAlready = false;
                             image_username_valid.setVisibility(View.VISIBLE);
-                            sendOtp(String.format("91%s", enteredUserName));
+//                            sendOtp(String.format("91%s", enteredUserName));
                         } else {
                             image_username_valid.setVisibility(View.GONE);
                             isUSerExistsAlready = true;
@@ -1985,6 +2004,11 @@ public class SignupActivity extends AppCompatActivity {
 
     String generatedOtp;
     private void sendOtp(String enteredUserName) {
+        if (!NetworkConnection.isOnline(context)) {
+            Toast.makeText(context, R.string.no_network, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         progress.show();
         UrlModifiers urlModifiers = new UrlModifiers();
         String urlString = urlModifiers.sendOtp("HXIN1701481071IN");
@@ -2004,6 +2028,10 @@ public class SignupActivity extends AppCompatActivity {
                     public void onNext(SendOtp clsUserGetResponse) {
                         progress.dismiss();
                         Toast.makeText(context, R.string.otp_sent, Toast.LENGTH_SHORT).show();
+
+                        btnSendOtp.setVisibility(View.GONE);
+                        login_linearlayout.setVisibility(View.VISIBLE);
+                        frRegister.setVisibility(View.VISIBLE);
                         mOTP.requestFocus();
                         tvResendOtp.setVisibility(View.VISIBLE);
                     }
