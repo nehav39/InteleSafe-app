@@ -33,6 +33,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
         import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -220,6 +221,7 @@ public class SignupActivity extends AppCompatActivity {
     private Spinner state_spinner, city_spinner;
     private EditText et_tested_positive_date;
     private String birthDate;
+    private CheckBox chbAgreePrivacy;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -953,6 +955,11 @@ public class SignupActivity extends AppCompatActivity {
                 }
 
 
+                if (!chbAgreePrivacy.isChecked()) {
+                    Toast.makeText(getApplicationContext(), getString(R.string.privacy_toast2), Toast.LENGTH_LONG).show();
+                    return;
+                }
+
 //                if (mAge.getText().toString().equals("")) {
 //                    mAge.setError(getString(R.string.error_field_required));
 //                    mAge.requestFocus();
@@ -1249,6 +1256,7 @@ public class SignupActivity extends AppCompatActivity {
         });
 
         mPostal = findViewById(R.id.identification_postal_code);
+        chbAgreePrivacy = findViewById(R.id.chb_agree_privacy);
     }
 
     boolean isUSerExistsAlready = false;

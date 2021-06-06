@@ -45,6 +45,7 @@ import org.intelehealth.intelesafe.BuildConfig;
 import org.intelehealth.intelesafe.R;
 import org.intelehealth.intelesafe.activities.privacyNoticeActivity.PrivacyNotice_Activity;
 import org.intelehealth.intelesafe.activities.resetPasswordActivity.ResetPasswordActivity;
+import org.intelehealth.intelesafe.activities.signupActivity.SignupActivity;
 import org.intelehealth.intelesafe.app.AppConstants;
 import org.intelehealth.intelesafe.models.SendOtp;
 import org.intelehealth.intelesafe.models.loginModel.LoginModel;
@@ -278,10 +279,17 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void signUp() {
-        Intent intent = new Intent(LoginActivity.this, PrivacyNotice_Activity.class);
+        /*Intent intent = new Intent(LoginActivity.this, PrivacyNotice_Activity.class);
         //intent.putExtra("privacy", privacy_value); //privacy value send to identificationActivity
         intent//addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 . addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);*/
+
+        Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
+        intent.putExtra("privacy", "Accept"); //privacy value send to identificationActivity
+        intent
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
