@@ -30,7 +30,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-        import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
         import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -38,6 +39,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +51,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
@@ -138,7 +141,7 @@ public class SignupActivity extends AppCompatActivity {
 //    EditText mAddress1;
 //    EditText mAddress2;
 //    AutoCompleteTextView mCity;
-//    EditText mPostal;
+    EditText mPostal;
     RadioButton mGenderM;
     RadioButton mGenderF;
 //    EditText countryText;
@@ -213,6 +216,10 @@ public class SignupActivity extends AppCompatActivity {
 
     private ImageView image_username_valid;
     private TextView tvResendOtp;
+
+    private Spinner state_spinner, city_spinner;
+    private EditText et_tested_positive_date;
+    private String birthDate;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -305,7 +312,7 @@ public class SignupActivity extends AppCompatActivity {
         mState = findViewById(R.id.spinner_state);*/
         /*selectDistrict = findViewById(R.id.spinner_district);
         selectLocation = findViewById(R.id.spinner_location);*/
-       /* mPostal = findViewById(R.id.identification_postal_code);
+       /*
         countryText = findViewById(R.id.identification_country);
         mCountry = findViewById(R.id.spinner_country);*/
 
@@ -692,7 +699,8 @@ public class SignupActivity extends AppCompatActivity {
                         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault());
                         dob.set(mDOBYear, mDOBMonth, mDOBDay);
                         String dobString = simpleDateFormat.format(dob.getTime());
-                        mDOB.setText(dobString);
+//                        mDOB.setText(dobString);
+                        birthDate = DateAndTimeUtils.getFormatedDateOfBirth(StringUtils.getValue(dobString));
                         mDOBPicker.updateDate(mDOBYear, mDOBMonth, mDOBDay);
                         dialog.dismiss();
                     }
@@ -786,6 +794,14 @@ public class SignupActivity extends AppCompatActivity {
                 //DOB validation...
                 if (mDOB.getText().toString().equals("")) {
                     mDOB.setError(getString(R.string.error_field_required));
+                    mDOB.setFocusable(true);
+                    mDOB.setFocusableInTouchMode(true);
+                    mDOB.requestFocus();
+                    return;
+                }
+
+                if (et_tested_positive_date.getText().toString().equals("")) {
+                    et_tested_positive_date.setError(getString(R.string.error_field_required));
                     mDOB.setFocusable(true);
                     mDOB.setFocusableInTouchMode(true);
                     mDOB.requestFocus();
@@ -1052,7 +1068,7 @@ public class SignupActivity extends AppCompatActivity {
                 ////////////Data Model for step 2
                 UserBirthData userBirthData = new UserBirthData();
                 userBirthData.setAge(mAgeYears);
-                userBirthData.setBirthdate("" + DateAndTimeUtils.getFormatedDateOfBirth(StringUtils.getValue(mDOB.getText().toString())));
+                userBirthData.setBirthdate("" + birthDate);
                 userBirthData.setBirthdateEstimated(true);
 
                 UserBirthAttribute userBirthAttribute = new UserBirthAttribute();
@@ -1061,7 +1077,7 @@ public class SignupActivity extends AppCompatActivity {
 
                 UserBirthAttribute userBirthOccupationAttribute = new UserBirthAttribute();
                 userBirthOccupationAttribute.setAttributeType("ecdaadb6-14a0-4ed9-b5b7-cfed87b44b87"); // openmrsuuid occupation
-              //  userBirthOccupationAttribute.setValue("" + licenseID.getText().toString()); //license text
+                userBirthOccupationAttribute.setValue("" + et_tested_positive_date.getText().toString()); //license text
 
                 UserBirthAttribute userBirthHosAttribute = new UserBirthAttribute();
                 userBirthHosAttribute.setAttributeType("1c718819-345c-4368-aad6-d69b4c267db7"); //openmrsuuid education
@@ -1088,9 +1104,10 @@ public class SignupActivity extends AppCompatActivity {
                 userAddressData.setCityVillage("" + mCity.getText().toString());*/
                 userAddressData.setCountry("" + country);
                 userAddressData.setStateProvince("" + state);
+                userAddressData.setCityVillage("" + city_spinner.getSelectedItem().toString());
                 sessionManager.setState(state);
                 sessionManager.setPatientCountry(country);
-              //  userAddressData.setPostalCode("" + mPostal.getText().toString());
+                userAddressData.setPostalCode("" + mPostal.getText().toString());
                 // userAddressData.setCountyDistrict("" + selectedLocationName);
 
                 Log.e("JSON-STEP3- ", "" + gson.toJson(userAddressData));
@@ -1193,6 +1210,45 @@ public class SignupActivity extends AppCompatActivity {
                 }
             }
         });
+
+        state_spinner = findViewById(R.id.state_spinner);
+        city_spinner = findViewById(R.id.city_spinner);
+        state_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(SignupActivity.this, position == 0 ? R.array.jh_city_values : R.array.mp_city_values, android.R.layout.simple_spinner_item);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                city_spinner.setAdapter(adapter);
+                state = state_spinner.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        et_tested_positive_date = findViewById(R.id.et_tested_positive_date);
+        et_tested_positive_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar instance = Calendar.getInstance();
+                new DatePickerDialog(SignupActivity.this, android.R.style.Theme_Holo_Light_Dialog_NoActionBar, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        et_tested_positive_date.setError(null);
+                        Calendar cal = Calendar.getInstance();
+                        cal.setTimeInMillis(0);
+                        cal.set(year, monthOfYear, dayOfMonth);
+                        Date date = cal.getTime();
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMMM yyyy", Locale.ENGLISH);
+                        et_tested_positive_date.setText(simpleDateFormat.format(date));
+                    }
+                }, instance.get(Calendar.YEAR), instance.get(Calendar.MONTH), instance.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+        mPostal = findViewById(R.id.identification_postal_code);
     }
 
     boolean isUSerExistsAlready = false;
@@ -1447,11 +1503,12 @@ public class SignupActivity extends AppCompatActivity {
         patientdto.setLastname(StringUtils.getValue(mLastName.getText().toString()));
         patientdto.setPhonenumber(StringUtils.getValue(mPhoneNum.getText().toString()));
         patientdto.setGender(StringUtils.getValue(mGender));
-        patientdto.setDateofbirth(DateAndTimeUtils.getFormatedDateOfBirth(StringUtils.getValue(mDOB.getText().toString())));
+        patientdto.setDateofbirth(birthDate);
        /* patientdto.setAddress1(StringUtils.getValue(mAddress1.getText().toString()));
         patientdto.setAddress2(StringUtils.getValue(mAddress2.getText().toString()));
         patientdto.setCityvillage(StringUtils.getValue(mCity.getText().toString()));
-        patientdto.setPostalcode(StringUtils.getValue(mPostal.getText().toString()));*/
+        */
+        patientdto.setPostalcode(StringUtils.getValue(mPostal.getText().toString()));
         patientdto.setCountry(country); //mCountry.getSelectedItem().toString()) here, country = India
         patientdto.setPatientPhoto(mCurrentPhotoPath);
 //      patientdto.setEconomic(StringUtils.getValue(m));

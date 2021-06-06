@@ -15,6 +15,7 @@ import android.os.StrictMode;
         import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.text.InputType;
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
@@ -682,6 +683,7 @@ public class LoginActivity extends AppCompatActivity {
                         llOtp.setVisibility(View.VISIBLE);
                         tvResendOtp.setVisibility(View.VISIBLE);
                         mEmailSignInButton.setText(R.string.action_sign_in);
+                        mPasswordView.setInputType(InputType.TYPE_CLASS_NUMBER);
                         mPasswordView.requestFocus();
                         Toast.makeText(context, R.string.otp_sent, Toast.LENGTH_SHORT).show();
                     }
