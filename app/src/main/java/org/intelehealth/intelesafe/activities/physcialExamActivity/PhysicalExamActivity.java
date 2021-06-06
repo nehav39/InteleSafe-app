@@ -83,8 +83,8 @@ public class PhysicalExamActivity extends AppCompatActivity {
     static File filePath;
 
 
-    String mFileName = "physExam_3.json";
-    String mFileName_2 = "physExam_3.json";
+    String mFileName = "physExam_4.json";
+    String mFileName_2 = "physExam_4.json";
 
 
     PhysicalExam physicalExamMap;

@@ -122,14 +122,14 @@
             android:src="@drawable/sponsor_logo_four"
             android:layout_alignParentStart="true"/>
 
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:visibility="gone"
-            android:id="@+id/sponsor_two"
-            android:src="@drawable/sponsor_logo_three" />
+<!--        <ImageView-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="10dp"-->
+<!--            android:visibility="gone"-->
+<!--            android:id="@+id/sponsor_two"-->
+<!--            android:src="@drawable/sponsor_logo_three" />-->
 
         <ImageView
             android:layout_width="0dp"
