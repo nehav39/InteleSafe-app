@@ -50,6 +50,7 @@ import org.intelehealth.intelesafe.BuildConfig;
 import org.intelehealth.intelesafe.R;
 import org.intelehealth.intelesafe.activities.cameraActivity.CameraActivity;
 import org.intelehealth.intelesafe.activities.homeActivity.HomeActivity;
+import org.intelehealth.intelesafe.activities.privacyNoticeActivity.PrivacyNotice_Activity;
 import org.intelehealth.intelesafe.app.AppConstants;
 import org.intelehealth.intelesafe.database.dao.ImagesDAO;
 import org.intelehealth.intelesafe.database.dao.PatientsDAO;
@@ -222,6 +223,7 @@ public class SignupActivity extends AppCompatActivity {
     private CheckBox chbAgreePrivacy;
     private View frRegister, login_linearlayout;
     private Button btnSendOtp;
+    private TextView txt_privacy;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -1305,8 +1307,22 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }
 
+                if (isUSerExistsAlready) {
+                    Toast.makeText(context, R.string.txt_user_exists, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 String mobile = String.format("91%s", mPhoneNum.getText().toString());
                 sendOtp(mobile);
+            }
+        });
+
+        txt_privacy = findViewById(R.id.txt_privacy);
+        txt_privacy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, PrivacyNotice_Activity.class);
+                startActivity(intent);
             }
         });
     }
