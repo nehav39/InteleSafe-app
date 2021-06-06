@@ -1129,7 +1129,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             recycler_home_adapter = new Recycler_Home_Adapter(context, recycler_arraylist, array_original_date);
             recycler_home_adapter.notifyDataSetChanged();
 
-            recyclerView.setLayoutManager(new LinearLayoutManager(HomeActivity.this, LinearLayoutManager.VERTICAL, false));
+            recyclerView.setLayoutManager(new LinearLayoutManager(HomeActivity.this, LinearLayoutManager.VERTICAL, true));
             recyclerView.setAdapter(recycler_home_adapter);
         } else {
             sessionManager.setFirstCheckin("false");

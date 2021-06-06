@@ -9,9 +9,11 @@
 
     <LinearLayout
         android:id="@+id/ll_center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:paddingHorizontal="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_above="@id/llStateLogos"
         android:orientation="vertical">
 
         <ImageView
@@ -73,15 +75,17 @@
             android:layout_gravity="center"
             android:textSize="36sp" />
 
-        <!--<TextView
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/stay_aware_stay_safe"
+            android:layout_marginTop="8dp"
+            android:text="@string/splash_subtitle"
             android:textColor="@color/white"
             android:textStyle="bold"
+            android:gravity="center"
+            android:textAlignment="center"
             android:fontFamily="@font/lato_bold"
-            android:textSize="24sp" />-->
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
 <!--        <ImageView
             android:layout_width="wrap_content"
@@ -106,9 +110,9 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/llBottomLogo"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_margin="5dp"
+        android:layout_height="88dp"
         android:layout_above="@id/powered_text"
         android:gravity="bottom"
         android:orientation="horizontal">
@@ -118,7 +122,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/sponsor_one"
             android:layout_weight="1"
-            android:layout_margin="10dp"
+            android:layout_margin="8dp"
             android:src="@drawable/sponsor_logo_four"
             android:layout_alignParentStart="true"/>
 
@@ -135,7 +139,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="8dp"
             android:id="@+id/sponsor_three"
             android:src="@drawable/sponsor_logo_two" />
 
@@ -143,7 +147,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="8dp"
             android:id="@+id/sponsor_four"
             android:src="@drawable/sponsor_logo_one" />
     </LinearLayout>
@@ -168,4 +172,59 @@
 
     </RelativeLayout>
 
+    <LinearLayout
+        android:id="@+id/llStateLogos"
+        android:orientation="horizontal"
+        android:layout_above="@id/llBottomLogo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@drawable/ic_jh_logo"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"/>
+                <TextView
+                    android:text="@string/jharkhand"
+                    android:fontFamily="@font/lato_bold"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </LinearLayout>
+        <View
+            android:layout_width="32dp"
+            android:layout_height="1px"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@drawable/ic_mp_logo"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"/>
+                <TextView
+                    android:text="@string/madhya_pradesh"
+                    android:fontFamily="@font/lato_bold"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>

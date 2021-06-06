@@ -730,4 +730,7 @@
     <string name="hint_date_tested_positive">Date of tested positive*</string>
     <string name="hint_postal_code" translatable="false">Postal code</string>
     <string name="hint_district" translatable="false">District*</string>
+    <string name="splash_subtitle">NISHTHA’s Comprehensive Post COVID Care\nInitiative</string>
+    <string name="jharkhand">Jharkhand</string>
+    <string name="madhya_pradesh">Madhya Pradesh</string>
 </resources>
