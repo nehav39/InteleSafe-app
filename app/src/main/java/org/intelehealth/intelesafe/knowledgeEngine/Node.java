@@ -63,6 +63,7 @@ public class Node implements Serializable {
     private String text;
     private String display;
     private String display_oriya;
+    private String display_hindi;
     private String display_cebuno;
     private String language;
     private String choiceType;
@@ -159,6 +160,17 @@ public class Node implements Serializable {
             if (this.display_oriya.isEmpty()) {
                 this.display_oriya = this.display;
             }
+
+            //Hindi support...
+            this.display_hindi = jsonNode.optString("display-hi");
+            if (this.display_hindi.isEmpty()) {
+                this.display_hindi = jsonNode.optString("display-hi");
+            }
+            if (this.display_hindi.isEmpty()) {
+                this.display_hindi = this.display;
+            }
+            //Hindi support end...
+
             this.display_cebuno = jsonNode.optString("display-cb");
             if (this.display_cebuno.isEmpty()) {
                 this.display_cebuno = jsonNode.optString("display-cb");
@@ -223,6 +235,7 @@ public class Node implements Serializable {
         this.text = source.text;
         this.display = source.display;
         this.display_oriya = source.display_oriya;
+        this.display_hindi = source.display_hindi;
         this.display_cebuno = source.display_cebuno;
         this.optionsList = source.optionsList;
         this.terminal = source.terminal;
@@ -376,6 +389,21 @@ public class Node implements Serializable {
                 }
 
             }
+            //Hindi support start...
+            case "hi": {
+                if (display_hindi != null && !display_hindi.isEmpty()) {
+                    return display_hindi;
+                } else {
+                    if (display == null || display.isEmpty()) {
+                        return text;
+                    } else {
+                        return display;
+                    }
+                }
+
+            }
+                //Hindi Support end...
+
             case "cb": {
                 //Log.i(TAG, "findDisplay: cb");
                 if (display_cebuno != null && !display_cebuno.isEmpty()) {
