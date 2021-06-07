@@ -423,7 +423,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 //                ppe.putExtra("PPE", 1);
 //                startActivity(ppe);
 
-                watchYoutubeVideo(HomeActivity.this, "xTvd7oAEyhs" );
+                if (sessionManager.getAppLanguage().equalsIgnoreCase("en")){
+                    startActivity(new Intent(Intent.ACTION_VIEW,   Uri.parse("https://youtube.com/playlist?list=PLY7f0i-HnvJ17kaGjtpPzQHO70GLqSW8z")));
+                } else {
+                    startActivity(new Intent(Intent.ACTION_VIEW,   Uri.parse("https://www.youtube.com/playlist?list=PLY7f0i-HnvJ1rONMTGFU03k-5RvNIsjvU")));
+                }
+
+//                watchYoutubeVideo(HomeActivity.this, "xTvd7oAEyhs" );
             }
         });
 
@@ -490,7 +496,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 //                Intent faq = new Intent(HomeActivity.this, Webview.class);
 //                faq.putExtra("FAQ", 1);
 //                startActivity(faq);
-                watchYoutubeVideo(HomeActivity.this, "I47QOyX71kg" );
+
+                if (sessionManager.getAppLanguage().equalsIgnoreCase("en")){
+                    startActivity(new Intent(Intent.ACTION_VIEW,   Uri.parse("https://youtube.com/playlist?list=PLY7f0i-HnvJ2jx8sWpScxo95hxRkV66Qq")));
+                } else {
+                    startActivity(new Intent(Intent.ACTION_VIEW,   Uri.parse("https://youtube.com/playlist?list=PLY7f0i-HnvJ2aWCpFe2C690qomg9p2zmu")));
+                }
+
+//                watchYoutubeVideo(HomeActivity.this, "I47QOyX71kg" );
             }
         });
         Logger.logD(TAG, "onCreate: " + getFilesDir().toString());
