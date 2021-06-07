@@ -61,10 +61,22 @@ public class PhysicalExam extends Node {
         //TODO: Physical exam mind map needs to be modified to include required attribute
         if (getOption(0).getOptionsList() != null) {
             for (int i = 0; i < getOption(0).getOptionsList().size(); i++) {
-                getOption(0).getOption(i).setRequired(true);
+                if(i==2) { //Take Picture question from PhysExam_4.json file...as we have to skip that question...
+                    getOption(0).getOption(i).setRequired(false);
+                }
+                else {
+                    getOption(0).getOption(i).setRequired(true);
+                }
+
                 if (getOption(0).getOption(i).getOptionsList() != null) {
                     for (int j = 0; j < getOption(0).getOption(i).getOptionsList().size(); j++) {
-                        getOption(0).getOption(i).getOption(j).setRequired(true);
+                        if(i==2) { //Take Picture question from PhysExam_4.json file... as we have to skip that question....
+                            getOption(0).getOption(i).getOption(j).setRequired(false);
+                        }
+                        else {
+                            getOption(0).getOption(i).getOption(j).setRequired(true);
+                        }
+
                     }
                 }
             }
