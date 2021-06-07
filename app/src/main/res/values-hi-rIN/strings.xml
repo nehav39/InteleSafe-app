@@ -379,7 +379,7 @@
     <string name="button_deny" translatable="false">Deny</string>
     <string name="button_ok" translatable="false">OK</string>
     <string name="button_cancel" translatable="false">Cancel</string>
-    <string name="picture_taken" translatable="false">Picture taken</string>
+    <string name="picture_taken" translatable="false">तस्वीर ली</string>
     <string name="switch_flash" translatable="false">Switch flash</string>
     <string name="switch_camera" translatable="false">Switch camera</string>
     <string name="flash_auto" translatable="false">Flash auto</string>
@@ -391,8 +391,8 @@
     <string name="permission_sms_denied" translatable="false">SMS permission was denied. Please consider granting it in order to send sms from the application!</string>
     <string name="permission_sms_never_askagain" translatable="false">SMS permission was denied with never ask again.</string>
 
-    <string name="button_save" translatable="false">Save</string>
-    <string name="button_delete" translatable="false">Delete</string>
+    <string name="button_save">सहेजें</string>
+    <string name="button_delete">हटाना</string>
 
     //Camera Dialog
     <string name="camera_dialog_default" translatable="false">Please click document photo in good lighting conditions only. If document photo is not clear, please retake the document photo.</string>
@@ -781,4 +781,6 @@
     <string name="hint_block">ब्लॉक*</string>
     <string name="error_mandatory_field">कृपया सभी अनिवार्य फ़ील्ड भरें</string>
     <string name="txt_user_exists">मोबाइल नंबर पहले से मौजूद है।</string>
+
+    <string name="choose_lang_title">अपनी भाषा चुनिए</string>
 </resources>
