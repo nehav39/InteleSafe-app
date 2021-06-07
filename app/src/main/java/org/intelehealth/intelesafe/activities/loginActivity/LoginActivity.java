@@ -5,7 +5,8 @@ import android.content.Context;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
-        import android.graphics.Bitmap;
+import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -39,6 +40,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 import org.intelehealth.intelesafe.BuildConfig;
@@ -108,6 +110,7 @@ public class LoginActivity extends AppCompatActivity {
     TextInputLayout etPasswordLayout;
     String generatedOtp;
     private TextView tvResendOtp;
+    String appLanguage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,12 +121,17 @@ public class LoginActivity extends AppCompatActivity {
 
         context = LoginActivity.this;
         sessionManager = new SessionManager(context);
+        appLanguage = sessionManager.getAppLanguage();
+        if (!appLanguage.equalsIgnoreCase("")) {
+            setLocale(appLanguage);
+        }
         cpd = new CustomProgressDialog(context);
 
         setTitle(R.string.title_activity_login);
 
         offlineLogin = OfflineLogin.getOfflineLogin();
         txt_cant_login = findViewById(R.id.cant_login_id);
+        txt_cant_login.setText(getResources().getString(R.string.cant_login_user));
         txt_cant_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -175,6 +183,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // Set up the login form.
         mUsernameView = findViewById(R.id.et_email);
+        mUsernameView.setHint(getResources().getString(R.string.prompt_phone_number));
         // populateAutoComplete(); TODO: create our own autocomplete code
         mPasswordView = findViewById(R.id.et_password);
         mPasswordView.setTransformationMethod(new PasswordTransformationMethod());
@@ -189,12 +198,13 @@ public class LoginActivity extends AppCompatActivity {
 //            }
 //        });
         mEmailSignInButton = findViewById(R.id.email_sign_in_button);
+        mEmailSignInButton.setText(getResources().getString(R.string.action_send_otp));
         mEmailSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Logger.logD(TAG, "button pressed");
                 if (!NetworkConnection.isOnline(context)) {
-                    Toast.makeText(context, R.string.no_network, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, getResources().getString(R.string.no_network), Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -207,7 +217,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (generatedOtp.equals(otp) || (BuildConfig.DEBUG && otp.equals("0000"))) {
                             ResetPasswordActivity.start(context, mobile);
                         } else {
-                            Toast.makeText(context, R.string.invalid_otp, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, getResources().getString(R.string.invalid_otp), Toast.LENGTH_SHORT).show();
                         }
                     }
                 } else {
@@ -218,6 +228,7 @@ public class LoginActivity extends AppCompatActivity {
 
         llOtp = findViewById(R.id.llOtp);
         tvResendOtp = findViewById(R.id.tvResendOtp);
+        tvResendOtp.setText(getResources().getString(R.string.resend_otp));
         tvResendOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -231,6 +242,7 @@ public class LoginActivity extends AppCompatActivity {
         etPasswordLayout = findViewById(R.id.etPasswordLayout);
 
         Button sign_up_button = findViewById(R.id.sign_up_button);
+        sign_up_button.setText(getResources().getString(R.string.title_sign_up));
         sign_up_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -239,7 +251,8 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         txt_signup = findViewById(R.id.txt_signup);
-        String signupStr = getString(R.string.txt_sign_up_option);
+        String signupStr = getResources().getString(R.string.txt_sign_up_option);
+        txt_signup.setText(signupStr);
        /* SpannableString spannableString = new SpannableString(signupStr);
         int startIndex = signupStr.lastIndexOf("?");
         Log.e("OnClick","startIndex" + startIndex);
@@ -264,6 +277,15 @@ public class LoginActivity extends AppCompatActivity {
         txt_signup.setMovementMethod(LinkMovementMethod.getInstance());*/
 
         checkSetup();
+    }
+
+    public void setLocale(String appLanguage)
+    {
+        Locale locale = new Locale(appLanguage);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
     }
 
     private void checkSetup() {

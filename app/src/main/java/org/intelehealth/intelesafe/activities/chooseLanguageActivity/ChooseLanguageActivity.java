@@ -1,6 +1,7 @@
 package org.intelehealth.intelesafe.activities.chooseLanguageActivity;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
@@ -21,6 +22,7 @@ import org.intelehealth.intelesafe.utilities.Logger;
 import org.intelehealth.intelesafe.utilities.SessionManager;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class ChooseLanguageActivity extends AppCompatActivity {
 
@@ -34,6 +36,7 @@ public class ChooseLanguageActivity extends AppCompatActivity {
     String LOG_TAG = "ChooseLanguageActivity";
     String systemLanguage = Resources.getSystem().getConfiguration().locale.getLanguage();
     int getSystemLanguagePosition;
+    String appLanguage;
 
 
     @Override
@@ -42,6 +45,10 @@ public class ChooseLanguageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_choose_language);
         initViews();
         PopulatingLanguages();
+        appLanguage = sessionManager.getAppLanguage();
+        if (!appLanguage.equalsIgnoreCase("")) {
+            setLocale(appLanguage);
+        }
         if(!sessionManager.isFirstTimeLaunch())
         {
             BackImage.setVisibility(View.VISIBLE);
@@ -120,4 +127,13 @@ public class ChooseLanguageActivity extends AppCompatActivity {
         ArrayAdapter<String> language_adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_checked,languages_list);
         LanguageListView.setAdapter(language_adapter);
     }
+    public void setLocale(String appLanguage)
+    {
+        Locale locale = new Locale(appLanguage);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+    }
+
 }

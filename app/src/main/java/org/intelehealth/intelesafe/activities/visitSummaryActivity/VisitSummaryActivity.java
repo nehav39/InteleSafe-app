@@ -130,7 +130,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
     boolean uploaded = false;
     boolean downloaded = false;
 
-    Context context;
+    Context context,context1;
 
     String patientUuid;
     String visitUuid;
@@ -499,6 +499,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         mLayout = findViewById(R.id.summary_layout);
         context = getApplicationContext();
+        context1 = VisitSummaryActivity.this;
 //we can remove by data binding
         mAdditionalDocsRecyclerView = findViewById(R.id.recy_additional_documents);
         mPhysicalExamsRecyclerView = findViewById(R.id.recy_physexam);
@@ -751,7 +752,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                 // to set the Visit submit successfully in local DB to Push.
                 updateVisitSubmit();
                 if (NetworkConnection.isOnline(getApplication())) {
-                    Toast.makeText(context, getResources().getString(R.string.upload_started), Toast.LENGTH_LONG).show();
+                    Toast.makeText(context1, getResources().getString(R.string.upload_started), Toast.LENGTH_LONG).show();
 
 //                    AppConstants.notificationUtils.showNotifications(getString(R.string.visit_data_upload), getString(R.string.uploading_visit_data_notif), 3, VisitSummaryActivity.this);
                     SyncDAO syncDAO = new SyncDAO();
@@ -1431,8 +1432,8 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
     private void showPopup() {
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(VisitSummaryActivity.this);
-        alertDialogBuilder.setTitle(getString(R.string.thank_you));
-        alertDialogBuilder.setMessage(getString(R.string.your_checkin_is_uploaded_successfully));
+        alertDialogBuilder.setTitle(getResources().getString(R.string.thank_you));
+        alertDialogBuilder.setMessage(getResources().getString(R.string.your_checkin_is_uploaded_successfully));
 
 //        alertDialogBuilder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
 //            @Override
@@ -1440,7 +1441,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 //                dialogInterface.dismiss();
 //            }
 //        });
-        alertDialogBuilder.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+        alertDialogBuilder.setPositiveButton(getResources().getString(R.string.generic_ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
