@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +31,7 @@ import org.intelehealth.intelesafe.R;
 import org.intelehealth.intelesafe.activities.homeActivity.HomeActivity;
 import org.intelehealth.intelesafe.app.AppConstants;
 import org.intelehealth.intelesafe.models.ResetPassoword;
+import org.intelehealth.intelesafe.models.SendOtp;
 import org.intelehealth.intelesafe.models.loginModel.LoginModel;
 import org.intelehealth.intelesafe.models.loginProviderModel.LoginProviderModel;
 import org.intelehealth.intelesafe.models.person.ClsPersonGetResponse;
@@ -48,6 +50,8 @@ import java.io.File;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.text.DecimalFormat;
+import java.util.Random;
 import java.util.regex.Pattern;
 
 import io.reactivex.Observable;
@@ -94,6 +98,10 @@ public class ResetPasswordActivity extends AppCompatActivity {
     String privacy_value;
 
     Button mEmailSignInButton;
+    private View llPassoword, llOtp;
+    private EditText mOTP;
+    private TextView tvResendOtp;
+    String generatedOtp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -187,6 +195,20 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 mPasswordView.requestFocus();
             }
         }
+
+        llPassoword = findViewById(R.id.llPassword);
+        llOtp = findViewById(R.id.llOtp);
+        mOTP = findViewById(R.id.et_otp);
+        tvResendOtp = findViewById(R.id.tvResendOtp);
+        tvResendOtp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String mobile = String.format("91%s", mUsernameView.getText().toString());
+                if (!TextUtils.isEmpty(mobile)) {
+                    sendOtp(mobile);
+                }
+            }
+        });
     }
 
     private void setLogo() {
@@ -268,7 +290,30 @@ public class ResetPasswordActivity extends AppCompatActivity {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
 //            UserLoginTask(email, password);
-            resetPassword(email, password);
+            if (llOtp.getVisibility() == View.VISIBLE) {
+                if (TextUtils.isEmpty(mOTP.getText().toString())) {
+                    mOTP.setError(getString(R.string.error_field_required));
+                    mOTP.requestFocus();
+                    return;
+                }
+
+                String otp = mOTP.getText().toString().trim();
+                if (!otp.equals(generatedOtp)) {
+                    if (BuildConfig.DEBUG && otp.equals("0000")) {
+                        System.out.println("testing with fake otp");
+                    } else {
+                        mOTP.setError(getString(R.string.invalid_otp));
+                        mOTP.requestFocus();
+                        return;
+                    }
+                }
+                resetPassword(email, password);
+            } else {
+                String mobile = String.format("91%s", mUsernameView.getText().toString());
+                if (!TextUtils.isEmpty(mobile)) {
+                    sendOtp(mobile);
+                }
+            }
         } else {
             //offlineLogin.login(email, password);
 //            offlineLogin.offline_login(email, password);
@@ -554,6 +599,47 @@ public class ResetPasswordActivity extends AppCompatActivity {
                         cpd.dismiss();
                         Toast.makeText(context, R.string.reset_password_success, Toast.LENGTH_SHORT).show();
                         UserLoginTask(enteredUserName, password);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        cpd.dismiss();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
+
+    private void sendOtp(String enteredUserName) {
+        if (!NetworkConnection.isOnline(context)) {
+            Toast.makeText(context, R.string.no_network, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        cpd.show();
+        UrlModifiers urlModifiers = new UrlModifiers();
+        String urlString = urlModifiers.sendOtp("HXIN1701481071IN");
+//        String encoded = base64Utils.encoded("admin", "Admin123");
+        generatedOtp = new DecimalFormat("0000").format(new Random().nextInt(9999));
+        Observable<SendOtp> userGetResponse = AppConstants.apiInterface.sendOtp(urlString,
+                "A39e1e65900618ef9b6e16da473f8894d",
+                enteredUserName,
+                "OTP",
+                "TIFDOC",
+                String.format("Your Intelehealth Swasthsampark account verification code is :%s", generatedOtp),
+                "1107162261167510445");
+        userGetResponse.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<SendOtp>() {
+                    @Override
+                    public void onNext(SendOtp clsUserGetResponse) {
+                        cpd.dismiss();
+                        Toast.makeText(context, R.string.otp_sent, Toast.LENGTH_SHORT).show();
+                        llOtp.setVisibility(View.VISIBLE);
+                        llPassoword.setVisibility(View.GONE);
+                        mOTP.requestFocus();
                     }
 
                     @Override
