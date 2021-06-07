@@ -781,6 +781,7 @@
     <string name="hint_block">ब्लॉक*</string>
     <string name="error_mandatory_field">कृपया सभी अनिवार्य फ़ील्ड भरें</string>
     <string name="txt_user_exists">मोबाइल नंबर पहले से मौजूद है।</string>
-
+    <string name="check_appointments">अपनी डॉक्टर अपॉइंटमेंट और प्रिस्क्रिप्षन जाँचें</string>
+    <string name="appointment_status">अपॉइंटमेंट स्थिति</string>
     <string name="choose_lang_title">अपनी भाषा चुनिए</string>
 </resources>
