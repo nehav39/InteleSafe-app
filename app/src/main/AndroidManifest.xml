@@ -38,8 +38,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
-<!--        fb sdk-->
+        <activity android:name=".activities.appointments.AppointmentsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"/>
+        <!-- fb sdk -->
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
@@ -243,7 +245,7 @@
             android:label="Signup"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-      
+
         <provider
             android:name="org.intelehealth.intelesafe.activities.searchPatientActivity.SearchSuggestionProvider"
             android:authorities="org.intelehealth.intelesafe.activities.searchPatientActivity.SearchSuggestionProvider"
