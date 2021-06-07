@@ -172,59 +172,125 @@
 
     </RelativeLayout>
 
+<!--    <LinearLayout-->
+<!--        android:id="@+id/llStateLogos"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:layout_above="@id/llBottomLogo"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content">-->
+<!--        <LinearLayout-->
+<!--            android:orientation="vertical"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:gravity="end"-->
+<!--            android:layout_height="wrap_content">-->
+<!--            <LinearLayout-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content">-->
+<!--                <ImageView-->
+<!--                    android:src="@drawable/ic_jh_logo"-->
+<!--                    android:layout_width="48dp"-->
+<!--                    android:layout_height="48dp"/>-->
+<!--                <TextView-->
+<!--                    android:text="@string/jharkhand"-->
+<!--                    android:fontFamily="@font/lato_bold"-->
+<!--                    android:textAppearance="?android:attr/textAppearanceMedium"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"/>-->
+<!--            </LinearLayout>-->
+<!--        </LinearLayout>-->
+<!--        <View-->
+<!--            android:layout_width="32dp"-->
+<!--            android:layout_height="1px"/>-->
+<!--        <LinearLayout-->
+<!--            android:orientation="vertical"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_height="wrap_content">-->
+<!--            <LinearLayout-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content">-->
+<!--                <ImageView-->
+<!--                    android:src="@drawable/ic_mp_logo"-->
+<!--                    android:layout_width="48dp"-->
+<!--                    android:layout_height="48dp"/>-->
+<!--                <TextView-->
+<!--                    android:text="@string/madhya_pradesh"-->
+<!--                    android:fontFamily="@font/lato_bold"-->
+<!--                    android:textAppearance="?android:attr/textAppearanceMedium"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"/>-->
+<!--            </LinearLayout>-->
+<!--        </LinearLayout>-->
+<!--    </LinearLayout>-->
     <LinearLayout
         android:id="@+id/llStateLogos"
-        android:orientation="horizontal"
-        android:layout_above="@id/llBottomLogo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/llBottomLogo"
+        android:layout_marginHorizontal="5dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="70dp"
+            android:layout_marginEnd="1dp"
             android:layout_weight="1"
-            android:gravity="end"
-            android:layout_height="wrap_content">
-            <LinearLayout
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/ic_jh_logo" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:src="@drawable/ic_jh_logo"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"/>
-                <TextView
-                    android:text="@string/jharkhand"
-                    android:fontFamily="@font/lato_bold"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
+                android:text="Jharkhand"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+
         </LinearLayout>
-        <View
-            android:layout_width="32dp"
-            android:layout_height="1px"/>
+
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:layout_marginEnd="70dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content">
-            <LinearLayout
+            android:orientation="vertical"
+            android:weightSum="2">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/ic_mp_logo" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:src="@drawable/ic_mp_logo"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"/>
-                <TextView
-                    android:text="@string/madhya_pradesh"
-                    android:fontFamily="@font/lato_bold"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
+                android:text="Madhya Pradesh"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
