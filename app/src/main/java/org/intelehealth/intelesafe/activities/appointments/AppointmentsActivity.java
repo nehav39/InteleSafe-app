@@ -32,6 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -95,6 +96,7 @@ public class AppointmentsActivity extends AppCompatActivity {
         StringBuilder stringBuilder;
         hashSet = new HashSet<>();
         ArrayList<String> array_original_date = new ArrayList<>();
+        HashMap<String, Boolean> prescMap = new HashMap<>();
 
         if (cursor != null) {
             if (cursor.moveToFirst()) {
@@ -122,12 +124,11 @@ public class AppointmentsActivity extends AppCompatActivity {
 //
 //                        }
 
-                        Day_Date dayDate = new Day_Date
-                                ("Day " + a, dd);
-                        if (visitsWithPrescription.contains(uuid))
-                            dayDate.hasPrescription = true;
-                        recycler_arraylist.add(dayDate);
-                        a++;
+                        if ((prescMap.get(dd) == null || !prescMap.get(dd)) && visitsWithPrescription.contains(uuid))
+                            prescMap.put(dd, true);
+                        /*recycler_arraylist.add(new Day_Date
+                                ("Day " + a, dd));
+                        a++;*/
 
 
                     } catch (Exception e) {
@@ -147,7 +148,9 @@ public class AppointmentsActivity extends AppCompatActivity {
         Collections.sort(new_arraylist); // added by venu N to sort the
 
         for (int j = 0; j < new_arraylist.size(); j++) {
-            recycler_arraylist.add(new Day_Date(getString(R.string.visit) + " " + a, new_arraylist.get(j)));
+            Day_Date day_date = new Day_Date(getString(R.string.day_text) + " " + a, new_arraylist.get(j));
+            day_date.hasPrescription = prescMap.containsKey(day_date.getDate());
+            recycler_arraylist.add(day_date);
             a++;
         }
 
