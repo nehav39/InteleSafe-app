@@ -84,6 +84,7 @@ import org.intelehealth.apprtc.data.Manager;
 import org.intelehealth.apprtc.utils.FirebaseUtils;
 import org.intelehealth.intelesafe.BuildConfig;
 import org.intelehealth.intelesafe.R;
+import org.intelehealth.intelesafe.activities.appointments.AppointmentsActivity;
 import org.intelehealth.intelesafe.activities.chooseLanguageActivity.ChooseLanguageActivity;
 import org.intelehealth.intelesafe.activities.loginActivity.LoginActivity;
 import org.intelehealth.intelesafe.activities.physcialExamActivity.PhysicalExamActivity;
@@ -163,8 +164,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     CardView c1, c2, c3, c4, c5, ppe_cardView_request;
     private String key = null;
     private String licenseUrl = null;
-    RecyclerView recyclerView;
-    TextView tvNoVisit;
+//    RecyclerView recyclerView;
+//    TextView tvNoVisit;
     Button help_watsapp;
     TextView tvMentalHelpRequest, tv_ppe_request, mental_Help_Text;
     ImageView home_popup_menu;
@@ -383,8 +384,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         db = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
 
-        recyclerView = findViewById(R.id.recyclerview_data);
-        tvNoVisit = findViewById(R.id.tv_no_visit);
+//        recyclerView = findViewById(R.id.recyclerview_data);
+//        tvNoVisit = findViewById(R.id.tv_no_visit);
 
 
 //        set = new HashSet<Day_Date>();
@@ -704,6 +705,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 } else {
                     Toast.makeText(context, R.string.please_connect_to_internet, Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        findViewById(R.id.cv_appointment_status).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppointmentsActivity.start(HomeActivity.this);
             }
         });
     }
@@ -1068,7 +1076,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void renderList() {
-        recycler_arraylist = new ArrayList<Day_Date>();
+        /*recycler_arraylist = new ArrayList<Day_Date>();
         String endDate = "";
         String query = "SELECT v.startdate FROM tbl_visit v, tbl_patient p WHERE " +
                 "p.uuid = v.patientuuid AND v.startdate IS NOT NULL AND (v.issubmitted == 1 OR v.enddate IS NOT NULL) AND " +
@@ -1110,9 +1118,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 //
 //                        }
 
-                               /* recycler_arraylist.add(new Day_Date
+                               *//* recycler_arraylist.add(new Day_Date
                                         ("Day " + a, dd));
-                                a++;*/
+                                a++;*//*
 
 
                     } catch (Exception e) {
@@ -1147,7 +1155,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         } else {
             sessionManager.setFirstCheckin("false");
             tvNoVisit.setVisibility(View.VISIBLE);
-        }
+        }*/
     }
 
     private void createNewVisit() {

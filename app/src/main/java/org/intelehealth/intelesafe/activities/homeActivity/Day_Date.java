@@ -3,7 +3,7 @@ package org.intelehealth.intelesafe.activities.homeActivity;
 public class Day_Date {
 
     private String Day, Date;
-
+    public boolean hasPrescription;
 
     public Day_Date(String day, String date) {
         Day = day;
