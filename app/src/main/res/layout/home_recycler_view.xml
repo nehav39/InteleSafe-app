@@ -36,7 +36,7 @@
             <TextView
                 android:id="@+id/recycler_date_textview"
                 android:layout_width="0dp"
-                android:layout_weight="5.5"
+                android:layout_weight="6.5"
                 android:layout_height="wrap_content"
                 tools:text="2020-06-08"
                 android:fontFamily="@font/lato_regular"
@@ -47,13 +47,11 @@
             <ImageView
                 android:id="@+id/recycler_tick_imageview"
                 android:layout_width="0dp"
-                android:layout_weight="1.5"
+                android:layout_weight="0.5"
                 android:layout_height="wrap_content"
-                android:paddingVertical="10sp"
                 android:layout_gravity="center"
-                android:tint="@color/colorPrimary"
                 android:layout_marginEnd="10sp"
-                android:src="@drawable/ic_done_24dp"/>
+                tools:src="@drawable/ic_prescription_green"/>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

@@ -250,50 +250,68 @@ public class PhysicalExamActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                //returns true if all Mandatory questions have been answered...
                 complaintConfirmed = physicalExamMap.areRequiredAnswered();
 
                 if (complaintConfirmed) {
 
-                    physicalString = physicalExamMap.generateFindings();
-
-                    List<String> imagePathList = physicalExamMap.getImagePathList();
-
-                    if (imagePathList != null) {
-                        for (String imagePath : imagePathList) {
-                            updateImageDatabase();
-                        }
+                    /*
+                    * Here, checks if the currentview is not the last view of the viewpager
+                    * than it sets the current view to the next view and so user will be sent to
+                    * the question that is not mandatory as well...If the user than reaches
+                    * to the last question and complaintconfirmed is True that means all
+                    * required questions are answered then in that case the
+                    * currentItem (2) is < getcount()-1 (2) this becomes FALSE
+                    * and so the else loop is executed...*/
+                    
+                    if(mViewPager.getCurrentItem() < mViewPager.getAdapter().getCount()-1){
+                        fab.setImageDrawable(ContextCompat.getDrawable
+                                (PhysicalExamActivity.this, R.drawable.svg_right_arrow));
+                        mViewPager.setCurrentItem(mViewPager.getCurrentItem()+1);
                     }
+                    else {
 
-                    if (intentTag != null && intentTag.equals("edit")) {
-                        updateDatabase(physicalString);
-                        Intent intent = new Intent(PhysicalExamActivity.this, VisitSummaryActivity.class);
-                        intent.putExtra("patientUuid", patientUuid);
-                        intent.putExtra("visitUuid", visitUuid);
-                        intent.putExtra("encounterUuidVitals", encounterVitals);
-                        intent.putExtra("encounterUuidAdultIntial", encounterAdultIntials);
-                        intent.putExtra("state", state);
-                        intent.putExtra("name", patientName);
-                        intent.putExtra("tag", intentTag);
-                        intent.putExtra("hasPrescription", "false");
+                        physicalString = physicalExamMap.generateFindings();
 
-                        for (String exams : selectedExamsList) {
-                            Log.i(TAG, "onClick:++ " + exams);
+                        List<String> imagePathList = physicalExamMap.getImagePathList();
+
+                        if (imagePathList != null) {
+                            for (String imagePath : imagePathList) {
+                                updateImageDatabase();
+                            }
                         }
-                        // intent.putStringArrayListExtra("exams", selectedExamsList);
-                        startActivity(intent);
-                    } else {
-                        boolean obsId = insertDb(physicalString);
-                        Intent intent1 = new Intent(PhysicalExamActivity.this, VisitSummaryActivity.class); // earlier visitsummary
-                        intent1.putExtra("patientUuid", patientUuid);
-                        intent1.putExtra("visitUuid", visitUuid);
-                        intent1.putExtra("encounterUuidVitals", encounterVitals);
-                        intent1.putExtra("encounterUuidAdultIntial", encounterAdultIntials);
-                        intent1.putExtra("state", state);
-                        intent1.putExtra("name", patientName);
-                        intent1.putExtra("tag", intentTag);
-                        intent1.putExtra("hasPrescription", "false");
-                        // intent1.putStringArrayListExtra("exams", selectedExamsList);
-                        startActivity(intent1);
+
+                        if (intentTag != null && intentTag.equals("edit")) {
+                            updateDatabase(physicalString);
+                            Intent intent = new Intent(PhysicalExamActivity.this, VisitSummaryActivity.class);
+                            intent.putExtra("patientUuid", patientUuid);
+                            intent.putExtra("visitUuid", visitUuid);
+                            intent.putExtra("encounterUuidVitals", encounterVitals);
+                            intent.putExtra("encounterUuidAdultIntial", encounterAdultIntials);
+                            intent.putExtra("state", state);
+                            intent.putExtra("name", patientName);
+                            intent.putExtra("tag", intentTag);
+                            intent.putExtra("hasPrescription", "false");
+
+                            for (String exams : selectedExamsList) {
+                                Log.i(TAG, "onClick:++ " + exams);
+                            }
+                            // intent.putStringArrayListExtra("exams", selectedExamsList);
+                            startActivity(intent);
+                        } else {
+                            boolean obsId = insertDb(physicalString);
+                            Intent intent1 = new Intent(PhysicalExamActivity.this, VisitSummaryActivity.class); // earlier visitsummary
+                            intent1.putExtra("patientUuid", patientUuid);
+                            intent1.putExtra("visitUuid", visitUuid);
+                            intent1.putExtra("encounterUuidVitals", encounterVitals);
+                            intent1.putExtra("encounterUuidAdultIntial", encounterAdultIntials);
+                            intent1.putExtra("state", state);
+                            intent1.putExtra("name", patientName);
+                            intent1.putExtra("tag", intentTag);
+                            intent1.putExtra("hasPrescription", "false");
+                            // intent1.putStringArrayListExtra("exams", selectedExamsList);
+                            startActivity(intent1);
+                        }
                     }
 
                 } else {

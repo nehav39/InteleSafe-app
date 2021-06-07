@@ -23,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.intelehealth.intelesafe.R;
+import org.intelehealth.intelesafe.activities.appointments.AppointmentsActivity;
 import org.intelehealth.intelesafe.app.AppConstants;
 import org.intelehealth.intelesafe.utilities.SessionManager;
 
@@ -195,7 +196,7 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
                         @Override
                         public void onClick(View view) {
                             int pos = (int) view.getTag();
-                            ((HomeActivity) mcontext).pastVisits(pos, array_message.get(pos));
+                            ((AppointmentsActivity) mcontext).pastVisits(pos, array_message.get(pos));
                             alertDialog.dismiss();
                         }
                     });
@@ -232,6 +233,13 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
                 negativeButton.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
             }
         });
+
+        if (arrayList.get(position).hasPrescription) {
+            myViewHolder.check_image.setImageResource(R.drawable.ic_prescription_green);
+        } else {
+            myViewHolder.check_image.setImageDrawable(null);
+        }
+
 
     }
     @Override
