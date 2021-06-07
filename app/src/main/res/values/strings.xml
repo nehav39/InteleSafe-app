@@ -739,4 +739,5 @@
     <string name="enter_date">Select a date</string>
     <string name="check_appointments">Check your appointments and prescription</string>
     <string name="appointment_status">Appointment status</string>
+    <string name="day_text">Day</string>
 </resources>
