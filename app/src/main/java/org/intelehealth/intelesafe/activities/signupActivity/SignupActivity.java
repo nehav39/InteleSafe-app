@@ -637,6 +637,44 @@ public class SignupActivity extends AppCompatActivity {
 //            int month = DateAndTimeUtils.getMonth(patient1.getDate_of_birth());
 //            mAge.setText(age + getString(R.string.identification_screen_text_years) + month + getString(R.string.identification_screen_text_months));
         }
+
+        mDOB.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if(!mDOB.getText().toString().isEmpty() || !mDOB.getText().toString().equals("")) {
+                    int dob_int = Integer.parseInt(mDOB.getText().toString());
+                    if (dob_int < 1) {
+                        mDOB.getText().clear();
+                        mDOB.setError("Age cannot be less than 1");
+                        mDOB.setFocusable(true);
+                        mDOB.setFocusableInTouchMode(true);
+                        mDOB.requestFocus();
+                        return;
+                    } else if (dob_int > 120) {
+                        mDOB.getText().clear();
+                        mDOB.setError("Age cannot be greater than 120");
+                        mDOB.setFocusable(true);
+                        mDOB.setFocusableInTouchMode(true);
+                        mDOB.requestFocus();
+                        return;
+                    }
+                    else {
+                        //do nothing...
+                    }
+                }
+            }
+        });
 /*
         mDOB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -808,6 +846,7 @@ public class SignupActivity extends AppCompatActivity {
                     mDOB.requestFocus();
                     return;
                 }
+
 
                 if (et_tested_positive_date.getText().toString().equals("")) {
                     et_tested_positive_date.setError(getString(R.string.error_field_required));
