@@ -642,7 +642,7 @@ Github: prajwalmw
                         android:layout_below="@+id/visit_help_text"
                         android:layout_marginStart="10sp"
                         android:background="@android:color/transparent"
-                        android:drawableStart="@drawable/ic_icons8_whatsapp"
+                        android:drawableStart="@drawable/telephone"
                         android:drawablePadding="10sp"
                         android:fontFamily="@font/lato_bold"
                         android:gravity="start|center"
