@@ -641,7 +641,8 @@
                         android:textColor="@color/txt_sub_header_color"
                         android:textStyle="bold"
                         android:background="@android:color/transparent"
-                        android:drawableStart="@drawable/ic_icons8_whatsapp"
+                        android:drawableStart="@drawable/telephone"
+                        android:drawableLeft="@drawable/telephone"
                         android:gravity="start|center"
                         android:drawablePadding="14sp" />
 

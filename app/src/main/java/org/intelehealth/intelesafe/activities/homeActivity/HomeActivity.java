@@ -53,6 +53,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -89,6 +90,7 @@ import org.intelehealth.intelesafe.activities.chooseLanguageActivity.ChooseLangu
 import org.intelehealth.intelesafe.activities.loginActivity.LoginActivity;
 import org.intelehealth.intelesafe.activities.physcialExamActivity.PhysicalExamActivity;
 import org.intelehealth.intelesafe.activities.settingsActivity.SettingsActivity;
+import org.intelehealth.intelesafe.activities.videosActivity.VideosActivity;
 import org.intelehealth.intelesafe.activities.visitSummaryActivity.VisitSummaryActivity;
 import org.intelehealth.intelesafe.app.AppConstants;
 import org.intelehealth.intelesafe.app.IntelehealthApplication;
@@ -156,8 +158,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     TextView lastSyncAgo;
     TextView welcomeUser;
     Button manualSyncButton;
-    RelativeLayout enter_check_in, home_quarantine_guidelines, educational_videos, user_logout,
+    LinearLayout home_quarantine_guidelines;
+    RelativeLayout enter_check_in, educational_videos, user_logout,
             home_quarantine_guidelines_2, educational_videos_2;
+
     IntentFilter filter;
     Myreceiver reMyreceive;
     SyncUtils syncUtils = new SyncUtils();
@@ -428,11 +432,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 //                ppe.putExtra("PPE", 1);
 //                startActivity(ppe);
 
-                if (sessionManager.getAppLanguage().equalsIgnoreCase("en")){
-                    startActivity(new Intent(Intent.ACTION_VIEW,   Uri.parse("https://youtube.com/playlist?list=PLY7f0i-HnvJ17kaGjtpPzQHO70GLqSW8z")));
-                } else {
-                    startActivity(new Intent(Intent.ACTION_VIEW,   Uri.parse("https://www.youtube.com/playlist?list=PLY7f0i-HnvJ1rONMTGFU03k-5RvNIsjvU")));
-                }
+//                if (sessionManager.getAppLanguage().equalsIgnoreCase("en")){
+//                    startActivity(new Intent(Intent.ACTION_VIEW,   Uri.parse("https://youtube.com/playlist?list=PLY7f0i-HnvJ17kaGjtpPzQHO70GLqSW8z")));
+//                } else {
+//                    startActivity(new Intent(Intent.ACTION_VIEW,   Uri.parse("https://www.youtube.com/playlist?list=PLY7f0i-HnvJ1rONMTGFU03k-5RvNIsjvU")));
+//                }
+
+                Intent videosActivity = new Intent(HomeActivity.this, VideosActivity.class);
+                startActivity(videosActivity);
+
+
 
 //                watchYoutubeVideo(HomeActivity.this, "xTvd7oAEyhs" );
             }

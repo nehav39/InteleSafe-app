@@ -57,7 +57,7 @@
     <string name="permission_rationale" translatable="false">"Contacts permissions are needed for providing email completions."</string>
     <string name="device_id" translatable="false">Device ID:</string>
     <string name="cant_login_user" translatable="false">Forgot password?</string>
-    <string name="email_link" > To reset your password send an email to support@intelehealth.io</string>
+    <string name="email_link"> To reset your password send an email to support@intelehealth.io</string>
     <string name="send_email_button">Send Email</string>
     <string name="close_button">Close</string>
 
@@ -691,7 +691,6 @@
     <string name="mental_health_support">Mental health support</string>
 
 
-
     // SignUP Screen(New Changes)
     <string name="txt_personal_caste_header">I am a...*</string>
     <string name="txt_prompt_caste">Select Caste</string>
@@ -742,4 +741,12 @@
     <string name="day_text">Day</string>
     <string name="self_assessment">Self Assessment</string>
     <string name="doctors_visits">Doctors Visits</string>
+    <string name="in_partnership_with_state_government_of">In partnership with state government of</string>
+
+    <string name="recovering_covid_new">Recovering from Covid-19 \n Videos</string>
+    <string name="educational_videos">Educational Videos</string>
+    <string name="info_about_covid"> Information about Covid &amp; \n FAQ</string>
+    <string name="post_covid_title">Post COVID Care</string>
+    <string name="videos_title">Know about Post COVID Care</string>
+
 </resources>
