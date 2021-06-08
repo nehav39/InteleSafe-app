@@ -549,6 +549,7 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
+
 /*
         mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -636,6 +637,7 @@ public class SignupActivity extends AppCompatActivity {
 //            int month = DateAndTimeUtils.getMonth(patient1.getDate_of_birth());
 //            mAge.setText(age + getString(R.string.identification_screen_text_years) + month + getString(R.string.identification_screen_text_months));
         }
+/*
         mDOB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -704,6 +706,8 @@ public class SignupActivity extends AppCompatActivity {
                         dob.set(mDOBYear, mDOBMonth, mDOBDay);
                         String dobString = simpleDateFormat.format(dob.getTime());
 //                        mDOB.setText(dobString);
+
+                        //here...
                         birthDate = DateAndTimeUtils.getFormatedDateOfBirth(StringUtils.getValue(dobString));
                         mDOBPicker.updateDate(mDOBYear, mDOBMonth, mDOBDay);
                         dialog.dismiss();
@@ -719,6 +723,7 @@ public class SignupActivity extends AppCompatActivity {
                 mAgePicker.show();
             }
         });
+*/
 
         Button btnSave = findViewById(R.id.btnSave);
 
@@ -1064,6 +1069,15 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }*/
 
+                //passes number of days to this function to calculate the actual date...
+                if(!mDOB.getText().toString().isEmpty() || !mDOB.getText().toString().equals("")) {
+                    String age = getYearFromAge(Integer.parseInt(mDOB.getText().toString()));
+                    birthDate = DateAndTimeUtils.getFormatedDateOfBirth(StringUtils.getValue(age));
+                    Log.v("age", "birthdate: "+birthDate);
+                }
+                else {
+                    //do nothing close the dialog...
+                }
 
                 ///////////Data Model for step 1
                 UserCreationData userCreationData = new UserCreationData();
@@ -1363,6 +1377,21 @@ public class SignupActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private String getYearFromAge(int dateString) {
+        String date = "";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMMM yyyy",
+                Locale.ENGLISH);
+
+        //number of days before date...
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.YEAR, -dateString);
+        date = simpleDateFormat.format(calendar.getTime());
+        Log.v("time", "todays date: " + date);
+        //number of days calculation...
+
+        return date;
     }
 
     boolean isUSerExistsAlready = false;
