@@ -1,21 +1,18 @@
 package org.intelehealth.intelesafe.activities.loginActivity;
 
 //import android.accounts.AccountManager;
-import android.content.Context;
+
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.StrictMode;
-
-        import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
@@ -27,28 +24,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.gson.Gson;
 
-import java.io.File;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
-import java.text.DecimalFormat;
-import java.util.List;
-import java.util.Locale;
-import java.util.Random;
-
 import org.intelehealth.intelesafe.BuildConfig;
 import org.intelehealth.intelesafe.R;
-import org.intelehealth.intelesafe.activities.privacyNoticeActivity.PrivacyNotice_Activity;
+import org.intelehealth.intelesafe.activities.homeActivity.HomeActivity;
 import org.intelehealth.intelesafe.activities.resetPasswordActivity.ResetPasswordActivity;
 import org.intelehealth.intelesafe.activities.signupActivity.SignupActivity;
 import org.intelehealth.intelesafe.app.AppConstants;
+import org.intelehealth.intelesafe.models.GetPassword;
 import org.intelehealth.intelesafe.models.SendOtp;
 import org.intelehealth.intelesafe.models.loginModel.LoginModel;
 import org.intelehealth.intelesafe.models.loginProviderModel.LoginProviderModel;
@@ -57,14 +46,23 @@ import org.intelehealth.intelesafe.models.user.ClsUserGetResponse;
 import org.intelehealth.intelesafe.models.user.ResultsItem;
 import org.intelehealth.intelesafe.utilities.Base64Utils;
 import org.intelehealth.intelesafe.utilities.Logger;
+import org.intelehealth.intelesafe.utilities.NetworkConnection;
 import org.intelehealth.intelesafe.utilities.OfflineLogin;
 import org.intelehealth.intelesafe.utilities.SessionManager;
 import org.intelehealth.intelesafe.utilities.StringEncryption;
 import org.intelehealth.intelesafe.utilities.UrlModifiers;
 import org.intelehealth.intelesafe.widget.materialprogressbar.CustomProgressDialog;
 
-import org.intelehealth.intelesafe.activities.homeActivity.HomeActivity;
-import org.intelehealth.intelesafe.utilities.NetworkConnection;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+import java.text.DecimalFormat;
+import java.util.List;
+import java.util.Locale;
+import java.util.Random;
+
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -208,7 +206,8 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (!sessionManager.isSetupComplete()) {
+                //commented as only otp is required now
+                /*if (!sessionManager.isSetupComplete()) {
                     if (TextUtils.isEmpty(generatedOtp)) {
                         attemptLogin();
                     } else {
@@ -222,6 +221,18 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 } else {
                     attemptLogin();
+                }*/
+                if (TextUtils.isEmpty(generatedOtp)) {
+                    attemptLogin();
+                } else {
+                    String mobile = mUsernameView.getText().toString();
+                    String otp = mPasswordView.getText().toString();
+                    if (generatedOtp.equals(otp) || (BuildConfig.DEBUG && otp.equals("0000"))) {
+//                        ResetPasswordActivity.start(context, mobile);
+                        getPassword(mobile);
+                    } else {
+                        Toast.makeText(context, getResources().getString(R.string.invalid_otp), Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -289,7 +300,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void checkSetup() {
-        if (sessionManager.isSetupComplete()) {
+        //commented as only otp is required now
+        /*if (sessionManager.isSetupComplete()) {
             etPasswordLayout.setHint(R.string.prompt_password);
             llOtp.setVisibility(View.VISIBLE);
             mEmailSignInButton.setText(R.string.action_sign_in);
@@ -297,7 +309,7 @@ public class LoginActivity extends AppCompatActivity {
             etPasswordLayout.setHint(R.string.prompt_otp);
             llOtp.setVisibility(View.GONE);
             mEmailSignInButton.setText(R.string.action_send_otp);
-        }
+        }*/
     }
 
     private void signUp() {
@@ -349,7 +361,9 @@ public class LoginActivity extends AppCompatActivity {
         if (NetworkConnection.isOnline(this)) {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            if (sessionManager.isSetupComplete()) {
+
+            //commented as only otp is required now
+            /*if (sessionManager.isSetupComplete()) {
                 // Check for a valid password, if the user entered one.
                 if (TextUtils.isEmpty(password)) {
                     mPasswordView.setError(getString(R.string.enter_password));
@@ -366,11 +380,8 @@ public class LoginActivity extends AppCompatActivity {
                 UserLoginTask(email, password);
             } else {
                 checkUserExistsOrNot(email);
-            }
-        } else {
-            //offlineLogin.login(email, password);
-//            offlineLogin.offline_login(email, password);
-
+            }*/
+            checkUserExistsOrNot(email);
         }
 
     }
@@ -716,6 +727,35 @@ public class LoginActivity extends AppCompatActivity {
                         mPasswordView.setInputType(InputType.TYPE_CLASS_NUMBER);
                         mPasswordView.requestFocus();
                         Toast.makeText(context, R.string.otp_sent, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        cpd.dismiss();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
+
+    private void getPassword(String enteredUserName) {
+        cpd.show();
+        UrlModifiers urlModifiers = new UrlModifiers();
+        String urlString = urlModifiers.getPassword(BuildConfig.CLEAN_URL);
+        String encoded = base64Utils.encoded("admin", "Admin123");
+        GetPassword getPassword = new GetPassword();
+        getPassword.username = enteredUserName;
+        Observable<GetPassword> userGetResponse = AppConstants.apiInterface.getPassword(urlString, "Basic " + encoded, getPassword);
+        userGetResponse.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<GetPassword>() {
+                    @Override
+                    public void onNext(GetPassword response) {
+                        cpd.dismiss();
+//                        Toast.makeText(context, R.string.reset_password_success, Toast.LENGTH_SHORT).show();
+                        UserLoginTask(enteredUserName, response.password);
                     }
 
                     @Override

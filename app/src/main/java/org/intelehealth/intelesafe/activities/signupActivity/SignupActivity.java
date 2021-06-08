@@ -56,6 +56,7 @@ import org.intelehealth.intelesafe.database.dao.ImagesDAO;
 import org.intelehealth.intelesafe.database.dao.PatientsDAO;
 import org.intelehealth.intelesafe.models.GetDistrictRes;
 import org.intelehealth.intelesafe.models.GetOpenMRS;
+import org.intelehealth.intelesafe.models.GetPassword;
 import org.intelehealth.intelesafe.models.GetUserCallRes.UserCallRes;
 import org.intelehealth.intelesafe.models.IdentifierUUID;
 import org.intelehealth.intelesafe.models.NewUserCreationCall.NameUser;
@@ -84,6 +85,7 @@ import org.intelehealth.intelesafe.utilities.UrlModifiers;
 import org.intelehealth.intelesafe.utilities.UuidGenerator;
 import org.intelehealth.intelesafe.utilities.exception.DAOException;
 
+import java.security.SecureRandom;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -747,8 +749,9 @@ public class SignupActivity extends AppCompatActivity {
                 // Store values at the time of the login attempt.
               //  userName = mEmailView.getText().toString();
                 userName = mPhoneNum.getText().toString();
-                password = mPasswordView.getText().toString();
-                cPassword = mCPassword.getText().toString();
+                /*password = mPasswordView.getText().toString();
+                cPassword = mCPassword.getText().toString();*/
+                password = generatePassword(10);
 
                 boolean cancel = false;
                 View focusView = null;
@@ -904,8 +907,9 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }
 
+                //commented as only otp is required
                 // Check for a valid password, if the user entered one.
-                if (TextUtils.isEmpty(password)) {
+                /*if (TextUtils.isEmpty(password)) {
                     mPasswordView.setError(getString(R.string.error_field_required));
                     mPasswordView.requestFocus();
                     return;
@@ -955,7 +959,7 @@ public class SignupActivity extends AppCompatActivity {
                     mCPassword.setError(getString(R.string.username_password_must_be_different));
                     mCPassword.requestFocus();
                     return;
-                }
+                }*/
 
                 if (TextUtils.isEmpty(mOTP.getText().toString())) {
                     mOTP.setError(getString(R.string.error_field_required));
@@ -1363,6 +1367,36 @@ public class SignupActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private String generatePassword(int length) {
+        char[] SYMBOLS = "-/.^&*_!@%=+>)".toCharArray();
+        char[] LOWERCASE = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+        char[] UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
+        char[] NUMBERS = "0123456789".toCharArray();
+        char[] ALL_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-/.^&*_!@%=+>)".toCharArray();
+        Random rand = new SecureRandom();
+
+        char[] password = new char[length];
+        //get the requirements out of the way
+        password[0] = LOWERCASE[rand.nextInt(LOWERCASE.length)];
+        password[1] = UPPERCASE[rand.nextInt(UPPERCASE.length)];
+        password[2] = NUMBERS[rand.nextInt(NUMBERS.length)];
+        password[3] = SYMBOLS[rand.nextInt(SYMBOLS.length)];
+
+        //populate rest of the password with random chars
+        for (int i = 4; i < length; i++) {
+            password[i] = ALL_CHARS[rand.nextInt(ALL_CHARS.length)];
+        }
+
+        //shuffle it up
+        for (int i = 0; i < password.length; i++) {
+            int randomPosition = rand.nextInt(password.length);
+            char temp = password[i];
+            password[i] = password[randomPosition];
+            password[randomPosition] = temp;
+        }
+        return new String(password);
     }
 
     boolean isUSerExistsAlready = false;
@@ -2047,7 +2081,7 @@ public class SignupActivity extends AppCompatActivity {
                         progress.dismiss();
                         if (res != null) {
 
-                            Log.e("OpenMRS-ID =", "Generated Successfully");
+                            /*Log.e("OpenMRS-ID =", "Generated Successfully");
                             onPatientCreateClicked(personUUID);
                             sessionManager.setFirstTimeLaunch(false);
                             Intent intent = new Intent(SignupActivity.this, HomeActivity.class);
@@ -2066,7 +2100,8 @@ public class SignupActivity extends AppCompatActivity {
                             sessionManager.setTriggerNoti("no");
                             startActivity(intent);
 
-                            finish();
+                            finish();*/
+                            createUserMapping(userName, password);
 
                         } else {
                             Toast.makeText(context, getString(R.string.something_went_wrong), Toast.LENGTH_LONG).show();
@@ -2153,4 +2188,54 @@ public class SignupActivity extends AppCompatActivity {
         return date;
     }
 
+
+    private void createUserMapping(String enteredUserName, String password) {
+        progress.show();
+        UrlModifiers urlModifiers = new UrlModifiers();
+        String urlString = urlModifiers.getUserMapping(BuildConfig.CLEAN_URL);
+        String encoded = base64Utils.encoded("admin", "Admin123");
+        GetPassword getPassword = new GetPassword();
+        getPassword.username = enteredUserName;
+        getPassword.password = password;
+        Observable<GetPassword> userGetResponse = AppConstants.apiInterface.getPassword(urlString, "Basic " + encoded, getPassword);
+        userGetResponse.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<GetPassword>() {
+                    @Override
+                    public void onNext(GetPassword response) {
+                        progress.dismiss();
+//                        UserLoginTask(enteredUserName, response.password);
+
+                        Log.e("OpenMRS-ID =", "Generated Successfully");
+                        onPatientCreateClicked(personUUID);
+                        sessionManager.setFirstTimeLaunch(false);
+                        Intent intent = new Intent(SignupActivity.this, HomeActivity.class);
+                        intent.putExtra("setup", true);
+                        intent.putExtra("from", "setup");
+                        intent.putExtra("login", true);
+                        intent.putExtra("username", userName);
+                        intent.putExtra("password", password);
+//                            intent.putExtra("name", "" + mFirstName.getText().toString() + " " + mLastName.getText().toString());
+//                            intent.putExtra("patientUUID", "" + personUUID);
+
+                        sessionManager.setPersionUUID(personUUID);
+                        sessionManager.setUserName("" + mFirstName.getText().toString() + " " + mLastName.getText().toString());
+                        sessionManager.setUseFirstName("" + mFirstName.getText().toString()); // added by venu N on 07/04/2020.
+                        sessionManager.setPrivacyValue(privacy_value);
+                        sessionManager.setTriggerNoti("no");
+                        startActivity(intent);
+
+                        finish();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        progress.dismiss();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
 }

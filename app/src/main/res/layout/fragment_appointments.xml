@@ -6,9 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".activities.appointments.AppointmentsActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
     <TextView
         android:id="@+id/your_data_overview"
         android:layout_width="match_parent"
@@ -39,25 +36,4 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/your_data_overview" />
-</RelativeLayout>
-
-
-    <RelativeLayout
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#1db995">
-    </com.google.android.material.tabs.TabLayout>
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/tabLayout"
-        tools:layout_editor_absoluteX="8dp" />
-    </RelativeLayout>
 </RelativeLayout>
