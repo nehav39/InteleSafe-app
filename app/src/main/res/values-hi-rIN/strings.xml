@@ -96,7 +96,7 @@
     //Login Screen
     <string name="title_activity_login" translatable="false">Intelehealth</string>
     <string name="prompt_email">उपयोगकर्ता नाम</string>
-    <string name="prompt_password">कुंजिका*</string>
+    <string name="prompt_password">पासवर्ड*</string>
     <string name="prompt_admin_password" translatable="false">Admin Password</string>
     <string name="action_sign_in">लॉग इन</string>
     <string name="action_sign_in_short">साइन इन करें</string>
@@ -728,7 +728,7 @@
     <string name="txt_post_covid_selfCheck">कोविड होने के बाद स्वास्थ्य में सुधार का स्वयं मुल्यांकन ?</string>
     <string name="personal_pr">व्यक्तिगत सुरक्षा दिशानिर्देश</string>
     <string name="if_you_star">PPE और संक्रमण नियंत्रण के बारे में प्रश्न प्राप्त करें आप कोविद -19 के लक्षण दिखा रहे हैं? अपनी चिंताओं के बारे में किसी विशेषज्ञ से बात करने के लिए नीचे दिए गए हमारे हेल्पलाइन नंबर पर हमें एक व्हाट्सएप संदेश भेजें।</string>
-    <string name="whatsApp_description">कोविड से ठीक होने के बाद भी आपको कमजोरी, थकान, सांस लेने में तकलीफ, सीने में दर्द, चिंता या तनाव जैसे लक्षण महसूस हो रहे हैं । हम यहाँ आपकी मदद करने के लिए हैं। यह महत्वपूर्ण है कि हम इन लक्षणों का इलाज करें और आपके स्वास्थ्य को ठीक करें।</string>
+    <string name="whatsApp_description">कोविड से ठीक होने के बाद भी आपको कमजोरी, थकान, सांस लेने में तकलीफ, सीने में दर्द, चिंता या तनाव जैसे लक्षण महसूस हो रहे हैं। हम यहाँ आपकी मदद करने के लिए हैं। यह महत्वपूर्ण है कि हम इन लक्षणों का इलाज करें और आपके स्वास्थ्य को ठीक करें।</string>
     <string name="some_id">+91 9825989750</string>
     <string name="ppe_faq">पीपीई का पुन: उपयोग, विकल्प और एफएक्यू</string>
     <string name="about_covid">COVID-19 के बारे में</string>
