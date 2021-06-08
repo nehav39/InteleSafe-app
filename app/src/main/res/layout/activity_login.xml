@@ -28,7 +28,7 @@
                 android:layout_height="100dp"
                 android:layout_centerHorizontal="true"
                 android:layout_margin="20dp"
-                android:src="@drawable/ic_spash_logo_background" />
+                android:src="@drawable/ic_logo_app" />
 
             <LinearLayout
                 android:id="@+id/ll_center"
