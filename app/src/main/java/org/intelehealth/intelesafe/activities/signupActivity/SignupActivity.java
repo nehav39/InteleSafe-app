@@ -224,6 +224,7 @@ public class SignupActivity extends AppCompatActivity {
     private View frRegister, login_linearlayout;
     private Button btnSendOtp;
     private TextView txt_privacy;
+    private DatePickerDialog datePickerDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -1357,7 +1358,9 @@ public class SignupActivity extends AppCompatActivity {
                             input.requestFocus();
                         } else {
                             Calendar instance = Calendar.getInstance();
-                            new DatePickerDialog(SignupActivity.this, android.R.style.Theme_Holo_Light_Dialog_NoActionBar, new DatePickerDialog.OnDateSetListener() {
+                            datePickerDialog = new DatePickerDialog(SignupActivity.this,
+                                    android.R.style.Theme_Holo_Light_Dialog_NoActionBar,
+                                    new DatePickerDialog.OnDateSetListener() {
                                 @Override
                                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                                     et_tested_positive_date.setError(null);
@@ -1368,7 +1371,10 @@ public class SignupActivity extends AppCompatActivity {
                                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMMM yyyy", Locale.ENGLISH);
                                     et_tested_positive_date.setText(simpleDateFormat.format(date));
                                 }
-                            }, instance.get(Calendar.YEAR), instance.get(Calendar.MONTH), instance.get(Calendar.DAY_OF_MONTH)).show();
+                            }, instance.get(Calendar.YEAR), instance.get(Calendar.MONTH), instance.get(Calendar.DAY_OF_MONTH));
+                            datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                            //This will set the maxDate to Today only...
+                            datePickerDialog.show();
                         }
                     }
                 });
