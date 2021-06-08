@@ -2197,7 +2197,7 @@ public class SignupActivity extends AppCompatActivity {
         GetPassword getPassword = new GetPassword();
         getPassword.username = enteredUserName;
         getPassword.password = password;
-        Observable<GetPassword> userGetResponse = AppConstants.apiInterface.getPassword(urlString, "Basic " + encoded, getPassword);
+        Observable<GetPassword> userGetResponse = AppConstants.apiInterface.getUserMapping(urlString, "Basic " + encoded, getPassword);
         userGetResponse.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new DisposableObserver<GetPassword>() {
