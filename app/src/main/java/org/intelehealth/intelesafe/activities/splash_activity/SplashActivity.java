@@ -6,30 +6,29 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 
-import java.util.List;
-import java.util.Locale;
-
 import org.intelehealth.intelesafe.R;
 import org.intelehealth.intelesafe.activities.chooseLanguageActivity.ChooseLanguageActivity;
 import org.intelehealth.intelesafe.activities.homeActivity.HomeActivity;
+import org.intelehealth.intelesafe.activities.loginActivity.LoginActivity;
 import org.intelehealth.intelesafe.dataMigration.SmoothUpgrade;
 import org.intelehealth.intelesafe.fcm.util.FCMUtils;
 import org.intelehealth.intelesafe.services.fcm_service.TokenRefreshUtils;
 import org.intelehealth.intelesafe.utilities.Logger;
 import org.intelehealth.intelesafe.utilities.SessionManager;
 
-import org.intelehealth.intelesafe.activities.loginActivity.LoginActivity;
+import java.util.List;
+import java.util.Locale;
 
 
 public class SplashActivity extends AppCompatActivity {
+    private static final int SPLASH_TIMER = 6 * 1000; // 7 sec
     SessionManager sessionManager = null;
     ProgressDialog TempDialog;
     int i = 5;
@@ -82,7 +81,7 @@ public class SplashActivity extends AppCompatActivity {
                         public void run() {
                             nextActivity();
                         }
-                    }, 2000);
+                    }, SPLASH_TIMER);
 
                 } else {
                     final Handler handler = new Handler();
@@ -101,7 +100,7 @@ public class SplashActivity extends AppCompatActivity {
                             }
 
                         }
-                    }, 2000);
+                    }, SPLASH_TIMER);
                 }
 
             }
