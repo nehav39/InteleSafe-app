@@ -7,12 +7,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 public class TabAdapter extends FragmentPagerAdapter {
-    private Context myContext;
     int totalTabs;
 
-    public TabAdapter(Context context, FragmentManager fm, int totalTabs) {
+    public TabAdapter(FragmentManager fm, int totalTabs) {
         super(fm);
-        myContext = context;
         this.totalTabs = totalTabs;
     }
 
@@ -21,10 +19,10 @@ public class TabAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                Fragment fragment = new Fragment();
+                Fragment fragment = AppointmentsFragment.newInstance(true);
                 return fragment;
             case 1:
-                Fragment fragment1 = new Fragment();
+                Fragment fragment1 = AppointmentsFragment.newInstance(false);
                 return fragment1;
             default:
                 return null;
