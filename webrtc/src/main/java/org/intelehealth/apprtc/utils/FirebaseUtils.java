@@ -30,6 +30,7 @@ public class FirebaseUtils {
                 return;
             }
             JSONObject inputJsonObject = new JSONObject();
+            inputJsonObject.put("type", "Patient");
             inputJsonObject.put("user_uuid", userUUID);
             inputJsonObject.put("data", new JSONObject().put("device_reg_token", fcmToken));
 

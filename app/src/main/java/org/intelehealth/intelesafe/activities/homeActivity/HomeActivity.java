@@ -84,6 +84,7 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.UUID;
 
+import org.intelehealth.apprtc.CompleteActivity;
 import org.intelehealth.apprtc.data.Manager;
 import org.intelehealth.apprtc.utils.FirebaseUtils;
 import org.intelehealth.intelesafe.BuildConfig;
@@ -1330,6 +1331,17 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         alert.setCanceledOnTouchOutside(false);
         alert.getButton(AlertDialog.BUTTON_POSITIVE).setVisibility(View.GONE);
         alert.getButton(AlertDialog.BUTTON_NEGATIVE).setVisibility(View.GONE);
+    }
+
+    public void startVideoChatWithHealthWorker(View view) {
+        startActivity(new Intent(this, CompleteActivity.class)
+                .putExtra("callerName", "Nurse")
+                .putExtra("roomId", sessionManager.getProviderID())
+                .putExtra("nurseId", sessionManager.getProviderID())
+        );
+    }
+
+    public void startTextChatWithHealthWorker(View view) {
     }
 
     private class DownloadFile extends AsyncTask<String, Void, Void> {
