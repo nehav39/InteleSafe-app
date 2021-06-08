@@ -1292,6 +1292,7 @@ public class SignupActivity extends AppCompatActivity {
         city_spinner.setEnabled(false);
         block_spinner = findViewById(R.id.block_spinner);
         block_spinner.setEnabled(false);
+
         state_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -1299,17 +1300,61 @@ public class SignupActivity extends AppCompatActivity {
                     city_spinner.setEnabled(true);
                     block_spinner.setEnabled(true);
 
-                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(SignupActivity.this, position == 1 ? R.array.jh_city_values : R.array.mp_city_values, android.R.layout.simple_spinner_item);
+                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource
+                            (SignupActivity.this, position == 1 ? R.array.jh_city_values :
+                                    R.array.mp_city_values, android.R.layout.simple_spinner_item);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     city_spinner.setAdapter(adapter);
                     state = state_spinner.getSelectedItem().toString();
 
-                    ArrayAdapter<CharSequence> blockAdapter = ArrayAdapter.createFromResource(SignupActivity.this, position == 1 ? R.array.jh_block_values : R.array.mp_block_values, android.R.layout.simple_spinner_item);
+                   /* ArrayAdapter<CharSequence> blockAdapter = ArrayAdapter.createFromResource
+                            (SignupActivity.this, position == 1 ? R.array.jh_block_values : R.array.mp_block_values,
+                                    android.R.layout.simple_spinner_item);
                     blockAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    block_spinner.setAdapter(blockAdapter);
+                    block_spinner.setAdapter(blockAdapter);*/
                 } else {
                     city_spinner.setEnabled(false);
+                   // block_spinner.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        city_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position > 0) {
+                    block_spinner.setEnabled(true);
+
+                    int array = 0;
+                    switch (position) {
+                        case 1:
+                            array = R.array.rn_block_values;
+                            break;
+                        case 2:
+                            array = R.array.es_block_values;
+                            break;
+                        case 3:
+                            array = R.array.bo_block_values;
+                            break;
+                        case 4:
+                            array = R.array.dh_block_values;
+                            break;
+                        default:
+                            array = R.array.default_block_values;
+                    }
+                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource
+                            (SignupActivity.this, array,
+                                    android.R.layout.simple_spinner_item);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    block_spinner.setAdapter(adapter);
+                } else {
                     block_spinner.setEnabled(false);
+                    // block_spinner.setEnabled(false);
                 }
             }
 

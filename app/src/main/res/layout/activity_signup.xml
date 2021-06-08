@@ -289,7 +289,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
                             android:focusable="true"
-                            android:entries="@array/jh_block_values"
+                            android:entries="@array/default_block_values"
                             />
 
                         <com.google.android.material.textfield.TextInputLayout
