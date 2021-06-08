@@ -38,7 +38,7 @@ public class AppointmentsFragment extends Fragment {
     private ArrayList<Day_Date> recycler_arraylist;
     private SessionManager sessionManager;
     private SQLiteDatabase db;
-    private HashSet<String> hashSet;
+//    private HashSet<String> hashSet;
     private Recycler_Home_Adapter recycler_home_adapter;
     boolean self;
 
@@ -85,9 +85,10 @@ public class AppointmentsFragment extends Fragment {
         String dd = "";
         int a1;
         StringBuilder stringBuilder;
-        hashSet = new HashSet<>();
+//        hashSet = new HashSet<>();
         ArrayList<String> array_original_date = new ArrayList<>();
         HashMap<String, Boolean> prescMap = new HashMap<>();
+        ArrayList<String> new_arraylist = new ArrayList<>();
 
         if (cursor != null) {
             if (cursor.moveToFirst()) {
@@ -95,7 +96,7 @@ public class AppointmentsFragment extends Fragment {
                     try {
                         String uuid = cursor.getString(cursor.getColumnIndexOrThrow("uuid"));
 
-                        EncounterDAO encounterDAO = new EncounterDAO();
+                        /*EncounterDAO encounterDAO = new EncounterDAO();
                         String encounterIDSelection = "visituuid = ?";
                         String[] encounterIDArgs = {uuid};
                         Cursor encounterCursor = db.query("tbl_encounter", null, encounterIDSelection, encounterIDArgs, null, null, null);
@@ -107,6 +108,18 @@ public class AppointmentsFragment extends Fragment {
                                 if (self)
                                     continue;
                             }
+                        } else {
+                            continue;
+                        }*/
+                        Cursor cursor1 = db.rawQuery("select * from tbl_obs as o where o.conceptuuid = '3edb0e09-9135-481e-b8f0-07a26fa9a5ce' and o.encounteruuid IN (select e.uuid from tbl_encounter as e where e.visituuid = ?)", new String[]{uuid});
+                        if (cursor1 != null && cursor1.moveToFirst()) {
+                            cursor1.close();
+                            if (self)
+                                continue;
+                        } else {
+                            cursor1.close();
+                            if (!self)
+                                continue;
                         }
 
                         endDate = cursor.getString(cursor.getColumnIndexOrThrow("startdate"));
@@ -114,12 +127,16 @@ public class AppointmentsFragment extends Fragment {
                         a1 = stringBuilder.indexOf("T");
                         dd = stringBuilder.substring(0, a1);
 
+//                        if (hashSet.contains(dd))
+//                            continue;
+
                         //comment...
                         array_original_date.add(b, endDate);
                         b++;
 //                        hashSet.add(new Day_Date("Day "+a, endDate));
                         //   boolean t = ;
-                        hashSet.add(dd);
+//                        hashSet.add(dd);
+                        new_arraylist.add(dd);
 
 
 //                        for(int i=0; i<recycler_arraylist.size(); i++)
@@ -148,8 +165,8 @@ public class AppointmentsFragment extends Fragment {
             cursor.close();
         }
 
-        ArrayList<String> new_arraylist = new ArrayList<>();
-        new_arraylist.addAll(hashSet);
+//        ArrayList<String> new_arraylist = new ArrayList<>();
+//        new_arraylist.addAll(hashSet);
 
         Collections.sort(new_arraylist); // added by venu N to sort the
 
