@@ -314,6 +314,7 @@
                         android:layout_marginHorizontal="5dp"
                         app:cardCornerRadius="10dp"
                         app:cardElevation="8dp"
+                        app:cardBackgroundColor="#62C9D0"
                         app:cardPreventCornerOverlap="false">
 
                         <!--                        <RelativeLayout-->
@@ -364,6 +365,7 @@
                                     android:layout_gravity="center"
                                     android:layout_height="wrap_content"
                                     android:textAlignment="center"
+                                    android:textColor="@color/white"
                                     android:text="@string/videos_title"
                                     android:src="@drawable/ic_doctor_with_mask">
 
@@ -375,6 +377,7 @@
                                     android:layout_height="20dp"
                                     android:layout_centerHorizontal="true"
                                     android:layout_marginStart="10dp"
+                                    app:tint="@color/white"
                                     android:src="@drawable/svg_arrow_forward_black" />
 
                             </LinearLayout>
@@ -628,6 +631,8 @@
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginTop="15dp"
                     app:cardCornerRadius="10sp"
+                    android:layout_marginBottom="10dp"
+                    app:cardBackgroundColor="#7A89B0"
                     app:cardElevation="5sp"
                     >
 
@@ -654,6 +659,7 @@
                                 android:layout_marginTop="5dp"
                                 android:fontFamily="@font/lato_regular"
                                 android:includeFontPadding="false"
+                                android:textColor="@color/white"
                                 android:text="@string/whatsApp_description"
                                 android:textSize="14sp" />
 
@@ -672,7 +678,7 @@
                                 android:hint=""
                                 android:textStyle="bold"
                                 android:text="@string/txt_talk_to_doc"
-                                android:textColor="@color/txt_sub_header_color"
+                                android:textColor="@color/white"
                                 android:textSize="18sp" />
 
                             <!-- Icon Credits:- <a target="_blank" href="https://icons8.com/icons/set/whatsapp">WhatsApp icon</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>-->
@@ -789,7 +795,9 @@
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginTop="15dp"
                     app:cardCornerRadius="10sp"
-                    app:cardElevation="5sp">
+                    app:cardBackgroundColor="#41ABE6"
+                    app:cardElevation="5sp"
+                    android:visibility="gone">
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -905,43 +913,46 @@
                     android:layout_below="@id/your_data_overview" />-->
 
                 <androidx.cardview.widget.CardView
-                    android:layout_below="@id/ppe_cardView_request"
+                    android:layout_below="@id/cardview_help"
                     android:id="@+id/cv_appointment_status"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:cardCornerRadius="10sp"
                     app:cardElevation="5sp"
+                    app:cardBackgroundColor="#A27FB9"
                     android:layout_margin="10sp">
 
                     <LinearLayout
-                        android:padding="12dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:padding="12dp">
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:src="@drawable/ic_baseline_event_24"/>
+                            android:src="@drawable/ic_baseline_event_24"
+                            app:tint="@color/white" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/appointment_status"
-                            android:fontFamily="@font/lato_bold"
                             android:layout_gravity="center_horizontal"
-                            android:textAppearance="?android:attr/textAppearanceMedium"/>
+                            android:fontFamily="@font/lato_bold"
+                            android:text="@string/appointment_status"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@color/white" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/check_appointments"
+                            android:layout_gravity="center_horizontal"
                             android:fontFamily="@font/lato_regular"
-                            android:textAppearance="?android:attr/textAppearanceSmall"
                             android:gravity="center"
-                            android:textColor="@color/txt_sub_header_color"
-                            android:layout_gravity="center_horizontal"/>
+                            android:text="@string/check_appointments"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="@color/white" />
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
