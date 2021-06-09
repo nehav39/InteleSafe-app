@@ -575,7 +575,7 @@ public class Node implements Serializable {
                 String val = dialogEditText.getText().toString();
                 if (val.isEmpty()) {
                     dialogEditText.setText("");
-                    Toast.makeText(context, context.getString(R.string.please_enter_value_for) +" "+ node.getText(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, context.getString(R.string.please_enter_value_for) +" "+ node.getText(), Toast.LENGTH_LONG).show();
                     node.setUnselected();
                     adapter.notifyDataSetChanged();
                     return;
@@ -584,7 +584,7 @@ public class Node implements Serializable {
                 if (node.getId().trim().equalsIgnoreCase("ID_1409441302")) {
                     if (valDouble < 85 || valDouble > 108) {
                         dialogEditText.setText("");
-                        Toast.makeText(context, context.getString(R.string.validation_text_for_temp) +" "+ node.getText(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.validation_text_for_temp) +" "+ node.getText(), Toast.LENGTH_LONG).show();
                         node.setUnselected();
                         adapter.notifyDataSetChanged();
                         return;
@@ -592,7 +592,7 @@ public class Node implements Serializable {
                 } else if (node.getId().trim().equalsIgnoreCase("ID_1562764420")) {
                     if (valDouble > 100) {
                         dialogEditText.setText("");
-                        Toast.makeText(context, context.getString(R.string.spo2_number_validation_text) +" "+ node.getText(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.spo2_number_validation_text) +" "+ node.getText(), Toast.LENGTH_LONG).show();
                         node.setUnselected();
                         adapter.notifyDataSetChanged();
                         return;
@@ -860,7 +860,7 @@ public class Node implements Serializable {
                 String value = etEnterValue.getText().toString();
                 if (value.isEmpty()) {
                     etEnterValue.setText("");
-                    Toast.makeText(context, context.getString(R.string.please_enter_value_for) +" "+ node.getText(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, context.getString(R.string.please_enter_value_for) +" "+ node.getText(), Toast.LENGTH_LONG).show();
                     node.setUnselected();
                     adapter.notifyDataSetChanged();
                     return;
@@ -869,7 +869,7 @@ public class Node implements Serializable {
                 if (node.getId().trim().equalsIgnoreCase("ID_350715851")) {
                     if (valDouble > 60) {
                         etEnterValue.setText("");
-                        Toast.makeText(context, context.getString(R.string.respiratory_number_validation_text) +" "+ node.getText(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.respiratory_number_validation_text) +" "+ node.getText(), Toast.LENGTH_LONG).show();
                         node.setUnselected();
                         adapter.notifyDataSetChanged();
                         return;
@@ -877,7 +877,7 @@ public class Node implements Serializable {
                 } else if (node.getId().trim().equalsIgnoreCase("ID_1961691483")) {
                     if (valDouble > 200) {
                         etEnterValue.setText("");
-                        Toast.makeText(context, context.getString(R.string.pulse_number_validation_text) +" "+ node.getText(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.pulse_number_validation_text) +" "+ node.getText(), Toast.LENGTH_LONG).show();
                         node.setUnselected();
                         adapter.notifyDataSetChanged();
                         return;
