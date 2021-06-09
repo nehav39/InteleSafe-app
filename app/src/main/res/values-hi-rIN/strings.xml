@@ -791,10 +791,10 @@
     <string name="info_about_covid">कोविड और अक्सर पूछे जाने वाले प्रश्नों के बारे में जानकारी</string>
     <string name="post_covid_title">पोस्ट कोविड केयर</string>
     <string name="videos_title">पोस्ट कोविड केयर के बारे में जानें</string>
-    <string name="please_enter_value_for">\"Please enter the value for \"</string>
-    <string name="validation_text_for_temp">\"Please enter the valid value (85 to 108)  for \"</string>
-    <string name="spo2_number_validation_text">\"Please enter the valid value (max 100)  for \"</string>
-    <string name="respiratory_number_validation_text">\"Please enter the valid value (max 60)  for \"</string>
-    <string name="pulse_number_validation_text">\"Please enter the valid value (max 200)  for \"</string>
+    <string name="please_enter_value_for">कृपया के लिए मान दर्ज करें </string>
+    <string name="validation_text_for_temp">कृपया के लिए मान्य मान (८५ से १०८) दर्ज करें </string>
+    <string name="spo2_number_validation_text">कृपया इसके लिए मान्य मान (अधिकतम १००) दर्ज करें </string>
+    <string name="respiratory_number_validation_text">कृपया के लिए मान्य मान (अधिकतम ६०) दर्ज करें </string>
+    <string name="pulse_number_validation_text">कृपया इसके लिए मान्य मान (अधिकतम 200) दर्ज करें </string>
 
 </resources>
