@@ -343,7 +343,7 @@
 
                             <ImageView
                                 android:layout_width="match_parent"
-                                android:layout_height="100dp"
+                                android:layout_height="80dp"
                                 android:layout_centerHorizontal="true"
                                 android:src="@drawable/ic_social_media"/>
 
@@ -357,7 +357,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:textStyle="bold"
-                                    android:textSize="20sp"
+                                    android:textSize="18sp"
                                     android:fontFamily="@font/lato_regular"
                                     android:layout_margin="5dp"
                                     android:layout_gravity="center"
@@ -405,14 +405,14 @@
 
                             <ImageView
                                 android:layout_width="match_parent"
-                                android:layout_height="100dp"
+                                android:layout_height="80dp"
                                 android:layout_centerHorizontal="true"
                                 android:src="@drawable/ic_medical_appointment" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:textStyle="bold"
-                                android:textSize="20sp"
+                                android:textSize="18sp"
                                 android:fontFamily="@font/lato_regular"
                                 android:layout_margin="5dp"
                                 android:layout_gravity="center"
