@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import org.intelehealth.intelesafe.R;
+import org.intelehealth.intelesafe.activities.pdflist.PdfListActivity;
+import org.intelehealth.intelesafe.activities.videolist.VideoListActivity;
 import org.intelehealth.intelesafe.utilities.SessionManager;
 
 public class VideosActivity extends AppCompatActivity {
@@ -27,23 +29,24 @@ public class VideosActivity extends AppCompatActivity {
         home_quarantine_guidelines.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (sessionManager.getAppLanguage().equalsIgnoreCase("en")) {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://youtube.com/playlist?list=PLY7f0i-HnvJ17kaGjtpPzQHO70GLqSW8z")));
-                } else {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/playlist?list=PLY7f0i-HnvJ1rONMTGFU03k-5RvNIsjvU")));
-                }
+//                if (sessionManager.getAppLanguage().equalsIgnoreCase("en")) {
+//                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://youtube.com/playlist?list=PLY7f0i-HnvJ17kaGjtpPzQHO70GLqSW8z")));
+//                } else {
+//                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/playlist?list=PLY7f0i-HnvJ1rONMTGFU03k-5RvNIsjvU")));
+//                }
+                VideoListActivity.start(VideosActivity.this);
             }
         });
         educational_videos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (sessionManager.getAppLanguage().equalsIgnoreCase("en")) {
+                /*if (sessionManager.getAppLanguage().equalsIgnoreCase("en")) {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://youtube.com/playlist?list=PLY7f0i-HnvJ2jx8sWpScxo95hxRkV66Qq")));
                 } else {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://youtube.com/playlist?list=PLY7f0i-HnvJ2aWCpFe2C690qomg9p2zmu")));
-                }
-
+                }*/
+                PdfListActivity.start(VideosActivity.this);
             }
         });
     }
