@@ -372,4 +372,20 @@ public class VisitsDAO {
     }
 
 
+    public void deleteByVisitUUID(String visitUuid) throws DAOException {
+
+        SQLiteDatabase db = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
+        db.beginTransaction();
+
+        try {
+            db.delete("tbl_visit","uuid = ?",new String[] {visitUuid});
+            db.setTransactionSuccessful();
+        } catch (SQLiteException e) {
+            FirebaseCrashlytics.getInstance().recordException(e);
+            throw new DAOException(e);
+        } finally {
+            db.endTransaction();
+        }
+
+    }
 }

@@ -198,7 +198,7 @@ public class QuestionNodeActivity extends AppCompatActivity {
 
 
             if (!question.isTerminal() && question.isSelected()) {
-                Node.subLevelQuestion(question, QuestionNodeActivity.this, adapter, filePath.toString(), imageName);
+                Node.subLevelQuestion(currentNode.getOption(groupPosition), question, QuestionNodeActivity.this, adapter, filePath.toString(), imageName);
                 //If the knowledgeEngine is not terminal, that means there are more questions to be asked for this branch.
             }
         } else if ((currentNode.getOption(groupPosition).getChoiceType().equals("single")) && currentNode.getOption(groupPosition).anySubSelected()) {
@@ -235,7 +235,7 @@ public class QuestionNodeActivity extends AppCompatActivity {
             }
 
             if (!question.isTerminal() && question.isSelected()) {
-                Node.subLevelQuestion(question, QuestionNodeActivity.this, adapter, filePath.toString(), imageName);
+                Node.subLevelQuestion(currentNode.getOption(groupPosition), question, QuestionNodeActivity.this, adapter, filePath.toString(), imageName);
                 //If the knowledgeEngine is not terminal, that means there are more questions to be asked for this branch.
             }
         }
