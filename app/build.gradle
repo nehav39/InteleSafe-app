@@ -152,6 +152,12 @@ dependencies {
     //facebook sdk
     implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
 
+    //exo player
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.14.0'
+    implementation 'com.google.android.exoplayer:exoplayer-ui:2.14.0'
+
+    //pdf
+    implementation 'es.voghdev.pdfviewpager:library:1.1.2'
 }
 apply plugin: 'com.google.gms.google-services'  // Google Play services Gradle plugin
 

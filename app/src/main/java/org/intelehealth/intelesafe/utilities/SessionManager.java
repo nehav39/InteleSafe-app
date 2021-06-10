@@ -549,7 +549,12 @@ public class SessionManager {
         return pref.getString(personSelectedCountry,"");
     }
 
+    public void cachePdfPath(String url, String downloadPath) {
+        editor.putString(url, downloadPath);
+        editor.apply();
+    }
 
-
-
+    public String getCachedPdfPath(String url) {
+        return pref.getString(url, null);
+    }
 }
