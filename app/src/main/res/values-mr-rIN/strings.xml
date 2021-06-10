@@ -720,10 +720,10 @@
     <string name="enter_otp">Enter OTP</string>
     <string name="send_otp">Send OTP</string>
     <string name="in_partnership_with_state_government_of">In partnership with state government of</string>
-    <string name="please_enter_value_for">\"Please enter the value for \"</string>
-    <string name="validation_text_for_temp">\"Please enter the valid value (85 to 108)  for \"</string>
-    <string name="spo2_number_validation_text">\"Please enter the valid value (max 100)  for \"</string>
-    <string name="respiratory_number_validation_text">\"Please enter the valid value (max 60)  for \"</string>
-    <string name="pulse_number_validation_text">\"Please enter the valid value (max 200)  for \"</string>
+    <string name="please_enter_value_for">Please enter the value for </string>
+    <string name="validation_text_for_temp">Please enter the valid value (85 to 108)  for </string>
+    <string name="spo2_number_validation_text">Please enter the valid value (max 100)  for </string>
+    <string name="respiratory_number_validation_text">Please enter the valid value (max 60)  for </string>
+    <string name="pulse_number_validation_text">Please enter the valid value (max 200)  for </string>
 
 </resources>
