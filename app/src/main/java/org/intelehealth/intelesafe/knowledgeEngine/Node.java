@@ -232,7 +232,8 @@ public class Node implements Serializable {
      * @param source source knowledgeEngine to copy into a new knowledgeEngine. Will always default as unselected.
      */
     public Node(Node source) {
-        //this.id = source.id;
+        this.id = source.id;
+        this.isMultiChoice = source.isMultiChoice;
         this.text = source.text;
         this.display = source.display;
         this.display_oriya = source.display_oriya;
@@ -259,7 +260,7 @@ public class Node implements Serializable {
         this.negativeCondition = source.negativeCondition;
     }
 
-    public static void subLevelQuestion(final Node node, final Activity context, final CustomExpandableListAdapter callingAdapter,
+    public static void subLevelQuestion(final Node parentNode, final Node node, final Activity context, final CustomExpandableListAdapter callingAdapter,
                                         final String imagePath, final String imageName) {
 
         node.setSelected();
@@ -298,7 +299,7 @@ public class Node implements Serializable {
                 }
 
                 if (!node.getOption(position).isTerminal()) {
-                    subLevelQuestion(node.getOption(position), context, callingAdapter, imagePath, imageName);
+                    subLevelQuestion(node, node.getOption(position), context, callingAdapter, imagePath, imageName);
                 }
             }
         });
@@ -307,12 +308,24 @@ public class Node implements Serializable {
         subQuestion.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
-                node.setText(node.generateLanguage());
-                callingAdapter.notifyDataSetChanged();
-                dialog.dismiss();
-                if (node.anySubSelected() && node.anySubPopUp()) {
-                    node.generatePopUp(context);
+                String generatedLang = node.generateLanguage();
+                Log.v(TAG, "generateLanguage - "+generatedLang);
+                if(generatedLang!=null) {
+                    node.setText(generatedLang);
+                    callingAdapter.notifyDataSetChanged();
+                    dialog.dismiss();
+                    if (node.anySubSelected() && node.anySubPopUp()) {
+                        node.generatePopUp(context);
+                    }
+                }else {
+                    parentNode.setUnselected();
+                    node.subSelected = false;
+                    node.setUnselected();
+                    for (int i = 0; i <node.getOptionsList().size() ; i++) {
+                        node.getOption(i).setUnselected();
+                    }
+                    callingAdapter.notifyDataSetChanged();
+                    Toast.makeText(context, context.getString(R.string.please_select_any_option), Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -575,7 +588,7 @@ public class Node implements Serializable {
                 String val = dialogEditText.getText().toString();
                 if (val.isEmpty()) {
                     dialogEditText.setText("");
-                    Toast.makeText(context, context.getString(R.string.please_enter_value_for) +" "+ node.getText(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, context.getString(R.string.please_enter_value_for) + " " + node.getText(), Toast.LENGTH_LONG).show();
                     node.setUnselected();
                     adapter.notifyDataSetChanged();
                     return;
@@ -584,7 +597,7 @@ public class Node implements Serializable {
                 if (node.getId().trim().equalsIgnoreCase("ID_1409441302")) {
                     if (valDouble < 85 || valDouble > 108) {
                         dialogEditText.setText("");
-                        Toast.makeText(context, context.getString(R.string.validation_text_for_temp) +" "+ node.getText(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, context.getString(R.string.validation_text_for_temp) + " " + node.getText(), Toast.LENGTH_LONG).show();
                         node.setUnselected();
                         adapter.notifyDataSetChanged();
                         return;
@@ -592,7 +605,7 @@ public class Node implements Serializable {
                 } else if (node.getId().trim().equalsIgnoreCase("ID_1562764420")) {
                     if (valDouble > 100) {
                         dialogEditText.setText("");
-                        Toast.makeText(context, context.getString(R.string.spo2_number_validation_text) +" "+ node.getText(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, context.getString(R.string.spo2_number_validation_text) + " " + node.getText(), Toast.LENGTH_LONG).show();
                         node.setUnselected();
                         adapter.notifyDataSetChanged();
                         return;
@@ -860,7 +873,7 @@ public class Node implements Serializable {
                 String value = etEnterValue.getText().toString();
                 if (value.isEmpty()) {
                     etEnterValue.setText("");
-                    Toast.makeText(context, context.getString(R.string.please_enter_value_for) +" "+ node.getText(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, context.getString(R.string.please_enter_value_for) + " " + node.getText(), Toast.LENGTH_LONG).show();
                     node.setUnselected();
                     adapter.notifyDataSetChanged();
                     return;
@@ -869,7 +882,7 @@ public class Node implements Serializable {
                 if (node.getId().trim().equalsIgnoreCase("ID_350715851")) {
                     if (valDouble > 60) {
                         etEnterValue.setText("");
-                        Toast.makeText(context, context.getString(R.string.respiratory_number_validation_text) +" "+ node.getText(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, context.getString(R.string.respiratory_number_validation_text) + " " + node.getText(), Toast.LENGTH_LONG).show();
                         node.setUnselected();
                         adapter.notifyDataSetChanged();
                         return;
@@ -877,7 +890,7 @@ public class Node implements Serializable {
                 } else if (node.getId().trim().equalsIgnoreCase("ID_1961691483")) {
                     if (valDouble > 200) {
                         etEnterValue.setText("");
-                        Toast.makeText(context, context.getString(R.string.pulse_number_validation_text) +" "+ node.getText(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, context.getString(R.string.pulse_number_validation_text) + " " + node.getText(), Toast.LENGTH_LONG).show();
                         node.setUnselected();
                         adapter.notifyDataSetChanged();
                         return;

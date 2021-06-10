@@ -204,7 +204,7 @@ public class FamilyHistoryActivity extends AppCompatActivity {
 
                 if (!familyHistoryMap.getOption(groupPosition).getOption(childPosition).isTerminal() &&
                         familyHistoryMap.getOption(groupPosition).getOption(childPosition).isSelected()) {
-                    Node.subLevelQuestion(clickedNode, FamilyHistoryActivity.this, adapter, filePath.toString(), imageName);
+                    Node.subLevelQuestion(familyHistoryMap.getOption(groupPosition),clickedNode, FamilyHistoryActivity.this, adapter, filePath.toString(), imageName);
                 }
 
                 return false;

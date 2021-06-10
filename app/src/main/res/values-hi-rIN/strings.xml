@@ -796,5 +796,7 @@
     <string name="spo2_number_validation_text">कृपया इसके लिए मान्य मान (अधिकतम १००) दर्ज करें </string>
     <string name="respiratory_number_validation_text">कृपया के लिए मान्य मान (अधिकतम ६०) दर्ज करें </string>
     <string name="pulse_number_validation_text">कृपया इसके लिए मान्य मान (अधिकतम 200) दर्ज करें </string>
+    <string name="please_give_your_answer">कृपया अपना उत्तर दें</string>
+    <string name="please_select_any_option">कृपया कोई विकल्प चुनें</string>
 
 </resources>
