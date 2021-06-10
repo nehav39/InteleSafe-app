@@ -4,16 +4,20 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import org.intelehealth.intelesafe.R;
@@ -60,13 +64,57 @@ public class AppointmentsActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle(getString(R.string.appointment_status));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setElevation(0);
 
         sessionManager = new SessionManager(this);
         db = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
-        ;
+        /*
         recyclerView = findViewById(R.id.recyclerview_data);
         tvNoVisit = findViewById(R.id.tv_no_visit);
-        renderList();
+        renderList();*/
+        setupTabs();
+    }
+
+    TabLayout tabLayout;
+    ViewPager viewPager;
+    @SuppressLint("ClickableViewAccessibility")
+    private void setupTabs() {
+        tabLayout= findViewById(R.id.tabLayout);
+        viewPager= findViewById(R.id.viewPager);
+        viewPager.setOnTouchListener(new View.OnTouchListener()
+        {
+            @Override
+            public boolean onTouch(View v, MotionEvent event)
+            {
+                return true;
+            }
+        });
+
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.self_assessment));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.doctors_visits));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        final TabAdapter adapter = new TabAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        viewPager.setAdapter(adapter);
+
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 
     @Override
@@ -78,7 +126,7 @@ public class AppointmentsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void renderList() {
+    /*private void renderList() {
         ArrayList<String> visitsWithPrescription = getVisitsWithPrescription();
         recycler_arraylist = new ArrayList<Day_Date>();
         String endDate = "";
@@ -126,9 +174,9 @@ public class AppointmentsActivity extends AppCompatActivity {
 
                         if ((prescMap.get(dd) == null || !prescMap.get(dd)) && visitsWithPrescription.contains(uuid))
                             prescMap.put(dd, true);
-                        /*recycler_arraylist.add(new Day_Date
+                        *//*recycler_arraylist.add(new Day_Date
                                 ("Day " + a, dd));
-                        a++;*/
+                        a++;*//*
 
 
                     } catch (Exception e) {
@@ -167,7 +215,7 @@ public class AppointmentsActivity extends AppCompatActivity {
             sessionManager.setFirstCheckin("false");
             tvNoVisit.setVisibility(View.VISIBLE);
         }
-    }
+    }*/
 
     public void pastVisits(int position, String check_inDate) {
 
@@ -271,7 +319,7 @@ public class AppointmentsActivity extends AppCompatActivity {
         startActivity(visitSummary);
     }
 
-    private ArrayList<String> getVisitsWithPrescription() {
+    /*private ArrayList<String> getVisitsWithPrescription() {
         ArrayList<String> encounterVisitUUID = new ArrayList<String>();
         HashSet<String> hsPatientUUID = new HashSet<String>();
 
@@ -310,5 +358,5 @@ public class AppointmentsActivity extends AppCompatActivity {
             listPatientUUID.addAll(hsPatientUUID);
         }
         return listPatientUUID;
-    }
+    }*/
 }

@@ -96,7 +96,7 @@
     //Login Screen
     <string name="title_activity_login" translatable="false">Intelehealth</string>
     <string name="prompt_email">उपयोगकर्ता नाम</string>
-    <string name="prompt_password">कुंजिका*</string>
+    <string name="prompt_password">पासवर्ड*</string>
     <string name="prompt_admin_password" translatable="false">Admin Password</string>
     <string name="action_sign_in">लॉग इन</string>
     <string name="action_sign_in_short">साइन इन करें</string>
@@ -134,7 +134,7 @@
     <string name="logout_menu">लॉग आउट</string>
 
     //Sign Up Screen
-    <string name="title_sign_up">साइन अप</string>
+    <string name="title_sign_up">रजिस्टर करें</string>
     <string name="personal_information">व्यक्तिगत जानकारी</string>
     <string name="login_details">लॉगइन विवरण</string>
     <string name="username">उपयोगकर्ता नाम*</string>
@@ -300,7 +300,7 @@
     <string name="visit_summary_follow_up_reminder" translatable="false">Please remind the patient of their follow up date: </string>
     <string name="visit_summary_upload_reminder" translatable="false">Please upload first before attempting to end the visit.</string>
     <string name="click_submit">सबमिट बटन पर क्लिक करें</string>
-    <string name="upload_before_home">सबमिट बटन पर क्लिक करके होम स्क्रीन पर जाने से पहले कृपया अपनी यात्रा अपलोड करें।</string>
+    <string name="upload_before_home">सबमिट बटन पर क्लिक करके होम स्क्रीन पर जाने से पहले कृपया अपनी जानकारी जमा करे।</string>
 
 
     //Diagnostic Tests Screen
@@ -479,7 +479,7 @@
     <string name="exit_survey_label" translatable="false">How was your experience?</string>
     <string name="exit_survey_prompt" translatable="false">Enter your comments here</string>
     <string name="exit_survey_skip" translatable="false">SKIP</string>
-    <string name="exit_survey_submit" translatable="false">प्रस्तुत</string>
+    <string name="exit_survey_submit" translatable="false">सबमिट</string>
     <string name="exit_survey_toast">Please select a smiley before submitting</string>
 
 
@@ -659,7 +659,7 @@
     <string name="help_cardview_visit">If you get much sicker please call your nearest doctor - 73054154312</string>
     <string name="intelesafe">InteleSafe</string>
     <string name="who_is_this_napplication_for">यह आवेदन किसके लिए है?</string>
-    <string name="submit_visitSummary_Button">प्रस्तुत</string>
+    <string name="submit_visitSummary_Button">सबमिट</string>
     <string name="medical_registration_number_license_id">Medical registration number/license ID</string>
     <string name="name_of_health_organization_hospital_where_you_primarily_work">Health org./hospital where you work</string>
     <string name="username_10digits">Username should be 8 characters</string>
@@ -728,7 +728,7 @@
     <string name="txt_post_covid_selfCheck">कोविड होने के बाद स्वास्थ्य में सुधार का स्वयं मुल्यांकन ?</string>
     <string name="personal_pr">व्यक्तिगत सुरक्षा दिशानिर्देश</string>
     <string name="if_you_star">PPE और संक्रमण नियंत्रण के बारे में प्रश्न प्राप्त करें आप कोविद -19 के लक्षण दिखा रहे हैं? अपनी चिंताओं के बारे में किसी विशेषज्ञ से बात करने के लिए नीचे दिए गए हमारे हेल्पलाइन नंबर पर हमें एक व्हाट्सएप संदेश भेजें।</string>
-    <string name="whatsApp_description">कोविड से ठीक होने के बाद भी आपको कमजोरी, थकान, सांस लेने में तकलीफ, सीने में दर्द, चिंता या तनाव जैसे लक्षण महसूस हो रहे हैं । हम यहाँ आपकी मदद करने के लिए हैं। यह महत्वपूर्ण है कि हम इन लक्षणों का इलाज करें और आपके स्वास्थ्य को ठीक करें।</string>
+    <string name="whatsApp_description">कोविड से ठीक होने के बाद भी आपको कमजोरी, थकान, सांस लेने में तकलीफ, सीने में दर्द, चिंता या तनाव जैसे लक्षण महसूस हो रहे हैं। हम यहाँ आपकी मदद करने के लिए हैं। यह महत्वपूर्ण है कि हम इन लक्षणों का इलाज करें और आपके स्वास्थ्य को ठीक करें।</string>
     <string name="some_id">+91 9825989750</string>
     <string name="ppe_faq">पीपीई का पुन: उपयोग, विकल्प और एफएक्यू</string>
     <string name="about_covid">COVID-19 के बारे में</string>
@@ -781,7 +781,20 @@
     <string name="hint_block">ब्लॉक*</string>
     <string name="error_mandatory_field">कृपया सभी अनिवार्य फ़ील्ड भरें</string>
     <string name="txt_user_exists">मोबाइल नंबर पहले से मौजूद है।</string>
-    <string name="check_appointments">अपनी डॉक्टर अपॉइंटमेंट और प्रिस्क्रिप्षन जाँचें</string>
+    <string name="check_appointments">अपने अपॉइंटमेंट शेड्यूल और प्रिस्क्रिप्षन की जाँच करें</string>
     <string name="appointment_status">अपॉइंटमेंट स्थिति</string>
     <string name="choose_lang_title">अपनी भाषा चुनिए</string>
+    <string name="in_partnership_with_state_government_of">राज्य सरकार के सहयोग से</string>
+
+    <string name="recovering_covid_new">पोस्ट-कोविड देखभाल के बारे में \n वीडियो</string>
+    <string name="educational_videos">शैक्षिक वीडियो</string>
+    <string name="info_about_covid">कोविड और अक्सर पूछे जाने वाले प्रश्नों के बारे में जानकारी</string>
+    <string name="post_covid_title">पोस्ट कोविड केयर</string>
+    <string name="videos_title">पोस्ट कोविड केयर के बारे में जानें</string>
+    <string name="please_enter_value_for">कृपया के लिए मान दर्ज करें </string>
+    <string name="validation_text_for_temp">कृपया के लिए मान्य मान (८५ से १०८) दर्ज करें </string>
+    <string name="spo2_number_validation_text">कृपया इसके लिए मान्य मान (अधिकतम १००) दर्ज करें </string>
+    <string name="respiratory_number_validation_text">कृपया के लिए मान्य मान (अधिकतम ६०) दर्ज करें </string>
+    <string name="pulse_number_validation_text">कृपया इसके लिए मान्य मान (अधिकतम 200) दर्ज करें </string>
+
 </resources>

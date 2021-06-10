@@ -2,6 +2,8 @@ package org.intelehealth.intelesafe.knowledgeEngine;
 
 import android.util.Log;
 
+import com.google.gson.Gson;
+
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
 
@@ -61,19 +63,17 @@ public class PhysicalExam extends Node {
         //TODO: Physical exam mind map needs to be modified to include required attribute
         if (getOption(0).getOptionsList() != null) {
             for (int i = 0; i < getOption(0).getOptionsList().size(); i++) {
-                if(i==2) { //Take Picture question from PhysExam_4.json file...as we have to skip that question...
+                if (i == 2) { //Take Picture question from PhysExam_4.json file...as we have to skip that question...
                     getOption(0).getOption(i).setRequired(false);
-                }
-                else {
+                } else {
                     getOption(0).getOption(i).setRequired(true);
                 }
 
                 if (getOption(0).getOption(i).getOptionsList() != null) {
                     for (int j = 0; j < getOption(0).getOption(i).getOptionsList().size(); j++) {
-                        if(i==2) { //Take Picture question from PhysExam_4.json file... as we have to skip that question....
+                        if (i == 2) { //Take Picture question from PhysExam_4.json file... as we have to skip that question....
                             getOption(0).getOption(i).getOption(j).setRequired(false);
-                        }
-                        else {
+                        } else {
                             getOption(0).getOption(i).getOption(j).setRequired(true);
                         }
 
@@ -238,6 +238,23 @@ public class PhysicalExam extends Node {
         return allAnswered;
     }
 
+    //Check to see if single required exams have been answered before moving on.
+    public boolean areRequiredAnsweredForCurrentNode(int index) {
+
+        boolean allAnswered = true;
+
+        //int total = this.totalExams;
+        //for (int i = 0; i < total; i++) {
+        Node node = getExamNode(index);
+        Log.v(TAG, new Gson().toJson(node).toString());
+        if (node.isRequired() && !node.anySubSelected()) {
+            allAnswered = false;
+            //  break;
+        }
+        // }
+        return allAnswered;
+    }
+
     //TODO: Physical exam map needs to modified to make language generation easier.
     public String generateFindings() {
         String mLanguage = "";
@@ -255,11 +272,11 @@ public class PhysicalExam extends Node {
                 boolean checkSet = rootStrings.add(levelOne);
 
                 if (checkSet)
-                    stringsList.add("<b>"+levelOne + ": "+"</b>" + bullet + " " + node.getLanguage());
+                    stringsList.add("<b>" + levelOne + ": " + "</b>" + bullet + " " + node.getLanguage());
                 else stringsList.add(bullet + " " + node.getLanguage());
                 if (!node.isTerminal()) {
                     String lang = node.formLanguage();
-                    Log.i(TAG, "generateFindings: "+ lang);
+                    Log.i(TAG, "generateFindings: " + lang);
                     stringsList.add(lang);
                 }
             }
@@ -286,16 +303,16 @@ public class PhysicalExam extends Node {
         mLanguage = mLanguage.replaceAll("\\.", "\\. ");
         mLanguage = mLanguage.replaceAll("\\: -", "\\: ");
         mLanguage = mLanguage.replaceAll("% - ", "");
-        mLanguage = mLanguage.replace(next_line,"-");
-        mLanguage = mLanguage.replaceAll("-"+ bullet, next_line + bullet);
-        mLanguage = mLanguage.replaceAll("-"+"<b>", next_line +"<b>");
-        mLanguage = mLanguage.replaceAll("</b>"+ bullet,"</b>"+ next_line + bullet);
+        mLanguage = mLanguage.replace(next_line, "-");
+        mLanguage = mLanguage.replaceAll("-" + bullet, next_line + bullet);
+        mLanguage = mLanguage.replaceAll("-" + "<b>", next_line + "<b>");
+        mLanguage = mLanguage.replaceAll("</b>" + bullet, "</b>" + next_line + bullet);
 
-        if(StringUtils.right(mLanguage,2).equals(" -")){
-            mLanguage = mLanguage.substring(0,mLanguage.length()-2);
+        if (StringUtils.right(mLanguage, 2).equals(" -")) {
+            mLanguage = mLanguage.substring(0, mLanguage.length() - 2);
         }
 
-        mLanguage = mLanguage.replaceAll("%-"," ");
+        mLanguage = mLanguage.replaceAll("%-", " ");
         return mLanguage;
     }
 

@@ -5,6 +5,7 @@ import org.intelehealth.intelesafe.models.CheckAppUpdateRes;
 import org.intelehealth.intelesafe.models.DownloadMindMapRes;
 import org.intelehealth.intelesafe.models.GetDistrictRes;
 import org.intelehealth.intelesafe.models.GetOpenMRS;
+import org.intelehealth.intelesafe.models.GetPassword;
 import org.intelehealth.intelesafe.models.GetUserCallRes.UserCallRes;
 import org.intelehealth.intelesafe.models.Location;
 import org.intelehealth.intelesafe.models.NewUserCreationCall.UserCreationData;
@@ -155,4 +156,10 @@ public interface ApiInterface {
 
     @POST
     Observable<ResetPassoword> resetPassword(@Url String url, @Header("Authorization") String authHeader, @Body ResetPassoword resetPassoword);
+
+    @POST
+    Observable<GetPassword> getPassword(@Url String url, @Header("Authorization") String authHeader, @Body GetPassword getPassword);
+
+    @POST
+    Observable<GetPassword> getUserMapping(@Url String url, @Header("Authorization") String authHeader, @Body GetPassword getPassword);
 }

@@ -8,19 +8,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.crashlytics.FirebaseCrashlytics;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.core.content.ContextCompat;
-import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,19 +17,19 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
+import com.google.gson.Gson;
 
 import org.intelehealth.intelesafe.R;
 import org.intelehealth.intelesafe.activities.visitSummaryActivity.VisitSummaryActivity;
@@ -56,10 +43,20 @@ import org.intelehealth.intelesafe.models.dto.EncounterDTO;
 import org.intelehealth.intelesafe.models.dto.ObsDTO;
 import org.intelehealth.intelesafe.utilities.FileUtils;
 import org.intelehealth.intelesafe.utilities.SessionManager;
-import org.intelehealth.intelesafe.utilities.UuidDictionary;
-
 import org.intelehealth.intelesafe.utilities.StringUtils;
+import org.intelehealth.intelesafe.utilities.UuidDictionary;
 import org.intelehealth.intelesafe.utilities.exception.DAOException;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 public class PhysicalExamActivity extends AppCompatActivity {
     final static String TAG = PhysicalExamActivity.class.getSimpleName();
@@ -224,10 +221,10 @@ public class PhysicalExamActivity extends AppCompatActivity {
 
         // Modified by venu N on 02/04/2020.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-           // tabLayout.setSelectedTabIndicatorColor(getColor(R.color.amber));
+            // tabLayout.setSelectedTabIndicatorColor(getColor(R.color.amber));
             tabLayout.setTabTextColors(getColor(R.color.txt_sub_header_color), getColor(R.color.white));
         } else {
-           // tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.amber));
+            // tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.amber));
             tabLayout.setTabTextColors(getResources().getColor(R.color.txt_sub_header_color), getResources().getColor(R.color.white));
         }
         if (tabLayout != null) {
@@ -236,12 +233,11 @@ public class PhysicalExamActivity extends AppCompatActivity {
         }
 
 
-
         FloatingActionButton fab = findViewById(R.id.fab);
         // added by Venu N on 02/04/2020.
-        if(mViewPager.getCurrentItem() == mViewPager.getAdapter().getCount()-1){
+        if (mViewPager.getCurrentItem() == mViewPager.getAdapter().getCount() - 1) {
             fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_done_24dp));
-        }else{
+        } else {
             fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.svg_right_arrow));
         }
         assert fab != null;
@@ -251,25 +247,25 @@ public class PhysicalExamActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 //returns true if all Mandatory questions have been answered...
-                complaintConfirmed = physicalExamMap.areRequiredAnswered();
+                //complaintConfirmed = physicalExamMap.areRequiredAnswered();
+                complaintConfirmed = physicalExamMap.areRequiredAnsweredForCurrentNode(1);
 
                 if (complaintConfirmed) {
 
                     /*
-                    * Here, checks if the currentview is not the last view of the viewpager
-                    * than it sets the current view to the next view and so user will be sent to
-                    * the question that is not mandatory as well...If the user than reaches
-                    * to the last question and complaintconfirmed is True that means all
-                    * required questions are answered then in that case the
-                    * currentItem (2) is < getcount()-1 (2) this becomes FALSE
-                    * and so the else loop is executed...*/
-                    
-                    if(mViewPager.getCurrentItem() < mViewPager.getAdapter().getCount()-1){
+                     * Here, checks if the currentview is not the last view of the viewpager
+                     * than it sets the current view to the next view and so user will be sent to
+                     * the question that is not mandatory as well...If the user than reaches
+                     * to the last question and complaintconfirmed is True that means all
+                     * required questions are answered then in that case the
+                     * currentItem (2) is < getcount()-1 (2) this becomes FALSE
+                     * and so the else loop is executed...*/
+
+                    if (mViewPager.getCurrentItem() < mViewPager.getAdapter().getCount() - 1) {
                         fab.setImageDrawable(ContextCompat.getDrawable
                                 (PhysicalExamActivity.this, R.drawable.svg_right_arrow));
-                        mViewPager.setCurrentItem(mViewPager.getCurrentItem()+1);
-                    }
-                    else {
+                        mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
+                    } else {
 
                         physicalString = physicalExamMap.generateFindings();
 
@@ -282,6 +278,7 @@ public class PhysicalExamActivity extends AppCompatActivity {
                         }
 
                         if (intentTag != null && intentTag.equals("edit")) {
+
                             updateDatabase(physicalString);
                             Intent intent = new Intent(PhysicalExamActivity.this, VisitSummaryActivity.class);
                             intent.putExtra("patientUuid", patientUuid);
@@ -316,13 +313,12 @@ public class PhysicalExamActivity extends AppCompatActivity {
 
                 } else {
                     // added by venu N 0n 02/04/2020.
-                    if(mViewPager.getCurrentItem() == mViewPager.getAdapter().getCount()-1){
+                    if (mViewPager.getCurrentItem() == mViewPager.getAdapter().getCount() - 1) {
                         questionsMissing();
-                    }else if(mViewPager.getCurrentItem() < mViewPager.getAdapter().getCount()-1){
+                    } else if (mViewPager.getCurrentItem() < mViewPager.getAdapter().getCount() - 1) {
                         fab.setImageDrawable(ContextCompat.getDrawable(PhysicalExamActivity.this, R.drawable.svg_right_arrow));
-                        mViewPager.setCurrentItem(mViewPager.getCurrentItem()+1);
-                    }
-                    else{
+                        mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
+                    } else {
                         fab.setImageDrawable(ContextCompat.getDrawable(PhysicalExamActivity.this, R.drawable.ic_done_24dp));
                     }
 
@@ -348,9 +344,9 @@ public class PhysicalExamActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int i) {
-                if(i == mViewPager.getAdapter().getCount()-1){
+                if (i == mViewPager.getAdapter().getCount() - 1) {
                     fab.setImageDrawable(ContextCompat.getDrawable(PhysicalExamActivity.this, R.drawable.ic_done_24dp));
-                }else{
+                } else {
                     fab.setImageDrawable(ContextCompat.getDrawable(PhysicalExamActivity.this, R.drawable.svg_right_arrow));
                 }
             }
@@ -569,12 +565,21 @@ public class PhysicalExamActivity extends AppCompatActivity {
                 @Override
                 public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                     Node question = viewNode.getOption(groupPosition).getOption(childPosition);
-                    //Log.d("Clicked", question.language());
+
                     question.toggleSelected();
                     if (viewNode.getOption(groupPosition).anySubSelected()) {
                         viewNode.getOption(groupPosition).setSelected();
                     } else {
                         viewNode.getOption(groupPosition).setUnselected();
+                    }
+                    Node rootNode = viewNode.getOption(groupPosition);
+                    if (!rootNode.isMultiChoice() && rootNode.getId().equals("ID_1987809737")) {
+                        for (int i = 0; i < rootNode.getOptionsList().size(); i++) {
+                            Node childNode = rootNode.getOptionsList().get(i);
+                            if (!childNode.getId().equals(question.getId())){
+                                viewNode.getOption(groupPosition).getOptionsList().get(i).setUnselected();
+                            }
+                        }
                     }
                     adapter.notifyDataSetChanged();
 

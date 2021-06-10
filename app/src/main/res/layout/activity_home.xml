@@ -239,53 +239,69 @@
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
 
-                <LinearLayout
-                    android:id="@+id/sub_header_view"
+                <!--                <LinearLayout-->
+                <!--                    android:id="@+id/sub_header_view"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_below="@id/cardview_self_assessment"-->
+                <!--                    android:layout_marginStart="10dp"-->
+                <!--                    android:layout_marginTop="15dp"-->
+                <!--                    android:layout_marginEnd="10dp"-->
+                <!--                    android:orientation="horizontal">-->
+
+
+                <!--                    <TextView-->
+                <!--                        android:layout_width="0dp"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_gravity="center_horizontal|center_vertical"-->
+                <!--                        android:layout_weight="1"-->
+                <!--                        android:fontFamily="@font/lato_bold"-->
+                <!--                        android:gravity="center"-->
+                <!--                        android:includeFontPadding="false"-->
+                <!--                        android:text="@string/recovering_covid"-->
+                <!--                        android:textColor="@color/txt_sub_header_color"-->
+                <!--                        android:textSize="13sp" />-->
+
+
+                <!--                    <TextView-->
+                <!--                        android:visibility="gone"-->
+                <!--                        android:layout_width="0dp"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_gravity="center_horizontal|center_vertical"-->
+                <!--                        android:layout_weight="1"-->
+                <!--                        android:fontFamily="@font/lato_bold"-->
+                <!--                        android:gravity="center"-->
+                <!--                        android:includeFontPadding="false"-->
+                <!--                        android:text="@string/simple_exercises"-->
+                <!--                        android:textColor="@color/txt_sub_header_color"-->
+                <!--                        android:textSize="13sp" />-->
+
+
+                <!--                </LinearLayout>-->
+
+                <TextView
+                    android:id="@+id/video_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/cardview_self_assessment"
+                    android:fontFamily="@font/lato_bold"
+                    android:includeFontPadding="false"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginEnd="10dp"
-                    android:orientation="horizontal">
-
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal|center_vertical"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/lato_bold"
-                        android:gravity="center"
-                        android:includeFontPadding="false"
-                        android:text="@string/recovering_covid"
-                        android:textColor="@color/txt_sub_header_color"
-                        android:textSize="13sp" />
-
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal|center_vertical"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/lato_bold"
-                        android:gravity="center"
-                        android:includeFontPadding="false"
-                        android:text="@string/simple_exercises"
-                        android:textColor="@color/txt_sub_header_color"
-                        android:textSize="13sp" />
-
-
-                </LinearLayout>
+                    android:layout_below="@+id/cardview_self_assessment"
+                    android:text="@string/educational_videos"
+                    android:textColor="@color/txt_sub_header_color" />
 
 
                 <LinearLayout
                     android:id="@+id/cardview_two_action_View"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/sub_header_view"
+                    android:layout_below="@id/video_title"
                     android:orientation="horizontal"
                     android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="5dp"
                     >
 
@@ -298,28 +314,79 @@
                         android:layout_marginHorizontal="5dp"
                         app:cardCornerRadius="10dp"
                         app:cardElevation="8dp"
+                        app:cardBackgroundColor="#62C9D0"
                         app:cardPreventCornerOverlap="false">
 
-                        <RelativeLayout
+                        <!--                        <RelativeLayout-->
+                        <!--                            android:id="@+id/button_home_quarantine"-->
+                        <!--                            android:layout_width="match_parent"-->
+                        <!--                            android:layout_height="match_parent"-->
+                        <!--                            android:gravity="bottom">-->
+
+                        <!--                            <ImageView-->
+                        <!--                                android:layout_width="wrap_content"-->
+                        <!--                                android:layout_height="wrap_content"-->
+                        <!--                                android:layout_centerHorizontal="true"-->
+                        <!--                                android:src="@drawable/ic_doctor_with_mask">-->
+
+                        <!--                            </ImageView>-->
+                        <!--                            -->
+                        <!--                        </RelativeLayout>-->
+
+                        <LinearLayout
                             android:id="@+id/button_home_quarantine"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:gravity="bottom"
-
-                            >
+                            android:orientation="horizontal"
+                            android:gravity="bottom">
 
                             <ImageView
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
                                 android:layout_height="wrap_content"
                                 android:layout_centerHorizontal="true"
                                 android:src="@drawable/ic_doctor_with_mask">
 
                             </ImageView>
 
-                        </RelativeLayout>
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:textStyle="bold"
+                                    android:textSize="20sp"
+                                    android:fontFamily="@font/lato_regular"
+                                    android:layout_margin="5dp"
+                                    android:layout_gravity="center"
+                                    android:layout_height="wrap_content"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/white"
+                                    android:text="@string/videos_title"
+                                    android:src="@drawable/ic_doctor_with_mask">
+
+                                </TextView>
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_gravity="center"
+                                    android:layout_height="20dp"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginStart="10dp"
+                                    app:tint="@color/white"
+                                    android:src="@drawable/svg_arrow_forward_black" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:visibility="gone"
                         android:id="@+id/cardview_button_educational_videos"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -564,6 +631,8 @@
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginTop="15dp"
                     app:cardCornerRadius="10sp"
+                    android:layout_marginBottom="10dp"
+                    app:cardBackgroundColor="#7A89B0"
                     app:cardElevation="5sp"
                     >
 
@@ -590,6 +659,7 @@
                                 android:layout_marginTop="5dp"
                                 android:fontFamily="@font/lato_regular"
                                 android:includeFontPadding="false"
+                                android:textColor="@color/white"
                                 android:text="@string/whatsApp_description"
                                 android:textSize="14sp" />
 
@@ -600,15 +670,15 @@
                                 android:layout_below="@+id/Help_Text"
                                 android:layout_marginStart="10sp"
                                 android:background="@android:color/transparent"
-                                android:drawableStart="@drawable/ic_icons8_whatsapp"
-                                android:drawableLeft="@drawable/ic_icons8_whatsapp"
+                                android:drawableStart="@drawable/telephone"
+                                android:drawableLeft="@drawable/telephone"
                                 android:drawablePadding="10sp"
                                 android:fontFamily="@font/lato_medium"
                                 android:gravity="start|center"
                                 android:hint=""
                                 android:textStyle="bold"
                                 android:text="@string/txt_talk_to_doc"
-                                android:textColor="@color/txt_sub_header_color"
+                                android:textColor="@color/white"
                                 android:textSize="18sp" />
 
                             <!-- Icon Credits:- <a target="_blank" href="https://icons8.com/icons/set/whatsapp">WhatsApp icon</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>-->
@@ -658,15 +728,15 @@
                             android:layout_marginStart="5dp"
                             android:layout_marginEnd="40dp">
 
-                         <!--   <TextView
-                                android:id="@+id/mental_help_title"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/lato_bold"
-                                android:includeFontPadding="false"
-                                android:text="@string/help"
-                                android:textColor="@color/txt_sub_header_color"
-                                android:textSize="12sp" />-->
+                            <!--   <TextView
+                                   android:id="@+id/mental_help_title"
+                                   android:layout_width="match_parent"
+                                   android:layout_height="wrap_content"
+                                   android:fontFamily="@font/lato_bold"
+                                   android:includeFontPadding="false"
+                                   android:text="@string/help"
+                                   android:textColor="@color/txt_sub_header_color"
+                                   android:textSize="12sp" />-->
 
 
                             <TextView
@@ -725,7 +795,9 @@
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginTop="15dp"
                     app:cardCornerRadius="10sp"
-                    app:cardElevation="5sp">
+                    app:cardBackgroundColor="#41ABE6"
+                    app:cardElevation="5sp"
+                    android:visibility="gone">
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -841,37 +913,46 @@
                     android:layout_below="@id/your_data_overview" />-->
 
                 <androidx.cardview.widget.CardView
-                    android:layout_below="@id/ppe_cardView_request"
+                    android:layout_below="@id/cardview_help"
                     android:id="@+id/cv_appointment_status"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:cardCornerRadius="10sp"
                     app:cardElevation="5sp"
+                    app:cardBackgroundColor="#A27FB9"
                     android:layout_margin="10sp">
 
                     <LinearLayout
-                        android:padding="12dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:padding="12dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_baseline_event_24"
+                            app:tint="@color/white" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/appointment_status"
-                            android:fontFamily="@font/lato_bold"
                             android:layout_gravity="center_horizontal"
-                            android:textAppearance="?android:attr/textAppearanceMedium"/>
+                            android:fontFamily="@font/lato_bold"
+                            android:text="@string/appointment_status"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@color/white" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/check_appointments"
+                            android:layout_gravity="center_horizontal"
                             android:fontFamily="@font/lato_regular"
-                            android:textAppearance="?android:attr/textAppearanceSmall"
                             android:gravity="center"
-                            android:textColor="@color/txt_sub_header_color"
-                            android:layout_gravity="center_horizontal"/>
+                            android:text="@string/check_appointments"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="@color/white" />
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -1171,5 +1252,6 @@
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
