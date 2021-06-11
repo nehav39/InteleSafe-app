@@ -1438,19 +1438,22 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void onClick(View v) {
 
-                Intent download = new Intent(VisitSummaryActivity.this, Webview.class);
+                String Url = BuildConfig.BASE_URL +
+                        "preApi/i.jsp?v=" +
+                        visitUuid + "&pid=" + patient.getOpenmrs_id();
+
+                Intent download_intent = new Intent(Intent.ACTION_VIEW);
+                download_intent.setData(Uri.parse(Url));
+                startActivity(download_intent);
+                Log.d("url", "url: "+Url);
+
+               /* Intent download = new Intent(VisitSummaryActivity.this, Webview.class);
                 download.putExtra("Base_Url", BuildConfig.BASE_URL);
                 download.putExtra("visitUuid", visitUuid);
                 download.putExtra("openMRS_id", patient.getOpenmrs_id());
                 Log.d("vdownload", "visituuid: "+ visitUuid +
                         "openmrs: "+ patient.getOpenmrs_id());
-                startActivity(download);
-
-               /* if (sessionManager.getAppLanguage().equalsIgnoreCase("en")){
-                    startActivity(new Intent(Intent.ACTION_VIEW,   Uri.parse("https://youtube.com/playlist?list=PLY7f0i-HnvJ17kaGjtpPzQHO70GLqSW8z")));
-                } else {
-                    startActivity(new Intent(Intent.ACTION_VIEW,   Uri.parse("https://www.youtube.com/playlist?list=PLY7f0i-HnvJ1rONMTGFU03k-5RvNIsjvU")));
-                }*/
+                startActivity(download);*/
             }
         });
     }

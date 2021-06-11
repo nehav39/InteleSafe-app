@@ -84,6 +84,8 @@ public class Webview extends AppCompatActivity {
                     public void onPageFinished(WebView view, String url) {
                         super.onPageFinished(view, url);
                         customProgressDialog.dismiss();
+                        webView.loadUrl("javascript:document.getElementById('skip_button').click()");
+                      //  Log.d("webview", "webview: "+webView.)
                     }
 
                     @Override
