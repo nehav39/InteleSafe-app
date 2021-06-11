@@ -262,6 +262,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.pdflist.PdfListActivity"
+            android:theme="@style/AppTheme"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.pdflist.PdfViewerActivity"
