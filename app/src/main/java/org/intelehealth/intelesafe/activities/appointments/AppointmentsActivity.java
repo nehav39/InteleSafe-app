@@ -209,7 +209,7 @@ public class AppointmentsActivity extends AppCompatActivity {
         }
     }*/
 
-    public void pastVisits(int position, String check_inDate, boolean self) {
+    public void pastVisits(int position, String check_inDate, boolean self, String visitUuid) {
 
         String patientuuid = sessionManager.getPersionUUID();
         List<String> visitList = new ArrayList<>();
@@ -228,8 +228,8 @@ public class AppointmentsActivity extends AppCompatActivity {
         String visitOrderBy = "startdate";
         String query = "SELECT DISTINCT v.uuid, v.startdate, v.enddate FROM tbl_visit v WHERE " +
                 "(v.issubmitted == 1 OR v.enddate IS NOT NULL) AND " +
-                "v.patientuuid = ? ORDER BY v.startdate";
-        String[] visitArgs = {patientuuid};
+                "v.patientuuid = ? AND v.uuid = ? ORDER BY v.startdate";
+        String[] visitArgs = {patientuuid, visitUuid };
 
         Cursor visitCursor = db.rawQuery(query, visitArgs);
         //Cursor visitCursor = db.query("tbl_visit", visitColumns, visitSelection, visitArgs, null, null, visitOrderBy);
@@ -281,7 +281,7 @@ public class AppointmentsActivity extends AppCompatActivity {
 
                     Date formatted = currentDate.parse(date);
                     String visitDate = currentDate.format(formatted);
-                    OldVisit(visitDate, visitList.get(position), end_date, "", ""/*encounterVitalList.get(position)*/, encounterAdultList.get(position), self);
+                    OldVisit(visitDate, visitUuid, end_date, "", ""/*encounterVitalList.get(position)*/, encounterAdultList.get(0), self);
                 } catch (ParseException e) {
                     FirebaseCrashlytics.getInstance().recordException(e);
                 }
