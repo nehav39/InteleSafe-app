@@ -67,6 +67,7 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.gson.Gson;
 
 import org.apache.commons.lang3.StringUtils;
+import org.intelehealth.intelesafe.BuildConfig;
 import org.intelehealth.intelesafe.activities.homeActivity.Webview;
 import org.intelehealth.intelesafe.models.ClsDoctorDetails;
 import org.intelehealth.intelesafe.database.dao.VisitAttributeListDAO;
@@ -204,7 +205,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
     NotificationCompat.Builder mBuilder;
 
     Button uploadButton;
-    Button teleconsultationButton;
+    Button teleconsultationButton, download_Watsapp;
     //Button downloadButton;
     ArrayList<String> physicalExams;
 
@@ -213,7 +214,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
     CardView medicalAdviceCard;
     CardView requestedTestsCard;
     CardView additionalCommentsCard;
-    CardView followUpDateCard, cardView_prescription;
+    CardView followUpDateCard, cardView_prescription, download_cardview;
 
     TextView diagnosisTextView;
     TextView prescriptionTextView;
@@ -516,6 +517,8 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         mDoctorName.setVisibility(View.GONE);
         prescriptionDataFormat = findViewById(R.id.textView_content_prescription);
         cardView_prescription = findViewById(R.id.cardView_prescription);
+        download_cardview = findViewById(R.id.download_cardview);
+        download_Watsapp = findViewById(R.id.download_Watsapp);
 
         diagnosisTextView = findViewById(R.id.textView_content_diagnosis);
         prescriptionTextView = findViewById(R.id.textView_content_rx);
@@ -1430,6 +1433,26 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
         doQuery();
 
+        //Button click....
+        download_Watsapp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent download = new Intent(VisitSummaryActivity.this, Webview.class);
+                download.putExtra("Base_Url", BuildConfig.BASE_URL);
+                download.putExtra("visitUuid", visitUuid);
+                download.putExtra("openMRS_id", patient.getOpenmrs_id());
+                Log.d("vdownload", "visituuid: "+ visitUuid +
+                        "openmrs: "+ patient.getOpenmrs_id());
+                startActivity(download);
+
+               /* if (sessionManager.getAppLanguage().equalsIgnoreCase("en")){
+                    startActivity(new Intent(Intent.ACTION_VIEW,   Uri.parse("https://youtube.com/playlist?list=PLY7f0i-HnvJ17kaGjtpPzQHO70GLqSW8z")));
+                } else {
+                    startActivity(new Intent(Intent.ACTION_VIEW,   Uri.parse("https://www.youtube.com/playlist?list=PLY7f0i-HnvJ1rONMTGFU03k-5RvNIsjvU")));
+                }*/
+            }
+        });
     }
 
     private void showPopup() {
@@ -2476,12 +2499,15 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
      */
     private String sms_web_prescription_format() {
         //prescription...
-        //If prescription is provided then show cardview...
+        //If prescription is provided then show cardview for
+        // Prescription preview & Presription Downlaod link...
         if (objClsDoctorDetails != null) {
             cardView_prescription.setVisibility(View.VISIBLE);
+            download_cardview.setVisibility(View.VISIBLE);
         }
         else {
             cardView_prescription.setVisibility(View.GONE);
+            download_cardview.setVisibility(View.GONE);
         }
 
         //Check for license key and load the correct config file
