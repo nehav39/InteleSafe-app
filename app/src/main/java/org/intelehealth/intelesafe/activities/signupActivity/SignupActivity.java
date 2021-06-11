@@ -1166,7 +1166,7 @@ public class SignupActivity extends AppCompatActivity {
 
                 UserBirthAttribute userBirthHosAttribute = new UserBirthAttribute();
                 userBirthHosAttribute.setAttributeType("1c718819-345c-4368-aad6-d69b4c267db7"); //openmrsuuid education
-                userBirthHosAttribute.setValue("" + block_spinner.getSelectedItem().toString()); //hospital name text
+                userBirthHosAttribute.setValue("" + (block_spinner.getSelectedItem().toString().equalsIgnoreCase("Select") ?"" :block_spinner.getSelectedItem().toString())); //hospital name text
 
                 UserBirthAttribute userCasteAttribute = new UserBirthAttribute();
                 userCasteAttribute.setAttributeType("5a889d96-0c84-4a04-88dc-59a6e37db2d3"); // This is for Designation. openrms caste...
