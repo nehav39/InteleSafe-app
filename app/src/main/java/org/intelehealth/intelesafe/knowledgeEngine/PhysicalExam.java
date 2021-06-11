@@ -63,19 +63,14 @@ public class PhysicalExam extends Node {
         //TODO: Physical exam mind map needs to be modified to include required attribute
         if (getOption(0).getOptionsList() != null) {
             for (int i = 0; i < getOption(0).getOptionsList().size(); i++) {
-                if (i == 2) { //Take Picture question from PhysExam_4.json file...as we have to skip that question...
-                    getOption(0).getOption(i).setRequired(false);
-                } else {
-                    getOption(0).getOption(i).setRequired(true);
-                }
+                // vital are not required as a compulsory
+                getOption(0).getOption(i).setRequired(i != 0);
+                Log.v(TAG, "matchSelections - " + new Gson().toJson(getOption(0).getOption(i)).toString());
 
                 if (getOption(0).getOption(i).getOptionsList() != null) {
                     for (int j = 0; j < getOption(0).getOption(i).getOptionsList().size(); j++) {
-                        if (i == 2) { //Take Picture question from PhysExam_4.json file... as we have to skip that question....
-                            getOption(0).getOption(i).getOption(j).setRequired(false);
-                        } else {
-                            getOption(0).getOption(i).getOption(j).setRequired(true);
-                        }
+                        getOption(0).getOption(i).getOption(j).setRequired(i != 0);
+                        Log.v(TAG, "matchSelections inner - " +getOption(0).getOption(i).getOption(j).getText()+" - "+ getOption(0).getOption(i).getOption(j).isRequired());
 
                     }
                 }
@@ -247,6 +242,8 @@ public class PhysicalExam extends Node {
         //for (int i = 0; i < total; i++) {
         Node node = getExamNode(index);
         Log.v(TAG, new Gson().toJson(node).toString());
+        Log.v(TAG, "node.isRequired() - "+ node.isRequired());
+        Log.v(TAG, "node.anySubSelected() - "+ node.anySubSelected());
         if (node.isRequired() && !node.anySubSelected()) {
             allAnswered = false;
             //  break;

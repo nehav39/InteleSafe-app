@@ -16,6 +16,7 @@ import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,6 +38,7 @@ import org.intelehealth.intelesafe.app.AppConstants;
 import org.intelehealth.intelesafe.database.dao.EncounterDAO;
 import org.intelehealth.intelesafe.database.dao.ImagesDAO;
 import org.intelehealth.intelesafe.database.dao.ObsDAO;
+import org.intelehealth.intelesafe.database.dao.VisitsDAO;
 import org.intelehealth.intelesafe.knowledgeEngine.Node;
 import org.intelehealth.intelesafe.knowledgeEngine.PhysicalExam;
 import org.intelehealth.intelesafe.models.dto.EncounterDTO;
@@ -120,9 +122,11 @@ public class PhysicalExamActivity extends AppCompatActivity {
         Intent intent = this.getIntent(); // The intent was passed to the activity
         if (intent != null) {
             patientUuid = intent.getStringExtra("patientUuid");
+            // Visit is pre created before coming to this screen so need to clear if user will not submit and going back from the screen
             visitUuid = intent.getStringExtra("visitUuid");
             encounterVitals = intent.getStringExtra("encounterUuidVitals");
             encounterAdultIntials = intent.getStringExtra("encounterUuidAdultIntial");
+
             state = intent.getStringExtra("state");
             patientName = intent.getStringExtra("name");
             intentTag = intent.getStringExtra("tag");
@@ -332,7 +336,25 @@ public class PhysicalExamActivity extends AppCompatActivity {
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                try {
+                    // remove the visit
+                    VisitsDAO visitsDAO = new VisitsDAO();
+                    visitsDAO.deleteByVisitUUID(visitUuid);
+                    // remove the visit obs i.e. observation
+                    // Obs is creating during the final FAB button submit but i am removing here for
+                    // anything went wrong during submit and data inserted to that obs table
+                    // so it will also clear on back from this screen
+                    ObsDAO obsDAO = new ObsDAO();
+                    obsDAO.deleteByEncounterUud(encounterAdultIntials);
+                    // remove the Encounter
+                    EncounterDAO encounterDAO = new EncounterDAO();
+                    encounterDAO.deleteByVisitUUID(visitUuid);
+
+                    finish();
+                } catch (DAOException e) {
+                    e.printStackTrace();
+                    Toast.makeText(PhysicalExamActivity.this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -436,8 +458,8 @@ public class PhysicalExamActivity extends AppCompatActivity {
 
     public void questionsMissing() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setMessage(R.string.question_answer_all_phy_exam);
-        alertDialogBuilder.setNeutralButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+        alertDialogBuilder.setMessage(R.string.please_give_your_answer);
+        alertDialogBuilder.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -573,10 +595,11 @@ public class PhysicalExamActivity extends AppCompatActivity {
                         viewNode.getOption(groupPosition).setUnselected();
                     }
                     Node rootNode = viewNode.getOption(groupPosition);
-                    if (!rootNode.isMultiChoice() && rootNode.getId().equals("ID_1987809737")) {
+                    Log.v(TAG, "rootNode - "+new Gson().toJson(rootNode));
+                    if (!rootNode.isMultiChoice()) {
                         for (int i = 0; i < rootNode.getOptionsList().size(); i++) {
                             Node childNode = rootNode.getOptionsList().get(i);
-                            if (!childNode.getId().equals(question.getId())){
+                            if (!childNode.getId().equals(question.getId())) {
                                 viewNode.getOption(groupPosition).getOptionsList().get(i).setUnselected();
                             }
                         }
@@ -601,7 +624,7 @@ public class PhysicalExamActivity extends AppCompatActivity {
                     }
 
                     if (!question.isTerminal() && question.isSelected()) {
-                        Node.subLevelQuestion(question, (Activity) getContext(), adapter, filePath.toString(), imageName);
+                        Node.subLevelQuestion(viewNode.getOption(groupPosition), question, (Activity) getContext(), adapter, filePath.toString(), imageName);
                     }
 
                     return false;
