@@ -81,14 +81,6 @@ public class AppointmentsActivity extends AppCompatActivity {
     private void setupTabs() {
         tabLayout= findViewById(R.id.tabLayout);
         viewPager= findViewById(R.id.viewPager);
-        viewPager.setOnTouchListener(new View.OnTouchListener()
-        {
-            @Override
-            public boolean onTouch(View v, MotionEvent event)
-            {
-                return true;
-            }
-        });
 
         tabLayout.addTab(tabLayout.newTab().setText(R.string.self_assessment));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.doctors_visits));
@@ -217,7 +209,7 @@ public class AppointmentsActivity extends AppCompatActivity {
         }
     }*/
 
-    public void pastVisits(int position, String check_inDate) {
+    public void pastVisits(int position, String check_inDate, boolean self) {
 
         String patientuuid = sessionManager.getPersionUUID();
         List<String> visitList = new ArrayList<>();
@@ -289,7 +281,7 @@ public class AppointmentsActivity extends AppCompatActivity {
 
                     Date formatted = currentDate.parse(date);
                     String visitDate = currentDate.format(formatted);
-                    OldVisit(visitDate, visitList.get(position), end_date, "", ""/*encounterVitalList.get(position)*/, encounterAdultList.get(position));
+                    OldVisit(visitDate, visitList.get(position), end_date, "", ""/*encounterVitalList.get(position)*/, encounterAdultList.get(position), self);
                 } catch (ParseException e) {
                     FirebaseCrashlytics.getInstance().recordException(e);
                 }
@@ -299,7 +291,7 @@ public class AppointmentsActivity extends AppCompatActivity {
         finish();
     }
 
-    private void OldVisit(final String datetime, String visit_id, String end_datetime, String visitValue, String encounterVitalslocal, String encounterAdultIntialslocal) throws ParseException {
+    private void OldVisit(final String datetime, String visit_id, String end_datetime, String visitValue, String encounterVitalslocal, String encounterAdultIntialslocal, boolean self) throws ParseException {
 
         final Boolean past_visit;
 
@@ -316,6 +308,7 @@ public class AppointmentsActivity extends AppCompatActivity {
         visitSummary.putExtra("pastVisit", past_visit);
         visitSummary.putExtra("hasPrescription", "false");
         visitSummary.putExtra("fromOldVisit", true);
+        visitSummary.putExtra("self", self);
         startActivity(visitSummary);
     }
 
