@@ -18,15 +18,15 @@ public class SyncUtils {
 
     public void syncBackground() {
         SyncDAO syncDAO = new SyncDAO();
-        ImagesPushDAO imagesPushDAO = new ImagesPushDAO();
+      //  ImagesPushDAO imagesPushDAO = new ImagesPushDAO();
 
         syncDAO.pushDataApi();
         syncDAO.pullData_Background(IntelehealthApplication.getAppContext()); //only this new function duplicate
 
-        imagesPushDAO.patientProfileImagesPush();
+       /* imagesPushDAO.patientProfileImagesPush();
         imagesPushDAO.obsImagesPush();
         imagesPushDAO.deleteObsImage();
-
+*/
         NotificationUtils notificationUtils = new NotificationUtils();
         notificationUtils.clearAllNotifications(IntelehealthApplication.getAppContext());
 
@@ -44,7 +44,7 @@ public class SyncUtils {
     public boolean syncForeground(String fromActivity) {
         boolean isSynced = false;
         SyncDAO syncDAO = new SyncDAO();
-        ImagesPushDAO imagesPushDAO = new ImagesPushDAO();
+       // ImagesPushDAO imagesPushDAO = new ImagesPushDAO();
         Logger.logD(TAG, "Push Started");
         isSynced = syncDAO.pushDataApi();
         Logger.logD(TAG, "Push ended");
@@ -61,11 +61,9 @@ public class SyncUtils {
             }
         }, 3000);
 
-        imagesPushDAO.patientProfileImagesPush();
-
+      /*  imagesPushDAO.patientProfileImagesPush();
         imagesPushDAO.obsImagesPush();
-
-        imagesPushDAO.deleteObsImage();
+        imagesPushDAO.deleteObsImage();*/
 
         WorkManager.getInstance()
                 .beginWith(AppConstants.VISIT_SUMMARY_WORK_REQUEST)

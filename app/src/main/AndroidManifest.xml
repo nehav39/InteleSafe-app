@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="org.intelehealth.intelesafe">
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -35,7 +36,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        tools:replace="android:label">
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
@@ -250,6 +252,20 @@
             android:label="Signup"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".activities.videolist.VideoListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.videolist.VideoPlayerActivity"
+            android:screenOrientation="fullSensor"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.pdflist.PdfListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.pdflist.PdfViewerActivity"
+            android:screenOrientation="fullSensor" />
 
         <provider
             android:name=".activities.searchPatientActivity.SearchSuggestionProvider"
