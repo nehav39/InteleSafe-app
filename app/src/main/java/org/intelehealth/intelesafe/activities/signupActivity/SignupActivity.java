@@ -1170,7 +1170,8 @@ public class SignupActivity extends AppCompatActivity {
 
                 UserBirthAttribute userCasteAttribute = new UserBirthAttribute();
                 userCasteAttribute.setAttributeType("5a889d96-0c84-4a04-88dc-59a6e37db2d3"); // This is for Designation. openrms caste...
-                userCasteAttribute.setValue("" + selectedPersonalCaste);
+//                userCasteAttribute.setValue("" + selectedPersonalCaste);
+                userCasteAttribute.setValue("patient_app");
 
 
                 List<UserBirthAttribute> userAttributeList = new ArrayList<>();
