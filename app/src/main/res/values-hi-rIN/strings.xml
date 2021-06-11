@@ -801,5 +801,7 @@
     <string name="hint_date_tested_positive_optional">कोविद पॉज़िटिव रिपोर्ट की तारीख</string>
     <string name="hint_block_optional">ब्लॉक</string>
     <string name="download_prescription"><u>प्रिस्क्रिप्शन डाउनलोड करें</u></string>
+    <string name="how_to_use_spo2">पल्स ऑक्सीमीटर का उपयोग कैसे करें</string>
+    <string name="how_to_use_thermo">डिजिटल थर्मामीटर का उपयोग कैसे करें</string>
 
 </resources>

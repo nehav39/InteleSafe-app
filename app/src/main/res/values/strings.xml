@@ -759,5 +759,7 @@
     <string name="hint_date_tested_positive_optional">Date of tested positive / Days</string>
     <string name="hint_block_optional">Block</string>
     <string name="download_prescription"><u>Download Prescription</u></string>
+    <string name="how_to_use_spo2">How to use pulse oximeter</string>
+    <string name="how_to_use_thermo">How to use digital thermometer</string>
 
 </resources>
