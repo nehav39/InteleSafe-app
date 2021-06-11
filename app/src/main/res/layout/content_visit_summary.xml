@@ -539,7 +539,6 @@ Github: prajwalmw
             android:visibility="gone"
             tools:visibility="visible"
             android:layout_marginTop="@dimen/padding_card"
-            android:layout_marginBottom="@dimen/padding_card"
             app:cardCornerRadius="12dp"
             app:cardElevation="2dp"
             app:cardUseCompatPadding="true"
@@ -656,7 +655,7 @@ Github: prajwalmw
                         android:layout_marginStart="10dp"
                         android:fontFamily="@font/lato_bold"
                         android:gravity="start|center"
-                        android:text="Download Prescription"
+                        android:text="@string/download_prescription"
                         android:layout_toEndOf="@+id/presc_green"
                         android:textColor="@color/txt_sub_header_color"
                         android:textSize="@dimen/text_20sp" />
