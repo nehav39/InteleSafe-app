@@ -124,7 +124,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
     private static final String TAG = VisitSummaryActivity.class.getSimpleName();
     private WebView mWebView;
     private LinearLayout mLayout;
-    TextView Help_Link_Whatsapp;
+    TextView Help_Link_Whatsapp, download_Watsapp;
     TextView tvMentalHelpRequest, prescriptionDataFormat;
     String mHeight, mWeight, mBMI, mBP, mPulse, mTemp, mSPO2, mresp;
 
@@ -205,7 +205,8 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
     NotificationCompat.Builder mBuilder;
 
     Button uploadButton;
-    Button teleconsultationButton, download_Watsapp;
+    Button teleconsultationButton;
+    TextView download_presc_Watsapp;
     //Button downloadButton;
     ArrayList<String> physicalExams;
 
@@ -518,7 +519,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         prescriptionDataFormat = findViewById(R.id.textView_content_prescription);
         cardView_prescription = findViewById(R.id.cardView_prescription);
         download_cardview = findViewById(R.id.download_cardview);
-        download_Watsapp = findViewById(R.id.download_Watsapp);
+        download_presc_Watsapp = findViewById(R.id.download_presc_Watsapp);
 
         diagnosisTextView = findViewById(R.id.textView_content_diagnosis);
         prescriptionTextView = findViewById(R.id.textView_content_rx);
@@ -529,6 +530,10 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
         Help_Link_Whatsapp = findViewById(R.id.Help_Watsapp);
         Help_Link_Whatsapp.setPaintFlags(Help_Link_Whatsapp.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
+        download_presc_Watsapp = findViewById(R.id.download_presc_Watsapp);
+        download_presc_Watsapp.setPaintFlags(download_presc_Watsapp.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
         Help_Link_Whatsapp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -1434,7 +1439,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         doQuery();
 
         //Button click....
-        download_Watsapp.setOnClickListener(new View.OnClickListener() {
+        download_presc_Watsapp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

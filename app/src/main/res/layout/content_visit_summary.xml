@@ -638,18 +638,26 @@ Github: prajwalmw
                         android:layout_marginTop="10dp"
                         />-->
 
+                    <ImageView
+                        android:id="@+id/presc_green"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="10sp"
+                        android:src="@drawable/ic_prescription_green" />
+
+
                     <Button
-                        android:id="@+id/download_Watsapp"
+                        android:id="@+id/download_presc_Watsapp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10sp"
                         android:background="@android:color/transparent"
-                        android:drawableStart="@drawable/ic_prescription_green"
-                        android:drawableLeft="@drawable/ic_prescription_green"
                         android:drawablePadding="20sp"
+                        android:layout_marginStart="10dp"
                         android:fontFamily="@font/lato_bold"
                         android:gravity="start|center"
                         android:text="Download Prescription"
+                        android:layout_toEndOf="@+id/presc_green"
                         android:textColor="@color/txt_sub_header_color"
                         android:textSize="@dimen/text_20sp" />
 
