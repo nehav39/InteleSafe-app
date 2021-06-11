@@ -230,7 +230,7 @@
                                 android:focusable="false"
                                 android:fontFamily="@font/lato_regular"
                                 android:freezesText="true"
-                                android:hint="@string/hint_date_tested_positive"
+                                android:hint="@string/hint_date_tested_positive_optional"
                                 android:imeOptions="actionUnspecified"
                                 android:inputType=""
                                 android:maxLines="1"
@@ -281,7 +281,7 @@
                             android:ems="10"
                             android:includeFontPadding="false"
                             android:textSize="16sp"
-                            android:text="@string/hint_block"
+                            android:text="@string/hint_block_optional"
                             android:textAppearance="@style/sign_up_input" />
                         <Spinner
                             android:id="@+id/block_spinner"

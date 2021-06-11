@@ -798,6 +798,8 @@
     <string name="pulse_number_validation_text">कृपया इसके लिए मान्य मान (अधिकतम 200) दर्ज करें </string>
     <string name="please_give_your_answer">कृपया अपना उत्तर चुनें</string>
     <string name="please_select_any_option">कृपया कोई विकल्प चुनें</string>
+    <string name="hint_date_tested_positive_optional">कोविद पॉज़िटिव रिपोर्ट की तारीख</string>
+    <string name="hint_block_optional">ब्लॉक</string>
     <string name="download_prescription"><u>प्रिस्क्रिप्शन डाउनलोड करें</u></string>
 
 </resources>
