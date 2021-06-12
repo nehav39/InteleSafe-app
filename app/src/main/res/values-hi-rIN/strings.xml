@@ -803,5 +803,16 @@
     <string name="download_prescription"><u>प्रिस्क्रिप्शन डाउनलोड करें</u></string>
     <string name="how_to_use_spo2">पल्स ऑक्सीमीटर का उपयोग कैसे करें</string>
     <string name="how_to_use_thermo">डिजिटल थर्मामीटर का उपयोग कैसे करें</string>
+    <string name="your_visits_amp_appointments">आपके दौरे और अपॉइंटमेंट</string>
+    <string name="know_post_covid_care">जानिए पोस्ट-कोविड देखभाल</string>
+    <string name="concerned_about_something">किसी बात को लेकर चिंतित हैं?</string>
+    <string name="would_you_like_to_talk_to_our_experts_nget_in_touch_now">क्या आप हमारे विशेषज्ञों से बात करना चाहेंगे?\nअभी संपर्क करें</string>
+    <string name="my_vistis">मेरे दौरे</string>
+    <string name="self_assessment_label">आत्म मूल्यांकन</string>
+    <string name="click_here_to_download_prescription">नुस्खे डाउनलोड करने के लिए यहां क्लिक करें</string>
+    <string name="waiting_for_doctor_s_prescription">डॉक्टर के पर्चे का इंतजार है।</string>
+    <string name="doctors_visits_label">डॉक्टर का दौरा</string>
+    <string name="note_for_doctors_visits">COVID रिकवरी के बाद टेलीकंसल्टेशन</string>
+    <string name="click_here_view_details">विवरण देखने के लिए यहां क्लिक करें</string>
 
 </resources>

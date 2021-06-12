@@ -730,5 +730,16 @@
     <string name="hint_date_tested_positive_optional">Date of tested positive / Days</string>
     <string name="hint_block_optional">Block</string>
     <string name="download_prescription">Download Prescription</string>
+    <string name="your_visits_amp_appointments"><![CDATA[Your Visits & Appointments]]></string>
+    <string name="know_post_covid_care">Know Post-COVID care</string>
+    <string name="concerned_about_something">Concerned about something?</string>
+    <string name="would_you_like_to_talk_to_our_experts_nget_in_touch_now">Would you like to talk to our experts?\nGet in touch now</string>
+    <string name="my_vistis">My Visits</string>
+    <string name="self_assessment_label">Self-Assessment</string>
+    <string name="click_here_to_download_prescription">Click here to download prescription</string>
+    <string name="waiting_for_doctor_s_prescription">Waiting for doctor’s prescription.</string>
+    <string name="doctors_visits_label">Doctor’s visit</string>
+    <string name="note_for_doctors_visits">Teleconsultation for post-COVID recovery</string>
+    <string name="click_here_view_details">Click here to view details</string>
 
 </resources>
