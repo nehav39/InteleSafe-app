@@ -1,11 +1,5 @@
 package org.intelehealth.intelesafe.activities.appointments;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -13,9 +7,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
@@ -26,9 +24,6 @@ import org.intelehealth.intelesafe.activities.homeActivity.Recycler_Home_Adapter
 import org.intelehealth.intelesafe.activities.visitSummaryActivity.VisitSummaryActivity;
 import org.intelehealth.intelesafe.app.AppConstants;
 import org.intelehealth.intelesafe.database.dao.EncounterDAO;
-import org.intelehealth.intelesafe.database.dao.VisitsDAO;
-import org.intelehealth.intelesafe.models.dto.EncounterDTO;
-import org.intelehealth.intelesafe.models.dto.VisitDTO;
 import org.intelehealth.intelesafe.utilities.SessionManager;
 
 import java.text.ParseException;
@@ -36,7 +31,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -62,9 +56,9 @@ public class AppointmentsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appointments);
 
-        getSupportActionBar().setTitle(getString(R.string.appointment_status));
+      /*  getSupportActionBar().setTitle(getString(R.string.my_vistis));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setElevation(0);
+        getSupportActionBar().setElevation(0);*/
 
         sessionManager = new SessionManager(this);
         db = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
@@ -229,7 +223,7 @@ public class AppointmentsActivity extends AppCompatActivity {
         String query = "SELECT DISTINCT v.uuid, v.startdate, v.enddate FROM tbl_visit v WHERE " +
                 "(v.issubmitted == 1 OR v.enddate IS NOT NULL) AND " +
                 "v.patientuuid = ? AND v.uuid = ? ORDER BY v.startdate";
-        String[] visitArgs = {patientuuid, visitUuid };
+        String[] visitArgs = {patientuuid, visitUuid};
 
         Cursor visitCursor = db.rawQuery(query, visitArgs);
         //Cursor visitCursor = db.query("tbl_visit", visitColumns, visitSelection, visitArgs, null, null, visitOrderBy);
@@ -310,6 +304,10 @@ public class AppointmentsActivity extends AppCompatActivity {
         visitSummary.putExtra("fromOldVisit", true);
         visitSummary.putExtra("self", self);
         startActivity(visitSummary);
+    }
+
+    public void closeActivity(View view) {
+        finish();
     }
 
     /*private ArrayList<String> getVisitsWithPrescription() {

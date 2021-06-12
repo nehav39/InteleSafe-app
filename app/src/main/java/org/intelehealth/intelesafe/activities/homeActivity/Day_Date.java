@@ -2,7 +2,7 @@ package org.intelehealth.intelesafe.activities.homeActivity;
 
 public class Day_Date {
 
-    private String Day, Date;
+    private String Day, Date, note;
     public boolean hasPrescription;
 
     public Day_Date(String day, String date) {
@@ -27,4 +27,11 @@ public class Day_Date {
     }
 
 
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
 }
