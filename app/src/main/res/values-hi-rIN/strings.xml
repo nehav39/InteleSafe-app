@@ -129,7 +129,7 @@
     <string name="menu_option_settings" translatable="false">Settings</string>
     <string name="menu_option_end_of_day" translatable="false">End of Day</string>
     <string name="menu_option_logout" translatable="false">Logout</string>
-    <string name="today_checkin">आज का चेक-इन</string>
+    <string name="today_checkin">चेक-इन</string>
     <string name="change_lang_menu">भाषा बदलो</string>
     <string name="logout_menu">लॉग आउट</string>
 

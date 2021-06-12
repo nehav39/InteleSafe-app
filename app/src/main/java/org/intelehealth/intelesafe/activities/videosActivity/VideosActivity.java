@@ -85,7 +85,7 @@ public class VideosActivity extends AppCompatActivity {
         educational_videos = findViewById(R.id.button_educational_videos);
         sessionManager = new SessionManager(VideosActivity.this);
         Intent intent = getIntent();
-        getSupportActionBar().setTitle(getString(R.string.post_covid_title));
+        getSupportActionBar().setTitle(getString(R.string.know_post_covid_care));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         initVideos();

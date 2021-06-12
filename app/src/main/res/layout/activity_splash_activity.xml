@@ -120,7 +120,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorPrimary"
         android:gravity="bottom"
         android:orientation="horizontal">
 
@@ -130,7 +130,7 @@
             android:layout_margin="3dp"
             android:fontFamily="@font/lato_regular"
             android:gravity="center"
-            android:padding="8dip"
+            android:padding="5dip"
             android:text="Powered by Intelehealth, Ekal Arogya &amp; \n Transform Rural India"
             android:textAlignment="center"
             android:textColor="@color/white"

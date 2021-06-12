@@ -563,7 +563,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 //                                String.format("https://api.whatsapp.com/send?phone=%s&text=%s",
 //                                        phoneNumberWithCountryCode, message))));
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:+9173142821385"));
+                intent.setData(Uri.parse("tel:+917314821385"));
                 startActivity(intent);
             }
         });

@@ -111,7 +111,7 @@
     <string name="address_ppe">Address:</string>
     <string name="ppe_required">PPE Required:</string>
     <string name="no_application">No Application available to view PDF</string>
-    <string name="today_checkin">Today\'s Check-in</string>
+    <string name="today_checkin">Check-in</string>
     <string name="visit">Visit</string>
 
     //Identification Screen

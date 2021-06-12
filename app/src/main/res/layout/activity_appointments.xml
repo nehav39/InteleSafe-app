@@ -38,7 +38,7 @@
             android:includeFontPadding="false"
             android:text="@string/my_vistis"
             android:textColor="@color/white"
-            android:textSize="30sp" />
+            android:textSize="20sp" />
 
     </LinearLayout>
 
