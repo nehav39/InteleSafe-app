@@ -21,7 +21,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
     private ItemClickListener mClickListener;
 
     // data is passed into the constructor
-    VideoAdapter(Context context, List<VideoItem> data) {
+    public VideoAdapter(Context context, List<VideoItem> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
@@ -71,7 +71,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
         }
     }
 
-    void setClickListener(ItemClickListener itemClickListener) {
+    public void setClickListener(ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
 
