@@ -41,11 +41,13 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
     private Context mcontext;
     SessionManager sessionManager;
     AlertDialog.Builder alertdialogBuilder;
+    private boolean self;
 
-    public Recycler_Home_Adapter(Context context, ArrayList<Day_Date> recycler_arraylist, ArrayList<String> array_og_date) {
+    public Recycler_Home_Adapter(Context context, ArrayList<Day_Date> recycler_arraylist, ArrayList<String> array_og_date, boolean self) {
         this.arrayList = recycler_arraylist;
         this.mcontext = context;
         this.stringArrayList_date = array_og_date;
+        this.self = self;
     }
 
     @NonNull
@@ -117,6 +119,17 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
             if (cursor.moveToFirst()) {
                 do {
                     try {
+                        String uuid = cursor.getString(cursor.getColumnIndexOrThrow("uuid"));
+                        Cursor cursor1 = db.rawQuery("select * from tbl_obs as o where o.conceptuuid = '3edb0e09-9135-481e-b8f0-07a26fa9a5ce' and o.encounteruuid IN (select e.uuid from tbl_encounter as e where e.visituuid = ?)", new String[]{uuid});
+                        if (cursor1 != null && cursor1.moveToFirst()) {
+                            cursor1.close();
+                            if (self)
+                                continue;
+                        } else {
+                            cursor1.close();
+                            if (!self)
+                                continue;
+                        }
 
                         message = cursor.getString(cursor.getColumnIndexOrThrow("startdate"));
                         StringBuilder stringBuilder = new StringBuilder(message);
@@ -125,7 +138,8 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
 
                         array_message.add(counter, de);
 
-                        uuid_array.add(counter, cursor.getString(cursor.getColumnIndexOrThrow("uuid")));
+
+                        uuid_array.add(counter, uuid);
 
                         counter++;
                         // alertdialogBuilder.setMessage(message);
@@ -172,7 +186,8 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
                     stringBuilder_2.append(R.string.visit + (i + 1) + "-\t\t" + array_message.get(i));
                     //stringBuilder_2.append("\n");
                     TextView visitText = new TextView(mcontext);
-                    visitText.setText( "Visit no." + (i + 1) + "-\t\t" + array_message.get(i));
+//                    visitText.setText( "Visit no." + (i + 1) + "-\t\t" + array_message.get(i));
+                    visitText.setText( "Visit no." + (i + 1) + "-\t\t View Details");
                     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                             LinearLayout.LayoutParams.WRAP_CONTENT);
                     if(mcontext.getResources().getBoolean(R.bool.isTab)) {
@@ -196,7 +211,7 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
                         @Override
                         public void onClick(View view) {
                             int pos = (int) view.getTag();
-                            ((AppointmentsActivity) mcontext).pastVisits(pos, array_message.get(pos));
+                            ((AppointmentsActivity) mcontext).pastVisits(pos, array_message.get(pos), self, uuid_array.get(pos));
                             alertDialog.dismiss();
                         }
                     });

@@ -26,15 +26,6 @@ import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
 import android.print.PrintJob;
 import android.print.PrintManager;
-import androidx.core.app.NotificationCompat;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-import androidx.core.view.MenuItemCompat;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.Toolbar;
 import android.telephony.SmsManager;
 import android.text.Html;
 import android.text.InputType;
@@ -62,11 +53,21 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
+import androidx.core.app.NotificationCompat;
+import androidx.core.view.MenuItemCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.gson.Gson;
 
 import org.apache.commons.lang3.StringUtils;
+import org.intelehealth.intelesafe.BuildConfig;
 import org.intelehealth.intelesafe.activities.homeActivity.Webview;
 import org.intelehealth.intelesafe.models.ClsDoctorDetails;
 import org.intelehealth.intelesafe.database.dao.VisitAttributeListDAO;
@@ -89,15 +90,21 @@ import org.intelehealth.intelesafe.R;
 import org.intelehealth.intelesafe.activities.additionalDocumentsActivity.AdditionalDocumentsActivity;
 import org.intelehealth.intelesafe.activities.complaintNodeActivity.ComplaintNodeActivity;
 import org.intelehealth.intelesafe.activities.familyHistoryActivity.FamilyHistoryActivity;
+import org.intelehealth.intelesafe.activities.homeActivity.HomeActivity;
+import org.intelehealth.intelesafe.activities.homeActivity.Webview;
 import org.intelehealth.intelesafe.activities.pastMedicalHistoryActivity.PastMedicalHistoryActivity;
 import org.intelehealth.intelesafe.activities.patientSurveyActivity.PatientSurveyActivity;
+import org.intelehealth.intelesafe.activities.physcialExamActivity.PhysicalExamActivity;
+import org.intelehealth.intelesafe.activities.vitalActivity.VitalsActivity;
 import org.intelehealth.intelesafe.app.AppConstants;
 import org.intelehealth.intelesafe.database.dao.EncounterDAO;
 import org.intelehealth.intelesafe.database.dao.ImagesDAO;
 import org.intelehealth.intelesafe.database.dao.ObsDAO;
 import org.intelehealth.intelesafe.database.dao.SyncDAO;
+import org.intelehealth.intelesafe.database.dao.VisitAttributeListDAO;
 import org.intelehealth.intelesafe.database.dao.VisitsDAO;
 import org.intelehealth.intelesafe.knowledgeEngine.Node;
+import org.intelehealth.intelesafe.models.ClsDoctorDetails;
 import org.intelehealth.intelesafe.models.Patient;
 import org.intelehealth.intelesafe.models.dto.ObsDTO;
 import org.intelehealth.intelesafe.services.DownloadService;
@@ -105,14 +112,24 @@ import org.intelehealth.intelesafe.syncModule.SyncUtils;
 import org.intelehealth.intelesafe.utilities.DateAndTimeUtils;
 import org.intelehealth.intelesafe.utilities.FileUtils;
 import org.intelehealth.intelesafe.utilities.Logger;
+import org.intelehealth.intelesafe.utilities.NetworkConnection;
 import org.intelehealth.intelesafe.utilities.SessionManager;
 import org.intelehealth.intelesafe.utilities.UuidDictionary;
-
-import org.intelehealth.intelesafe.activities.homeActivity.HomeActivity;
-import org.intelehealth.intelesafe.activities.physcialExamActivity.PhysicalExamActivity;
-import org.intelehealth.intelesafe.activities.vitalActivity.VitalsActivity;
-import org.intelehealth.intelesafe.utilities.NetworkConnection;
 import org.intelehealth.intelesafe.utilities.exception.DAOException;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * Created By: Prajwal Waingankar
@@ -123,7 +140,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
     private static final String TAG = VisitSummaryActivity.class.getSimpleName();
     private WebView mWebView;
     private LinearLayout mLayout;
-    TextView Help_Link_Whatsapp;
+    TextView Help_Link_Whatsapp, download_Watsapp;
     TextView tvMentalHelpRequest, prescriptionDataFormat;
     String mHeight, mWeight, mBMI, mBP, mPulse, mTemp, mSPO2, mresp;
 
@@ -205,6 +222,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
     Button uploadButton;
     Button teleconsultationButton;
+    TextView download_presc_Watsapp;
     //Button downloadButton;
     ArrayList<String> physicalExams;
 
@@ -213,7 +231,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
     CardView medicalAdviceCard;
     CardView requestedTestsCard;
     CardView additionalCommentsCard;
-    CardView followUpDateCard, cardView_prescription;
+    CardView followUpDateCard, cardView_prescription, download_cardview;
 
     TextView diagnosisTextView;
     TextView prescriptionTextView;
@@ -271,6 +289,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
     private boolean isRespiratory = false;
 
     SyncUtils syncUtils = new SyncUtils();
+    private boolean self;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -456,6 +475,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
             if (selectedExams != null && !selectedExams.isEmpty()) {
                 physicalExams.addAll(selectedExams);
             }
+            self = intent.getBooleanExtra("self", false);
         }
         registerBroadcastReceiverDynamically();
         registerDownloadPrescription();
@@ -516,6 +536,8 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         mDoctorName.setVisibility(View.GONE);
         prescriptionDataFormat = findViewById(R.id.textView_content_prescription);
         cardView_prescription = findViewById(R.id.cardView_prescription);
+        download_cardview = findViewById(R.id.download_cardview);
+        download_presc_Watsapp = findViewById(R.id.download_presc_Watsapp);
 
         diagnosisTextView = findViewById(R.id.textView_content_diagnosis);
         prescriptionTextView = findViewById(R.id.textView_content_rx);
@@ -526,6 +548,10 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
         Help_Link_Whatsapp = findViewById(R.id.Help_Watsapp);
         Help_Link_Whatsapp.setPaintFlags(Help_Link_Whatsapp.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
+        download_presc_Watsapp = findViewById(R.id.download_presc_Watsapp);
+        download_presc_Watsapp.setPaintFlags(download_presc_Watsapp.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
         Help_Link_Whatsapp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -903,7 +929,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         if (patHistory.getValue() != null)
             patHistView.setText(Html.fromHtml(patHistory.getValue()));
         if (phyExam.getValue() != null) {
-            String physicalExamStr = phyExam.getValue().replaceAll("<b>General exams: </b>", "<b>Self Assessment: </b>");
+            String physicalExamStr = phyExam.getValue().replaceAll("<b>General exams: </b>", self ? "<b>Self Assessment: </b>" : "<b>Doctor Visit: </b>");
             physFindingsView.setText(Html.fromHtml(physicalExamStr));
         }
 
@@ -1152,7 +1178,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                                 phyExam.setValue(dialogEditText.getText().toString().replace("\n", "<br>"));
                                 String b = "";
                                 if (phyExam.getValue() != null) {
-                                    String physicalExamStr = phyExam.getValue().replaceAll("<b>General exams: </b>", "<b>Self Assessment: </b>");
+                                    String physicalExamStr = phyExam.getValue().replaceAll("<b>General exams: </b>", self ? "<b>Self Assessment: </b>" : "<b>Doctor Visit: </b>");
                                     physicalText.setText(Html.fromHtml(physicalExamStr));
                                     physFindingsView.setText(Html.fromHtml(physicalExamStr));
                                      b = phyExam.getValue().replaceAll("Self Assessment: ", "<b>General exams: </b> ");
@@ -1430,6 +1456,29 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
         doQuery();
 
+        //Button click....
+        download_presc_Watsapp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String Url = BuildConfig.BASE_URL +
+                        "preApi/i.jsp?v=" +
+                        visitUuid + "&pid=" + patient.getOpenmrs_id();
+
+                Intent download_intent = new Intent(Intent.ACTION_VIEW);
+                download_intent.setData(Uri.parse(Url));
+                startActivity(download_intent);
+                Log.d("url", "url: "+Url);
+
+               /* Intent download = new Intent(VisitSummaryActivity.this, Webview.class);
+                download.putExtra("Base_Url", BuildConfig.BASE_URL);
+                download.putExtra("visitUuid", visitUuid);
+                download.putExtra("openMRS_id", patient.getOpenmrs_id());
+                Log.d("vdownload", "visituuid: "+ visitUuid +
+                        "openmrs: "+ patient.getOpenmrs_id());
+                startActivity(download);*/
+            }
+        });
     }
 
     private void showPopup() {
@@ -2476,12 +2525,15 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
      */
     private String sms_web_prescription_format() {
         //prescription...
-        //If prescription is provided then show cardview...
+        //If prescription is provided then show cardview for
+        // Prescription preview & Presription Downlaod link...
         if (objClsDoctorDetails != null) {
             cardView_prescription.setVisibility(View.VISIBLE);
+            download_cardview.setVisibility(View.VISIBLE);
         }
         else {
             cardView_prescription.setVisibility(View.GONE);
+            download_cardview.setVisibility(View.GONE);
         }
 
         //Check for license key and load the correct config file

@@ -729,5 +729,6 @@
     <string name="please_select_any_option">Please select any option</string>
     <string name="hint_date_tested_positive_optional">Date of tested positive / Days</string>
     <string name="hint_block_optional">Block</string>
+    <string name="download_prescription">Download Prescription</string>
 
 </resources>
