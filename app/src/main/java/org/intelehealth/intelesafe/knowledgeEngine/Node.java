@@ -59,6 +59,7 @@ import java.util.Locale;
 public class Node implements Serializable {
 
     private boolean isMultiChoice = false;
+    private boolean isExcludedFromMultiChoice = false; //exclude-from-multi-choice
     private String id;
     private String text;
     private String display;
@@ -137,6 +138,7 @@ public class Node implements Serializable {
             this.id = jsonNode.optString("id");
             this.text = jsonNode.getString("text");
             this.isMultiChoice = jsonNode.optBoolean("multi-choice");
+            this.isExcludedFromMultiChoice = jsonNode.optBoolean("exclude-from-multi-choice");
 
             JSONArray optionsArray = jsonNode.optJSONArray("options");
             if (optionsArray == null) {
@@ -1969,6 +1971,14 @@ public class Node implements Serializable {
 
     public void setMultiChoice(boolean multiChoice) {
         isMultiChoice = multiChoice;
+    }
+
+    public boolean isExcludedFromMultiChoice() {
+        return isExcludedFromMultiChoice;
+    }
+
+    public void setExcludedFromMultiChoice(boolean excludedFromMultiChoice) {
+        isExcludedFromMultiChoice = excludedFromMultiChoice;
     }
 }
 

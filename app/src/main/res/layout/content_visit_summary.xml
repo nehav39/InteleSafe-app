@@ -19,11 +19,10 @@ Github: prajwalmw
 
     <!--Split the screen into two columns of cards-->
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/scroll_new"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/lin_upload"
         android:fillViewport="true"
         android:overScrollMode="never">
 
@@ -32,13 +31,12 @@ Github: prajwalmw
             android:id="@+id/summary_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/padding_visit_summary_screen"
-            android:layout_marginRight="@dimen/padding_visit_summary_screen"
+
             android:animateLayoutChanges="true"
             android:orientation="vertical">
 
 
-            <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+            <androidx.cardview.widget.CardView
                 android:id="@+id/cardView_patient_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -165,7 +163,7 @@ Github: prajwalmw
 
             <!-- Vitals Card contains a TableView-->
 
-            <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+            <androidx.cardview.widget.CardView
                 android:id="@+id/cardView_vitals"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -383,7 +381,7 @@ Github: prajwalmw
             </androidx.cardview.widget.CardView>
 
             <!--C/O Card contains text-->
-            <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+            <androidx.cardview.widget.CardView
                 android:id="@+id/cardView_complaint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -435,20 +433,21 @@ Github: prajwalmw
 
 
             <!--Physical Exam Card contains text-->
-            <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+            <androidx.cardview.widget.CardView
                 android:id="@+id/cardView_physexam"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="15dp"
-                android:elevation="40dp"
+                android:layout_marginHorizontal="20dip"
+                android:layout_marginTop="16dip"
+                android:layout_marginBottom="10dip"
+                app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="10sp"
-                app:cardPreventCornerOverlap="false"
-                app:cardUseCompatPadding="true">
+                app:cardElevation="8dip">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:padding="8dip">
 
                     <TextView
                         android:id="@+id/textView_heading_physexam"
@@ -456,23 +455,22 @@ Github: prajwalmw
                         android:layout_height="wrap_content"
                         android:background="@color/white"
                         android:fontFamily="@font/lato_bold"
+                        android:padding="8dp"
                         android:paddingVertical="12dp"
-                        android:paddingStart="20dp"
                         android:text="@string/visit_Summary_cardview"
                         android:textColor="@color/txt_sub_header_color"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:visibility="gone" />
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/imagebutton_edit_physexam"
                         style="@style/SelectableItemBackground"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignRight="@id/textView_heading_physexam"
-                        android:background="@null"
-                        android:contentDescription="TODO"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        android:padding="10dp"
-                        app:srcCompat="@drawable/edit_icon" />
+                        android:layout_width="32dip"
+                        android:layout_height="32dip"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/oval_home_location"
+                        android:padding="4dip"
+                        android:src="@drawable/edit_icon" />
 
                     <ImageButton
                         android:id="@+id/imagebutton_download_physexam"
@@ -495,8 +493,7 @@ Github: prajwalmw
                         android:layout_below="@+id/textView_heading_physexam"
                         android:fontFamily="@font/lato_regular"
                         android:lineSpacingExtra="1sp"
-                        android:paddingLeft="@dimen/padding_card"
-                        android:paddingRight="@dimen/padding_card"
+                        android:padding="16dip"
                         android:textColor="@color/txt_sub_header_color"
                         android:textSize="14sp" />
 
@@ -504,8 +501,7 @@ Github: prajwalmw
                         android:id="@+id/recy_physexam"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/textView_content_physexam"
-                        android:padding="10dp" />
+                        android:layout_below="@+id/textView_content_physexam" />
 
                     <TextView
                         android:id="@+id/physcial_examination_download"
@@ -521,18 +517,19 @@ Github: prajwalmw
             </androidx.cardview.widget.CardView>
 
             <!--Prescription-->
-            <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+            <androidx.cardview.widget.CardView
                 android:id="@+id/cardView_prescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="@dimen/padding_card"
-                android:elevation="40dp"
+                android:layout_marginHorizontal="20dip"
+                android:layout_marginTop="8dip"
+                android:layout_marginBottom="8dip"
                 android:visibility="gone"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="10sp"
+                app:cardElevation="8dip"
                 app:cardPreventCornerOverlap="false"
-                app:cardUseCompatPadding="true"
                 tools:visibility="visible">
 
                 <RelativeLayout
@@ -566,6 +563,7 @@ Github: prajwalmw
                         android:paddingLeft="@dimen/padding_card"
                         android:paddingTop="@dimen/padding_card"
                         android:paddingRight="@dimen/padding_card"
+                        android:paddingBottom="16dip"
                         android:textColor="@color/txt_sub_header_color"
                         android:textSize="14sp"
                         tools:text="web prescription" />
@@ -580,12 +578,13 @@ Github: prajwalmw
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="15dp"
-                android:elevation="40dp"
+                android:layout_marginHorizontal="20dip"
+                android:layout_marginTop="8dip"
                 android:visibility="gone"
+                app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="10sp"
+                app:cardElevation="8dip"
                 app:cardPreventCornerOverlap="false"
-                app:cardUseCompatPadding="true"
                 tools:visibility="visible">
 
 
@@ -674,13 +673,13 @@ Github: prajwalmw
                 android:id="@+id/help_cardview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginHorizontal="20dip"
+                android:layout_marginTop="16dip"
                 android:layout_marginBottom="10dip"
-                app:cardPreventCornerOverlap="false"
-                app:cardUseCompatPadding="true"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="10sp"
-                app:cardElevation="4dip">
+                app:cardElevation="8dip">
+
 
                 <RelativeLayout
                     android:id="@+id/help_relative"
@@ -697,11 +696,11 @@ Github: prajwalmw
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dip"
-                        android:fontFamily="@font/lato_bold"
+                        android:fontFamily="@font/lato_regular"
                         android:includeFontPadding="false"
                         android:text="@string/concerned_about_something"
                         android:textColor="@color/gray_6"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/Help_Text"
@@ -728,7 +727,7 @@ Github: prajwalmw
                         android:fontFamily="@font/lato_medium"
                         android:gravity="start|center"
                         android:hint=""
-                        android:text="+917314821385"
+                        android:text="+9173142821385"
                         android:textColor="@color/gray_6"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -760,90 +759,6 @@ Github: prajwalmw
 
 
             </androidx.cardview.widget.CardView>
-
-<!--            <androidx.cardview.widget.CardView-->
-<!--                android:id="@+id/help_cardview"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:layout_marginTop="15dp"-->
-<!--                android:elevation="40dp"-->
-<!--                app:cardCornerRadius="10sp"-->
-<!--                app:cardPreventCornerOverlap="false"-->
-<!--                app:cardUseCompatPadding="true">-->
-
-
-<!--                <FrameLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:padding="5dp">-->
-
-<!--                    <RelativeLayout-->
-<!--                        android:id="@+id/help_relative"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginEnd="20dp"-->
-<!--                        android:padding="0dp">-->
-
-<!--                        <TextView-->
-<!--                            android:id="@+id/help_title"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:background="@color/white"-->
-<!--                            android:fontFamily="@font/lato_bold"-->
-<!--                            android:text="@string/help"-->
-<!--                            android:textColor="@color/txt_sub_header_color"-->
-<!--                            android:textSize="16sp"-->
-<!--                            android:visibility="gone" />-->
-
-
-<!--                        <TextView-->
-<!--                            android:id="@+id/visit_help_text"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_below="@id/help_title"-->
-<!--                            android:layout_marginTop="10dp"-->
-<!--                            android:fontFamily="@font/lato_regular"-->
-<!--                            android:text="@string/whatsApp_description"-->
-<!--                            android:textColor="@color/txt_sub_header_color"-->
-<!--                            android:textSize="14sp"-->
-<!--                            android:visibility="gone" />-->
-
-<!--                        <Button-->
-<!--                            android:id="@+id/Help_Watsapp"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_below="@+id/visit_help_text"-->
-<!--                            android:layout_marginStart="10sp"-->
-<!--                            android:background="@android:color/transparent"-->
-<!--                            android:drawableStart="@drawable/telephone"-->
-<!--                            android:drawableLeft="@drawable/telephone"-->
-<!--                            android:drawablePadding="10sp"-->
-<!--                            android:fontFamily="@font/lato_bold"-->
-<!--                            android:gravity="start|center"-->
-<!--                            android:text="@string/txt_talk_to_doc"-->
-<!--                            android:textColor="@color/txt_sub_header_color"-->
-<!--                            android:textSize="@dimen/text_20sp" />-->
-
-<!--                        &lt;!&ndash; Icon Credits:- <a target="_blank" href="https://icons8.com/icons/set/whatsapp">WhatsApp icon</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>&ndash;&gt;-->
-
-<!--                    </RelativeLayout>-->
-
-
-<!--                    <ImageView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_gravity="bottom|right"-->
-<!--                        android:layout_marginEnd="8dp"-->
-<!--                        android:layout_marginBottom="8dp"-->
-<!--                        android:src="@drawable/ic_heart"-->
-<!--                        android:visibility="gone">-->
-
-<!--                    </ImageView>-->
-
-<!--                </FrameLayout>-->
-
-<!--            </androidx.cardview.widget.CardView>-->
 
 
             <androidx.cardview.widget.CardView
@@ -918,7 +833,7 @@ Github: prajwalmw
             </androidx.cardview.widget.CardView>
 
             <!--Patient History Card contains text-->
-            <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+            <androidx.cardview.widget.CardView
                 android:id="@+id/cardView_pathist"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -969,7 +884,7 @@ Github: prajwalmw
             </androidx.cardview.widget.CardView>
 
             <!--Family History Card contains text-->
-            <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+            <androidx.cardview.widget.CardView
                 android:id="@+id/cardView_famhist"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -1019,7 +934,7 @@ Github: prajwalmw
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+            <androidx.cardview.widget.CardView
                 android:id="@+id/additional_document_images"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -1082,7 +997,7 @@ Github: prajwalmw
             </androidx.cardview.widget.CardView>
 
             <!-- Diagnosis contains a TableView-->
-            <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+            <androidx.cardview.widget.CardView
                 android:id="@+id/cardView_diagnosis"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -1136,7 +1051,7 @@ Github: prajwalmw
             </androidx.cardview.widget.CardView>
 
             <!-- Prescription contains a TableView-->
-            <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+            <androidx.cardview.widget.CardView
                 android:id="@+id/cardView_rx"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -1190,7 +1105,7 @@ Github: prajwalmw
             </androidx.cardview.widget.CardView>
 
             <!-- Medical Advice contains a TableView-->
-            <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+            <androidx.cardview.widget.CardView
                 android:id="@+id/cardView_medical_advice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -1244,7 +1159,7 @@ Github: prajwalmw
             </androidx.cardview.widget.CardView>
 
             <!-- Requested Tests contains a TableView-->
-            <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+            <androidx.cardview.widget.CardView
                 android:id="@+id/cardView_tests"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -1298,7 +1213,7 @@ Github: prajwalmw
             </androidx.cardview.widget.CardView>
 
             <!-- Additional Comments contains a TableView-->
-            <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+            <androidx.cardview.widget.CardView
                 android:id="@+id/cardView_additional_comments"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -1351,7 +1266,7 @@ Github: prajwalmw
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+            <androidx.cardview.widget.CardView
                 android:id="@+id/cardView_follow_up_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -1404,7 +1319,7 @@ Github: prajwalmw
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+            <androidx.cardview.widget.CardView
                 android:id="@+id/chw_and_doctor_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -1466,7 +1381,7 @@ Github: prajwalmw
 
             </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+            <androidx.cardview.widget.CardView
                 android:id="@+id/flageddetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -1507,84 +1422,6 @@ Github: prajwalmw
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
-
-            <!--Previous Reports Card contains a list of links to image files of the previous reports-->
-            <!--<android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"-->
-            <!--android:id="@+id/cardView_prevreports"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:layout_marginBottom="@dimen/padding_card"-->
-            <!--android:layout_marginTop="@dimen/padding_card"-->
-            <!--card_view:cardCornerRadius="@dimen/card_corner_radius"-->
-            <!--card_view:cardElevation="2dp"-->
-            <!--card_view:cardUseCompatPadding="true"-->
-            <!--card_view:contentPadding="@dimen/padding_card">-->
-
-            <!--<RelativeLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content">-->
-
-            <!--<TextView-->
-            <!--android:id="@+id/textView_heading_prevreports"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:paddingTop="@dimen/padding_card_title_text"-->
-            <!--android:text="@string/visit_summary_previous_reports"-->
-            <!--android:textSize="@dimen/card_title_text_size" />-->
-            <!--<ImageButton-->
-            <!--android:id="@+id/imageButton_edit_prevreports"-->
-            <!--android:layout_width="@dimen/edit_icon_width"-->
-            <!--android:layout_height="@dimen/edit_icon_height"-->
-            <!--android:src="@drawable/edit_icon"-->
-            <!--android:padding="@dimen/padding_card_action"-->
-            <!--android:layout_alignRight="@id/textView_heading_prevreports"-->
-            <!--android:background="@null"/>-->
-            <!--<TextView-->
-            <!--android:id="@+id/textView_content_prevreports"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_below="@+id/textView_heading_prevreports"-->
-            <!--android:paddingTop="@dimen/padding_card"-->
-            <!--android:textSize="@dimen/card_content_text_size" />-->
-            <!--</RelativeLayout>-->
-
-            <!--</android.support.v7.widget.CardView>-->
-
-            <!--HA details Card contains text-->
-            <!--<android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"-->
-            <!--android:id="@+id/cardView_hadetails"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:layout_marginBottom="@dimen/padding_card"-->
-            <!--android:layout_marginTop="@dimen/padding_card"-->
-            <!--card_view:cardCornerRadius="@dimen/card_corner_radius"-->
-            <!--card_view:cardElevation="2dp"-->
-            <!--card_view:cardUseCompatPadding="true"-->
-            <!--card_view:contentPadding="@dimen/padding_card">-->
-
-            <!--<RelativeLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content">-->
-
-            <!--<TextView-->
-            <!--android:id="@+id/textView_heading_hadetails"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:paddingTop="@dimen/padding_card_title_text"-->
-            <!--android:text="@string/visit_summary_hw_on_duty"-->
-            <!--android:textSize="@dimen/card_title_text_size" />-->
-            <!--<TextView-->
-            <!--android:id="@+id/textView_content_hadetails"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_below="@+id/textView_heading_hadetails"-->
-            <!--android:paddingTop="@dimen/padding_card"-->
-            <!--android:textSize="@dimen/card_content_text_size" />-->
-            <!--</RelativeLayout>-->
-            <!--</android.support.v7.widget.CardView>-->
-
 
             <LinearLayout
                 android:id="@+id/lin_upload"
@@ -1651,6 +1488,6 @@ Github: prajwalmw
 
         </LinearLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </RelativeLayout>
