@@ -79,7 +79,7 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
             myViewHolder.foregroundCardView.setCardBackgroundColor(mcontext.getResources().getColor(R.color.red_light_1));
             myViewHolder.prescriptionLayout.setVisibility(View.GONE);
 //            myViewHolder.descriptionTextView.setText(mcontext.getString(R.string.click_here_view_details));
-            String physicalExamStr = arrayList.get(position).physicalExamValue;
+            String physicalExamStr = arrayList.get(position).physicalExamValue.replaceAll("<b>General exams: </b>", "<b>Summary: </b>");
             myViewHolder.descriptionTextView.setText(Html.fromHtml(physicalExamStr));
         } else {
             myViewHolder.titlePart1TextView.setText(mcontext.getString(R.string.doctors_visits_label));
@@ -94,7 +94,8 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
                 myViewHolder.check_image.setVisibility(View.GONE);
                 myViewHolder.prescriptionStatusTextView.setText(mcontext.getString(R.string.waiting_for_doctor_s_prescription));
             }
-            myViewHolder.descriptionTextView.setText(mcontext.getString(R.string.note_for_doctors_visits));
+//            myViewHolder.descriptionTextView.setText(mcontext.getString(R.string.note_for_doctors_visits));
+            myViewHolder.descriptionTextView.setText(Html.fromHtml(String.format("%s%s", "<b>Teleconsultation for: </b><br>", arrayList.get(position).currentComplaintValue)));
         }
 
 

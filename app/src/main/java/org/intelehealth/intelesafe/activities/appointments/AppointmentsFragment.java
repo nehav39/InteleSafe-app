@@ -112,8 +112,10 @@ public class AppointmentsFragment extends Fragment {
                         } else {
                             continue;
                         }*/
-                        Cursor cursor1 = db.rawQuery("select * from tbl_obs as o where o.conceptuuid = '3edb0e09-9135-481e-b8f0-07a26fa9a5ce' and o.encounteruuid IN (select e.uuid from tbl_encounter as e where e.visituuid = ?)", new String[]{uuid});
+                        String currentComplaint = null;
+                        Cursor cursor1 = db.rawQuery("select o.value from tbl_obs as o where o.conceptuuid = '3edb0e09-9135-481e-b8f0-07a26fa9a5ce' and o.encounteruuid IN (select e.uuid from tbl_encounter as e where e.visituuid = ?)", new String[]{uuid});
                         if (cursor1 != null && cursor1.moveToFirst()) {
+                            currentComplaint = cursor1.getString(cursor1.getColumnIndexOrThrow("value"));
                             cursor1.close();
                             if (self)
                                 continue;
@@ -166,6 +168,7 @@ public class AppointmentsFragment extends Fragment {
                             }
                             obsCursor.close();
                         } else {
+                            day_date.currentComplaintValue = currentComplaint;
                             day_date.openmrsId = cursor.getString(cursor.getColumnIndexOrThrow("openmrs_id"));
                         }
                         recycler_arraylist.add(day_date);

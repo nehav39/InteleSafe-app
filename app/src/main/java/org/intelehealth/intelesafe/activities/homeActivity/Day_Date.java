@@ -4,7 +4,7 @@ public class Day_Date {
 
     private String Day, Date, note;
     public boolean hasPrescription;
-    public String visitUid, physicalExamValue, openmrsId;;
+    public String visitUid, physicalExamValue, currentComplaintValue, openmrsId;;
 
     public Day_Date(String day, String date) {
         Day = day;

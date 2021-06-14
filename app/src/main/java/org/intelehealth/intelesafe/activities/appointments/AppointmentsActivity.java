@@ -76,8 +76,8 @@ public class AppointmentsActivity extends AppCompatActivity {
         tabLayout= findViewById(R.id.tabLayout);
         viewPager= findViewById(R.id.viewPager);
 
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.self_assessment));
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.doctors_visits));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.self_assessment_label));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.doctors_visits_label));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final TabAdapter adapter = new TabAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
