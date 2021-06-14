@@ -21,7 +21,7 @@ public class PdfAdapter extends RecyclerView.Adapter<PdfAdapter.ViewHolder> {
     private ItemClickListener mClickListener;
 
     // data is passed into the constructor
-    PdfAdapter(Context context, List<PdfItem> data) {
+    public PdfAdapter(Context context, List<PdfItem> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
@@ -71,7 +71,7 @@ public class PdfAdapter extends RecyclerView.Adapter<PdfAdapter.ViewHolder> {
         }
     }
 
-    void setClickListener(ItemClickListener itemClickListener) {
+    public void setClickListener(ItemClickListener itemClickListener) {
         this.mClickListener = itemClickListener;
     }
 

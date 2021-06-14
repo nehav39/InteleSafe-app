@@ -50,6 +50,18 @@
             android:layout_marginTop="8dp"
             android:fontFamily="@font/lato_bold"
             android:gravity="center"
+            android:text="निष्ठा की व्यापक पोस्ट कोविड देखभाल पहल"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/lato_bold"
+            android:gravity="center"
             android:text="@string/splash_subtitle"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
@@ -108,7 +120,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorPrimary"
         android:gravity="bottom"
         android:orientation="horizontal">
 
@@ -118,7 +130,7 @@
             android:layout_margin="3dp"
             android:fontFamily="@font/lato_regular"
             android:gravity="center"
-            android:padding="8dip"
+            android:padding="5dip"
             android:text="Powered by Intelehealth, Ekal Arogya &amp; \n Transform Rural India"
             android:textAlignment="center"
             android:textColor="@color/white"
@@ -140,13 +152,30 @@
             android:padding="12dip">
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_hindi"
+                android:fontFamily="@font/lato_regular"
+                android:layout_below="@+id/partnership_label_tv"
+                android:paddingStart="8dip"
+                android:paddingEnd="8dip"
+                android:layout_margin="3dp"
+                android:text="@string/in_partnership_with_state_government_of"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <TextView
                 android:id="@+id/partnership_label_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="3dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
                 android:fontFamily="@font/lato_regular"
-                android:padding="8dip"
-                android:text="@string/in_partnership_with_state_government_of"
+                android:paddingStart="8dip"
+                android:layout_centerHorizontal="true"
+                android:paddingEnd="8dip"
+                android:text="राज्य सरकार झारखंड, एमपी के साझेदारी में"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
@@ -155,7 +184,7 @@
                 android:id="@+id/llStateLogos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/partnership_label_tv"
+                android:layout_below="@+id/tv_hindi"
                 android:layout_centerHorizontal="true"
                 android:layout_margin="12dp"
                 android:orientation="horizontal">
@@ -189,7 +218,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dip"
-
                     android:orientation="vertical">
 
                     <ImageView

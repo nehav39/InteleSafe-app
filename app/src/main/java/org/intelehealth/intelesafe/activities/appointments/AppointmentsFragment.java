@@ -136,7 +136,8 @@ public class AppointmentsFragment extends Fragment {
 //                        hashSet.add(new Day_Date("Day "+a, endDate));
                         //   boolean t = ;
 //                        hashSet.add(dd);
-                        new_arraylist.add(dd);
+                        if (!new_arraylist.contains(dd))
+                            new_arraylist.add(dd);
 
 
 //                        for(int i=0; i<recycler_arraylist.size(); i++)
@@ -181,7 +182,7 @@ public class AppointmentsFragment extends Fragment {
             Collections.reverse(recycler_arraylist);
             sessionManager.setFirstCheckin("true");
             tvNoVisit.setVisibility(View.GONE);
-            recycler_home_adapter = new Recycler_Home_Adapter(getContext(), recycler_arraylist, array_original_date);
+            recycler_home_adapter = new Recycler_Home_Adapter(getContext(), recycler_arraylist, array_original_date, self);
             recycler_home_adapter.notifyDataSetChanged();
 
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));

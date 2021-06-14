@@ -6,13 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Paint;
 import android.graphics.Typeface;
-
-import androidx.annotation.NonNull;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.appcompat.app.AlertDialog;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +13,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.intelehealth.intelesafe.R;
 import org.intelehealth.intelesafe.activities.appointments.AppointmentsActivity;
@@ -41,11 +41,13 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
     private Context mcontext;
     SessionManager sessionManager;
     AlertDialog.Builder alertdialogBuilder;
+    private boolean self;
 
-    public Recycler_Home_Adapter(Context context, ArrayList<Day_Date> recycler_arraylist, ArrayList<String> array_og_date) {
+    public Recycler_Home_Adapter(Context context, ArrayList<Day_Date> recycler_arraylist, ArrayList<String> array_og_date, boolean self) {
         this.arrayList = recycler_arraylist;
         this.mcontext = context;
         this.stringArrayList_date = array_og_date;
+        this.self = self;
     }
 
     @NonNull
@@ -57,34 +59,6 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int position) {
-        //SimpleDateFormat currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-
-    /*    try {
-            Date first_visit = currentDate.parse(arrayList.get(position).getDate());
-            Date array_visit = currentDate.parse(arrayList.get(position+1).getDate());
-
-            if((array_visit.getTime() > first_visit.getTime() || arrayList.size() > 0) &&
-            array_visit.getTime() != first_visit.getTime())
-            //25 after 26 -> true. --- 26 before 25 -> true.
-            {
-                myViewHolder.day_text.setText(arrayList.get(position).getDay());
-                StringBuilder stringBuilder = new StringBuilder(arrayList.get(position).getDate());
-                int a1 = stringBuilder.indexOf("T");
-                myViewHolder.date_text.setText(stringBuilder.substring(0, a1));
-                Log.d("GG","GG: "+stringBuilder.substring(0, a1));
-                Log.d("GG","GG_1: "+myViewHolder.date_text.getText().toString());
-            }
-            else
-            {
-                Toast.makeText(mcontext, "Hello", Toast.LENGTH_SHORT).show();
-                myViewHolder.cardView.setVisibility(View.GONE);
-            }
-
-        }
-        catch (Exception e)
-        {
-
-        }*/
 
 
         myViewHolder.day_text.setText(arrayList.get(position).getDay());
@@ -93,6 +67,29 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
         myViewHolder.date_text.setText(arrayList.get(position).getDate());
         Log.d("GG", "GG: " + arrayList.get(position).getDate());
         Log.d("GG", "GG_1: " + myViewHolder.date_text.getText().toString());
+
+        myViewHolder.titlePart2TextView.setText(arrayList.get(position).getDate());
+        if (self) {
+            myViewHolder.titlePart1TextView.setText(mcontext.getString(R.string.self_assessment_label));
+            myViewHolder.backgroundCardView.setCardBackgroundColor(mcontext.getResources().getColor(R.color.orange2));
+            myViewHolder.foregroundCardView.setCardBackgroundColor(mcontext.getResources().getColor(R.color.red_light_1));
+            myViewHolder.prescriptionLayout.setVisibility(View.GONE);
+            myViewHolder.descriptionTextView.setText(mcontext.getString(R.string.click_here_view_details));
+        } else {
+            myViewHolder.titlePart1TextView.setText(mcontext.getString(R.string.doctors_visits_label));
+            myViewHolder.backgroundCardView.setCardBackgroundColor(mcontext.getResources().getColor(R.color.blue_11));
+            myViewHolder.foregroundCardView.setCardBackgroundColor(mcontext.getResources().getColor(R.color.blue_light_1));
+            myViewHolder.prescriptionLayout.setVisibility(View.VISIBLE);
+            if (arrayList.get(position).hasPrescription) {
+                myViewHolder.check_image.setVisibility(View.VISIBLE);
+                myViewHolder.prescriptionStatusTextView.setText(mcontext.getString(R.string.click_here_to_download_prescription));
+
+            } else {
+                myViewHolder.check_image.setVisibility(View.GONE);
+                myViewHolder.prescriptionStatusTextView.setText(mcontext.getString(R.string.waiting_for_doctor_s_prescription));
+            }
+            myViewHolder.descriptionTextView.setText(mcontext.getString(R.string.note_for_doctors_visits));
+        }
 
 
         SQLiteDatabase db = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
@@ -117,6 +114,17 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
             if (cursor.moveToFirst()) {
                 do {
                     try {
+                        String uuid = cursor.getString(cursor.getColumnIndexOrThrow("uuid"));
+                        Cursor cursor1 = db.rawQuery("select * from tbl_obs as o where o.conceptuuid = '3edb0e09-9135-481e-b8f0-07a26fa9a5ce' and o.encounteruuid IN (select e.uuid from tbl_encounter as e where e.visituuid = ?)", new String[]{uuid});
+                        if (cursor1 != null && cursor1.moveToFirst()) {
+                            cursor1.close();
+                            if (self)
+                                continue;
+                        } else {
+                            cursor1.close();
+                            if (!self)
+                                continue;
+                        }
 
                         message = cursor.getString(cursor.getColumnIndexOrThrow("startdate"));
                         StringBuilder stringBuilder = new StringBuilder(message);
@@ -125,7 +133,8 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
 
                         array_message.add(counter, de);
 
-                        uuid_array.add(counter, cursor.getString(cursor.getColumnIndexOrThrow("uuid")));
+
+                        uuid_array.add(counter, uuid);
 
                         counter++;
                         // alertdialogBuilder.setMessage(message);
@@ -141,7 +150,9 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
             cursor.close();
         }
 
-        myViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+        Log.v("TAG", array_message + "");
+
+        myViewHolder.foregroundCardView.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
@@ -172,10 +183,11 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
                     stringBuilder_2.append(R.string.visit + (i + 1) + "-\t\t" + array_message.get(i));
                     //stringBuilder_2.append("\n");
                     TextView visitText = new TextView(mcontext);
-                    visitText.setText( "Visit no." + (i + 1) + "-\t\t" + array_message.get(i));
+//                    visitText.setText( "Visit no." + (i + 1) + "-\t\t" + array_message.get(i));
+                    visitText.setText("Visit no." + (i + 1) + "-\t\t View Details");
                     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                             LinearLayout.LayoutParams.WRAP_CONTENT);
-                    if(mcontext.getResources().getBoolean(R.bool.isTab)) {
+                    if (mcontext.getResources().getBoolean(R.bool.isTab)) {
                         params.setMargins(0, 12, 0, 12);
                         visitText.setLayoutParams(params);
                         visitText.setPadding(9, 14, 9, 14);
@@ -196,33 +208,13 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
                         @Override
                         public void onClick(View view) {
                             int pos = (int) view.getTag();
-                            ((AppointmentsActivity) mcontext).pastVisits(pos, array_message.get(pos));
+                            ((AppointmentsActivity) mcontext).pastVisits(pos, array_message.get(pos), self, uuid_array.get(pos));
                             alertDialog.dismiss();
                         }
                     });
 
 //                    ((HomeActivity) context).pastVisits(position);
                 }
-                // alertdialogBuilder.setMessage(stringBuilder_2.toString());
-              /*  SpannableString ss = new SpannableString(stringBuilder_2.toString());
-                ClickableSpan clickableSpan = new ClickableSpan() {
-                    @Override
-                    public void onClick(View textView) {
-
-                       // startActivity(new Intent(MyActivity.this, NextActivity.class));
-                    }
-                    @Override
-                    public void updateDrawState(TextPaint ds) {
-                        super.updateDrawState(ds);
-                        ds.setUnderlineText(false);
-                    }
-                };
-                ss.setSpan(clickableSpan, 22, 27, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);*/
-
-
-                //alertdialogBuilder.setNegativeButton(R.string.generic_no, null);
-
-
                 Button positiveButton = alertDialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE);
                 Button negativeButton = alertDialog.getButton(android.app.AlertDialog.BUTTON_NEGATIVE);
 
@@ -235,13 +227,14 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
         });
 
         if (arrayList.get(position).hasPrescription) {
-            myViewHolder.check_image.setImageResource(R.drawable.ic_prescription_green);
+            myViewHolder.check_image.setImageResource(R.drawable.prescription_new_icon);
         } else {
             myViewHolder.check_image.setImageDrawable(null);
         }
 
 
     }
+
     @Override
     public int getItemCount() {
         return arrayList.size();
@@ -254,10 +247,24 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
         ImageView check_image;
 
         // Context context;
+        TextView titlePart1TextView, titlePart2TextView, descriptionTextView, prescriptionStatusTextView;
+        CardView backgroundCardView, foregroundCardView;
+        RelativeLayout prescriptionLayout;
 
 
         public MyViewHolder(@NonNull View itemView, Context context) {
             super(itemView);
+
+            titlePart1TextView = itemView.findViewById(R.id.title_label_1_tv);
+            titlePart2TextView = itemView.findViewById(R.id.title_label_2_tv);
+            descriptionTextView = itemView.findViewById(R.id.note_tv);
+            prescriptionStatusTextView = itemView.findViewById(R.id.prescription_status_tv);
+
+            backgroundCardView = itemView.findViewById(R.id.cardview_recycler_1);
+            foregroundCardView = itemView.findViewById(R.id.cardview_recycler);
+
+            prescriptionLayout = itemView.findViewById(R.id.prescription_layout);
+
             this.cardView = itemView.findViewById(R.id.cardview_recycler);
             this.day_text = itemView.findViewById(R.id.recycler_day_textview);
             this.date_text = itemView.findViewById(R.id.recycler_date_textview);

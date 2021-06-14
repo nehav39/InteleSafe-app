@@ -26,15 +26,6 @@ import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
 import android.print.PrintJob;
 import android.print.PrintManager;
-import androidx.core.app.NotificationCompat;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-import androidx.core.view.MenuItemCompat;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.Toolbar;
 import android.telephony.SmsManager;
 import android.text.Html;
 import android.text.InputType;
@@ -62,6 +53,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
+import androidx.core.app.NotificationCompat;
+import androidx.core.view.MenuItemCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.gson.Gson;
@@ -90,15 +90,21 @@ import org.intelehealth.intelesafe.R;
 import org.intelehealth.intelesafe.activities.additionalDocumentsActivity.AdditionalDocumentsActivity;
 import org.intelehealth.intelesafe.activities.complaintNodeActivity.ComplaintNodeActivity;
 import org.intelehealth.intelesafe.activities.familyHistoryActivity.FamilyHistoryActivity;
+import org.intelehealth.intelesafe.activities.homeActivity.HomeActivity;
+import org.intelehealth.intelesafe.activities.homeActivity.Webview;
 import org.intelehealth.intelesafe.activities.pastMedicalHistoryActivity.PastMedicalHistoryActivity;
 import org.intelehealth.intelesafe.activities.patientSurveyActivity.PatientSurveyActivity;
+import org.intelehealth.intelesafe.activities.physcialExamActivity.PhysicalExamActivity;
+import org.intelehealth.intelesafe.activities.vitalActivity.VitalsActivity;
 import org.intelehealth.intelesafe.app.AppConstants;
 import org.intelehealth.intelesafe.database.dao.EncounterDAO;
 import org.intelehealth.intelesafe.database.dao.ImagesDAO;
 import org.intelehealth.intelesafe.database.dao.ObsDAO;
 import org.intelehealth.intelesafe.database.dao.SyncDAO;
+import org.intelehealth.intelesafe.database.dao.VisitAttributeListDAO;
 import org.intelehealth.intelesafe.database.dao.VisitsDAO;
 import org.intelehealth.intelesafe.knowledgeEngine.Node;
+import org.intelehealth.intelesafe.models.ClsDoctorDetails;
 import org.intelehealth.intelesafe.models.Patient;
 import org.intelehealth.intelesafe.models.dto.ObsDTO;
 import org.intelehealth.intelesafe.services.DownloadService;
@@ -106,14 +112,24 @@ import org.intelehealth.intelesafe.syncModule.SyncUtils;
 import org.intelehealth.intelesafe.utilities.DateAndTimeUtils;
 import org.intelehealth.intelesafe.utilities.FileUtils;
 import org.intelehealth.intelesafe.utilities.Logger;
+import org.intelehealth.intelesafe.utilities.NetworkConnection;
 import org.intelehealth.intelesafe.utilities.SessionManager;
 import org.intelehealth.intelesafe.utilities.UuidDictionary;
-
-import org.intelehealth.intelesafe.activities.homeActivity.HomeActivity;
-import org.intelehealth.intelesafe.activities.physcialExamActivity.PhysicalExamActivity;
-import org.intelehealth.intelesafe.activities.vitalActivity.VitalsActivity;
-import org.intelehealth.intelesafe.utilities.NetworkConnection;
 import org.intelehealth.intelesafe.utilities.exception.DAOException;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * Created By: Prajwal Waingankar
@@ -273,6 +289,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
     private boolean isRespiratory = false;
 
     SyncUtils syncUtils = new SyncUtils();
+    private boolean self;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -458,6 +475,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
             if (selectedExams != null && !selectedExams.isEmpty()) {
                 physicalExams.addAll(selectedExams);
             }
+            self = intent.getBooleanExtra("self", false);
         }
         registerBroadcastReceiverDynamically();
         registerDownloadPrescription();
@@ -545,7 +563,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 //                                String.format("https://api.whatsapp.com/send?phone=%s&text=%s",
 //                                        phoneNumberWithCountryCode, message))));
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:+9173142821385"));
+                intent.setData(Uri.parse("tel:+917314821385"));
                 startActivity(intent);
             }
         });
@@ -911,7 +929,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         if (patHistory.getValue() != null)
             patHistView.setText(Html.fromHtml(patHistory.getValue()));
         if (phyExam.getValue() != null) {
-            String physicalExamStr = phyExam.getValue().replaceAll("<b>General exams: </b>", "<b>Self Assessment: </b>");
+            String physicalExamStr = phyExam.getValue().replaceAll("<b>General exams: </b>", self ? "<b>Self Assessment: </b>" : "<b>Doctor Visit: </b>");
             physFindingsView.setText(Html.fromHtml(physicalExamStr));
         }
 
@@ -1160,7 +1178,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                                 phyExam.setValue(dialogEditText.getText().toString().replace("\n", "<br>"));
                                 String b = "";
                                 if (phyExam.getValue() != null) {
-                                    String physicalExamStr = phyExam.getValue().replaceAll("<b>General exams: </b>", "<b>Self Assessment: </b>");
+                                    String physicalExamStr = phyExam.getValue().replaceAll("<b>General exams: </b>", self ? "<b>Self Assessment: </b>" : "<b>Doctor Visit: </b>");
                                     physicalText.setText(Html.fromHtml(physicalExamStr));
                                     physFindingsView.setText(Html.fromHtml(physicalExamStr));
                                      b = phyExam.getValue().replaceAll("Self Assessment: ", "<b>General exams: </b> ");

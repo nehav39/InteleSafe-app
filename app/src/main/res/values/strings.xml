@@ -111,7 +111,7 @@
     <string name="address_ppe">Address:</string>
     <string name="ppe_required">PPE Required:</string>
     <string name="no_application">No Application available to view PDF</string>
-    <string name="today_checkin">Today\'s Check-in</string>
+    <string name="today_checkin">Check-in</string>
     <string name="visit">Visit</string>
 
     //Identification Screen
@@ -743,9 +743,9 @@
     <string name="doctors_visits">Doctors Visits</string>
     <string name="in_partnership_with_state_government_of">In partnership with state government of</string>
 
-    <string name="recovering_covid_new">Recovering from Covid-19 \n Videos</string>
+    <string name="recovering_covid_new">Recovering from Covid-19 Videos</string>
     <string name="educational_videos">Educational Videos</string>
-    <string name="info_about_covid">Information about Covid &amp;\nFAQ</string>
+    <string name="info_about_covid">Information about Covid &amp; FAQ</string>
     <string name="post_covid_title">Post COVID Care</string>
     <string name="videos_title">Post COVID care</string>
     <string name="please_enter_value_for">Please enter the value for </string>
@@ -756,6 +756,21 @@
     <string name="title_videos">Covid 19 videos</string>
     <string name="please_give_your_answer">Please select your answer</string>
     <string name="please_select_any_option">Please select any option</string>
+    <string name="hint_date_tested_positive_optional">Date of tested positive / Days</string>
+    <string name="hint_block_optional">Block</string>
     <string name="download_prescription"><u>Download Prescription</u></string>
+    <string name="how_to_use_spo2">How to use pulse oximeter</string>
+    <string name="how_to_use_thermo">How to use digital thermometer</string>
+    <string name="your_visits_amp_appointments"><![CDATA[Your Visits & Appointments]]></string>
+    <string name="know_post_covid_care">Know Post-COVID care</string>
+    <string name="concerned_about_something">Concerned about something?</string>
+    <string name="would_you_like_to_talk_to_our_experts_nget_in_touch_now">Would you like to talk to our experts?\nGet in touch now</string>
+    <string name="my_vistis">My Visits</string>
+    <string name="self_assessment_label">Self-Assessment</string>
+    <string name="click_here_to_download_prescription">Click here to download prescription</string>
+    <string name="waiting_for_doctor_s_prescription">Waiting for doctor’s prescription.</string>
+    <string name="doctors_visits_label">Doctor’s visit</string>
+    <string name="note_for_doctors_visits">Teleconsultation for post-COVID recovery</string>
+    <string name="click_here_view_details">Click here to view details</string>
 
 </resources>

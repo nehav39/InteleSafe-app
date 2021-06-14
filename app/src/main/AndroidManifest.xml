@@ -47,12 +47,12 @@
             android:resource="@color/colorPrimary" />-->
 
 
-
         <activity android:name=".activities.videosActivity.VideosActivity"></activity>
         <activity
             android:name=".activities.appointments.AppointmentsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait" /> <!-- fb sdk -->
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" /> <!-- fb sdk -->
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" /> <!-- Fb App Events: Auto-Logging of events is enabled... -->
@@ -262,7 +262,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.pdflist.PdfListActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".activities.pdflist.PdfViewerActivity"
             android:screenOrientation="fullSensor" />

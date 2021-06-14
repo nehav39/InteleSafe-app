@@ -33,27 +33,27 @@ public class VideoListActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(R.string.title_videos);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setElevation(0);
-
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-        List<VideoItem> videos = getVideos();
-        VideoAdapter adapter = new VideoAdapter(this, videos);
-        adapter.setClickListener(new VideoAdapter.ItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                if (position == RecyclerView.NO_POSITION)
-                    return;
-                VideoItem videoItem = videos.get(position);
-                VideoPlayerActivity.start(VideoListActivity.this, videoItem.url);
-            }
-        });
-        recyclerView.setAdapter(adapter);
+//
+//        recyclerView = findViewById(R.id.recyclerView);
+//        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+//        List<VideoItem> videos = getVideos();
+//        VideoAdapter adapter = new VideoAdapter(this, videos);
+//        adapter.setClickListener(new VideoAdapter.ItemClickListener() {
+//            @Override
+//            public void onItemClick(View view, int position) {
+//                if (position == RecyclerView.NO_POSITION)
+//                    return;
+//                VideoItem videoItem = videos.get(position);
+//                VideoPlayerActivity.start(VideoListActivity.this, videoItem.url);
+//            }
+//        });
+//        recyclerView.setAdapter(adapter);
     }
 
     private List<VideoItem> getVideos() {
         ArrayList<VideoItem> videoItems = new ArrayList<>();
-        videoItems.add(new VideoItem("How to use pulse oximeter", "https://swasthyasampark.intelehealth.org/IEC/pulse_oximeter.mp4"));
-        videoItems.add(new VideoItem("How to use digital thermometer", "https://swasthyasampark.intelehealth.org/IEC/digital_thermometer.mp4"));
+        videoItems.add(new VideoItem(getResources().getString(R.string.how_to_use_spo2), "https://swasthyasampark.intelehealth.org/IEC/pulse_oximeter.mp4"));
+        videoItems.add(new VideoItem(getResources().getString(R.string.how_to_use_thermo), "https://swasthyasampark.intelehealth.org/IEC/digital_thermometer.mp4"));
         return videoItems;
     }
 

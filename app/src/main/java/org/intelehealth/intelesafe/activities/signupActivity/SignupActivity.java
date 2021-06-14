@@ -852,13 +852,13 @@ public class SignupActivity extends AppCompatActivity {
                 }
 
 
-                if (et_tested_positive_date.getText().toString().equals("")) {
+                /*if (et_tested_positive_date.getText().toString().equals("")) {
                     et_tested_positive_date.setError(getString(R.string.error_field_required));
                     mDOB.setFocusable(true);
                     mDOB.setFocusableInTouchMode(true);
                     mDOB.requestFocus();
                     return;
-                }
+                }*/
 
                 if (state_spinner.getSelectedItemPosition() == 0) {
                     state_spinner.requestFocus();
@@ -872,11 +872,11 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (block_spinner.getSelectedItemPosition() == 0) {
+                /*if (block_spinner.getSelectedItemPosition() == 0) {
                     block_spinner.requestFocus();
                     Toast.makeText(context, R.string.error_mandatory_field, Toast.LENGTH_SHORT).show();
                     return;
-                }
+                }*/
 
                 if (dob.equals("") || dob.toString().equals("")) {
                     if (dob.after(today)) {
@@ -1166,11 +1166,12 @@ public class SignupActivity extends AppCompatActivity {
 
                 UserBirthAttribute userBirthHosAttribute = new UserBirthAttribute();
                 userBirthHosAttribute.setAttributeType("1c718819-345c-4368-aad6-d69b4c267db7"); //openmrsuuid education
-                userBirthHosAttribute.setValue("" + block_spinner.getSelectedItem().toString()); //hospital name text
+                userBirthHosAttribute.setValue("" + (block_spinner.getSelectedItem().toString().equalsIgnoreCase("Select") ?"" :block_spinner.getSelectedItem().toString())); //hospital name text
 
                 UserBirthAttribute userCasteAttribute = new UserBirthAttribute();
                 userCasteAttribute.setAttributeType("5a889d96-0c84-4a04-88dc-59a6e37db2d3"); // This is for Designation. openrms caste...
-                userCasteAttribute.setValue("" + selectedPersonalCaste);
+//                userCasteAttribute.setValue("" + selectedPersonalCaste);
+                userCasteAttribute.setValue("patient_app");
 
 
                 List<UserBirthAttribute> userAttributeList = new ArrayList<>();
