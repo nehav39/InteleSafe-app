@@ -70,7 +70,7 @@ public class PhysicalExam extends Node {
                 if (getOption(0).getOption(i).getOptionsList() != null) {
                     for (int j = 0; j < getOption(0).getOption(i).getOptionsList().size(); j++) {
                         getOption(0).getOption(i).getOption(j).setRequired(i != 0);
-                        Log.v(TAG, "matchSelections inner - " +getOption(0).getOption(i).getOption(j).getText()+" - "+ getOption(0).getOption(i).getOption(j).isRequired());
+                        Log.v(TAG, "matchSelections inner - " + getOption(0).getOption(i).getOption(j).getText() + " - " + getOption(0).getOption(i).getOption(j).isRequired());
 
                     }
                 }
@@ -234,21 +234,21 @@ public class PhysicalExam extends Node {
     }
 
     //Check to see if single required exams have been answered before moving on.
-    public boolean areRequiredAnsweredForCurrentNode(int index) {
+    public boolean areRequiredAnsweredForGivenNodes(int[] index) {
 
         boolean allAnswered = true;
 
         //int total = this.totalExams;
-        //for (int i = 0; i < total; i++) {
-        Node node = getExamNode(index);
-        Log.v(TAG, new Gson().toJson(node).toString());
-        Log.v(TAG, "node.isRequired() - "+ node.isRequired());
-        Log.v(TAG, "node.anySubSelected() - "+ node.anySubSelected());
-        if (node.isRequired() && !node.anySubSelected()) {
-            allAnswered = false;
-            //  break;
+        for (int i = 0; i < index.length; i++) {
+            Node node = getExamNode(index[i]);
+            Log.v(TAG, new Gson().toJson(node).toString());
+            Log.v(TAG, "node.isRequired() - " + node.isRequired());
+            Log.v(TAG, "node.anySubSelected() - " + node.anySubSelected());
+            if (node.isRequired() && !node.anySubSelected()) {
+                allAnswered = false;
+                break;
+            }
         }
-        // }
         return allAnswered;
     }
 

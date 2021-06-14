@@ -252,7 +252,7 @@ public class PhysicalExamActivity extends AppCompatActivity {
 
                 //returns true if all Mandatory questions have been answered...
                 //complaintConfirmed = physicalExamMap.areRequiredAnswered();
-                complaintConfirmed = physicalExamMap.areRequiredAnsweredForCurrentNode(1);
+                complaintConfirmed = physicalExamMap.areRequiredAnsweredForGivenNodes(new int[]{1,2});
 
                 if (complaintConfirmed) {
 
@@ -293,7 +293,7 @@ public class PhysicalExamActivity extends AppCompatActivity {
                             intent.putExtra("name", patientName);
                             intent.putExtra("tag", intentTag);
                             intent.putExtra("hasPrescription", "false");
-
+                            intent.putExtra("self", true);
                             for (String exams : selectedExamsList) {
                                 Log.i(TAG, "onClick:++ " + exams);
                             }
@@ -310,6 +310,7 @@ public class PhysicalExamActivity extends AppCompatActivity {
                             intent1.putExtra("name", patientName);
                             intent1.putExtra("tag", intentTag);
                             intent1.putExtra("hasPrescription", "false");
+                            intent1.putExtra("self", true);
                             // intent1.putStringArrayListExtra("exams", selectedExamsList);
                             startActivity(intent1);
                         }
@@ -595,8 +596,17 @@ public class PhysicalExamActivity extends AppCompatActivity {
                         viewNode.getOption(groupPosition).setUnselected();
                     }
                     Node rootNode = viewNode.getOption(groupPosition);
+                    if(rootNode.isMultiChoice() && !question.isExcludedFromMultiChoice()){
+                        for (int i = 0; i < rootNode.getOptionsList().size(); i++) {
+                            Node childNode = rootNode.getOptionsList().get(i);
+                            if (childNode.isSelected() && childNode.isExcludedFromMultiChoice()) {
+                                viewNode.getOption(groupPosition).getOptionsList().get(i).setUnselected();
+
+                            }
+                        }
+                    }
                     Log.v(TAG, "rootNode - "+new Gson().toJson(rootNode));
-                    if (!rootNode.isMultiChoice()) {
+                    if (!rootNode.isMultiChoice() || (rootNode.isMultiChoice() && question.isExcludedFromMultiChoice() && question.isSelected())) {
                         for (int i = 0; i < rootNode.getOptionsList().size(); i++) {
                             Node childNode = rootNode.getOptionsList().get(i);
                             if (!childNode.getId().equals(question.getId())) {

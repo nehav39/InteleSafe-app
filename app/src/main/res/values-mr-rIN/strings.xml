@@ -741,5 +741,6 @@
     <string name="doctors_visits_label">Doctor’s visit</string>
     <string name="note_for_doctors_visits">Teleconsultation for post-COVID recovery</string>
     <string name="click_here_view_details">Click here to view details</string>
+    <string name="go_to_home">Go to Home</string>
 
 </resources>
