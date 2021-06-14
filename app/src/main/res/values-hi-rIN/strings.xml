@@ -129,7 +129,7 @@
     <string name="menu_option_settings" translatable="false">Settings</string>
     <string name="menu_option_end_of_day" translatable="false">End of Day</string>
     <string name="menu_option_logout" translatable="false">Logout</string>
-    <string name="today_checkin">आज का चेक-इन</string>
+    <string name="today_checkin">चेक-इन</string>
     <string name="change_lang_menu">भाषा बदलो</string>
     <string name="logout_menu">लॉग आउट</string>
 
@@ -786,7 +786,7 @@
     <string name="choose_lang_title">अपनी भाषा चुनिए</string>
     <string name="in_partnership_with_state_government_of">राज्य सरकार के सहयोग से</string>
 
-    <string name="recovering_covid_new">पोस्ट-कोविड देखभाल के बारे में \n वीडियो</string>
+    <string name="recovering_covid_new">पोस्ट-कोविड देखभाल के बारे में वीडियो</string>
     <string name="educational_videos">शैक्षिक वीडियो</string>
     <string name="info_about_covid">कोविड और अक्सर पूछे जाने वाले प्रश्नों के बारे में जानकारी</string>
     <string name="post_covid_title">पोस्ट कोविड केयर</string>

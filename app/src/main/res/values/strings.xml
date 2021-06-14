@@ -111,7 +111,7 @@
     <string name="address_ppe">Address:</string>
     <string name="ppe_required">PPE Required:</string>
     <string name="no_application">No Application available to view PDF</string>
-    <string name="today_checkin">Today\'s Check-in</string>
+    <string name="today_checkin">Check-in</string>
     <string name="visit">Visit</string>
 
     //Identification Screen
@@ -743,9 +743,9 @@
     <string name="doctors_visits">Doctors Visits</string>
     <string name="in_partnership_with_state_government_of">In partnership with state government of</string>
 
-    <string name="recovering_covid_new">Recovering from Covid-19 \n Videos</string>
+    <string name="recovering_covid_new">Recovering from Covid-19 Videos</string>
     <string name="educational_videos">Educational Videos</string>
-    <string name="info_about_covid">Information about Covid &amp;\nFAQ</string>
+    <string name="info_about_covid">Information about Covid &amp; FAQ</string>
     <string name="post_covid_title">Post COVID Care</string>
     <string name="videos_title">Post COVID care</string>
     <string name="please_enter_value_for">Please enter the value for </string>

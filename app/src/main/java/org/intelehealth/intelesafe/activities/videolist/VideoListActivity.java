@@ -33,21 +33,21 @@ public class VideoListActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(R.string.title_videos);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setElevation(0);
-
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-        List<VideoItem> videos = getVideos();
-        VideoAdapter adapter = new VideoAdapter(this, videos);
-        adapter.setClickListener(new VideoAdapter.ItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                if (position == RecyclerView.NO_POSITION)
-                    return;
-                VideoItem videoItem = videos.get(position);
-                VideoPlayerActivity.start(VideoListActivity.this, videoItem.url);
-            }
-        });
-        recyclerView.setAdapter(adapter);
+//
+//        recyclerView = findViewById(R.id.recyclerView);
+//        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+//        List<VideoItem> videos = getVideos();
+//        VideoAdapter adapter = new VideoAdapter(this, videos);
+//        adapter.setClickListener(new VideoAdapter.ItemClickListener() {
+//            @Override
+//            public void onItemClick(View view, int position) {
+//                if (position == RecyclerView.NO_POSITION)
+//                    return;
+//                VideoItem videoItem = videos.get(position);
+//                VideoPlayerActivity.start(VideoListActivity.this, videoItem.url);
+//            }
+//        });
+//        recyclerView.setAdapter(adapter);
     }
 
     private List<VideoItem> getVideos() {
