@@ -95,7 +95,11 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
                 myViewHolder.prescriptionStatusTextView.setText(mcontext.getString(R.string.waiting_for_doctor_s_prescription));
             }
 //            myViewHolder.descriptionTextView.setText(mcontext.getString(R.string.note_for_doctors_visits));
-            myViewHolder.descriptionTextView.setText(Html.fromHtml(String.format("%s%s", "<b>Teleconsultation for: </b><br>", arrayList.get(position).currentComplaintValue)));
+            String currentComplaintValue = arrayList.get(position).currentComplaintValue;
+            int endIndex = currentComplaintValue.indexOf(":");
+            if (endIndex > 0)
+                currentComplaintValue = currentComplaintValue.substring(0, endIndex);
+            myViewHolder.descriptionTextView.setText(Html.fromHtml(String.format("%s%s", "<b>Teleconsultation for: </b><br>", currentComplaintValue)));
         }
 
 
