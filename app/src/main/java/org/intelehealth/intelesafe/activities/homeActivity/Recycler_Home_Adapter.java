@@ -2,10 +2,13 @@ package org.intelehealth.intelesafe.activities.homeActivity;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.net.Uri;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +25,7 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.intelehealth.intelesafe.BuildConfig;
 import org.intelehealth.intelesafe.R;
 import org.intelehealth.intelesafe.activities.appointments.AppointmentsActivity;
 import org.intelehealth.intelesafe.app.AppConstants;
@@ -74,7 +78,9 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
             myViewHolder.backgroundCardView.setCardBackgroundColor(mcontext.getResources().getColor(R.color.orange2));
             myViewHolder.foregroundCardView.setCardBackgroundColor(mcontext.getResources().getColor(R.color.red_light_1));
             myViewHolder.prescriptionLayout.setVisibility(View.GONE);
-            myViewHolder.descriptionTextView.setText(mcontext.getString(R.string.click_here_view_details));
+//            myViewHolder.descriptionTextView.setText(mcontext.getString(R.string.click_here_view_details));
+            String physicalExamStr = arrayList.get(position).physicalExamValue;
+            myViewHolder.descriptionTextView.setText(Html.fromHtml(physicalExamStr));
         } else {
             myViewHolder.titlePart1TextView.setText(mcontext.getString(R.string.doctors_visits_label));
             myViewHolder.backgroundCardView.setCardBackgroundColor(mcontext.getResources().getColor(R.color.blue_11));
@@ -156,7 +162,20 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
 
             @Override
             public void onClick(View view) {
-                alertdialogBuilder = new AlertDialog.Builder(mcontext);
+                if (self)
+                    return;
+
+                Day_Date day_date = arrayList.get(position);
+                String Url = BuildConfig.BASE_URL +
+                        "preApi/i.jsp?v=" +
+                        day_date.visitUid + "&pid=" + day_date.openmrsId;
+
+                Intent download_intent = new Intent(Intent.ACTION_VIEW);
+                download_intent.setData(Uri.parse(Url));
+                mcontext.startActivity(download_intent);
+                Log.d("url", "url: "+ Url);
+
+                /*alertdialogBuilder = new AlertDialog.Builder(mcontext);
                 alertdialogBuilder.setTitle(R.string.today_checkin);
 
 
@@ -222,7 +241,7 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
                 positiveButton.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
 
                 negativeButton.setTextColor(mcontext.getResources().getColor(R.color.colorPrimary));
-                negativeButton.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+                negativeButton.setTypeface(Typeface.DEFAULT, Typeface.BOLD);*/
             }
         });
 

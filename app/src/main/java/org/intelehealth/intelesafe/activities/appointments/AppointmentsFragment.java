@@ -23,6 +23,7 @@ import org.intelehealth.intelesafe.database.dao.VisitsDAO;
 import org.intelehealth.intelesafe.models.dto.EncounterDTO;
 import org.intelehealth.intelesafe.models.dto.VisitDTO;
 import org.intelehealth.intelesafe.utilities.SessionManager;
+import org.intelehealth.intelesafe.utilities.UuidDictionary;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -73,7 +74,7 @@ public class AppointmentsFragment extends Fragment {
         ArrayList<String> visitsWithPrescription = getVisitsWithPrescription();
         recycler_arraylist = new ArrayList<Day_Date>();
         String endDate = "";
-        String query = "SELECT v.uuid, v.startdate FROM tbl_visit v, tbl_patient p WHERE " +
+        String query = "SELECT v.uuid, v.startdate, p.openmrs_id FROM tbl_visit v, tbl_patient p WHERE " +
                 "p.uuid = v.patientuuid AND v.startdate IS NOT NULL AND (v.issubmitted == 1 OR v.enddate IS NOT NULL) AND " +
                 "v.patientuuid = ?";
         String[] data = {sessionManager.getPersionUUID()};
@@ -148,12 +149,26 @@ public class AppointmentsFragment extends Fragment {
 //
 //                        }
 
+
                         if ((prescMap.get(dd) == null || !prescMap.get(dd)) && visitsWithPrescription.contains(uuid))
                             prescMap.put(dd, true);
                         /*recycler_arraylist.add(new Day_Date
                                 ("Day " + a, dd));
                         a++;*/
 
+                        Day_Date day_date = new Day_Date(getString(R.string.day_text) + " " + a, dd);
+                        day_date.hasPrescription = visitsWithPrescription.contains(uuid);
+                        day_date.visitUid = uuid;
+                        if (self) {
+                            Cursor obsCursor = db.rawQuery("select o.value from tbl_obs as o where o.conceptuuid = ? and o.encounteruuid IN (select e.uuid from tbl_encounter as e where e.visituuid = ?)", new String[]{UuidDictionary.PHYSICAL_EXAMINATION, uuid});
+                            if (obsCursor != null && obsCursor.moveToFirst()) {
+                                day_date.physicalExamValue = obsCursor.getString(obsCursor.getColumnIndexOrThrow("value"));
+                            }
+                            obsCursor.close();
+                        } else {
+                            day_date.openmrsId = cursor.getString(cursor.getColumnIndexOrThrow("openmrs_id"));
+                        }
+                        recycler_arraylist.add(day_date);
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -171,12 +186,12 @@ public class AppointmentsFragment extends Fragment {
 
         Collections.sort(new_arraylist); // added by venu N to sort the
 
-        for (int j = 0; j < new_arraylist.size(); j++) {
+        /*for (int j = 0; j < new_arraylist.size(); j++) {
             Day_Date day_date = new Day_Date(getString(R.string.day_text) + " " + a, new_arraylist.get(j));
             day_date.hasPrescription = prescMap.containsKey(day_date.getDate());
             recycler_arraylist.add(day_date);
             a++;
-        }
+        }*/
 
         if (!recycler_arraylist.isEmpty()) {
             Collections.reverse(recycler_arraylist);
