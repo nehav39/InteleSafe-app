@@ -314,19 +314,19 @@ public class Node implements Serializable {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String generatedLang = node.generateLanguage();
-                Log.v(TAG, "generateLanguage - "+generatedLang);
-                if(generatedLang!=null) {
+                Log.v(TAG, "generateLanguage - " + generatedLang);
+                if (generatedLang != null) {
                     node.setText(generatedLang);
                     callingAdapter.notifyDataSetChanged();
                     dialog.dismiss();
                     if (node.anySubSelected() && node.anySubPopUp()) {
                         node.generatePopUp(context);
                     }
-                }else {
+                } else {
                     parentNode.setUnselected();
                     node.subSelected = false;
                     node.setUnselected();
-                    for (int i = 0; i <node.getOptionsList().size() ; i++) {
+                    for (int i = 0; i < node.getOptionsList().size(); i++) {
                         node.getOption(i).setUnselected();
                     }
                     callingAdapter.notifyDataSetChanged();
