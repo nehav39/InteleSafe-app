@@ -727,7 +727,7 @@ Github: prajwalmw
                         android:fontFamily="@font/lato_medium"
                         android:gravity="start|center"
                         android:hint=""
-                        android:text="+9173142821385"
+                        android:text="+917314821385"
                         android:textColor="@color/gray_6"
                         android:textSize="18sp"
                         android:textStyle="bold" />
