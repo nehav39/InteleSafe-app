@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import org.intelehealth.intelesafe.R;
 
 import java.util.List;
@@ -39,11 +41,9 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         VideoItem videoItem = mData.get(position);
         holder.tvTitle.setText(videoItem.title);
-        /*Glide.with(holder.itemView.getContext())
+        Glide.with(holder.itemView.getContext())
                 .load(videoItem.url)
-                .asBitmap()
-                .placeholder(new ColorDrawable(Color.GRAY))
-                .into(holder.thumbnail);*/
+                .into(holder.thumbnail);
     }
 
     // total number of cells

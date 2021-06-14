@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import org.intelehealth.intelesafe.R;
 
 import java.util.List;
@@ -39,11 +41,9 @@ public class PdfAdapter extends RecyclerView.Adapter<PdfAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         PdfItem item = mData.get(position);
         holder.tvTitle.setText(item.title);
-        /*Glide.with(holder.itemView.getContext())
-                .load(item.url)
-                .asBitmap()
-                .placeholder(new ColorDrawable(Color.GRAY))
-                .into(holder.thumbnail);*/
+        Glide.with(holder.itemView.getContext())
+                .load(item.placeholder)
+                .into(holder.thumbnail);
     }
 
     // total number of cells

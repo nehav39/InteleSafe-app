@@ -13,19 +13,23 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <LinearLayout
+        <RelativeLayout
             android:background="@color/gray"
-            android:minHeight="128dp"
-            android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
+            android:layout_height="128dp">
             <ImageView
                 android:id="@+id/thumbnail"
+                android:layout_centerInParent="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@null" />
+            <ImageView
+                android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_media_play" />
-        </LinearLayout>
+                android:src="@android:drawable/ic_media_play"
+                android:contentDescription="@null" />
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/tvTitle"

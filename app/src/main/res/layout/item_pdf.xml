@@ -15,16 +15,16 @@
 
         <LinearLayout
             android:background="@color/colorPrimaryLight"
-            android:minHeight="128dp"
             android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="128dp">
 
             <ImageView
                 android:id="@+id/thumbnail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_dialog_info" />
+                android:scaleType="centerCrop"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:src="@drawable/ic_double_masking" />
         </LinearLayout>
 
         <TextView

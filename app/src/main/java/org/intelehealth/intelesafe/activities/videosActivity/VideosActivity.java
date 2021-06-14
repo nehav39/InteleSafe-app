@@ -143,18 +143,18 @@ public class VideosActivity extends AppCompatActivity {
     private List<PdfItem> getDocuments() {
         ArrayList<PdfItem> items = new ArrayList<>();
         if (sessionManager.getAppLanguage().equalsIgnoreCase("hi")) {
-            items.add(new PdfItem("डबल मास्किंग", "https://swasthyasampark.intelehealth.org/IEC/Double_masking-Hindi.pdf"));
-            items.add(new PdfItem("COVID19 के बाद देखभाल", "https://swasthyasampark.intelehealth.org/IEC/Post_COVID19_care-Hindi.pdf"));
-            items.add(new PdfItem("स्वास्थ्यकर्मियों के लिए मानसिक स्वास्थ्य", "https://swasthyasampark.intelehealth.org/IEC/Mental_Health_for_Healthworkers_Hindi .pdf"));
-            items.add(new PdfItem("स्तनपान और COVID19", "https://swasthyasampark.intelehealth.org/IEC/Breastfeeding_and_COVID19-Hindi.pdf"));
+            items.add(new PdfItem("डबल मास्किंग", "https://swasthyasampark.intelehealth.org/IEC/Double_masking-Hindi.pdf", R.drawable.ic_double_masking));
+            items.add(new PdfItem("COVID19 के बाद देखभाल", "https://swasthyasampark.intelehealth.org/IEC/Post_COVID19_care-Hindi.pdf", R.drawable.hindi_covide_after_care));
+            items.add(new PdfItem("स्वास्थ्यकर्मियों के लिए मानसिक स्वास्थ्य", "https://swasthyasampark.intelehealth.org/IEC/Mental_Health_for_Healthworkers_Hindi .pdf", R.drawable.hindi_mental_health_chw));
+            items.add(new PdfItem("स्तनपान और COVID19", "https://swasthyasampark.intelehealth.org/IEC/Breastfeeding_and_COVID19-Hindi.pdf", R.drawable.hindi_breastfeeding_covid));
         } else {
-            items.add(new PdfItem("Double up Protection by Double masking - Dos and Don't", "https://swasthyasampark.intelehealth.org/IEC/Double_masking_Jharkhand_2.pdf"));
-            items.add(new PdfItem("Double up Protection by Double masking - Dos and Don't", "https://swasthyasampark.intelehealth.org/IEC/Double_masking_MP.pdf"));
-            items.add(new PdfItem("How to dispose off a mask", "https://swasthyasampark.intelehealth.org/IEC/How_to_dispose_off_a_mask_MP.pdf"));
-            items.add(new PdfItem("Post COVID", "https://swasthyasampark.intelehealth.org/IEC/Post_COVID_MP.pdf"));
-            items.add(new PdfItem("Tips to Maintain Mental Health", "https://swasthyasampark.intelehealth.org/IEC/Tips_to_Maintain_Mental_Health-Jharkhand.pdf"));
-            items.add(new PdfItem("Tips to Maintain Mental Health", "https://swasthyasampark.intelehealth.org/IEC/Tips_to_Maintain_Mental_Health_MP.pdf"));
-            items.add(new PdfItem("FAQ about breastfeeding and covid", "https://swasthyasampark.intelehealth.org/IEC/faqs-breastfeeding-and-covid-19.pdf"));
+            items.add(new PdfItem("Double up Protection by Double masking - Dos and Don't", "https://swasthyasampark.intelehealth.org/IEC/Double_masking_Jharkhand_2.pdf", R.drawable.double_up_protection));
+//            items.add(new PdfItem("Double up Protection by Double masking - Dos and Don't", "https://swasthyasampark.intelehealth.org/IEC/Double_masking_MP.pdf"));
+            items.add(new PdfItem("How to dispose off a mask", "https://swasthyasampark.intelehealth.org/IEC/How_to_dispose_off_a_mask_MP.pdf", R.drawable.dispose_mask));
+            items.add(new PdfItem("Post COVID", "https://swasthyasampark.intelehealth.org/IEC/Post_COVID_MP.pdf", R.drawable.post_covid));
+            items.add(new PdfItem("Tips to Maintain Mental Health", "https://swasthyasampark.intelehealth.org/IEC/Tips_to_Maintain_Mental_Health-Jharkhand.pdf", R.drawable.tips_mental_health));
+//            items.add(new PdfItem("Tips to Maintain Mental Health", "https://swasthyasampark.intelehealth.org/IEC/Tips_to_Maintain_Mental_Health_MP.pdf"));
+            items.add(new PdfItem("FAQ about breastfeeding and covid", "https://swasthyasampark.intelehealth.org/IEC/faqs-breastfeeding-and-covid-19.pdf", R.drawable.faq_breastfeeding_covid));
         }
         return items;
     }
