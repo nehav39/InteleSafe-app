@@ -56,6 +56,7 @@ import org.intelehealth.intelesafe.database.dao.ImagesDAO;
 import org.intelehealth.intelesafe.database.dao.PatientsDAO;
 import org.intelehealth.intelesafe.models.GetDistrictRes;
 import org.intelehealth.intelesafe.models.GetOpenMRS;
+import org.intelehealth.intelesafe.models.GetPassword;
 import org.intelehealth.intelesafe.models.GetUserCallRes.UserCallRes;
 import org.intelehealth.intelesafe.models.IdentifierUUID;
 import org.intelehealth.intelesafe.models.NewUserCreationCall.NameUser;
@@ -84,6 +85,7 @@ import org.intelehealth.intelesafe.utilities.UrlModifiers;
 import org.intelehealth.intelesafe.utilities.UuidGenerator;
 import org.intelehealth.intelesafe.utilities.exception.DAOException;
 
+import java.security.SecureRandom;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -224,6 +226,7 @@ public class SignupActivity extends AppCompatActivity {
     private View frRegister, login_linearlayout;
     private Button btnSendOtp;
     private TextView txt_privacy;
+    private DatePickerDialog datePickerDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -549,6 +552,7 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
+
 /*
         mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -636,6 +640,45 @@ public class SignupActivity extends AppCompatActivity {
 //            int month = DateAndTimeUtils.getMonth(patient1.getDate_of_birth());
 //            mAge.setText(age + getString(R.string.identification_screen_text_years) + month + getString(R.string.identification_screen_text_months));
         }
+
+        mDOB.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if(!mDOB.getText().toString().isEmpty() || !mDOB.getText().toString().equals("")) {
+                    int dob_int = Integer.parseInt(mDOB.getText().toString());
+                    if (dob_int < 1) {
+                        mDOB.getText().clear();
+                        mDOB.setError("Age cannot be less than 1");
+                        mDOB.setFocusable(true);
+                        mDOB.setFocusableInTouchMode(true);
+                        mDOB.requestFocus();
+                        return;
+                    } else if (dob_int > 120) {
+                        mDOB.getText().clear();
+                        mDOB.setError("Age cannot be greater than 120");
+                        mDOB.setFocusable(true);
+                        mDOB.setFocusableInTouchMode(true);
+                        mDOB.requestFocus();
+                        return;
+                    }
+                    else {
+                        //do nothing...
+                    }
+                }
+            }
+        });
+/*
         mDOB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -704,6 +747,8 @@ public class SignupActivity extends AppCompatActivity {
                         dob.set(mDOBYear, mDOBMonth, mDOBDay);
                         String dobString = simpleDateFormat.format(dob.getTime());
 //                        mDOB.setText(dobString);
+
+                        //here...
                         birthDate = DateAndTimeUtils.getFormatedDateOfBirth(StringUtils.getValue(dobString));
                         mDOBPicker.updateDate(mDOBYear, mDOBMonth, mDOBDay);
                         dialog.dismiss();
@@ -719,6 +764,7 @@ public class SignupActivity extends AppCompatActivity {
                 mAgePicker.show();
             }
         });
+*/
 
         Button btnSave = findViewById(R.id.btnSave);
 
@@ -747,8 +793,9 @@ public class SignupActivity extends AppCompatActivity {
                 // Store values at the time of the login attempt.
               //  userName = mEmailView.getText().toString();
                 userName = mPhoneNum.getText().toString();
-                password = mPasswordView.getText().toString();
-                cPassword = mCPassword.getText().toString();
+                /*password = mPasswordView.getText().toString();
+                cPassword = mCPassword.getText().toString();*/
+                password = generatePassword(8);
 
                 boolean cancel = false;
                 View focusView = null;
@@ -804,13 +851,14 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (et_tested_positive_date.getText().toString().equals("")) {
+
+                /*if (et_tested_positive_date.getText().toString().equals("")) {
                     et_tested_positive_date.setError(getString(R.string.error_field_required));
                     mDOB.setFocusable(true);
                     mDOB.setFocusableInTouchMode(true);
                     mDOB.requestFocus();
                     return;
-                }
+                }*/
 
                 if (state_spinner.getSelectedItemPosition() == 0) {
                     state_spinner.requestFocus();
@@ -824,11 +872,11 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (block_spinner.getSelectedItemPosition() == 0) {
+                /*if (block_spinner.getSelectedItemPosition() == 0) {
                     block_spinner.requestFocus();
                     Toast.makeText(context, R.string.error_mandatory_field, Toast.LENGTH_SHORT).show();
                     return;
-                }
+                }*/
 
                 if (dob.equals("") || dob.toString().equals("")) {
                     if (dob.after(today)) {
@@ -904,8 +952,9 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }
 
+                //commented as only otp is required
                 // Check for a valid password, if the user entered one.
-                if (TextUtils.isEmpty(password)) {
+                /*if (TextUtils.isEmpty(password)) {
                     mPasswordView.setError(getString(R.string.error_field_required));
                     mPasswordView.requestFocus();
                     return;
@@ -955,7 +1004,7 @@ public class SignupActivity extends AppCompatActivity {
                     mCPassword.setError(getString(R.string.username_password_must_be_different));
                     mCPassword.requestFocus();
                     return;
-                }
+                }*/
 
                 if (TextUtils.isEmpty(mOTP.getText().toString())) {
                     mOTP.setError(getString(R.string.error_field_required));
@@ -1064,6 +1113,15 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }*/
 
+                //passes number of days to this function to calculate the actual date...
+                if(!mDOB.getText().toString().isEmpty() || !mDOB.getText().toString().equals("")) {
+                    String age = getYearFromAge(Integer.parseInt(mDOB.getText().toString()));
+                    birthDate = DateAndTimeUtils.getFormatedDateOfBirth(StringUtils.getValue(age));
+                    Log.v("age", "birthdate: "+birthDate);
+                }
+                else {
+                    //do nothing close the dialog...
+                }
 
                 ///////////Data Model for step 1
                 UserCreationData userCreationData = new UserCreationData();
@@ -1108,11 +1166,12 @@ public class SignupActivity extends AppCompatActivity {
 
                 UserBirthAttribute userBirthHosAttribute = new UserBirthAttribute();
                 userBirthHosAttribute.setAttributeType("1c718819-345c-4368-aad6-d69b4c267db7"); //openmrsuuid education
-                userBirthHosAttribute.setValue("" + block_spinner.getSelectedItem().toString()); //hospital name text
+                userBirthHosAttribute.setValue("" + (block_spinner.getSelectedItem().toString().equalsIgnoreCase("Select") ?"" :block_spinner.getSelectedItem().toString())); //hospital name text
 
                 UserBirthAttribute userCasteAttribute = new UserBirthAttribute();
                 userCasteAttribute.setAttributeType("5a889d96-0c84-4a04-88dc-59a6e37db2d3"); // This is for Designation. openrms caste...
-                userCasteAttribute.setValue("" + selectedPersonalCaste);
+//                userCasteAttribute.setValue("" + selectedPersonalCaste);
+                userCasteAttribute.setValue("patient_app");
 
 
                 List<UserBirthAttribute> userAttributeList = new ArrayList<>();
@@ -1238,6 +1297,7 @@ public class SignupActivity extends AppCompatActivity {
         city_spinner.setEnabled(false);
         block_spinner = findViewById(R.id.block_spinner);
         block_spinner.setEnabled(false);
+
         state_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -1245,17 +1305,61 @@ public class SignupActivity extends AppCompatActivity {
                     city_spinner.setEnabled(true);
                     block_spinner.setEnabled(true);
 
-                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(SignupActivity.this, position == 1 ? R.array.jh_city_values : R.array.mp_city_values, android.R.layout.simple_spinner_item);
+                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource
+                            (SignupActivity.this, position == 1 ? R.array.jh_city_values :
+                                    R.array.mp_city_values, android.R.layout.simple_spinner_item);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     city_spinner.setAdapter(adapter);
                     state = state_spinner.getSelectedItem().toString();
 
-                    ArrayAdapter<CharSequence> blockAdapter = ArrayAdapter.createFromResource(SignupActivity.this, position == 1 ? R.array.jh_block_values : R.array.mp_block_values, android.R.layout.simple_spinner_item);
+                   /* ArrayAdapter<CharSequence> blockAdapter = ArrayAdapter.createFromResource
+                            (SignupActivity.this, position == 1 ? R.array.jh_block_values : R.array.mp_block_values,
+                                    android.R.layout.simple_spinner_item);
                     blockAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    block_spinner.setAdapter(blockAdapter);
+                    block_spinner.setAdapter(blockAdapter);*/
                 } else {
                     city_spinner.setEnabled(false);
+                   // block_spinner.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        city_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position > 0) {
+                    block_spinner.setEnabled(true);
+
+                    int array = 0;
+                    switch (position) {
+                        case 1:
+                            array = R.array.rn_block_values;
+                            break;
+                        case 2:
+                            array = R.array.es_block_values;
+                            break;
+                        case 3:
+                            array = R.array.bo_block_values;
+                            break;
+                        case 4:
+                            array = R.array.dh_block_values;
+                            break;
+                        default:
+                            array = R.array.default_block_values;
+                    }
+                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource
+                            (SignupActivity.this, array,
+                                    android.R.layout.simple_spinner_item);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    block_spinner.setAdapter(adapter);
+                } else {
                     block_spinner.setEnabled(false);
+                    // block_spinner.setEnabled(false);
                 }
             }
 
@@ -1304,7 +1408,9 @@ public class SignupActivity extends AppCompatActivity {
                             input.requestFocus();
                         } else {
                             Calendar instance = Calendar.getInstance();
-                            new DatePickerDialog(SignupActivity.this, android.R.style.Theme_Holo_Light_Dialog_NoActionBar, new DatePickerDialog.OnDateSetListener() {
+                            datePickerDialog = new DatePickerDialog(SignupActivity.this,
+                                    android.R.style.Theme_Holo_Light_Dialog_NoActionBar,
+                                    new DatePickerDialog.OnDateSetListener() {
                                 @Override
                                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                                     et_tested_positive_date.setError(null);
@@ -1315,7 +1421,10 @@ public class SignupActivity extends AppCompatActivity {
                                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMMM yyyy", Locale.ENGLISH);
                                     et_tested_positive_date.setText(simpleDateFormat.format(date));
                                 }
-                            }, instance.get(Calendar.YEAR), instance.get(Calendar.MONTH), instance.get(Calendar.DAY_OF_MONTH)).show();
+                            }, instance.get(Calendar.YEAR), instance.get(Calendar.MONTH), instance.get(Calendar.DAY_OF_MONTH));
+                            datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                            //This will set the maxDate to Today only...
+                            datePickerDialog.show();
                         }
                     }
                 });
@@ -1363,6 +1472,51 @@ public class SignupActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private String generatePassword(int length) {
+//        char[] SYMBOLS = "-/.^&*_!@%=+>)".toCharArray();
+        char[] LOWERCASE = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+        char[] UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
+        char[] NUMBERS = "0123456789".toCharArray();
+        char[] ALL_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".toCharArray();
+        Random rand = new SecureRandom();
+
+        char[] password = new char[length];
+        //get the requirements out of the way
+        password[0] = LOWERCASE[rand.nextInt(LOWERCASE.length)];
+        password[1] = UPPERCASE[rand.nextInt(UPPERCASE.length)];
+        password[2] = NUMBERS[rand.nextInt(NUMBERS.length)];
+//        password[3] = SYMBOLS[rand.nextInt(SYMBOLS.length)];
+
+        //populate rest of the password with random chars
+        for (int i = 3; i < length; i++) {
+            password[i] = ALL_CHARS[rand.nextInt(ALL_CHARS.length)];
+        }
+
+        //shuffle it up
+        for (int i = 0; i < password.length; i++) {
+            int randomPosition = rand.nextInt(password.length);
+            char temp = password[i];
+            password[i] = password[randomPosition];
+            password[randomPosition] = temp;
+        }
+        return new String(password);
+    }
+
+    private String getYearFromAge(int dateString) {
+        String date = "";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMMM yyyy",
+                Locale.ENGLISH);
+
+        //number of days before date...
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.YEAR, -dateString);
+        date = simpleDateFormat.format(calendar.getTime());
+        Log.v("time", "todays date: " + date);
+        //number of days calculation...
+
+        return date;
     }
 
     boolean isUSerExistsAlready = false;
@@ -2047,7 +2201,7 @@ public class SignupActivity extends AppCompatActivity {
                         progress.dismiss();
                         if (res != null) {
 
-                            Log.e("OpenMRS-ID =", "Generated Successfully");
+                            /*Log.e("OpenMRS-ID =", "Generated Successfully");
                             onPatientCreateClicked(personUUID);
                             sessionManager.setFirstTimeLaunch(false);
                             Intent intent = new Intent(SignupActivity.this, HomeActivity.class);
@@ -2066,7 +2220,8 @@ public class SignupActivity extends AppCompatActivity {
                             sessionManager.setTriggerNoti("no");
                             startActivity(intent);
 
-                            finish();
+                            finish();*/
+                            createUserMapping(userName, password);
 
                         } else {
                             Toast.makeText(context, getString(R.string.something_went_wrong), Toast.LENGTH_LONG).show();
@@ -2153,4 +2308,54 @@ public class SignupActivity extends AppCompatActivity {
         return date;
     }
 
+
+    private void createUserMapping(String enteredUserName, String password) {
+        progress.show();
+        UrlModifiers urlModifiers = new UrlModifiers();
+        String urlString = urlModifiers.getUserMapping(BuildConfig.CLEAN_URL);
+        String encoded = base64Utils.encoded("admin", "Admin123");
+        GetPassword getPassword = new GetPassword();
+        getPassword.username = enteredUserName;
+        getPassword.password = password;
+        Observable<GetPassword> userGetResponse = AppConstants.apiInterface.getUserMapping(urlString, "Basic " + encoded, getPassword);
+        userGetResponse.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<GetPassword>() {
+                    @Override
+                    public void onNext(GetPassword response) {
+                        progress.dismiss();
+//                        UserLoginTask(enteredUserName, response.password);
+
+                        Log.e("OpenMRS-ID =", "Generated Successfully");
+                        onPatientCreateClicked(personUUID);
+                        sessionManager.setFirstTimeLaunch(false);
+                        Intent intent = new Intent(SignupActivity.this, HomeActivity.class);
+                        intent.putExtra("setup", true);
+                        intent.putExtra("from", "setup");
+                        intent.putExtra("login", true);
+                        intent.putExtra("username", userName);
+                        intent.putExtra("password", password);
+//                            intent.putExtra("name", "" + mFirstName.getText().toString() + " " + mLastName.getText().toString());
+//                            intent.putExtra("patientUUID", "" + personUUID);
+
+                        sessionManager.setPersionUUID(personUUID);
+                        sessionManager.setUserName("" + mFirstName.getText().toString() + " " + mLastName.getText().toString());
+                        sessionManager.setUseFirstName("" + mFirstName.getText().toString()); // added by venu N on 07/04/2020.
+                        sessionManager.setPrivacyValue(privacy_value);
+                        sessionManager.setTriggerNoti("no");
+                        startActivity(intent);
+
+                        finish();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        progress.dismiss();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
 }

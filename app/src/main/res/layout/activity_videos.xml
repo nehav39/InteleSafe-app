@@ -6,23 +6,70 @@
     android:layout_height="match_parent"
     tools:context=".activities.videosActivity.VideosActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_bold"
+                android:text="@string/recovering_covid_new"
+                android:textColor="@color/txt_sub_header_color"
+                android:textSize="14sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewVideos"
+                android:padding="4dp"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_bold"
+                android:layout_marginTop="5dp"
+                android:text="@string/info_about_covid"
+                android:textColor="@color/txt_sub_header_color"
+                android:textSize="14sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewPDF"
+                android:padding="4dp"
+                android:layout_marginTop="5dp"
+                android:nestedScrollingEnabled="false"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </ScrollView>
 
     <LinearLayout
         android:id="@+id/cardview_two_action_View"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/sub_header_view"
-        android:orientation="horizontal"
+        android:visibility="gone"
         android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp">
+        android:layout_marginRight="5dp"
+        android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardview_button_home_quarantine"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginVertical="10dp"
             android:layout_marginHorizontal="5dp"
+            android:layout_marginVertical="10dp"
+            android:layout_weight="1"
             app:cardCornerRadius="10dp"
             app:cardElevation="8dp"
             app:cardPreventCornerOverlap="false">
@@ -37,7 +84,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:src="@drawable/ic_covid_video"/>
+                    android:src="@drawable/ic_covid_video" />
 
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
@@ -46,8 +93,8 @@
             android:id="@+id/cardview_button_educational_videos"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp"
             android:layout_marginHorizontal="5dp"
+            android:layout_marginVertical="10dp"
             android:layout_weight="1"
             app:cardCornerRadius="10dp"
             app:cardElevation="8dp"
@@ -62,8 +109,8 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_education"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/ic_education" />
 
             </RelativeLayout>
 
@@ -77,6 +124,7 @@
         android:id="@+id/sub_header_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="10dp"
@@ -90,9 +138,9 @@
             android:layout_weight="1"
             android:fontFamily="@font/lato_bold"
             android:gravity="center"
-            android:textAlignment="center"
             android:includeFontPadding="false"
             android:text="@string/recovering_covid_new"
+            android:textAlignment="center"
             android:textColor="@color/txt_sub_header_color"
             android:textSize="13sp" />
 
@@ -105,8 +153,8 @@
             android:fontFamily="@font/lato_bold"
             android:gravity="center"
             android:includeFontPadding="false"
-            android:textAlignment="center"
             android:text="@string/info_about_covid"
+            android:textAlignment="center"
             android:textColor="@color/txt_sub_header_color"
             android:textSize="13sp" />
 

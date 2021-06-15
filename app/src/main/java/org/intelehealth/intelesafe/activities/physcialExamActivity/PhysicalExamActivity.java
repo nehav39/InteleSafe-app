@@ -8,19 +8,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.crashlytics.FirebaseCrashlytics;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.core.content.ContextCompat;
-import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,9 +16,38 @@ import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
+import com.google.gson.Gson;
 
+import org.intelehealth.intelesafe.R;
+import org.intelehealth.intelesafe.activities.visitSummaryActivity.VisitSummaryActivity;
+import org.intelehealth.intelesafe.app.AppConstants;
+import org.intelehealth.intelesafe.database.dao.EncounterDAO;
+import org.intelehealth.intelesafe.database.dao.ImagesDAO;
+import org.intelehealth.intelesafe.database.dao.ObsDAO;
+import org.intelehealth.intelesafe.database.dao.VisitsDAO;
+import org.intelehealth.intelesafe.knowledgeEngine.Node;
+import org.intelehealth.intelesafe.knowledgeEngine.PhysicalExam;
+import org.intelehealth.intelesafe.models.dto.EncounterDTO;
+import org.intelehealth.intelesafe.models.dto.ObsDTO;
+import org.intelehealth.intelesafe.utilities.FileUtils;
+import org.intelehealth.intelesafe.utilities.SessionManager;
+import org.intelehealth.intelesafe.utilities.StringUtils;
+import org.intelehealth.intelesafe.utilities.UuidDictionary;
+import org.intelehealth.intelesafe.utilities.exception.DAOException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -43,23 +59,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-
-import org.intelehealth.intelesafe.R;
-import org.intelehealth.intelesafe.activities.visitSummaryActivity.VisitSummaryActivity;
-import org.intelehealth.intelesafe.app.AppConstants;
-import org.intelehealth.intelesafe.database.dao.EncounterDAO;
-import org.intelehealth.intelesafe.database.dao.ImagesDAO;
-import org.intelehealth.intelesafe.database.dao.ObsDAO;
-import org.intelehealth.intelesafe.knowledgeEngine.Node;
-import org.intelehealth.intelesafe.knowledgeEngine.PhysicalExam;
-import org.intelehealth.intelesafe.models.dto.EncounterDTO;
-import org.intelehealth.intelesafe.models.dto.ObsDTO;
-import org.intelehealth.intelesafe.utilities.FileUtils;
-import org.intelehealth.intelesafe.utilities.SessionManager;
-import org.intelehealth.intelesafe.utilities.UuidDictionary;
-
-import org.intelehealth.intelesafe.utilities.StringUtils;
-import org.intelehealth.intelesafe.utilities.exception.DAOException;
 
 public class PhysicalExamActivity extends AppCompatActivity {
     final static String TAG = PhysicalExamActivity.class.getSimpleName();
@@ -123,9 +122,11 @@ public class PhysicalExamActivity extends AppCompatActivity {
         Intent intent = this.getIntent(); // The intent was passed to the activity
         if (intent != null) {
             patientUuid = intent.getStringExtra("patientUuid");
+            // Visit is pre created before coming to this screen so need to clear if user will not submit and going back from the screen
             visitUuid = intent.getStringExtra("visitUuid");
             encounterVitals = intent.getStringExtra("encounterUuidVitals");
             encounterAdultIntials = intent.getStringExtra("encounterUuidAdultIntial");
+
             state = intent.getStringExtra("state");
             patientName = intent.getStringExtra("name");
             intentTag = intent.getStringExtra("tag");
@@ -224,10 +225,10 @@ public class PhysicalExamActivity extends AppCompatActivity {
 
         // Modified by venu N on 02/04/2020.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-           // tabLayout.setSelectedTabIndicatorColor(getColor(R.color.amber));
+            // tabLayout.setSelectedTabIndicatorColor(getColor(R.color.amber));
             tabLayout.setTabTextColors(getColor(R.color.txt_sub_header_color), getColor(R.color.white));
         } else {
-           // tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.amber));
+            // tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.amber));
             tabLayout.setTabTextColors(getResources().getColor(R.color.txt_sub_header_color), getResources().getColor(R.color.white));
         }
         if (tabLayout != null) {
@@ -236,12 +237,11 @@ public class PhysicalExamActivity extends AppCompatActivity {
         }
 
 
-
         FloatingActionButton fab = findViewById(R.id.fab);
         // added by Venu N on 02/04/2020.
-        if(mViewPager.getCurrentItem() == mViewPager.getAdapter().getCount()-1){
+        if (mViewPager.getCurrentItem() == mViewPager.getAdapter().getCount() - 1) {
             fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_done_24dp));
-        }else{
+        } else {
             fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.svg_right_arrow));
         }
         assert fab != null;
@@ -251,25 +251,25 @@ public class PhysicalExamActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 //returns true if all Mandatory questions have been answered...
-                complaintConfirmed = physicalExamMap.areRequiredAnswered();
+                //complaintConfirmed = physicalExamMap.areRequiredAnswered();
+                complaintConfirmed = physicalExamMap.areRequiredAnsweredForGivenNodes(new int[]{1,2});
 
                 if (complaintConfirmed) {
 
                     /*
-                    * Here, checks if the currentview is not the last view of the viewpager
-                    * than it sets the current view to the next view and so user will be sent to
-                    * the question that is not mandatory as well...If the user than reaches
-                    * to the last question and complaintconfirmed is True that means all
-                    * required questions are answered then in that case the
-                    * currentItem (2) is < getcount()-1 (2) this becomes FALSE
-                    * and so the else loop is executed...*/
-                    
-                    if(mViewPager.getCurrentItem() < mViewPager.getAdapter().getCount()-1){
+                     * Here, checks if the currentview is not the last view of the viewpager
+                     * than it sets the current view to the next view and so user will be sent to
+                     * the question that is not mandatory as well...If the user than reaches
+                     * to the last question and complaintconfirmed is True that means all
+                     * required questions are answered then in that case the
+                     * currentItem (2) is < getcount()-1 (2) this becomes FALSE
+                     * and so the else loop is executed...*/
+
+                    if (mViewPager.getCurrentItem() < mViewPager.getAdapter().getCount() - 1) {
                         fab.setImageDrawable(ContextCompat.getDrawable
                                 (PhysicalExamActivity.this, R.drawable.svg_right_arrow));
-                        mViewPager.setCurrentItem(mViewPager.getCurrentItem()+1);
-                    }
-                    else {
+                        mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
+                    } else {
 
                         physicalString = physicalExamMap.generateFindings();
 
@@ -282,6 +282,7 @@ public class PhysicalExamActivity extends AppCompatActivity {
                         }
 
                         if (intentTag != null && intentTag.equals("edit")) {
+
                             updateDatabase(physicalString);
                             Intent intent = new Intent(PhysicalExamActivity.this, VisitSummaryActivity.class);
                             intent.putExtra("patientUuid", patientUuid);
@@ -292,7 +293,7 @@ public class PhysicalExamActivity extends AppCompatActivity {
                             intent.putExtra("name", patientName);
                             intent.putExtra("tag", intentTag);
                             intent.putExtra("hasPrescription", "false");
-
+                            intent.putExtra("self", true);
                             for (String exams : selectedExamsList) {
                                 Log.i(TAG, "onClick:++ " + exams);
                             }
@@ -309,6 +310,7 @@ public class PhysicalExamActivity extends AppCompatActivity {
                             intent1.putExtra("name", patientName);
                             intent1.putExtra("tag", intentTag);
                             intent1.putExtra("hasPrescription", "false");
+                            intent1.putExtra("self", true);
                             // intent1.putStringArrayListExtra("exams", selectedExamsList);
                             startActivity(intent1);
                         }
@@ -316,13 +318,12 @@ public class PhysicalExamActivity extends AppCompatActivity {
 
                 } else {
                     // added by venu N 0n 02/04/2020.
-                    if(mViewPager.getCurrentItem() == mViewPager.getAdapter().getCount()-1){
+                    if (mViewPager.getCurrentItem() == mViewPager.getAdapter().getCount() - 1) {
                         questionsMissing();
-                    }else if(mViewPager.getCurrentItem() < mViewPager.getAdapter().getCount()-1){
+                    } else if (mViewPager.getCurrentItem() < mViewPager.getAdapter().getCount() - 1) {
                         fab.setImageDrawable(ContextCompat.getDrawable(PhysicalExamActivity.this, R.drawable.svg_right_arrow));
-                        mViewPager.setCurrentItem(mViewPager.getCurrentItem()+1);
-                    }
-                    else{
+                        mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
+                    } else {
                         fab.setImageDrawable(ContextCompat.getDrawable(PhysicalExamActivity.this, R.drawable.ic_done_24dp));
                     }
 
@@ -336,7 +337,25 @@ public class PhysicalExamActivity extends AppCompatActivity {
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                try {
+                    // remove the visit
+                    VisitsDAO visitsDAO = new VisitsDAO();
+                    visitsDAO.deleteByVisitUUID(visitUuid);
+                    // remove the visit obs i.e. observation
+                    // Obs is creating during the final FAB button submit but i am removing here for
+                    // anything went wrong during submit and data inserted to that obs table
+                    // so it will also clear on back from this screen
+                    ObsDAO obsDAO = new ObsDAO();
+                    obsDAO.deleteByEncounterUud(encounterAdultIntials);
+                    // remove the Encounter
+                    EncounterDAO encounterDAO = new EncounterDAO();
+                    encounterDAO.deleteByVisitUUID(visitUuid);
+
+                    finish();
+                } catch (DAOException e) {
+                    e.printStackTrace();
+                    Toast.makeText(PhysicalExamActivity.this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -348,9 +367,9 @@ public class PhysicalExamActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int i) {
-                if(i == mViewPager.getAdapter().getCount()-1){
+                if (i == mViewPager.getAdapter().getCount() - 1) {
                     fab.setImageDrawable(ContextCompat.getDrawable(PhysicalExamActivity.this, R.drawable.ic_done_24dp));
-                }else{
+                } else {
                     fab.setImageDrawable(ContextCompat.getDrawable(PhysicalExamActivity.this, R.drawable.svg_right_arrow));
                 }
             }
@@ -440,8 +459,8 @@ public class PhysicalExamActivity extends AppCompatActivity {
 
     public void questionsMissing() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setMessage(R.string.question_answer_all_phy_exam);
-        alertDialogBuilder.setNeutralButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
+        alertDialogBuilder.setMessage(R.string.please_give_your_answer);
+        alertDialogBuilder.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -569,12 +588,31 @@ public class PhysicalExamActivity extends AppCompatActivity {
                 @Override
                 public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                     Node question = viewNode.getOption(groupPosition).getOption(childPosition);
-                    //Log.d("Clicked", question.language());
+
                     question.toggleSelected();
                     if (viewNode.getOption(groupPosition).anySubSelected()) {
                         viewNode.getOption(groupPosition).setSelected();
                     } else {
                         viewNode.getOption(groupPosition).setUnselected();
+                    }
+                    Node rootNode = viewNode.getOption(groupPosition);
+                    if(rootNode.isMultiChoice() && !question.isExcludedFromMultiChoice()){
+                        for (int i = 0; i < rootNode.getOptionsList().size(); i++) {
+                            Node childNode = rootNode.getOptionsList().get(i);
+                            if (childNode.isSelected() && childNode.isExcludedFromMultiChoice()) {
+                                viewNode.getOption(groupPosition).getOptionsList().get(i).setUnselected();
+
+                            }
+                        }
+                    }
+                    Log.v(TAG, "rootNode - "+new Gson().toJson(rootNode));
+                    if (!rootNode.isMultiChoice() || (rootNode.isMultiChoice() && question.isExcludedFromMultiChoice() && question.isSelected())) {
+                        for (int i = 0; i < rootNode.getOptionsList().size(); i++) {
+                            Node childNode = rootNode.getOptionsList().get(i);
+                            if (!childNode.getId().equals(question.getId())) {
+                                viewNode.getOption(groupPosition).getOptionsList().get(i).setUnselected();
+                            }
+                        }
                     }
                     adapter.notifyDataSetChanged();
 
@@ -596,7 +634,7 @@ public class PhysicalExamActivity extends AppCompatActivity {
                     }
 
                     if (!question.isTerminal() && question.isSelected()) {
-                        Node.subLevelQuestion(question, (Activity) getContext(), adapter, filePath.toString(), imageName);
+                        Node.subLevelQuestion(viewNode.getOption(groupPosition), question, (Activity) getContext(), adapter, filePath.toString(), imageName);
                     }
 
                     return false;

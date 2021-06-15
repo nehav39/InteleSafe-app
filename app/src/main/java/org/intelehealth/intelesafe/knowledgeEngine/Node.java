@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import androidx.appcompat.app.AlertDialog;
+import android.graphics.drawable.Drawable;
 import android.text.InputType;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -20,15 +20,25 @@ import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
-
+import org.intelehealth.intelesafe.R;
+import org.intelehealth.intelesafe.activities.cameraActivity.CameraActivity;
+import org.intelehealth.intelesafe.activities.complaintNodeActivity.CustomArrayAdapter;
+import org.intelehealth.intelesafe.activities.physcialExamActivity.CustomExpandableListAdapter;
+import org.intelehealth.intelesafe.app.IntelehealthApplication;
+import org.intelehealth.intelesafe.utilities.SessionManager;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,20 +55,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
-import org.intelehealth.intelesafe.R;
-import org.intelehealth.intelesafe.app.IntelehealthApplication;
-import org.intelehealth.intelesafe.utilities.SessionManager;
-
-import org.intelehealth.intelesafe.activities.cameraActivity.CameraActivity;
-import org.intelehealth.intelesafe.activities.complaintNodeActivity.CustomArrayAdapter;
-import org.intelehealth.intelesafe.activities.physcialExamActivity.CustomExpandableListAdapter;
-
 /**
  * Created by Amal Afroz Alam on 21, April, 2016.
  * Contact me: contact@amal.io
  */
 public class Node implements Serializable {
 
+    private boolean isMultiChoice = false;
+    private boolean isExcludedFromMultiChoice = false; //exclude-from-multi-choice
     private String id;
     private String text;
     private String display;
@@ -134,8 +138,10 @@ public class Node implements Serializable {
     public Node(JSONObject jsonNode) {
         try {
             //this.id = jsonNode.getString("id");
-
+            this.id = jsonNode.optString("id");
             this.text = jsonNode.getString("text");
+            this.isMultiChoice = jsonNode.optBoolean("multi-choice");
+            this.isExcludedFromMultiChoice = jsonNode.optBoolean("exclude-from-multi-choice");
 
             JSONArray optionsArray = jsonNode.optJSONArray("options");
             if (optionsArray == null) {
@@ -231,7 +237,8 @@ public class Node implements Serializable {
      * @param source source knowledgeEngine to copy into a new knowledgeEngine. Will always default as unselected.
      */
     public Node(Node source) {
-        //this.id = source.id;
+        this.id = source.id;
+        this.isMultiChoice = source.isMultiChoice;
         this.text = source.text;
         this.display = source.display;
         this.display_oriya = source.display_oriya;
@@ -258,13 +265,14 @@ public class Node implements Serializable {
         this.negativeCondition = source.negativeCondition;
     }
 
-    public static void subLevelQuestion(final Node node, final Activity context, final CustomExpandableListAdapter callingAdapter,
+    public static void subLevelQuestion(final Node parentNode, final Node node, final Activity context, final CustomExpandableListAdapter callingAdapter,
                                         final String imagePath, final String imageName) {
 
         node.setSelected();
         List<Node> mNodes = node.getOptionsList();
         final CustomArrayAdapter adapter = new CustomArrayAdapter(context, R.layout.list_item_subquestion, mNodes);
         final AlertDialog.Builder subQuestion = new AlertDialog.Builder(context);
+        subQuestion.setCancelable(false);
 
         final LayoutInflater inflater = context.getLayoutInflater();
         View convertView = inflater.inflate(R.layout.dialog_subquestion, null);
@@ -296,7 +304,7 @@ public class Node implements Serializable {
                 }
 
                 if (!node.getOption(position).isTerminal()) {
-                    subLevelQuestion(node.getOption(position), context, callingAdapter, imagePath, imageName);
+                    subLevelQuestion(node, node.getOption(position), context, callingAdapter, imagePath, imageName);
                 }
             }
         });
@@ -305,12 +313,24 @@ public class Node implements Serializable {
         subQuestion.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
-                node.setText(node.generateLanguage());
-                callingAdapter.notifyDataSetChanged();
-                dialog.dismiss();
-                if (node.anySubSelected() && node.anySubPopUp()) {
-                    node.generatePopUp(context);
+                String generatedLang = node.generateLanguage();
+                Log.v(TAG, "generateLanguage - " + generatedLang);
+                if (generatedLang != null) {
+                    node.setText(generatedLang);
+                    callingAdapter.notifyDataSetChanged();
+                    dialog.dismiss();
+                    if (node.anySubSelected() && node.anySubPopUp()) {
+                        node.generatePopUp(context);
+                    }
+                } else {
+                    parentNode.setUnselected();
+                    node.subSelected = false;
+                    node.setUnselected();
+                    for (int i = 0; i < node.getOptionsList().size(); i++) {
+                        node.getOption(i).setUnselected();
+                    }
+                    callingAdapter.notifyDataSetChanged();
+                    Toast.makeText(context, context.getString(R.string.please_select_any_option), Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -402,7 +422,7 @@ public class Node implements Serializable {
                 }
 
             }
-                //Hindi Support end...
+            //Hindi Support end...
 
             case "cb": {
                 //Log.i(TAG, "findDisplay: cb");
@@ -570,10 +590,37 @@ public class Node implements Serializable {
         textInput.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                String val = dialogEditText.getText().toString();
+                if (val.isEmpty()) {
+                    dialogEditText.setText("");
+                    Toast.makeText(context, context.getString(R.string.please_enter_value_for) + " " + node.getText(), Toast.LENGTH_LONG).show();
+                    node.setUnselected();
+                    adapter.notifyDataSetChanged();
+                    return;
+                }
+                double valDouble = Double.parseDouble(val);
+                if (node.getId().trim().equalsIgnoreCase("ID_1409441302")) {
+                    if (valDouble < 85 || valDouble > 108) {
+                        dialogEditText.setText("");
+                        Toast.makeText(context, context.getString(R.string.validation_text_for_temp) + " " + node.getText(), Toast.LENGTH_LONG).show();
+                        node.setUnselected();
+                        adapter.notifyDataSetChanged();
+                        return;
+                    }
+                } else if (node.getId().trim().equalsIgnoreCase("ID_1562764420")) {
+                    if (valDouble > 100) {
+                        dialogEditText.setText("");
+                        Toast.makeText(context, context.getString(R.string.spo2_number_validation_text) + " " + node.getText(), Toast.LENGTH_LONG).show();
+                        node.setUnselected();
+                        adapter.notifyDataSetChanged();
+                        return;
+                    }
+                }
+                Log.v(TAG, node.getLanguage());
                 if (node.getLanguage().contains("_")) {
                     node.setLanguage(node.getLanguage().replace("_", dialogEditText.getText().toString()));
                 } else {
-                    node.addLanguage(dialogEditText.getText().toString());
+                    node.addLanguage(node.getLanguage().split(":")[0] + ":" + dialogEditText.getText().toString());
                     //knowledgeEngine.setText(knowledgeEngine.getLanguage());
                 }
                 node.setSelected();
@@ -584,6 +631,8 @@ public class Node implements Serializable {
         textInput.setNegativeButton(R.string.generic_cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                node.setUnselected();
+                adapter.notifyDataSetChanged();
                 dialog.cancel();
             }
         });
@@ -825,11 +874,39 @@ public class Node implements Serializable {
             public void onClick(DialogInterface dialog, int which) {
 //                numberPicker.setValue(numberPicker.getValue());
 //                String value = String.valueOf(numberPicker.getValue());
+
                 String value = etEnterValue.getText().toString();
+                if (value.isEmpty()) {
+                    etEnterValue.setText("");
+                    Toast.makeText(context, context.getString(R.string.please_enter_value_for) + " " + node.getText(), Toast.LENGTH_LONG).show();
+                    node.setUnselected();
+                    adapter.notifyDataSetChanged();
+                    return;
+                }
+                double valDouble = Double.parseDouble(value);
+                if (node.getId().trim().equalsIgnoreCase("ID_350715851")) {
+                    if (valDouble > 60) {
+                        etEnterValue.setText("");
+                        Toast.makeText(context, context.getString(R.string.respiratory_number_validation_text) + " " + node.getText(), Toast.LENGTH_LONG).show();
+                        node.setUnselected();
+                        adapter.notifyDataSetChanged();
+                        return;
+                    }
+                } else if (node.getId().trim().equalsIgnoreCase("ID_1961691483")) {
+                    if (valDouble > 200) {
+                        etEnterValue.setText("");
+                        Toast.makeText(context, context.getString(R.string.pulse_number_validation_text) + " " + node.getText(), Toast.LENGTH_LONG).show();
+                        node.setUnselected();
+                        adapter.notifyDataSetChanged();
+                        return;
+                    }
+                }
+
+
                 if (node.getLanguage().contains("_")) {
                     node.setLanguage(node.getLanguage().replace("_", value));
                 } else {
-                    node.addLanguage(" " + value);
+                    node.addLanguage(node.getLanguage().split(":")[0] + ":" + value);
                     node.setText(value);
                     //knowledgeEngine.setText(knowledgeEngine.getLanguage());
                 }
@@ -843,7 +920,8 @@ public class Node implements Serializable {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-
+                node.setUnselected();
+                adapter.notifyDataSetChanged();
             }
         });
         numberDialog.show();
@@ -1119,7 +1197,7 @@ public class Node implements Serializable {
         View convertView = inflater.inflate(R.layout.dialog_1_number_picker, null);
         numberDialog.setView(convertView);
         EditText etEnterValue = convertView.findViewById(R.id.et_enter_value);
-       // final NumberPicker numberPicker = convertView.findViewById(R.id.dialog_1_number_picker);
+        // final NumberPicker numberPicker = convertView.findViewById(R.id.dialog_1_number_picker);
 //        numberPicker.setMinValue(0);
 //        numberPicker.setMaxValue(1000);
         numberDialog.setPositiveButton(R.string.generic_ok, new DialogInterface.OnClickListener() {
@@ -1522,15 +1600,15 @@ public class Node implements Serializable {
                         .load(new File(imagePath))
                         .skipMemoryCache(true)
                         .diskCacheStrategy(DiskCacheStrategy.NONE)
-                        .listener(new RequestListener<File, GlideDrawable>() {
+                        .listener(new RequestListener<Drawable>() {
                             @Override
-                            public boolean onException(Exception e, File file, Target<GlideDrawable> target, boolean b) {
+                            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                                 progressBar.setVisibility(View.GONE);
                                 return false;
                             }
 
                             @Override
-                            public boolean onResourceReady(GlideDrawable glideDrawable, File file, Target<GlideDrawable> target, boolean b, boolean b1) {
+                            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                                 progressBar.setVisibility(View.GONE);
                                 return false;
                             }
@@ -1890,5 +1968,20 @@ public class Node implements Serializable {
     }
 
 
+    public boolean isMultiChoice() {
+        return isMultiChoice;
+    }
+
+    public void setMultiChoice(boolean multiChoice) {
+        isMultiChoice = multiChoice;
+    }
+
+    public boolean isExcludedFromMultiChoice() {
+        return isExcludedFromMultiChoice;
+    }
+
+    public void setExcludedFromMultiChoice(boolean excludedFromMultiChoice) {
+        isExcludedFromMultiChoice = excludedFromMultiChoice;
+    }
 }
 

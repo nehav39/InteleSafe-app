@@ -303,7 +303,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 //                                        phoneNumberWithCountryCode, message))));
 
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:+9173142821385"));
+                intent.setData(Uri.parse("tel:+917314821385"));
                 startActivity(intent);
 
         //    startVideoCall();

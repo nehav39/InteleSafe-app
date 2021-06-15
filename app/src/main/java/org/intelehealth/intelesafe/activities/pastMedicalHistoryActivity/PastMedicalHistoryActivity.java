@@ -277,7 +277,7 @@ public class PastMedicalHistoryActivity extends AppCompatActivity {
                 if (!clickedNode.isTerminal() && clickedNode.isSelected()) {
                     imageName = UUID.randomUUID().toString();
 
-                    Node.subLevelQuestion(clickedNode, PastMedicalHistoryActivity.this, adapter, filePath.toString(), imageName);
+                    Node.subLevelQuestion(patientHistoryMap.getOption(groupPosition), clickedNode, PastMedicalHistoryActivity.this, adapter, filePath.toString(), imageName);
                 }
 
                 return false;

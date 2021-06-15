@@ -117,7 +117,7 @@ dependencies {
 //    debugImplementation 'com.amitshekhar.android:debug-db:1.0.4'
     //image loaders
 //    implementation 'com.squareup.picasso:picasso:2.71828'
-    implementation 'com.github.bumptech.glide:glide:3.8.0'
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
     //Uncomment below line to enable multidex support for Kitkat
     implementation 'androidx.multidex:multidex:2.0.1'
     //camera view
@@ -152,6 +152,12 @@ dependencies {
     //facebook sdk
     implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
 
+    //exo player
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.14.0'
+    implementation 'com.google.android.exoplayer:exoplayer-ui:2.14.0'
+
+    //pdf
+    implementation 'es.voghdev.pdfviewpager:library:1.1.2'
 }
 apply plugin: 'com.google.gms.google-services'  // Google Play services Gradle plugin
 

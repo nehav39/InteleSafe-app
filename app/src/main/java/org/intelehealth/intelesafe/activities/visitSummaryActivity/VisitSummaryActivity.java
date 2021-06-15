@@ -21,20 +21,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
 import android.print.PrintJob;
 import android.print.PrintManager;
-import androidx.core.app.NotificationCompat;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-import androidx.core.view.MenuItemCompat;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.Toolbar;
 import android.telephony.SmsManager;
 import android.text.Html;
 import android.text.InputType;
@@ -45,7 +35,6 @@ import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,14 +51,50 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
+import androidx.core.app.NotificationCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.gson.Gson;
 
 import org.apache.commons.lang3.StringUtils;
+import org.intelehealth.intelesafe.BuildConfig;
+import org.intelehealth.intelesafe.R;
+import org.intelehealth.intelesafe.activities.additionalDocumentsActivity.AdditionalDocumentsActivity;
+import org.intelehealth.intelesafe.activities.complaintNodeActivity.ComplaintNodeActivity;
+import org.intelehealth.intelesafe.activities.familyHistoryActivity.FamilyHistoryActivity;
+import org.intelehealth.intelesafe.activities.homeActivity.HomeActivity;
 import org.intelehealth.intelesafe.activities.homeActivity.Webview;
-import org.intelehealth.intelesafe.models.ClsDoctorDetails;
+import org.intelehealth.intelesafe.activities.pastMedicalHistoryActivity.PastMedicalHistoryActivity;
+import org.intelehealth.intelesafe.activities.patientSurveyActivity.PatientSurveyActivity;
+import org.intelehealth.intelesafe.activities.physcialExamActivity.PhysicalExamActivity;
+import org.intelehealth.intelesafe.activities.vitalActivity.VitalsActivity;
+import org.intelehealth.intelesafe.app.AppConstants;
+import org.intelehealth.intelesafe.database.dao.EncounterDAO;
+import org.intelehealth.intelesafe.database.dao.ImagesDAO;
+import org.intelehealth.intelesafe.database.dao.ObsDAO;
+import org.intelehealth.intelesafe.database.dao.SyncDAO;
 import org.intelehealth.intelesafe.database.dao.VisitAttributeListDAO;
+import org.intelehealth.intelesafe.database.dao.VisitsDAO;
+import org.intelehealth.intelesafe.knowledgeEngine.Node;
+import org.intelehealth.intelesafe.models.ClsDoctorDetails;
+import org.intelehealth.intelesafe.models.Patient;
+import org.intelehealth.intelesafe.models.dto.ObsDTO;
+import org.intelehealth.intelesafe.services.DownloadService;
+import org.intelehealth.intelesafe.syncModule.SyncUtils;
+import org.intelehealth.intelesafe.utilities.DateAndTimeUtils;
+import org.intelehealth.intelesafe.utilities.FileUtils;
+import org.intelehealth.intelesafe.utilities.Logger;
+import org.intelehealth.intelesafe.utilities.NetworkConnection;
+import org.intelehealth.intelesafe.utilities.SessionManager;
+import org.intelehealth.intelesafe.utilities.UuidDictionary;
+import org.intelehealth.intelesafe.utilities.exception.DAOException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -85,35 +110,6 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
 
-import org.intelehealth.intelesafe.R;
-import org.intelehealth.intelesafe.activities.additionalDocumentsActivity.AdditionalDocumentsActivity;
-import org.intelehealth.intelesafe.activities.complaintNodeActivity.ComplaintNodeActivity;
-import org.intelehealth.intelesafe.activities.familyHistoryActivity.FamilyHistoryActivity;
-import org.intelehealth.intelesafe.activities.pastMedicalHistoryActivity.PastMedicalHistoryActivity;
-import org.intelehealth.intelesafe.activities.patientSurveyActivity.PatientSurveyActivity;
-import org.intelehealth.intelesafe.app.AppConstants;
-import org.intelehealth.intelesafe.database.dao.EncounterDAO;
-import org.intelehealth.intelesafe.database.dao.ImagesDAO;
-import org.intelehealth.intelesafe.database.dao.ObsDAO;
-import org.intelehealth.intelesafe.database.dao.SyncDAO;
-import org.intelehealth.intelesafe.database.dao.VisitsDAO;
-import org.intelehealth.intelesafe.knowledgeEngine.Node;
-import org.intelehealth.intelesafe.models.Patient;
-import org.intelehealth.intelesafe.models.dto.ObsDTO;
-import org.intelehealth.intelesafe.services.DownloadService;
-import org.intelehealth.intelesafe.syncModule.SyncUtils;
-import org.intelehealth.intelesafe.utilities.DateAndTimeUtils;
-import org.intelehealth.intelesafe.utilities.FileUtils;
-import org.intelehealth.intelesafe.utilities.Logger;
-import org.intelehealth.intelesafe.utilities.SessionManager;
-import org.intelehealth.intelesafe.utilities.UuidDictionary;
-
-import org.intelehealth.intelesafe.activities.homeActivity.HomeActivity;
-import org.intelehealth.intelesafe.activities.physcialExamActivity.PhysicalExamActivity;
-import org.intelehealth.intelesafe.activities.vitalActivity.VitalsActivity;
-import org.intelehealth.intelesafe.utilities.NetworkConnection;
-import org.intelehealth.intelesafe.utilities.exception.DAOException;
-
 /**
  * Created By: Prajwal Waingankar
  * Github: prajwalmw
@@ -123,14 +119,14 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
     private static final String TAG = VisitSummaryActivity.class.getSimpleName();
     private WebView mWebView;
     private LinearLayout mLayout;
-    TextView Help_Link_Whatsapp;
+    TextView Help_Link_Whatsapp, download_Watsapp;
     TextView tvMentalHelpRequest, prescriptionDataFormat;
     String mHeight, mWeight, mBMI, mBP, mPulse, mTemp, mSPO2, mresp;
 
     boolean uploaded = false;
     boolean downloaded = false;
 
-    Context context,context1;
+    Context context, context1;
 
     String patientUuid;
     String visitUuid;
@@ -168,7 +164,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
     ImageButton editVitals;
     ImageButton editComplaint;
-    ImageButton editPhysical;
+    ImageView editPhysical;
     ImageButton editFamHist;
     ImageButton editMedHist;
     ImageButton editAddDocs;
@@ -205,6 +201,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
     Button uploadButton;
     Button teleconsultationButton;
+    TextView download_presc_Watsapp;
     //Button downloadButton;
     ArrayList<String> physicalExams;
 
@@ -213,7 +210,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
     CardView medicalAdviceCard;
     CardView requestedTestsCard;
     CardView additionalCommentsCard;
-    CardView followUpDateCard, cardView_prescription;
+    CardView followUpDateCard, cardView_prescription, download_cardview;
 
     TextView diagnosisTextView;
     TextView prescriptionTextView;
@@ -271,8 +268,9 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
     private boolean isRespiratory = false;
 
     SyncUtils syncUtils = new SyncUtils();
+    private boolean self;
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_visit_summary, menu);
@@ -293,7 +291,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
         if (isPastVisit) menuItem.setVisible(false);
         return super.onCreateOptionsMenu(menu);
-    }
+    }*/
 
     private BroadcastReceiver broadcastReceiverForIamgeDownlaod = new BroadcastReceiver() {
         @Override
@@ -322,6 +320,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
     public void onBackPressed() {
         //do nothing
         //Use the buttons on the screen to navigate
+        if (isFromOldVisit) finish();
     }
 
     @Override
@@ -339,7 +338,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.summary_home: {
-                if (flag_upload == true || isFromOldVisit) {
+                if (flag_upload || isFromOldVisit) {
                     Intent i = new Intent(this, HomeActivity.class);
                     i.putExtra("from", "visit");
                     i.putExtra("username", "");
@@ -428,8 +427,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
     }
 
 
-
-     boolean isFromOldVisit = false;
+    boolean isFromOldVisit = false;
     TextView mental_visit_help_text;
 
 
@@ -456,6 +454,9 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
             if (selectedExams != null && !selectedExams.isEmpty()) {
                 physicalExams.addAll(selectedExams);
             }
+            self = intent.getBooleanExtra("self", false);
+
+
         }
         registerBroadcastReceiverDynamically();
         registerDownloadPrescription();
@@ -497,10 +498,11 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setTitle(getString(R.string.visit_Summary_cardview));
         mLayout = findViewById(R.id.summary_layout);
         context = getApplicationContext();
         context1 = VisitSummaryActivity.this;
-//we can remove by data binding
+        //we can remove by data binding
         mAdditionalDocsRecyclerView = findViewById(R.id.recy_additional_documents);
         mPhysicalExamsRecyclerView = findViewById(R.id.recy_physexam);
 
@@ -516,6 +518,8 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         mDoctorName.setVisibility(View.GONE);
         prescriptionDataFormat = findViewById(R.id.textView_content_prescription);
         cardView_prescription = findViewById(R.id.cardView_prescription);
+        download_cardview = findViewById(R.id.download_cardview);
+        download_presc_Watsapp = findViewById(R.id.download_presc_Watsapp);
 
         diagnosisTextView = findViewById(R.id.textView_content_diagnosis);
         prescriptionTextView = findViewById(R.id.textView_content_rx);
@@ -526,6 +530,10 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
         Help_Link_Whatsapp = findViewById(R.id.Help_Watsapp);
         Help_Link_Whatsapp.setPaintFlags(Help_Link_Whatsapp.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
+        download_presc_Watsapp = findViewById(R.id.download_presc_Watsapp);
+        download_presc_Watsapp.setPaintFlags(download_presc_Watsapp.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
         Help_Link_Whatsapp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -537,7 +545,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 //                                String.format("https://api.whatsapp.com/send?phone=%s&text=%s",
 //                                        phoneNumberWithCountryCode, message))));
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:+9173142821385"));
+                intent.setData(Uri.parse("tel:+917314821385"));
                 startActivity(intent);
             }
         });
@@ -584,6 +592,8 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         if (isFromOldVisit) {
             uploadButton.setVisibility(View.GONE);
             editPhysical.setVisibility(View.GONE);
+
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         } else {
             uploadButton.setVisibility(View.VISIBLE);
             editPhysical.setVisibility(View.VISIBLE);
@@ -591,12 +601,12 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
         mental_visit_help_text = findViewById(R.id.mental_visit_help_text);
         String teleconsult_request = "";
-        if(sessionManager.getPatientCountry().equals("India")){
+        if (sessionManager.getPatientCountry().equals("India")) {
             mental_visit_help_text.setText(getString(R.string.tele_consultant_text));
             tvMentalHelpRequest.setText(getString(R.string.teleconsult_request));
             teleconsult_request = getString(R.string.teleconsult_request);
 
-        }else{
+        } else {
             mental_visit_help_text.setText(getString(R.string.Mental_health_support_text));
             tvMentalHelpRequest.setText(getString(R.string.mental_health_support));
             teleconsult_request = getString(R.string.mental_health_support);
@@ -678,124 +688,137 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                flag_upload = true;
+                if (uploaded) {
+                    Intent i = new Intent(VisitSummaryActivity.this, HomeActivity.class);
+                    i.putExtra("from", "visit");
+                    i.putExtra("username", "");
+                    i.putExtra("password", "");
+                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(i);
+                    finish();
+                } else {
+                    flag_upload = true;
 
-                //Adding default speciality as General Physician...
-                isVisitSpecialityExists = speciality_row_exist_check(visitUuid);
-                //we are getting this visitUuid in the intent.
-                VisitAttributeListDAO speciality_attributes = new VisitAttributeListDAO();
-                boolean isUpdateVisitDone = false;
-                try {
-                    if (!isVisitSpecialityExists) {
-                        isUpdateVisitDone = speciality_attributes
-                                .insertVisitAttributes(visitUuid, "General Physician");
-                    }
-                    Log.d("Update_Special_Visit", "Update_Special_Visit: " + isUpdateVisitDone);
-                } catch (DAOException e) {
-                    e.printStackTrace();
-                    Log.d("Update_Special_Visit", "Update_Special_Visit: " + isUpdateVisitDone);
-                }
-                //end...
-
-
-                if (flag.isChecked()) {
+                    //Adding default speciality as General Physician...
+                    isVisitSpecialityExists = speciality_row_exist_check(visitUuid);
+                    //we are getting this visitUuid in the intent.
+                    VisitAttributeListDAO speciality_attributes = new VisitAttributeListDAO();
+                    boolean isUpdateVisitDone = false;
                     try {
-                        EncounterDAO encounterDAO = new EncounterDAO();
-                        encounterDAO.setEmergency(visitUuid, true);
+                        if (!isVisitSpecialityExists) {
+                            isUpdateVisitDone = speciality_attributes
+                                    .insertVisitAttributes(visitUuid, "General Physician");
+                        }
+                        Log.d("Update_Special_Visit", "Update_Special_Visit: " + isUpdateVisitDone);
                     } catch (DAOException e) {
-                        FirebaseCrashlytics.getInstance().recordException(e);
+                        e.printStackTrace();
+                        Log.d("Update_Special_Visit", "Update_Special_Visit: " + isUpdateVisitDone);
                     }
-                }
-                if (patient.getOpenmrs_id() == null || patient.getOpenmrs_id().isEmpty()) {
-                    String patientSelection = "uuid = ?";
-                    String[] patientArgs = {String.valueOf(patient.getUuid())};
-                    String table = "tbl_patient";
-                    String[] columnsToReturn = {"openmrs_id"};
-                    final Cursor idCursor = db.query(table, columnsToReturn, patientSelection, patientArgs, null, null, null);
+                    //end...
 
 
-                    if (idCursor.moveToFirst()) {
-                        do {
-                            patient.setOpenmrs_id(idCursor.getString(idCursor.getColumnIndex("openmrs_id")));
-                        } while (idCursor.moveToNext());
+                    if (flag.isChecked()) {
+                        try {
+                            EncounterDAO encounterDAO = new EncounterDAO();
+                            encounterDAO.setEmergency(visitUuid, true);
+                        } catch (DAOException e) {
+                            FirebaseCrashlytics.getInstance().recordException(e);
+                        }
                     }
-                    idCursor.close();
-                }
+                    if (patient.getOpenmrs_id() == null || patient.getOpenmrs_id().isEmpty()) {
+                        String patientSelection = "uuid = ?";
+                        String[] patientArgs = {String.valueOf(patient.getUuid())};
+                        String table = "tbl_patient";
+                        String[] columnsToReturn = {"openmrs_id"};
+                        final Cursor idCursor = db.query(table, columnsToReturn, patientSelection, patientArgs, null, null, null);
 
-                if (patient.getOpenmrs_id() == null || patient.getOpenmrs_id().isEmpty()) {
-                }
 
-                if (visitUUID == null || visitUUID.isEmpty()) {
+                        if (idCursor.moveToFirst()) {
+                            do {
+                                patient.setOpenmrs_id(idCursor.getString(idCursor.getColumnIndex("openmrs_id")));
+                            } while (idCursor.moveToNext());
+                        }
+                        idCursor.close();
+                    }
+
+                    if (patient.getOpenmrs_id() == null || patient.getOpenmrs_id().isEmpty()) {
+                    }
+
+                    if (visitUUID == null || visitUUID.isEmpty()) {
+                        String visitIDSelection = "uuid = ?";
+                        String[] visitIDArgs = {visitUuid};
+                        final Cursor visitIDCursor = db.query("tbl_visit", null, visitIDSelection, visitIDArgs, null, null, null);
+                        if (visitIDCursor != null && visitIDCursor.moveToFirst()) {
+                            visitUUID = visitIDCursor.getString(visitIDCursor.getColumnIndexOrThrow("uuid"));
+                        }
+                        if (visitIDCursor != null)
+                            visitIDCursor.close();
+                    }
+                    String[] columnsToReturn = {"startdate"};
+                    String visitIDorderBy = "startdate";
                     String visitIDSelection = "uuid = ?";
                     String[] visitIDArgs = {visitUuid};
-                    final Cursor visitIDCursor = db.query("tbl_visit", null, visitIDSelection, visitIDArgs, null, null, null);
-                    if (visitIDCursor != null && visitIDCursor.moveToFirst()) {
-                        visitUUID = visitIDCursor.getString(visitIDCursor.getColumnIndexOrThrow("uuid"));
-                    }
-                    if (visitIDCursor != null)
-                        visitIDCursor.close();
-                }
-                String[] columnsToReturn = {"startdate"};
-                String visitIDorderBy = "startdate";
-                String visitIDSelection = "uuid = ?";
-                String[] visitIDArgs = {visitUuid};
-                Cursor visitIDCursor1 = db.query("tbl_visit", columnsToReturn, visitIDSelection, visitIDArgs, null, null, visitIDorderBy);
-                visitIDCursor1.moveToLast();
-                String startDateTime = visitIDCursor1.getString(visitIDCursor1.getColumnIndexOrThrow("startdate"));
-                visitIDCursor1.close();
+                    Cursor visitIDCursor1 = db.query("tbl_visit", columnsToReturn, visitIDSelection, visitIDArgs, null, null, visitIDorderBy);
+                    visitIDCursor1.moveToLast();
+                    String startDateTime = visitIDCursor1.getString(visitIDCursor1.getColumnIndexOrThrow("startdate"));
+                    visitIDCursor1.close();
 
-                if (!flag.isChecked()) {
-                    //
-                }
+                    if (!flag.isChecked()) {
+                        //
+                    }
 
 //                new Restaurant(VisitSummaryActivity.this, getString(R.string.uploading_to_doctor_notif), Snackbar.LENGTH_LONG)
 //                        .setBackgroundColor(Color.BLACK)
 //                        .setTextColor(Color.WHITE)
 //                        .show();
-                // to set the Visit submit successfully in local DB to Push.
-                updateVisitSubmit();
-                if (NetworkConnection.isOnline(getApplication())) {
-                    Toast.makeText(context1, getResources().getString(R.string.upload_started), Toast.LENGTH_LONG).show();
-
+                    // to set the Visit submit successfully in local DB to Push.
+                    updateVisitSubmit();
+                    if (NetworkConnection.isOnline(getApplication())) {
+                        //Toast.makeText(context1, getResources().getString(R.string.upload_started), Toast.LENGTH_LONG).show();
+                        uploadButton.setEnabled(false);
+                        uploadButton.setAlpha(0.5f);
+                        uploadButton.setText(getString(R.string.upload_started));
 //                    AppConstants.notificationUtils.showNotifications(getString(R.string.visit_data_upload), getString(R.string.uploading_visit_data_notif), 3, VisitSummaryActivity.this);
-                    SyncDAO syncDAO = new SyncDAO();
+                        SyncDAO syncDAO = new SyncDAO();
 //                    ProgressDialog pd = new ProgressDialog(VisitSummaryActivity.this);
 //                    pd.setTitle(getString(R.string.syncing_visitDialog));
 //                    pd.show();
 //                    pd.setCancelable(false);
 
-                    final Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
+                        final Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
 //                            Added the 4 sec delay and then push data.For some reason doing immediately does not work
-                            //Do something after 100ms
-                            SyncUtils syncUtils = new SyncUtils();
-                            boolean isSynced = syncUtils.syncForeground("visitSummary");
-                            if (isSynced) {
+                                //Do something after 100ms
+                                SyncUtils syncUtils = new SyncUtils();
+                                boolean isSynced = syncUtils.syncForeground("visitSummary");
+                                if (isSynced) {
 //                                AppConstants.notificationUtils.DownloadDone(patientName + " " + getString(R.string.visit_data_upload), getString(R.string.visit_uploaded_successfully), 3, VisitSummaryActivity.this);
-                                //
-                                showVisitID();
-                                endVisit();
-                                if (!isFinishing()) {
-                                    showPopup();
-                                }
-                                uploadButton.setEnabled(false);
-                                uploadButton.setAlpha(0.5f);
-                                editPhysical.setVisibility(View.GONE);
+                                    //
+                                    showVisitID();
+                                    endVisit();
+                                    if (!isFinishing()) {
+                                        showPopup();
+                                    }
+                                    uploadButton.setEnabled(true);
+                                    uploadButton.setAlpha(1f);
+                                    uploadButton.setText(getString(R.string.go_to_home));
+                                    editPhysical.setVisibility(View.GONE);
 
-                            } else {
-                                AppConstants.notificationUtils.DownloadDone(patientName + " " + getString(R.string.visit_data_failed), getString(R.string.visit_uploaded_failed), 3, VisitSummaryActivity.this);
-                            }
-                            uploaded = true;
+                                } else {
+                                    AppConstants.notificationUtils.DownloadDone(patientName + " " + getString(R.string.visit_data_failed), getString(R.string.visit_uploaded_failed), 3, VisitSummaryActivity.this);
+                                }
+                                uploaded = true;
 //                            pd.dismiss();
 //                            Toast.makeText(VisitSummaryActivity.this, getString(R.string.upload_completed), Toast.LENGTH_SHORT).show();
-                        }
-                    }, 4000);
-                } else {
-                    AppConstants.notificationUtils.DownloadDone(patientName + " " + getString(R.string.visit_data_failed), getString(R.string.visit_uploaded_failed), 3, VisitSummaryActivity.this);
+                            }
+                        }, 4000);
+                    } else {
+                        AppConstants.notificationUtils.DownloadDone(patientName + " " + getString(R.string.visit_data_failed), getString(R.string.visit_uploaded_failed), 3, VisitSummaryActivity.this);
                     /*uploadButton.setEnabled(false);
                     uploadButton.setAlpha(0.5f);*/
+                    }
                 }
             }
 
@@ -903,7 +926,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         if (patHistory.getValue() != null)
             patHistView.setText(Html.fromHtml(patHistory.getValue()));
         if (phyExam.getValue() != null) {
-            String physicalExamStr = phyExam.getValue().replaceAll("<b>General exams: </b>", "<b>Self Assessment: </b>");
+            String physicalExamStr = phyExam.getValue().replaceAll("<b>General exams: </b>", self ? "<b>Self Assessment: </b>" : "<b>Doctor Visit: </b>");
             physFindingsView.setText(Html.fromHtml(physicalExamStr));
         }
 
@@ -1152,10 +1175,10 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                                 phyExam.setValue(dialogEditText.getText().toString().replace("\n", "<br>"));
                                 String b = "";
                                 if (phyExam.getValue() != null) {
-                                    String physicalExamStr = phyExam.getValue().replaceAll("<b>General exams: </b>", "<b>Self Assessment: </b>");
+                                    String physicalExamStr = phyExam.getValue().replaceAll("<b>General exams: </b>", self ? "<b>Self Assessment: </b>" : "<b>Doctor Visit: </b>");
                                     physicalText.setText(Html.fromHtml(physicalExamStr));
                                     physFindingsView.setText(Html.fromHtml(physicalExamStr));
-                                     b = phyExam.getValue().replaceAll("Self Assessment: ", "<b>General exams: </b> ");
+                                    b = phyExam.getValue().replaceAll("Self Assessment: ", "<b>General exams: </b> ");
                                 }
 
                                 updateDatabase(b, UuidDictionary.PHYSICAL_EXAMINATION);
@@ -1430,6 +1453,29 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
         doQuery();
 
+        //Button click....
+        download_presc_Watsapp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String Url = BuildConfig.BASE_URL +
+                        "preApi/i.jsp?v=" +
+                        visitUuid + "&pid=" + patient.getOpenmrs_id();
+
+                Intent download_intent = new Intent(Intent.ACTION_VIEW);
+                download_intent.setData(Uri.parse(Url));
+                startActivity(download_intent);
+                Log.d("url", "url: " + Url);
+
+               /* Intent download = new Intent(VisitSummaryActivity.this, Webview.class);
+                download.putExtra("Base_Url", BuildConfig.BASE_URL);
+                download.putExtra("visitUuid", visitUuid);
+                download.putExtra("openMRS_id", patient.getOpenmrs_id());
+                Log.d("vdownload", "visituuid: "+ visitUuid +
+                        "openmrs: "+ patient.getOpenmrs_id());
+                startActivity(download);*/
+            }
+        });
     }
 
     private void showPopup() {
@@ -1836,7 +1882,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         physicalExamStr = physicalExamStr.replaceAll("Self Assessment:", "");// Added by venu N on 02/04/2020.
 
         // Generate an HTML document on the fly:
-        if(objClsDoctorDetails != null) {
+        if (objClsDoctorDetails != null) {
             //this means the prescription is present since even when the doctor havent given any presc,
             //then to the Doctor Details are mandatorily passed to the app.
             if (isRespiratory) {
@@ -1849,12 +1895,12 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                                         "<p id=\"patient_name\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">%s</p></b>" +
                                         "<p id=\"patient_details\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">Age: %s | Gender: %s  </p>" +
 
-                                //Address is commented...
-                                       /* "<p id=\"address_and_contact\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">Address and Contact: %s</p>" +*/
+                                        //Address is commented...
+                                        /* "<p id=\"address_and_contact\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">Address and Contact: %s</p>" +*/
 
                                         "<p id=\"visit_details\" style=\"font-size:12pt; margin-top:5px; margin-bottom:0px; padding: 0px;\">Patient Id: %s | Date of visit: %s </p><br>" +
 
-                                //Vitals section commented
+                                        //Vitals section commented
                                       /*  "<b><p id=\"vitals_heading\" style=\"font-size:12pt;margin-top:5px; margin-bottom:0px;; padding: 0px;\">Vitals</p></b>" +
                                         "<p id=\"vitals\" style=\"font-size:12pt;margin:0px; padding: 0px;\">Height(cm): %s | Weight(kg): %s | BMI: %s | Blood Pressure: %s | Pulse(bpm): %s | %s | Respiratory Rate: %s |  %s </p><br>" +
                                 */
@@ -1888,8 +1934,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                                 /*pat_hist, fam_hist,*/ mComplaint, diagnosis_web, rx_web, tests_web, advice_web, followUp_web, doctor_web);
                 webView.loadDataWithBaseURL(null, htmlDocument, "text/HTML", "UTF-8", null);
 
-            }
-            else {
+            } else {
                 //If Respiratory value is not present then this loop will be excuted...
                 String htmlDocument =
                         String.format(font_face + "<b><p id=\"heading_1\" style=\"font-size:16pt; margin: 0px; padding: 0px; text-align: center;\">%s</p>" +
@@ -1899,11 +1944,11 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                                         "<p id=\"patient_name\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">%s</p></b>" +
                                         "<p id=\"patient_details\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">Age: %s | Gender: %s </p>" +
 
-                                      //  "<p id=\"address_and_contact\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">Address and Contact: %s</p>" +
+                                        //  "<p id=\"address_and_contact\" style=\"font-size:12pt; margin: 0px; padding: 0px;\">Address and Contact: %s</p>" +
 
                                         "<p id=\"visit_details\" style=\"font-size:12pt; margin-top:5px; margin-bottom:0px; padding: 0px;\">Patient Id: %s | Date of visit: %s </p><br>" +
 
-                                //Vitals section commented...
+                                        //Vitals section commented...
                                        /* "<b><p id=\"vitals_heading\" style=\"font-size:12pt;margin-top:5px; margin-bottom:0px;; padding: 0px;\">Vitals</p></b>" +
                                         "<p id=\"vitals\" style=\"font-size:12pt;margin:0px; padding: 0px;\">Height(cm): %s | Weight(kg): %s | BMI: %s | Blood Pressure: %s | Pulse(bpm): %s | %s | %s </p><br>" +
                                 */
@@ -1937,8 +1982,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                 webView.loadDataWithBaseURL(null, htmlDocument, "text/HTML", "UTF-8", null);
 
             }
-        }
-        else {
+        } else {
             if (isRespiratory) {
                 String htmlDocument =
                         String.format("<b><p id=\"heading_1\" style=\"font-size:16pt; margin: 0px; padding: 0px; text-align: center;\">%s</p>" +
@@ -2007,7 +2051,6 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
             }
             //end of if-else of design...
         }
-
 
 
         /**
@@ -2366,7 +2409,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                     diagnosisReturned = value;
                 }
                 if (diagnosisCard.getVisibility() != View.VISIBLE) {
-                 //   diagnosisCard.setVisibility(View.VISIBLE);
+                    //   diagnosisCard.setVisibility(View.VISIBLE);
                 }
                 diagnosisTextView.setText(diagnosisReturned);
                 //checkForDoctor();
@@ -2382,7 +2425,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                 }
                 Log.i(TAG, "parseData: rxfin" + rxReturned);
                 if (prescriptionCard.getVisibility() != View.VISIBLE) {
-                  //  prescriptionCard.setVisibility(View.VISIBLE);
+                    //  prescriptionCard.setVisibility(View.VISIBLE);
                 }
                 prescriptionTextView.setText(rxReturned);
                 //checkForDoctor();
@@ -2397,7 +2440,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                     Log.d("GAME", "GAME_2: " + adviceReturned);
                 }
                 if (medicalAdviceCard.getVisibility() != View.VISIBLE) {
-                  //  medicalAdviceCard.setVisibility(View.VISIBLE);
+                    //  medicalAdviceCard.setVisibility(View.VISIBLE);
                 }
                 //medicalAdviceTextView.setText(adviceReturned);
                 Log.d("Hyperlink", "hyper_global: " + medicalAdvice_string);
@@ -2433,7 +2476,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                     testsReturned = Node.bullet + " " + value;
                 }
                 if (requestedTestsCard.getVisibility() != View.VISIBLE) {
-                  //  requestedTestsCard.setVisibility(View.VISIBLE);
+                    //  requestedTestsCard.setVisibility(View.VISIBLE);
                 }
                 requestedTestsTextView.setText(testsReturned);
                 //checkForDoctor();
@@ -2452,7 +2495,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                     followUpDate = value;
                 }
                 if (followUpDateCard.getVisibility() != View.VISIBLE) {
-                   // followUpDateCard.setVisibility(View.VISIBLE);
+                    // followUpDateCard.setVisibility(View.VISIBLE);
                 }
                 followUpDateTextView.setText(followUpDate);
                 //checkForDoctor();
@@ -2476,12 +2519,14 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
      */
     private String sms_web_prescription_format() {
         //prescription...
-        //If prescription is provided then show cardview...
+        //If prescription is provided then show cardview for
+        // Prescription preview & Presription Downlaod link...
         if (objClsDoctorDetails != null) {
             cardView_prescription.setVisibility(View.VISIBLE);
-        }
-        else {
+            download_cardview.setVisibility(View.VISIBLE);
+        } else {
             cardView_prescription.setVisibility(View.GONE);
+            download_cardview.setVisibility(View.GONE);
         }
 
         //Check for license key and load the correct config file
@@ -2535,7 +2580,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         if (objClsDoctorDetails != null) {
             doctorDetailStr =
                     "<span style=\"font-size:12pt; color:#212121;padding: 0px;\">" + objClsDoctorDetails.getName() + "</span><br>" +
-                            "<span style=\"font-size:12pt; color:#212121;padding: 0px;\">" + "+911141236457" + "</span>" ;
+                            "<span style=\"font-size:12pt; color:#212121;padding: 0px;\">" + "+911141236457" + "</span>";
         }
 
         String diagnosis_web = stringToWeb_sms(diagnosisReturned);
@@ -2586,7 +2631,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                                 "<b id=\"follow_up_heading\" style=\"font-size:15pt;margin-top:5px; margin-bottom:0px; padding: 0px;\">Follow Up Date <br>" +
                                 "%s" + "</b>"/* +*/
 
-                               /* doctorDetailStr*/, heading, heading2, mPatientName, age, mGender,
+                        /* doctorDetailStr*/, heading, heading2, mPatientName, age, mGender,
                         (!diagnosis_web.isEmpty()) ? diagnosis_web : "- Not Provided" + "<br>",
                         (!rx_web.isEmpty()) ? rx_web : "- Not Provided" + "<br>",
                         (!tests_web.isEmpty()) ? tests_web : "- Not Provided" + "<br>",
@@ -2606,8 +2651,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
             objClsDoctorDetails = gson.fromJson(dbValue, ClsDoctorDetails.class);
             Log.e(TAG, "TEST DB: " + dbValue);
             Log.e(TAG, "TEST VISIT: " + objClsDoctorDetails);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             FirebaseCrashlytics.getInstance().recordException(e);
             Toast.makeText(context, getResources().getString(R.string.something_went_wrong),
                     Toast.LENGTH_SHORT).show();
@@ -2619,7 +2663,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         String doctorDetailStr = "";
         if (objClsDoctorDetails != null) {
 
-          //  frameLayout_doctor.setVisibility(View.VISIBLE);
+            //  frameLayout_doctor.setVisibility(View.VISIBLE);
 
             doctorSign = objClsDoctorDetails.getTextOfSign();
 
@@ -2637,7 +2681,6 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
             mDoctorName.setText(Html.fromHtml(doctorDetailStr).toString().trim());
         }
     }
-
 
 
     /**
@@ -2691,7 +2734,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
     public void callBroadcastReceiver() {
         if (!isReceiverRegistered) {
-            if(receiver == null) {
+            if (receiver == null) {
                 IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
                 receiver = new NetworkChangeReceiver();
                 registerReceiver(receiver, filter);
@@ -3168,16 +3211,16 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         db.endTransaction();
         return isExists;
     }
+
     /**
-     * @param webView Webview object.
+     * @param webView       Webview object.
      * @param contentHeight Height of the overall contents of the HTML string in int datatype.
      */
     private void createWebPrintJob_Button(WebView webView, int contentHeight) {
         // Get a PrintManager instance
         PrintManager printManager = (PrintManager) this.getSystemService(Context.PRINT_SERVICE);
 
-        
-        
+
         // Get a print adapter instance
         PrintDocumentAdapter printAdapter = webView.createPrintDocumentAdapter();
         Log.d("webview content height", "webview content height: " + contentHeight);
@@ -3311,7 +3354,6 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         }
         return str;
     }
-
 
 
 }

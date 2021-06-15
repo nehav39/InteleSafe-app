@@ -1,10 +1,6 @@
 package org.intelehealth.intelesafe.activities.appointments;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -14,6 +10,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import org.intelehealth.intelesafe.R;
@@ -22,9 +24,6 @@ import org.intelehealth.intelesafe.activities.homeActivity.Recycler_Home_Adapter
 import org.intelehealth.intelesafe.activities.visitSummaryActivity.VisitSummaryActivity;
 import org.intelehealth.intelesafe.app.AppConstants;
 import org.intelehealth.intelesafe.database.dao.EncounterDAO;
-import org.intelehealth.intelesafe.database.dao.VisitsDAO;
-import org.intelehealth.intelesafe.models.dto.EncounterDTO;
-import org.intelehealth.intelesafe.models.dto.VisitDTO;
 import org.intelehealth.intelesafe.utilities.SessionManager;
 
 import java.text.ParseException;
@@ -32,7 +31,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -58,15 +56,51 @@ public class AppointmentsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appointments);
 
-        getSupportActionBar().setTitle(getString(R.string.appointment_status));
+      /*  getSupportActionBar().setTitle(getString(R.string.my_vistis));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setElevation(0);*/
 
         sessionManager = new SessionManager(this);
         db = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
-        ;
+        /*
         recyclerView = findViewById(R.id.recyclerview_data);
         tvNoVisit = findViewById(R.id.tv_no_visit);
-        renderList();
+        renderList();*/
+        setupTabs();
+    }
+
+    TabLayout tabLayout;
+    ViewPager viewPager;
+    @SuppressLint("ClickableViewAccessibility")
+    private void setupTabs() {
+        tabLayout= findViewById(R.id.tabLayout);
+        viewPager= findViewById(R.id.viewPager);
+
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.self_assessment_label));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.doctors_visits_label));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        final TabAdapter adapter = new TabAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        viewPager.setAdapter(adapter);
+
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 
     @Override
@@ -78,7 +112,7 @@ public class AppointmentsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void renderList() {
+    /*private void renderList() {
         ArrayList<String> visitsWithPrescription = getVisitsWithPrescription();
         recycler_arraylist = new ArrayList<Day_Date>();
         String endDate = "";
@@ -126,9 +160,9 @@ public class AppointmentsActivity extends AppCompatActivity {
 
                         if ((prescMap.get(dd) == null || !prescMap.get(dd)) && visitsWithPrescription.contains(uuid))
                             prescMap.put(dd, true);
-                        /*recycler_arraylist.add(new Day_Date
+                        *//*recycler_arraylist.add(new Day_Date
                                 ("Day " + a, dd));
-                        a++;*/
+                        a++;*//*
 
 
                     } catch (Exception e) {
@@ -167,9 +201,9 @@ public class AppointmentsActivity extends AppCompatActivity {
             sessionManager.setFirstCheckin("false");
             tvNoVisit.setVisibility(View.VISIBLE);
         }
-    }
+    }*/
 
-    public void pastVisits(int position, String check_inDate) {
+    public void pastVisits(int position, String check_inDate, boolean self, String visitUuid) {
 
         String patientuuid = sessionManager.getPersionUUID();
         List<String> visitList = new ArrayList<>();
@@ -188,8 +222,8 @@ public class AppointmentsActivity extends AppCompatActivity {
         String visitOrderBy = "startdate";
         String query = "SELECT DISTINCT v.uuid, v.startdate, v.enddate FROM tbl_visit v WHERE " +
                 "(v.issubmitted == 1 OR v.enddate IS NOT NULL) AND " +
-                "v.patientuuid = ? ORDER BY v.startdate";
-        String[] visitArgs = {patientuuid};
+                "v.patientuuid = ? AND v.uuid = ? ORDER BY v.startdate";
+        String[] visitArgs = {patientuuid, visitUuid};
 
         Cursor visitCursor = db.rawQuery(query, visitArgs);
         //Cursor visitCursor = db.query("tbl_visit", visitColumns, visitSelection, visitArgs, null, null, visitOrderBy);
@@ -241,7 +275,7 @@ public class AppointmentsActivity extends AppCompatActivity {
 
                     Date formatted = currentDate.parse(date);
                     String visitDate = currentDate.format(formatted);
-                    OldVisit(visitDate, visitList.get(position), end_date, "", ""/*encounterVitalList.get(position)*/, encounterAdultList.get(position));
+                    OldVisit(visitDate, visitUuid, end_date, "", ""/*encounterVitalList.get(position)*/, encounterAdultList.get(0), self);
                 } catch (ParseException e) {
                     FirebaseCrashlytics.getInstance().recordException(e);
                 }
@@ -251,7 +285,7 @@ public class AppointmentsActivity extends AppCompatActivity {
         finish();
     }
 
-    private void OldVisit(final String datetime, String visit_id, String end_datetime, String visitValue, String encounterVitalslocal, String encounterAdultIntialslocal) throws ParseException {
+    private void OldVisit(final String datetime, String visit_id, String end_datetime, String visitValue, String encounterVitalslocal, String encounterAdultIntialslocal, boolean self) throws ParseException {
 
         final Boolean past_visit;
 
@@ -268,10 +302,15 @@ public class AppointmentsActivity extends AppCompatActivity {
         visitSummary.putExtra("pastVisit", past_visit);
         visitSummary.putExtra("hasPrescription", "false");
         visitSummary.putExtra("fromOldVisit", true);
+        visitSummary.putExtra("self", self);
         startActivity(visitSummary);
     }
 
-    private ArrayList<String> getVisitsWithPrescription() {
+    public void closeActivity(View view) {
+        finish();
+    }
+
+    /*private ArrayList<String> getVisitsWithPrescription() {
         ArrayList<String> encounterVisitUUID = new ArrayList<String>();
         HashSet<String> hsPatientUUID = new HashSet<String>();
 
@@ -310,5 +349,5 @@ public class AppointmentsActivity extends AppCompatActivity {
             listPatientUUID.addAll(hsPatientUUID);
         }
         return listPatientUUID;
-    }
+    }*/
 }

@@ -28,1217 +28,1020 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingBottom="@dimen/activity_vertical_margin"
-        android:background="#E5E5E5"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context="io.intelehealth.client.activities.identification_activity.IdentificationActivity"
         tools:showIn="@layout/activity_identification">
 
-        <ScrollView
+        <LinearLayout
+            android:id="@+id/header_info_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dip"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="top"
+                android:lineSpacingExtra="3sp"
+                android:text="@string/please_fill_your_details"
+                android:textAppearance="@style/please_fill"
+                android:textColor="@color/gray_3"
+                android:translationY="-1.6sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dip"
+                android:drawableStart="@drawable/assignment"
+                android:drawablePadding="10dp"
+                android:ems="10"
+                android:text="@string/personal_information"
+                android:textAppearance="@style/sign_up_title"
+                android:textColor="@color/gray_6" />
+        </LinearLayout>
+
+        <androidx.core.widget.NestedScrollView
             android:id="@+id/identification_scrollView"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
+            android:layout_below="@+id/header_info_layout"
+
+            android:background="@color/white"
             android:fillViewport="false">
 
-
-            <LinearLayout
-                android:id="@+id/layout_identification"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:textAppearance="@style/please_fill"
-                    android:lineSpacingExtra="3sp"
-                    android:translationY="-1.6sp"
-                    android:gravity="top"
-                    android:text="@string/please_fill_your_details" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:drawableStart="@drawable/assignment"
-                    android:drawableLeft="@drawable/assignment"
-                    android:drawablePadding="10dp"
-                    android:ems="10"
-                    android:text="@string/personal_information"
-                    android:textAppearance="@style/sign_up_title" />
-                <Space
-                    android:layout_width="20dp"
-                    android:layout_height="20dp" />
+                android:layout_marginHorizontal="8dip"
+                android:layout_marginTop="8dip"
+                android:layout_marginBottom="10dip"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="10sp"
+                app:cardElevation="8dip">
 
                 <LinearLayout
-                    android:animateLayoutChanges="true"
+                    android:id="@+id/layout_identification"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingHorizontal="10dp"
-                    android:elevation="40dp"
-                    android:orientation="vertical"
-                    android:paddingBottom="10dp"
-                    android:background="@drawable/white_rectangular_bg">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="15dp"
-                        android:orientation="vertical">
+                        android:animateLayoutChanges="true"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="10dp"
+                        android:paddingBottom="10dp">
 
-                        <com.google.android.material.textfield.TextInputLayout
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <!--Can't access Vector drawables directly,that's why putted into another DrawableContainer-->
-                            <!--On the Left or Right of textview or Editext-->
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="15dp"
+                            android:orientation="vertical">
 
-                            <EditText
-                                android:id="@+id/identification_first_name"
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <!--Can't access Vector drawables directly,that's why putted into another DrawableContainer-->
+                                <!--On the Left or Right of textview or Editext-->
+
+                                <EditText
+                                    android:id="@+id/identification_first_name"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:ems="10"
+                                    android:freezesText="true"
+                                    android:hint="@string/identification_screen_prompt_first_name"
+                                    android:imeOptions="actionUnspecified"
+                                    android:inputType="textCapWords"
+                                    android:maxLength="25"
+                                    android:maxLines="1"
+                                    android:singleLine="true"
+                                    android:textAppearance="@style/sign_up_input" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:ems="10"
-                                android:freezesText="true"
-                                android:hint="@string/identification_screen_prompt_first_name"
-                                android:imeOptions="actionUnspecified"
-                                android:inputType="textCapWords"
-                                android:maxLength="25"
-                                android:maxLines="1"
-                                android:singleLine="true"
-                                android:textAppearance="@style/sign_up_input" />
+                                android:visibility="gone">
 
-                        </com.google.android.material.textfield.TextInputLayout>
+                                <EditText
+                                    android:id="@+id/identification_middle_name"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:ems="10"
+                                    android:freezesText="true"
+                                    android:hint="@string/identification_screen_prompt_middle_name"
+                                    android:imeOptions="actionUnspecified"
+                                    android:inputType="textCapWords"
+                                    android:maxLength="25"
+                                    android:maxLines="1"
+                                    android:singleLine="true"
+                                    android:tag="@string/tag_optional"
+                                    android:textAppearance="@style/sign_up_input" />
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:visibility="gone">
+                            </com.google.android.material.textfield.TextInputLayout>
 
-                            <EditText
-                                android:id="@+id/identification_middle_name"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:ems="10"
-                                android:freezesText="true"
-                                android:hint="@string/identification_screen_prompt_middle_name"
-                                android:imeOptions="actionUnspecified"
-                                android:inputType="textCapWords"
-                                android:maxLength="25"
-                                android:maxLines="1"
-                                android:singleLine="true"
-                                android:tag="@string/tag_optional"
-                                android:textAppearance="@style/sign_up_input" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <EditText
-                                android:id="@+id/identification_last_name"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:autofillHints="@string/action_settings"
-                                android:ems="10"
-                                android:freezesText="true"
-                                android:hint="@string/identification_screen_prompt_last_name"
-                                android:imeOptions="actionUnspecified"
-                                android:inputType="textCapWords"
-                                android:maxLength="25"
-                                android:maxLines="1"
-                                android:singleLine="true"
-                                android:textAppearance="@style/sign_up_input" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-
-                        <!-- <Space
-                            android:layout_width="20dp"
-                            android:layout_height="20dp" />-->
-
-                        <RadioGroup
-                            android:id="@+id/radioGrp"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:orientation="horizontal"
-                            android:paddingLeft="8dp"
-                            android:paddingRight="8dp">
-
-                            <RadioButton
-                                android:id="@+id/identification_gender_male"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:drawableStart="@drawable/icon_male"
-                                android:drawableLeft="@drawable/icon_male"
-                                android:drawablePadding="5dp"
-                                android:text="@string/identification_screen_checkbox_male"
-                                android:textAppearance="@style/sign_up_gender" />
-
-                            <RadioButton
-                                android:id="@+id/identification_gender_female"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:drawableStart="@drawable/icon_female"
-                                android:drawableLeft="@drawable/icon_female"
-                                android:drawablePadding="5dp"
-                                android:text="@string/identification_screen_checkbox_female"
-                                android:textAppearance="@style/sign_up_gender" />
-
-                        </RadioGroup>
-
-                        <Space
-                            android:layout_width="20dp"
-                            android:layout_height="10dp" />
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <EditText
-                                android:id="@+id/identification_birth_date_text_view"
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:ems="10"
-                                android:focusable="false"
-                                android:freezesText="true"
-                                android:hint="@string/hint_age"
-                                android:imeOptions="actionUnspecified"
-                                android:inputType=""
-                                android:maxLines="1"
-                                android:singleLine="true"
-                                android:textAppearance="@style/sign_up_input" />
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <EditText
-                                android:id="@+id/et_tested_positive_date"
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:drawablePadding="10dp"
-                                android:ems="10"
-                                android:focusable="false"
-                                android:fontFamily="@font/lato_regular"
-                                android:freezesText="true"
-                                android:hint="@string/hint_date_tested_positive"
-                                android:imeOptions="actionUnspecified"
-                                android:inputType=""
-                                android:maxLines="1"
-                                android:singleLine="true"
-                                android:textAppearance="@style/sign_up_input" />
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <TextView
-                            android:layout_marginTop="8dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:ems="10"
-                                android:includeFontPadding="false"
-                                android:textSize="16sp"
-                                android:text="@string/identification_screen_prompt_state"
-                                android:textAppearance="@style/sign_up_input" />
-                            <Spinner
-                                android:id="@+id/state_spinner"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="12dp"
-                                android:focusable="true"
-                                android:entries="@array/state_values"
-                                />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:ems="10"
-                                android:layout_marginTop="15dp"
-                                android:includeFontPadding="false"
-                                android:textSize="16sp"
-                                android:text="@string/hint_district"
-                                android:textAppearance="@style/sign_up_input" />
-                            <Spinner
-                                android:id="@+id/city_spinner"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="12dp"
-                                android:focusable="true"
-                                android:entries="@array/jh_city_values"
-                                />
-
-                        <TextView
-                            android:layout_marginTop="8dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:ems="10"
-                            android:includeFontPadding="false"
-                            android:textSize="16sp"
-                            android:text="@string/hint_block"
-                            android:textAppearance="@style/sign_up_input" />
-                        <Spinner
-                            android:id="@+id/block_spinner"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="12dp"
-                            android:focusable="true"
-                            android:entries="@array/jh_block_values"
-                            />
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <EditText
-                                android:id="@+id/identification_postal_code"
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:ems="10"
-                                android:freezesText="true"
-                                android:hint="@string/hint_postal_code"
-                                android:imeOptions="actionUnspecified"
-                                android:inputType="number"
-                                android:maxLength="6"
-                                android:maxLines="1"
-                                android:tag="@string/tag_optional"
-                                android:textAppearance="@style/sign_up_input"/>
-
-
-                        </com.google.android.material.textfield.TextInputLayout>
-                        <!--    <android.support.design.widget.TextInputLayout
+                            <com.google.android.material.textfield.TextInputLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
 
                                 <EditText
-                                    android:id="@+id/identification_age"
+                                    android:id="@+id/identification_last_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:autofillHints="@string/action_settings"
+                                    android:ems="10"
+                                    android:freezesText="true"
+                                    android:hint="@string/identification_screen_prompt_last_name"
+                                    android:imeOptions="actionUnspecified"
+                                    android:inputType="textCapWords"
+                                    android:maxLength="25"
+                                    android:maxLines="1"
+                                    android:singleLine="true"
+                                    android:textAppearance="@style/sign_up_input" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+
+                            <!-- <Space
+                                android:layout_width="20dp"
+                                android:layout_height="20dp" />-->
+
+                            <RadioGroup
+                                android:id="@+id/radioGrp"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dip"
+                                android:orientation="horizontal"
+                                android:paddingLeft="8dp"
+                                android:paddingRight="8dp">
+
+                                <RadioButton
+                                    android:id="@+id/identification_gender_male"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:drawableStart="@drawable/event_icon"
-                                    android:drawableLeft="@drawable/event_icon"
+                                    android:drawableStart="@drawable/icon_male"
+                                    android:drawablePadding="5dp"
+                                    android:text="@string/identification_screen_checkbox_male"
+                                    android:textColor="@color/gray_6" />
+
+                                <RadioButton
+                                    android:id="@+id/identification_gender_female"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:drawableStart="@drawable/icon_female"
+                                    android:drawableLeft="@drawable/icon_female"
+                                    android:drawablePadding="5dp"
+                                    android:text="@string/identification_screen_checkbox_female"
+                                    android:textColor="@color/gray_6" />
+
+                            </RadioGroup>
+
+                            <!-- <Space
+                                 android:layout_width="20dp"
+                                 android:layout_height="10dp" />-->
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <EditText
+                                    android:id="@+id/identification_birth_date_text_view"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:ems="10"
+                                    android:freezesText="true"
+                                    android:hint="@string/hint_age"
+                                    android:imeOptions="actionUnspecified"
+                                    android:inputType="number"
+                                    android:maxLines="1"
+                                    android:singleLine="true"
+                                    android:textAppearance="@style/sign_up_input" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <EditText
+                                    android:id="@+id/et_tested_positive_date"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
                                     android:drawablePadding="10dp"
                                     android:ems="10"
                                     android:focusable="false"
+                                    android:fontFamily="@font/lato_regular"
                                     android:freezesText="true"
-                                    android:hint="@string/identification_screen_prompt_age"
+                                    android:hint="@string/hint_date_tested_positive_optional"
                                     android:imeOptions="actionUnspecified"
                                     android:inputType=""
                                     android:maxLines="1"
-                                    android:singleLine="true" />
+                                    android:singleLine="true"
+                                    android:textAppearance="@style/sign_up_input" />
+                            </com.google.android.material.textfield.TextInputLayout>
 
-                            </android.support.design.widget.TextInputLayout>-->
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="4dip"
+                                android:layout_marginTop="8dp"
+                                android:ems="10"
+                                android:includeFontPadding="false"
+                                android:text="@string/identification_screen_prompt_state"
+                                android:textAppearance="@style/sign_up_input"
+                                android:textSize="14sp" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dip"
+                                android:layout_marginHorizontal="4dip"
+                                android:layout_marginTop="4dip"
+                                android:background="@color/gray_5" />
+
+                            <Spinner
+                                android:id="@+id/state_spinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dip"
+                                android:entries="@array/state_values"
+                                android:focusable="true" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="4dip"
+                                android:layout_marginTop="15dp"
+                                android:ems="10"
+                                android:includeFontPadding="false"
+                                android:text="@string/hint_district"
+                                android:textAppearance="@style/sign_up_input"
+                                android:textSize="14sp" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dip"
+                                android:layout_marginHorizontal="4dip"
+                                android:layout_marginTop="4dip"
+                                android:background="@color/gray_5" />
+
+                            <Spinner
+                                android:id="@+id/city_spinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dip"
+                                android:entries="@array/jh_city_values"
+                                android:focusable="true" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="4dip"
+                                android:layout_marginTop="8dp"
+                                android:ems="10"
+                                android:includeFontPadding="false"
+                                android:text="@string/hint_block_optional"
+                                android:textAppearance="@style/sign_up_input"
+                                android:textSize="14sp" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dip"
+                                android:layout_marginHorizontal="4dip"
+                                android:layout_marginTop="4dip"
+                                android:background="@color/gray_5" />
+
+                            <Spinner
+                                android:id="@+id/block_spinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dip"
+                                android:entries="@array/default_block_values"
+                                android:focusable="true" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <EditText
+                                    android:id="@+id/identification_postal_code"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:ems="10"
+                                    android:freezesText="true"
+                                    android:hint="@string/hint_postal_code"
+                                    android:imeOptions="actionUnspecified"
+                                    android:inputType="number"
+                                    android:maxLength="6"
+                                    android:maxLines="1"
+                                    android:tag="@string/tag_optional"
+                                    android:textAppearance="@style/sign_up_input" />
 
 
-
-                        <FrameLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginTop="5dp"
-                                    android:gravity="center"
-                                    android:paddingHorizontal="5dp"
-                                    android:text="+91"
-                                    android:textSize="16sp" />
-
-                                <com.google.android.material.textfield.TextInputLayout
+                            </com.google.android.material.textfield.TextInputLayout>
+                            <!--    <android.support.design.widget.TextInputLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent">
+                                    android:layout_height="wrap_content">
 
                                     <EditText
-                                        android:id="@+id/identification_phone_number"
-                                        android:layout_width="fill_parent"
+                                        android:id="@+id/identification_age"
+                                        android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:digits="0123456789+"
+                                        android:layout_weight="1"
+                                        android:drawableStart="@drawable/event_icon"
+                                        android:drawableLeft="@drawable/event_icon"
+                                        android:drawablePadding="10dp"
                                         android:ems="10"
+                                        android:focusable="false"
                                         android:freezesText="true"
-                                        android:hint="@string/identification_screen_prompt_phone_number"
+                                        android:hint="@string/identification_screen_prompt_age"
                                         android:imeOptions="actionUnspecified"
-                                        android:inputType="number"
-                                        android:maxLength="10"
+                                        android:inputType=""
                                         android:maxLines="1"
-                                        android:singleLine="true"
-                                        android:tag="@string/tag_optional"
-                                        android:textAppearance="@style/sign_up_input" />
+                                        android:singleLine="true" />
 
-                                </com.google.android.material.textfield.TextInputLayout>
-                        </LinearLayout>
+                                </android.support.design.widget.TextInputLayout>-->
 
-                            <ImageView
-                                android:id="@+id/image_username_valid"
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:layout_gravity="center_vertical|right"
-                                android:layout_marginTop="0dp"
-                                android:layout_marginEnd="12dp"
-                                app:srcCompat="@drawable/svg_valid_icon"/>
+
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginTop="5dp"
+                                        android:gravity="center"
+                                        android:paddingHorizontal="5dp"
+                                        android:text="+91"
+                                        android:textSize="16sp" />
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent">
+
+                                        <EditText
+                                            android:id="@+id/identification_phone_number"
+                                            android:layout_width="fill_parent"
+                                            android:layout_height="wrap_content"
+                                            android:digits="0123456789+"
+                                            android:ems="10"
+                                            android:freezesText="true"
+                                            android:hint="@string/identification_screen_prompt_phone_number"
+                                            android:imeOptions="actionUnspecified"
+                                            android:inputType="number"
+                                            android:maxLength="10"
+                                            android:maxLines="1"
+                                            android:singleLine="true"
+                                            android:tag="@string/tag_optional"
+                                            android:textAppearance="@style/sign_up_input" />
+
+                                    </com.google.android.material.textfield.TextInputLayout>
+                                </LinearLayout>
+
+                                <ImageView
+                                    android:id="@+id/image_username_valid"
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_gravity="center_vertical|right"
+                                    android:layout_marginTop="0dp"
+                                    android:layout_marginEnd="12dp"
+                                    app:srcCompat="@drawable/svg_valid_icon" />
                             </FrameLayout>
 
 
-                        <!--
+                            <!--
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:visibility="gone"
+                                        android:orientation="vertical">
+
+                                        <EditText
+                                            android:id="@+id/identification_caste"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:clickable="false"
+                                            android:cursorVisible="false"
+                                            android:focusable="false"
+                                            android:focusableInTouchMode="false"
+                                            android:fontFamily="@font/lato_regular"
+                                            android:freezesText="true"
+                                            android:imeOptions="actionUnspecified"
+                                            android:inputType="textCapWords"
+                                            android:maxLines="1"
+                                            android:text="@string/txt_personal_caste_header"
+                                            android:textSize="14sp" />
+
+                                        <Spinner
+                                            android:id="@+id/spinner_Caste"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content" />
+
+                                    </LinearLayout>
+
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:visibility="gone"
+                                    android:layout_height="wrap_content">
+
+                                    <EditText
+                                        android:id="@+id/identification_other_caste"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:autofillHints="@string/action_settings"
+                                        android:ems="10"
+                                        android:freezesText="true"
+                                        android:hint="@string/txt_enter_caste"
+                                        android:imeOptions="actionUnspecified"
+                                        android:inputType="textCapWords"
+                                        android:maxLength="25"
+                                        android:maxLines="1"
+                                        android:singleLine="true"
+                                        android:textSize="14sp"
+                                        android:fontFamily="@font/lato_regular"/>
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:visibility="gone"
+                                    >
+
+                                    <EditText
+                                        android:id="@+id/identification_registration_no"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:autofillHints="@string/action_settings"
+                                        android:ems="10"
+                                        android:fontFamily="@font/lato_regular"
+                                        android:textSize="14sp"
+                                        android:freezesText="true"
+                                        android:hint="@string/medical_registration_number_license_id"
+                                        android:imeOptions="actionUnspecified"
+                                        android:inputType="textCapWords"
+                                        android:maxLength="25"
+                                        android:maxLines="1"
+                                        android:singleLine="true"
+                                        android:textAppearance="@style/sign_up_input"/>
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:visibility="gone"
+                                   >
+
+                                    <EditText
+                                        android:id="@+id/identification_hospital_name"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:autofillHints="@string/action_settings"
+                                        android:ems="10"
+                                        android:freezesText="true"
+                                        android:hint="@string/name_of_health_organization_hospital_where_you_primarily_work"
+                                        android:imeOptions="actionUnspecified"
+                                        android:inputType="textCapWords"
+                                        android:maxLength="25"
+                                        android:maxLines="1"
+                                        android:fontFamily="@font/lato_regular"
+                                        android:textSize="14sp"
+                                        android:singleLine="true"
+                                        android:textAppearance="@style/sign_up_input"/>
+
+                                </com.google.android.material.textfield.TextInputLayout>
+                            </LinearLayout>
+    -->
+
+
+                        </LinearLayout>
+
+
                         <LinearLayout
+                            android:id="@+id/login_linearlayout"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="5dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="15dp"
+                            android:animateLayoutChanges="true"
+                            android:orientation="vertical"
+                            android:visibility="gone"
+                            tools:visibility="visible">
+
+                            <!--OTP No-->
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <EditText
+                                    android:id="@+id/mOTP"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/enter_otp"
+                                    android:imeOptions="actionNext"
+                                    android:maxLength="4"
+                                    android:singleLine="true"
+                                    android:textAppearance="@style/sign_up_input" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <TextView
+                                android:id="@+id/tvResendOtp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:fontFamily="@font/lato_regular"
+                                android:gravity="center"
+                                android:minHeight="32dp"
+                                android:text="@string/resend_otp"
+                                android:textColor="@color/colorPrimary"
+                                android:visibility="gone"
+                                tools:visibility="visible" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:visibility="gone"
+                                app:passwordToggleEnabled="true">
+
+                                <EditText
+                                    android:id="@+id/password"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/prompt_password"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="textPassword"
+                                    android:maxLength="12"
+                                    android:singleLine="true"
+                                    android:textAppearance="@style/sign_up_input" />
+                                android:maxLines="1"
+                                android:singleLine="true" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:visibility="gone"
+                                app:passwordToggleEnabled="true">
+
+                                <EditText
+                                    android:id="@+id/cpassword"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/confirm_password"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="textPassword"
+                                    android:maxLength="12"
+                                    android:singleLine="true"
+                                    android:textAppearance="@style/sign_up_input" />
+                                android:maxLines="1"
+                                android:singleLine="true" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="2dp"
+                                android:lineSpacingExtra="2sp"
+                                android:text="@string/password_should_be_8_characters_long_and_should_have_both_upper_and_lower_case_characters_at_least_one_digit"
+                                android:textAppearance="@style/login_details_conditions"
+                                android:textColor="@null"
+                                android:translationY="-1sp"
+                                android:visibility="gone" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                    <Space
+                        android:layout_width="20dp"
+                        android:layout_height="20dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:drawableStart="@drawable/icon_address"
+                        android:drawableLeft="@drawable/icon_address"
+                        android:drawablePadding="10dp"
+                        android:ems="10"
+                        android:text="@string/address_details"
+                        android:textAppearance="@style/sign_up_title"
+                        android:visibility="gone" />/>
+
+                    <Space
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:visibility="gone" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="10dp"
+                        android:visibility="gone">
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginBottom="15dp"
+                            android:layout_weight="1"
                             android:orientation="vertical">
 
                             <com.google.android.material.textfield.TextInputLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                >
+                                android:visibility="gone">
+
+                                <EditText
+                                    android:id="@+id/identification_address1"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:ems="10"
+                                    android:freezesText="true"
+                                    android:hint="@string/address_of_line_1"
+                                    android:imeOptions="actionUnspecified"
+                                    android:inputType="textCapWords"
+                                    android:maxLength="50"
+                                    android:maxLines="2"
+                                    android:singleLine="false"
+                                    android:tag="@string/tag_optional"
+                                    android:textAppearance="@style/sign_up_input" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:visibility="gone">
+
+                                <EditText
+                                    android:id="@+id/identification_address2"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:ems="10"
+                                    android:freezesText="true"
+                                    android:hint="@string/address_of_line_2"
+                                    android:imeOptions="actionUnspecified"
+                                    android:inputType="textCapWords"
+                                    android:maxLength="50"
+                                    android:maxLines="2"
+                                    android:tag="@string/tag_optional"
+                                    android:textAppearance="@style/sign_up_input" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:visibility="gone">
+
+                                <AutoCompleteTextView
+                                    android:id="@+id/identification_city"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:freezesText="true"
+                                    android:hint="@string/identification_screen_prompt_city"
+                                    android:imeOptions="actionUnspecified"
+                                    android:inputType="textCapWords"
+                                    android:maxLength="25"
+                                    android:maxLines="1"
+                                    android:textAppearance="@style/sign_up_input" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <LinearLayout
+                                android:id="@+id/identification_llcountry_state"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:baselineAligned="false"
+                                android:orientation="horizontal">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:visibility="gone"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_weight="1"
                                     android:orientation="vertical">
 
-                                    <EditText
-                                        android:id="@+id/identification_caste"
+                                    <com.google.android.material.textfield.TextInputLayout
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:clickable="false"
-                                        android:cursorVisible="false"
-                                        android:focusable="false"
-                                        android:focusableInTouchMode="false"
-                                        android:fontFamily="@font/lato_regular"
-                                        android:freezesText="true"
-                                        android:imeOptions="actionUnspecified"
-                                        android:inputType="textCapWords"
-                                        android:maxLines="1"
-                                        android:text="@string/txt_personal_caste_header"
-                                        android:textSize="14sp" />
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1">
 
-                                    <Spinner
-                                        android:id="@+id/spinner_Caste"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content" />
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:orientation="vertical"
+                                            android:weightSum="4">
 
+                                            <EditText
+                                                android:id="@+id/identification_country"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="3"
+                                                android:clickable="false"
+                                                android:cursorVisible="false"
+                                                android:focusable="false"
+                                                android:focusableInTouchMode="false"
+                                                android:freezesText="true"
+                                                android:imeOptions="actionUnspecified"
+                                                android:inputType="textCapWords"
+                                                android:maxLines="1"
+                                                android:text="@string/identification_screen_prompt_country"
+                                                android:textAppearance="@style/sign_up_input" />
+
+                                            <Spinner
+                                                android:id="@+id/spinner_country"
+                                                android:layout_width="fill_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="1" />
+
+                                        </LinearLayout>
+
+
+                                    </com.google.android.material.textfield.TextInputLayout>
                                 </LinearLayout>
 
 
-                            </com.google.android.material.textfield.TextInputLayout>
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:layout_width="match_parent"
-                                android:visibility="gone"
-                                android:layout_height="wrap_content">
-
-                                <EditText
-                                    android:id="@+id/identification_other_caste"
+                                <RelativeLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:autofillHints="@string/action_settings"
-                                    android:ems="10"
-                                    android:freezesText="true"
-                                    android:hint="@string/txt_enter_caste"
-                                    android:imeOptions="actionUnspecified"
-                                    android:inputType="textCapWords"
-                                    android:maxLength="25"
-                                    android:maxLines="1"
-                                    android:singleLine="true"
-                                    android:textSize="14sp"
-                                    android:fontFamily="@font/lato_regular"/>
-                            </com.google.android.material.textfield.TextInputLayout>
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical"
+                                    android:visibility="gone">
 
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:visibility="gone"
-                                >
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:id="@+id/input_state_spinner"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:visibility="gone"
+                                        android:weightSum="4">
 
-                                <EditText
-                                    android:id="@+id/identification_registration_no"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:autofillHints="@string/action_settings"
-                                    android:ems="10"
-                                    android:fontFamily="@font/lato_regular"
-                                    android:textSize="14sp"
-                                    android:freezesText="true"
-                                    android:hint="@string/medical_registration_number_license_id"
-                                    android:imeOptions="actionUnspecified"
-                                    android:inputType="textCapWords"
-                                    android:maxLength="25"
-                                    android:maxLines="1"
-                                    android:singleLine="true"
-                                    android:textAppearance="@style/sign_up_input"/>
+                                        <LinearLayout
 
-                            </com.google.android.material.textfield.TextInputLayout>
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:orientation="vertical">
 
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:visibility="gone"
-                               >
+                                            <EditText
+                                                android:id="@+id/identification_state"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="3"
+                                                android:clickable="false"
+                                                android:cursorVisible="false"
+                                                android:focusable="false"
+                                                android:focusableInTouchMode="false"
+                                                android:freezesText="true"
+                                                android:imeOptions="actionUnspecified"
+                                                android:inputType="textCapWords"
+                                                android:maxLines="1"
+                                                android:text="@string/identification_screen_prompt_state"
+                                                android:textAppearance="@style/sign_up_input" />
 
-                                <EditText
-                                    android:id="@+id/identification_hospital_name"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:autofillHints="@string/action_settings"
-                                    android:ems="10"
-                                    android:freezesText="true"
-                                    android:hint="@string/name_of_health_organization_hospital_where_you_primarily_work"
-                                    android:imeOptions="actionUnspecified"
-                                    android:inputType="textCapWords"
-                                    android:maxLength="25"
-                                    android:maxLines="1"
-                                    android:fontFamily="@font/lato_regular"
-                                    android:textSize="14sp"
-                                    android:singleLine="true"
-                                    android:textAppearance="@style/sign_up_input"/>
+                                            <Spinner
+                                                android:id="@+id/spinner_state"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_weight="1" />
+                                        </LinearLayout>
 
-                            </com.google.android.material.textfield.TextInputLayout>
+
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:id="@+id/input_state_field"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="15dp"
+
+                                        >
+                                        <!--Can't access Vector drawables directly,that's why putted into another DrawableContainer-->
+                                        <!--On the Left or Right of textview or Editext-->
+
+                                        <EditText
+                                            android:id="@+id/edt_state"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:ems="10"
+                                            android:freezesText="true"
+                                            android:hint="@string/identification_screen_prompt_state"
+                                            android:imeOptions="actionUnspecified"
+                                            android:inputType="textCapWords"
+                                            android:maxLength="25"
+                                            android:maxLines="1"
+                                            android:singleLine="true"
+                                            android:textAppearance="@style/sign_up_input" />
+
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                                </RelativeLayout>
+
+                            </LinearLayout>
+
+
+                            <!--Commented by Venu as per the Neha told on 03/04/2020.-->
+                            <!-- <android.support.design.widget.TextInputLayout
+                                 android:layout_width="match_parent"
+                                 android:layout_height="wrap_content"
+                                 android:layout_marginTop="10dp"
+                                 android:layout_weight="1"
+                                 android:weightSum="4">
+
+                                 <LinearLayout
+                                     android:layout_width="match_parent"
+                                     android:layout_height="match_parent"
+                                     android:orientation="vertical">
+
+                                     <EditText
+                                         android:id="@+id/identification_dist"
+                                         android:layout_width="match_parent"
+                                         android:layout_height="wrap_content"
+                                         android:layout_weight="3"
+                                         android:clickable="false"
+                                         android:cursorVisible="false"
+                                         android:focusable="false"
+                                         android:focusableInTouchMode="false"
+                                         android:freezesText="true"
+                                         android:imeOptions="actionUnspecified"
+                                         android:inputType="textCapWords"
+                                         android:maxLines="1"
+                                         android:text="@string/district_municipal_corporations"
+                                         android:textAppearance="@style/sign_up_input"/>
+
+                                     <Spinner
+                                         android:id="@+id/spinner_district"
+                                         android:layout_width="match_parent"
+                                         android:layout_height="wrap_content" />
+                                 </LinearLayout>
+
+                             </android.support.design.widget.TextInputLayout>
+
+                             <android.support.design.widget.TextInputLayout
+                                 android:layout_width="match_parent"
+                                 android:layout_height="wrap_content"
+                                 android:layout_marginTop="10dp"
+                                 android:layout_weight="1"
+                                 android:weightSum="4">
+
+                                 <LinearLayout
+                                     android:layout_width="match_parent"
+                                     android:layout_height="match_parent"
+                                     android:orientation="vertical">
+
+                                     <EditText
+                                         android:id="@+id/identification_location"
+                                         android:layout_width="match_parent"
+                                         android:layout_height="wrap_content"
+                                         android:layout_weight="3"
+                                         android:clickable="false"
+                                         android:cursorVisible="false"
+                                         android:focusable="false"
+                                         android:focusableInTouchMode="false"
+                                         android:freezesText="true"
+                                         android:imeOptions="actionUnspecified"
+                                         android:inputType="textCapWords"
+                                         android:maxLines="1"
+                                         android:text="@string/location"
+                                         android:textAppearance="@style/sign_up_input"/>
+
+                                     <Spinner
+                                         android:id="@+id/spinner_location"
+                                         android:layout_width="match_parent"
+                                         android:layout_height="wrap_content" />
+                                 </LinearLayout>
+
+
+                             </android.support.design.widget.TextInputLayout>-->
+
+                            <!--                <com.google.android.material.textfield.TextInputLayout-->
+                            <!--                    android:layout_width="match_parent"-->
+                            <!--                    android:layout_height="wrap_content">-->
+
+                            <!--                    <EditText-->
+                            <!--                        android:id="@+id/identification_postal_code"-->
+                            <!--                        android:layout_width="fill_parent"-->
+                            <!--                        android:layout_height="wrap_content"-->
+                            <!--                        android:ems="10"-->
+                            <!--                        android:freezesText="true"-->
+                            <!--                        android:hint="@string/identification_screen_prompt_postal_code"-->
+                            <!--                        android:imeOptions="actionUnspecified"-->
+                            <!--                        android:inputType="number"-->
+                            <!--                        android:maxLength="6"-->
+                            <!--                        android:maxLines="1"-->
+                            <!--                        android:tag="@string/tag_optional"-->
+                            <!--                        android:textAppearance="@style/sign_up_input"/>-->
+
+
+                            <!--                </com.google.android.material.textfield.TextInputLayout>-->
+
                         </LinearLayout>
--->
-
-
                     </LinearLayout>
 
-<!--
-                        <FrameLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-
-                                &lt;!&ndash; android:textColor="#50000000"&ndash;&gt;
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/email"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:digits="1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-                                    android:hint="@string/username"
-                                    android:imeOptions="actionNext"
-                                    android:inputType="text"
-                                    android:maxLength="8"
-                                    android:maxLines="1"
-                                    android:nextFocusForward="@id/password"
-                                    android:textAppearance="@style/sign_up_input" />
-                                &lt;!&ndash; android:maxLines="1"
-                                 android:nextFocusForward="@id/password" />&ndash;&gt;
-
-                            </com.google.android.material.textfield.TextInputLayout>
-
-
-
-                        </FrameLayout>
--->
-
-
-<!--
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="2dp"
-                            android:lineSpacingExtra="2sp"
-                            android:text="@string/username_condition"
-                            android:textAppearance="@style/login_details_conditions"
-                            android:textColor="@null"
-                            android:translationY="-1sp"
-                            android:visibility="visible" />
--->
-
-                    <LinearLayout
-                        android:id="@+id/login_linearlayout"
+                    <Button
+                        android:id="@+id/btnSendOtp"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="15dp"
                         android:layout_marginBottom="15dp"
-                        android:orientation="vertical"
-                        android:animateLayoutChanges="true"
-                        android:visibility="gone">
-
-                        <!--OTP No-->
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <EditText
-                                android:id="@+id/mOTP"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="@string/enter_otp"
-                                android:imeOptions="actionNext"
-                                android:maxLength="4"
-                                android:singleLine="true"
-                                android:textAppearance="@style/sign_up_input" />
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <TextView
-                            android:id="@+id/tvResendOtp"
-                            android:text="@string/resend_otp"
-                            android:layout_marginTop="4dp"
-                            android:visibility="gone"
-                            tools:visibility="visible"
-                            android:minHeight="32dp"
-                            android:gravity="center"
-                            android:fontFamily="@font/lato_regular"
-                            android:textColor="@color/colorPrimary"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:passwordToggleEnabled="true">
-
-                            <EditText
-                                android:id="@+id/password"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="@string/prompt_password"
-                                android:imeOptions="actionNext"
-                                android:inputType="textPassword"
-                                android:maxLength="12"
-                                android:singleLine="true"
-                                android:textAppearance="@style/sign_up_input" />
-                            android:maxLines="1"
-                            android:singleLine="true" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:passwordToggleEnabled="true">
-
-                            <EditText
-                                android:id="@+id/cpassword"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="@string/confirm_password"
-                                android:imeOptions="actionNext"
-                                android:inputType="textPassword"
-                                android:maxLength="12"
-                                android:singleLine="true"
-                                android:textAppearance="@style/sign_up_input" />
-                            android:maxLines="1"
-                            android:singleLine="true" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="2dp"
-                            android:lineSpacingExtra="2sp"
-                            android:text="@string/password_should_be_8_characters_long_and_should_have_both_upper_and_lower_case_characters_at_least_one_digit"
-                            android:textAppearance="@style/login_details_conditions"
-                            android:textColor="@null"
-                            android:translationY="-1sp" />
-                    </LinearLayout>
-
-                    <!--<ImageView
-                        android:id="@+id/imageview_id_picture"
-                        android:layout_width="170dp"
-                        android:layout_height="170dp"
-                        android:layout_gravity="right"
-                        android:contentDescription="TODO"
-                        android:scaleType="centerCrop"
-                        android:visibility="gone"
-                        app:srcCompat="@drawable/ic_person_camera_intele" />-->
-
-                </LinearLayout>
-
-           <!--     <Space
-                    android:layout_width="20dp"
-                    android:layout_height="20dp" />
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:drawableStart="@drawable/icon_account_details"
-                    android:drawableLeft="@drawable/icon_account_details"
-                    android:drawablePadding="10dp"
-                    android:ems="10"
-                    android:text="@string/login_details"
-                    android:textAppearance="@style/sign_up_title" />/>
-                <Space
-                    android:layout_width="20dp"
-                    android:layout_height="20dp" />-->
-
-                <Space
-                    android:layout_width="20dp"
-                    android:layout_height="20dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:visibility="gone"
-                    android:drawableStart="@drawable/icon_address"
-                    android:drawableLeft="@drawable/icon_address"
-                    android:drawablePadding="10dp"
-                    android:ems="10"
-                    android:text="@string/address_details"
-                    android:textAppearance="@style/sign_up_title"/>/>
-
-                <Space
-                    android:layout_width="20dp"
-                    android:visibility="gone"
-                    android:layout_height="20dp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:visibility="gone"
-                    android:background="@drawable/white_rectangular_bg"
-                    android:elevation="40dp"
-                    android:padding="10dp">
-
+                        android:background="@drawable/rectangle_7"
+                        android:text="@string/send_otp"
+                        android:textAppearance="@style/sign_up_save" />
 
                     <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginBottom="15dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone">
-
-                    <EditText
-                        android:id="@+id/identification_address1"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:freezesText="true"
-                        android:hint="@string/address_of_line_1"
-                        android:imeOptions="actionUnspecified"
-                        android:inputType="textCapWords"
-                        android:maxLength="50"
-                        android:maxLines="2"
-                        android:singleLine="false"
-                        android:tag="@string/tag_optional"
-                        android:textAppearance="@style/sign_up_input"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone">
-
-                    <EditText
-                        android:id="@+id/identification_address2"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:freezesText="true"
-                        android:hint="@string/address_of_line_2"
-                        android:imeOptions="actionUnspecified"
-                        android:inputType="textCapWords"
-                        android:maxLength="50"
-                        android:maxLines="2"
-                        android:tag="@string/tag_optional"
-                        android:textAppearance="@style/sign_up_input"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone">
-
-                    <AutoCompleteTextView
-                        android:id="@+id/identification_city"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:freezesText="true"
-                        android:hint="@string/identification_screen_prompt_city"
-                        android:imeOptions="actionUnspecified"
-                        android:inputType="textCapWords"
-                        android:maxLength="25"
-                        android:maxLines="1"
-                        android:textAppearance="@style/sign_up_input"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <LinearLayout
-                    android:id="@+id/identification_llcountry_state"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:baselineAligned="false"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
+                        android:id="@+id/frRegister"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical"
-                                android:weightSum="4">
-
-                                <EditText
-                                    android:id="@+id/identification_country"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="3"
-                                    android:clickable="false"
-                                    android:cursorVisible="false"
-                                    android:focusable="false"
-                                    android:focusableInTouchMode="false"
-                                    android:freezesText="true"
-                                    android:imeOptions="actionUnspecified"
-                                    android:inputType="textCapWords"
-                                    android:maxLines="1"
-                                    android:text="@string/identification_screen_prompt_country"
-                                    android:textAppearance="@style/sign_up_input"/>
-
-                                <Spinner
-                                    android:id="@+id/spinner_country"
-                                    android:layout_width="fill_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1" />
-
-                            </LinearLayout>
-
-
-                        </com.google.android.material.textfield.TextInputLayout>
-                    </LinearLayout>
-
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:visibility="gone">
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/input_state_spinner"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:visibility="gone"
-                            android:layout_weight="1"
-                            android:weightSum="4">
-
-                            <LinearLayout
-
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical">
-
-                                <EditText
-                                    android:id="@+id/identification_state"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="3"
-                                    android:clickable="false"
-                                    android:cursorVisible="false"
-                                    android:focusable="false"
-                                    android:focusableInTouchMode="false"
-                                    android:freezesText="true"
-                                    android:imeOptions="actionUnspecified"
-                                    android:inputType="textCapWords"
-                                    android:maxLines="1"
-                                    android:text="@string/identification_screen_prompt_state"
-                                    android:textAppearance="@style/sign_up_input"/>
-
-                                <Spinner
-                                    android:id="@+id/spinner_state"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1" />
-                            </LinearLayout>
-
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/input_state_field"
+                        <LinearLayout
+                            android:id="@+id/buttons"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
+                            android:gravity="center"
+                            android:orientation="horizontal">
 
-                            >
-                            <!--Can't access Vector drawables directly,that's why putted into another DrawableContainer-->
-                            <!--On the Left or Right of textview or Editext-->
-
-                            <EditText
-                                android:id="@+id/edt_state"
-                                android:layout_width="match_parent"
+                            <CheckBox
+                                android:id="@+id/chb_agree_privacy"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:ems="10"
-                                android:freezesText="true"
-                                android:hint="@string/identification_screen_prompt_state"
-                                android:imeOptions="actionUnspecified"
-                                android:inputType="textCapWords"
-                                android:maxLength="25"
-                                android:maxLines="1"
-                                android:singleLine="true"
-                                android:textAppearance="@style/sign_up_input"/>
+                                android:layout_weight="0.75"
+                                android:fontFamily="@fonts/Lato_Regular"
+                                android:text="@string/privacy_agree" />
 
-                        </com.google.android.material.textfield.TextInputLayout>
+                            <TextView
+                                android:id="@+id/txt_privacy"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:drawableEnd="@drawable/ic_keyboard_arrow_right"
+                                android:fontFamily="@fonts/Lato_Regular"
+                                android:foreground="?android:attr/selectableItemBackground"
+                                android:padding="10dp"
+                                android:text="@string/privacy_notice_title"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:textColor="@color/colorPrimaryDark" />
+                        </LinearLayout>
 
 
-                    </RelativeLayout>
-
-                </LinearLayout>
-
-
-                <!--Commented by Venu as per the Neha told on 03/04/2020.-->
-               <!-- <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:weightSum="4">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-
-                        <EditText
-                            android:id="@+id/identification_dist"
+                        <Button
+                            android:id="@+id/btnSave"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="3"
-                            android:clickable="false"
-                            android:cursorVisible="false"
-                            android:focusable="false"
-                            android:focusableInTouchMode="false"
-                            android:freezesText="true"
-                            android:imeOptions="actionUnspecified"
-                            android:inputType="textCapWords"
-                            android:maxLines="1"
-                            android:text="@string/district_municipal_corporations"
-                            android:textAppearance="@style/sign_up_input"/>
-
-                        <Spinner
-                            android:id="@+id/spinner_district"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="15dp"
+                            android:layout_marginBottom="15dp"
+                            android:background="@drawable/rectangle_7"
+                            android:text="@string/title_sign_up"
+                            android:textAppearance="@style/sign_up_save" />
                     </LinearLayout>
 
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:weightSum="4">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-
-                        <EditText
-                            android:id="@+id/identification_location"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="3"
-                            android:clickable="false"
-                            android:cursorVisible="false"
-                            android:focusable="false"
-                            android:focusableInTouchMode="false"
-                            android:freezesText="true"
-                            android:imeOptions="actionUnspecified"
-                            android:inputType="textCapWords"
-                            android:maxLines="1"
-                            android:text="@string/location"
-                            android:textAppearance="@style/sign_up_input"/>
-
-                        <Spinner
-                            android:id="@+id/spinner_location"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-                    </LinearLayout>
-
-
-                </android.support.design.widget.TextInputLayout>-->
-
-<!--                <com.google.android.material.textfield.TextInputLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content">-->
-
-<!--                    <EditText-->
-<!--                        android:id="@+id/identification_postal_code"-->
-<!--                        android:layout_width="fill_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:ems="10"-->
-<!--                        android:freezesText="true"-->
-<!--                        android:hint="@string/identification_screen_prompt_postal_code"-->
-<!--                        android:imeOptions="actionUnspecified"-->
-<!--                        android:inputType="number"-->
-<!--                        android:maxLength="6"-->
-<!--                        android:maxLines="1"-->
-<!--                        android:tag="@string/tag_optional"-->
-<!--                        android:textAppearance="@style/sign_up_input"/>-->
-
-
-<!--                </com.google.android.material.textfield.TextInputLayout>-->
-
-            </LinearLayout>
-            </LinearLayout>
-                <Button
-                    android:id="@+id/btnSendOtp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginBottom="15dp"
-                    android:background="@drawable/rectangle_7"
-                    android:text="@string/send_otp"
-                    android:textAppearance="@style/sign_up_save" />
-                <LinearLayout
-                    android:id="@+id/frRegister"
-                    android:orientation="vertical"
-                    android:visibility="gone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                <LinearLayout
-                    android:id="@+id/buttons"
-                    android:layout_marginTop="15dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <CheckBox
-                        android:id="@+id/chb_agree_privacy"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.75"
-                        android:fontFamily="@fonts/Lato_Regular"
-                        android:text="@string/privacy_agree" />
-
-                    <TextView
-                        android:id="@+id/txt_privacy"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableEnd="@drawable/ic_keyboard_arrow_right"
-                        android:fontFamily="@fonts/Lato_Regular"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        android:padding="10dp"
-                        android:layout_gravity="center_vertical"
-                        android:text="@string/privacy_notice_title"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textAppearance="?android:attr/textAppearanceSmall"/>
                 </LinearLayout>
-
-
-                <Button
-                    android:id="@+id/btnSave"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginBottom="15dp"
-                    android:background="@drawable/rectangle_7"
-                    android:text="@string/title_sign_up"
-                    android:textAppearance="@style/sign_up_save" />
-            </LinearLayout>
-
-                <!--                <android.support.design.widget.TextInputLayout-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content">-->
-
-                <!--                    <EditText-->
-                <!--                        android:id="@+id/identification_relationship"-->
-                <!--                        android:layout_width="fill_parent"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:ems="10"-->
-                <!--                        android:freezesText="true"-->
-                <!--                        android:hint="@string/identification_screen_prompt_relationship"-->
-                <!--                        android:imeOptions="actionUnspecified"-->
-                <!--                        android:drawableStart="@drawable/ic_family_24dp_black"-->
-                <!--                        android:drawableLeft="@drawable/ic_family_24dp_black"-->
-                <!--                        android:drawablePadding="10dp"-->
-                <!--                        android:inputType="textCapWords"-->
-                <!--                        android:maxLength="25"-->
-                <!--                        android:maxLines="1"-->
-                <!--                        android:tag="@string/tag_optional" />-->
-
-                <!--                </android.support.design.widget.TextInputLayout>-->
-
-                <!--                <android.support.design.widget.TextInputLayout-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content">-->
-
-
-                <!--                    <EditText-->
-                <!--                        android:id="@+id/identification_occupation"-->
-                <!--                        android:layout_width="fill_parent"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:drawableStart="@drawable/occupation_icon"-->
-                <!--                        android:drawableLeft="@drawable/occupation_icon"-->
-                <!--                        android:drawablePadding="10dp"-->
-                <!--                        android:ems="10"-->
-                <!--                        android:freezesText="true"-->
-                <!--                        android:hint="@string/identification_screen_prompt_occupation"-->
-                <!--                        android:imeOptions="actionUnspecified"-->
-                <!--                        android:inputType="textCapWords"-->
-                <!--                        android:maxLength="25"-->
-
-                <!--                        android:maxLines="1"-->
-                <!--                        android:tag="@string/tag_optional" />-->
-
-                <!--                </android.support.design.widget.TextInputLayout>-->
-
-
-                <!--                <Space-->
-                <!--                    android:layout_width="20dp"-->
-                <!--                    android:layout_height="20dp" />-->
-
-                <!--                <android.support.design.widget.TextInputLayout-->
-                <!--                    android:id="@+id/identification_txtlcaste"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content">-->
-
-                <!--                    <LinearLayout-->
-                <!--                        android:layout_width="match_parent"-->
-                <!--                        android:layout_height="match_parent"-->
-                <!--                        android:orientation="horizontal"-->
-                <!--                        android:weightSum="4">-->
-
-                <!--                        <EditText-->
-                <!--                            android:id="@+id/identification_caste"-->
-                <!--                            android:layout_width="wrap_content"-->
-                <!--                            android:layout_height="wrap_content"-->
-                <!--                            android:clickable="false"-->
-                <!--                            android:cursorVisible="false"-->
-                <!--                            android:drawableStart="@drawable/person_icon"-->
-                <!--                            android:drawableLeft="@drawable/person_icon"-->
-                <!--                            android:drawablePadding="10dp"-->
-                <!--                            android:focusable="false"-->
-                <!--                            android:focusableInTouchMode="false"-->
-
-                <!--                            android:freezesText="true"-->
-                <!--                            android:imeOptions="actionUnspecified"-->
-                <!--                            android:inputType="textCapWords"-->
-                <!--                            android:maxLines="1"-->
-                <!--                            android:text="@string/identification_screen_prompt_caste" />-->
-
-                <!--                        <Spinner-->
-                <!--                            android:id="@+id/spinner_caste"-->
-                <!--                            android:layout_width="match_parent"-->
-                <!--                            android:layout_height="wrap_content" />-->
-                <!--                    </LinearLayout>-->
-
-                <!--                </android.support.design.widget.TextInputLayout>-->
-
-                <!--                <android.support.design.widget.TextInputLayout-->
-                <!--                    android:id="@+id/identification_txtleconomic"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content">-->
-
-                <!--                    <LinearLayout-->
-                <!--                        android:layout_width="match_parent"-->
-                <!--                        android:layout_height="match_parent"-->
-                <!--                        android:orientation="horizontal"-->
-                <!--                        android:weightSum="4">-->
-
-                <!--                        <EditText-->
-                <!--                            android:id="@+id/identification_econiomic_status"-->
-                <!--                            android:layout_width="wrap_content"-->
-                <!--                            android:layout_height="wrap_content"-->
-                <!--                            android:clickable="false"-->
-                <!--                            android:cursorVisible="false"-->
-                <!--                            android:drawableStart="@drawable/econiomic_status_icon"-->
-                <!--                            android:drawableLeft="@drawable/econiomic_status_icon"-->
-                <!--                            android:drawablePadding="10dp"-->
-                <!--                            android:focusable="false"-->
-                <!--                            android:focusableInTouchMode="false"-->
-                <!--                            android:freezesText="true"-->
-                <!--                            android:imeOptions="actionUnspecified"-->
-                <!--                            android:inputType="textCapWords"-->
-                <!--                            android:maxLines="1"-->
-                <!--                            android:text="@string/identification_screen_prompt_economic_status" />-->
-
-                <!--                        <Spinner-->
-                <!--                            android:id="@+id/spinner_economic_status"-->
-                <!--                            android:layout_width="match_parent"-->
-                <!--                            android:layout_height="wrap_content" />-->
-                <!--                    </LinearLayout>-->
-                <!--                </android.support.design.widget.TextInputLayout>-->
-
-                <!--                <android.support.design.widget.TextInputLayout-->
-                <!--                    android:id="@+id/identification_txtleducation"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:visibility="gone"-->
-                <!--                    android:layout_height="wrap_content">-->
-
-                <!--                    <LinearLayout-->
-                <!--                        android:layout_width="match_parent"-->
-                <!--                        android:layout_height="match_parent"-->
-                <!--                        android:orientation="horizontal"-->
-                <!--                        android:weightSum="4">-->
-
-                <!--                        <EditText-->
-                <!--                            android:id="@+id/identification_education"-->
-                <!--                            android:layout_width="wrap_content"-->
-                <!--                            android:layout_height="wrap_content"-->
-                <!--                            android:clickable="false"-->
-                <!--                            android:cursorVisible="false"-->
-                <!--                            android:drawableStart="@drawable/education_icon"-->
-                <!--                            android:drawableLeft="@drawable/education_icon"-->
-                <!--                            android:drawablePadding="10dp"-->
-                <!--                            android:focusable="false"-->
-                <!--                            android:focusableInTouchMode="false"-->
-                <!--                            android:freezesText="true"-->
-                <!--                            android:imeOptions="actionUnspecified"-->
-
-                <!--                            android:inputType="textCapWords"-->
-                <!--                            android:maxLines="1"-->
-                <!--                            android:text="@string/identification_screen_prompt_education" />-->
-
-                <!--                        <Spinner-->
-                <!--                            android:id="@+id/spinner_education"-->
-                <!--                            android:layout_width="match_parent"-->
-                <!--                            android:layout_height="wrap_content" />-->
-                <!--                    </LinearLayout>-->
-
-
-                <!--                </android.support.design.widget.TextInputLayout>-->
-            </LinearLayout>
-        </ScrollView>
+            </androidx.cardview.widget.CardView>
+        </androidx.core.widget.NestedScrollView>
     </RelativeLayout>
 
-    <!--    <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/fab_margin"
-            app:srcCompat="@drawable/ic_done_24dp" />-->
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

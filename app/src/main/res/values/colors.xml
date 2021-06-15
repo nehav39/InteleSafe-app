@@ -2,9 +2,9 @@
 
 <resources>
     <color name="colorPrimary">#3A5084</color> //385399 //#002A6C
-    <color name="colorPrimaryDark">#3A5084</color> //2014EB //
+    <color name="colorPrimaryDark">#212D49</color> //2014EB //
     <color name="colorPrimaryLight">#C5CAE9</color> //D1C4E9 //#C5CAE9
-    <color name="colorAccent">#C04F60</color> //448AFF //#002A6C
+    <color name="colorAccent">#0091EA</color> //448AFF //#002A6C
 
     <color name="act_background">#E5E5E5</color>
 
@@ -70,5 +70,9 @@
 
     <!--Home Screen Changes-->
     <color name="txt_sub_header_color">#333333</color>
+    <color name="red_light_1">#fbf1e8</color>
+    <color name="blue_light_1">#EDEEF9</color>
+    <color name="blue_11">#56CCF2</color>
+    <color name="common_bg_color">#FCFCFF</color>
 
 </resources>
