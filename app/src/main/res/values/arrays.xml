@@ -162,7 +162,6 @@
         <item>Pigtauranan-Pangantucan</item>
         <item>Poblacion-Pangantucan</item>
         <item>Portulin-Pangantucan</item>
-        <item></item>
 
     </string-array>
 
@@ -557,13 +556,19 @@
         <item>Zimbabwe</item>
     </string-array>
 
-    <string-array name="state_values">
+    <string-array name="state_values_en">
         <item>Select</item>
         <item>Jharkhand</item>
         <item>Madhya Pradesh</item>
     </string-array>
 
-    <string-array name="jh_city_values">
+    <string-array name="state_values_hi">
+        <item>चयन करें</item>
+        <item>झारखण्ड</item>
+        <item>मध्य प्रदेश</item>
+    </string-array>
+
+    <string-array name="jh_city_values_en">
         <item>Select</item>
         <item>Ranchi</item>
         <item>East Singhbhum</item>
@@ -571,14 +576,28 @@
         <item>Dhanbad</item>
     </string-array>
 
-    <string-array name="mp_city_values">
+    <string-array name="jh_city_values_hi">
+        <item>चयन करें</item>
+        <item>रांची</item>
+        <item>पूर्वी सिंहभूम</item>
+        <item>बोकारो</item>
+        <item>धनबाद </item>
+    </string-array>
+
+    <string-array name="mp_city_values_en">
         <item>Select</item>
         <item>Khandwa</item>
         <item>Rajgarh</item>
     </string-array>
 
+    <string-array name="mp_city_values_hi">
+        <item>चयन करें</item>
+        <item>खंडवा</item>
+        <item>राजगढ़</item>
+    </string-array>
+
     <!--Ranchi Block Values...-->
-    <string-array name="rn_block_values">
+    <string-array name="rn_block_values_en">
         <item>Select</item>
         <item>Burmu</item>
         <item>Khelari</item>
@@ -601,7 +620,7 @@
     </string-array>
 
     <!--East Singhbhum Values...-->
-    <string-array name="es_block_values">
+    <string-array name="es_block_values_en">
         <item>Select</item>
         <item>Baharagora</item>
         <item>Boram</item>
@@ -617,7 +636,7 @@
     </string-array>
 
     <!--Bokaro Values...-->
-    <string-array name="bo_block_values">
+    <string-array name="bo_block_values_en">
         <item>Select</item>
         <item>Bermo</item>
         <item>Chandankiyari</item>
@@ -631,7 +650,7 @@
     </string-array>
 
     <!--Dhanbad Values...-->
-    <string-array name="dh_block_values">
+    <string-array name="dh_block_values_en">
         <item>Select</item>
         <item>Baghmara</item>
         <item>Baliapur</item>
@@ -646,13 +665,92 @@
     </string-array>
 
     <!--Default Block Values...-->
-    <string-array name="default_block_values">
+    <string-array name="default_block_values_en">
         <item>Select</item>
         <item>Invalid</item>
     </string-array>
 
-    <string-array name="mp_block_values">
+    <!--Ranchi Block Values...-->
+    <string-array name="rn_block_values_hi">
+        <item>चयन करें</item>
+        <item>बर्मु</item>
+        <item>खेलेरी</item>
+        <item>कांके</item>
+        <item>ओरमांझी</item>
+        <item>अंगारा</item>
+        <item>रेह</item>
+        <item>सिल्ली</item>
+        <item>सोनाहातु</item>
+        <item>नामकुम</item>
+        <item>रातू</item>
+        <item>नगरी</item>
+        <item>मंदारी</item>
+        <item>चान्हो</item>
+        <item>बेरो</item>
+        <item>इटकि</item>
+        <item>लापुंग</item>
+        <item>बुन्दु</item>
+        <item>तामार</item>
+    </string-array>
+
+    <!--East Singhbhum Values...-->
+    <string-array name="es_block_values_hi">
+        <item>चयन करें</item>
+        <item>बहरागोरा</item>
+        <item>बोराम</item>
+        <item>चाकुलिया</item>
+        <item>धालभूमगढ़</item>
+        <item>डुमरिया</item>
+        <item>घाटशिला</item>
+        <item>गोलमुरी सह जुगसलाई</item>
+        <item>गुड़ाबांधा </item>
+        <item>मुसाबनी</item>
+        <item>पतमदा</item>
+        <item>पोटका</item>
+    </string-array>
+
+    <!--Bokaro Values...-->
+    <string-array name="bo_block_values_hi">
+        <item>चयन करें</item>
+        <item>बेरमो</item>
+        <item>चंदनकियारी</item>
+        <item>चंद्रपुर</item>
+        <item>चास</item>
+        <item>गुमिया</item>
+        <item>जरीडीह</item>
+        <item>कसमारी</item>
+        <item>नवादिह</item>
+        <item>पीटरवार</item>
+    </string-array>
+
+    <!--Dhanbad Values...-->
+    <string-array name="dh_block_values_hi">
+        <item>चयन करें</item>
+        <item>बाघमार</item>
+        <item>बलियापुर</item>
+        <item>धनबाद</item>
+        <item>एगरकुंड</item>
+        <item>गोविंदपुर</item>
+        <item>कलियासोल</item>
+        <item>निरसा</item>
+        <item>पूर्वी टुंडी</item>
+        <item>तोपचांची</item>
+        <item>टुंडी</item>
+    </string-array>
+
+    <!--Default Block Values...-->
+    <string-array name="default_block_values_hi">
+        <item>चयन करें</item>
+        <item>अमान्य</item>
+    </string-array>
+
+    <string-array name="mp_block_values_en">
         <item>Select</item>
         <item>Other</item>
+    </string-array>
+
+    <string-array name="mp_block_values_hi">
+        <item>चयन करें</item>
+        <item>अन्य</item>
     </string-array>
 </resources>

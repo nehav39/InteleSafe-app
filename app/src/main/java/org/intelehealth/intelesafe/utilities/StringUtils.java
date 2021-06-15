@@ -185,4 +185,209 @@ public final class StringUtils {
         return val;
     }
 
+    public static String switch_hi_state(String val) {
+        switch (val) {
+            case "झारखण्ड":
+                val = "Jharkhand";
+                break;
+            case "मध्य प्रदेश":
+                val = "Madhya Pradesh";
+                break;
+            case "चयन करें":
+                val = "Select";
+                break;
+            default:
+                return val;
+        }
+        return val;
+    }
+    public static String switch_hi_city(String val) {
+        switch (val) {
+            case "रांची":
+                val = "Ranchi";
+                break;
+            case "पूर्वी सिंहभूम":
+                val = "East Singhbhum";
+                break;
+            case "बोकारो":
+                val = "Bokaro";
+                break;
+            case "धनबाद":
+                val = "Dhanbad";
+                break;
+            case "खंडवा":
+                val = "Khandwa";
+                break;
+            case "राजगढ़":
+                val = "Rajgarh";
+                break;
+            case "चयन करें":
+                val = "Select";
+                break;
+            default:
+                return val;
+        }
+        return val;
+    }
+
+    public static String switch_hi_block(String val) {
+        switch (val) {
+            case "बर्मु":
+                val = "Burmu";
+                break;
+            case "खेलेरी":
+                val = "Khelari";
+                break;
+            case "कांके":
+                val = "Kanke";
+                break;
+            case "ओरमांझी":
+                val = "Ormanjhi";
+                break;
+            case "अंगारा":
+                val = "Angara";
+                break;
+            case "रेह":
+                val = "Rahe";
+                break;
+            case "सिल्ली":
+                val = "Silli";
+                break;
+            case "सोनाहातु":
+                val = "Sonahatu";
+                break;
+            case "नामकुम":
+                val = "Namkum";
+                break;
+            case "रातू":
+                val = "Ratu";
+                break;
+            case "नगरी":
+                val = "Nagri";
+                break;
+            case "मंदारी":
+                val = "Mandar";
+                break;
+            case "चान्हो":
+                val = "Chanho";
+                break;
+            case "बेरो":
+                val = "Bero";
+                break;
+            case "इटकि":
+                val = "Itki";
+                break;
+            case "लापुंग":
+                val = "Lapung";
+                break;
+            case "बुन्दु":
+                val = "Bundu";
+                break;
+            case "तामार":
+                val = "Tamar";
+                break;
+            case "बहरागोरा":
+                val = "Baharagora";
+                break;
+            case "बोराम":
+                val = "Boram";
+                break;
+            case "चाकुलिया":
+                val = "Chakulia";
+                break;
+            case "धालभूमगढ़":
+                val = "Dhalbhumgarh";
+                break;
+            case "डुमरिया":
+                val = "Dumaria";
+                break;
+            case "घाटशिला":
+                val = "Ghatshila";
+                break;
+            case "गोलमुरी सह जुगसलाई":
+                val = "Golmuri cum Jugsalai";
+                break;
+            case "गुड़ाबांधा":
+                val = "Gudabandha";
+                break;
+            case "मुसाबनी":
+                val = "Musabani";
+                break;
+            case "पतमदा":
+                val = "Patamda";
+                break;
+            case "पोटका":
+                val = "Potka";
+                break;
+            case "बेरमो":
+                val = "Bermo";
+                break;
+            case "चंदनकियारी":
+                val = "Chandankiyari";
+                break;
+            case "चंद्रपुर":
+                val = "Chandrapura";
+                break;
+            case "चास":
+                val = "Chas";
+                break;
+            case "गुमिया":
+                val = "Gumia";
+                break;
+            case "जरीडीह":
+                val = "Jaridih";
+                break;
+            case "कसमारी":
+                val = "Kasmar";
+                break;
+            case "नवादिह":
+                val = "Nawadih";
+                break;
+            case "पीटरवार":
+                val = "Peterwar";
+                break;
+            case "बाघमार":
+                val = "Baghmara";
+                break;
+            case "बलियापुर":
+                val = "Baliapur";
+                break;
+            case "धनबाद":
+                val = "Dhanbad";
+                break;
+            case "एगरकुंड":
+                val = "Egarkund";
+                break;
+            case "गोविंदपुर":
+                val = "Govindpur";
+                break;
+            case "कलियासोल":
+                val = "Kaliasole";
+                break;
+            case "निरसा":
+                val = "Nirsa";
+                break;
+            case "पूर्वी टुंडी":
+                val = "Purvi Tundi";
+                break;
+            case "तोपचांची":
+                val = "Topchanchi";
+                break;
+            case "टुंडी":
+                val = "Tundi";
+                break;
+            case "अमान्य":
+                val = "Invalid";
+                break;
+            case "चयन करें":
+                val = "Select";
+                break;
+            case "अन्य":
+                val = "Other";
+                break;
+            default:
+                return val;
+        }
+        return val;
+    }
 }

@@ -275,7 +275,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dip"
-                                android:entries="@array/state_values"
                                 android:focusable="true" />
 
                             <TextView
@@ -301,7 +300,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dip"
-                                android:entries="@array/jh_city_values"
                                 android:focusable="true" />
 
                             <TextView
@@ -327,7 +325,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dip"
-                                android:entries="@array/default_block_values"
                                 android:focusable="true" />
 
                             <com.google.android.material.textfield.TextInputLayout
