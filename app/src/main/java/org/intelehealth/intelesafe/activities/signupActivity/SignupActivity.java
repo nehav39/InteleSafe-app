@@ -105,6 +105,10 @@ import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
 
+import static org.intelehealth.intelesafe.utilities.StringUtils.switch_hi_block;
+import static org.intelehealth.intelesafe.utilities.StringUtils.switch_hi_city;
+import static org.intelehealth.intelesafe.utilities.StringUtils.switch_hi_state;
+
 /**
  * Created by Sagar Shimpi
  */
@@ -178,6 +182,9 @@ public class SignupActivity extends AppCompatActivity {
     String cPassword = "";
     String country = "India";
     String state = "";
+    String city = "";
+    String block = "";
+
     //   String district = "";
     private String personUUID = "";
     private String patientOpenMRSID = "";
@@ -227,6 +234,11 @@ public class SignupActivity extends AppCompatActivity {
     private Button btnSendOtp;
     private TextView txt_privacy;
     private DatePickerDialog datePickerDialog;
+
+    private ArrayAdapter<CharSequence> stateAdapter;
+    private ArrayAdapter<CharSequence> cityAdapter;
+    private ArrayAdapter<CharSequence> blockAdapter;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -375,7 +387,7 @@ public class SignupActivity extends AppCompatActivity {
 
         generateUuid();
 
-        ArrayAdapter<CharSequence> stateAdapter = ArrayAdapter.createFromResource(this, R.array.state_error, android.R.layout.simple_spinner_item);
+//        ArrayAdapter<CharSequence> stateAdapter = ArrayAdapter.createFromResource(this, R.array.state_error, android.R.layout.simple_spinner_item);
         // stateAdapter.setDropDownViewResource(R.layout.custom_spinner_item);
       //  mState.setAdapter(stateAdapter);
 
@@ -1166,7 +1178,7 @@ public class SignupActivity extends AppCompatActivity {
 
                 UserBirthAttribute userBirthHosAttribute = new UserBirthAttribute();
                 userBirthHosAttribute.setAttributeType("1c718819-345c-4368-aad6-d69b4c267db7"); //openmrsuuid education
-                userBirthHosAttribute.setValue("" + (block_spinner.getSelectedItem().toString().equalsIgnoreCase("Select") ?"" :block_spinner.getSelectedItem().toString())); //hospital name text
+                userBirthHosAttribute.setValue("" + (block_spinner.getSelectedItemPosition()==0?"" : selectBlock())); //hospital name text
 
                 UserBirthAttribute userCasteAttribute = new UserBirthAttribute();
                 userCasteAttribute.setAttributeType("5a889d96-0c84-4a04-88dc-59a6e37db2d3"); // This is for Designation. openrms caste...
@@ -1190,7 +1202,7 @@ public class SignupActivity extends AppCompatActivity {
                 userAddressData.setCityVillage("" + mCity.getText().toString());*/
                 userAddressData.setCountry("" + country);
                 userAddressData.setStateProvince("" + state);
-                userAddressData.setCityVillage("" + city_spinner.getSelectedItem().toString());
+                userAddressData.setCityVillage("" + selectCity());
                 sessionManager.setState(state);
                 sessionManager.setPatientCountry(country);
                 userAddressData.setPostalCode("" + mPostal.getText().toString());
@@ -1298,6 +1310,21 @@ public class SignupActivity extends AppCompatActivity {
         block_spinner = findViewById(R.id.block_spinner);
         block_spinner.setEnabled(false);
 
+        try {
+//            String stateSpinner = "state_" + sessionManager.getAppLanguage();
+            String stateSpinner = "state_values_" + sessionManager.getAppLanguage();
+            int states = getResources().getIdentifier(stateSpinner, "array", getApplicationContext().getPackageName());
+            if (states != 0) {
+                stateAdapter = ArrayAdapter.createFromResource(this,
+                        states, android.R.layout.simple_spinner_item);
+
+            }
+            state_spinner.setAdapter(stateAdapter);
+        } catch (Exception e) {
+            Toast.makeText(this, "Values Missing", Toast.LENGTH_SHORT).show();
+            Logger.logE("Identification", "#648", e);
+        }
+
         state_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -1305,12 +1332,53 @@ public class SignupActivity extends AppCompatActivity {
                     city_spinner.setEnabled(true);
                     block_spinner.setEnabled(true);
 
-                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource
-                            (SignupActivity.this, position == 1 ? R.array.jh_city_values :
-                                    R.array.mp_city_values, android.R.layout.simple_spinner_item);
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    city_spinner.setAdapter(adapter);
-                    state = state_spinner.getSelectedItem().toString();
+                    if(position==1)
+                    {
+                        String jharkhand_state_spinner = "jh_city_values_"  + sessionManager.getAppLanguage();
+                        int jh_states = getResources().getIdentifier(jharkhand_state_spinner, "array", getApplicationContext().getPackageName());
+                        if (jh_states != 0) {
+                            cityAdapter = ArrayAdapter.createFromResource
+                                    (SignupActivity.this, jh_states, android.R.layout.simple_spinner_item);
+                        }
+                        city_spinner.setAdapter(cityAdapter);
+                        if(sessionManager.getAppLanguage().equalsIgnoreCase("hi"))
+                        {
+                            state = switch_hi_state(state_spinner.getSelectedItem().toString());
+//                            city = switch_hi_city(city_spinner.getSelectedItem().toString());
+                        }
+                        else
+                        {
+                            state = state_spinner.getSelectedItem().toString();
+//                            city = city_spinner.getSelectedItem().toString();
+                        }
+
+                    }
+                    else
+                    {
+                        String mp_state_spinner = "mp_city_values_"  + sessionManager.getAppLanguage();
+                        int mp_states = getResources().getIdentifier(mp_state_spinner, "array", getApplicationContext().getPackageName());
+                        if (mp_states != 0) {
+                            cityAdapter = ArrayAdapter.createFromResource
+                                    (SignupActivity.this, mp_states, android.R.layout.simple_spinner_item);
+                        }
+                        city_spinner.setAdapter(cityAdapter);
+                        if(sessionManager.getAppLanguage().equalsIgnoreCase("hi"))
+                        {
+                            state = switch_hi_state(state_spinner.getSelectedItem().toString());
+//                            city = switch_hi_city(city_spinner.getSelectedItem().toString());
+                        }
+                        else
+                        {
+                            state = state_spinner.getSelectedItem().toString();
+//                            city = city_spinner.getSelectedItem().toString();
+                        }
+                    }
+//                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource
+//                            (SignupActivity.this, position == 1 ? R.array.jh_city_values :
+//                                    R.array.mp_city_values, android.R.layout.simple_spinner_item);
+//                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                    city_spinner.setAdapter(adapter);
+//                    state = state_spinner.getSelectedItem().toString();
 
                    /* ArrayAdapter<CharSequence> blockAdapter = ArrayAdapter.createFromResource
                             (SignupActivity.this, position == 1 ? R.array.jh_block_values : R.array.mp_block_values,
@@ -1336,27 +1404,60 @@ public class SignupActivity extends AppCompatActivity {
                     block_spinner.setEnabled(true);
 
                     int array = 0;
-                    switch (position) {
-                        case 1:
-                            array = R.array.rn_block_values;
-                            break;
-                        case 2:
-                            array = R.array.es_block_values;
-                            break;
-                        case 3:
-                            array = R.array.bo_block_values;
-                            break;
-                        case 4:
-                            array = R.array.dh_block_values;
-                            break;
-                        default:
-                            array = R.array.default_block_values;
+                    String block_spinner_values = "";
+                    if(state.equalsIgnoreCase("Jharkhand"))
+                    {
+                        switch (position) {
+                            case 1:
+                                block_spinner_values = "rn_block_values_"  + sessionManager.getAppLanguage();
+                                array = getResources().getIdentifier(block_spinner_values, "array", getApplicationContext().getPackageName());
+                                break;
+                            case 2:
+//                            array = R.array.es_block_values;
+                                block_spinner_values = "es_block_values_"  + sessionManager.getAppLanguage();
+                                array = getResources().getIdentifier(block_spinner_values, "array", getApplicationContext().getPackageName());
+                                break;
+                            case 3:
+//                            array = R.array.bo_block_values;
+                                block_spinner_values = "bo_block_values_"  + sessionManager.getAppLanguage();
+                                array = getResources().getIdentifier(block_spinner_values, "array", getApplicationContext().getPackageName());
+                                break;
+                            case 4:
+//                            array = R.array.dh_block_values;
+                                block_spinner_values = "dh_block_values_"  + sessionManager.getAppLanguage();
+                                array = getResources().getIdentifier(block_spinner_values, "array", getApplicationContext().getPackageName());
+                                break;
+                            default:
+//                            array = R.array.default_block_values;
+                                block_spinner_values = "default_block_values_"  + sessionManager.getAppLanguage();
+                                array = getResources().getIdentifier(block_spinner_values, "array", getApplicationContext().getPackageName());
+                        }
                     }
-                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource
-                            (SignupActivity.this, array,
-                                    android.R.layout.simple_spinner_item);
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    block_spinner.setAdapter(adapter);
+                    else
+                    {
+                        switch (position) {
+                            case 1:
+                                block_spinner_values = "mp_block_values_" + sessionManager.getAppLanguage();
+                                array = getResources().getIdentifier(block_spinner_values, "array", getApplicationContext().getPackageName());
+                                break;
+                            case 2:
+//                            array = R.array.es_block_values;
+                                block_spinner_values = "mp_block_values_" + sessionManager.getAppLanguage();
+                                array = getResources().getIdentifier(block_spinner_values, "array", getApplicationContext().getPackageName());
+                                break;
+                            default:
+//                            array = R.array.default_block_values;
+                                block_spinner_values = "default_block_values_"  + sessionManager.getAppLanguage();
+                                array = getResources().getIdentifier(block_spinner_values, "array", getApplicationContext().getPackageName());
+                        }
+                    }
+
+                    if (array != 0) {
+                        blockAdapter = ArrayAdapter.createFromResource
+                                (SignupActivity.this, array, android.R.layout.simple_spinner_item);
+                    }
+                    block_spinner.setAdapter(blockAdapter);
+
                 } else {
                     block_spinner.setEnabled(false);
                     // block_spinner.setEnabled(false);
@@ -1472,6 +1573,30 @@ public class SignupActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private String selectCity() {
+        if(sessionManager.getAppLanguage().equalsIgnoreCase("hi"))
+        {
+            city = switch_hi_city(city_spinner.getSelectedItem().toString());
+        }
+        else
+        {
+            city = city_spinner.getSelectedItem().toString();
+        }
+        return city;
+    }
+
+    private String selectBlock() {
+        if(sessionManager.getAppLanguage().equalsIgnoreCase("hi"))
+        {
+            block = switch_hi_block(block_spinner.getSelectedItem().toString());
+        }
+        else
+        {
+            block = block_spinner.getSelectedItem().toString();
+        }
+        return block;
     }
 
     private String generatePassword(int length) {
