@@ -236,7 +236,7 @@ public class SmoothUpgrade {
                     visitDTO.setStartdate(cursor.getString(cursor.getColumnIndexOrThrow("start_datetime")));
                     visitDTO.setEnddate(cursor.getString(cursor.getColumnIndexOrThrow("end_datetime")));
                     visitDTO.setVisitTypeUuid(UuidDictionary.VISIT_TELEMEDICINE);
-                    visitDTO.setLocationuuid("b56d5d16-bf89-4ac0-918d-e830fbfba290");
+                    visitDTO.setLocationuuid("eb374eaf-430e-465e-81df-fe94c2c515be");
                     visitDTO.setCreatoruuid("8af2f1eb-d7d1-452e-b211-9610947ee80d");
 
                     cursor.moveToNext();

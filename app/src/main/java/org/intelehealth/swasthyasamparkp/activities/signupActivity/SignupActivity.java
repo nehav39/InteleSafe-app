@@ -1649,7 +1649,7 @@ public class SignupActivity extends AppCompatActivity {
         progress.show();
         UrlModifiers urlModifiers = new UrlModifiers();
         String urlString = urlModifiers.setRegistrationURL();
-        encoded = base64Utils.encoded("admin", "IHUser#1");
+        encoded = base64Utils.encoded("admin", BuildConfig.DEBUG ? "Admin123" : "IHUser#1");
         Observable<ClsUserGetResponse> userGetResponse = AppConstants.apiInterface.getUsersFromServer(urlString, "Basic " + encoded, enteredUserName);
         userGetResponse.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -2075,7 +2075,7 @@ public class SignupActivity extends AppCompatActivity {
 
         UrlModifiers urlModifiers = new UrlModifiers();
         String urlString = urlModifiers.loginUrl(BuildConfig.CLEAN_URL);
-        encoded = base64Utils.encoded("admin", "IHUser#1");
+        encoded = base64Utils.encoded("admin", BuildConfig.DEBUG ? "Admin123" : "IHUser#1");
 //      sessionManager.setEncoded(encoded);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -2124,7 +2124,7 @@ public class SignupActivity extends AppCompatActivity {
                                         manager.addAccountExplicitly(account, password, null);*/
 
                                         sessionManager.setLocationName("" + userAddressData.getCountyDistrict());
-                                        sessionManager.setLocationUuid("b56d5d16-bf89-4ac0-918d-e830fbfba290");
+                                        sessionManager.setLocationUuid("eb374eaf-430e-465e-81df-fe94c2c515be");
                                         sessionManager.setLocationDescription("In Maharashtra State");
                                         sessionManager.setServerUrl(BuildConfig.CLEAN_URL);
                                         sessionManager.setServerUrlRest("https://" + BuildConfig.CLEAN_URL + "/openmrs/ws/rest/v1/");
@@ -2305,7 +2305,7 @@ public class SignupActivity extends AppCompatActivity {
         IdentifierUUID identifierUUID = new IdentifierUUID();
         identifierUUID.setIdentifier(OpenMRSID);
         identifierUUID.setIdentifierType("05a29f94-c0ed-11e2-94be-8c13b969e334");
-        identifierUUID.setLocation("b56d5d16-bf89-4ac0-918d-e830fbfba290");
+        identifierUUID.setLocation("eb374eaf-430e-465e-81df-fe94c2c515be");
         identifierUUID.setPreferred(true);
 
         List<IdentifierUUID> identifierUUIDList = new ArrayList<>();
@@ -2378,7 +2378,7 @@ public class SignupActivity extends AppCompatActivity {
         progress.show();
         UrlModifiers urlModifiers = new UrlModifiers();
         String urlString = urlModifiers.sendOtp("HXIN1701481071IN");
-//        String encoded = base64Utils.encoded("admin", "Admin123");
+//        String encoded = base64Utils.encoded("admin", "IHUser#1");
         generatedOtp = new DecimalFormat("0000").format(new Random().nextInt(9999));
         Observable<SendOtp> userGetResponse = AppConstants.apiInterface.sendOtp(urlString,
                 "A39e1e65900618ef9b6e16da473f8894d",
@@ -2437,7 +2437,7 @@ public class SignupActivity extends AppCompatActivity {
         progress.show();
         UrlModifiers urlModifiers = new UrlModifiers();
         String urlString = urlModifiers.getUserMapping(BuildConfig.CLEAN_URL);
-        String encoded = base64Utils.encoded("admin", "IHUser#1");
+        String encoded = base64Utils.encoded("admin", BuildConfig.DEBUG ? "Admin123" : "IHUser#1");
         GetPassword getPassword = new GetPassword();
         getPassword.username = enteredUserName;
         getPassword.password = password;
