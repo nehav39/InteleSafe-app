@@ -131,7 +131,7 @@
             android:fontFamily="@font/lato_regular"
             android:gravity="center"
             android:padding="5dip"
-            android:text="Powered by Intelehealth, Ekal Arogya &amp; \n Transform Rural India"
+            android:text="Powered by Intelehealth, Arogya Foundation of India &amp; \n Transform Rural India"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="12sp" />

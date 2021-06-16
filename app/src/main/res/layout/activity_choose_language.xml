@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:padding="@dimen/padding_screen"
     android:orientation="vertical"
-    tools:context="org.intelehealth.intelesafe.activities.chooseLanguageActivity.ChooseLanguageActivity"
+    tools:context="org.intelehealth.swasthyasamparkp.activities.chooseLanguageActivity.ChooseLanguageActivity"
     android:background="@color/white">
 
     <ImageView
