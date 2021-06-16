@@ -1,10 +1,8 @@
 package org.intelehealth.apprtc;
 
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -57,7 +55,9 @@ import io.socket.client.Socket;
 
 public class ChatActivity extends AppCompatActivity {
     private static final String TAG = ChatActivity.class.getName();
-    private static final String ACTION_NAME = "org.intelehealth.app.RTC_MESSAGING_EVENT";
+    private static final String PACKAGE_NAME = "org.intelehealth.swasthyasamparkp";
+    private static final String ACTION_NAME = PACKAGE_NAME + ".RTC_MESSAGING_EVENT";
+    private static final String RECEIVER_CLASS = PACKAGE_NAME + ".utilities.RTCMessageReceiver";
     private List<JSONObject> mChatList = new ArrayList<JSONObject>();
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
@@ -338,7 +338,7 @@ public class ChatActivity extends AppCompatActivity {
                                     Intent intent = new Intent(ACTION_NAME);
                                     intent.putExtra("visit_uuid", mVisitUUID);
                                     intent.putExtra("connection_info", connectionInfoObject.toString());
-                                    intent.setComponent(new ComponentName("org.intelehealth.app", "org.intelehealth.app.utilities.RTCMessageReceiver"));
+                                    intent.setComponent(new ComponentName(PACKAGE_NAME, RECEIVER_CLASS));
 
                                     getApplicationContext().sendBroadcast(intent);
                                     getAllMessages();

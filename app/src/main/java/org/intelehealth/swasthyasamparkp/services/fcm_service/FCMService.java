@@ -23,7 +23,9 @@ import org.json.JSONObject;
 public class FCMService extends FirebaseMessagingService {
 
     private static final String TAG = FCMService.class.getSimpleName();
-    private static final String ACTION_NAME = "org.intelehealth.intelesafe.RTC_MESSAGING_EVENT";
+    private static final String PACKAGE_NAME = "org.intelehealth.swasthyasamparkp";
+    private static final String ACTION_NAME = PACKAGE_NAME + ".RTC_MESSAGING_EVENT";
+    private static final String RECEIVER_CLASS = PACKAGE_NAME + ".utilities.RTCMessageReceiver";
 
     @Override
     public void onNewToken(String s) {
@@ -93,7 +95,7 @@ public class FCMService extends FirebaseMessagingService {
                         Intent intent = new Intent(ACTION_NAME);
                         intent.putExtra("visit_uuid", visitUUID);
                         intent.putExtra("connection_info", connectionInfoObject.toString());
-                        intent.setComponent(new ComponentName("org.intelehealth.app", "org.intelehealth.app.utilities.RTCMessageReceiver"));
+                        intent.setComponent(new ComponentName(PACKAGE_NAME, RECEIVER_CLASS));
                         getApplicationContext().sendBroadcast(intent);
 
 
