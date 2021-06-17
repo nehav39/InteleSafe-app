@@ -655,7 +655,8 @@ public class LoginActivity extends AppCompatActivity {
         cpd.show();
         UrlModifiers urlModifiers = new UrlModifiers();
         String urlString = urlModifiers.setRegistrationURL();
-        String encoded = base64Utils.encoded("admin", BuildConfig.DEBUG ? "Admin123" : "IHUser#1");
+        //String encoded = base64Utils.encoded("admin", BuildConfig.DEBUG ? "Admin123" : "IHUser#1");
+        String encoded = base64Utils.encoded("admin", "IHUser#1");
         Observable<ClsUserGetResponse> userGetResponse = AppConstants.apiInterface.getUsersFromServer(urlString, "Basic " + encoded, enteredUserName);
         userGetResponse.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -744,7 +745,8 @@ public class LoginActivity extends AppCompatActivity {
         cpd.show();
         UrlModifiers urlModifiers = new UrlModifiers();
         String urlString = urlModifiers.getPassword(BuildConfig.CLEAN_URL);
-        String encoded = base64Utils.encoded("admin", BuildConfig.DEBUG ? "Admin123" : "IHUser#1");
+        //String encoded = base64Utils.encoded("admin", BuildConfig.DEBUG ? "Admin123" : "IHUser#1");
+        String encoded = base64Utils.encoded("admin", "IHUser#1");
         GetPassword getPassword = new GetPassword();
         getPassword.username = enteredUserName;
         Observable<GetPassword> userGetResponse = AppConstants.apiInterface.getPassword(urlString, "Basic " + encoded, getPassword);

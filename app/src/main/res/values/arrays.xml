@@ -560,13 +560,116 @@
         <item>Select</item>
         <item>Jharkhand</item>
         <item>Madhya Pradesh</item>
+        <item>Sikkim</item>
     </string-array>
 
     <string-array name="state_values_hi">
         <item>चयन करें</item>
         <item>झारखण्ड</item>
         <item>मध्य प्रदेश</item>
+        <item>सिक्किम</item>
     </string-array>
+
+    <!--Sikkim Info Start-->
+    <string-array name="sk_city_values_en">
+        <item>Select</item>
+        <item>East</item>
+        <item>West</item>
+        <item>North</item>
+        <item>South</item>
+    </string-array>
+    <string-array name="sk_city_values_hi">
+        <item>चयन करें</item>
+        <item>पूर्व</item>
+        <item>पश्चिम</item>
+        <item>उत्तरी</item>
+        <item>दक्षिण</item>
+    </string-array>
+
+    <string-array name="east_block_values_en">
+        <item>Select</item>
+        <item>Machong</item>
+        <item>Pakyong</item>
+        <item>Rangpo</item>
+        <item>Rhenock</item>
+        <item>Rongli</item>
+        <item>Samdong</item>
+        <item>Sang</item>
+    </string-array>
+
+    <string-array name="west_block_values_en">
+        <item>Select</item>
+        <item>Dentam</item>
+        <item>Mangalbary</item>
+        <item>Rinchenpong</item>
+        <item>Sombaria</item>
+        <item>Soreng</item>
+        <item>Tashiding</item>
+        <item>Yuksom</item>
+    </string-array>
+
+    <string-array name="north_block_values_en">
+        <item>Select</item>
+        <item>Chungthang</item>
+        <item>Dikchu</item>
+        <item>Hee Gyathang</item>
+        <item>Passingdong</item>
+        <item>Phodong</item>
+    </string-array>
+
+    <string-array name="south_block_values_en">
+        <item>Select</item>
+        <item>Jorethang</item>
+        <item>Melli</item>
+        <item>Namthang</item>
+        <item>Ravongla</item>
+        <item>Temi</item>
+        <item>Tokal Bermiok</item>
+        <item>Yangyang</item>
+    </string-array>
+
+    <string-array name="east_block_values_hi">
+        <item>चयन करें</item>
+        <item>माचोंग</item>
+        <item>पाक्योंग</item>
+        <item>रांगपो</item>
+        <item>रिनाक</item>
+        <item>रोंगली</item>
+        <item>समडोंग</item>
+        <item>सेंग</item>
+    </string-array>
+
+    <string-array name="west_block_values_hi">
+        <item>चयन करें</item>
+        <item>दंतम</item>
+        <item>मंगलबरी</item>
+        <item>रिनचेनपोंग</item>
+        <item>सोम्बारिया</item>
+        <item>सोरेन्ग</item>
+        <item>ताशिदिंग</item>
+        <item>युकसोम</item>
+    </string-array>
+
+    <string-array name="north_block_values_hi">
+        <item>चयन करें</item>
+        <item>चुंगथांग</item>
+        <item>दिक्चु</item>
+        <item>ही ग्याथांग</item>
+        <item>पासिंगडोंग</item>
+        <item>फोडोंग</item>
+    </string-array>
+
+    <string-array name="south_block_values_hi">
+        <item>चयन करें</item>
+        <item>जोरेथांग</item>
+        <item>मेल्ली</item>
+        <item>नमथांग</item>
+        <item>रावोंग्ला</item>
+        <item>टेमि</item>
+        <item>तोकल बरमियोक</item>
+        <item>यांगयांग</item>
+    </string-array>
+    <!--Sikkim info END-->
 
     <string-array name="jh_city_values_en">
         <item>Select</item>
