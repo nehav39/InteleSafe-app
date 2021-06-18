@@ -1451,7 +1451,7 @@ public class SignupActivity extends AppCompatActivity {
                 if (sessionManager.getAppLanguage().equalsIgnoreCase("hi")) {
                     city = getResources().getStringArray(getResources().getIdentifier(mSelectedCityArrayNameEN, "array", getApplicationContext().getPackageName()))[position];
                 } else {
-                    city = block_spinner.getSelectedItem().toString();
+                    city = city_spinner.getSelectedItem().toString();
                 }
             }
 
