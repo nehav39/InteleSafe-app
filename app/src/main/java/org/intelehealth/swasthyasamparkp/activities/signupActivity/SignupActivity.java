@@ -1330,7 +1330,7 @@ public class SignupActivity extends AppCompatActivity {
                 if (position > 0) {
                     city_spinner.setEnabled(true);
                     block_spinner.setEnabled(true);
-                    String city_array_name = (position == 1 ? "jh_city_values_" : position == 2 ? "mp_city_values_" : "sk_city_values_");
+                    String city_array_name = (position == 1 ? "jh_city_values_" : position == 2 ? "mp_city_values_" : position == 3 ? "sk_city_values_" : "default_city_values_");
 
                     mSelectedCityArrayNameEN = city_array_name + "en";
                     mSelectedBlockArrayNameEN = "";
@@ -1408,7 +1408,7 @@ public class SignupActivity extends AppCompatActivity {
 //                            array = R.array.default_block_values;
                                 block_spinner_values = "default_block_values_";
                         }
-                    } else {
+                    } else if (state.equalsIgnoreCase("Sikkim")) {
                         switch (position) {
                             case 1:
                                 block_spinner_values = "east_block_values_";
@@ -1429,6 +1429,8 @@ public class SignupActivity extends AppCompatActivity {
 //                            array = R.array.default_block_values;
                                 block_spinner_values = "default_block_values_";
                         }
+                    } else {
+                        block_spinner_values = "default_block_values_";
                     }
 
                     mSelectedBlockArrayNameEN = block_spinner_values + "en";
