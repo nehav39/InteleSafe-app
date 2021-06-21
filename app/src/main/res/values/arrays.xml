@@ -793,6 +793,55 @@
         <item>Other</item>
     </string-array>
 
+    <!--Khandwa Block Values...-->
+    <string-array name="kh_block_values_en">
+        <item>Select</item>
+        <item>Harsud</item>
+        <item>Khalwa</item>
+        <item>Khandwa</item>
+        <item>Pandhana</item>
+        <item>Punasa</item>
+        <item>Other</item>
+    </string-array>
+
+    <!--Rajgarh Block Values...-->
+    <string-array name="rj_block_values_en">
+        <item>Select</item>
+        <item>Biaora</item>
+        <item>Jirapur</item>
+        <item>Khilchipur</item>
+        <item>Narsinghgarh</item>
+        <item>Pachore</item>
+        <item>Rajgarh</item>
+        <item>Sarangpur</item>
+        <item>Other</item>
+    </string-array>
+
+    <!--Khandwa Block Values...-->
+    <string-array name="kh_block_values_hi">
+        <item>चयन करें</item>
+        <item>हरसूद</item>
+        <item>खलवा</item>
+        <item>खंडवा</item>
+        <item>पंधाना</item>
+        <item>पुनासा</item>
+        <item>अन्य</item>
+    </string-array>
+
+    <!--Rajgarh Block Values...-->
+    <string-array name="rj_block_values_hi">
+        <item>चयन करें</item>
+        <item>ब्यावरा</item>
+        <item>जीरापुर</item>
+        <item>खिलचीपुर</item>
+        <item>नरसिंहगढ़</item>
+        <item>पचोरे</item>
+        <item>राजगढ़</item>
+        <item>सारंगपुर</item>
+        <item>अन्य</item>
+    </string-array>
+
+
     <!--Ranchi Block Values...-->
     <string-array name="rn_block_values_hi">
         <item>चयन करें</item>

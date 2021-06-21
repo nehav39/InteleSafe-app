@@ -1398,11 +1398,11 @@ public class SignupActivity extends AppCompatActivity {
                     } else if (state.equalsIgnoreCase("Madhya Pradesh")) {
                         switch (position) {
                             case 1:
-                                block_spinner_values = "mp_block_values_";
+                                block_spinner_values = "kh_block_values_";
                                 break;
                             case 2:
 //                            array = R.array.es_block_values;
-                                block_spinner_values = "mp_block_values_";
+                                block_spinner_values = "rj_block_values_";
                                 break;
                             default:
 //                            array = R.array.default_block_values;
