@@ -4,12 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.net.Uri;
-import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -73,7 +75,8 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
             myViewHolder.prescriptionLayout.setVisibility(View.GONE);
 //            myViewHolder.descriptionTextView.setText(mcontext.getString(R.string.click_here_view_details));
             String physicalExamStr = arrayList.get(position).physicalExamValue.replaceAll("<b>General exams: </b>", "<b>Summary: </b>");
-            myViewHolder.descriptionTextView.setText(Html.fromHtml(physicalExamStr));
+            //myViewHolder.descriptionTextView.setText(Html.fromHtml(physicalExamStr));
+            myViewHolder.descriptionWebView.loadDataWithBaseURL(null, physicalExamStr, "text/html", "utf-8", null);
         } else {
             myViewHolder.titlePart1TextView.setText(mcontext.getString(R.string.doctors_visits_label));
             myViewHolder.backgroundCardView.setCardBackgroundColor(mcontext.getResources().getColor(R.color.blue_11));
@@ -92,7 +95,8 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
             int endIndex = currentComplaintValue.indexOf(":");
             if (endIndex > 0)
                 currentComplaintValue = currentComplaintValue.substring(0, endIndex);
-            myViewHolder.descriptionTextView.setText(Html.fromHtml(String.format("%s%s", "<b>Teleconsultation for: </b><br>", currentComplaintValue)));
+            //myViewHolder.descriptionTextView.setText(Html.fromHtml(String.format("%s%s", "<b>Teleconsultation for: </b><br>", currentComplaintValue)));
+            myViewHolder.descriptionWebView.loadDataWithBaseURL(null, String.format("%s%s", "<b>Teleconsultation for: </b><br>", currentComplaintValue), "text/html", "utf-8", null);
         }
 
 
@@ -266,9 +270,10 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
         ImageView check_image;
 
         // Context context;
-        TextView titlePart1TextView, titlePart2TextView, descriptionTextView, prescriptionStatusTextView;
+        TextView titlePart1TextView, titlePart2TextView, prescriptionStatusTextView;
         CardView backgroundCardView, foregroundCardView;
         RelativeLayout prescriptionLayout;
+        WebView descriptionWebView;
 
 
         public MyViewHolder(@NonNull View itemView, Context context) {
@@ -276,7 +281,14 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
 
             titlePart1TextView = itemView.findViewById(R.id.title_label_1_tv);
             titlePart2TextView = itemView.findViewById(R.id.title_label_2_tv);
-            descriptionTextView = itemView.findViewById(R.id.note_tv);
+            descriptionWebView = itemView.findViewById(R.id.note_tv);
+            // Impostazioni della WebView.
+            final WebSettings webSettings = descriptionWebView.getSettings();
+            // Set the font size (in sp).
+            webSettings.setDefaultFontSize(13);
+            descriptionWebView.setBackgroundColor(Color.TRANSPARENT);
+            descriptionWebView.setLayerType(WebView.LAYER_TYPE_SOFTWARE, null);
+
             prescriptionStatusTextView = itemView.findViewById(R.id.prescription_status_tv);
 
             backgroundCardView = itemView.findViewById(R.id.cardview_recycler_1);

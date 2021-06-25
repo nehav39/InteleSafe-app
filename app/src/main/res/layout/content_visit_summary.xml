@@ -462,15 +462,6 @@ Github: prajwalmw
                         android:textSize="16sp"
                         android:visibility="gone" />
 
-                    <ImageView
-                        android:id="@+id/imagebutton_edit_physexam"
-                        style="@style/SelectableItemBackground"
-                        android:layout_width="32dip"
-                        android:layout_height="32dip"
-                        android:layout_alignParentEnd="true"
-                        android:background="@drawable/oval_home_location"
-                        android:padding="4dip"
-                        android:src="@drawable/edit_icon" />
 
                     <ImageButton
                         android:id="@+id/imagebutton_download_physexam"
@@ -486,16 +477,21 @@ Github: prajwalmw
                         android:visibility="gone"
                         app:srcCompat="@drawable/download" />
 
-                    <TextView
+
+                    <WebView
                         android:id="@+id/textView_content_physexam"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/textView_heading_physexam"
-                        android:fontFamily="@font/lato_regular"
-                        android:lineSpacingExtra="1sp"
-                        android:padding="16dip"
-                        android:textColor="@color/txt_sub_header_color"
-                        android:textSize="14sp" />
+                        android:layout_below="@+id/textView_heading_physexam" />
+                    <ImageView
+                        android:id="@+id/imagebutton_edit_physexam"
+                        style="@style/SelectableItemBackground"
+                        android:layout_width="32dip"
+                        android:layout_height="32dip"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/oval_home_location"
+                        android:padding="4dip"
+                        android:src="@drawable/edit_icon" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recy_physexam"
@@ -514,6 +510,53 @@ Github: prajwalmw
                         android:text="@string/click_to_download_the_images"
                         android:visibility="gone" />
                 </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView_alert"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dip"
+                android:layout_marginTop="16dip"
+                android:layout_marginBottom="10dip"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="10sp"
+                app:cardElevation="8dip">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="8dip">
+
+                    <TextView
+                        android:id="@+id/alert_label_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:text="Alert Message"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:id="@+id/spec_1_v"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dip"
+                        android:layout_marginVertical="8dip"
+                        android:background="@color/black" />
+
+                    <TextView
+                        android:id="@+id/alert_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:text="Alert text"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        android:textStyle="normal" />
+                </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <!--Prescription-->

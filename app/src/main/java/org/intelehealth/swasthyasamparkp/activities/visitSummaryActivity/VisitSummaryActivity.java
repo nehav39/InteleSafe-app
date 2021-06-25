@@ -38,6 +38,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
@@ -182,7 +183,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
     TextView complaintView;
     TextView famHistView;
     TextView patHistView;
-    TextView physFindingsView;
+    WebView physFindingsWebView;
     TextView mDoctorTitle;
     TextView mDoctorName;
     TextView mCHWname;
@@ -269,6 +270,8 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
 
     SyncUtils syncUtils = new SyncUtils();
     private boolean self;
+    private CardView mAlertMessageCardView;
+    private TextView mAlertMessageTextView;
 
     /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -502,6 +505,36 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         mLayout = findViewById(R.id.summary_layout);
         context = getApplicationContext();
         context1 = VisitSummaryActivity.this;
+
+        mAlertMessageCardView = findViewById(R.id.cardView_alert);
+        mAlertMessageTextView = findViewById(R.id.alert_tv);
+        if (getIntent().hasExtra("AlertType")) {
+            int type = getIntent().getIntExtra("AlertType", 1);
+            mAlertMessageCardView.setVisibility(View.VISIBLE);
+            mAlertMessageTextView.setText(getIntent().getStringExtra("MessageToPatient"));
+            if (type == 1) { // healthy
+                findViewById(R.id.alert_label_tv).setVisibility(View.GONE);
+                findViewById(R.id.spec_1_v).setVisibility(View.GONE);
+                mAlertMessageCardView.setCardBackgroundColor(getResources().getColor(R.color.green));
+                // mAlertMessageTextView.setTextColor(getResources().getColor(R.color.white));
+                //mAlertStatusImageView.setImageResource(R.drawable.healthy_icon);
+            } else if (type == 2) { // mild
+                mAlertMessageCardView.setCardBackgroundColor(getResources().getColor(R.color.amber));
+                //mAlertMessageTextView.setTextColor(getResources().getColor(R.color.white));
+                //mAlertStatusImageView.setImageResource(R.drawable.mild_icon);
+            } else if (type == 3) { // moderate
+                mAlertMessageCardView.setCardBackgroundColor(getResources().getColor(R.color.scale_2));
+                //mAlertMessageTextView.setTextColor(getResources().getColor(R.color.white));
+                //mAlertStatusImageView.setImageResource(R.drawable.moderate_icon);
+            } else if (type == 4) { // severe
+                mAlertMessageCardView.setCardBackgroundColor(getResources().getColor(R.color.red));
+                //mAlertMessageTextView.setTextColor(getResources().getColor(R.color.white));
+                //mAlertStatusImageView.setImageResource(R.drawable.severe_icon);
+            }
+        } else {
+            mAlertMessageCardView.setVisibility(View.GONE);
+        }
+
         //we can remove by data binding
         mAdditionalDocsRecyclerView = findViewById(R.id.recy_additional_documents);
         mPhysicalExamsRecyclerView = findViewById(R.id.recy_physexam);
@@ -880,7 +913,14 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         complaintView = findViewById(R.id.textView_content_complaint);
         famHistView = findViewById(R.id.textView_content_famhist);
         patHistView = findViewById(R.id.textView_content_pathist);
-        physFindingsView = findViewById(R.id.textView_content_physexam);
+        physFindingsWebView = findViewById(R.id.textView_content_physexam);
+
+        // Impostazioni della WebView.
+        final WebSettings webSettings = physFindingsWebView.getSettings();
+        // Set the font size (in sp).
+        webSettings.setDefaultFontSize(13);
+        physFindingsWebView.setBackgroundColor(Color.TRANSPARENT);
+        physFindingsWebView.setLayerType(WebView.LAYER_TYPE_SOFTWARE, null);
 
         if (isRespiratory) {
             respiratoryText.setVisibility(View.VISIBLE);
@@ -927,7 +967,8 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
             patHistView.setText(Html.fromHtml(patHistory.getValue()));
         if (phyExam.getValue() != null) {
             String physicalExamStr = phyExam.getValue().replaceAll("<b>General exams: </b>", self ? "<b>Self Assessment: </b>" : "<b>Doctor Visit: </b>");
-            physFindingsView.setText(Html.fromHtml(physicalExamStr));
+            Log.v(TAG, physicalExamStr);
+            physFindingsWebView.loadDataWithBaseURL(null, physicalExamStr, "text/html", "utf-8", null);//;setText(Html.fromHtml(physicalExamStr));
         }
 
 
@@ -1177,7 +1218,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                                 if (phyExam.getValue() != null) {
                                     String physicalExamStr = phyExam.getValue().replaceAll("<b>General exams: </b>", self ? "<b>Self Assessment: </b>" : "<b>Doctor Visit: </b>");
                                     physicalText.setText(Html.fromHtml(physicalExamStr));
-                                    physFindingsView.setText(Html.fromHtml(physicalExamStr));
+                                    physFindingsWebView.loadDataWithBaseURL(null, physicalExamStr, "text/html", "utf-8", null);//setText(Html.fromHtml(physicalExamStr));
                                     b = phyExam.getValue().replaceAll("Self Assessment: ", "<b>General exams: </b> ");
                                 }
 

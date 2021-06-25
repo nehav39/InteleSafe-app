@@ -34,6 +34,7 @@ import com.google.gson.Gson;
 
 import org.intelehealth.swasthyasamparkp.R;
 import org.intelehealth.swasthyasamparkp.activities.visitSummaryActivity.VisitSummaryActivity;
+import org.intelehealth.swasthyasamparkp.alert.AlertEngine;
 import org.intelehealth.swasthyasamparkp.app.AppConstants;
 import org.intelehealth.swasthyasamparkp.database.dao.EncounterDAO;
 import org.intelehealth.swasthyasamparkp.database.dao.ImagesDAO;
@@ -57,6 +58,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -94,12 +96,20 @@ public class PhysicalExamActivity extends AppCompatActivity {
     String encounterAdultIntials;
     SessionManager sessionManager;
 
+    public AlertEngine mAlertEngine;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         baseDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES).getAbsolutePath();
 
         localdb = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
         sessionManager = new SessionManager(this);
+        mAlertEngine = new AlertEngine(this, new AlertEngine.MessageListener() {
+            @Override
+            public void onMessageGenerated(String message, int type) {
+                //TODO : UI updates
+            }
+        });
        /* AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle(R.string.wash_hands);
         LayoutInflater factory = LayoutInflater.from(this);
@@ -208,6 +218,7 @@ public class PhysicalExamActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         }
+        final FloatingActionButton fab = findViewById(R.id.fab);
 
         setTitle(patientName + ": " + getString(R.string.check_in));
         // Create the adapter that will return a fragment for each of the three
@@ -237,7 +248,6 @@ public class PhysicalExamActivity extends AppCompatActivity {
         }
 
 
-        FloatingActionButton fab = findViewById(R.id.fab);
         // added by Venu N on 02/04/2020.
         if (mViewPager.getCurrentItem() == mViewPager.getAdapter().getCount() - 1) {
             fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_done_24dp));
@@ -252,7 +262,7 @@ public class PhysicalExamActivity extends AppCompatActivity {
 
                 //returns true if all Mandatory questions have been answered...
                 //complaintConfirmed = physicalExamMap.areRequiredAnswered();
-                complaintConfirmed = physicalExamMap.areRequiredAnsweredForGivenNodes(new int[]{1,2});
+                complaintConfirmed = physicalExamMap.areRequiredAnsweredForGivenNodes(new int[]{1, 2});
 
                 if (complaintConfirmed) {
 
@@ -270,7 +280,6 @@ public class PhysicalExamActivity extends AppCompatActivity {
                                 (PhysicalExamActivity.this, R.drawable.svg_right_arrow));
                         mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
                     } else {
-
                         physicalString = physicalExamMap.generateFindings();
 
                         List<String> imagePathList = physicalExamMap.getImagePathList();
@@ -281,10 +290,25 @@ public class PhysicalExamActivity extends AppCompatActivity {
                             }
                         }
 
+                        // add alert info
+                        String colorCode = "";
+                        if (mAlertEngine.getAlertType() >= 3) {
+                            if (mAlertEngine.getAlertType() == 3) {
+                                colorCode = "orange";
+                            } else {
+                                colorCode = "red";
+                            }
+                            String alertMessage = "<div hidden><b><br>Alert Message</b><br><font color='" + colorCode + "'>" + mAlertEngine.getAlertMessageToTeleCaller() + "</font></div>";
+                            physicalString += alertMessage;
+                        }
+                        Intent intent = new Intent(PhysicalExamActivity.this, VisitSummaryActivity.class);
+                        intent.putExtra("AlertType", mAlertEngine.getAlertType());
+                        intent.putExtra("MessageToPatient", mAlertEngine.getAlertMessageToPatient());
+                        intent.putExtra("MessageToTeleCaller", mAlertEngine.getAlertMessageToTeleCaller());
                         if (intentTag != null && intentTag.equals("edit")) {
 
                             updateDatabase(physicalString);
-                            Intent intent = new Intent(PhysicalExamActivity.this, VisitSummaryActivity.class);
+
                             intent.putExtra("patientUuid", patientUuid);
                             intent.putExtra("visitUuid", visitUuid);
                             intent.putExtra("encounterUuidVitals", encounterVitals);
@@ -301,18 +325,18 @@ public class PhysicalExamActivity extends AppCompatActivity {
                             startActivity(intent);
                         } else {
                             boolean obsId = insertDb(physicalString);
-                            Intent intent1 = new Intent(PhysicalExamActivity.this, VisitSummaryActivity.class); // earlier visitsummary
-                            intent1.putExtra("patientUuid", patientUuid);
-                            intent1.putExtra("visitUuid", visitUuid);
-                            intent1.putExtra("encounterUuidVitals", encounterVitals);
-                            intent1.putExtra("encounterUuidAdultIntial", encounterAdultIntials);
-                            intent1.putExtra("state", state);
-                            intent1.putExtra("name", patientName);
-                            intent1.putExtra("tag", intentTag);
-                            intent1.putExtra("hasPrescription", "false");
-                            intent1.putExtra("self", true);
+                            //Intent intent1 = new Intent(PhysicalExamActivity.this, VisitSummaryActivity.class); // earlier visitsummary
+                            intent.putExtra("patientUuid", patientUuid);
+                            intent.putExtra("visitUuid", visitUuid);
+                            intent.putExtra("encounterUuidVitals", encounterVitals);
+                            intent.putExtra("encounterUuidAdultIntial", encounterAdultIntials);
+                            intent.putExtra("state", state);
+                            intent.putExtra("name", patientName);
+                            intent.putExtra("tag", intentTag);
+                            intent.putExtra("hasPrescription", "false");
+                            intent.putExtra("self", true);
                             // intent1.putStringArrayListExtra("exams", selectedExamsList);
-                            startActivity(intent1);
+                            startActivity(intent);
                         }
                     }
 
@@ -433,6 +457,7 @@ public class PhysicalExamActivity extends AppCompatActivity {
     }
 
     private void updateDatabase(String string) {
+        Log.v(TAG, "updateDatabase - " + string);
         ObsDTO obsDTO = new ObsDTO();
         ObsDAO obsDAO = new ObsDAO();
         try {
@@ -588,6 +613,7 @@ public class PhysicalExamActivity extends AppCompatActivity {
                 @Override
                 public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                     Node question = viewNode.getOption(groupPosition).getOption(childPosition);
+                    Log.v(TAG, "onChildClick Node = " + new Gson().toJson(question));
 
                     question.toggleSelected();
                     if (viewNode.getOption(groupPosition).anySubSelected()) {
@@ -596,7 +622,7 @@ public class PhysicalExamActivity extends AppCompatActivity {
                         viewNode.getOption(groupPosition).setUnselected();
                     }
                     Node rootNode = viewNode.getOption(groupPosition);
-                    if(rootNode.isMultiChoice() && !question.isExcludedFromMultiChoice()){
+                    if (rootNode.isMultiChoice() && !question.isExcludedFromMultiChoice()) {
                         for (int i = 0; i < rootNode.getOptionsList().size(); i++) {
                             Node childNode = rootNode.getOptionsList().get(i);
                             if (childNode.isSelected() && childNode.isExcludedFromMultiChoice()) {
@@ -605,7 +631,7 @@ public class PhysicalExamActivity extends AppCompatActivity {
                             }
                         }
                     }
-                    Log.v(TAG, "rootNode - "+new Gson().toJson(rootNode));
+                    Log.v(TAG, "rootNode - " + new Gson().toJson(rootNode));
                     if (!rootNode.isMultiChoice() || (rootNode.isMultiChoice() && question.isExcludedFromMultiChoice() && question.isSelected())) {
                         for (int i = 0; i < rootNode.getOptionsList().size(); i++) {
                             Node childNode = rootNode.getOptionsList().get(i);
@@ -616,9 +642,9 @@ public class PhysicalExamActivity extends AppCompatActivity {
                     }
                     adapter.notifyDataSetChanged();
 
+                    boolean flagForHandleQuestion = false;
 
-                    if (question.getInputType() != null && question.isSelected()) {
-
+                    if (question.getInputType() != null && !question.getInputType().isEmpty() && question.isSelected()) {
                         if (question.getInputType().equals("camera")) {
                             if (!filePath.exists()) {
                                 boolean res = filePath.mkdirs();
@@ -626,17 +652,26 @@ public class PhysicalExamActivity extends AppCompatActivity {
                             }
                             imageName = UUID.randomUUID().toString();
                             Node.handleQuestion(question, getActivity(), adapter, filePath.toString(), imageName);
+
                         } else {
                             Node.handleQuestion(question, (Activity) getContext(), adapter, null, null);
                         }
 
-
+                        flagForHandleQuestion = true;
                     }
 
                     if (!question.isTerminal() && question.isSelected()) {
                         Node.subLevelQuestion(viewNode.getOption(groupPosition), question, (Activity) getContext(), adapter, filePath.toString(), imageName);
+                        ///flagForHandleQuestion = true;
                     }
 
+                    if (!flagForHandleQuestion && question.isSelected()) {
+                        ((PhysicalExamActivity) Objects.requireNonNull(getContext())).mAlertEngine.scanForAlert(question.getId(), question.getText());
+                    }
+
+                    if (!question.isSelected()) {
+                        ((PhysicalExamActivity) Objects.requireNonNull(getContext())).mAlertEngine.handleItemUnselected(question.getId());
+                    }
                     return false;
                 }
             });
