@@ -305,6 +305,9 @@ public class PhysicalExam extends Node {
         mLanguage = mLanguage.replaceAll("-" + "<b>", next_line + "<b>");
         mLanguage = mLanguage.replaceAll("</b>" + bullet, "</b>" + next_line + bullet);
 
+        if(mLanguage.endsWith("-"))
+            mLanguage =mLanguage.substring(0,mLanguage.length() - 1);
+
         if (StringUtils.right(mLanguage, 2).equals(" -")) {
             mLanguage = mLanguage.substring(0, mLanguage.length() - 2);
         }

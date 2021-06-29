@@ -1540,7 +1540,7 @@ public class Node implements Serializable {
 
                 if (!stringsList.get(i).isEmpty()) {
                     if (i == stringsList.size() - 1 && isTerminal) {
-                        mLanguage = mLanguage.concat(stringsList.get(i) + ".");
+                        mLanguage = mLanguage.concat(stringsList.get(i));
                     } else {
                         mLanguage = mLanguage.concat(stringsList.get(i));
                     }
@@ -1548,7 +1548,7 @@ public class Node implements Serializable {
             } else {
                 if (!stringsList.get(i).isEmpty()) {
                     if (i == stringsList.size() - 1 && isTerminal) {
-                        mLanguage = mLanguage.concat(languageSeparator + stringsList.get(i) + ".");
+                        mLanguage = mLanguage.concat(languageSeparator + stringsList.get(i));
                     } else {
                         mLanguage = mLanguage.concat(languageSeparator + stringsList.get(i));
                     }
