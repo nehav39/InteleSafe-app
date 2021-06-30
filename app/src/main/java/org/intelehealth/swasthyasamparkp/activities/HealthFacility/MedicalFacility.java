@@ -54,8 +54,10 @@ SessionManager sessionManager;
 
                for (int i = 0; i < medical_list.length(); i++) {
 
+                   String s = sessionManager.getState_Name() + " " + sessionManager.getDistrict_Name();
+                   Log.d(TAG, "state: " + s);
                    if(medical_list.getJSONObject(i).has("state") && medical_list.getJSONObject(i).getString("state")
-                           .equalsIgnoreCase("Jharkhand")) {
+                           .equalsIgnoreCase(sessionManager.getState_Name())) {
 
                        //check district array is empty or not...
                        JSONArray district = medical_list.getJSONObject(i).getJSONArray("district");
@@ -65,34 +67,35 @@ SessionManager sessionManager;
                            for (int j = 0; j < district.length(); j++) {
                                //checking for disitrit is empty or not...
 
-                               if(district.getJSONObject(j).has("covid_centre") && district.getJSONObject(j).getJSONArray("covid_centre") != null &&
-                              district.getJSONObject(j).getString("covid_centre").length() > 0) {
-                                  //checking for covid_centre exists or not...
-                                  //this means that the hospital exists...
+                               if (district.getJSONObject(j).getString("name").equalsIgnoreCase(sessionManager.getDistrict_Name())) {
+                                   if (district.getJSONObject(j).has("covid_centre") && district.getJSONObject(j).getJSONArray("covid_centre") != null &&
+                                           district.getJSONObject(j).getString("covid_centre").length() > 0) {
+                                       //checking for covid_centre exists or not...
+                                       //this means that the hospital exists...
 
-                                  JSONArray covid_centre = district.getJSONObject(j).getJSONArray("covid_centre");
-                                  if(covid_centre != null && covid_centre.length() > 0) {
+                                       JSONArray covid_centre = district.getJSONObject(j).getJSONArray("covid_centre");
+                                       if (covid_centre != null && covid_centre.length() > 0) {
 
-                                      String mtitle = "", maddress = "", mphone= "", MmapUrl = "";
-                                      for (int k = 0; k < covid_centre.length(); k++) {
-                                          //traversing through covid-centre's...
-                                          mtitle = covid_centre.getJSONObject(k).getString("c_name");
-                                          maddress = covid_centre.getJSONObject(k).getString("address");
-                                          mphone = covid_centre.getJSONObject(k).getString("phone_no");
-                                          MmapUrl = covid_centre.getJSONObject(k).getString("map_url");
+                                           String mtitle = "", maddress = "", mphone = "", MmapUrl = "";
+                                           for (int k = 0; k < covid_centre.length(); k++) {
+                                               //traversing through covid-centre's...
+                                               mtitle = covid_centre.getJSONObject(k).getString("c_name");
+                                               maddress = covid_centre.getJSONObject(k).getString("address");
+                                               mphone = covid_centre.getJSONObject(k).getString("phone_no");
+                                               MmapUrl = covid_centre.getJSONObject(k).getString("map_url");
 
-                                          arrayList.add(new MedicalFacility_DataModel(mtitle, maddress, mphone, MmapUrl));
-                                      }
+                                               arrayList.add(new MedicalFacility_DataModel(mtitle, maddress, mphone, MmapUrl));
+                                           }
 
-                                  }
+                                       }
 
-                              }
+                                   }
+                           }
+                          //end of for
                            }
 
                        }
                    }
-                   String s = sessionManager.getState();
-                   Log.d(TAG, "state: "+ s);
                }
            }
 

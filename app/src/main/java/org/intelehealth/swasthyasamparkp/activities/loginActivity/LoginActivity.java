@@ -590,8 +590,15 @@ public class LoginActivity extends AppCompatActivity {
                     sessionManager.setPrivacyValue("Accept");
                     sessionManager.setFirstTimeLaunch(false);
                     sessionManager.setPatientCountry(clsPersonGetResponse.getPreferredAddress().getCountry());
+
+                    sessionManager.setState_Name(clsPersonGetResponse.getAddresses().get(0).getStateProvince());
+                    sessionManager.setDistrict_Name(clsPersonGetResponse.getAddresses().get(0).getCityVillage());
+                    String s = sessionManager.getState_Name() + " " + sessionManager.getDistrict_Name();
+                    Log.d(TAG, "state: " + s);
+
                     // offlineLogin.setUpOfflineLogin(mEmail, mPassword);
                     cpd.dismiss();
+                    //address = cityvillage = stateprovince
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                     intent.putExtra("login", true);
                     intent.putExtra("from", "login");

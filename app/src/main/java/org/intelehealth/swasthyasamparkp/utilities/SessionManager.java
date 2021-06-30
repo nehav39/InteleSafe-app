@@ -54,6 +54,9 @@ public class SessionManager {
     private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
     private static final String FIRST_CHECKIN = "FIRST_CHECKIN";
     private static final String DB_CLEAR = "DB_CLEAR";
+    private static final String STATE = "STATE";
+    private static final String DISTRICT = "DISTRICT";
+
     // LogCat tag
     private static String TAG = SessionManager.class.getSimpleName();
     // Shared Preferences
@@ -87,6 +90,24 @@ public class SessionManager {
 
     public void setVisitId(String token) {
         editor.putString(VISIT_ID, token);
+        editor.commit();
+    }
+
+    public String getState_Name() {
+        return pref.getString(STATE, "");
+    }
+
+    public void setState_Name(String name) {
+        editor.putString(STATE, name);
+        editor.commit();
+    }
+
+    public String getDistrict_Name() {
+        return pref.getString(DISTRICT, "");
+    }
+
+    public void setDistrict_Name(String name) {
+        editor.putString(DISTRICT, name);
         editor.commit();
     }
 
