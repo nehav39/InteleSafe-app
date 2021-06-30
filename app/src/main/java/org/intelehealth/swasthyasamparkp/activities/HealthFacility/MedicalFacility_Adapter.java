@@ -81,13 +81,24 @@ private Context context;
 
         holder.phoneno.setText(medicalFacility_dataModel.getPhoneno());
         holder.phoneno.setPaintFlags(holder.phoneno.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        holder.phoneno.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    int mobile = Integer.parseInt(medicalFacility_dataModel.getPhoneno());
+
+                }
+                catch (NumberFormatException e) {
+                    //do nothing...
+                }
+            }
+        });
 
         holder.mapLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* Intent i = new Intent(Intent.ACTION_VIEW);
-                i.putExtra("url", medicalFacility_dataModel.getMap_url());
-                context.startActivity(i);*/
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(medicalFacility_dataModel.getMap_url()));
+                context.startActivity(browserIntent);
             }
         });
 
