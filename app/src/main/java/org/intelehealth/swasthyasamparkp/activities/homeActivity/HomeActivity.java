@@ -83,6 +83,7 @@ import org.intelehealth.apprtc.data.Manager;
 import org.intelehealth.apprtc.utils.FirebaseUtils;
 import org.intelehealth.swasthyasamparkp.BuildConfig;
 import org.intelehealth.swasthyasamparkp.R;
+import org.intelehealth.swasthyasamparkp.activities.HealthFacility.MedicalFacility;
 import org.intelehealth.swasthyasamparkp.activities.appointments.AppointmentsActivity;
 import org.intelehealth.swasthyasamparkp.activities.chooseLanguageActivity.ChooseLanguageActivity;
 import org.intelehealth.swasthyasamparkp.activities.loginActivity.LoginActivity;
@@ -647,6 +648,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         switch (item.getItemId()) {
                             case R.id.changeLanguage:
                                 chooseLanguageMenu();
+                                return true;
+                            case R.id.medical_facility:
+                                Intent i = new Intent(HomeActivity.this, MedicalFacility.class);
+                                startActivity(i);
                                 return true;
                             case R.id.logout:
                                 logoutMenu();
