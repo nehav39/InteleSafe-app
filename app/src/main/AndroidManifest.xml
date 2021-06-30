@@ -38,7 +38,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:label">
-        <activity android:name=".activities.HealthFacility.MedicalFacility"></activity>
+
+        <activity android:name=".activities.HealthFacility.MedicalFacility"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"

@@ -7,7 +7,7 @@
 
     <item
         android:id="@+id/medical_facility"
-        android:title="Health Facilities" />
+        android:title="@string/health_facilities" />
 
     <item
         android:id="@+id/logout"

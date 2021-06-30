@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -34,6 +35,7 @@ SessionManager sessionManager;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medical_facility);
 
+       // setTitle(getString(R.string.health_facilities));
         context = MedicalFacility.this;
         sessionManager = new SessionManager(context);
         recyclerView = findViewById(R.id.medical_recyclerview);
@@ -110,5 +112,9 @@ SessionManager sessionManager;
 
 
 
+    }
+
+    public void closeActivity(View view) {
+        finish();
     }
 }
