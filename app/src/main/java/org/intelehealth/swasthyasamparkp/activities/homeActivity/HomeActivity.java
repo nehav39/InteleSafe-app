@@ -1249,6 +1249,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         visitDTO.setUuid(uuid);
         visitDTO.setPatientuuid(sessionManager.getPersionUUID());
         visitDTO.setStartdate(thisDate);
+        visitDTO.setEnddate(thisDate);
         visitDTO.setVisitTypeUuid(UuidDictionary.VISIT_TELEMEDICINE);
         visitDTO.setLocationuuid(sessionManager.getLocationUuid());
         visitDTO.setSyncd(false);

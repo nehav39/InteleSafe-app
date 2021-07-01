@@ -300,6 +300,12 @@ public class PhysicalExamActivity extends AppCompatActivity {
                             }
                             String alertMessage = "<div hidden><b><br>Alert Message</b><br><font color='" + colorCode + "'>" + mAlertEngine.getAlertMessageToTeleCaller() + "</font></div>";
                             physicalString += alertMessage;
+                            EncounterDAO encounterDAO = new EncounterDAO();
+                            try {
+                                encounterDAO.setEmergency(visitUuid, true);
+                            } catch (DAOException e) {
+                                e.printStackTrace();
+                            }
                         }
                         Intent intent = new Intent(PhysicalExamActivity.this, VisitSummaryActivity.class);
                         intent.putExtra("AlertType", mAlertEngine.getAlertType());
