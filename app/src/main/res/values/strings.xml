@@ -774,5 +774,6 @@
     <string name="click_here_view_details">Click here to view details</string>
     <string name="go_to_home">Go to Home</string>
     <string name="health_facilities">Health Facilities</string>
+    <string name="mobile_no_not_available">Mobile number not available</string>
 
 </resources>

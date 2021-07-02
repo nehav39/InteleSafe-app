@@ -816,5 +816,6 @@
     <string name="click_here_view_details">विवरण देखने के लिए यहां क्लिक करें</string>
     <string name="go_to_home">होम स्क्रीन पर जाएं</string>
     <string name="health_facilities">Health Facilities</string>
+    <string name="mobile_no_not_available">Mobile number not available</string>
 
 </resources>
