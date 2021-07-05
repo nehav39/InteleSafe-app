@@ -94,7 +94,6 @@ public class VideosActivity extends AppCompatActivity {
     private void initPDF() {
 
         recyclerViewPDF = findViewById(R.id.recyclerViewPDF);
-        recyclerViewPDF.setNestedScrollingEnabled(false);
         recyclerViewPDF.setHasFixedSize(true);
         recyclerViewPDF.setLayoutManager(new GridLayoutManager(this, 2));
         List<PdfItem> documents = getDocuments();
@@ -133,8 +132,17 @@ public class VideosActivity extends AppCompatActivity {
 
     private List<VideoItem> getVideos() {
         ArrayList<VideoItem> videoItems = new ArrayList<>();
-        videoItems.add(new VideoItem(getResources().getString(R.string.how_to_use_spo2), "https://swasthyasampark.intelehealth.org/IEC/pulse_oximeter.mp4"));
-        videoItems.add(new VideoItem(getResources().getString(R.string.how_to_use_thermo), "https://swasthyasampark.intelehealth.org/IEC/digital_thermometer.mp4"));
+
+        if(sessionManager.getAppLanguage().equalsIgnoreCase("hi")) {
+            //TODO: Add hindi video url from backend...
+            videoItems.add(new VideoItem(getResources().getString(R.string.how_to_use_spo2), "https://swasthyasampark.intelehealth.org/IEC/Hindi-pulse-oximeter.mp4"));
+            videoItems.add(new VideoItem(getResources().getString(R.string.how_to_use_thermo), "https://swasthyasampark.intelehealth.org/IEC/Hindi-digital-thermometer.mp4"));
+        }
+        else {
+            videoItems.add(new VideoItem(getResources().getString(R.string.how_to_use_spo2), "https://swasthyasampark.intelehealth.org/IEC/pulse_oximeter.mp4"));
+            videoItems.add(new VideoItem(getResources().getString(R.string.how_to_use_thermo), "https://swasthyasampark.intelehealth.org/IEC/digital_thermometer.mp4"));
+        }
+
         return videoItems;
     }
 
@@ -153,6 +161,15 @@ public class VideosActivity extends AppCompatActivity {
             items.add(new PdfItem("Tips to Maintain Mental Health", "https://swasthyasampark.intelehealth.org/IEC/Tips_to_Maintain_Mental_Health-Jharkhand.pdf", R.drawable.tips_mental_health));
 //            items.add(new PdfItem("Tips to Maintain Mental Health", "https://swasthyasampark.intelehealth.org/IEC/Tips_to_Maintain_Mental_Health_MP.pdf"));
             items.add(new PdfItem("FAQ about breastfeeding and covid", "https://swasthyasampark.intelehealth.org/IEC/faqs-breastfeeding-and-covid-19.pdf", R.drawable.faq_breastfeeding_covid));
+
+            //TODO: Add drawable icon for two pdf...
+            items.add(new PdfItem("FAQ about Post COVID Care",
+                    "https://swasthyasampark.intelehealth.org/IEC/Post-COVID-Care-Frequently-Asked-Questions.pdf",
+                    R.drawable.faq_breastfeeding_covid));
+            items.add(new PdfItem("Know more about Mucor Mycosis (Black Fungus)",
+                    "https://swasthyasampark.intelehealth.org/IEC/Know-more-about-Mucor-Mycosis-Black-Fungus.pdf",
+                    R.drawable.faq_breastfeeding_covid));
+
         }
         return items;
     }
