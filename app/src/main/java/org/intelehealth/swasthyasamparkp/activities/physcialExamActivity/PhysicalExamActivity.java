@@ -307,14 +307,10 @@ public class PhysicalExamActivity extends AppCompatActivity {
                                 e.printStackTrace();
                             }
                         }
-                        Intent intent = new Intent(PhysicalExamActivity.this, VisitSummaryActivity.class);
-                        intent.putExtra("AlertType", mAlertEngine.getAlertType());
-                        intent.putExtra("MessageToPatient", mAlertEngine.getAlertMessageToPatient());
-                        intent.putExtra("MessageToTeleCaller", mAlertEngine.getAlertMessageToTeleCaller());
-                        if (intentTag != null && intentTag.equals("edit")) {
+                         if (intentTag != null && intentTag.equals("edit")) {
 
                             updateDatabase(physicalString);
-
+                            Intent intent = new Intent(PhysicalExamActivity.this, VisitSummaryActivity.class);
                             intent.putExtra("patientUuid", patientUuid);
                             intent.putExtra("visitUuid", visitUuid);
                             intent.putExtra("encounterUuidVitals", encounterVitals);
@@ -324,6 +320,10 @@ public class PhysicalExamActivity extends AppCompatActivity {
                             intent.putExtra("tag", intentTag);
                             intent.putExtra("hasPrescription", "false");
                             intent.putExtra("self", true);
+                            intent.putExtra("AlertType", mAlertEngine.getAlertType());
+                            intent.putExtra("MessageToPatient", mAlertEngine.getAlertMessageToPatient());
+                            intent.putExtra("MessageToTeleCaller", mAlertEngine.getAlertMessageToTeleCaller());
+
                             for (String exams : selectedExamsList) {
                                 Log.i(TAG, "onClick:++ " + exams);
                             }
@@ -331,18 +331,22 @@ public class PhysicalExamActivity extends AppCompatActivity {
                             startActivity(intent);
                         } else {
                             boolean obsId = insertDb(physicalString);
-                            //Intent intent1 = new Intent(PhysicalExamActivity.this, VisitSummaryActivity.class); // earlier visitsummary
-                            intent.putExtra("patientUuid", patientUuid);
-                            intent.putExtra("visitUuid", visitUuid);
-                            intent.putExtra("encounterUuidVitals", encounterVitals);
-                            intent.putExtra("encounterUuidAdultIntial", encounterAdultIntials);
-                            intent.putExtra("state", state);
-                            intent.putExtra("name", patientName);
-                            intent.putExtra("tag", intentTag);
-                            intent.putExtra("hasPrescription", "false");
-                            intent.putExtra("self", true);
+                            Intent intent1 = new Intent(PhysicalExamActivity.this, VisitSummaryActivity.class); // earlier visitsummary
+                            intent1.putExtra("patientUuid", patientUuid);
+                            intent1.putExtra("visitUuid", visitUuid);
+                            intent1.putExtra("encounterUuidVitals", encounterVitals);
+                            intent1.putExtra("encounterUuidAdultIntial", encounterAdultIntials);
+                            intent1.putExtra("state", state);
+                            intent1.putExtra("name", patientName);
+                            intent1.putExtra("tag", intentTag);
+                            intent1.putExtra("hasPrescription", "false");
+                            intent1.putExtra("self", true);
+                            intent1.putExtra("AlertType", mAlertEngine.getAlertType());
+                            intent1.putExtra("MessageToPatient", mAlertEngine.getAlertMessageToPatient());
+                            intent1.putExtra("MessageToTeleCaller", mAlertEngine.getAlertMessageToTeleCaller());
+
                             // intent1.putStringArrayListExtra("exams", selectedExamsList);
-                            startActivity(intent);
+                            startActivity(intent1);
                         }
                     }
 
@@ -463,7 +467,6 @@ public class PhysicalExamActivity extends AppCompatActivity {
     }
 
     private void updateDatabase(String string) {
-        Log.v(TAG, "updateDatabase - " + string);
         ObsDTO obsDTO = new ObsDTO();
         ObsDAO obsDAO = new ObsDAO();
         try {
@@ -619,7 +622,6 @@ public class PhysicalExamActivity extends AppCompatActivity {
                 @Override
                 public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                     Node question = viewNode.getOption(groupPosition).getOption(childPosition);
-                    Log.v(TAG, "onChildClick Node = " + new Gson().toJson(question));
 
                     question.toggleSelected();
                     if (viewNode.getOption(groupPosition).anySubSelected()) {
@@ -637,7 +639,7 @@ public class PhysicalExamActivity extends AppCompatActivity {
                             }
                         }
                     }
-                    Log.v(TAG, "rootNode - " + new Gson().toJson(rootNode));
+                    Log.v(TAG, "rootNode - "+new Gson().toJson(rootNode));
                     if (!rootNode.isMultiChoice() || (rootNode.isMultiChoice() && question.isExcludedFromMultiChoice() && question.isSelected())) {
                         for (int i = 0; i < rootNode.getOptionsList().size(); i++) {
                             Node childNode = rootNode.getOptionsList().get(i);
@@ -658,7 +660,6 @@ public class PhysicalExamActivity extends AppCompatActivity {
                             }
                             imageName = UUID.randomUUID().toString();
                             Node.handleQuestion(question, getActivity(), adapter, filePath.toString(), imageName);
-
                         } else {
                             Node.handleQuestion(question, (Activity) getContext(), adapter, null, null);
                         }
