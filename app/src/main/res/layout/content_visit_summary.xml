@@ -477,12 +477,6 @@ Github: prajwalmw
                         android:visibility="gone"
                         app:srcCompat="@drawable/download" />
 
-
-                    <WebView
-                        android:id="@+id/textView_content_physexam"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/textView_heading_physexam" />
                     <ImageView
                         android:id="@+id/imagebutton_edit_physexam"
                         style="@style/SelectableItemBackground"
@@ -492,6 +486,15 @@ Github: prajwalmw
                         android:background="@drawable/oval_home_location"
                         android:padding="4dip"
                         android:src="@drawable/edit_icon" />
+
+                    <WebView
+                        android:id="@+id/textView_content_physexam"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView_heading_physexam"
+                        android:layout_marginEnd="8dip"
+                        android:layout_toStartOf="@+id/imagebutton_edit_physexam" />
+
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recy_physexam"
@@ -537,7 +540,7 @@ Github: prajwalmw
                         android:gravity="center"
                         android:text="Alert Message"
                         android:textColor="@color/black"
-                        android:textSize="14sp"
+                        android:textSize="15sp"
                         android:textStyle="bold" />
 
                     <View
@@ -554,7 +557,7 @@ Github: prajwalmw
                         android:gravity="start"
                         android:text="Alert text"
                         android:textColor="@color/black"
-                        android:textSize="12sp"
+                        android:textSize="13.3sp"
                         android:textStyle="normal" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

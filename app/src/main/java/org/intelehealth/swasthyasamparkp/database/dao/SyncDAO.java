@@ -7,21 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.widget.Toast;
 
-
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.gson.Gson;
 
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-
-import org.intelehealth.swasthyasamparkp.utilities.Logger;
-import org.intelehealth.swasthyasamparkp.utilities.NotificationID;
-import org.intelehealth.swasthyasamparkp.utilities.PatientsFrameJson;
-import org.intelehealth.swasthyasamparkp.utilities.SessionManager;
 import org.intelehealth.swasthyasamparkp.R;
 import org.intelehealth.swasthyasamparkp.app.AppConstants;
 import org.intelehealth.swasthyasamparkp.app.IntelehealthApplication;
@@ -31,7 +19,18 @@ import org.intelehealth.swasthyasamparkp.models.dto.ResponseDTO;
 import org.intelehealth.swasthyasamparkp.models.dto.VisitDTO;
 import org.intelehealth.swasthyasamparkp.models.pushRequestApiCall.PushRequestApiCall;
 import org.intelehealth.swasthyasamparkp.models.pushResponseApiCall.PushResponseApiCall;
+import org.intelehealth.swasthyasamparkp.utilities.Logger;
+import org.intelehealth.swasthyasamparkp.utilities.NotificationID;
+import org.intelehealth.swasthyasamparkp.utilities.PatientsFrameJson;
+import org.intelehealth.swasthyasamparkp.utilities.SessionManager;
 import org.intelehealth.swasthyasamparkp.utilities.exception.DAOException;
+
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;

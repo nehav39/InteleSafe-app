@@ -1197,7 +1197,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                 }
                 physicalText.setEnabled(false);
 
-                physicalDialog.setPositiveButton(getString(R.string.generic_manual_entry), new DialogInterface.OnClickListener() {
+                /*physicalDialog.setPositiveButton(getString(R.string.generic_manual_entry), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         final AlertDialog.Builder textInput = new AlertDialog.Builder(VisitSummaryActivity.this);
@@ -1235,7 +1235,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
                         textInput.show();
                         dialogInterface.dismiss();
                     }
-                });
+                });*/
 
                 physicalDialog.setNegativeButton(getString(R.string.generic_erase_redo), new DialogInterface.OnClickListener() {
                     @Override

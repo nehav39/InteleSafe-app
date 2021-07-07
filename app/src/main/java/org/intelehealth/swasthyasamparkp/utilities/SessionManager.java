@@ -72,9 +72,8 @@ public class SessionManager {
         editor = pref.edit();
     }
 
-    public int getSystemLanguage(String systemLanguage)
-    {
-        if(systemLanguage == "hi")
+    public int getSystemLanguage(String systemLanguage) {
+        if (systemLanguage == "hi")
             return 0;
         else
             return 1;
@@ -118,15 +117,17 @@ public class SessionManager {
     }
 
     public String getAppLanguage() {
-        if(pref.getString(APP_LANGUAGE, "").equals("हिंदी"))
+        /*if(pref.getString(APP_LANGUAGE, "").equals("हिंदी"))
             return "hi";
 
         if(pref.getString(APP_LANGUAGE, "").equals("मराठी"))
         return "mr";
 
         else
-            return "en";
+            return "en";*/
+        return pref.getString(APP_LANGUAGE, "en");
     }
+
     public void setAppLanguage(String pullExcutedTime) {
         editor.putString(APP_LANGUAGE, pullExcutedTime);
         editor.commit();
@@ -516,6 +517,7 @@ public class SessionManager {
 
     /**
      * for getting User First Name only by Venu N
+     *
      * @return
      */
     public String getUserFirstName() {
@@ -524,6 +526,7 @@ public class SessionManager {
 
     /**
      * to set User First Name only by Venu N
+     *
      * @param value
      */
     public void setUseFirstName(String value) {
@@ -533,20 +536,22 @@ public class SessionManager {
 
     /**
      * for setting the patient Selected Country
+     *
      * @param countryStr
      */
-    public void setPatientCountry(String countryStr){
-        editor.putString(personSelectedCountry,countryStr);
+    public void setPatientCountry(String countryStr) {
+        editor.putString(personSelectedCountry, countryStr);
         editor.commit();
     }
 
 
     /**
      * get patient Country.
+     *
      * @return
      */
-    public  String getPatientCountry(){
-        return pref.getString(personSelectedCountry,"");
+    public String getPatientCountry() {
+        return pref.getString(personSelectedCountry, "");
     }
 
     public void cachePdfPath(String url, String downloadPath) {
