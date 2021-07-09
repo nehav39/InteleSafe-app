@@ -50,8 +50,8 @@ public class VideoListActivity extends AppCompatActivity {
 
     private List<VideoItem> getVideos() {
         ArrayList<VideoItem> videoItems = new ArrayList<>();
-        videoItems.add(new VideoItem(getResources().getString(R.string.how_to_use_spo2), "https://swasthyasampark.intelehealth.org/IEC/pulse_oximeter.mp4"));
-        videoItems.add(new VideoItem(getResources().getString(R.string.how_to_use_thermo), "https://swasthyasampark.intelehealth.org/IEC/digital_thermometer.mp4"));
+        videoItems.add(new VideoItem(getResources().getString(R.string.how_to_use_spo2), "https://swasthyasampark.intelehealth.org/IEC/pulse_oximeter.mp4", R.drawable.pulse_oximeter_icon_new));
+        videoItems.add(new VideoItem(getResources().getString(R.string.how_to_use_thermo), "https://swasthyasampark.intelehealth.org/IEC/digital_thermometer.mp4", R.drawable.digital_thermometer_icon_new));
         return videoItems;
     }
 

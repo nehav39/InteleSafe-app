@@ -42,7 +42,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.ViewHolder> 
         VideoItem videoItem = mData.get(position);
         holder.tvTitle.setText(videoItem.title);
         Glide.with(holder.itemView.getContext())
-                .load(videoItem.url)
+                .load(videoItem.placeholder)
                 .into(holder.thumbnail);
     }
 

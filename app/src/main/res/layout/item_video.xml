@@ -14,35 +14,43 @@
         android:orientation="vertical">
 
         <RelativeLayout
-            android:background="@color/gray"
             android:layout_width="match_parent"
-            android:layout_height="128dp">
+            android:layout_height="100dp"
+            android:background="@color/white">
+
             <ImageView
                 android:id="@+id/thumbnail"
-                android:layout_centerInParent="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:contentDescription="@null" />
-            <ImageView
                 android:layout_centerInParent="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_media_play"
-                android:contentDescription="@null" />
+                android:contentDescription="@null"
+                android:minWidth="84dip"
+                android:minHeight="84dip" />
+
+            <ImageView
+                android:layout_width="48dip"
+                android:layout_height="48dip"
+                android:layout_centerInParent="true"
+                android:background="@drawable/ic_baseline_lens_24_gray"
+                android:contentDescription="@null"
+                android:padding="8dip"
+                android:src="@drawable/ic_baseline_play_circle_outline_24" />
         </RelativeLayout>
 
         <TextView
             android:id="@+id/tvTitle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="56dip"
             android:layout_gravity="center_horizontal"
+            android:background="@color/colorPrimary"
             android:ellipsize="end"
             android:fontFamily="@font/lato_regular"
             android:gravity="center"
-            android:maxLines="2"
-            android:padding="8dip"
+            android:maxLines="3"
+            android:padding="4dip"
             android:textAlignment="center"
-            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
             tools:text="@string/in_partnership_with_state_government_of" />
 
     </LinearLayout>

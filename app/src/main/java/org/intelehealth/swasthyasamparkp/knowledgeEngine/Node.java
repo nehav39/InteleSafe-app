@@ -37,6 +37,7 @@ import org.intelehealth.swasthyasamparkp.R;
 import org.intelehealth.swasthyasamparkp.activities.cameraActivity.CameraActivity;
 import org.intelehealth.swasthyasamparkp.activities.complaintNodeActivity.CustomArrayAdapter;
 import org.intelehealth.swasthyasamparkp.activities.physcialExamActivity.CustomExpandableListAdapter;
+import org.intelehealth.swasthyasamparkp.activities.physcialExamActivity.PhysicalExamActivity;
 import org.intelehealth.swasthyasamparkp.app.IntelehealthApplication;
 import org.intelehealth.swasthyasamparkp.utilities.SessionManager;
 import org.json.JSONArray;
@@ -54,6 +55,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 /**
  * Created by Amal Afroz Alam on 21, April, 2016.
@@ -911,6 +913,9 @@ public class Node implements Serializable {
                 }
                 node.setSelected();
                 adapter.notifyDataSetChanged();
+                // analyze the alert from the user inputs
+                ((PhysicalExamActivity) Objects.requireNonNull(context)).mAlertEngine.scanForAlert(node.getId(), value);
+
 
                 dialog.dismiss();
             }

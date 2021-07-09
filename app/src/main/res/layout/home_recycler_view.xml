@@ -76,17 +76,17 @@
                         android:textColor="@color/gray_4"
                         android:textSize="16sp" />
 
-                    <TextView
+                    <WebView
                         android:id="@+id/note_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/title_label_1_tv"
                         android:layout_gravity="center"
+                        android:background="#00000000"
                         android:fontFamily="@font/lato_regular"
                         android:gravity="center_vertical"
                         android:padding="8sp"
                         android:paddingVertical="15sp"
-                        android:text="12/06/2021"
                         android:textColor="@color/gray_6"
                         android:textSize="13sp" />
 
