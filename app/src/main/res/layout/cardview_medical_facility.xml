@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/medical_cardview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="15dip"
+    android:layout_marginTop="8dip"
+    android:layout_marginBottom="8dp"
+    android:padding="5dp"
+    app:cardBackgroundColor="@color/blue_light_1"
+    app:cardCornerRadius="8dip"
+    app:cardElevation="8dip"
+    app:cardPreventCornerOverlap="false">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="4">
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3.4"
+                android:layout_marginVertical="10dp"
+                android:layout_marginStart="15dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginVertical="2dp"
+                    tools:text="RIMS" />
+
+                <TextView
+                    android:id="@+id/address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:layout_marginVertical="2dp"
+                    tools:text="Address" />
+
+                <TextView
+                    android:id="@+id/phoneno"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:autoLink="phone"
+                    android:layout_marginVertical="2dp"
+                    tools:text="Phone no." />
+
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/map_icon"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:layout_gravity="end|center_vertical"
+                android:layout_margin="10dp"
+                android:background="@drawable/oval_home_count"
+                android:padding="5dp"
+                android:src="@drawable/ic_baseline_directions_24" />
+
+        </LinearLayout>
+    </FrameLayout>
+</androidx.cardview.widget.CardView>

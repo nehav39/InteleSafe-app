@@ -4,6 +4,11 @@
     <item
         android:id="@+id/changeLanguage"
         android:title="@string/change_lang_menu" />
+
+    <item
+        android:id="@+id/medical_facility"
+        android:title="@string/health_facilities" />
+
     <item
         android:id="@+id/logout"
         android:title="@string/logout_menu"/>

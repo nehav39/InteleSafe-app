@@ -6,9 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".activities.videosActivity.VideosActivity">
 
-    <ScrollView
+ <!--   <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content">-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -42,16 +42,21 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewPDF"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:padding="4dp"
                 android:layout_marginTop="5dp"
-                android:nestedScrollingEnabled="false"
                 android:layout_marginBottom="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:scrollbars="vertical"
+                android:fadeScrollbars="false"
+                android:scrollbarThumbVertical="@color/colorPrimary"
+                android:scrollbarStyle="outsideInset"
+                android:paddingRight="10dp"
+                />
 
         </LinearLayout>
 
-    </ScrollView>
+   <!-- </ScrollView>-->
 
     <LinearLayout
         android:id="@+id/cardview_two_action_View"

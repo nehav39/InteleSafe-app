@@ -590,8 +590,15 @@ public class LoginActivity extends AppCompatActivity {
                     sessionManager.setPrivacyValue("Accept");
                     sessionManager.setFirstTimeLaunch(false);
                     sessionManager.setPatientCountry(clsPersonGetResponse.getPreferredAddress().getCountry());
+
+                    sessionManager.setState_Name(clsPersonGetResponse.getAddresses().get(0).getStateProvince());
+                    sessionManager.setDistrict_Name(clsPersonGetResponse.getAddresses().get(0).getCityVillage());
+                    String s = sessionManager.getState_Name() + " " + sessionManager.getDistrict_Name();
+                    Log.d(TAG, "state: " + s);
+
                     // offlineLogin.setUpOfflineLogin(mEmail, mPassword);
                     cpd.dismiss();
+                    //address = cityvillage = stateprovince
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                     intent.putExtra("login", true);
                     intent.putExtra("from", "login");
@@ -655,8 +662,7 @@ public class LoginActivity extends AppCompatActivity {
         cpd.show();
         UrlModifiers urlModifiers = new UrlModifiers();
         String urlString = urlModifiers.setRegistrationURL();
-        //String encoded = base64Utils.encoded("admin", BuildConfig.DEBUG ? "Admin123" : "IHUser#1");
-        String encoded = base64Utils.encoded("admin", "IHUser#1");
+        String encoded = base64Utils.encoded("admin", BuildConfig.DEBUG ? "IHUser#1" : "IHUser#1");
         Observable<ClsUserGetResponse> userGetResponse = AppConstants.apiInterface.getUsersFromServer(urlString, "Basic " + encoded, enteredUserName);
         userGetResponse.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -745,8 +751,7 @@ public class LoginActivity extends AppCompatActivity {
         cpd.show();
         UrlModifiers urlModifiers = new UrlModifiers();
         String urlString = urlModifiers.getPassword(BuildConfig.CLEAN_URL);
-        //String encoded = base64Utils.encoded("admin", BuildConfig.DEBUG ? "Admin123" : "IHUser#1");
-        String encoded = base64Utils.encoded("admin", "IHUser#1");
+        String encoded = base64Utils.encoded("admin", BuildConfig.DEBUG ? "IHUser#1" : "IHUser#1");
         GetPassword getPassword = new GetPassword();
         getPassword.username = enteredUserName;
         Observable<GetPassword> userGetResponse = AppConstants.apiInterface.getPassword(urlString, "Basic " + encoded, getPassword);
