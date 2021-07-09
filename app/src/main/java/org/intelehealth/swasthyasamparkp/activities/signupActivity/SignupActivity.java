@@ -104,10 +104,6 @@ import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
 
-import static org.intelehealth.swasthyasamparkp.utilities.StringUtils.switch_hi_block;
-import static org.intelehealth.swasthyasamparkp.utilities.StringUtils.switch_hi_city;
-import static org.intelehealth.swasthyasamparkp.utilities.StringUtils.switch_hi_state;
-
 /**
  * Created by Sagar Shimpi
  */
@@ -143,7 +139,7 @@ public class SignupActivity extends AppCompatActivity {
     EditText mPhoneNum;
     //    EditText mAge;
     AlertDialog.Builder mAgePicker;
-//    EditText mAddress1;
+    //    EditText mAddress1;
 //    EditText mAddress2;
 //    AutoCompleteTextView mCity;
     EditText mPostal;
@@ -217,7 +213,7 @@ public class SignupActivity extends AppCompatActivity {
     Pattern lowerCasePatten = Pattern.compile("[a-z ]");
     Pattern digitCasePatten = Pattern.compile("[0-9 ]");
 
-   // protected AccountManager manager;
+    // protected AccountManager manager;
 
     private TextInputLayout input_state_field, input_state_spinner; //  state a text box if country is not India so that user can enter their state
     private EditText edt_state;
@@ -237,6 +233,12 @@ public class SignupActivity extends AppCompatActivity {
     private ArrayAdapter<CharSequence> stateAdapter;
     private ArrayAdapter<CharSequence> cityAdapter;
     private ArrayAdapter<CharSequence> blockAdapter;
+
+    /*utils for String en & hindi issue */
+
+    private String mSelectedStateArrayNameEN = "";
+    private String mSelectedCityArrayNameEN = "";
+    private String mSelectedBlockArrayNameEN = "";
 
 
     @Override
@@ -273,7 +275,7 @@ public class SignupActivity extends AppCompatActivity {
         mLastName = findViewById(R.id.identification_last_name);
         mLastName.setFilters(new InputFilter[]{new InputFilter.LengthFilter(41), inputFilter_Name}); //maxlength 41
 
-      //  mEmailView = findViewById(R.id.email);
+        //  mEmailView = findViewById(R.id.email);
 
         image_username_valid = findViewById(R.id.image_username_valid);
         image_username_valid.setVisibility(View.GONE);
@@ -309,11 +311,10 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
-       // licenseID = findViewById(R.id.identification_registration_no);
-      //  licenseID.setFilters(new InputFilter[]{new InputFilter.LengthFilter(50), inputFilter_Name}); //maxlength 50
-      //  hospital_name = findViewById(R.id.identification_hospital_name);
-       // hospital_name.setFilters(new InputFilter[]{new InputFilter.LengthFilter(26), inputFilter_Name}); //maxlength 26
-
+        // licenseID = findViewById(R.id.identification_registration_no);
+        //  licenseID.setFilters(new InputFilter[]{new InputFilter.LengthFilter(50), inputFilter_Name}); //maxlength 50
+        //  hospital_name = findViewById(R.id.identification_hospital_name);
+        // hospital_name.setFilters(new InputFilter[]{new InputFilter.LengthFilter(26), inputFilter_Name}); //maxlength 26
 
 
 //        mAge = findViewById(R.id.identification_age);
@@ -334,7 +335,7 @@ public class SignupActivity extends AppCompatActivity {
         countryText = findViewById(R.id.identification_country);
         mCountry = findViewById(R.id.spinner_country);*/
 
-      //  mImageView = findViewById(R.id.imageview_id_picture);
+        //  mImageView = findViewById(R.id.imageview_id_picture);
 
       /*  input_state_field = findViewById(R.id.input_state_field);
         input_state_spinner = findViewById(R.id.input_state_spinner);
@@ -382,13 +383,13 @@ public class SignupActivity extends AppCompatActivity {
         ArrayAdapter<CharSequence> personalCasteAdapter = ArrayAdapter.createFromResource(SignupActivity.this,
                 R.array.personal_caste, R.layout.custom_spinner_item);
         // personalCasteAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-       // mCaste.setAdapter(personalCasteAdapter);
+        // mCaste.setAdapter(personalCasteAdapter);
 
         generateUuid();
 
 //        ArrayAdapter<CharSequence> stateAdapter = ArrayAdapter.createFromResource(this, R.array.state_error, android.R.layout.simple_spinner_item);
         // stateAdapter.setDropDownViewResource(R.layout.custom_spinner_item);
-      //  mState.setAdapter(stateAdapter);
+        //  mState.setAdapter(stateAdapter);
 
 /*
         mState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -666,7 +667,7 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
 
-                if(!mDOB.getText().toString().isEmpty() || !mDOB.getText().toString().equals("")) {
+                if (!mDOB.getText().toString().isEmpty() || !mDOB.getText().toString().equals("")) {
                     int dob_int = Integer.parseInt(mDOB.getText().toString());
                     if (dob_int < 1) {
                         mDOB.getText().clear();
@@ -682,8 +683,7 @@ public class SignupActivity extends AppCompatActivity {
                         mDOB.setFocusableInTouchMode(true);
                         mDOB.requestFocus();
                         return;
-                    }
-                    else {
+                    } else {
                         //do nothing...
                     }
                 }
@@ -795,14 +795,14 @@ public class SignupActivity extends AppCompatActivity {
 //                finish();
 
                 // Reset errors.
-               // mEmailView.setError(null);
+                // mEmailView.setError(null);
                 mPhoneNum.setError(null);
                 mOTP.setError(null);
                 mPasswordView.setError(null);
                 mCPassword.setError(null);
 
                 // Store values at the time of the login attempt.
-              //  userName = mEmailView.getText().toString();
+                //  userName = mEmailView.getText().toString();
                 userName = mPhoneNum.getText().toString();
                 /*password = mPasswordView.getText().toString();
                 cPassword = mCPassword.getText().toString();*/
@@ -1047,7 +1047,6 @@ public class SignupActivity extends AppCompatActivity {
 //                }
 
 
-
                 // Added by venu N on 03/04/202.
                 //Commenting out on 21/05/21 : By Nishita
                 /*if ((selectedPersonalCaste == null && selectedPersonalCaste.length() <= 0) || selectedPersonalCaste.equalsIgnoreCase("Select Designation")) {
@@ -1125,12 +1124,11 @@ public class SignupActivity extends AppCompatActivity {
                 }*/
 
                 //passes number of days to this function to calculate the actual date...
-                if(!mDOB.getText().toString().isEmpty() || !mDOB.getText().toString().equals("")) {
+                if (!mDOB.getText().toString().isEmpty() || !mDOB.getText().toString().equals("")) {
                     String age = getYearFromAge(Integer.parseInt(mDOB.getText().toString()));
                     birthDate = DateAndTimeUtils.getFormatedDateOfBirth(StringUtils.getValue(age));
-                    Log.v("age", "birthdate: "+birthDate);
-                }
-                else {
+                    Log.v("age", "birthdate: " + birthDate);
+                } else {
                     //do nothing close the dialog...
                 }
 
@@ -1177,7 +1175,7 @@ public class SignupActivity extends AppCompatActivity {
 
                 UserBirthAttribute userBirthHosAttribute = new UserBirthAttribute();
                 userBirthHosAttribute.setAttributeType("1c718819-345c-4368-aad6-d69b4c267db7"); //openmrsuuid education
-                userBirthHosAttribute.setValue("" + (block_spinner.getSelectedItemPosition()==0?"" : selectBlock())); //hospital name text
+                userBirthHosAttribute.setValue("" + (block_spinner.getSelectedItemPosition() == 0 ? "" : selectBlock())); //hospital name text
 
                 UserBirthAttribute userCasteAttribute = new UserBirthAttribute();
                 userCasteAttribute.setAttributeType("5a889d96-0c84-4a04-88dc-59a6e37db2d3"); // This is for Designation. openrms caste...
@@ -1200,8 +1198,9 @@ public class SignupActivity extends AppCompatActivity {
                /* userAddressData.setAddress1("" + mAddress1.getText().toString() + " " + mAddress2.getText().toString());
                 userAddressData.setCityVillage("" + mCity.getText().toString());*/
                 userAddressData.setCountry("" + country);
-                userAddressData.setStateProvince("" + state);
-                userAddressData.setCityVillage("" + selectCity());
+                userAddressData.setStateProvince(state.equalsIgnoreCase("Select") ? "" : state);
+                userAddressData.setCityVillage(city.equalsIgnoreCase("Select") ? "" : city);
+                userAddressData.setAddress1(block.equalsIgnoreCase("Select") ? "" : block);
                 sessionManager.setState(state);
                 sessionManager.setPatientCountry(country);
                 userAddressData.setPostalCode("" + mPostal.getText().toString());
@@ -1312,10 +1311,11 @@ public class SignupActivity extends AppCompatActivity {
         try {
 //            String stateSpinner = "state_" + sessionManager.getAppLanguage();
             String stateSpinner = "state_values_" + sessionManager.getAppLanguage();
+            mSelectedStateArrayNameEN = "state_values_en";
             int states = getResources().getIdentifier(stateSpinner, "array", getApplicationContext().getPackageName());
             if (states != 0) {
                 stateAdapter = ArrayAdapter.createFromResource(this,
-                        states, android.R.layout.simple_spinner_item);
+                        states, R.layout.cst_spnner_item_view);
 
             }
             state_spinner.setAdapter(stateAdapter);
@@ -1330,63 +1330,33 @@ public class SignupActivity extends AppCompatActivity {
                 if (position > 0) {
                     city_spinner.setEnabled(true);
                     block_spinner.setEnabled(true);
+                    String city_array_name = (position == 1 ? "jh_city_values_" : position == 2 ? "mp_city_values_" : position == 3 ? "sk_city_values_" : "default_city_values_");
 
-                    if(position==1)
-                    {
-                        String jharkhand_state_spinner = "jh_city_values_"  + sessionManager.getAppLanguage();
-                        int jh_states = getResources().getIdentifier(jharkhand_state_spinner, "array", getApplicationContext().getPackageName());
-                        if (jh_states != 0) {
-                            cityAdapter = ArrayAdapter.createFromResource
-                                    (SignupActivity.this, jh_states, android.R.layout.simple_spinner_item);
-                        }
-                        city_spinner.setAdapter(cityAdapter);
-                        if(sessionManager.getAppLanguage().equalsIgnoreCase("hi"))
-                        {
-                            state = switch_hi_state(state_spinner.getSelectedItem().toString());
-//                            city = switch_hi_city(city_spinner.getSelectedItem().toString());
-                        }
-                        else
-                        {
-                            state = state_spinner.getSelectedItem().toString();
-//                            city = city_spinner.getSelectedItem().toString();
-                        }
+                    mSelectedCityArrayNameEN = city_array_name + "en";
+                    mSelectedBlockArrayNameEN = "";
+                    city = "";
+                    block = "";
 
+
+                    city_array_name = city_array_name + sessionManager.getAppLanguage();
+
+                    int citys = getResources().getIdentifier(city_array_name, "array", getApplicationContext().getPackageName());
+                    if (citys != 0) {
+                        cityAdapter = ArrayAdapter.createFromResource
+                                (SignupActivity.this, citys, R.layout.cst_spnner_item_view);
                     }
-                    else
-                    {
-                        String mp_state_spinner = "mp_city_values_"  + sessionManager.getAppLanguage();
-                        int mp_states = getResources().getIdentifier(mp_state_spinner, "array", getApplicationContext().getPackageName());
-                        if (mp_states != 0) {
-                            cityAdapter = ArrayAdapter.createFromResource
-                                    (SignupActivity.this, mp_states, android.R.layout.simple_spinner_item);
-                        }
-                        city_spinner.setAdapter(cityAdapter);
-                        if(sessionManager.getAppLanguage().equalsIgnoreCase("hi"))
-                        {
-                            state = switch_hi_state(state_spinner.getSelectedItem().toString());
-//                            city = switch_hi_city(city_spinner.getSelectedItem().toString());
-                        }
-                        else
-                        {
-                            state = state_spinner.getSelectedItem().toString();
-//                            city = city_spinner.getSelectedItem().toString();
-                        }
+                    city_spinner.setAdapter(cityAdapter);
+                    if (sessionManager.getAppLanguage().equalsIgnoreCase("hi")) {
+                        //state = switch_hi_state(state_spinner.getSelectedItem().toString());
+                        state = getResources().getStringArray(getResources().getIdentifier(mSelectedStateArrayNameEN, "array", getApplicationContext().getPackageName()))[position];
+                    } else {
+                        state = state_spinner.getSelectedItem().toString();
                     }
-//                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource
-//                            (SignupActivity.this, position == 1 ? R.array.jh_city_values :
-//                                    R.array.mp_city_values, android.R.layout.simple_spinner_item);
-//                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                    city_spinner.setAdapter(adapter);
-//                    state = state_spinner.getSelectedItem().toString();
 
-                   /* ArrayAdapter<CharSequence> blockAdapter = ArrayAdapter.createFromResource
-                            (SignupActivity.this, position == 1 ? R.array.jh_block_values : R.array.mp_block_values,
-                                    android.R.layout.simple_spinner_item);
-                    blockAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    block_spinner.setAdapter(blockAdapter);*/
+
                 } else {
                     city_spinner.setEnabled(false);
-                   // block_spinner.setEnabled(false);
+                    // block_spinner.setEnabled(false);
                 }
             }
 
@@ -1404,62 +1374,86 @@ public class SignupActivity extends AppCompatActivity {
 
                     int array = 0;
                     String block_spinner_values = "";
-                    if(state.equalsIgnoreCase("Jharkhand"))
-                    {
+                    if (state.equalsIgnoreCase("Jharkhand")) {
                         switch (position) {
                             case 1:
-                                block_spinner_values = "rn_block_values_"  + sessionManager.getAppLanguage();
-                                array = getResources().getIdentifier(block_spinner_values, "array", getApplicationContext().getPackageName());
+                                block_spinner_values = "rn_block_values_";
                                 break;
                             case 2:
 //                            array = R.array.es_block_values;
-                                block_spinner_values = "es_block_values_"  + sessionManager.getAppLanguage();
-                                array = getResources().getIdentifier(block_spinner_values, "array", getApplicationContext().getPackageName());
+                                block_spinner_values = "es_block_values_";
                                 break;
                             case 3:
 //                            array = R.array.bo_block_values;
-                                block_spinner_values = "bo_block_values_"  + sessionManager.getAppLanguage();
-                                array = getResources().getIdentifier(block_spinner_values, "array", getApplicationContext().getPackageName());
+                                block_spinner_values = "bo_block_values_";
                                 break;
                             case 4:
 //                            array = R.array.dh_block_values;
-                                block_spinner_values = "dh_block_values_"  + sessionManager.getAppLanguage();
-                                array = getResources().getIdentifier(block_spinner_values, "array", getApplicationContext().getPackageName());
+                                block_spinner_values = "dh_block_values_";
                                 break;
                             default:
 //                            array = R.array.default_block_values;
-                                block_spinner_values = "default_block_values_"  + sessionManager.getAppLanguage();
-                                array = getResources().getIdentifier(block_spinner_values, "array", getApplicationContext().getPackageName());
+                                block_spinner_values = "default_block_values_";
                         }
-                    }
-                    else
-                    {
+                    } else if (state.equalsIgnoreCase("Madhya Pradesh")) {
                         switch (position) {
                             case 1:
-                                block_spinner_values = "mp_block_values_" + sessionManager.getAppLanguage();
-                                array = getResources().getIdentifier(block_spinner_values, "array", getApplicationContext().getPackageName());
+                                block_spinner_values = "kh_block_values_";
                                 break;
                             case 2:
 //                            array = R.array.es_block_values;
-                                block_spinner_values = "mp_block_values_" + sessionManager.getAppLanguage();
-                                array = getResources().getIdentifier(block_spinner_values, "array", getApplicationContext().getPackageName());
+                                block_spinner_values = "rj_block_values_";
                                 break;
                             default:
 //                            array = R.array.default_block_values;
-                                block_spinner_values = "default_block_values_"  + sessionManager.getAppLanguage();
-                                array = getResources().getIdentifier(block_spinner_values, "array", getApplicationContext().getPackageName());
+                                block_spinner_values = "default_block_values_";
                         }
+                    } else if (state.equalsIgnoreCase("Sikkim")) {
+                        switch (position) {
+                            case 1:
+                                block_spinner_values = "east_block_values_";
+                                break;
+                            case 2:
+//                            array = R.array.es_block_values;
+                                block_spinner_values = "west_block_values_";
+                                break;
+                            case 3:
+//                            array = R.array.es_block_values;
+                                block_spinner_values = "north_block_values_";
+                                break;
+                            case 4:
+//                            array = R.array.es_block_values;
+                                block_spinner_values = "south_block_values_";
+                                break;
+                            default:
+//                            array = R.array.default_block_values;
+                                block_spinner_values = "default_block_values_";
+                        }
+                    } else {
+                        block_spinner_values = "default_block_values_";
                     }
+
+                    mSelectedBlockArrayNameEN = block_spinner_values + "en";
+                    block = "";
+
+                    block_spinner_values = block_spinner_values + sessionManager.getAppLanguage();
+                    array = getResources().getIdentifier(block_spinner_values, "array", getApplicationContext().getPackageName());
 
                     if (array != 0) {
                         blockAdapter = ArrayAdapter.createFromResource
-                                (SignupActivity.this, array, android.R.layout.simple_spinner_item);
+                                (SignupActivity.this, array, R.layout.cst_spnner_item_view);
                     }
                     block_spinner.setAdapter(blockAdapter);
 
                 } else {
                     block_spinner.setEnabled(false);
                     // block_spinner.setEnabled(false);
+                }
+
+                if (sessionManager.getAppLanguage().equalsIgnoreCase("hi")) {
+                    city = getResources().getStringArray(getResources().getIdentifier(mSelectedCityArrayNameEN, "array", getApplicationContext().getPackageName()))[position];
+                } else {
+                    city = city_spinner.getSelectedItem().toString();
                 }
             }
 
@@ -1468,6 +1462,22 @@ public class SignupActivity extends AppCompatActivity {
 
             }
         });
+        block_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                if (sessionManager.getAppLanguage().equalsIgnoreCase("hi")) {
+                    block = getResources().getStringArray(getResources().getIdentifier(mSelectedBlockArrayNameEN, "array", getApplicationContext().getPackageName()))[position];
+                } else {
+                    block = block_spinner.getSelectedItem().toString();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
 
         et_tested_positive_date = findViewById(R.id.et_tested_positive_date);
         et_tested_positive_date.setOnClickListener(new View.OnClickListener() {
@@ -1494,14 +1504,13 @@ public class SignupActivity extends AppCompatActivity {
                                     dialog.dismiss();
                                     et_tested_positive_date.setError(null);
                                     //passes number of days to this function to calculate the actual date...
-                                    if(!input.getText().toString().isEmpty() || !input.getText().toString().equals("")) {
+                                    if (!input.getText().toString().isEmpty() || !input.getText().toString().equals("")) {
                                         String date = getDatefromDays(Integer.parseInt(input.getText().toString()));
                                         et_tested_positive_date.setText(date);
-                                    }
-                                    else {
+                                    } else {
                                         //do nothing close the dialog...
                                     }
-                                  //  et_tested_positive_date.setText(input.getText().toString());
+                                    //  et_tested_positive_date.setText(input.getText().toString());
                                 }
                             });
                             builder.show();
@@ -1511,17 +1520,17 @@ public class SignupActivity extends AppCompatActivity {
                             datePickerDialog = new DatePickerDialog(SignupActivity.this,
                                     android.R.style.Theme_Holo_Light_Dialog_NoActionBar,
                                     new DatePickerDialog.OnDateSetListener() {
-                                @Override
-                                public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                    et_tested_positive_date.setError(null);
-                                    Calendar cal = Calendar.getInstance();
-                                    cal.setTimeInMillis(0);
-                                    cal.set(year, monthOfYear, dayOfMonth);
-                                    Date date = cal.getTime();
-                                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMMM yyyy", Locale.ENGLISH);
-                                    et_tested_positive_date.setText(simpleDateFormat.format(date));
-                                }
-                            }, instance.get(Calendar.YEAR), instance.get(Calendar.MONTH), instance.get(Calendar.DAY_OF_MONTH));
+                                        @Override
+                                        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                            et_tested_positive_date.setError(null);
+                                            Calendar cal = Calendar.getInstance();
+                                            cal.setTimeInMillis(0);
+                                            cal.set(year, monthOfYear, dayOfMonth);
+                                            Date date = cal.getTime();
+                                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMMM yyyy", Locale.ENGLISH);
+                                            et_tested_positive_date.setText(simpleDateFormat.format(date));
+                                        }
+                                    }, instance.get(Calendar.YEAR), instance.get(Calendar.MONTH), instance.get(Calendar.DAY_OF_MONTH));
                             datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
                             //This will set the maxDate to Today only...
                             datePickerDialog.show();
@@ -1575,26 +1584,20 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private String selectCity() {
-        if(sessionManager.getAppLanguage().equalsIgnoreCase("hi"))
-        {
+        /*if (sessionManager.getAppLanguage().equalsIgnoreCase("hi")) {
             city = switch_hi_city(city_spinner.getSelectedItem().toString());
-        }
-        else
-        {
+        } else {
             city = city_spinner.getSelectedItem().toString();
-        }
+        }*/
         return city;
     }
 
     private String selectBlock() {
-        if(sessionManager.getAppLanguage().equalsIgnoreCase("hi"))
-        {
+        /*if (sessionManager.getAppLanguage().equalsIgnoreCase("hi")) {
             block = switch_hi_block(block_spinner.getSelectedItem().toString());
-        }
-        else
-        {
+        } else {
             block = block_spinner.getSelectedItem().toString();
-        }
+        }*/
         return block;
     }
 
@@ -1649,7 +1652,8 @@ public class SignupActivity extends AppCompatActivity {
         progress.show();
         UrlModifiers urlModifiers = new UrlModifiers();
         String urlString = urlModifiers.setRegistrationURL();
-        encoded = base64Utils.encoded("admin", BuildConfig.DEBUG ? "Admin123" : "IHUser#1");
+        //encoded = base64Utils.encoded("admin", BuildConfig.DEBUG ? "Admin123" : "IHUser#1");
+        encoded = base64Utils.encoded("admin", "IHUser#1");
         Observable<ClsUserGetResponse> userGetResponse = AppConstants.apiInterface.getUsersFromServer(urlString, "Basic " + encoded, enteredUserName);
         userGetResponse.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -1934,7 +1938,7 @@ public class SignupActivity extends AppCompatActivity {
         patientAttributesDTO.setUuid(UUID.randomUUID().toString());
         patientAttributesDTO.setPatientuuid(uuid);
         patientAttributesDTO.setPersonAttributeTypeUuid(patientsDAO.getUuidForAttribute("occupation"));
-      //  patientAttributesDTO.setValue(StringUtils.getValue(licenseID.getText().toString()));
+        //  patientAttributesDTO.setValue(StringUtils.getValue(licenseID.getText().toString()));
         patientAttributesDTOList.add(patientAttributesDTO);
 
 //            patientAttributesDTO = new PatientAttributesDTO();
@@ -1948,7 +1952,7 @@ public class SignupActivity extends AppCompatActivity {
         patientAttributesDTO.setUuid(UUID.randomUUID().toString());
         patientAttributesDTO.setPatientuuid(uuid);
         patientAttributesDTO.setPersonAttributeTypeUuid(patientsDAO.getUuidForAttribute("Education Level"));
-     //   patientAttributesDTO.setValue(StringUtils.getValue(hospital_name.getText().toString()));
+        //   patientAttributesDTO.setValue(StringUtils.getValue(hospital_name.getText().toString()));
         patientAttributesDTOList.add(patientAttributesDTO);
 
         patientAttributesDTO = new PatientAttributesDTO();
@@ -2075,7 +2079,8 @@ public class SignupActivity extends AppCompatActivity {
 
         UrlModifiers urlModifiers = new UrlModifiers();
         String urlString = urlModifiers.loginUrl(BuildConfig.CLEAN_URL);
-        encoded = base64Utils.encoded("admin", BuildConfig.DEBUG ? "Admin123" : "IHUser#1");
+        //encoded = base64Utils.encoded("admin", BuildConfig.DEBUG ? "Admin123" : "IHUser#1");
+        encoded = base64Utils.encoded("admin", "IHUser#1");
 //      sessionManager.setEncoded(encoded);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -2369,6 +2374,7 @@ public class SignupActivity extends AppCompatActivity {
 
 
     String generatedOtp;
+
     private void sendOtp(String enteredUserName) {
         if (!NetworkConnection.isOnline(context)) {
             Toast.makeText(context, R.string.no_network, Toast.LENGTH_SHORT).show();
@@ -2437,7 +2443,8 @@ public class SignupActivity extends AppCompatActivity {
         progress.show();
         UrlModifiers urlModifiers = new UrlModifiers();
         String urlString = urlModifiers.getUserMapping(BuildConfig.CLEAN_URL);
-        String encoded = base64Utils.encoded("admin", BuildConfig.DEBUG ? "Admin123" : "IHUser#1");
+        //String encoded = base64Utils.encoded("admin", BuildConfig.DEBUG ? "Admin123" : "IHUser#1");
+        String encoded = base64Utils.encoded("admin", "IHUser#1");
         GetPassword getPassword = new GetPassword();
         getPassword.username = enteredUserName;
         getPassword.password = password;

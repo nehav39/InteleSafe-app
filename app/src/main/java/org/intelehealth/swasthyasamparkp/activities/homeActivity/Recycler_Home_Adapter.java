@@ -156,13 +156,15 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
 
         Log.v("TAG", array_message + "");
 
+        myViewHolder.foregroundCardView.setTag(arrayList.get(position).hasPrescription);
         myViewHolder.foregroundCardView.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 if (self)
                     return;
-
+                boolean hasPrescription = (boolean) view.getTag();
+                if (!hasPrescription) return;
                 Day_Date day_date = arrayList.get(position);
                 String Url = BuildConfig.BASE_URL +
                         "preApi/i.jsp?v=" +
@@ -171,7 +173,7 @@ public class Recycler_Home_Adapter extends RecyclerView.Adapter<Recycler_Home_Ad
                 Intent download_intent = new Intent(Intent.ACTION_VIEW);
                 download_intent.setData(Uri.parse(Url));
                 mcontext.startActivity(download_intent);
-                Log.d("url", "url: "+ Url);
+                Log.d("url", "url: " + Url);
 
                 /*alertdialogBuilder = new AlertDialog.Builder(mcontext);
                 alertdialogBuilder.setTitle(R.string.today_checkin);

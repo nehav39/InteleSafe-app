@@ -598,24 +598,7 @@ public class Node implements Serializable {
                     adapter.notifyDataSetChanged();
                     return;
                 }
-                double valDouble = Double.parseDouble(val);
-                if (node.getId().trim().equalsIgnoreCase("ID_1409441302")) {
-                    if (valDouble < 85 || valDouble > 108) {
-                        dialogEditText.setText("");
-                        Toast.makeText(context, context.getString(R.string.validation_text_for_temp) + " " + node.getText(), Toast.LENGTH_LONG).show();
-                        node.setUnselected();
-                        adapter.notifyDataSetChanged();
-                        return;
-                    }
-                } else if (node.getId().trim().equalsIgnoreCase("ID_1562764420")) {
-                    if (valDouble > 100) {
-                        dialogEditText.setText("");
-                        Toast.makeText(context, context.getString(R.string.spo2_number_validation_text) + " " + node.getText(), Toast.LENGTH_LONG).show();
-                        node.setUnselected();
-                        adapter.notifyDataSetChanged();
-                        return;
-                    }
-                }
+
                 Log.v(TAG, node.getLanguage());
                 if (node.getLanguage().contains("_")) {
                     node.setLanguage(node.getLanguage().replace("_", dialogEditText.getText().toString()));
@@ -884,7 +867,23 @@ public class Node implements Serializable {
                     return;
                 }
                 double valDouble = Double.parseDouble(value);
-                if (node.getId().trim().equalsIgnoreCase("ID_350715851")) {
+                if (node.getId().trim().equalsIgnoreCase("ID_1409441302")) {
+                    if (valDouble < 85 || valDouble > 108) {
+                        etEnterValue.setText("");
+                        Toast.makeText(context, context.getString(R.string.validation_text_for_temp) + " " + node.getText(), Toast.LENGTH_LONG).show();
+                        node.setUnselected();
+                        adapter.notifyDataSetChanged();
+                        return;
+                    }
+                } else if (node.getId().trim().equalsIgnoreCase("ID_1562764420")) {
+                    if (valDouble > 100) {
+                        etEnterValue.setText("");
+                        Toast.makeText(context, context.getString(R.string.spo2_number_validation_text) + " " + node.getText(), Toast.LENGTH_LONG).show();
+                        node.setUnselected();
+                        adapter.notifyDataSetChanged();
+                        return;
+                    }
+                } else if (node.getId().trim().equalsIgnoreCase("ID_350715851")) {
                     if (valDouble > 60) {
                         etEnterValue.setText("");
                         Toast.makeText(context, context.getString(R.string.respiratory_number_validation_text) + " " + node.getText(), Toast.LENGTH_LONG).show();
@@ -1541,7 +1540,7 @@ public class Node implements Serializable {
 
                 if (!stringsList.get(i).isEmpty()) {
                     if (i == stringsList.size() - 1 && isTerminal) {
-                        mLanguage = mLanguage.concat(stringsList.get(i) + ".");
+                        mLanguage = mLanguage.concat(stringsList.get(i));
                     } else {
                         mLanguage = mLanguage.concat(stringsList.get(i));
                     }
@@ -1549,7 +1548,7 @@ public class Node implements Serializable {
             } else {
                 if (!stringsList.get(i).isEmpty()) {
                     if (i == stringsList.size() - 1 && isTerminal) {
-                        mLanguage = mLanguage.concat(languageSeparator + stringsList.get(i) + ".");
+                        mLanguage = mLanguage.concat(languageSeparator + stringsList.get(i));
                     } else {
                         mLanguage = mLanguage.concat(languageSeparator + stringsList.get(i));
                     }

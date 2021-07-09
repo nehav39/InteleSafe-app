@@ -560,13 +560,126 @@
         <item>Select</item>
         <item>Jharkhand</item>
         <item>Madhya Pradesh</item>
+        <item>Sikkim</item>
+        <item>Other</item>
     </string-array>
 
     <string-array name="state_values_hi">
         <item>चयन करें</item>
         <item>झारखण्ड</item>
         <item>मध्य प्रदेश</item>
+        <item>सिक्किम</item>
+        <item>अन्य</item>
     </string-array>
+
+    <!--Sikkim Info Start-->
+    <string-array name="sk_city_values_en">
+        <item>Select</item>
+        <item>East</item>
+        <item>West</item>
+        <item>North</item>
+        <item>South</item>
+    </string-array>
+    <string-array name="sk_city_values_hi">
+        <item>चयन करें</item>
+        <item>पूर्व</item>
+        <item>पश्चिम</item>
+        <item>उत्तरी</item>
+        <item>दक्षिण</item>
+    </string-array>
+
+    <string-array name="east_block_values_en">
+        <item>Select</item>
+        <item>Machong</item>
+        <item>Pakyong</item>
+        <item>Rangpo</item>
+        <item>Rhenock</item>
+        <item>Rongli</item>
+        <item>Samdong</item>
+        <item>Sang</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="west_block_values_en">
+        <item>Select</item>
+        <item>Dentam</item>
+        <item>Mangalbary</item>
+        <item>Rinchenpong</item>
+        <item>Sombaria</item>
+        <item>Soreng</item>
+        <item>Tashiding</item>
+        <item>Yuksom</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="north_block_values_en">
+        <item>Select</item>
+        <item>Chungthang</item>
+        <item>Dikchu</item>
+        <item>Hee Gyathang</item>
+        <item>Passingdong</item>
+        <item>Phodong</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="south_block_values_en">
+        <item>Select</item>
+        <item>Jorethang</item>
+        <item>Melli</item>
+        <item>Namthang</item>
+        <item>Ravongla</item>
+        <item>Temi</item>
+        <item>Tokal Bermiok</item>
+        <item>Yangyang</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="east_block_values_hi">
+        <item>चयन करें</item>
+        <item>माचोंग</item>
+        <item>पाक्योंग</item>
+        <item>रांगपो</item>
+        <item>रिनाक</item>
+        <item>रोंगली</item>
+        <item>समडोंग</item>
+        <item>सेंग</item>
+        <item>अन्य</item>
+    </string-array>
+
+    <string-array name="west_block_values_hi">
+        <item>चयन करें</item>
+        <item>दंतम</item>
+        <item>मंगलबरी</item>
+        <item>रिनचेनपोंग</item>
+        <item>सोम्बारिया</item>
+        <item>सोरेन्ग</item>
+        <item>ताशिदिंग</item>
+        <item>युकसोम</item>
+        <item>अन्य</item>
+    </string-array>
+
+    <string-array name="north_block_values_hi">
+        <item>चयन करें</item>
+        <item>चुंगथांग</item>
+        <item>दिक्चु</item>
+        <item>ही ग्याथांग</item>
+        <item>पासिंगडोंग</item>
+        <item>फोडोंग</item>
+        <item>अन्य</item>
+    </string-array>
+
+    <string-array name="south_block_values_hi">
+        <item>चयन करें</item>
+        <item>जोरेथांग</item>
+        <item>मेल्ली</item>
+        <item>नमथांग</item>
+        <item>रावोंग्ला</item>
+        <item>टेमि</item>
+        <item>तोकल बरमियोक</item>
+        <item>यांगयांग</item>
+        <item>अन्य</item>
+    </string-array>
+    <!--Sikkim info END-->
 
     <string-array name="jh_city_values_en">
         <item>Select</item>
@@ -574,6 +687,7 @@
         <item>East Singhbhum</item>
         <item>Bokaro</item>
         <item>Dhanbad</item>
+        <item>Other</item>
     </string-array>
 
     <string-array name="jh_city_values_hi">
@@ -582,18 +696,22 @@
         <item>पूर्वी सिंहभूम</item>
         <item>बोकारो</item>
         <item>धनबाद </item>
+        <item>अन्य</item>
     </string-array>
 
     <string-array name="mp_city_values_en">
         <item>Select</item>
         <item>Khandwa</item>
         <item>Rajgarh</item>
+        <item>Others</item>
+
     </string-array>
 
     <string-array name="mp_city_values_hi">
         <item>चयन करें</item>
         <item>खंडवा</item>
         <item>राजगढ़</item>
+        <item>अन्य</item>
     </string-array>
 
     <!--Ranchi Block Values...-->
@@ -617,6 +735,8 @@
         <item>Lapung</item>
         <item>Bundu</item>
         <item>Tamar</item>
+        <item>Ranchi Urban</item>
+        <item>Other</item>
     </string-array>
 
     <!--East Singhbhum Values...-->
@@ -633,6 +753,7 @@
         <item>Musabani</item>
         <item>Patamda</item>
         <item>Potka</item>
+        <item>Other</item>
     </string-array>
 
     <!--Bokaro Values...-->
@@ -647,6 +768,7 @@
         <item>Kasmar</item>
         <item>Nawadih</item>
         <item>Peterwar</item>
+        <item>Other</item>
     </string-array>
 
     <!--Dhanbad Values...-->
@@ -662,13 +784,63 @@
         <item>Purvi Tundi</item>
         <item>Topchanchi</item>
         <item>Tundi</item>
+        <item>Other</item>
     </string-array>
 
     <!--Default Block Values...-->
     <string-array name="default_block_values_en">
         <item>Select</item>
-        <item>Invalid</item>
+        <item>Other</item>
     </string-array>
+
+    <!--Khandwa Block Values...-->
+    <string-array name="kh_block_values_en">
+        <item>Select</item>
+        <item>Harsud</item>
+        <item>Khalwa</item>
+        <item>Khandwa</item>
+        <item>Pandhana</item>
+        <item>Punasa</item>
+        <item>Other</item>
+    </string-array>
+
+    <!--Rajgarh Block Values...-->
+    <string-array name="rj_block_values_en">
+        <item>Select</item>
+        <item>Biaora</item>
+        <item>Jirapur</item>
+        <item>Khilchipur</item>
+        <item>Narsinghgarh</item>
+        <item>Pachore</item>
+        <item>Rajgarh</item>
+        <item>Sarangpur</item>
+        <item>Other</item>
+    </string-array>
+
+    <!--Khandwa Block Values...-->
+    <string-array name="kh_block_values_hi">
+        <item>चयन करें</item>
+        <item>हरसूद</item>
+        <item>खलवा</item>
+        <item>खंडवा</item>
+        <item>पंधाना</item>
+        <item>पुनासा</item>
+        <item>अन्य</item>
+    </string-array>
+
+    <!--Rajgarh Block Values...-->
+    <string-array name="rj_block_values_hi">
+        <item>चयन करें</item>
+        <item>ब्यावरा</item>
+        <item>जीरापुर</item>
+        <item>खिलचीपुर</item>
+        <item>नरसिंहगढ़</item>
+        <item>पचोरे</item>
+        <item>राजगढ़</item>
+        <item>सारंगपुर</item>
+        <item>अन्य</item>
+    </string-array>
+
 
     <!--Ranchi Block Values...-->
     <string-array name="rn_block_values_hi">
@@ -691,6 +863,8 @@
         <item>लापुंग</item>
         <item>बुन्दु</item>
         <item>तामार</item>
+        <item>रांची अर्बन</item>
+        <item>अन्य</item>
     </string-array>
 
     <!--East Singhbhum Values...-->
@@ -707,6 +881,7 @@
         <item>मुसाबनी</item>
         <item>पतमदा</item>
         <item>पोटका</item>
+        <item>अन्य</item>
     </string-array>
 
     <!--Bokaro Values...-->
@@ -721,6 +896,7 @@
         <item>कसमारी</item>
         <item>नवादिह</item>
         <item>पीटरवार</item>
+        <item>अन्य</item>
     </string-array>
 
     <!--Dhanbad Values...-->
@@ -736,12 +912,13 @@
         <item>पूर्वी टुंडी</item>
         <item>तोपचांची</item>
         <item>टुंडी</item>
+        <item>अन्य</item>
     </string-array>
 
     <!--Default Block Values...-->
     <string-array name="default_block_values_hi">
         <item>चयन करें</item>
-        <item>अमान्य</item>
+        <item>अन्य</item>
     </string-array>
 
     <string-array name="mp_block_values_en">
@@ -750,6 +927,18 @@
     </string-array>
 
     <string-array name="mp_block_values_hi">
+        <item>चयन करें</item>
+        <item>अन्य</item>
+    </string-array>
+
+    <!--Default City Values...-->
+    <string-array name="default_city_values_en">
+        <item>Select</item>
+        <item>Other</item>
+    </string-array>
+
+    <!--Default city Values...-->
+    <string-array name="default_city_values_hi">
         <item>चयन करें</item>
         <item>अन्य</item>
     </string-array>

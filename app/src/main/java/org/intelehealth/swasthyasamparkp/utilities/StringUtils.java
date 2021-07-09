@@ -16,11 +16,11 @@ package org.intelehealth.swasthyasamparkp.utilities;
 
 import android.widget.Spinner;
 
+import org.intelehealth.swasthyasamparkp.R;
+import org.intelehealth.swasthyasamparkp.app.IntelehealthApplication;
+
 import java.io.File;
 import java.util.List;
-
-import org.intelehealth.swasthyasamparkp.app.IntelehealthApplication;
-import org.intelehealth.swasthyasamparkp.R;
 
 public final class StringUtils {
     private static final String NULL_AS_STRING = "null";
@@ -185,13 +185,18 @@ public final class StringUtils {
         return val;
     }
 
-    public static String switch_hi_state(String val) {
+
+
+   /* public static String switch_hi_state(String val) {
         switch (val) {
             case "झारखण्ड":
                 val = "Jharkhand";
                 break;
             case "मध्य प्रदेश":
                 val = "Madhya Pradesh";
+                break;
+            case "सिक्किम":
+                val = "Sikkim";
                 break;
             case "चयन करें":
                 val = "Select";
@@ -201,6 +206,7 @@ public final class StringUtils {
         }
         return val;
     }
+
     public static String switch_hi_city(String val) {
         switch (val) {
             case "रांची":
@@ -218,9 +224,24 @@ public final class StringUtils {
             case "खंडवा":
                 val = "Khandwa";
                 break;
+
             case "राजगढ़":
                 val = "Rajgarh";
                 break;
+            *//*sikkim*//*
+            case "पूर्व":
+                val = "East";
+                break;
+            case "पश्चिम":
+                val = "West";
+                break;
+            case "उत्तरी":
+                val = "North";
+                break;
+            case "दक्षिण":
+                val = "South";
+                break;
+
             case "चयन करें":
                 val = "Select";
                 break;
@@ -389,5 +410,5 @@ public final class StringUtils {
                 return val;
         }
         return val;
-    }
+    }*/
 }
