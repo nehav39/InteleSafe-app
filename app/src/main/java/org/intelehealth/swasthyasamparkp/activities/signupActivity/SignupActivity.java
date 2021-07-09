@@ -2466,6 +2466,11 @@ public class SignupActivity extends AppCompatActivity {
 //                            intent.putExtra("name", "" + mFirstName.getText().toString() + " " + mLastName.getText().toString());
 //                            intent.putExtra("patientUUID", "" + personUUID);
 
+                        sessionManager.setState_Name(state_spinner.getSelectedItem().toString());
+                        sessionManager.setDistrict_Name(city_spinner.getSelectedItem().toString());
+                        String s = sessionManager.getState_Name() + " " + sessionManager.getDistrict_Name();
+                        Log.d(TAG, "state: " + s);
+
                         sessionManager.setPersionUUID(personUUID);
                         sessionManager.setUserName("" + mFirstName.getText().toString() + " " + mLastName.getText().toString());
                         sessionManager.setUseFirstName("" + mFirstName.getText().toString()); // added by venu N on 07/04/2020.

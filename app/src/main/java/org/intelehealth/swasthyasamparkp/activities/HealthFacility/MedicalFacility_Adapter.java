@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -84,12 +85,14 @@ private Context context;
         holder.phoneno.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    int mobile = Integer.parseInt(medicalFacility_dataModel.getPhoneno());
-
+                if (!medicalFacility_dataModel.getPhoneno().equalsIgnoreCase("not available")) {
+                    Intent intent = new Intent(Intent.ACTION_DIAL);
+                    intent.setData(Uri.parse(String.format("tel:%s", medicalFacility_dataModel.getPhoneno())));
+                    context.startActivity(intent);
                 }
-                catch (NumberFormatException e) {
+                else {
                     //do nothing...
+                    Toast.makeText(context, context.getResources().getString(R.string.mobile_no_not_available), Toast.LENGTH_SHORT).show();
                 }
             }
         });

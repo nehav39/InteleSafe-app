@@ -744,5 +744,6 @@
     <string name="go_to_home">Go to Home</string>
     <string name="health_facilities">Health Facilities</string>
     <string name="sikkim">Sikkim</string>
+    <string name="mobile_no_not_available">Mobile number not available</string>
 
 </resources>
