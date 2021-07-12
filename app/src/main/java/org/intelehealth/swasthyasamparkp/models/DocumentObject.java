@@ -5,6 +5,7 @@ public class DocumentObject {
 
     private String documentName;
     private String documentPhoto;
+    public boolean isNew;
 
     public DocumentObject(String documentName, String documentPhoto) {
         this.documentName = documentName;

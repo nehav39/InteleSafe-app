@@ -32,6 +32,8 @@ public class UuidDictionary {
     public static final String ADDITIONAL_COMMENTS = "162169AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
 
     public static final String COMPLEX_IMAGE_AD = "07a816ce-ffc0-49b9-ad92-a1bf9bf5e2ba";
+    public static final String PATIENT_PROFILE_AD = "8d3284d6-416f-4005-a269-4bdbed0c89ee";
+    public static final String PATIENT_PROFILE_MED_HISTORY = "68968661-1e7a-4ea9-8ccb-571469bc659c";
 
     public static final String COMPLEX_IMAGE_PE = "200b7a45-77bc-4986-b879-cc727f5f7d5b";
 

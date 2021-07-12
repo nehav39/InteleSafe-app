@@ -1,0 +1,708 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ScrollView
+        android:id="@+id/scrollPrfile"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:padding="16dp"
+        android:scrollbars="none">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/profile_photo_frame"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp">
+
+                <ImageView
+                    android:id="@+id/profile_photo"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:background="@drawable/profile_circle"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_person_24" />
+
+                <ImageButton
+                    android:id="@+id/btn_edit_photo"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="bottom|end"
+                    android:background="@drawable/bg_profile_edit"
+                    android:src="@drawable/ic_camera" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tvNameAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profile_photo_frame"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                app:fontFamily="@font/lato_bold"
+                tools:text="Sagar S, 30" />
+
+            <TextView
+                android:id="@+id/tvMobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvNameAge"
+                android:layout_centerHorizontal="true"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                app:fontFamily="@font/lato_regular" />
+
+            <TextView
+                android:id="@+id/tvAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvMobile"
+                android:layout_centerHorizontal="true"
+                android:text="Mumbai, MH"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                app:fontFamily="@font/lato_regular" />
+
+            <View
+                android:id="@+id/border"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/tvAddress"
+                android:layout_marginTop="8dp"
+                android:background="@color/gray_2" />
+
+
+            <!--            ================================================-->
+
+            <LinearLayout
+                android:id="@+id/ll_info_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/border"
+                android:layout_marginTop="8dip"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/assignment"
+                    android:drawablePadding="10dp"
+                    android:ems="10"
+                    android:text="Covid History"
+                    android:textAppearance="@style/sign_up_title"
+                    android:textColor="@color/gray_6"
+                    app:fontFamily="@font/lato_regular" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="1dip"
+                    android:layout_marginTop="8dip"
+                    android:layout_marginBottom="10dip"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="10sp"
+                    app:cardElevation="8dip">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="8dp">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/et_tested_positive_date"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:drawablePadding="10dp"
+                                android:ems="10"
+                                android:focusable="false"
+                                android:fontFamily="@font/lato_regular"
+                                android:freezesText="true"
+                                android:hint="@string/hint_date_tested_positive_optional"
+                                android:imeOptions="actionUnspecified"
+                                android:inputType=""
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                android:textAppearance="@style/sign_up_input" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/et_admission_date"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:drawablePadding="10dp"
+                                android:ems="10"
+                                android:focusable="false"
+                                android:fontFamily="@font/lato_regular"
+                                android:freezesText="true"
+                                android:hint="Date of Admission"
+                                android:imeOptions="actionUnspecified"
+                                android:inputType=""
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                android:textAppearance="@style/sign_up_input" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/et_stay_days"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:drawablePadding="10dp"
+                                android:ems="10"
+                                android:fontFamily="@font/lato_regular"
+                                android:hint="Stay in Hospital in days"
+                                android:inputType="number"
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                android:textAppearance="@style/sign_up_input" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:layout_marginTop="8dp"
+                            android:paddingHorizontal="4dp"
+                            android:text="Stay Type"
+                            android:textColor="@color/gray_6"
+                            app:fontFamily="@font/lato_regular" />
+
+                        <RadioGroup
+                            android:id="@+id/rgStayType"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dip"
+                            android:layout_marginBottom="8dp"
+                            android:orientation="vertical"
+                            android:paddingLeft="8dp"
+                            android:paddingRight="8dp">
+
+                            <RadioButton
+                                android:id="@+id/rbOxygen"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="ICU"
+                                android:textColor="@color/gray_6"
+                                app:fontFamily="@font/lato_regular" />
+
+                            <RadioButton
+                                android:id="@+id/rbOxygenTherapy"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Oxygen Therapy"
+                                android:textColor="@color/gray_6"
+                                app:fontFamily="@font/lato_regular" />
+
+                            <RadioButton
+                                android:id="@+id/rbVentilator"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Ventilator"
+                                android:textColor="@color/gray_6"
+                                app:fontFamily="@font/lato_regular" />
+
+                            <RadioButton
+                                android:id="@+id/rbWithout_Oxygen_Therapy"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Without Oxygen Therapy"
+                                android:textColor="@color/gray_6"
+                                app:fontFamily="@font/lato_regular" />
+                        </RadioGroup>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/assignment"
+                    android:drawablePadding="10dp"
+                    android:ems="10"
+                    android:text="Past History"
+                    android:layout_marginTop="8dp"
+                    android:textAppearance="@style/sign_up_title"
+                    android:textColor="@color/gray_6"
+                    app:fontFamily="@font/lato_regular" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="1dip"
+                    android:layout_marginTop="8dip"
+                    android:layout_marginBottom="10dip"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="10sp"
+                    app:cardElevation="8dip">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:text="Do you have any medical conditions before COVID?"
+                            android:textColor="@color/gray_6"
+                            app:fontFamily="@font/lato_regular" />
+
+                        <CheckBox
+                            android:id="@+id/cbDiabetes"
+                            android:text="Diabetes"
+                            app:fontFamily="@font/lato_regular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                        <CheckBox
+                            android:id="@+id/cbHypertension"
+                            android:text="Hypertension"
+                            app:fontFamily="@font/lato_regular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                        <CheckBox
+                            android:id="@+id/cbHeartDiseases"
+                            android:text="Heart diseases"
+                            app:fontFamily="@font/lato_regular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                        <CheckBox
+                            android:id="@+id/cbCancer"
+                            android:text="Cancer"
+                            app:fontFamily="@font/lato_regular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                        <CheckBox
+                            android:id="@+id/cbAsthma"
+                            android:text="Asthma"
+                            app:fontFamily="@font/lato_regular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                        <CheckBox
+                            android:id="@+id/cbKidneyDisorder"
+                            android:text="Kidney disorder"
+                            app:fontFamily="@font/lato_regular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                        <CheckBox
+                            android:id="@+id/cbOthers"
+                            android:text="Others"
+                            app:fontFamily="@font/lato_regular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                        <com.google.android.material.textfield.TextInputLayout
+                            app:hintEnabled="false"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/et_Others"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:fontFamily="@font/lato_regular"
+                                android:hint="Others"
+                                android:inputType="text"
+                                android:maxLines="1"
+                                android:singleLine="true" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:layout_marginTop="8dp"
+                            android:paddingHorizontal="4dp"
+                            android:text="Are you taking medication for any of these medical condition (If Yes please upload prescription in Upload Document Section)"
+                            android:textColor="@color/gray_6"
+                            app:fontFamily="@font/lato_regular" />
+
+                        <RadioGroup
+                            android:id="@+id/rgMedications"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dip"
+                            android:layout_marginBottom="8dp"
+                            android:orientation="horizontal"
+                            android:paddingLeft="8dp"
+                            android:paddingRight="8dp">
+
+                            <RadioButton
+                                android:id="@+id/rbMedicationsYes"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/generic_yes"
+                                android:textColor="@color/gray_6"
+                                app:fontFamily="@font/lato_regular" />
+
+                            <RadioButton
+                                android:id="@+id/rbMedicationsNo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/generic_no"
+                                android:textColor="@color/gray_6"
+                                app:fontFamily="@font/lato_regular" />
+                        </RadioGroup>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:layout_marginTop="8dp"
+                            android:text="Do you have family history of any disease?"
+                            android:textColor="@color/gray_6"
+                            app:fontFamily="@font/lato_regular" />
+
+                        <CheckBox
+                            android:id="@+id/cbDiabetesFamily"
+                            android:text="Diabetes"
+                            app:fontFamily="@font/lato_regular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                        <CheckBox
+                            android:id="@+id/cbHypertensionFamily"
+                            android:text="Hypertension"
+                            app:fontFamily="@font/lato_regular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                        <CheckBox
+                            android:id="@+id/cbHeartDiseasesFamily"
+                            android:text="Heart diseases"
+                            app:fontFamily="@font/lato_regular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                        <CheckBox
+                            android:id="@+id/cbCancerFamily"
+                            android:text="Cancer"
+                            app:fontFamily="@font/lato_regular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                        <CheckBox
+                            android:id="@+id/cbAsthmaFamily"
+                            android:text="Asthma"
+                            app:fontFamily="@font/lato_regular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                        <CheckBox
+                            android:id="@+id/cbKidneyDisorderFamily"
+                            android:text="Kidney disorder"
+                            app:fontFamily="@font/lato_regular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                        <CheckBox
+                            android:id="@+id/cbOthersFamily"
+                            android:text="Others"
+                            app:fontFamily="@font/lato_regular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                        <com.google.android.material.textfield.TextInputLayout
+                            app:hintEnabled="false"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/et_OthersFamily"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:fontFamily="@font/lato_regular"
+                                android:hint="Others"
+                                android:inputType="text"
+                                android:maxLines="1"
+                                android:singleLine="true" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:layout_marginTop="8dp"
+                            android:paddingHorizontal="4dp"
+                            android:text="Do You have any allergies?"
+                            android:textColor="@color/gray_6"
+                            app:fontFamily="@font/lato_regular" />
+
+                        <RadioGroup
+                            android:id="@+id/rgAllergies"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dip"
+                            android:layout_marginBottom="8dp"
+                            android:orientation="horizontal"
+                            android:paddingLeft="8dp"
+                            android:paddingRight="8dp">
+
+                            <RadioButton
+                                android:id="@+id/rbAllergiesYes"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/generic_yes"
+                                android:textColor="@color/gray_6"
+                                app:fontFamily="@font/lato_regular" />
+
+                            <RadioButton
+                                android:id="@+id/rbAllergiesNo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/generic_no"
+                                android:textColor="@color/gray_6"
+                                app:fontFamily="@font/lato_regular" />
+                        </RadioGroup>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:layout_marginTop="8dp"
+                            android:paddingHorizontal="4dp"
+                            android:text="Do You consume Alcohol?"
+                            android:textColor="@color/gray_6"
+                            app:fontFamily="@font/lato_regular" />
+
+                        <RadioGroup
+                            android:id="@+id/rgAlcohol"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dip"
+                            android:layout_marginBottom="8dp"
+                            android:orientation="horizontal"
+                            android:paddingLeft="8dp"
+                            android:paddingRight="8dp">
+
+                            <RadioButton
+                                android:id="@+id/rbAlcoholYes"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/generic_yes"
+                                android:textColor="@color/gray_6"
+                                app:fontFamily="@font/lato_regular" />
+
+                            <RadioButton
+                                android:id="@+id/rbAlcoholNo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/generic_no"
+                                android:textColor="@color/gray_6"
+                                app:fontFamily="@font/lato_regular" />
+                        </RadioGroup>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:layout_marginTop="8dp"
+                            android:paddingHorizontal="4dp"
+                            android:text="Do you consume tobacco Smoke?"
+                            android:textColor="@color/gray_6"
+                            app:fontFamily="@font/lato_regular" />
+
+                        <RadioGroup
+                            android:id="@+id/rgSmokeTobacco"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dip"
+                            android:layout_marginBottom="8dp"
+                            android:orientation="horizontal"
+                            android:paddingLeft="8dp"
+                            android:paddingRight="8dp">
+
+                            <RadioButton
+                                android:id="@+id/rbSmokeTobaccoYes"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/generic_yes"
+                                android:textColor="@color/gray_6"
+                                app:fontFamily="@font/lato_regular" />
+
+                            <RadioButton
+                                android:id="@+id/rbSmokeTobaccoNo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/generic_no"
+                                android:textColor="@color/gray_6"
+                                app:fontFamily="@font/lato_regular" />
+                        </RadioGroup>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/assignment"
+                    android:drawablePadding="10dp"
+                    android:ems="10"
+                    android:text="Post COVID Care"
+                    android:layout_marginTop="8dp"
+                    android:textAppearance="@style/sign_up_title"
+                    android:textColor="@color/gray_6"
+                    app:fontFamily="@font/lato_regular" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="1dip"
+                    android:layout_marginTop="8dip"
+                    android:layout_marginBottom="10dip"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="10sp"
+                    app:cardElevation="8dip">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="8dp">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:layout_marginTop="8dp"
+                            android:paddingHorizontal="4dp"
+                            android:text="Are you consulting any doctor for Post COVID Care?"
+                            android:textColor="@color/gray_6"
+                            app:fontFamily="@font/lato_regular" />
+
+                        <RadioGroup
+                            android:id="@+id/rgPostCovidConsulting"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dip"
+                            android:layout_marginBottom="8dp"
+                            android:orientation="horizontal"
+                            android:paddingLeft="8dp"
+                            android:paddingRight="8dp">
+
+                            <RadioButton
+                                android:id="@+id/rbPostCovidConsultingYes"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/generic_yes"
+                                android:textColor="@color/gray_6"
+                                app:fontFamily="@font/lato_regular" />
+
+                            <RadioButton
+                                android:id="@+id/rbPostCovidConsultingNo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/generic_no"
+                                android:textColor="@color/gray_6"
+                                app:fontFamily="@font/lato_regular" />
+                        </RadioGroup>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:text="If yes, please mention the complaint"
+                            android:textColor="@color/gray_6"
+                            app:fontFamily="@font/lato_regular" />
+                        <com.google.android.material.textfield.TextInputLayout
+                            app:hintEnabled="false"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/et_Complaint"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:ems="10"
+                                android:fontFamily="@font/lato_regular"
+                                android:hint="Complaint"
+                                android:inputType="text"
+                                android:maxLines="1"
+                                android:singleLine="true" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:text="If you have conducted any post COVID investigation or taking any post COVID medicine please upload in Upload"
+                            android:textColor="@color/gray_6"
+                            app:fontFamily="@font/lato_regular" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <!--            ================================================-->
+
+
+            <TextView
+                android:id="@+id/tvDocuments"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ll_info_layout"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/lato_regular"
+                android:text="@string/title_activity_additional_documents"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <Button
+                android:id="@+id/btnUpload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvDocuments"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:fontFamily="@font/lato_regular"
+                android:onClick="uploadDocument"
+                android:paddingHorizontal="16dp"
+                android:text="@string/visit_summary_button_upload" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btnUpload"
+                android:layout_marginTop="8dp" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/recyclerView"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                app:srcCompat="@drawable/ic_done_24dp" />
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

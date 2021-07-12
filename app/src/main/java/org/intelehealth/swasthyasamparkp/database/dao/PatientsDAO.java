@@ -69,6 +69,7 @@ public class PatientsDAO {
             values.put("modified_date", AppConstants.dateAndTimeUtils.currentDateTime());
             values.put("dead", patient.getDead());
             values.put("sync", patient.getSyncd());
+            values.put("phone_number", patient.getPhonenumber());
             createdRecordsCount = db.insertWithOnConflict("tbl_patient", null, values, SQLiteDatabase.CONFLICT_REPLACE);
         } catch (SQLException e) {
             isCreated = false;
@@ -436,5 +437,38 @@ public class PatientsDAO {
 
     }
 
-
+    public PatientDTO getPatient(String patientUuid) {
+        PatientDTO patientDTO = new PatientDTO();
+        SQLiteDatabase db = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
+        db.beginTransaction();
+        try {
+            Cursor idCursor = db.rawQuery("SELECT * FROM tbl_patient where uuid = ? COLLATE NOCASE", new String[]{patientUuid});
+            if (idCursor.getCount() != 0) {
+                while (idCursor.moveToNext()) {
+                    patientDTO.setUuid(idCursor.getString(idCursor.getColumnIndexOrThrow("uuid")));
+                    patientDTO.setOpenmrsId(idCursor.getString(idCursor.getColumnIndexOrThrow("openmrs_id")));
+                    patientDTO.setFirstname(idCursor.getString(idCursor.getColumnIndexOrThrow("first_name")));
+                    patientDTO.setLastname(idCursor.getString(idCursor.getColumnIndexOrThrow("last_name")));
+                    patientDTO.setMiddlename(idCursor.getString(idCursor.getColumnIndexOrThrow("middle_name")));
+                    patientDTO.setGender(idCursor.getString(idCursor.getColumnIndexOrThrow("gender")));
+                    patientDTO.setDateofbirth(idCursor.getString(idCursor.getColumnIndexOrThrow("date_of_birth")));
+                    patientDTO.setPhonenumber(idCursor.getString(idCursor.getColumnIndexOrThrow("phone_number")));
+                    patientDTO.setCountry(idCursor.getString(idCursor.getColumnIndexOrThrow("country")));
+                    patientDTO.setStateprovince(idCursor.getString(idCursor.getColumnIndexOrThrow("state_province")));
+                    patientDTO.setCityvillage(idCursor.getString(idCursor.getColumnIndexOrThrow("city_village")));
+                    patientDTO.setAddress1(idCursor.getString(idCursor.getColumnIndexOrThrow("address1")));
+                    patientDTO.setAddress2(idCursor.getString(idCursor.getColumnIndexOrThrow("address2")));
+                    patientDTO.setPostalcode(idCursor.getString(idCursor.getColumnIndexOrThrow("postal_code")));
+                    patientDTO.setPatientPhoto(idCursor.getString(idCursor.getColumnIndexOrThrow("patient_photo")));
+                }
+            }
+            idCursor.close();
+            db.setTransactionSuccessful();
+        } catch (SQLException e) {
+            FirebaseCrashlytics.getInstance().recordException(e);
+        } finally {
+            db.endTransaction();
+        }
+        return patientDTO;
+    }
 }

@@ -776,5 +776,8 @@
     <string name="health_facilities">Health Facilities</string>
     <string name="mobile_no_not_available">Mobile number not available</string>
     <string name="sikkim">Sikkim</string>
-
+    <string name="profile">Profile</string>
+    <string name="hint_name">Name</string>
+    <string name="take_photo">Take Photo</string>
+    <string name="choose_from_gallery">Choose from Gallery</string>
 </resources>

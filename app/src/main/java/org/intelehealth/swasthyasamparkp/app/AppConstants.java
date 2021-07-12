@@ -91,4 +91,8 @@ public class AppConstants {
             new OneTimeWorkRequest.Builder(LastSyncWork.class)
                     .setConstraints(MY_CONSTRAINTS)
                     .build();
+
+    public static final String SYNC_INTENT_ACTION = "org.intelehealth.app.LAST_SYNC";
+    public static final String SYNC_INTENT_DATA_KEY = "SYNC_JOB_TYPE";
+    public static final int SYNC_OBS_IMAGE_PUSH_DONE = 4;
 }

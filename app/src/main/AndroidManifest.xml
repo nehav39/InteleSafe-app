@@ -49,9 +49,13 @@
         <!--
 <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
-            android:resource="@color/colorPrimary" />
-        -->
-        <activity android:name=".activities.videosActivity.VideosActivity" />
+            android:resource="@color/colorPrimary" />-->
+
+        <activity android:name=".activities.profile.ProfileActivity"
+            android:theme="@style/AppTheme"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"/>
+        <activity android:name="org.intelehealth.swasthyasamparkp.activities.videosActivity.VideosActivity"></activity>
         <activity
             android:name=".activities.appointments.AppointmentsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -89,7 +93,8 @@
             android:name=".activities.chooseLanguageActivity.ChooseLanguageActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.introActivity.IntroActivity"
+            android:name="org.intelehealth.swasthyasamparkp.activities.introActivity.IntroActivity"
+            android:label="@string/about_swasthya_sampark"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
