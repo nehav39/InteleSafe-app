@@ -43,6 +43,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.load.model.GlideUrl;
+import com.bumptech.glide.load.model.LazyHeaders;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.signature.ObjectKey;
@@ -500,6 +502,7 @@ public class ProfileActivity extends AppCompatActivity {
         private Context context;
         private String filePath;
         ImagesDAO imagesDAO = new ImagesDAO();
+        private SessionManager sessionManager;
         private final String TAG = org.intelehealth.swasthyasamparkp.activities.additionalDocumentsActivity.AdditionalDocumentAdapter.class.getSimpleName();
 
         public AdditionalDocumentAdapter(Context context, List<DocumentObject> documentList, String filePath) {
@@ -510,7 +513,7 @@ public class ProfileActivity extends AppCompatActivity {
             screen_height = displayMetrics.heightPixels;
             screen_width = displayMetrics.widthPixels;
             this.filePath = filePath;
-
+            sessionManager = new SessionManager(context);
         }
 
         @Override
@@ -528,9 +531,13 @@ public class ProfileActivity extends AppCompatActivity {
             holder.getDocumentNameTextView().setText(documentObject.getDocumentName());
 
             final File image = new File(documentObject.getDocumentPhoto());
-
+            String url = new UrlModifiers().obsImageUrl(StringUtils.getFileNameWithoutExtension(image));
+            GlideUrl glideUrl = new GlideUrl(url,
+                    new LazyHeaders.Builder()
+                            .addHeader("Authorization", "Basic " + sessionManager.getEncoded())
+                            .build());
             Glide.with(context)
-                    .load(image)
+                    .load(glideUrl)
                     .skipMemoryCache(true)
                     .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                     .thumbnail(0.1f)
@@ -539,7 +546,7 @@ public class ProfileActivity extends AppCompatActivity {
             holder.getRootView().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    displayImage(image);
+                    displayImage(image, url);
                 }
             });
 
@@ -579,7 +586,7 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
 
-        public void displayImage(final File file) {
+        public void displayImage(final File file, String url) {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
 
@@ -595,8 +602,12 @@ public class ProfileActivity extends AppCompatActivity {
                     ImageView imageView = dialog.findViewById(R.id.confirmationImageView);
                     final ProgressBar progressBar = dialog.findViewById(R.id.progressBar);
                     if (imageView != null) {
+                        GlideUrl glideUrl = new GlideUrl(url,
+                                new LazyHeaders.Builder()
+                                        .addHeader("Authorization", "Basic " + sessionManager.getEncoded())
+                                        .build());
                         Glide.with(context)
-                                .load(file)
+                                .load(glideUrl)
                                 .skipMemoryCache(true)
                                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                                 .listener(new RequestListener<Drawable>() {
