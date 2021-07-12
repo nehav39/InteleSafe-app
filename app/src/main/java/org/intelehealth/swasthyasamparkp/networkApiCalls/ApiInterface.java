@@ -17,6 +17,7 @@ import org.intelehealth.swasthyasamparkp.models.SendOtp;
 import org.intelehealth.swasthyasamparkp.models.UUIDResData;
 import org.intelehealth.swasthyasamparkp.models.UserAddressData;
 import org.intelehealth.swasthyasamparkp.models.UserBirthData;
+import org.intelehealth.swasthyasamparkp.models.UserProfileData;
 import org.intelehealth.swasthyasamparkp.models.dto.ResponseDTO;
 import org.intelehealth.swasthyasamparkp.models.loginModel.LoginModel;
 import org.intelehealth.swasthyasamparkp.models.loginProviderModel.LoginProviderModel;
@@ -162,4 +163,9 @@ public interface ApiInterface {
 
     @POST
     Observable<GetPassword> getUserMapping(@Url String url, @Header("Authorization") String authHeader, @Body GetPassword getPassword);
+
+    @POST
+    Single<ResponseDTO> USER_PROFILE(@Url String url,
+                                          @Header("Authorization") String authHeader,
+                                          @Body UserProfileData userProfileData);
 }

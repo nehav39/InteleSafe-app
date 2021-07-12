@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardview_home"
+    android:layout_width="120dp"
+    android:layout_height="120dp"
+    android:elevation="2dp"
+    app:cardUseCompatPadding="true"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <!--<View
+        android:layout_width="wrap_content"
+        android:background="@color/divider"
+        android:layout_gravity="bottom"
+        android:layout_height="2dp"/>-->
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:scaleType="centerCrop"
+            android:id="@+id/document_photo_ImageView"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:contentDescription="TODO"
+            android:src="@drawable/ic_action_folder_open"/>
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/document_name_TextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/planet_name"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/document_delete_button_ImageView"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_toEndOf="@id/document_photo_ImageView"
+            android:layout_alignParentTop="true"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            android:clickable="true"
+            android:contentDescription="TODO"
+            android:layout_marginStart="-32dp"
+            android:background="@color/colorBlackTransparent_0_0"
+            android:focusable="true"
+            android:padding="6dp" />
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

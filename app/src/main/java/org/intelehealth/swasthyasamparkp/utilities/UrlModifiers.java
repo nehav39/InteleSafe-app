@@ -125,4 +125,12 @@ public class UrlModifiers {
         String BASE_URL = "https://" + CLEAN_URL + "/";
         return BASE_URL + urlModifier;
     }
+
+    public String getPatientProfileHistoryUrl() {
+        sessionManager = new SessionManager(IntelehealthApplication.getAppContext());
+        String provider = "iobs";
+
+        String BASE_URL = "https://" + sessionManager.getServerUrl() + "/";
+        return BASE_URL + provider;
+    }
 }

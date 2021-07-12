@@ -3,8 +3,10 @@ package org.intelehealth.swasthyasamparkp.utilities;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 
 import java.util.Set;
+import java.util.UUID;
 
 public class SessionManager {
     // Shared preferences file name
@@ -54,6 +56,8 @@ public class SessionManager {
     private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
     private static final String FIRST_CHECKIN = "FIRST_CHECKIN";
     private static final String DB_CLEAR = "DB_CLEAR";
+    private static final String PROFILE_DUMMY_ENCOUNTER_UID = "PROFILE_DUMMY_ENCOUNTER_UID";
+    private static final String PROFILE_OBS_UID = "PROFILE_OBS_UID";
     // LogCat tag
     private static String TAG = SessionManager.class.getSimpleName();
     // Shared Preferences
@@ -556,5 +560,23 @@ public class SessionManager {
 
     public String getCachedPdfPath(String url) {
         return pref.getString(url, null);
+    }
+
+    public String getDummyEncounterUidForProfile() {
+        String string = pref.getString(PROFILE_DUMMY_ENCOUNTER_UID, null);
+        if (TextUtils.isEmpty(string)) {
+            string = UUID.randomUUID().toString();
+            pref.edit().putString(PROFILE_DUMMY_ENCOUNTER_UID, string).apply();
+        }
+        return string;
+    }
+
+    public String getObsUidForProfile() {
+        String string = pref.getString(PROFILE_OBS_UID, null);
+        if (TextUtils.isEmpty(string)) {
+            string = UUID.randomUUID().toString();
+            pref.edit().putString(PROFILE_OBS_UID, string).apply();
+        }
+        return string;
     }
 }

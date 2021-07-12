@@ -405,7 +405,39 @@ public class ImagesDAO {
         return isLocalImageExists;
     }
 
+    public List<ObsPushDTO> getObsUnsyncedImages_novisit(
+        String patientUuid, String encounterUuid, String obsUuid) throws DAOException {
+        List<ObsPushDTO> obsImages = new ArrayList<>();
+        ObsPushDTO obsPushDTO = new ObsPushDTO();
+        obsPushDTO.setConcept(UuidDictionary.PATIENT_PROFILE_AD); //new concept id for patient doc images...
+        obsPushDTO.setEncounter(encounterUuid);
+        obsPushDTO.setObsDatetime("2021-06-29T10:35:30.418+0530"); //TODO: Fetch the time from obs table and show here...
+        obsPushDTO.setUuid(obsUuid);
+        obsPushDTO.setPerson(patientUuid);
+        obsImages.add(obsPushDTO);
+        return obsImages;
+    }
 
+    public ArrayList<String> getAdditionalDocuments(String conceptuuid) throws DAOException {
+//        Logger.logD(TAG, "encounter uuid for image " + encounterUuid);
+        ArrayList<String> uuidList = new ArrayList<>();
+        SQLiteDatabase localdb = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
+        localdb.beginTransaction();
+        try {
+            Cursor idCursor = localdb.rawQuery("SELECT uuid FROM tbl_obs where conceptuuid = ? AND voided=? COLLATE NOCASE", new String[]{conceptuuid, "0"});
+            if (idCursor.getCount() != 0) {
+                while (idCursor.moveToNext()) {
+                    uuidList.add(idCursor.getString(idCursor.getColumnIndexOrThrow("uuid")));
+                }
+            }
+            idCursor.close();
+        } catch (SQLiteException e) {
+            throw new DAOException(e);
+        } finally {
+            localdb.endTransaction();
 
+        }
+        return uuidList;
+    }
 }
 

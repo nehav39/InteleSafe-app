@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -49,6 +50,8 @@ public class IntroActivity extends AppCompatActivity {
         }
         setContentView(R.layout.activity_intro);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         context = IntroActivity.this;
 
 //        // Making notification bar transparent
@@ -81,7 +84,7 @@ public class IntroActivity extends AppCompatActivity {
         addBottomDots(1);
 
         // making notification bar transparent
-        changeStatusBarColor();
+//        changeStatusBarColor();
 
         myViewPagerAdapter = new MyViewPagerAdapter();
         viewPager.setAdapter(myViewPagerAdapter);
@@ -111,6 +114,18 @@ public class IntroActivity extends AppCompatActivity {
                 }
             }
         });
+
+        btnSkip.setVisibility(View.GONE);
+        btnNext.setVisibility(View.GONE);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void setLocale(String appLanguage)

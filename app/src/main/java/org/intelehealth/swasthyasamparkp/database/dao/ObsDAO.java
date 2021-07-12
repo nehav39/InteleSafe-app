@@ -111,6 +111,37 @@ public class ObsDAO {
 
     }
 
+    public boolean insertObsWithUid(ObsDTO obsDTO) throws DAOException {
+        boolean isUpdated = true;
+        long insertedCount = 0;
+        SQLiteDatabase db = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
+        db.beginTransaction();
+        ContentValues values = new ContentValues();
+
+        try {
+            values.put("uuid", obsDTO.getUuid());
+            values.put("encounteruuid", obsDTO.getEncounteruuid());
+            values.put("creator", obsDTO.getCreator());
+            values.put("conceptuuid", obsDTO.getConceptuuid());
+            values.put("value", obsDTO.getValue());
+            values.put("modified_date", AppConstants.dateAndTimeUtils.currentDateTime());
+            values.put("voided", "0");
+            values.put("sync", "false");
+            insertedCount = db.insertWithOnConflict("tbl_obs", null, values, SQLiteDatabase.CONFLICT_REPLACE);
+
+            db.setTransactionSuccessful();
+            Logger.logD("updated", "updatedrecords count" + insertedCount);
+        } catch (SQLException e) {
+            isUpdated = false;
+            throw new DAOException(e);
+        } finally {
+            db.endTransaction();
+
+        }
+
+        return isUpdated;
+
+    }
 
     public boolean updateObs(ObsDTO obsDTO) {
         SQLiteDatabase db = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
@@ -257,5 +288,23 @@ public class ObsDAO {
         } finally {
             db.endTransaction();
         }
+    }
+
+    public ObsDTO getObsProfileDto(String conceptUid) {
+        db = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
+        //take All obs except image obs
+        Cursor idCursor = db.rawQuery("SELECT * FROM tbl_obs where conceptuuid = ? AND voided='0'", new String[]{UuidDictionary.PATIENT_PROFILE_MED_HISTORY});
+        ObsDTO obsDTO = new ObsDTO();
+        if (idCursor.getCount() != 0) {
+            while (idCursor.moveToNext()) {
+                obsDTO.setUuid(idCursor.getString(idCursor.getColumnIndexOrThrow("uuid")));
+                obsDTO.setEncounteruuid(idCursor.getString(idCursor.getColumnIndexOrThrow("encounteruuid")));
+                obsDTO.setConceptuuid(idCursor.getString(idCursor.getColumnIndexOrThrow("conceptuuid")));
+                obsDTO.setValue(idCursor.getString(idCursor.getColumnIndexOrThrow("value")));
+            }
+        }
+        idCursor.close();
+
+        return obsDTO;
     }
 }

@@ -85,8 +85,10 @@ import org.intelehealth.swasthyasamparkp.BuildConfig;
 import org.intelehealth.swasthyasamparkp.R;
 import org.intelehealth.swasthyasamparkp.activities.appointments.AppointmentsActivity;
 import org.intelehealth.swasthyasamparkp.activities.chooseLanguageActivity.ChooseLanguageActivity;
+import org.intelehealth.swasthyasamparkp.activities.introActivity.IntroActivity;
 import org.intelehealth.swasthyasamparkp.activities.loginActivity.LoginActivity;
 import org.intelehealth.swasthyasamparkp.activities.physcialExamActivity.PhysicalExamActivity;
+import org.intelehealth.swasthyasamparkp.activities.profile.ProfileActivity;
 import org.intelehealth.swasthyasamparkp.activities.settingsActivity.SettingsActivity;
 import org.intelehealth.swasthyasamparkp.activities.videosActivity.VideosActivity;
 import org.intelehealth.swasthyasamparkp.activities.visitSummaryActivity.VisitSummaryActivity;
@@ -1370,6 +1372,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         alert.setCanceledOnTouchOutside(false);
         alert.getButton(AlertDialog.BUTTON_POSITIVE).setVisibility(View.GONE);
         alert.getButton(AlertDialog.BUTTON_NEGATIVE).setVisibility(View.GONE);
+    }
+
+    public void openProfile(View view) {
+        ProfileActivity.start(this);
+    }
+
+    public void openIntro(View view) {
+        Intent intent = new Intent(context, IntroActivity.class);
+        startActivity(intent);
     }
 
     private class DownloadFile extends AsyncTask<String, Void, Void> {
