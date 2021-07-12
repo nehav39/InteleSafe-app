@@ -171,7 +171,7 @@ public class PrivacyNotice_Activity extends AppCompatActivity {
         spannable = boldSize(spannable, privacy_string, "Telehealth Innovations Foundation Privacy Notice");
         spannable = boldSize(spannable, privacy_string, "INFORMATION WE COLLECT");
         spannable = boldSize(spannable, privacy_string, "Personal Information");
-        spannable = boldSize(spannable, privacy_string, "Use");
+//        spannable = boldSize(spannable, privacy_string, "Use"); //in this project's (SSampark) privacy notice we dont need "Use" in bold
         spannable = boldSize(spannable, privacy_string, "Your contact information may be used to");
         spannable = boldSize(spannable, privacy_string, "Intelehealth generally provides Personal Information to third parties where:");
         spannable = boldSize(spannable, privacy_string, "We may also disclose your personal information:");
