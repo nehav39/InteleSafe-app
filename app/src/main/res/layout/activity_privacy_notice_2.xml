@@ -85,8 +85,7 @@
                 android:padding="10dp"
                 android:textAlignment="gravity"
                 android:textColor="@color/black"
-                android:textFontWeight="1"
-                android:textStyle="bold" />
+                android:textFontWeight="1" />
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
