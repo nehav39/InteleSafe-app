@@ -162,6 +162,8 @@ public class ProfileActivity extends AppCompatActivity {
         TextView tvMobile = findViewById(R.id.tvMobile);
         TextView tvAddress = findViewById(R.id.tvAddress);
         et_tested_positive_date = findViewById(R.id.et_tested_positive_date);
+        String attributeValue = patientsDAO.getAttributeValue(patient.getUuid(), "ecdaadb6-14a0-4ed9-b5b7-cfed87b44b87");
+        et_tested_positive_date.setText(attributeValue);
         et_tested_positive_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1074,7 +1076,9 @@ public class ProfileActivity extends AppCompatActivity {
                 String date_of_admission = (String) covidHistory.get("date_of_admission");
                 String stay_in_hospital_days = (String) covidHistory.get("stay_in_hospital_days");
                 String stay_type = (String) covidHistory.get("stay_type");
-                et_tested_positive_date.setText(date_days_tested_positive);
+                if (TextUtils.isEmpty(et_tested_positive_date.getText())) {
+                    et_tested_positive_date.setText(date_days_tested_positive);
+                }
                 et_admission_date.setText(date_of_admission);
                 et_stay_days.setText(stay_in_hospital_days);
                 selectRadioGroup(rgStayType, stay_type);

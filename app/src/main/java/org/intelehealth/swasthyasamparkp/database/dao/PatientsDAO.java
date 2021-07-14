@@ -471,4 +471,27 @@ public class PatientsDAO {
         }
         return patientDTO;
     }
+
+    public String getAttributeValue(String patientUuid, String attributeUuid) {
+        SQLiteDatabase db = AppConstants.inteleHealthDatabaseHelper.getWriteDb();
+        db.beginTransaction();
+        String name = "";
+        try {
+            String query = "SELECT value from tbl_patient_attribute WHERE patientuuid = ? AND person_attribute_type_uuid = ?";
+            Cursor cursor = db.rawQuery(query, new String[] {patientUuid, attributeUuid}, null);
+            if (cursor.moveToFirst()) {
+                while (!cursor.isAfterLast()) {
+                    name = cursor.getString(cursor.getColumnIndex("value"));
+                    cursor.moveToNext();
+                }
+            }
+            cursor.close();
+            db.setTransactionSuccessful();
+        } catch (SQLException e) {
+            FirebaseCrashlytics.getInstance().recordException(e);
+        } finally {
+            db.endTransaction();
+        }
+        return name;
+    }
 }
