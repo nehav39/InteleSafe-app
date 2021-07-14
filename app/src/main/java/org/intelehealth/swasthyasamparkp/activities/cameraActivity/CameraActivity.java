@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -121,6 +122,9 @@ public class CameraActivity extends AppCompatActivity {
                         os = new FileOutputStream(file);
                         Bitmap bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
                         Bitmap bitmap = Bitmap.createScaledBitmap(bmp, 600, 800, false);
+                        Matrix matrix = new Matrix();
+                        matrix.postRotate(90);
+                        bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
                         bmp.recycle();
                         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, os);
                         os.flush();
