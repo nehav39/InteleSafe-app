@@ -70,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvMobile"
                 android:layout_centerHorizontal="true"
-                android:text="Mumbai, MH"
+                tools:text="Mumbai, MH"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 app:fontFamily="@font/lato_regular" />
 

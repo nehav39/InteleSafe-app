@@ -43,18 +43,18 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.load.model.GlideUrl;
+import com.bumptech.glide.load.model.LazyHeaders;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.signature.ObjectKey;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.google.gson.Gson;
 
-import org.intelehealth.swasthyasamparkp.BuildConfig;
 import org.intelehealth.swasthyasamparkp.R;
 import org.intelehealth.swasthyasamparkp.activities.additionalDocumentsActivity.AdditionalDocumentViewHolder;
 import org.intelehealth.swasthyasamparkp.activities.cameraActivity.CameraActivity;
 import org.intelehealth.swasthyasamparkp.activities.homeActivity.HomeActivity;
-import org.intelehealth.swasthyasamparkp.activities.signupActivity.SignupActivity;
 import org.intelehealth.swasthyasamparkp.app.AppConstants;
 import org.intelehealth.swasthyasamparkp.app.IntelehealthApplication;
 import org.intelehealth.swasthyasamparkp.database.dao.ImagesDAO;
@@ -77,9 +77,10 @@ import org.intelehealth.swasthyasamparkp.utilities.StringUtils;
 import org.intelehealth.swasthyasamparkp.utilities.UrlModifiers;
 import org.intelehealth.swasthyasamparkp.utilities.UuidDictionary;
 import org.intelehealth.swasthyasamparkp.utilities.exception.DAOException;
+import org.intelehealth.swasthyasamparkp.widget.materialprogressbar.CustomProgressDialog;
 
 import java.io.File;
-import java.text.ParseException;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -116,6 +117,7 @@ public class ProfileActivity extends AppCompatActivity {
     private CheckBox cbDiabetes, cbHypertension, cbHeartDiseases, cbCancer, cbAsthma, cbKidneyDisorder, cbOthers;
     private CheckBox cbDiabetesFamily, cbHypertensionFamily, cbHeartDiseasesFamily, cbCancerFamily, cbAsthmaFamily, cbKidneyDisorderFamily, cbOthersFamily;
     private EditText et_stay_days, et_Complaint, etOthers, etOthersFamily, et_admission_date, et_tested_positive_date;
+    private CustomProgressDialog customProgressDialog;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, ProfileActivity.class);
@@ -138,6 +140,7 @@ public class ProfileActivity extends AppCompatActivity {
         sessionManager = new SessionManager(this);
         dummyEncounterUuid = sessionManager.getDummyEncounterUidForProfile();
         obsUid = sessionManager.getObsUidForProfile();
+        customProgressDialog = new CustomProgressDialog(this);
         ArrayList<File> fileList = getDocuments();
         documentObjects = new ArrayList<>();
         for (File file : fileList)
@@ -159,6 +162,8 @@ public class ProfileActivity extends AppCompatActivity {
         TextView tvMobile = findViewById(R.id.tvMobile);
         TextView tvAddress = findViewById(R.id.tvAddress);
         et_tested_positive_date = findViewById(R.id.et_tested_positive_date);
+        String attributeValue = patientsDAO.getAttributeValue(patient.getUuid(), "ecdaadb6-14a0-4ed9-b5b7-cfed87b44b87");
+        et_tested_positive_date.setText(attributeValue);
         et_tested_positive_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -324,11 +329,6 @@ public class ProfileActivity extends AppCompatActivity {
                 }
 
                 updateProfile();
-
-
-                if (true) {
-
-                }
             }
         });
 
@@ -350,7 +350,6 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
         setProfileObsData();
-        finish();
     }
 
     private void setProfilePhoto(String photoPath) {
@@ -378,8 +377,16 @@ public class ProfileActivity extends AppCompatActivity {
             fileuuidList = imagesDAO.getAdditionalDocuments(UuidDictionary.PATIENT_PROFILE_AD);
             for (String fileuuid : fileuuidList) {
                 String filename = AppConstants.IMAGE_PATH + fileuuid + ".jpg";
-                if (new File(filename).exists()) {
-                    fileList.add(new File(filename));
+                File file = new File(filename);
+                if (file.exists()) {
+                    fileList.add(file);
+                } else  {
+                    try {
+                        file.createNewFile();
+                        fileList.add(file);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         } catch (DAOException e) {
@@ -393,7 +400,7 @@ public class ProfileActivity extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
         try {
             date = sdf.parse(dobString);
-        } catch (ParseException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -500,6 +507,7 @@ public class ProfileActivity extends AppCompatActivity {
         private Context context;
         private String filePath;
         ImagesDAO imagesDAO = new ImagesDAO();
+        private SessionManager sessionManager;
         private final String TAG = org.intelehealth.swasthyasamparkp.activities.additionalDocumentsActivity.AdditionalDocumentAdapter.class.getSimpleName();
 
         public AdditionalDocumentAdapter(Context context, List<DocumentObject> documentList, String filePath) {
@@ -510,7 +518,7 @@ public class ProfileActivity extends AppCompatActivity {
             screen_height = displayMetrics.heightPixels;
             screen_width = displayMetrics.widthPixels;
             this.filePath = filePath;
-
+            sessionManager = new SessionManager(context);
         }
 
         @Override
@@ -528,18 +536,31 @@ public class ProfileActivity extends AppCompatActivity {
             holder.getDocumentNameTextView().setText(documentObject.getDocumentName());
 
             final File image = new File(documentObject.getDocumentPhoto());
-
-            Glide.with(context)
-                    .load(image)
-                    .skipMemoryCache(true)
-                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                    .thumbnail(0.1f)
-                    .into(holder.getDocumentPhotoImageView());
+            String url = new UrlModifiers().obsImageUrl(StringUtils.getFileNameWithoutExtension(image));
+            if (documentObject.isNew) {
+                Glide.with(context)
+                        .load(image)
+                        .skipMemoryCache(true)
+                        .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                        .thumbnail(0.1f)
+                        .into(holder.getDocumentPhotoImageView());
+            } else {
+                GlideUrl glideUrl = new GlideUrl(url,
+                        new LazyHeaders.Builder()
+                                .addHeader("Authorization", "Basic " + sessionManager.getEncoded())
+                                .build());
+                Glide.with(context)
+                        .load(glideUrl)
+                        .skipMemoryCache(true)
+                        .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                        .thumbnail(0.1f)
+                        .into(holder.getDocumentPhotoImageView());
+            }
 
             holder.getRootView().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    displayImage(image);
+                    displayImage(image, url);
                 }
             });
 
@@ -579,7 +600,7 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
 
-        public void displayImage(final File file) {
+        public void displayImage(final File file, String url) {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
 
@@ -595,29 +616,42 @@ public class ProfileActivity extends AppCompatActivity {
                     ImageView imageView = dialog.findViewById(R.id.confirmationImageView);
                     final ProgressBar progressBar = dialog.findViewById(R.id.progressBar);
                     if (imageView != null) {
-                        Glide.with(context)
-                                .load(file)
-                                .skipMemoryCache(true)
-                                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                                .listener(new RequestListener<Drawable>() {
-                                    @Override
-                                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                                        if (progressBar != null) {
-                                            progressBar.setVisibility(View.GONE);
+                        if (file.exists()) {
+                            Glide.with(context)
+                                    .load(file)
+                                    .skipMemoryCache(true)
+                                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                                    .thumbnail(0.1f)
+                                    .into(imageView);
+                        } else {
+                            GlideUrl glideUrl = new GlideUrl(url,
+                                    new LazyHeaders.Builder()
+                                            .addHeader("Authorization", "Basic " + sessionManager.getEncoded())
+                                            .build());
+                            Glide.with(context)
+                                    .load(glideUrl)
+                                    .skipMemoryCache(true)
+                                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                    .listener(new RequestListener<Drawable>() {
+                                        @Override
+                                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                            if (progressBar != null) {
+                                                progressBar.setVisibility(View.GONE);
+                                            }
+                                            return false;
                                         }
-                                        return false;
-                                    }
 
-                                    @Override
-                                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                                        if (progressBar != null) {
-                                            progressBar.setVisibility(View.GONE);
+                                        @Override
+                                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                            if (progressBar != null) {
+                                                progressBar.setVisibility(View.GONE);
+                                            }
+                                            return false;
                                         }
-                                        return false;
-                                    }
-                                })
-                                .override(screen_width, screen_height)
-                                .into(imageView);
+                                    })
+                                    .override(screen_width, screen_height)
+                                    .into(imageView);
+                        }
                     }
                 }
             });
@@ -919,6 +953,8 @@ public class ProfileActivity extends AppCompatActivity {
                             }
                         }
                     });
+
+            pushProfileDocumentObsData(p);
         }
         sessionManager.setPushSyncFinished(true);
         IntelehealthApplication.getAppContext().sendBroadcast(new Intent(AppConstants.SYNC_INTENT_ACTION)
@@ -947,22 +983,60 @@ public class ProfileActivity extends AppCompatActivity {
         String url = urlModifiers.getPatientProfileHistoryUrl();
         UserProfileData userProfileData = new UserProfileData(sessionManager.getPersionUUID(), sessionManager.getCreatorID(), obsDTO.getConceptuuid(), obsDTO.getValue());
         Single<ResponseDTO> personProfilePicUpload = AppConstants.apiInterface.USER_PROFILE(url, "Basic " + sessionManager.getEncoded(), userProfileData);
+        customProgressDialog.show();
         personProfilePicUpload.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new DisposableSingleObserver<ResponseDTO>() {
                     @Override
                     public void onSuccess(ResponseDTO responseBody) {
                         Logger.logD(ProfileActivity.class.getSimpleName(), "success" + responseBody);
+                        customProgressDialog.dismiss();
+                        finish();
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         Logger.logD(ProfileActivity.class.getSimpleName(), "Onerror " + e.getMessage());
+                        customProgressDialog.dismiss();
+                        Toast.makeText(context, R.string.something_went_wrong, Toast.LENGTH_SHORT).show();
+                        finish();
                     }
                 });
 
 
         return isInserted;
+    }
+
+    private void pushProfileDocumentObsData(ObsPushDTO obsPushDTO) {
+        ObsDTO obsDTO = new ObsDTO();
+        obsDTO.setUuid(obsPushDTO.getUuid());
+        obsDTO.setConceptuuid(obsPushDTO.getConcept());
+        obsDTO.setEncounteruuid(obsPushDTO.getEncounter());
+        obsDTO.setCreator(sessionManager.getCreatorID());
+        obsDTO.setValue("");
+        UrlModifiers urlModifiers = new UrlModifiers();
+        String url = urlModifiers.getPatientProfileHistoryUrl();
+        UserProfileData userProfileData = new UserProfileData(sessionManager.getPersionUUID(), sessionManager.getCreatorID(), obsDTO.getConceptuuid(), obsDTO.getValue());
+        Single<ResponseDTO> personProfilePicUpload = AppConstants.apiInterface.USER_PROFILE(url, "Basic " + sessionManager.getEncoded(), userProfileData);
+        customProgressDialog.show();
+        personProfilePicUpload.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(new DisposableSingleObserver<ResponseDTO>() {
+                @Override
+                public void onSuccess(ResponseDTO responseBody) {
+                    Logger.logD(ProfileActivity.class.getSimpleName(), "success" + responseBody);
+                    customProgressDialog.dismiss();
+                    finish();
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    Logger.logD(ProfileActivity.class.getSimpleName(), "Onerror " + e.getMessage());
+                    customProgressDialog.dismiss();
+                    Toast.makeText(context, R.string.something_went_wrong, Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            });
     }
 
     private void selectRadioGroup(RadioGroup group, String value) {
@@ -994,6 +1068,7 @@ public class ProfileActivity extends AppCompatActivity {
             ObsDTO obsProfileDto = obsDAO.getObsProfileDto(UuidDictionary.PATIENT_PROFILE_MED_HISTORY);
             if (TextUtils.isEmpty(obsProfileDto.getValue()))
                 return;
+            obsUid = obsProfileDto.getUuid();
             Map<String, Object> map = StringUtils.jsonToMap(StringUtils.jsonToObject(obsProfileDto.getValue()));
             HashMap<String, Object> covidHistory = (HashMap<String, Object>) map.get("covid_history");
             if (covidHistory != null) {
@@ -1001,7 +1076,9 @@ public class ProfileActivity extends AppCompatActivity {
                 String date_of_admission = (String) covidHistory.get("date_of_admission");
                 String stay_in_hospital_days = (String) covidHistory.get("stay_in_hospital_days");
                 String stay_type = (String) covidHistory.get("stay_type");
-                et_tested_positive_date.setText(date_days_tested_positive);
+                if (TextUtils.isEmpty(et_tested_positive_date.getText())) {
+                    et_tested_positive_date.setText(date_days_tested_positive);
+                }
                 et_admission_date.setText(date_of_admission);
                 et_stay_days.setText(stay_in_hospital_days);
                 selectRadioGroup(rgStayType, stay_type);
