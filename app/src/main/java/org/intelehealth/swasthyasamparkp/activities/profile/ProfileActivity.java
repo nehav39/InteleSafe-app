@@ -860,7 +860,10 @@ public class ProfileActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        saveImage(filePath);
+                        if (true) {
+                            saveImage(filePath);
+                        } else
+                            Toast.makeText(ProfileActivity.this, R.string.something_went_wrong, Toast.LENGTH_SHORT).show();
                     }
                 });
 
