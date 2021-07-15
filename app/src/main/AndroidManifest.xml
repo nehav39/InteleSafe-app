@@ -95,8 +95,7 @@
         <activity
             android:name="org.intelehealth.swasthyasamparkp.activities.introActivity.IntroActivity"
             android:label="@string/about_swasthya_sampark"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.privacyNoticeActivity.PrivacyNotice_Activity"
             android:label="@string/title_activity_privacy_notice"

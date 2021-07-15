@@ -4,9 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
+
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -39,19 +41,17 @@ public class IntroActivity extends AppCompatActivity {
     private Button btnSkip, btnNext;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_intro);
         sessionManager = new SessionManager(IntroActivity.this);
         appLanguage = sessionManager.getAppLanguage();
         if (!appLanguage.equalsIgnoreCase("")) {
             setLocale(appLanguage);
         }
-        setContentView(R.layout.activity_intro);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         context = IntroActivity.this;
 
 //        // Making notification bar transparent
@@ -63,8 +63,6 @@ public class IntroActivity extends AppCompatActivity {
         dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
         btnSkip = (Button) findViewById(R.id.btn_skip);
         btnNext = (Button) findViewById(R.id.btn_next);
-
-
 
 
         // layouts of all welcome sliders
@@ -128,8 +126,7 @@ public class IntroActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void setLocale(String appLanguage)
-    {
+    public void setLocale(String appLanguage) {
         Locale locale = new Locale(appLanguage);
         Locale.setDefault(locale);
         Configuration config = new Configuration();
@@ -226,8 +223,7 @@ public class IntroActivity extends AppCompatActivity {
             View view = layoutInflater.inflate(layouts[position], container, false);
             container.addView(view);
 
-            if(position==0)
-            {
+            if (position == 0) {
                 tvIntroOne = view.findViewById(R.id.tv_intro_one);
                 tvIntroTwo = view.findViewById(R.id.tv_intro_two);
                 tvIntroThree = view.findViewById(R.id.tv_intro_three);
@@ -248,9 +244,7 @@ public class IntroActivity extends AppCompatActivity {
 //            String newString = introOne.replaceAll(textToHighlightOne, "<font color='blue'>" + textToHighlightOne + "</font>");
                 tvIntroThree.setText(Html.fromHtml(introThree));
 
-            }
-            else if(position==1)
-            {
+            } else if (position == 1) {
                 tvIntroOne = view.findViewById(R.id.tv_intro_one);
                 tvIntroTwo = view.findViewById(R.id.tv_intro_two);
 
