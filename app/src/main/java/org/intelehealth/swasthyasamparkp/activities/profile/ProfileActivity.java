@@ -616,7 +616,7 @@ public class ProfileActivity extends AppCompatActivity {
                     ImageView imageView = dialog.findViewById(R.id.confirmationImageView);
                     final ProgressBar progressBar = dialog.findViewById(R.id.progressBar);
                     if (imageView != null) {
-                        if (file.exists()) {
+                        if (file.exists() && file.length() > 0) {
                             Glide.with(context)
                                     .load(file)
                                     .skipMemoryCache(true)
