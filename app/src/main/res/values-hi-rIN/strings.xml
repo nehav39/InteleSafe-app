@@ -817,5 +817,6 @@
     <string name="go_to_home">होम स्क्रीन पर जाएं</string>
     <string name="health_facilities">स्वास्थ्य सुविधाएं</string>
     <string name="sikkim">सिक्किम</string>
+    <string name="alert_message_txt">चेतावनी संदेश</string>
 
 </resources>

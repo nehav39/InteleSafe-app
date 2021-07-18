@@ -100,6 +100,7 @@ public class ChooseLanguageActivity extends AppCompatActivity {
                     intent.putExtra("password", "");
                     startActivity(intent);
                 }
+                finish();
             }
         });
         populatingLanguages();
@@ -127,7 +128,7 @@ public class ChooseLanguageActivity extends AppCompatActivity {
             jsonObject = new JSONObject();
             jsonObject.put("name", "English");
             jsonObject.put("code", "en");
-            jsonObject.put("selected", sessionManager.isFirstTimeLaunch() || sessionManager.getAppLanguage().equalsIgnoreCase("en"));
+            jsonObject.put("selected", sessionManager.getAppLanguage().isEmpty() || sessionManager.getAppLanguage().equalsIgnoreCase("en"));
             itemList.add(jsonObject);
 
            /* LanguageListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
@@ -144,7 +145,7 @@ public class ChooseLanguageActivity extends AppCompatActivity {
            /* ArrayAdapter<String> language_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_checked, languages_list);
             LanguageListView.setAdapter(language_adapter);*/
 
-            LanguageListAdapter languageListAdapter = new LanguageListAdapter(ChooseLanguageActivity.this, itemList, new ItemSelectionListener(){
+            LanguageListAdapter languageListAdapter = new LanguageListAdapter(ChooseLanguageActivity.this, itemList, new ItemSelectionListener() {
                 @Override
                 public void onSelect(JSONObject jsonObject, int index) {
                     try {

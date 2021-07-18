@@ -780,4 +780,5 @@
     <string name="hint_name">Name</string>
     <string name="take_photo">Take Photo</string>
     <string name="choose_from_gallery">Choose from Gallery</string>
+    <string name="alert_message_txt">Alert Message</string>
 </resources>

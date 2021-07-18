@@ -91,6 +91,7 @@ import org.intelehealth.swasthyasamparkp.services.DownloadService;
 import org.intelehealth.swasthyasamparkp.syncModule.SyncUtils;
 import org.intelehealth.swasthyasamparkp.utilities.DateAndTimeUtils;
 import org.intelehealth.swasthyasamparkp.utilities.FileUtils;
+import org.intelehealth.swasthyasamparkp.utilities.LocaleManager;
 import org.intelehealth.swasthyasamparkp.utilities.Logger;
 import org.intelehealth.swasthyasamparkp.utilities.NetworkConnection;
 import org.intelehealth.swasthyasamparkp.utilities.SessionManager;
@@ -1518,6 +1519,12 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
             }
         });
     }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleManager.updateResources(base, new SessionManager(base).getAppLanguage()));
+    }
+
 
     private void showPopup() {
 

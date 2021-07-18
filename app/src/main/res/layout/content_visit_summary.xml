@@ -536,9 +536,8 @@ Github: prajwalmw
                         android:id="@+id/alert_label_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
                         android:gravity="center"
-                        android:text="Alert Message"
+                        android:text="@string/alert_message_txt"
                         android:textColor="@color/black"
                         android:textSize="15sp"
                         android:textStyle="bold" />

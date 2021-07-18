@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import org.intelehealth.swasthyasamparkp.utilities.FileUtils;
+import org.intelehealth.swasthyasamparkp.utilities.SessionManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -25,6 +26,7 @@ public class AlertEngine {
     private JSONObject mConfigData = null;
     private HashMap<String, Integer> mScanHistory = new HashMap<String, Integer>();
     private MessageListener mMessageListener;
+    private SessionManager mSessionManager;
 
     public interface MessageListener {
         void onMessageGenerated(String message, int type);
@@ -33,6 +35,7 @@ public class AlertEngine {
     public AlertEngine(Context context, MessageListener messageListener) {
         mContext = context;
         mMessageListener = messageListener;
+        mSessionManager = new SessionManager(mContext);
     }
 
     public void handleItemUnselected(String itemID) {
@@ -189,19 +192,25 @@ public class AlertEngine {
                 JSONObject messageJsonObject = engineConfigJsonObject.getJSONObject("alert_messages");
                 String patientMessage = "";
                 String teleCallerMessage = "";
+                String patientKey = "patient";
+                String teleCallerKey = "tele_caller";
+                if (mSessionManager.getAppLanguage().equalsIgnoreCase("hi")) {
+                    patientKey = "patient_hi";
+                    teleCallerKey = "tele_caller_hi";
+                }
                 if (getAlertType() == HEALTHY) {
-                    patientMessage = messageJsonObject.getJSONObject("healthy").getString("patient");
-                    teleCallerMessage = messageJsonObject.getJSONObject("healthy").getString("tele_caller");
+                    patientMessage = messageJsonObject.getJSONObject("healthy").getString(patientKey);
+                    teleCallerMessage = messageJsonObject.getJSONObject("healthy").getString(teleCallerKey);
 
                 } else if (getAlertType() == MILD) {
-                    patientMessage = messageJsonObject.getJSONObject("mild").getString("patient");
-                    teleCallerMessage = messageJsonObject.getJSONObject("mild").getString("tele_caller");
+                    patientMessage = messageJsonObject.getJSONObject("mild").getString(patientKey);
+                    teleCallerMessage = messageJsonObject.getJSONObject("mild").getString(teleCallerKey);
                 } else if (getAlertType() == MODERATE) {
-                    patientMessage = messageJsonObject.getJSONObject("moderate").getString("patient");
-                    teleCallerMessage = messageJsonObject.getJSONObject("moderate").getString("tele_caller");
+                    patientMessage = messageJsonObject.getJSONObject("moderate").getString(patientKey);
+                    teleCallerMessage = messageJsonObject.getJSONObject("moderate").getString(teleCallerKey);
                 } else if (getAlertType() == SEVERE) {
-                    patientMessage = messageJsonObject.getJSONObject("severe").getString("patient");
-                    teleCallerMessage = messageJsonObject.getJSONObject("severe").getString("tele_caller");
+                    patientMessage = messageJsonObject.getJSONObject("severe").getString(patientKey);
+                    teleCallerMessage = messageJsonObject.getJSONObject("severe").getString(teleCallerKey);
                 }
                 setAlertMessageToPatient(patientMessage);
                 setAlertMessageToTeleCaller(teleCallerMessage);
