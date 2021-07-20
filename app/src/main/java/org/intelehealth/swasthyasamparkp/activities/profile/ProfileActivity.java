@@ -119,6 +119,7 @@ public class ProfileActivity extends AppCompatActivity {
     private CheckBox cbDiabetesFamily, cbHypertensionFamily, cbHeartDiseasesFamily, cbCancerFamily, cbAsthmaFamily, cbKidneyDisorderFamily, cbOthersFamily;
     private EditText et_stay_days, et_Complaint, etOthers, etOthersFamily, et_admission_date, et_tested_positive_date;
     private CustomProgressDialog customProgressDialog;
+    private Resources englishResources;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, ProfileActivity.class);
@@ -139,6 +140,7 @@ public class ProfileActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         context = ProfileActivity.this;
         sessionManager = new SessionManager(this);
+        englishResources = StringUtils.getLocalizedResources(this, Locale.ENGLISH);
         dummyEncounterUuid = sessionManager.getDummyEncounterUidForProfile();
         obsUid = sessionManager.getObsUidForProfile();
         customProgressDialog = new CustomProgressDialog(this);
@@ -1058,9 +1060,9 @@ public class ProfileActivity extends AppCompatActivity {
         childAt.setChecked(true);
     }
 
-    private void selectCheckbox(List<String> selectionList, CheckBox checkBox) {
+    private void selectCheckbox(List<String> selectionList, CheckBox checkBox, String chechBoxTextInEnglish) {
         for (String s : selectionList) {
-            if (s.contains(checkBox.getText().toString())) {
+            if (s.contains(chechBoxTextInEnglish)) {
                 checkBox.setChecked(true);
             }
         }
@@ -1101,13 +1103,13 @@ public class ProfileActivity extends AppCompatActivity {
                 selectBooleanRadioGroup(rgAlcohol, consume_alcohol);
                 selectBooleanRadioGroup(rgSmokeTobacco, consume_tobacco);
 
-                selectCheckbox(medical_conditions, cbDiabetes);
-                selectCheckbox(medical_conditions, cbHypertension);
-                selectCheckbox(medical_conditions, cbHeartDiseases);
-                selectCheckbox(medical_conditions, cbCancer);
-                selectCheckbox(medical_conditions, cbAsthma);
-                selectCheckbox(medical_conditions, cbKidneyDisorder);
-                selectCheckbox(medical_conditions, cbOthers);
+                selectCheckbox(medical_conditions, cbDiabetes, englishResources.getString(R.string.diabetes));
+                selectCheckbox(medical_conditions, cbHypertension, englishResources.getString(R.string.hypertension));
+                selectCheckbox(medical_conditions, cbHeartDiseases, englishResources.getString(R.string.heart_diseases));
+                selectCheckbox(medical_conditions, cbCancer, englishResources.getString(R.string.cancer));
+                selectCheckbox(medical_conditions, cbAsthma, englishResources.getString(R.string.asthma));
+                selectCheckbox(medical_conditions, cbKidneyDisorder, englishResources.getString(R.string.kidney_disorder));
+                selectCheckbox(medical_conditions, cbOthers, englishResources.getString(R.string.others));
                 /*cbOthers.post(new Runnable() {
                     @Override
                     public void run() {*/
@@ -1122,13 +1124,13 @@ public class ProfileActivity extends AppCompatActivity {
 //                    }
 //                });
 
-                selectCheckbox(family_history_disease, cbDiabetesFamily);
-                selectCheckbox(family_history_disease, cbHypertensionFamily);
-                selectCheckbox(family_history_disease, cbHeartDiseasesFamily);
-                selectCheckbox(family_history_disease, cbCancerFamily);
-                selectCheckbox(family_history_disease, cbAsthmaFamily);
-                selectCheckbox(family_history_disease, cbKidneyDisorderFamily);
-                selectCheckbox(family_history_disease, cbOthersFamily);
+                selectCheckbox(family_history_disease, cbDiabetesFamily, englishResources.getString(R.string.diabetes));
+                selectCheckbox(family_history_disease, cbHypertensionFamily, englishResources.getString(R.string.hypertension));
+                selectCheckbox(family_history_disease, cbHeartDiseasesFamily, englishResources.getString(R.string.heart_diseases));
+                selectCheckbox(family_history_disease, cbCancerFamily, englishResources.getString(R.string.cancer));
+                selectCheckbox(family_history_disease, cbAsthmaFamily, englishResources.getString(R.string.asthma));
+                selectCheckbox(family_history_disease, cbKidneyDisorderFamily, englishResources.getString(R.string.kidney_disorder));
+                selectCheckbox(family_history_disease, cbOthersFamily, englishResources.getString(R.string.others));
                 /*cbOthersFamily.post(new Runnable() {
                     @Override
                     public void run() {*/
@@ -1158,9 +1160,7 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
-    Resources englishResources;
     private String getObsValue() {
-        englishResources = StringUtils.getLocalizedResources(this, Locale.ENGLISH);
         Map<String, Object> data = new HashMap<>();
         Map<String, Object> covidHistory = new HashMap<>();
         covidHistory.put("date_days_tested_positive", et_tested_positive_date.getText().toString());
