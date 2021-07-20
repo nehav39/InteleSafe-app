@@ -99,7 +99,7 @@
                     android:drawableStart="@drawable/assignment"
                     android:drawablePadding="10dp"
                     android:ems="10"
-                    android:text="Covid History"
+                    android:text="@string/covid_history"
                     android:textAppearance="@style/sign_up_title"
                     android:textColor="@color/gray_6"
                     app:fontFamily="@font/lato_regular" />
@@ -186,7 +186,7 @@
                             android:ems="10"
                             android:layout_marginTop="8dp"
                             android:paddingHorizontal="4dp"
-                            android:text="Stay Type"
+                            android:text="@string/stay_type"
                             android:textColor="@color/gray_6"
                             app:fontFamily="@font/lato_regular" />
 
@@ -205,7 +205,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="ICU"
+                                android:text="@string/icu"
                                 android:textColor="@color/gray_6"
                                 app:fontFamily="@font/lato_regular" />
 
@@ -214,7 +214,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Oxygen Therapy"
+                                android:text="@string/oxygen_therapy"
                                 android:textColor="@color/gray_6"
                                 app:fontFamily="@font/lato_regular" />
 
@@ -223,7 +223,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Ventilator"
+                                android:text="@string/ventilator"
                                 android:textColor="@color/gray_6"
                                 app:fontFamily="@font/lato_regular" />
 
@@ -232,7 +232,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Without Oxygen Therapy"
+                                android:text="@string/without_oxygen_therapy"
                                 android:textColor="@color/gray_6"
                                 app:fontFamily="@font/lato_regular" />
                         </RadioGroup>
@@ -246,7 +246,7 @@
                     android:drawableStart="@drawable/assignment"
                     android:drawablePadding="10dp"
                     android:ems="10"
-                    android:text="Past History"
+                    android:text="@string/past_history"
                     android:layout_marginTop="8dp"
                     android:textAppearance="@style/sign_up_title"
                     android:textColor="@color/gray_6"
@@ -272,49 +272,49 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="10"
-                            android:text="Do you have any medical conditions before COVID?"
+                            android:text="@string/do_you_have_any_medical_conditions_before_covid"
                             android:textColor="@color/gray_6"
                             app:fontFamily="@font/lato_regular" />
 
                         <CheckBox
                             android:id="@+id/cbDiabetes"
-                            android:text="Diabetes"
+                            android:text="@string/diabetes"
                             app:fontFamily="@font/lato_regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
                         <CheckBox
                             android:id="@+id/cbHypertension"
-                            android:text="Hypertension"
+                            android:text="@string/hypertension"
                             app:fontFamily="@font/lato_regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
                         <CheckBox
                             android:id="@+id/cbHeartDiseases"
-                            android:text="Heart diseases"
+                            android:text="@string/heart_diseases"
                             app:fontFamily="@font/lato_regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
                         <CheckBox
                             android:id="@+id/cbCancer"
-                            android:text="Cancer"
+                            android:text="@string/cancer"
                             app:fontFamily="@font/lato_regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
                         <CheckBox
                             android:id="@+id/cbAsthma"
-                            android:text="Asthma"
+                            android:text="@string/asthma"
                             app:fontFamily="@font/lato_regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
                         <CheckBox
                             android:id="@+id/cbKidneyDisorder"
-                            android:text="Kidney disorder"
+                            android:text="@string/kidney_disorder"
                             app:fontFamily="@font/lato_regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
                         <CheckBox
                             android:id="@+id/cbOthers"
-                            android:text="Others"
+                            android:text="@string/others"
                             app:fontFamily="@font/lato_regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -329,7 +329,7 @@
                                 android:layout_height="wrap_content"
                                 android:ems="10"
                                 android:fontFamily="@font/lato_regular"
-                                android:hint="Others"
+                                android:hint="@string/others"
                                 android:inputType="text"
                                 android:maxLines="1"
                                 android:singleLine="true" />
@@ -342,7 +342,7 @@
                             android:ems="10"
                             android:layout_marginTop="8dp"
                             android:paddingHorizontal="4dp"
-                            android:text="Are you taking medication for any of these medical condition (If Yes please upload prescription in Upload Document Section)"
+                            android:text="@string/are_you_taking_medication_for_any_of_these_medical_condition_if_yes_please_upload_prescription_in_upload_document_section"
                             android:textColor="@color/gray_6"
                             app:fontFamily="@font/lato_regular" />
 
@@ -380,49 +380,49 @@
                             android:layout_height="wrap_content"
                             android:ems="10"
                             android:layout_marginTop="8dp"
-                            android:text="Do you have family history of any disease?"
+                            android:text="@string/do_you_have_family_history_of_any_disease"
                             android:textColor="@color/gray_6"
                             app:fontFamily="@font/lato_regular" />
 
                         <CheckBox
                             android:id="@+id/cbDiabetesFamily"
-                            android:text="Diabetes"
+                            android:text="@string/diabetes"
                             app:fontFamily="@font/lato_regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
                         <CheckBox
                             android:id="@+id/cbHypertensionFamily"
-                            android:text="Hypertension"
+                            android:text="@string/hypertension"
                             app:fontFamily="@font/lato_regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
                         <CheckBox
                             android:id="@+id/cbHeartDiseasesFamily"
-                            android:text="Heart diseases"
+                            android:text="@string/heart_diseases"
                             app:fontFamily="@font/lato_regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
                         <CheckBox
                             android:id="@+id/cbCancerFamily"
-                            android:text="Cancer"
+                            android:text="@string/cancer"
                             app:fontFamily="@font/lato_regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
                         <CheckBox
                             android:id="@+id/cbAsthmaFamily"
-                            android:text="Asthma"
+                            android:text="@string/asthma"
                             app:fontFamily="@font/lato_regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
                         <CheckBox
                             android:id="@+id/cbKidneyDisorderFamily"
-                            android:text="Kidney disorder"
+                            android:text="@string/kidney_disorder"
                             app:fontFamily="@font/lato_regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
                         <CheckBox
                             android:id="@+id/cbOthersFamily"
-                            android:text="Others"
+                            android:text="@string/others"
                             app:fontFamily="@font/lato_regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -437,7 +437,7 @@
                                 android:layout_height="wrap_content"
                                 android:ems="10"
                                 android:fontFamily="@font/lato_regular"
-                                android:hint="Others"
+                                android:hint="@string/others"
                                 android:inputType="text"
                                 android:maxLines="1"
                                 android:singleLine="true" />
@@ -449,7 +449,7 @@
                             android:ems="10"
                             android:layout_marginTop="8dp"
                             android:paddingHorizontal="4dp"
-                            android:text="Do You have any allergies?"
+                            android:text="@string/do_you_have_any_allergies"
                             android:textColor="@color/gray_6"
                             app:fontFamily="@font/lato_regular" />
 
@@ -488,7 +488,7 @@
                             android:ems="10"
                             android:layout_marginTop="8dp"
                             android:paddingHorizontal="4dp"
-                            android:text="Do You consume Alcohol?"
+                            android:text="@string/do_you_consume_alcohol"
                             android:textColor="@color/gray_6"
                             app:fontFamily="@font/lato_regular" />
 
@@ -527,7 +527,7 @@
                             android:ems="10"
                             android:layout_marginTop="8dp"
                             android:paddingHorizontal="4dp"
-                            android:text="Do you consume tobacco Smoke?"
+                            android:text="@string/do_you_consume_tobacco_smoke"
                             android:textColor="@color/gray_6"
                             app:fontFamily="@font/lato_regular" />
 
@@ -568,7 +568,7 @@
                     android:drawableStart="@drawable/assignment"
                     android:drawablePadding="10dp"
                     android:ems="10"
-                    android:text="Post COVID Care"
+                    android:text="@string/post_covid_care"
                     android:layout_marginTop="8dp"
                     android:textAppearance="@style/sign_up_title"
                     android:textColor="@color/gray_6"
@@ -595,7 +595,7 @@
                             android:ems="10"
                             android:layout_marginTop="8dp"
                             android:paddingHorizontal="4dp"
-                            android:text="Are you consulting any doctor for Post COVID Care?"
+                            android:text="@string/are_you_consulting_any_doctor_for_post_covid_care"
                             android:textColor="@color/gray_6"
                             app:fontFamily="@font/lato_regular" />
 
@@ -632,7 +632,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="10"
-                            android:text="If yes, please mention the complaint"
+                            android:text="@string/if_yes_please_mention_the_complaint"
                             android:textColor="@color/gray_6"
                             app:fontFamily="@font/lato_regular" />
                         <com.google.android.material.textfield.TextInputLayout
@@ -646,7 +646,7 @@
                                 android:layout_height="wrap_content"
                                 android:ems="10"
                                 android:fontFamily="@font/lato_regular"
-                                android:hint="Complaint"
+                                android:hint="@string/complaint"
                                 android:inputType="text"
                                 android:maxLines="1"
                                 android:singleLine="true" />
@@ -656,7 +656,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="10"
-                            android:text="If you have conducted any post COVID investigation or taking any post COVID medicine please upload in Upload"
+                            android:text="@string/if_you_have_conducted_any_post_covid_investigation_or_taking_any_post_covid_medicine_please_upload_in_upload"
                             android:textColor="@color/gray_6"
                             app:fontFamily="@font/lato_regular" />
                     </LinearLayout>
