@@ -1115,7 +1115,7 @@ public class ProfileActivity extends AppCompatActivity {
                     public void run() {*/
                         if (cbOthers.isChecked()) {
                             for (String medical_condition : medical_conditions) {
-                                if (medical_condition.contains(cbOthers.getText().toString())) {
+                                if (medical_condition.contains(englishResources.getString(R.string.others))) {
                                     etOthers.setText(medical_condition.split("\\|")[1]);
                                     break;
                                 }
@@ -1136,7 +1136,7 @@ public class ProfileActivity extends AppCompatActivity {
                     public void run() {*/
                         if (cbOthersFamily.isChecked()) {
                             for (String history : family_history_disease) {
-                                if (history.contains(cbOthersFamily.getText().toString())) {
+                                if (history.contains(englishResources.getString(R.string.others))) {
                                     etOthersFamily.setText(history.split("\\|")[1]);
                                     break;
                                 }
