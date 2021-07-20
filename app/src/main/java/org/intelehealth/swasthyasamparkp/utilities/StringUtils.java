@@ -14,7 +14,12 @@
 
 package org.intelehealth.swasthyasamparkp.utilities;
 
+import android.content.Context;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.widget.Spinner;
+
+import androidx.annotation.NonNull;
 
 import org.intelehealth.swasthyasamparkp.R;
 import org.intelehealth.swasthyasamparkp.app.IntelehealthApplication;
@@ -27,6 +32,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public final class StringUtils {
@@ -473,5 +479,14 @@ public final class StringUtils {
             list.add(value);
         }
         return list;
+    }
+
+    @NonNull
+    public static Resources getLocalizedResources(Context context, Locale desiredLocale) {
+        Configuration conf = context.getResources().getConfiguration();
+        conf = new Configuration(conf);
+        conf.setLocale(desiredLocale);
+        Context localizedContext = context.createConfigurationContext(conf);
+        return localizedContext.getResources();
     }
 }

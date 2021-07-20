@@ -201,7 +201,7 @@
                             android:paddingRight="8dp">
 
                             <RadioButton
-                                android:id="@+id/rbOxygen"
+                                android:id="@+id/rbIcu"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"

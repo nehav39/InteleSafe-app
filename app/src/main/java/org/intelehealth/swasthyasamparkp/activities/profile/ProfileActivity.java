@@ -6,6 +6,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -1157,64 +1158,78 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
+    Resources englishResources;
     private String getObsValue() {
+        englishResources = StringUtils.getLocalizedResources(this, Locale.ENGLISH);
         Map<String, Object> data = new HashMap<>();
         Map<String, Object> covidHistory = new HashMap<>();
         covidHistory.put("date_days_tested_positive", et_tested_positive_date.getText().toString());
         covidHistory.put("date_of_admission", et_admission_date.getText().toString());
         covidHistory.put("stay_in_hospital_days", et_stay_days.getText().toString());
         RadioButton rbStayType = findViewById(rgStayType.getCheckedRadioButtonId());
-        if (rbStayType != null)
-            covidHistory.put("stay_type", rbStayType.getText().toString());
+        if (rbStayType != null) {
+            String text = rbStayType.getText().toString();
+            if (rbStayType.getId() == R.id.rbIcu) {
+                text = englishResources.getString(R.string.icu);
+            } else if (rbStayType.getId() == R.id.rbOxygenTherapy) {
+                text = englishResources.getString(R.string.oxygen_therapy);
+            } else if (rbStayType.getId() == R.id.rbVentilator) {
+                text = englishResources.getString(R.string.ventilator);
+            } else if (rbStayType.getId() == R.id.rbWithout_Oxygen_Therapy) {
+                text = englishResources.getString(R.string.without_oxygen_therapy);
+            }
+//            covidHistory.put("stay_type", rbStayType.getText().toString());
+            covidHistory.put("stay_type", text);
+        }
         data.put("covid_history", covidHistory);
 
         Map<String, Object> pastHistory = new HashMap<>();
         List<String> medicalConditions = new ArrayList<>(); //will be array of selected checkbox values
         if (cbDiabetes.isChecked()) {
-            medicalConditions.add(cbDiabetes.getText().toString());
+            medicalConditions.add(englishResources.getString(R.string.diabetes));
         }
         if (cbHypertension.isChecked()) {
-            medicalConditions.add(cbHypertension.getText().toString());
+            medicalConditions.add(englishResources.getString(R.string.hypertension));
         }
         if (cbHeartDiseases.isChecked()) {
-            medicalConditions.add(cbHeartDiseases.getText().toString());
+            medicalConditions.add(englishResources.getString(R.string.heart_diseases));
         }
         if (cbCancer.isChecked()) {
-            medicalConditions.add(cbCancer.getText().toString());
+            medicalConditions.add(englishResources.getString(R.string.cancer));
         }
         if (cbAsthma.isChecked()) {
-            medicalConditions.add(cbAsthma.getText().toString());
+            medicalConditions.add(englishResources.getString(R.string.asthma));
         }
         if (cbKidneyDisorder.isChecked()) {
-            medicalConditions.add(cbKidneyDisorder.getText().toString());
+            medicalConditions.add(englishResources.getString(R.string.kidney_disorder));
         }
         if (cbOthers.isChecked()) {
-            medicalConditions.add(String.format("%s|%s", cbOthers.getText().toString(), etOthers.getText().toString()));
+            medicalConditions.add(String.format("%s|%s", englishResources.getString(R.string.others), etOthers.getText().toString()));
         }
         pastHistory.put("medical_conditions", medicalConditions);
         pastHistory.put("taking_medicine", rgMedications.getCheckedRadioButtonId() == R.id.rbMedicationsYes);
 
         List<String> familyHistoryDisease = new ArrayList<>(); //will be array of selected checkbox values
         if (cbDiabetesFamily.isChecked()) {
-            familyHistoryDisease.add(cbDiabetesFamily.getText().toString());
+            familyHistoryDisease.add(englishResources.getString(R.string.diabetes));
         }
         if (cbHypertensionFamily.isChecked()) {
-            familyHistoryDisease.add(cbHypertensionFamily.getText().toString());
+            familyHistoryDisease.add(englishResources.getString(R.string.hypertension));
         }
         if (cbHeartDiseasesFamily.isChecked()) {
-            familyHistoryDisease.add(cbHeartDiseasesFamily.getText().toString());
+            familyHistoryDisease.add(englishResources.getString(R.string.heart_diseases));
         }
         if (cbCancerFamily.isChecked()) {
-            familyHistoryDisease.add(cbCancerFamily.getText().toString());
+            familyHistoryDisease.add(englishResources.getString(R.string.cancer));
         }
         if (cbAsthmaFamily.isChecked()) {
-            familyHistoryDisease.add(cbAsthmaFamily.getText().toString());
+            familyHistoryDisease.add(englishResources.getString(R.string.asthma));
         }
         if (cbKidneyDisorderFamily.isChecked()) {
-            familyHistoryDisease.add(cbKidneyDisorderFamily.getText().toString());
+            familyHistoryDisease.add(englishResources.getString(R.string.kidney_disorder));
         }
         if (cbOthersFamily.isChecked()) {
-            familyHistoryDisease.add(String.format("%s|%s", cbOthersFamily.getText().toString(), etOthersFamily.getText().toString()));
+            familyHistoryDisease.add(String.format("%s|%s", englishResources.getString(R.string.others), etOthersFamily.getText().toString()));
         }
         pastHistory.put("family_history_disease", familyHistoryDisease);
 
@@ -1227,7 +1242,8 @@ public class ProfileActivity extends AppCompatActivity {
         postCovidCare.put("consulting_doctor", rgPostCovidConsulting.getCheckedRadioButtonId() == R.id.rbPostCovidConsultingYes);
         postCovidCare.put("complaint", et_Complaint.getText().toString());
         data.put("post_covid_care", postCovidCare);
-        return new Gson().toJson(data);
+        String json = new Gson().toJson(data);
+        return json;
     }
 
     private String getDatefromDays(int dateString) {

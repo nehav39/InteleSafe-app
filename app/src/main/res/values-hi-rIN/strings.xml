@@ -818,5 +818,29 @@
     <string name="health_facilities">स्वास्थ्य सुविधाएं</string>
     <string name="sikkim">सिक्किम</string>
     <string name="alert_message_txt">चेतावनी संदेश</string>
-
+    <string name = "covid_history">कोविड इतिहास</string>
+    <string name = "stay_type">स्टे टाइप</string>
+    <string name = "icu">ICU</string>
+    <string name = "oxygen_therapy">ऑक्सीजन थेरेपी</string>
+    <string name = "ventilator">वेंटीलेटर</string>
+    <string name = "without_oxygen_therapy">बिना ऑक्सीजन थेरेपी के</string>
+    <string name = "past_history">पिछला इतिहास</string>
+    <string name="do_you_have_any_medical_conditions_before_covid">क्या आपको COVID से पहले कोई बीमारी है?</string>
+    <string name = "diabetes">मधुमेह</string>
+    <string name = "hypertension">उच्च रक्तचाप</string>
+    <string name = "heart_diseases">हृदय रोग</string>
+    <string name = "cancer">कैंसर</string>
+    <string name = "asthma">अस्थमा</string>
+    <string name = "kidney_disorder">किडनी विकार</string>
+    <string name = "others">अन्य</string>
+    <string name="are_you_taking_medication_for_any_of_these_medical_condition_if_yes_please_upload_prescription_in_upload_document_section">क्या आप इनमें से किसी भी बीमारी के लिए दवा ले रहे हैं (यदि हां, तो कृपया दस्तावेज़ अपलोड अनुभाग में नुस्खे अपलोड करें)</string>
+    <string name="do_you_have_family_history_of_any_disease">क्या आपके परिवार में किसी बीमारी का इतिहास रहा है?</string>
+    <string name="do_you_have_any_allergies">क्या आपको कोई एलर्जी है?</string>
+    <string name="do_you_consume_alcohol">क्या आप शराब का सेवन करते हैं?</string>
+    <string name="do_you_consume_tobacco_smoke">क्या आप तंबाकू के धुएं का सेवन करते हैं?</string>
+    <string name = "post_covid_care"> COVID केयर पोस्ट करें</string>
+    <string name="are_you_consulting_any_doctor_for_post_covid_care">क्या आप पोस्ट COVID देखभाल के लिए किसी डॉक्टर से सलाह ले रहे हैं?</string>
+    <string name = "if_yes_please_mention_the_complaint">यदि हाँ, तो कृपया शिकायत का उल्लेख करें</string>
+    <string name = "complaint">शिकायत</string>
+    <string name="if_you_have_conducted_any_post_covid_investigation_or_taking_any_post_covid_medicine_please_upload_in_upload">अगर आपने कोई COVID जांच की है या कोई पोस्ट COVID दवा ली है तो कृपया अपलोड में अपलोड करें</string>
 </resources>
