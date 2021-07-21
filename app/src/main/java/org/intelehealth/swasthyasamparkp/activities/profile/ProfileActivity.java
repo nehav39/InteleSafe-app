@@ -665,7 +665,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void selectImage(int requestCode) {
-        final CharSequence[] options = {getString(R.string.take_photo), getString(R.string.choose_from_gallery), getString(R.string.cancel)};
+        final CharSequence[] options = {getString(R.string.take_photo), getString(R.string.choose_from_gallery), getString(R.string.generic_cancel)};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 //        builder.setTitle(R.string.additional_doc_image_picker_title);
         builder.setItems(options, new DialogInterface.OnClickListener() {

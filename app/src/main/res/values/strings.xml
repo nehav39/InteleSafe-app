@@ -806,4 +806,7 @@
     <string name="if_yes_please_mention_the_complaint">If yes, please mention the complaint</string>
     <string name="complaint">Complaint</string>
     <string name="if_you_have_conducted_any_post_covid_investigation_or_taking_any_post_covid_medicine_please_upload_in_upload">If you have conducted any post COVID investigation or taking any post COVID medicine please upload in Upload</string>
+    <string name="date_of_admission">Date of Admission</string>
+    <string name="stay_in_hospital_in_days">Stay in Hospital in days</string>
+    <string name="about_us">About Us</string>
 </resources>

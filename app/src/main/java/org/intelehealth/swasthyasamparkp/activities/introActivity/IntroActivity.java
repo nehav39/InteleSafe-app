@@ -52,6 +52,7 @@ public class IntroActivity extends AppCompatActivity {
         }
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(R.string.about_us);
         context = IntroActivity.this;
 
 //        // Making notification bar transparent
