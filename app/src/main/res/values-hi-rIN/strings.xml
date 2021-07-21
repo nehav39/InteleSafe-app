@@ -294,7 +294,7 @@
     <string name="visit_summary_heading_name" translatable="false">Name</string>
     <string name="visit_summary_heading_id" translatable="false">ID</string>
     <string name="visit_summary_button_download" translatable="false">Download</string>
-    <string name="visit_summary_button_upload" translatable="false">Upload</string>
+    <string name="visit_summary_button_upload" translatable="false">अपलोड</string>
     <string name="name_button_download" translatable="false">button_download</string>
     <string name="visit_summary_follow_up_date" translatable="false">Follow Up Date</string>
     <string name="visit_summary_follow_up_reminder" translatable="false">Please remind the patient of their follow up date: </string>
@@ -361,7 +361,7 @@
 
     <string name="title_activity_camera" translatable="false">Camera</string>
     <string name="title_activity_today_patient" translatable="false">"Today's Visits"</string>
-    <string name="title_activity_additional_documents" translatable="false">"Additional Documents"</string>
+    <string name="title_activity_additional_documents" translatable="false">अतिरिक्त दस्तावेज़</string>
     <string name="title_activity_video_library" translatable="false">"Video Library"</string>
     <string name="visit_summary_patient_details" translatable="false">Visit details</string>
 
