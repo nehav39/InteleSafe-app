@@ -19,6 +19,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import org.intelehealth.swasthyasamparkp.R;
+import org.intelehealth.swasthyasamparkp.activities.WebViewLocaleFixActivity;
 import org.intelehealth.swasthyasamparkp.activities.homeActivity.Day_Date;
 import org.intelehealth.swasthyasamparkp.activities.homeActivity.Recycler_Home_Adapter;
 import org.intelehealth.swasthyasamparkp.activities.visitSummaryActivity.VisitSummaryActivity;
@@ -35,7 +36,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 
-public class AppointmentsActivity extends AppCompatActivity {
+public class AppointmentsActivity extends WebViewLocaleFixActivity {
 
     private RecyclerView recyclerView;
     private TextView tvNoVisit;
