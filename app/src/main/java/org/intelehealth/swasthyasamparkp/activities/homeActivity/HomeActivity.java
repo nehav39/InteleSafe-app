@@ -737,7 +737,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private void saveToken() {
         Manager.getInstance().setBaseUrl("https://" + sessionManager.getServerUrl());
         // save fcm reg. token for chat (Video)
-        FirebaseUtils.saveToken(this, sessionManager.getProviderID(), IntelehealthApplication.getInstance().refreshedFCMTokenID);
+        FirebaseUtils.saveToken(this, sessionManager.getPersionUUID(), IntelehealthApplication.getInstance().refreshedFCMTokenID);
     }
 
     public static void watchYoutubeVideo(Context context, String id){
