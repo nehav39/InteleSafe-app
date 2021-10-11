@@ -12,14 +12,15 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
+        android:layout_centerVertical="true"
         android:paddingHorizontal="12dp"
         android:paddingTop="24dip">
 
         <ImageView
-            android:layout_width="80dip"
-            android:layout_height="80dip"
+            android:layout_width="90dip"
+            android:layout_height="90dip"
             android:layout_gravity="center"
-            android:src="@drawable/ic_logo_app" />
+            android:src="@drawable/ic_app_logo" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -27,7 +28,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="4dip"
             android:fontFamily="@font/lato_bold"
-            android:text="स्वास्थ्य संपर्क"
+            android:text="इंटेलहेल्थ डी२पी"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
             android:textSize="26sp" />
@@ -38,7 +39,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="4dip"
             android:fontFamily="@font/lato_bold"
-            android:text="Swasthya Sampark"
+            android:text="Intelehealth D2P"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
             android:textSize="26sp"
@@ -52,6 +53,7 @@
             android:gravity="center"
             android:text="निष्ठा की व्यापक पोस्ट कोविड देखभाल पहल"
             android:textAlignment="center"
+            android:visibility="gone"
             android:textColor="@color/colorPrimary"
             android:textSize="12sp"
             android:textStyle="bold" />
@@ -62,6 +64,7 @@
             android:layout_marginTop="8dp"
             android:fontFamily="@font/lato_bold"
             android:gravity="center"
+            android:visibility="gone"
             android:text="@string/splash_subtitle"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
@@ -76,6 +79,7 @@
         android:layout_height="64dip"
         android:layout_above="@id/powered_text"
         android:gravity="bottom"
+        android:visibility="gone"
         android:orientation="horizontal">
 
         <ImageView
@@ -131,7 +135,7 @@
             android:fontFamily="@font/lato_regular"
             android:gravity="center"
             android:padding="5dip"
-            android:text="Powered by Intelehealth, Arogya Foundation of India &amp; \n Transform Rural India"
+            android:text="Powered by Intelehealth"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="12sp" />
@@ -143,13 +147,15 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/llBottomLogo"
         android:layout_below="@+id/ll_center"
+        android:visibility="gone"
         android:gravity="center">
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/round_corner_primary_light"
-            android:padding="12dip">
+            android:padding="12dip"
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/tv_hindi"

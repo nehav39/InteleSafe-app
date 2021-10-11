@@ -30,7 +30,7 @@
         android:name=".app.IntelehealthApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/swasth_sampark"
+        android:label="@string/intelehealth_d2p"
         android:largeHeap="true"
         android:networkSecurityConfig="@xml/network_security_configuration"
         android:roundIcon="@mipmap/ic_launcher_round"

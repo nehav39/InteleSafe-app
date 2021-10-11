@@ -19,7 +19,7 @@
             android:layout_width="180dp"
             android:layout_height="180dp"
             android:layout_gravity="center"
-            android:src="@drawable/ic_logo_app" />
+            android:src="@drawable/ic_app_logo" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -27,7 +27,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="4dip"
             android:fontFamily="@font/lato_bold"
-            android:text="स्वास्थ्य संपर्क"
+            android:text="इंटेलहेल्थ डी२पी"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
             android:textSize="46sp" />
@@ -38,7 +38,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="4dip"
             android:fontFamily="@font/lato_bold"
-            android:text="Swasthya Sampark"
+            android:text="Intelehealth D2P"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
             android:textSize="46sp"
@@ -53,6 +53,7 @@
             android:text="@string/splash_subtitle"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
+            android:visibility="gone"
             android:textSize="22sp"
             android:textStyle="bold" />
 
@@ -64,6 +65,7 @@
         android:layout_height="128dip"
         android:layout_above="@id/powered_text"
         android:gravity="bottom"
+        android:visibility="gone"
         android:orientation="horizontal">
 
         <ImageView
@@ -120,7 +122,7 @@
             android:fontFamily="@font/lato_regular"
             android:gravity="center"
             android:padding="8dip"
-            android:text="Powered by Intelehealth, Ekal Arogya &amp; \n Transform Rural India"
+            android:text="Powered by Intelehealth"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="22sp" />
@@ -137,6 +139,7 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:background="@drawable/round_corner_primary_light"
             android:padding="32dip">
 

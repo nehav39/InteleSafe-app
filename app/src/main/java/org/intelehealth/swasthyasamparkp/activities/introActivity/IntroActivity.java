@@ -236,7 +236,7 @@ public class IntroActivity extends AppCompatActivity {
                 tvIntroOne.setText(Html.fromHtml(introOne));
 
                 String introTwo = getString(R.string.intro1_text2);
-                String textToHighlightTwo = getString(R.string.swasth_sampark);
+                String textToHighlightTwo = getString(R.string.intelehealth_d2p);
                 String newStringTwo = introTwo.replaceAll(textToHighlightTwo, "<font color='blue'>" + textToHighlightTwo + "</font>");
                 tvIntroTwo.setText(Html.fromHtml(newStringTwo));
 
@@ -250,7 +250,7 @@ public class IntroActivity extends AppCompatActivity {
                 tvIntroTwo = view.findViewById(R.id.tv_intro_two);
 
                 String introTwo = getString(R.string.intro2_text1);
-                String textToHighlightTwo = getString(R.string.swasth_sampark);
+                String textToHighlightTwo = getString(R.string.intelehealth_d2p);
                 String newStringTwo = introTwo.replaceAll(textToHighlightTwo, "<font color='blue'>" + textToHighlightTwo + "</font>");
                 tvIntroOne.setText(Html.fromHtml(newStringTwo));
 
