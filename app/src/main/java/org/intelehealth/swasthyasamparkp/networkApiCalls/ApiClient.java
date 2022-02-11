@@ -73,7 +73,7 @@ public class ApiClient {
             final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
 
             HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.NONE);
             client.addInterceptor(loggingInterceptor);
             client.connectTimeout(70, TimeUnit.SECONDS);
             client.readTimeout(70, TimeUnit.SECONDS);
