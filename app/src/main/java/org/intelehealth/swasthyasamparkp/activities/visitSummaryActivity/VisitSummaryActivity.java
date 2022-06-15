@@ -2616,10 +2616,10 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
         Date date = null;
         try {
             date = sdf.parse(mPatientDob);
-        } catch (ParseException e) {
+            dob.setTime(date);
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        dob.setTime(date);
 
         int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
         String mGender = patient.getGender();
@@ -2844,7 +2844,7 @@ public class VisitSummaryActivity extends AppCompatActivity implements View.OnCl
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_mental_help_request:
-               /* Uri uri = Uri.parse("https://www.intelesafe.org/mental-health"); // missing 'http://' will cause crashed
+               /* Uri uri = Uri.parse("https://www.InteleCare.org/mental-health"); // missing 'http://' will cause crashed
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);*/
                 Intent ppe = new Intent(VisitSummaryActivity.this, Webview.class);

@@ -560,7 +560,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
         cpd.show();
         UrlModifiers urlModifiers = new UrlModifiers();
         String urlString = urlModifiers.setRegistrationURL();
-        String encoded = base64Utils.encoded("admin", BuildConfig.DEBUG ? "IHUser#1" : "IHUser#1");
+        String encoded = base64Utils.encoded("admin", BuildConfig.DEBUG ? "Admin123" : "Admin123");
         Observable<ClsUserGetResponse> userGetResponse = AppConstants.apiInterface.getUsersFromServer(urlString, "Basic " + encoded, enteredUserName);
         userGetResponse.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -586,7 +586,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
         cpd.show();
         UrlModifiers urlModifiers = new UrlModifiers();
         String urlString = urlModifiers.resetPassword(BuildConfig.CLEAN_URL);
-        String encoded = base64Utils.encoded("admin", BuildConfig.DEBUG ? "IHUser#1" : "IHUser#1");
+        String encoded = base64Utils.encoded("admin", BuildConfig.DEBUG ? "Admin123" : "Admin123");
         ResetPassoword resetPassoword = new ResetPassoword();
         resetPassoword.username = enteredUserName;
         resetPassoword.password = password;
@@ -621,7 +621,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
         cpd.show();
         UrlModifiers urlModifiers = new UrlModifiers();
         String urlString = urlModifiers.sendOtp("HXIN1701481071IN");
-//        String encoded = base64Utils.encoded("admin", "IHUser#1");
+//        String encoded = base64Utils.encoded("admin", "Admin123");
         generatedOtp = new DecimalFormat("0000").format(new Random().nextInt(9999));
         Observable<SendOtp> userGetResponse = AppConstants.apiInterface.sendOtp(urlString,
                 "A39e1e65900618ef9b6e16da473f8894d",

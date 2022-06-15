@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">InteleSafe</string>
+    <string name="app_name">InteleCare</string>
     <string name="select_language">Select Language</string>
     <string name="accept">स्वीकार</string>
     <string name="reject">नाकार</string>
@@ -617,7 +617,7 @@
     <string name="not_answered">Not answered</string>
     <string name="teleconsultation_button_visitsummary">Teleconsultation</string>
     <string name="help_cardview_visit">If you get much sicker please call your nearest doctor - 73054154312</string>
-    <string name="intelesafe">InteleSafe</string>
+    <string name="InteleCare">InteleCare</string>
     <string name="who_is_this_napplication_for">Who is this  application for?</string>
     <string name="submit_visitSummary_Button">Submit</string>
     <string name="medical_registration_number_license_id">Medical registration number/license ID</string>

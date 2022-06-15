@@ -100,28 +100,28 @@ public class Webview extends AppCompatActivity {
         if(bundle != null) {
             if(bundle.containsKey("FAQ")) {
                 setTitle("PPE reuse & Alternative");
-                webUrl = "https://www.intelesafe.org/ppe-reuse-alternatives"; // FAQs url
+                webUrl = "https://www.InteleCare.org/ppe-reuse-alternatives"; // FAQs url
             } else if(bundle.containsKey("PPE")) {
                 setTitle("PPE Guidelines");
-                webUrl = "https://www.intelesafe.org/ppe-infection-control"; // PPE url
+                webUrl = "https://www.InteleCare.org/ppe-infection-control"; // PPE url
             }
             else if(bundle.containsKey("FAQ2")) {
                 setTitle("Request for PPE kits");
-                webUrl = "https://www.intelesafe.org/ppe-help"; // Request for PPE kit url.
+                webUrl = "https://www.InteleCare.org/ppe-help"; // Request for PPE kit url.
             }
             else if(bundle.containsKey("PPE2")) {
                 setTitle("Use of Telemedicine");
-                webUrl = "https://www.intelesafe.org/telemedicine"; // Use of Telemedicine url
+                webUrl = "https://www.InteleCare.org/telemedicine"; // Use of Telemedicine url
             }
             else if(bundle.containsKey("HomeMental")) {
                 String title = bundle.getString("HomeCardTitle");
                 setTitle(title);
-                webUrl = "https://www.intelesafe.org/mental-health";
+                webUrl = "https://www.InteleCare.org/mental-health";
             }
             else if(bundle.containsKey("VisitMental")) {
                 String title = bundle.getString("VisitTitle");
                 setTitle(title);
-                webUrl = "https://www.intelesafe.org/mental-health";
+                webUrl = "https://www.InteleCare.org/mental-health";
             }
             webView.loadUrl(webUrl);
             webView.getSettings().setJavaScriptEnabled(true);

@@ -1286,7 +1286,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_mental_help_request:
-                /*Uri uri = Uri.parse("https://www.intelesafe.org/mental-health"); // missing 'http://' will cause crashed
+                /*Uri uri = Uri.parse("https://www.InteleCare.org/mental-health"); // missing 'http://' will cause crashed
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);*/
                 Intent ppe = new Intent(HomeActivity.this, Webview.class);
@@ -1668,7 +1668,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         registerReceiver(reMyreceive, filter);
-        registerReceiver(reMyreceive, new IntentFilter("org.intelehealth.intelesafe.refreshCheck-in"));
+        registerReceiver(reMyreceive, new IntentFilter("org.intelehealth.InteleCare.refreshCheck-in"));
         checkAppVer();  //auto-update feature.
 //        lastSyncTextView.setText(getString(R.string.last_synced) + " \n" + sessionManager.getLastSyncDateTime());
         if (!sessionManager.getLastSyncDateTime().equalsIgnoreCase("- - - -")
@@ -1725,7 +1725,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
             if (intent != null) {
                 String strAction = intent.getAction().toString();
-                if (strAction.equalsIgnoreCase("org.intelehealth.intelesafe.refreshCheck-in")) {
+                if (strAction.equalsIgnoreCase("org.intelehealth.InteleCare.refreshCheck-in")) {
                     renderList();
                     sessionManager.setReturningUser(false);
                     customProgressDialog.dismiss();

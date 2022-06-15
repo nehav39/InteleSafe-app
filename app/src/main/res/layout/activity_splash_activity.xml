@@ -28,7 +28,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="4dip"
             android:fontFamily="@font/lato_bold"
-            android:text="इंटेलहेल्थ डी२पी"
+            android:text="इंटेलिकेअर"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
             android:textSize="26sp" />
@@ -39,7 +39,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="4dip"
             android:fontFamily="@font/lato_bold"
-            android:text="Intelehealth D2P"
+            android:text="InteleCare"
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
             android:textSize="26sp"

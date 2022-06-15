@@ -25,15 +25,15 @@ android {
     }
     buildTypes {
 
-        //Live BASE_URL = http://intelesafe.covidhelp.in/
-        //Live CLEAN_URL = intelesafe.covidhelp.in
+        //Live BASE_URL = http://InteleCare.covidhelp.in/
+        //Live CLEAN_URL = InteleCare.covidhelp.in
 
-        //Test BASE_URL = http://testintelesafe.covidhelp.in/
-        //Test CLEAN_URL = testintelesafe.covidhelp.in
-//        http://testintelesafe2.covidhelp.in/
+        //Test BASE_URL = http://testInteleCare.covidhelp.in/
+        //Test CLEAN_URL = testInteleCare.covidhelp.in
+//        http://testInteleCare2.covidhelp.in/
         debug{
-            buildConfigField "String", "BASE_URL", "\"https://trainingss.intelehealth.org/\"" // http://13.232.32.249:8080/
-            buildConfigField "String", "CLEAN_URL", "\"trainingss.intelehealth.org\"" // 13.232.32.249:8080
+            buildConfigField "String", "BASE_URL", "\"https://demo.intelehealth.org/\"" // http://13.232.32.249:8080/
+            buildConfigField "String", "CLEAN_URL", "\"demo.intelehealth.org\"" // 13.232.32.249:8080
 //            https://testssl.covidhelp.in/pulldata
         }
 
@@ -45,9 +45,9 @@ android {
             }
             minifyEnabled true
 
-            buildConfigField "String", "BASE_URL", "\"swasthyasampark.intelehealth.org/\"" // http://13.232.32.249:8080/
-            buildConfigField "String", "BASE_URL", "\"https://swasthyasampark.intelehealth.org/\"" // http://13.232.32.249:8080/
-            buildConfigField "String", "CLEAN_URL", "\"swasthyasampark.intelehealth.org\"" // 13.232.32.249:8080
+            buildConfigField "String", "BASE_URL", "\"demo.intelehealth.org/\"" // http://13.232.32.249:8080/
+            buildConfigField "String", "BASE_URL", "\"https://demo.intelehealth.org/\"" // http://13.232.32.249:8080/
+            buildConfigField "String", "CLEAN_URL", "\"demo.intelehealth.org\"" // 13.232.32.249:8080
 
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

@@ -266,7 +266,7 @@ public class SyncDAO {
 
                 if (fromActivity.equalsIgnoreCase("HOME_SCREEN")) {
                     Intent intent = new Intent();
-                    intent.setAction("org.intelehealth.intelesafe.refreshCheck-in");
+                    intent.setAction("org.intelehealth.InteleCare.refreshCheck-in");
                     IntelehealthApplication.getAppContext().sendBroadcast(intent);
 
                 }

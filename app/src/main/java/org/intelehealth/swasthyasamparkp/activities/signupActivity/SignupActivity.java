@@ -1652,7 +1652,7 @@ public class SignupActivity extends AppCompatActivity {
         progress.show();
         UrlModifiers urlModifiers = new UrlModifiers();
         String urlString = urlModifiers.setRegistrationURL();
-        encoded = base64Utils.encoded("admin", BuildConfig.DEBUG ? "IHUser#1" : "IHUser#1");
+        encoded = base64Utils.encoded("admin", BuildConfig.DEBUG ? "Admin123" : "Admin123");
         Observable<ClsUserGetResponse> userGetResponse = AppConstants.apiInterface.getUsersFromServer(urlString, "Basic " + encoded, enteredUserName);
         userGetResponse.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -2078,7 +2078,7 @@ public class SignupActivity extends AppCompatActivity {
 
         UrlModifiers urlModifiers = new UrlModifiers();
         String urlString = urlModifiers.loginUrl(BuildConfig.CLEAN_URL);
-        encoded = base64Utils.encoded("admin", BuildConfig.DEBUG ? "IHUser#1" : "IHUser#1");
+        encoded = base64Utils.encoded("admin", BuildConfig.DEBUG ? "Admin123" : "Admin123");
 //      sessionManager.setEncoded(encoded);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -2382,7 +2382,7 @@ public class SignupActivity extends AppCompatActivity {
         progress.show();
         UrlModifiers urlModifiers = new UrlModifiers();
         String urlString = urlModifiers.sendOtp("HXIN1701481071IN");
-//        String encoded = base64Utils.encoded("admin", "IHUser#1");
+//        String encoded = base64Utils.encoded("admin", "Admin123");
         generatedOtp = new DecimalFormat("0000").format(new Random().nextInt(9999));
         Observable<SendOtp> userGetResponse = AppConstants.apiInterface.sendOtp(urlString,
                 "A39e1e65900618ef9b6e16da473f8894d",
@@ -2441,7 +2441,7 @@ public class SignupActivity extends AppCompatActivity {
         progress.show();
         UrlModifiers urlModifiers = new UrlModifiers();
         String urlString = urlModifiers.getUserMapping(BuildConfig.CLEAN_URL);
-        String encoded = base64Utils.encoded("admin", BuildConfig.DEBUG ? "IHUser#1" : "IHUser#1");
+        String encoded = base64Utils.encoded("admin", BuildConfig.DEBUG ? "Admin123" : "Admin123");
         GetPassword getPassword = new GetPassword();
         getPassword.username = enteredUserName;
         getPassword.password = password;
